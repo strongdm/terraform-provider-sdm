@@ -86,13 +86,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *apiV1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot create Node %s: %w", "", err)
 	}
-	raw := resp.Nodes[0]
-	switch v := raw.(type) {
-	case *models_v1.Relay:
-		d.SetId(v.ID)
-	case *models_v1.Gateway:
-		d.SetId(v.ID)
-	}
+	d.SetId(resp.Node.GetID())
 	return resourceNodeRead(d, cc)
 }
 
@@ -129,17 +123,11 @@ func resourceNodeRead(d *schema.ResourceData, cc *apiV1.Client) error {
 func resourceNodeUpdate(d *schema.ResourceData, cc *apiV1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Nodes().Update(ctx, d.Id(), nodeFromResourceData(d))
+	resp, err := cc.Nodes().Update(ctx, nodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)
 	}
-	raw := resp.Node
-	switch v := raw.(type) {
-	case *models_v1.Relay:
-		d.SetId(v.ID)
-	case *models_v1.Gateway:
-		d.SetId(v.ID)
-	}
+	d.SetId(resp.Node.GetID())
 	return resourceNodeRead(d, cc)
 }
 

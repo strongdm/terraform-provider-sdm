@@ -1,3 +1,8 @@
+provider "sdm" {
+    api_key = ""
+    url = "localhost:8889"
+}
+
 resource "sdm_node" "relay" {
     relay {
         name = "blargh"

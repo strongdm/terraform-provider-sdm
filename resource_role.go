@@ -52,7 +52,7 @@ func resourceRoleCreate(d *schema.ResourceData, cc *apiV1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot create Role %s: %w", "", err)
 	}
-	d.SetId(resp.Roles[0].ID)
+	d.SetId(resp.Role.ID)
 	return resourceRoleRead(d, cc)
 }
 
@@ -77,12 +77,11 @@ func resourceRoleRead(d *schema.ResourceData, cc *apiV1.Client) error {
 func resourceRoleUpdate(d *schema.ResourceData, cc *apiV1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Roles().Update(ctx, d.Id(), roleFromResourceData(d))
+	resp, err := cc.Roles().Update(ctx, roleFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Role %s: %w", d.Id(), err)
 	}
-	raw := resp.Role
-	d.SetId(raw.ID)
+	d.SetId(resp.Role.ID)
 	return resourceRoleRead(d, cc)
 }
 
