@@ -17,11 +17,11 @@ func Provider() *schema.Provider {
 				Description: "An authenticated JWT token used to access the StrongDM API.",
 			},
 
-			"url": {
+			"host": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "https://api.strongdm.com",
-				Description: "The URL of the StrongDM API endpoint.",
+				Default:     "api.strongdm.com:443",
+				Description: "The host and port of the StrongDM API endpoint.",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
@@ -30,7 +30,7 @@ func Provider() *schema.Provider {
 			
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
-			client, err := apiV1.New(d.Get("url").(string), d.Get("api_key").(string))
+			client, err := apiV1.New(d.Get("host").(string), d.Get("api_key").(string))
 			if err != nil {
 				return nil, fmt.Errorf("cannot dial API server: %w", err)
 			}

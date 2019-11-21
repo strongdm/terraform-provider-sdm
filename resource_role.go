@@ -29,7 +29,6 @@ func resourceRole() *schema.Resource {
 				Type:     schema.TypeBool,
 				Required: true,
 			},
-			
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
