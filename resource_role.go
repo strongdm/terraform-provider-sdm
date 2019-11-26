@@ -24,10 +24,12 @@ func resourceRole() *schema.Resource {
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
+				Description: "Unique human-readable name of the Role.",
 			},
 			"composite": &schema.Schema{
 				Type:     schema.TypeBool,
 				Required: true,
+				Description: "True if the Role is a composite role.",
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -36,8 +38,8 @@ func resourceRole() *schema.Resource {
 	}
 }
 
-func roleFromResourceData(d *schema.ResourceData) models_v1.Role {
-	return models_v1.Role{
+func roleFromResourceData(d *schema.ResourceData) *models_v1.Role {
+	return &models_v1.Role{
 		ID:        d.Id(),
 		Name: stringFromResourceData(d, "name"),
 		Composite: boolFromResourceData(d, "composite"),

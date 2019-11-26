@@ -23,11 +23,13 @@ func resourceNode() *schema.Resource {
 			"relay": &schema.Schema{
 				Type:     schema.TypeList,
 				Optional: true,
+				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
+							Description: "Unique human-readable name of the Relay.",
 						},
 					},
 				},
@@ -35,19 +37,23 @@ func resourceNode() *schema.Resource {
 			"gateway": &schema.Schema{
 				Type:     schema.TypeList,
 				Optional: true,
+				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
+							Description: "Unique human-readable name of the Relay.",
 						},
 						"listen_address": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
+							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
 						},
 						"bind_address": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
+							Description: "The hostname/port tuple which the gateway daemon will bind to.",
 						},
 					},
 				},
