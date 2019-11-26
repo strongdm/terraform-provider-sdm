@@ -9,7 +9,7 @@ import (
 
 func Provider() *schema.Provider {
 	return &schema.Provider{
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"api_key": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -27,7 +27,6 @@ func Provider() *schema.Provider {
 		ResourcesMap: map[string]*schema.Resource{
 			"sdm_node": resourceNode(),
 			"sdm_role": resourceRole(),
-			
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			client, err := apiV1.New(d.Get("host").(string), d.Get("api_key").(string))

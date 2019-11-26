@@ -19,38 +19,38 @@ func resourceNode() *schema.Resource {
 		Delete: wrapCrudOperation(resourceNodeDelete),
 		Schema: map[string]*schema.Schema{
 			"relay": &schema.Schema{
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:        schema.TypeList,
+				Optional:    true,
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							Description: "Unique human-readable name of the Relay.",
 						},
 					},
 				},
 			},
 			"gateway": &schema.Schema{
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:        schema.TypeList,
+				Optional:    true,
 				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							Description: "Unique human-readable name of the Relay.",
 						},
 						"listen_address": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
 						},
 						"bind_address": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							Description: "The hostname/port tuple which the gateway daemon will bind to.",
 						},
 					},
@@ -67,17 +67,17 @@ func nodeFromResourceData(d *schema.ResourceData) apiv1.Node {
 	if list := d.Get("relay").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Relay{
-			ID:        d.Id(),
+			ID:   d.Id(),
 			Name: stringFromMap(raw, "name"),
 		}
 	}
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Gateway{
-			ID:        d.Id(),
-			Name: stringFromMap(raw, "name"),
+			ID:            d.Id(),
+			Name:          stringFromMap(raw, "name"),
 			ListenAddress: stringFromMap(raw, "listen_address"),
-			BindAddress: stringFromMap(raw, "bind_address"),
+			BindAddress:   stringFromMap(raw, "bind_address"),
 		}
 	}
 	return nil
@@ -115,9 +115,9 @@ func resourceNodeRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	case *apiv1.Gateway:
 		d.Set("gateway", []map[string]interface{}{
 			map[string]interface{}{
-				"name": v.Name,
+				"name":           v.Name,
 				"listen_address": v.ListenAddress,
-				"bind_address": v.BindAddress,
+				"bind_address":   v.BindAddress,
 			},
 		})
 	}
