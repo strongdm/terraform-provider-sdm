@@ -8,9 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 
-	apiV1 "github.com/strongdm/strongdm-sdk-go"
-	errors_v1 "github.com/strongdm/strongdm-sdk-go/errors"
-	models_v1 "github.com/strongdm/strongdm-sdk-go/models"
+	apiv1 "github.com/strongdm/strongdm-sdk-go"
 )
 
 func resourceRole() *schema.Resource {
@@ -38,15 +36,15 @@ func resourceRole() *schema.Resource {
 	}
 }
 
-func roleFromResourceData(d *schema.ResourceData) *models_v1.Role {
-	return &models_v1.Role{
+func roleFromResourceData(d *schema.ResourceData) *apiv1.Role {
+	return &apiv1.Role{
 		ID:        d.Id(),
 		Name: stringFromResourceData(d, "name"),
 		Composite: boolFromResourceData(d, "composite"),
 	}
 }
 
-func resourceRoleCreate(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceRoleCreate(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	resp, err := cc.Roles().Create(ctx, roleFromResourceData(d))
@@ -57,11 +55,11 @@ func resourceRoleCreate(d *schema.ResourceData, cc *apiV1.Client) error {
 	return resourceRoleRead(d, cc)
 }
 
-func resourceRoleRead(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceRoleRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
 	resp, err := cc.Roles().Get(ctx, d.Id())
-	var errNotFound *errors_v1.NotFoundError
+	var errNotFound *apiv1.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
 		d.SetId("")
 		return nil
@@ -75,7 +73,7 @@ func resourceRoleRead(d *schema.ResourceData, cc *apiV1.Client) error {
 	return nil
 }
 
-func resourceRoleUpdate(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceRoleUpdate(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
 	resp, err := cc.Roles().Update(ctx, roleFromResourceData(d))
@@ -86,7 +84,7 @@ func resourceRoleUpdate(d *schema.ResourceData, cc *apiV1.Client) error {
 	return resourceRoleRead(d, cc)
 }
 
-func resourceRoleDelete(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceRoleDelete(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
 	defer cancel()
 	_, err := cc.Roles().Delete(ctx, d.Id())

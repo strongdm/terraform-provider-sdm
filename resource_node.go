@@ -8,9 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 
-	apiV1 "github.com/strongdm/strongdm-sdk-go"
-	errors_v1 "github.com/strongdm/strongdm-sdk-go/errors"
-	models_v1 "github.com/strongdm/strongdm-sdk-go/models"
+	apiv1 "github.com/strongdm/strongdm-sdk-go"
 )
 
 func resourceNode() *schema.Resource {
@@ -65,17 +63,17 @@ func resourceNode() *schema.Resource {
 	}
 }
 
-func nodeFromResourceData(d *schema.ResourceData) models_v1.Node {
+func nodeFromResourceData(d *schema.ResourceData) apiv1.Node {
 	if list := d.Get("relay").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &models_v1.Relay{
+		return &apiv1.Relay{
 			ID:        d.Id(),
 			Name: stringFromMap(raw, "name"),
 		}
 	}
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &models_v1.Gateway{
+		return &apiv1.Gateway{
 			ID:        d.Id(),
 			Name: stringFromMap(raw, "name"),
 			ListenAddress: stringFromMap(raw, "listen_address"),
@@ -85,7 +83,7 @@ func nodeFromResourceData(d *schema.ResourceData) models_v1.Node {
 	return nil
 }
 
-func resourceNodeCreate(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceNodeCreate(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	resp, err := cc.Nodes().Create(ctx, nodeFromResourceData(d))
@@ -96,11 +94,11 @@ func resourceNodeCreate(d *schema.ResourceData, cc *apiV1.Client) error {
 	return resourceNodeRead(d, cc)
 }
 
-func resourceNodeRead(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceNodeRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
 	resp, err := cc.Nodes().Get(ctx, d.Id())
-	var errNotFound *errors_v1.NotFoundError
+	var errNotFound *apiv1.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
 		d.SetId("")
 		return nil
@@ -108,13 +106,13 @@ func resourceNodeRead(d *schema.ResourceData, cc *apiV1.Client) error {
 		return fmt.Errorf("cannot read Node %s: %w", d.Id(), err)
 	}
 	switch v := resp.Node.(type) {
-	case *models_v1.Relay:
+	case *apiv1.Relay:
 		d.Set("relay", []map[string]interface{}{
 			map[string]interface{}{
 				"name": v.Name,
 			},
 		})
-	case *models_v1.Gateway:
+	case *apiv1.Gateway:
 		d.Set("gateway", []map[string]interface{}{
 			map[string]interface{}{
 				"name": v.Name,
@@ -126,7 +124,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *apiV1.Client) error {
 	return nil
 }
 
-func resourceNodeUpdate(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceNodeUpdate(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
 	resp, err := cc.Nodes().Update(ctx, nodeFromResourceData(d))
@@ -137,7 +135,7 @@ func resourceNodeUpdate(d *schema.ResourceData, cc *apiV1.Client) error {
 	return resourceNodeRead(d, cc)
 }
 
-func resourceNodeDelete(d *schema.ResourceData, cc *apiV1.Client) error {
+func resourceNodeDelete(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
 	defer cancel()
 	_, err := cc.Nodes().Delete(ctx, d.Id())
