@@ -19,12 +19,12 @@ func resourceRole() *schema.Resource {
 		Delete: wrapCrudOperation(resourceRoleDelete),
 		Schema: map[string]*schema.Schema{
 
-			"name": &schema.Schema{
+			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "Unique human-readable name of the Role.",
 			},
-			"composite": &schema.Schema{
+			"composite": {
 				Type:        schema.TypeBool,
 				Required:    true,
 				Description: "True if the Role is a composite role.",

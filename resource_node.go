@@ -18,13 +18,13 @@ func resourceNode() *schema.Resource {
 		Update: wrapCrudOperation(resourceNodeUpdate),
 		Delete: wrapCrudOperation(resourceNodeDelete),
 		Schema: map[string]*schema.Schema{
-			"relay": &schema.Schema{
+			"relay": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"name": &schema.Schema{
+						"name": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Relay.",
@@ -32,23 +32,23 @@ func resourceNode() *schema.Resource {
 					},
 				},
 			},
-			"gateway": &schema.Schema{
+			"gateway": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"name": &schema.Schema{
+						"name": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Relay.",
 						},
-						"listen_address": &schema.Schema{
+						"listen_address": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
 						},
-						"bind_address": &schema.Schema{
+						"bind_address": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "The hostname/port tuple which the gateway daemon will bind to.",
@@ -108,13 +108,13 @@ func resourceNodeRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	switch v := resp.Node.(type) {
 	case *apiv1.Relay:
 		d.Set("relay", []map[string]interface{}{
-			map[string]interface{}{
+			{
 				"name": v.Name,
 			},
 		})
 	case *apiv1.Gateway:
 		d.Set("gateway", []map[string]interface{}{
-			map[string]interface{}{
+			{
 				"name":           v.Name,
 				"listen_address": v.ListenAddress,
 				"bind_address":   v.BindAddress,
