@@ -30,8 +30,9 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"sdm_node": resourceNode(),
-			"sdm_role": resourceRole(),
+			"sdm_node":            resourceNode(),
+			"sdm_role_attachment": resourceRoleAttachment(),
+			"sdm_role":            resourceRole(),
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			client, err := apiV1.New(d.Get("host").(string), d.Get("api_access_key").(string), d.Get("api_secret_key").(string))
