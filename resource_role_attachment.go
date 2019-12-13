@@ -47,8 +47,7 @@ func roleAttachmentFromResourceData(d *schema.ResourceData) *apiv1.RoleAttachmen
 func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	model := roleAttachmentFromResourceData(d)
-	resp, err := cc.RoleAttachments().Create(ctx, model)
+	resp, err := cc.RoleAttachments().Create(ctx, roleAttachmentFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create RoleAttachment %s: %w", "", err)
 	}
