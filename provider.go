@@ -31,6 +31,7 @@ func Provider() *schema.Provider {
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"sdm_node":            resourceNode(),
+			"sdm_resource":        resourceResource(),
 			"sdm_role_attachment": resourceRoleAttachment(),
 			"sdm_role":            resourceRole(),
 		},
