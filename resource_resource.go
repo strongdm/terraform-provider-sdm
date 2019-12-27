@@ -40,7 +40,7 @@ func resourceFromResourceData(d *schema.ResourceData) *apiv1.Resource {
 	return &apiv1.Resource{
 		ID:           d.Id(),
 		Name:         stringFromResourceData(d, "name"),
-		PortOverride: intFromResourceData(d, "port_override"),
+		PortOverride: int32FromResourceData(d, "port_override"),
 	}
 }
 

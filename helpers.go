@@ -30,6 +30,14 @@ func stringFromResourceData(d *schema.ResourceData, key string) string {
 	return value.(string)
 }
 
+func int32FromResourceData(d *schema.ResourceData, key string) int32 {
+	value := d.Get(key)
+	if value == nil {
+		return 0
+	}
+	return value.(int32)
+}
+
 func boolFromResourceData(d *schema.ResourceData, key string) bool {
 	value := d.Get(key)
 	if value == nil {
