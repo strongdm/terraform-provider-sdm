@@ -27,7 +27,7 @@ func resourceResource() *schema.Resource {
 			"port_override": {
 				Type:        schema.TypeInt,
 				Required:    true,
-				Description: "Port number override.",
+				Description: "Port number override.\n TODO: should this be a part of the Driver since it does not apply to HTTP resources?",
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
