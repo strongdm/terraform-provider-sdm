@@ -18,6 +18,79 @@ func resourceResource() *schema.Resource {
 		Update: wrapCrudOperation(resourceResourceUpdate),
 		Delete: wrapCrudOperation(resourceResourceDelete),
 		Schema: map[string]*schema.Schema{
+			"redis": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "Port number override.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"elasticache_redis": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "Port number override.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"kubernetes": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -578,6 +651,29 @@ func resourceResource() *schema.Resource {
 }
 
 func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
+	if list := d.Get("redis").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Redis{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Password:     stringFromMap(raw, "password"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.ElasticacheRedis{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Password:     stringFromMap(raw, "password"),
+			Port:         int32FromMap(raw, "port"),
+			TlsRequired:  boolFromMap(raw, "tls_required"),
+		}
+	}
 	if list := d.Get("kubernetes").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Kubernetes{
@@ -769,6 +865,27 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
 	}
 	switch v := resp.Resource.(type) {
+	case *apiv1.Redis:
+		d.Set("redis", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"port_override": v.PortOverride,
+				"hostname":      v.Hostname,
+				"password":      v.Password,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.ElasticacheRedis:
+		d.Set("elasticache_redis", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"port_override": v.PortOverride,
+				"hostname":      v.Hostname,
+				"password":      v.Password,
+				"port":          v.Port,
+				"tls_required":  v.TlsRequired,
+			},
+		})
 	case *apiv1.Kubernetes:
 		d.Set("kubernetes", []map[string]interface{}{
 			{
