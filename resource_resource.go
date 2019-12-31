@@ -29,13 +29,13 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -63,13 +63,13 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -102,10 +102,44 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
-							Description: "Port number override.",
+							Description: "",
+						},
+						"certificate_authority": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"client_certificate": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"client_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"kubernetes_basic_auth": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -114,6 +148,16 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -145,11 +189,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
@@ -195,11 +234,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"endpoint": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -229,11 +263,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -262,11 +291,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
 						},
 						"url": {
 							Type:        schema.TypeString,
@@ -312,11 +336,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"url": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -350,11 +369,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
 						},
 						"url": {
 							Type:        schema.TypeString,
@@ -395,11 +409,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -417,6 +426,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -439,11 +453,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -461,6 +470,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -483,11 +497,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -505,6 +514,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -527,11 +541,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -549,6 +558,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -571,11 +585,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -593,6 +602,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -615,11 +629,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "Port number override.",
-						},
 						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -630,12 +639,17 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"region": {
+						"output": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"output": {
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -656,8 +670,8 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Redis{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Password:     stringFromMap(raw, "password"),
 			Port:         int32FromMap(raw, "port"),
 		}
@@ -667,8 +681,8 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.ElasticacheRedis{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Password:     stringFromMap(raw, "password"),
 			Port:         int32FromMap(raw, "port"),
 			TlsRequired:  boolFromMap(raw, "tls_required"),
@@ -679,9 +693,22 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Kubernetes{
 			ID:                   d.Id(),
 			Name:                 stringFromMap(raw, "name"),
-			PortOverride:         int32FromMap(raw, "port_override"),
 			Hostname:             stringFromMap(raw, "hostname"),
 			Port:                 int32FromMap(raw, "port"),
+			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
+			ClientCertificate:    stringFromMap(raw, "client_certificate"),
+			ClientKey:            stringFromMap(raw, "client_key"),
+		}
+	}
+	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.KubernetesBasicAuth{
+			ID:                   d.Id(),
+			Name:                 stringFromMap(raw, "name"),
+			Hostname:             stringFromMap(raw, "hostname"),
+			Port:                 int32FromMap(raw, "port"),
+			Username:             stringFromMap(raw, "username"),
+			Password:             stringFromMap(raw, "password"),
 			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
 			ClientCertificate:    stringFromMap(raw, "client_certificate"),
 			ClientKey:            stringFromMap(raw, "client_key"),
@@ -692,7 +719,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.AmazonEks{
 			ID:                   d.Id(),
 			Name:                 stringFromMap(raw, "name"),
-			PortOverride:         int32FromMap(raw, "port_override"),
 			Endpoint:             stringFromMap(raw, "endpoint"),
 			AccessKey:            stringFromMap(raw, "access_key"),
 			SecretAccessKey:      stringFromMap(raw, "secret_access_key"),
@@ -706,7 +732,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.GoogleGke{
 			ID:                   d.Id(),
 			Name:                 stringFromMap(raw, "name"),
-			PortOverride:         int32FromMap(raw, "port_override"),
 			Endpoint:             stringFromMap(raw, "endpoint"),
 			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
 			ServiceAccountKey:    stringFromMap(raw, "service_account_key"),
@@ -715,12 +740,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Ssh{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Port:         int32FromMap(raw, "port"),
+			ID:       d.Id(),
+			Name:     stringFromMap(raw, "name"),
+			Hostname: stringFromMap(raw, "hostname"),
+			Username: stringFromMap(raw, "username"),
+			Port:     int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
@@ -728,7 +752,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.HttpBasicAuth{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
-			PortOverride:     int32FromMap(raw, "port_override"),
 			Url:              stringFromMap(raw, "url"),
 			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
 			Username:         stringFromMap(raw, "username"),
@@ -742,7 +765,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.HttpNoAuth{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
-			PortOverride:     int32FromMap(raw, "port_override"),
 			Url:              stringFromMap(raw, "url"),
 			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
 			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
@@ -754,7 +776,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.HttpAuth{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
-			PortOverride:     int32FromMap(raw, "port_override"),
 			Url:              stringFromMap(raw, "url"),
 			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
 			AuthHeader:       stringFromMap(raw, "auth_header"),
@@ -767,11 +788,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Mysql{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
 		}
 	}
@@ -780,11 +801,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.AuroraMysql{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
 		}
 	}
@@ -793,11 +814,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Clustrix{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
 		}
 	}
@@ -806,11 +827,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Maria{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
 		}
 	}
@@ -819,11 +840,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Memsql{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
 		}
 	}
@@ -832,11 +853,11 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.Athena{
 			ID:              d.Id(),
 			Name:            stringFromMap(raw, "name"),
-			PortOverride:    int32FromMap(raw, "port_override"),
 			AccessKey:       stringFromMap(raw, "access_key"),
 			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Region:          stringFromMap(raw, "region"),
 			Output:          stringFromMap(raw, "output"),
+			PortOverride:    int32FromMap(raw, "port_override"),
+			Region:          stringFromMap(raw, "region"),
 		}
 	}
 	return nil
@@ -869,8 +890,8 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("redis", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
+				"port_override": v.PortOverride,
 				"password":      v.Password,
 				"port":          v.Port,
 			},
@@ -879,8 +900,8 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
+				"port_override": v.PortOverride,
 				"password":      v.Password,
 				"port":          v.Port,
 				"tls_required":  v.TlsRequired,
@@ -890,9 +911,21 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("kubernetes", []map[string]interface{}{
 			{
 				"name":                  v.Name,
-				"port_override":         v.PortOverride,
 				"hostname":              v.Hostname,
 				"port":                  v.Port,
+				"certificate_authority": v.CertificateAuthority,
+				"client_certificate":    v.ClientCertificate,
+				"client_key":            v.ClientKey,
+			},
+		})
+	case *apiv1.KubernetesBasicAuth:
+		d.Set("kubernetes_basic_auth", []map[string]interface{}{
+			{
+				"name":                  v.Name,
+				"hostname":              v.Hostname,
+				"port":                  v.Port,
+				"username":              v.Username,
+				"password":              v.Password,
 				"certificate_authority": v.CertificateAuthority,
 				"client_certificate":    v.ClientCertificate,
 				"client_key":            v.ClientKey,
@@ -902,7 +935,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
 				"name":                  v.Name,
-				"port_override":         v.PortOverride,
 				"endpoint":              v.Endpoint,
 				"access_key":            v.AccessKey,
 				"secret_access_key":     v.SecretAccessKey,
@@ -915,7 +947,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("google_gke", []map[string]interface{}{
 			{
 				"name":                  v.Name,
-				"port_override":         v.PortOverride,
 				"endpoint":              v.Endpoint,
 				"certificate_authority": v.CertificateAuthority,
 				"service_account_key":   v.ServiceAccountKey,
@@ -924,18 +955,16 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	case *apiv1.SSH:
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"port_override": v.PortOverride,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port":          v.Port,
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"username": v.Username,
+				"port":     v.Port,
 			},
 		})
 	case *apiv1.HTTPBasicAuth:
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
 				"name":              v.Name,
-				"port_override":     v.PortOverride,
 				"url":               v.Url,
 				"healthcheck_path":  v.HealthcheckPath,
 				"username":          v.Username,
@@ -948,7 +977,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("http_no_auth", []map[string]interface{}{
 			{
 				"name":              v.Name,
-				"port_override":     v.PortOverride,
 				"url":               v.Url,
 				"healthcheck_path":  v.HealthcheckPath,
 				"headers_blacklist": v.HeadersBlacklist,
@@ -959,7 +987,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("http_auth", []map[string]interface{}{
 			{
 				"name":              v.Name,
-				"port_override":     v.PortOverride,
 				"url":               v.Url,
 				"healthcheck_path":  v.HealthcheckPath,
 				"auth_header":       v.AuthHeader,
@@ -971,11 +998,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("mysql", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port_override": v.PortOverride,
 				"port":          v.Port,
 			},
 		})
@@ -983,11 +1010,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port_override": v.PortOverride,
 				"port":          v.Port,
 			},
 		})
@@ -995,11 +1022,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("clustrix", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port_override": v.PortOverride,
 				"port":          v.Port,
 			},
 		})
@@ -1007,11 +1034,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("maria", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port_override": v.PortOverride,
 				"port":          v.Port,
 			},
 		})
@@ -1019,11 +1046,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("memsql", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"port_override": v.PortOverride,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port_override": v.PortOverride,
 				"port":          v.Port,
 			},
 		})
@@ -1031,11 +1058,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("athena", []map[string]interface{}{
 			{
 				"name":              v.Name,
-				"port_override":     v.PortOverride,
 				"access_key":        v.AccessKey,
 				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
 				"output":            v.Output,
+				"port_override":     v.PortOverride,
+				"region":            v.Region,
 			},
 		})
 	}
