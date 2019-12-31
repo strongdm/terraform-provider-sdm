@@ -117,12 +117,27 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
+						"client_certificate_filename": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"client_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"client_key_filename": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -166,12 +181,27 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
+						"client_certificate_filename": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"client_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"client_key_filename": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -210,6 +240,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -244,7 +279,17 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"service_account_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"service_account_key_filename": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -691,50 +736,59 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	if list := d.Get("kubernetes").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Kubernetes{
-			ID:                   d.Id(),
-			Name:                 stringFromMap(raw, "name"),
-			Hostname:             stringFromMap(raw, "hostname"),
-			Port:                 int32FromMap(raw, "port"),
-			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    stringFromMap(raw, "client_certificate"),
-			ClientKey:            stringFromMap(raw, "client_key"),
+			ID:                           d.Id(),
+			Name:                         stringFromMap(raw, "name"),
+			Hostname:                     stringFromMap(raw, "hostname"),
+			Port:                         int32FromMap(raw, "port"),
+			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            stringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    stringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    stringFromMap(raw, "client_key"),
+			ClientKeyFilename:            stringFromMap(raw, "client_key_filename"),
 		}
 	}
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.KubernetesBasicAuth{
-			ID:                   d.Id(),
-			Name:                 stringFromMap(raw, "name"),
-			Hostname:             stringFromMap(raw, "hostname"),
-			Port:                 int32FromMap(raw, "port"),
-			Username:             stringFromMap(raw, "username"),
-			Password:             stringFromMap(raw, "password"),
-			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    stringFromMap(raw, "client_certificate"),
-			ClientKey:            stringFromMap(raw, "client_key"),
+			ID:                           d.Id(),
+			Name:                         stringFromMap(raw, "name"),
+			Hostname:                     stringFromMap(raw, "hostname"),
+			Port:                         int32FromMap(raw, "port"),
+			Username:                     stringFromMap(raw, "username"),
+			Password:                     stringFromMap(raw, "password"),
+			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            stringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    stringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    stringFromMap(raw, "client_key"),
+			ClientKeyFilename:            stringFromMap(raw, "client_key_filename"),
 		}
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.AmazonEks{
-			ID:                   d.Id(),
-			Name:                 stringFromMap(raw, "name"),
-			Endpoint:             stringFromMap(raw, "endpoint"),
-			AccessKey:            stringFromMap(raw, "access_key"),
-			SecretAccessKey:      stringFromMap(raw, "secret_access_key"),
-			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
-			Region:               stringFromMap(raw, "region"),
-			ClusterName:          stringFromMap(raw, "cluster_name"),
+			ID:                           d.Id(),
+			Name:                         stringFromMap(raw, "name"),
+			Endpoint:                     stringFromMap(raw, "endpoint"),
+			AccessKey:                    stringFromMap(raw, "access_key"),
+			SecretAccessKey:              stringFromMap(raw, "secret_access_key"),
+			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
+			Region:                       stringFromMap(raw, "region"),
+			ClusterName:                  stringFromMap(raw, "cluster_name"),
 		}
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.GoogleGke{
-			ID:                   d.Id(),
-			Name:                 stringFromMap(raw, "name"),
-			Endpoint:             stringFromMap(raw, "endpoint"),
-			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
-			ServiceAccountKey:    stringFromMap(raw, "service_account_key"),
+			ID:                           d.Id(),
+			Name:                         stringFromMap(raw, "name"),
+			Endpoint:                     stringFromMap(raw, "endpoint"),
+			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
+			ServiceAccountKey:            stringFromMap(raw, "service_account_key"),
+			ServiceAccountKeyFilename:    stringFromMap(raw, "service_account_key_filename"),
 		}
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
@@ -910,46 +964,55 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	case *apiv1.Kubernetes:
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"name":                  v.Name,
-				"hostname":              v.Hostname,
-				"port":                  v.Port,
-				"certificate_authority": v.CertificateAuthority,
-				"client_certificate":    v.ClientCertificate,
-				"client_key":            v.ClientKey,
+				"name":                           v.Name,
+				"hostname":                       v.Hostname,
+				"port":                           v.Port,
+				"certificate_authority":          v.CertificateAuthority,
+				"certificate_authority_filename": v.CertificateAuthorityFilename,
+				"client_certificate":             v.ClientCertificate,
+				"client_certificate_filename":    v.ClientCertificateFilename,
+				"client_key":                     v.ClientKey,
+				"client_key_filename":            v.ClientKeyFilename,
 			},
 		})
 	case *apiv1.KubernetesBasicAuth:
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"name":                  v.Name,
-				"hostname":              v.Hostname,
-				"port":                  v.Port,
-				"username":              v.Username,
-				"password":              v.Password,
-				"certificate_authority": v.CertificateAuthority,
-				"client_certificate":    v.ClientCertificate,
-				"client_key":            v.ClientKey,
+				"name":                           v.Name,
+				"hostname":                       v.Hostname,
+				"port":                           v.Port,
+				"username":                       v.Username,
+				"password":                       v.Password,
+				"certificate_authority":          v.CertificateAuthority,
+				"certificate_authority_filename": v.CertificateAuthorityFilename,
+				"client_certificate":             v.ClientCertificate,
+				"client_certificate_filename":    v.ClientCertificateFilename,
+				"client_key":                     v.ClientKey,
+				"client_key_filename":            v.ClientKeyFilename,
 			},
 		})
 	case *apiv1.AmazonEKS:
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"name":                  v.Name,
-				"endpoint":              v.Endpoint,
-				"access_key":            v.AccessKey,
-				"secret_access_key":     v.SecretAccessKey,
-				"certificate_authority": v.CertificateAuthority,
-				"region":                v.Region,
-				"cluster_name":          v.ClusterName,
+				"name":                           v.Name,
+				"endpoint":                       v.Endpoint,
+				"access_key":                     v.AccessKey,
+				"secret_access_key":              v.SecretAccessKey,
+				"certificate_authority":          v.CertificateAuthority,
+				"certificate_authority_filename": v.CertificateAuthorityFilename,
+				"region":                         v.Region,
+				"cluster_name":                   v.ClusterName,
 			},
 		})
 	case *apiv1.GoogleGKE:
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"name":                  v.Name,
-				"endpoint":              v.Endpoint,
-				"certificate_authority": v.CertificateAuthority,
-				"service_account_key":   v.ServiceAccountKey,
+				"name":                           v.Name,
+				"endpoint":                       v.Endpoint,
+				"certificate_authority":          v.CertificateAuthority,
+				"certificate_authority_filename": v.CertificateAuthorityFilename,
+				"service_account_key":            v.ServiceAccountKey,
+				"service_account_key_filename":   v.ServiceAccountKeyFilename,
 			},
 		})
 	case *apiv1.SSH:
