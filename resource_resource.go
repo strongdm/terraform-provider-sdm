@@ -39,6 +39,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -134,6 +139,40 @@ func resourceResource() *schema.Resource {
 						},
 						"service_account_key": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"ssh": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "Port number override.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -308,6 +347,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -344,6 +388,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -386,6 +435,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -422,6 +476,11 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -464,6 +523,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -493,6 +557,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"output": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -516,6 +585,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Name:                 stringFromMap(raw, "name"),
 			PortOverride:         int32FromMap(raw, "port_override"),
 			Hostname:             stringFromMap(raw, "hostname"),
+			Port:                 int32FromMap(raw, "port"),
 			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
 			ClientCertificate:    stringFromMap(raw, "client_certificate"),
 			ClientKey:            stringFromMap(raw, "client_key"),
@@ -544,6 +614,17 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Endpoint:             stringFromMap(raw, "endpoint"),
 			CertificateAuthority: stringFromMap(raw, "certificate_authority"),
 			ServiceAccountKey:    stringFromMap(raw, "service_account_key"),
+		}
+	}
+	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Ssh{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
+			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
@@ -595,6 +676,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
@@ -607,6 +689,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
@@ -619,6 +702,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
@@ -631,6 +715,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("memsql").([]interface{}); len(list) > 0 {
@@ -643,6 +728,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
@@ -653,6 +739,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			PortOverride:    int32FromMap(raw, "port_override"),
 			AccessKey:       stringFromMap(raw, "access_key"),
 			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
+			Region:          stringFromMap(raw, "region"),
 			Output:          stringFromMap(raw, "output"),
 		}
 	}
@@ -688,6 +775,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"name":                  v.Name,
 				"port_override":         v.PortOverride,
 				"hostname":              v.Hostname,
+				"port":                  v.Port,
 				"certificate_authority": v.CertificateAuthority,
 				"client_certificate":    v.ClientCertificate,
 				"client_key":            v.ClientKey,
@@ -714,6 +802,16 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"endpoint":              v.Endpoint,
 				"certificate_authority": v.CertificateAuthority,
 				"service_account_key":   v.ServiceAccountKey,
+			},
+		})
+	case *apiv1.SSH:
+		d.Set("ssh", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"port_override": v.PortOverride,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"port":          v.Port,
 			},
 		})
 	case *apiv1.HTTPBasicAuth:
@@ -761,6 +859,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port":          v.Port,
 			},
 		})
 	case *apiv1.AuroraMysql:
@@ -772,6 +871,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port":          v.Port,
 			},
 		})
 	case *apiv1.Clustrix:
@@ -783,6 +883,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port":          v.Port,
 			},
 		})
 	case *apiv1.Maria:
@@ -794,6 +895,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port":          v.Port,
 			},
 		})
 	case *apiv1.Memsql:
@@ -805,6 +907,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"port":          v.Port,
 			},
 		})
 	case *apiv1.Athena:
@@ -814,6 +917,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override":     v.PortOverride,
 				"access_key":        v.AccessKey,
 				"secret_access_key": v.SecretAccessKey,
+				"region":            v.Region,
 				"output":            v.Output,
 			},
 		})
