@@ -22,6 +22,22 @@ func stringFromMap(m map[string]interface{}, key string) string {
 	return value.(string)
 }
 
+func int32FromMap(m map[string]interface{}, key string) int32 {
+	value := m[key]
+	if value == nil {
+		return 0
+	}
+	return value.(int32)
+}
+
+func boolFromMap(m map[string]interface{}, key string) bool {
+	value := m[key]
+	if value == nil {
+		return false
+	}
+	return value.(bool)
+}
+
 func stringFromResourceData(d *schema.ResourceData, key string) string {
 	value := d.Get(key)
 	if value == nil {
