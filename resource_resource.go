@@ -767,7 +767,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.AmazonEks{
+		return &apiv1.AmazonEKS{
 			ID:                           d.Id(),
 			Name:                         stringFromMap(raw, "name"),
 			Endpoint:                     stringFromMap(raw, "endpoint"),
@@ -781,7 +781,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.GoogleGke{
+		return &apiv1.GoogleGKE{
 			ID:                           d.Id(),
 			Name:                         stringFromMap(raw, "name"),
 			Endpoint:                     stringFromMap(raw, "endpoint"),
@@ -793,7 +793,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.Ssh{
+		return &apiv1.SSH{
 			ID:       d.Id(),
 			Name:     stringFromMap(raw, "name"),
 			Hostname: stringFromMap(raw, "hostname"),
@@ -803,7 +803,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.HttpBasicAuth{
+		return &apiv1.HTTPBasicAuth{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
 			Url:              stringFromMap(raw, "url"),
@@ -816,7 +816,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	}
 	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.HttpNoAuth{
+		return &apiv1.HTTPNoAuth{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
 			Url:              stringFromMap(raw, "url"),
@@ -827,7 +827,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	}
 	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.HttpAuth{
+		return &apiv1.HTTPAuth{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
 			Url:              stringFromMap(raw, "url"),
