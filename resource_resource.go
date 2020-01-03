@@ -73,6 +73,16 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Required:    true,
@@ -146,12 +156,7 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"endpoint": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"access_key": {
+						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -161,7 +166,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"region": {
+						"endpoint": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -376,36 +386,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"certificate_authority": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"certificate_authority_filename": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"client_certificate": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"client_certificate_filename": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"client_key": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"client_key_filename": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 					},
 				},
 			},
@@ -557,11 +537,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"endpoint": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -573,6 +548,11 @@ func resourceResource() *schema.Resource {
 							Description: "",
 						},
 						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"endpoint": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -635,11 +615,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"endpoint": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"private_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -652,6 +627,11 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"endpoint": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -1466,6 +1446,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"schema": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
@@ -1479,7 +1464,7 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"mongo_hybrid": {
+			"mongo_legacy_host": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1530,6 +1515,70 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"mongo_legacy_replicaset": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"auth_database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"replica_set": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"connect_to_replica": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -1571,6 +1620,16 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"schema": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
 							Required:    true,
 							Description: "",
 						},
@@ -1624,6 +1683,11 @@ func resourceResource() *schema.Resource {
 							Description: "",
 						},
 						"connect_to_replica": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
 							Type:        schema.TypeBool,
 							Required:    true,
 							Description: "",
@@ -1696,6 +1760,8 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
 			Hostname:     stringFromMap(raw, "hostname"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
 			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
 			Username:     stringFromMap(raw, "username"),
@@ -1719,10 +1785,10 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.AmazonES{
 			ID:              d.Id(),
 			Name:            stringFromMap(raw, "name"),
+			Region:          stringFromMap(raw, "region"),
+			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
 			Endpoint:        stringFromMap(raw, "endpoint"),
 			AccessKey:       stringFromMap(raw, "access_key"),
-			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Region:          stringFromMap(raw, "region"),
 			PortOverride:    int32FromMap(raw, "port_override"),
 		}
 	}
@@ -1780,18 +1846,12 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.KubernetesBasicAuth{
-			ID:                           d.Id(),
-			Name:                         stringFromMap(raw, "name"),
-			Hostname:                     stringFromMap(raw, "hostname"),
-			Port:                         int32FromMap(raw, "port"),
-			Username:                     stringFromMap(raw, "username"),
-			Password:                     stringFromMap(raw, "password"),
-			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
-			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
-			ClientCertificate:            stringFromMap(raw, "client_certificate"),
-			ClientCertificateFilename:    stringFromMap(raw, "client_certificate_filename"),
-			ClientKey:                    stringFromMap(raw, "client_key"),
-			ClientKeyFilename:            stringFromMap(raw, "client_key_filename"),
+			ID:       d.Id(),
+			Name:     stringFromMap(raw, "name"),
+			Hostname: stringFromMap(raw, "hostname"),
+			Port:     int32FromMap(raw, "port"),
+			Username: stringFromMap(raw, "username"),
+			Password: stringFromMap(raw, "password"),
 		}
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
@@ -1839,10 +1899,10 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.DynamoDB{
 			ID:              d.Id(),
 			Name:            stringFromMap(raw, "name"),
-			Endpoint:        stringFromMap(raw, "endpoint"),
 			AccessKey:       stringFromMap(raw, "access_key"),
 			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
 			Region:          stringFromMap(raw, "region"),
+			Endpoint:        stringFromMap(raw, "endpoint"),
 			PortOverride:    int32FromMap(raw, "port_override"),
 		}
 	}
@@ -1863,10 +1923,10 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 		return &apiv1.BigQuery{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
-			Endpoint:     stringFromMap(raw, "endpoint"),
 			PrivateKey:   stringFromMap(raw, "private_key"),
 			Project:      stringFromMap(raw, "project"),
 			PortOverride: int32FromMap(raw, "port_override"),
+			Endpoint:     stringFromMap(raw, "endpoint"),
 			Username:     stringFromMap(raw, "username"),
 		}
 	}
@@ -2109,13 +2169,14 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Password:         stringFromMap(raw, "password"),
 			Database:         stringFromMap(raw, "database"),
 			PortOverride:     int32FromMap(raw, "port_override"),
+			Schema:           stringFromMap(raw, "schema"),
 			Port:             int32FromMap(raw, "port"),
 			OverrideDatabase: boolFromMap(raw, "override_database"),
 		}
 	}
-	if list := d.Get("mongo_hybrid").([]interface{}); len(list) > 0 {
+	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.MongoHybrid{
+		return &apiv1.MongoLegacyHost{
 			ID:               d.Id(),
 			Name:             stringFromMap(raw, "name"),
 			Hostname:         stringFromMap(raw, "hostname"),
@@ -2126,6 +2187,23 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Port:             int32FromMap(raw, "port"),
 			ReplicaSet:       stringFromMap(raw, "replica_set"),
 			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      boolFromMap(raw, "tls_required"),
+		}
+	}
+	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.MongoLegacyReplicaset{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Hostname:         stringFromMap(raw, "hostname"),
+			AuthDatabase:     stringFromMap(raw, "auth_database"),
+			PortOverride:     int32FromMap(raw, "port_override"),
+			Username:         stringFromMap(raw, "username"),
+			Password:         stringFromMap(raw, "password"),
+			Port:             int32FromMap(raw, "port"),
+			ReplicaSet:       stringFromMap(raw, "replica_set"),
+			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      boolFromMap(raw, "tls_required"),
 		}
 	}
 	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
@@ -2139,6 +2217,8 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Port:         int32FromMap(raw, "port"),
+			Schema:       stringFromMap(raw, "schema"),
+			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
 	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
@@ -2154,6 +2234,7 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Port:             int32FromMap(raw, "port"),
 			ReplicaSet:       stringFromMap(raw, "replica_set"),
 			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      boolFromMap(raw, "tls_required"),
 		}
 	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
@@ -2210,6 +2291,8 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 			{
 				"name":          v.Name,
 				"hostname":      v.Hostname,
+				"password":      v.Password,
+				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
 				"username":      v.Username,
@@ -2231,10 +2314,10 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("amazon_es", []map[string]interface{}{
 			{
 				"name":              v.Name,
+				"region":            v.Region,
+				"secret_access_key": v.SecretAccessKey,
 				"endpoint":          v.Endpoint,
 				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
 				"port_override":     v.PortOverride,
 			},
 		})
@@ -2288,17 +2371,11 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	case *apiv1.KubernetesBasicAuth:
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"username":                       v.Username,
-				"password":                       v.Password,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"port":     v.Port,
+				"username": v.Username,
+				"password": v.Password,
 			},
 		})
 	case *apiv1.AmazonEKS:
@@ -2342,10 +2419,10 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("dynamo_db", []map[string]interface{}{
 			{
 				"name":              v.Name,
-				"endpoint":          v.Endpoint,
 				"access_key":        v.AccessKey,
 				"secret_access_key": v.SecretAccessKey,
 				"region":            v.Region,
+				"endpoint":          v.Endpoint,
 				"port_override":     v.PortOverride,
 			},
 		})
@@ -2364,10 +2441,10 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		d.Set("big_query", []map[string]interface{}{
 			{
 				"name":          v.Name,
-				"endpoint":      v.Endpoint,
 				"private_key":   v.PrivateKey,
 				"project":       v.Project,
 				"port_override": v.PortOverride,
+				"endpoint":      v.Endpoint,
 				"username":      v.Username,
 			},
 		})
@@ -2591,12 +2668,13 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password":          v.Password,
 				"database":          v.Database,
 				"port_override":     v.PortOverride,
+				"schema":            v.Schema,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
 			},
 		})
-	case *apiv1.MongoHybrid:
-		d.Set("mongo_hybrid", []map[string]interface{}{
+	case *apiv1.MongoLegacyHost:
+		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
 				"name":               v.Name,
 				"hostname":           v.Hostname,
@@ -2607,6 +2685,22 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port":               v.Port,
 				"replica_set":        v.ReplicaSet,
 				"connect_to_replica": v.ConnectToReplica,
+				"tls_required":       v.TlsRequired,
+			},
+		})
+	case *apiv1.MongoLegacyReplicaset:
+		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
+			{
+				"name":               v.Name,
+				"hostname":           v.Hostname,
+				"auth_database":      v.AuthDatabase,
+				"port_override":      v.PortOverride,
+				"username":           v.Username,
+				"password":           v.Password,
+				"port":               v.Port,
+				"replica_set":        v.ReplicaSet,
+				"connect_to_replica": v.ConnectToReplica,
+				"tls_required":       v.TlsRequired,
 			},
 		})
 	case *apiv1.MongoHost:
@@ -2619,6 +2713,8 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"port":          v.Port,
+				"schema":        v.Schema,
+				"tls_required":  v.TlsRequired,
 			},
 		})
 	case *apiv1.MongoReplicaSet:
@@ -2633,6 +2729,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port":               v.Port,
 				"replica_set":        v.ReplicaSet,
 				"connect_to_replica": v.ConnectToReplica,
+				"tls_required":       v.TlsRequired,
 			},
 		})
 	case *apiv1.Athena:
