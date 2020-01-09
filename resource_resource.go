@@ -18,7 +18,7 @@ func resourceResource() *schema.Resource {
 		Update: wrapCrudOperation(resourceResourceUpdate),
 		Delete: wrapCrudOperation(resourceResourceDelete),
 		Schema: map[string]*schema.Schema{
-			"sybase": {
+			"athena": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -29,12 +29,17 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"hostname": {
+						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"username": {
+						"secret_access_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"output": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -44,12 +49,7 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
+						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -57,7 +57,46 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"presto": {
+			"big_query": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"private_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"project": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"endpoint": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"cassandra": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -73,12 +112,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"password": {
+						"username": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"database": {
+						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -90,11 +129,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -106,7 +140,7 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"teradata": {
+			"druid": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -122,6 +156,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
 						"username": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -132,12 +171,46 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"port_override": {
+						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
-						"port": {
+					},
+				},
+			},
+			"dynamo_db": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"access_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"secret_access_key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"endpoint": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
 							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
@@ -228,7 +301,7 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"redis": {
+			"http_basic_auth": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -239,13 +312,18 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"hostname": {
+						"url": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
+						"healthcheck_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -254,15 +332,20 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"port": {
-							Type:        schema.TypeInt,
+						"headers_blacklist": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"default_path": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
 					},
 				},
 			},
-			"elasticache_redis": {
+			"http_no_auth": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -273,28 +356,62 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"hostname": {
+						"url": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
+						"healthcheck_path": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"port": {
-							Type:        schema.TypeInt,
+						"headers_blacklist": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"tls_required": {
-							Type:        schema.TypeBool,
+						"default_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"http_auth": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"url": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"healthcheck_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"auth_header": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"headers_blacklist": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"default_path": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -477,6 +594,486 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"memcached": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"mongo_legacy_host": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"auth_database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"replica_set": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"connect_to_replica": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"mongo_legacy_replicaset": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"auth_database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"replica_set": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"connect_to_replica": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"mongo_host": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"auth_database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"schema": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"mongo_replica_set": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"auth_database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"replica_set": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"connect_to_replica": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"mysql": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"aurora_mysql": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"clustrix": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"maria": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"memsql": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"oracle": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -520,196 +1117,6 @@ func resourceResource() *schema.Resource {
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"dynamo_db": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"access_key": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"secret_access_key": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"region": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"endpoint": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"rdp": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"big_query": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"private_key": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"project": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"endpoint": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"snowflake": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"schema": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"memcached": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -961,7 +1368,7 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"ssh": {
+			"presto": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -977,8 +1384,18 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"username": {
+						"password": {
 							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -987,127 +1404,20 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-					},
-				},
-			},
-			"http_basic_auth": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"url": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"healthcheck_path": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"username": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"headers_blacklist": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"default_path": {
-							Type:        schema.TypeString,
+						"tls_required": {
+							Type:        schema.TypeBool,
 							Required:    true,
 							Description: "",
 						},
 					},
 				},
 			},
-			"http_no_auth": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"url": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"healthcheck_path": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"headers_blacklist": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"default_path": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"http_auth": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"url": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"healthcheck_path": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"auth_header": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"headers_blacklist": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"default_path": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"cassandra": {
+			"rdp": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1135,6 +1445,74 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"redis": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"elasticache_redis": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -1151,7 +1529,7 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"mysql": {
+			"snowflake": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1182,227 +1560,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"aurora_mysql": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"database": {
+						"schema": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
 						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"clustrix": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"maria": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"memsql": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"druid": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
@@ -1464,7 +1627,7 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"mongo_legacy_host": {
+			"ssh": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1480,22 +1643,7 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"auth_database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
 						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -1505,25 +1653,10 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"replica_set": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"connect_to_replica": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
-						"tls_required": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
 					},
 				},
 			},
-			"mongo_legacy_replicaset": {
+			"sybase": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1539,7 +1672,7 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"auth_database": {
+						"username": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -1549,8 +1682,8 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"username": {
-							Type:        schema.TypeString,
+						"port": {
+							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
@@ -1559,30 +1692,10 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"replica_set": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"connect_to_replica": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
-						"tls_required": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
 					},
 				},
 			},
-			"mongo_host": {
+			"teradata": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1598,16 +1711,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"auth_database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
 						"username": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1618,116 +1721,13 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"schema": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"tls_required": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"mongo_replica_set": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"auth_database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Required:    true,
 							Description: "",
 						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"replica_set": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"connect_to_replica": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
-						"tls_required": {
-							Type:        schema.TypeBool,
-							Required:    true,
-							Description: "",
-						},
-					},
-				},
-			},
-			"athena": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"access_key": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"secret_access_key": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"output": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "",
-						},
-						"region": {
-							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
 						},
@@ -1742,42 +1742,65 @@ func resourceResource() *schema.Resource {
 }
 
 func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
-	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
+	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.Sybase{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-			Password:     stringFromMap(raw, "password"),
+		return &apiv1.Athena{
+			ID:              d.Id(),
+			Name:            stringFromMap(raw, "name"),
+			AccessKey:       stringFromMap(raw, "access_key"),
+			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
+			Output:          stringFromMap(raw, "output"),
+			PortOverride:    int32FromMap(raw, "port_override"),
+			Region:          stringFromMap(raw, "region"),
 		}
 	}
-	if list := d.Get("presto").([]interface{}); len(list) > 0 {
+	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.Presto{
+		return &apiv1.BigQuery{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			PrivateKey:   stringFromMap(raw, "private_key"),
+			Project:      stringFromMap(raw, "project"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Endpoint:     stringFromMap(raw, "endpoint"),
+			Username:     stringFromMap(raw, "username"),
+		}
+	}
+	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Cassandra{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
 			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
 			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
-			Username:     stringFromMap(raw, "username"),
 			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
-	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
+	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.Teradata{
+		return &apiv1.Druid{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
 			Hostname:     stringFromMap(raw, "hostname"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
-			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.DynamoDB{
+			ID:              d.Id(),
+			Name:            stringFromMap(raw, "name"),
+			AccessKey:       stringFromMap(raw, "access_key"),
+			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
+			Region:          stringFromMap(raw, "region"),
+			Endpoint:        stringFromMap(raw, "endpoint"),
+			PortOverride:    int32FromMap(raw, "port_override"),
 		}
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
@@ -1805,27 +1828,40 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
-	if list := d.Get("redis").([]interface{}); len(list) > 0 {
+	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.Redis{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
+		return &apiv1.HTTPBasicAuth{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Url:              stringFromMap(raw, "url"),
+			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
+			Username:         stringFromMap(raw, "username"),
+			Password:         stringFromMap(raw, "password"),
+			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
+			DefaultPath:      stringFromMap(raw, "default_path"),
 		}
 	}
-	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
+	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.ElasticacheRedis{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+		return &apiv1.HTTPNoAuth{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Url:              stringFromMap(raw, "url"),
+			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
+			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
+			DefaultPath:      stringFromMap(raw, "default_path"),
+		}
+	}
+	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.HTTPAuth{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Url:              stringFromMap(raw, "url"),
+			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
+			AuthHeader:       stringFromMap(raw, "auth_header"),
+			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
+			DefaultPath:      stringFromMap(raw, "default_path"),
 		}
 	}
 	if list := d.Get("kubernetes").([]interface{}); len(list) > 0 {
@@ -1880,6 +1916,144 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			ServiceAccountKeyFilename:    stringFromMap(raw, "service_account_key_filename"),
 		}
 	}
+	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Memcached{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.MongoLegacyHost{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Hostname:         stringFromMap(raw, "hostname"),
+			AuthDatabase:     stringFromMap(raw, "auth_database"),
+			PortOverride:     int32FromMap(raw, "port_override"),
+			Username:         stringFromMap(raw, "username"),
+			Password:         stringFromMap(raw, "password"),
+			Port:             int32FromMap(raw, "port"),
+			ReplicaSet:       stringFromMap(raw, "replica_set"),
+			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      boolFromMap(raw, "tls_required"),
+		}
+	}
+	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.MongoLegacyReplicaset{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Hostname:         stringFromMap(raw, "hostname"),
+			AuthDatabase:     stringFromMap(raw, "auth_database"),
+			PortOverride:     int32FromMap(raw, "port_override"),
+			Username:         stringFromMap(raw, "username"),
+			Password:         stringFromMap(raw, "password"),
+			Port:             int32FromMap(raw, "port"),
+			ReplicaSet:       stringFromMap(raw, "replica_set"),
+			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      boolFromMap(raw, "tls_required"),
+		}
+	}
+	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.MongoHost{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			AuthDatabase: stringFromMap(raw, "auth_database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Port:         int32FromMap(raw, "port"),
+			Schema:       stringFromMap(raw, "schema"),
+			TlsRequired:  boolFromMap(raw, "tls_required"),
+		}
+	}
+	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.MongoReplicaSet{
+			ID:               d.Id(),
+			Name:             stringFromMap(raw, "name"),
+			Hostname:         stringFromMap(raw, "hostname"),
+			AuthDatabase:     stringFromMap(raw, "auth_database"),
+			PortOverride:     int32FromMap(raw, "port_override"),
+			Username:         stringFromMap(raw, "username"),
+			Password:         stringFromMap(raw, "password"),
+			Port:             int32FromMap(raw, "port"),
+			ReplicaSet:       stringFromMap(raw, "replica_set"),
+			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      boolFromMap(raw, "tls_required"),
+		}
+	}
+	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Mysql{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.AuroraMysql{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Clustrix{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("maria").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Maria{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("memsql").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Memsql{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Oracle{
@@ -1892,65 +2066,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Port:         int32FromMap(raw, "port"),
 			PortOverride: int32FromMap(raw, "port_override"),
 			TlsRequired:  boolFromMap(raw, "tls_required"),
-		}
-	}
-	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.DynamoDB{
-			ID:              d.Id(),
-			Name:            stringFromMap(raw, "name"),
-			AccessKey:       stringFromMap(raw, "access_key"),
-			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Region:          stringFromMap(raw, "region"),
-			Endpoint:        stringFromMap(raw, "endpoint"),
-			PortOverride:    int32FromMap(raw, "port_override"),
-		}
-	}
-	if list := d.Get("rdp").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.RDP{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-		}
-	}
-	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.BigQuery{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			PrivateKey:   stringFromMap(raw, "private_key"),
-			Project:      stringFromMap(raw, "project"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Endpoint:     stringFromMap(raw, "endpoint"),
-			Username:     stringFromMap(raw, "username"),
-		}
-	}
-	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Snowflake{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			Schema:       stringFromMap(raw, "schema"),
-			PortOverride: int32FromMap(raw, "port_override"),
-		}
-	}
-	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Memcached{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
@@ -2023,140 +2138,66 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			OverrideDatabase: boolFromMap(raw, "override_database"),
 		}
 	}
-	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
+	if list := d.Get("presto").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.SSH{
-			ID:       d.Id(),
-			Name:     stringFromMap(raw, "name"),
-			Hostname: stringFromMap(raw, "hostname"),
-			Username: stringFromMap(raw, "username"),
-			Port:     int32FromMap(raw, "port"),
+		return &apiv1.Presto{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			Password:     stringFromMap(raw, "password"),
+			Database:     stringFromMap(raw, "database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+			Username:     stringFromMap(raw, "username"),
+			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
-	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
+	if list := d.Get("rdp").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.HTTPBasicAuth{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Url:              stringFromMap(raw, "url"),
-			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
-			DefaultPath:      stringFromMap(raw, "default_path"),
-		}
-	}
-	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.HTTPNoAuth{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Url:              stringFromMap(raw, "url"),
-			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
-			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
-			DefaultPath:      stringFromMap(raw, "default_path"),
-		}
-	}
-	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.HTTPAuth{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Url:              stringFromMap(raw, "url"),
-			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
-			AuthHeader:       stringFromMap(raw, "auth_header"),
-			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
-			DefaultPath:      stringFromMap(raw, "default_path"),
-		}
-	}
-	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Cassandra{
+		return &apiv1.RDP{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("redis").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Redis{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Password:     stringFromMap(raw, "password"),
+			Port:         int32FromMap(raw, "port"),
+		}
+	}
+	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.ElasticacheRedis{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Password:     stringFromMap(raw, "password"),
 			Port:         int32FromMap(raw, "port"),
 			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
-	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
+	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.Mysql{
+		return &apiv1.Snowflake{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
 			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Database:     stringFromMap(raw, "database"),
+			Schema:       stringFromMap(raw, "schema"),
 			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-		}
-	}
-	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.AuroraMysql{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-		}
-	}
-	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Clustrix{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-		}
-	}
-	if list := d.Get("maria").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Maria{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-		}
-	}
-	if list := d.Get("memsql").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Memsql{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-		}
-	}
-	if list := d.Get("druid").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Druid{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
 		}
 	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
@@ -2174,79 +2215,38 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			OverrideDatabase: boolFromMap(raw, "override_database"),
 		}
 	}
-	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
+	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.MongoLegacyHost{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			AuthDatabase:     stringFromMap(raw, "auth_database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Port:             int32FromMap(raw, "port"),
-			ReplicaSet:       stringFromMap(raw, "replica_set"),
-			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
-			TlsRequired:      boolFromMap(raw, "tls_required"),
+		return &apiv1.SSH{
+			ID:       d.Id(),
+			Name:     stringFromMap(raw, "name"),
+			Hostname: stringFromMap(raw, "hostname"),
+			Username: stringFromMap(raw, "username"),
+			Port:     int32FromMap(raw, "port"),
 		}
 	}
-	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
+	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.MongoLegacyReplicaset{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			AuthDatabase:     stringFromMap(raw, "auth_database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Port:             int32FromMap(raw, "port"),
-			ReplicaSet:       stringFromMap(raw, "replica_set"),
-			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
-			TlsRequired:      boolFromMap(raw, "tls_required"),
-		}
-	}
-	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.MongoHost{
+		return &apiv1.Sybase{
 			ID:           d.Id(),
 			Name:         stringFromMap(raw, "name"),
 			Hostname:     stringFromMap(raw, "hostname"),
-			AuthDatabase: stringFromMap(raw, "auth_database"),
+			Username:     stringFromMap(raw, "username"),
 			PortOverride: int32FromMap(raw, "port_override"),
+			Port:         int32FromMap(raw, "port"),
+			Password:     stringFromMap(raw, "password"),
+		}
+	}
+	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.Teradata{
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
+			PortOverride: int32FromMap(raw, "port_override"),
 			Port:         int32FromMap(raw, "port"),
-			Schema:       stringFromMap(raw, "schema"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
-		}
-	}
-	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.MongoReplicaSet{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			AuthDatabase:     stringFromMap(raw, "auth_database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Port:             int32FromMap(raw, "port"),
-			ReplicaSet:       stringFromMap(raw, "replica_set"),
-			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
-			TlsRequired:      boolFromMap(raw, "tls_required"),
-		}
-	}
-	if list := d.Get("athena").([]interface{}); len(list) > 0 {
-		raw := list[0].(map[string]interface{})
-		return &apiv1.Athena{
-			ID:              d.Id(),
-			Name:            stringFromMap(raw, "name"),
-			AccessKey:       stringFromMap(raw, "access_key"),
-			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Output:          stringFromMap(raw, "output"),
-			PortOverride:    int32FromMap(raw, "port_override"),
-			Region:          stringFromMap(raw, "region"),
 		}
 	}
 	return nil
@@ -2275,39 +2275,60 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
 	}
 	switch v := resp.Resource.(type) {
-	case *apiv1.Sybase:
-		d.Set("sybase", []map[string]interface{}{
+	case *apiv1.Athena:
+		d.Set("athena", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"name":              v.Name,
+				"access_key":        v.AccessKey,
+				"secret_access_key": v.SecretAccessKey,
+				"output":            v.Output,
+				"port_override":     v.PortOverride,
+				"region":            v.Region,
 			},
 		})
-	case *apiv1.Presto:
-		d.Set("presto", []map[string]interface{}{
+	case *apiv1.BigQuery:
+		d.Set("big_query", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"private_key":   v.PrivateKey,
+				"project":       v.Project,
+				"port_override": v.PortOverride,
+				"endpoint":      v.Endpoint,
+				"username":      v.Username,
+			},
+		})
+	case *apiv1.Cassandra:
+		d.Set("cassandra", []map[string]interface{}{
 			{
 				"name":          v.Name,
 				"hostname":      v.Hostname,
+				"username":      v.Username,
 				"password":      v.Password,
-				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-				"username":      v.Username,
 				"tls_required":  v.TlsRequired,
 			},
 		})
-	case *apiv1.Teradata:
-		d.Set("teradata", []map[string]interface{}{
+	case *apiv1.Druid:
+		d.Set("druid", []map[string]interface{}{
 			{
 				"name":          v.Name,
 				"hostname":      v.Hostname,
+				"port_override": v.PortOverride,
 				"username":      v.Username,
 				"password":      v.Password,
-				"port_override": v.PortOverride,
 				"port":          v.Port,
+			},
+		})
+	case *apiv1.DynamoDB:
+		d.Set("dynamo_db", []map[string]interface{}{
+			{
+				"name":              v.Name,
+				"access_key":        v.AccessKey,
+				"secret_access_key": v.SecretAccessKey,
+				"region":            v.Region,
+				"endpoint":          v.Endpoint,
+				"port_override":     v.PortOverride,
 			},
 		})
 	case *apiv1.AmazonES:
@@ -2333,25 +2354,37 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"tls_required":  v.TlsRequired,
 			},
 		})
-	case *apiv1.Redis:
-		d.Set("redis", []map[string]interface{}{
+	case *apiv1.HTTPBasicAuth:
+		d.Set("http_basic_auth", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
+				"name":              v.Name,
+				"url":               v.Url,
+				"healthcheck_path":  v.HealthcheckPath,
+				"username":          v.Username,
+				"password":          v.Password,
+				"headers_blacklist": v.HeadersBlacklist,
+				"default_path":      v.DefaultPath,
 			},
 		})
-	case *apiv1.ElasticacheRedis:
-		d.Set("elasticache_redis", []map[string]interface{}{
+	case *apiv1.HTTPNoAuth:
+		d.Set("http_no_auth", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":              v.Name,
+				"url":               v.Url,
+				"healthcheck_path":  v.HealthcheckPath,
+				"headers_blacklist": v.HeadersBlacklist,
+				"default_path":      v.DefaultPath,
+			},
+		})
+	case *apiv1.HTTPAuth:
+		d.Set("http_auth", []map[string]interface{}{
+			{
+				"name":              v.Name,
+				"url":               v.Url,
+				"healthcheck_path":  v.HealthcheckPath,
+				"auth_header":       v.AuthHeader,
+				"headers_blacklist": v.HeadersBlacklist,
+				"default_path":      v.DefaultPath,
 			},
 		})
 	case *apiv1.Kubernetes:
@@ -2402,6 +2435,134 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"service_account_key_filename":   v.ServiceAccountKeyFilename,
 			},
 		})
+	case *apiv1.Memcached:
+		d.Set("memcached", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.MongoLegacyHost:
+		d.Set("mongo_legacy_host", []map[string]interface{}{
+			{
+				"name":               v.Name,
+				"hostname":           v.Hostname,
+				"auth_database":      v.AuthDatabase,
+				"port_override":      v.PortOverride,
+				"username":           v.Username,
+				"password":           v.Password,
+				"port":               v.Port,
+				"replica_set":        v.ReplicaSet,
+				"connect_to_replica": v.ConnectToReplica,
+				"tls_required":       v.TlsRequired,
+			},
+		})
+	case *apiv1.MongoLegacyReplicaset:
+		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
+			{
+				"name":               v.Name,
+				"hostname":           v.Hostname,
+				"auth_database":      v.AuthDatabase,
+				"port_override":      v.PortOverride,
+				"username":           v.Username,
+				"password":           v.Password,
+				"port":               v.Port,
+				"replica_set":        v.ReplicaSet,
+				"connect_to_replica": v.ConnectToReplica,
+				"tls_required":       v.TlsRequired,
+			},
+		})
+	case *apiv1.MongoHost:
+		d.Set("mongo_host", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"auth_database": v.AuthDatabase,
+				"port_override": v.PortOverride,
+				"username":      v.Username,
+				"password":      v.Password,
+				"port":          v.Port,
+				"schema":        v.Schema,
+				"tls_required":  v.TlsRequired,
+			},
+		})
+	case *apiv1.MongoReplicaSet:
+		d.Set("mongo_replica_set", []map[string]interface{}{
+			{
+				"name":               v.Name,
+				"hostname":           v.Hostname,
+				"auth_database":      v.AuthDatabase,
+				"port_override":      v.PortOverride,
+				"username":           v.Username,
+				"password":           v.Password,
+				"port":               v.Port,
+				"replica_set":        v.ReplicaSet,
+				"connect_to_replica": v.ConnectToReplica,
+				"tls_required":       v.TlsRequired,
+			},
+		})
+	case *apiv1.Mysql:
+		d.Set("mysql", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"password":      v.Password,
+				"database":      v.Database,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.AuroraMysql:
+		d.Set("aurora_mysql", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"password":      v.Password,
+				"database":      v.Database,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.Clustrix:
+		d.Set("clustrix", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"password":      v.Password,
+				"database":      v.Database,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.Maria:
+		d.Set("maria", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"password":      v.Password,
+				"database":      v.Database,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.Memsql:
+		d.Set("memsql", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"password":      v.Password,
+				"database":      v.Database,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
 	case *apiv1.Oracle:
 		d.Set("oracle", []map[string]interface{}{
 			{
@@ -2413,60 +2574,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port":          v.Port,
 				"port_override": v.PortOverride,
 				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.DynamoDB:
-		d.Set("dynamo_db", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
-				"endpoint":          v.Endpoint,
-				"port_override":     v.PortOverride,
-			},
-		})
-	case *apiv1.RDP:
-		d.Set("rdp", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.BigQuery:
-		d.Set("big_query", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"private_key":   v.PrivateKey,
-				"project":       v.Project,
-				"port_override": v.PortOverride,
-				"endpoint":      v.Endpoint,
-				"username":      v.Username,
-			},
-		})
-	case *apiv1.Snowflake:
-		d.Set("snowflake", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"schema":        v.Schema,
-				"port_override": v.PortOverride,
-			},
-		})
-	case *apiv1.Memcached:
-		d.Set("memcached", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
 			},
 		})
 	case *apiv1.Postgres:
@@ -2534,129 +2641,61 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"override_database": v.OverrideDatabase,
 			},
 		})
-	case *apiv1.SSH:
-		d.Set("ssh", []map[string]interface{}{
+	case *apiv1.Presto:
+		d.Set("presto", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"username": v.Username,
-				"port":     v.Port,
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"password":      v.Password,
+				"database":      v.Database,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+				"username":      v.Username,
+				"tls_required":  v.TlsRequired,
 			},
 		})
-	case *apiv1.HTTPBasicAuth:
-		d.Set("http_basic_auth", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"username":          v.Username,
-				"password":          v.Password,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
-			},
-		})
-	case *apiv1.HTTPNoAuth:
-		d.Set("http_no_auth", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
-			},
-		})
-	case *apiv1.HTTPAuth:
-		d.Set("http_auth", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"auth_header":       v.AuthHeader,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
-			},
-		})
-	case *apiv1.Cassandra:
-		d.Set("cassandra", []map[string]interface{}{
+	case *apiv1.RDP:
+		d.Set("rdp", []map[string]interface{}{
 			{
 				"name":          v.Name,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"port_override": v.PortOverride,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.Redis:
+		d.Set("redis", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"port_override": v.PortOverride,
+				"password":      v.Password,
+				"port":          v.Port,
+			},
+		})
+	case *apiv1.ElasticacheRedis:
+		d.Set("elasticache_redis", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"port_override": v.PortOverride,
+				"password":      v.Password,
 				"port":          v.Port,
 				"tls_required":  v.TlsRequired,
 			},
 		})
-	case *apiv1.Mysql:
-		d.Set("mysql", []map[string]interface{}{
+	case *apiv1.Snowflake:
+		d.Set("snowflake", []map[string]interface{}{
 			{
 				"name":          v.Name,
 				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
 				"database":      v.Database,
+				"schema":        v.Schema,
 				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.AuroraMysql:
-		d.Set("aurora_mysql", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Clustrix:
-		d.Set("clustrix", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Maria:
-		d.Set("maria", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Memsql:
-		d.Set("memsql", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Druid:
-		d.Set("druid", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
 			},
 		})
 	case *apiv1.SQLServer:
@@ -2673,74 +2712,35 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"override_database": v.OverrideDatabase,
 			},
 		})
-	case *apiv1.MongoLegacyHost:
-		d.Set("mongo_legacy_host", []map[string]interface{}{
+	case *apiv1.SSH:
+		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"username": v.Username,
+				"port":     v.Port,
 			},
 		})
-	case *apiv1.MongoLegacyReplicaset:
-		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
-			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
-			},
-		})
-	case *apiv1.MongoHost:
-		d.Set("mongo_host", []map[string]interface{}{
+	case *apiv1.Sybase:
+		d.Set("sybase", []map[string]interface{}{
 			{
 				"name":          v.Name,
 				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
+				"username":      v.Username,
 				"port_override": v.PortOverride,
+				"port":          v.Port,
+				"password":      v.Password,
+			},
+		})
+	case *apiv1.Teradata:
+		d.Set("teradata", []map[string]interface{}{
+			{
+				"name":          v.Name,
+				"hostname":      v.Hostname,
 				"username":      v.Username,
 				"password":      v.Password,
+				"port_override": v.PortOverride,
 				"port":          v.Port,
-				"schema":        v.Schema,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.MongoReplicaSet:
-		d.Set("mongo_replica_set", []map[string]interface{}{
-			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
-			},
-		})
-	case *apiv1.Athena:
-		d.Set("athena", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"output":            v.Output,
-				"port_override":     v.PortOverride,
-				"region":            v.Region,
 			},
 		})
 	}
