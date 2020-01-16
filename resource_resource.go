@@ -26,32 +26,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"output": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"region": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -65,32 +65,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"private_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"project": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -104,37 +104,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -148,32 +148,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -187,32 +187,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"region": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -226,32 +226,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"region": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -265,37 +265,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -309,37 +309,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"url": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"healthcheck_path": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"headers_blacklist": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"default_path": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -353,27 +353,27 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"url": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"healthcheck_path": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"headers_blacklist": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"default_path": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -387,32 +387,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"url": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"healthcheck_path": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"auth_header": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"headers_blacklist": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"default_path": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -426,47 +426,47 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"client_certificate": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"client_certificate_filename": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"client_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"client_key_filename": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -480,27 +480,27 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -514,42 +514,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"region": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"cluster_name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -563,32 +563,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"service_account_key": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"service_account_key_filename": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -602,22 +602,22 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -631,52 +631,52 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"auth_database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"replica_set": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -690,52 +690,52 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"auth_database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"replica_set": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -749,47 +749,47 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"auth_database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"schema": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -803,52 +803,52 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"auth_database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"replica_set": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -862,37 +862,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -906,37 +906,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -950,37 +950,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -994,37 +994,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1038,37 +1038,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1082,42 +1082,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1131,42 +1131,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"override_database": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1180,42 +1180,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"override_database": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1229,42 +1229,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"override_database": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1278,42 +1278,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"override_database": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1327,42 +1327,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"override_database": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1376,42 +1376,42 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1425,32 +1425,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1464,27 +1464,27 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1498,32 +1498,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1537,37 +1537,37 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"schema": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1581,47 +1581,47 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"schema": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"override_database": {
 							Type:        schema.TypeBool,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1635,22 +1635,22 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1664,32 +1664,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1703,32 +1703,32 @@ func resourceResource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 					},

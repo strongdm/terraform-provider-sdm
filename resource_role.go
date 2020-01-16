@@ -21,12 +21,12 @@ func resourceRole() *schema.Resource {
 
 			"name": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				Description: "Unique human-readable name of the Role.",
 			},
 			"composite": {
 				Type:        schema.TypeBool,
-				Required:    true,
+				Optional:    true,
 				Description: "True if the Role is a composite role.",
 			},
 		},

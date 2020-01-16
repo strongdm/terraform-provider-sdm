@@ -21,12 +21,12 @@ func resourceRoleAttachment() *schema.Resource {
 
 			"composite_role_id": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				Description: "The id of the composite role of this RoleAttachment.",
 			},
 			"attached_role_id": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				Description: "The id of the attached role of this RoleAttachment.",
 			},
 		},

@@ -27,7 +27,7 @@ func int32FromMap(m map[string]interface{}, key string) int32 {
 	if value == nil {
 		return 0
 	}
-	return value.(int32)
+	return int32(value.(int))
 }
 
 func boolFromMap(m map[string]interface{}, key string) bool {
@@ -51,7 +51,7 @@ func int32FromResourceData(d *schema.ResourceData, key string) int32 {
 	if value == nil {
 		return 0
 	}
-	return value.(int32)
+	return int32(value.(int))
 }
 
 func boolFromResourceData(d *schema.ResourceData, key string) bool {

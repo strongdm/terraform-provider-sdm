@@ -26,7 +26,7 @@ func resourceNode() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Relay.",
 						},
 					},
@@ -40,17 +40,17 @@ func resourceNode() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Relay.",
 						},
 						"listen_address": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
 						},
 						"bind_address": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "The hostname/port tuple which the gateway daemon will bind to.",
 						},
 					},

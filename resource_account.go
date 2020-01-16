@@ -26,17 +26,17 @@ func resourceAccount() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"email": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "The User's email address. Must be unique.",
 						},
 						"first_name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "The User's first name.",
 						},
 						"last_name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "The User's last name.",
 						},
 					},
@@ -50,7 +50,7 @@ func resourceAccount() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "Unique human-readable name of the Service.",
 						},
 					},
