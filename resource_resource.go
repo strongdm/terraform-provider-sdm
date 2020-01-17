@@ -669,11 +669,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"connect_to_replica": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "",
-						},
 						"tls_required": {
 							Type:        schema.TypeBool,
 							Optional:    true,
@@ -779,11 +774,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Optional:    true,
-							Description: "",
-						},
-						"schema": {
-							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
 						},
@@ -1929,17 +1919,16 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.MongoLegacyHost{
-			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			AuthDatabase:     stringFromMap(raw, "auth_database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Port:             int32FromMap(raw, "port"),
-			ReplicaSet:       stringFromMap(raw, "replica_set"),
-			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
-			TlsRequired:      boolFromMap(raw, "tls_required"),
+			ID:           d.Id(),
+			Name:         stringFromMap(raw, "name"),
+			Hostname:     stringFromMap(raw, "hostname"),
+			AuthDatabase: stringFromMap(raw, "auth_database"),
+			PortOverride: int32FromMap(raw, "port_override"),
+			Username:     stringFromMap(raw, "username"),
+			Password:     stringFromMap(raw, "password"),
+			Port:         int32FromMap(raw, "port"),
+			ReplicaSet:   stringFromMap(raw, "replica_set"),
+			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
 	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
@@ -1969,7 +1958,6 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Username:     stringFromMap(raw, "username"),
 			Password:     stringFromMap(raw, "password"),
 			Port:         int32FromMap(raw, "port"),
-			Schema:       stringFromMap(raw, "schema"),
 			TlsRequired:  boolFromMap(raw, "tls_required"),
 		}
 	}
@@ -2447,16 +2435,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 	case *apiv1.MongoLegacyHost:
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"auth_database": v.AuthDatabase,
+				"port_override": v.PortOverride,
+				"username":      v.Username,
+				"password":      v.Password,
+				"port":          v.Port,
+				"replica_set":   v.ReplicaSet,
+				"tls_required":  v.TlsRequired,
 			},
 		})
 	case *apiv1.MongoLegacyReplicaset:
@@ -2484,7 +2471,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"port":          v.Port,
-				"schema":        v.Schema,
 				"tls_required":  v.TlsRequired,
 			},
 		})
