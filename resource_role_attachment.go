@@ -18,7 +18,6 @@ func resourceRoleAttachment() *schema.Resource {
 		Update: wrapCrudOperation(resourceRoleAttachmentUpdate),
 		Delete: wrapCrudOperation(resourceRoleAttachmentDelete),
 		Schema: map[string]*schema.Schema{
-
 			"composite_role_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -35,7 +34,6 @@ func resourceRoleAttachment() *schema.Resource {
 		},
 	}
 }
-
 func roleAttachmentFromResourceData(d *schema.ResourceData) *apiv1.RoleAttachment {
 	return &apiv1.RoleAttachment{
 		ID:              d.Id(),
@@ -67,7 +65,6 @@ func resourceRoleAttachmentRead(d *schema.ResourceData, cc *apiv1.Client) error 
 		return fmt.Errorf("cannot read RoleAttachment %s: %w", d.Id(), err)
 	}
 	v := resp.RoleAttachment
-
 	d.Set("composite_role_id", v.CompositeRoleID)
 	d.Set("attached_role_id", v.AttachedRoleID)
 	return nil

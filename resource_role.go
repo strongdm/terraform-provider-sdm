@@ -18,7 +18,6 @@ func resourceRole() *schema.Resource {
 		Update: wrapCrudOperation(resourceRoleUpdate),
 		Delete: wrapCrudOperation(resourceRoleDelete),
 		Schema: map[string]*schema.Schema{
-
 			"name": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -35,7 +34,6 @@ func resourceRole() *schema.Resource {
 		},
 	}
 }
-
 func roleFromResourceData(d *schema.ResourceData) *apiv1.Role {
 	return &apiv1.Role{
 		ID:        d.Id(),
@@ -67,7 +65,6 @@ func resourceRoleRead(d *schema.ResourceData, cc *apiv1.Client) error {
 		return fmt.Errorf("cannot read Role %s: %w", d.Id(), err)
 	}
 	v := resp.Role
-
 	d.Set("name", v.Name)
 	d.Set("composite", v.Composite)
 	return nil

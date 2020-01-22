@@ -62,7 +62,6 @@ func resourceAccount() *schema.Resource {
 		},
 	}
 }
-
 func accountFromResourceData(d *schema.ResourceData) apiv1.Account {
 	if list := d.Get("user").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})

@@ -62,7 +62,6 @@ func resourceNode() *schema.Resource {
 		},
 	}
 }
-
 func nodeFromResourceData(d *schema.ResourceData) apiv1.Node {
 	if list := d.Get("relay").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})

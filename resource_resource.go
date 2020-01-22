@@ -1730,7 +1730,6 @@ func resourceResource() *schema.Resource {
 		},
 	}
 }
-
 func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
