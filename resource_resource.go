@@ -594,6 +594,35 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"kubernetes_service_account": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"token": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"memcached": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -1905,6 +1934,16 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			ServiceAccountKeyFilename:    stringFromMap(raw, "service_account_key_filename"),
 		}
 	}
+	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.KubernetesServiceAccount{
+			ID:       d.Id(),
+			Name:     stringFromMap(raw, "name"),
+			Hostname: stringFromMap(raw, "hostname"),
+			Port:     int32FromMap(raw, "port"),
+			Token:    stringFromMap(raw, "token"),
+		}
+	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.Memcached{
@@ -2420,6 +2459,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"certificate_authority_filename": v.CertificateAuthorityFilename,
 				"service_account_key":            v.ServiceAccountKey,
 				"service_account_key_filename":   v.ServiceAccountKeyFilename,
+			},
+		})
+	case *apiv1.KubernetesServiceAccount:
+		d.Set("kubernetes_service_account", []map[string]interface{}{
+			{
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"port":     v.Port,
+				"token":    v.Token,
 			},
 		})
 	case *apiv1.Memcached:
