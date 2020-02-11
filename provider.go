@@ -30,6 +30,7 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
+			"sdm_account_grant":   resourceAccountGrant(),
 			"sdm_account":         resourceAccount(),
 			"sdm_node":            resourceNode(),
 			"sdm_resource":        resourceResource(),
