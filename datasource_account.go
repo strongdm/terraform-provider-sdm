@@ -54,8 +54,49 @@ func dataSourceAccount() *schema.Resource {
 			},
 			"accounts": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Computed: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"user": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"email": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The User's email address. Must be unique.",
+									},
+									"first_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The User's first name.",
+									},
+									"last_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The User's last name.",
+									},
+								},
+							},
+						},
+						"service": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Service.",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -83,10 +124,11 @@ func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot list Account %s: %w", d.Id(), err)
 	}
-	vList := []string{}
+	vList := []map[string]interface{}{}
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList, v.GetID())
+		// TODO: fix it!
+		fmt.Println(v)
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)

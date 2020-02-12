@@ -26,8 +26,21 @@ func dataSourceAccountGrant() *schema.Resource {
 			},
 			"account_grants": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Computed: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"resource_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The id of the composite role of this AccountGrant.",
+						},
+						"account_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The id of the attached role of this AccountGrant.",
+						},
+					},
+				},
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -70,10 +83,14 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *apiv1.Client) error 
 	if err != nil {
 		return fmt.Errorf("cannot list AccountGrant %s: %w", d.Id(), err)
 	}
-	vList := []string{}
+	vList := []map[string]interface{}{}
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList, v.ID)
+		vList = append(vList,
+			map[string]interface{}{
+				"resource_id": v.ResourceID,
+				"account_id":  v.AccountID,
+			})
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)

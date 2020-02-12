@@ -26,8 +26,21 @@ func dataSourceRole() *schema.Resource {
 			},
 			"roles": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Computed: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique human-readable name of the Role.",
+						},
+						"composite": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "True if the Role is a composite role.",
+						},
+					},
+				},
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -62,10 +75,14 @@ func dataSourceRoleList(d *schema.ResourceData, cc *apiv1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot list Role %s: %w", d.Id(), err)
 	}
-	vList := []string{}
+	vList := []map[string]interface{}{}
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList, v.ID)
+		vList = append(vList,
+			map[string]interface{}{
+				"name":      v.Name,
+				"composite": v.Composite,
+			})
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)

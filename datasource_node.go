@@ -54,8 +54,49 @@ func dataSourceNode() *schema.Resource {
 			},
 			"nodes": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Computed: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"relay": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Relay.",
+									},
+								},
+							},
+						},
+						"gateway": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Relay.",
+									},
+									"listen_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
+									},
+									"bind_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The hostname/port tuple which the gateway daemon will bind to.",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -83,10 +124,11 @@ func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot list Node %s: %w", d.Id(), err)
 	}
-	vList := []string{}
+	vList := []map[string]interface{}{}
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList, v.GetID())
+		// TODO: fix it!
+		fmt.Println(v)
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)

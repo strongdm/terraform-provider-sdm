@@ -26,8 +26,21 @@ func dataSourceRoleAttachment() *schema.Resource {
 			},
 			"role_attachments": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Computed: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"composite_role_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The id of the composite role of this RoleAttachment.",
+						},
+						"attached_role_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The id of the attached role of this RoleAttachment.",
+						},
+					},
+				},
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -62,10 +75,14 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 	if err != nil {
 		return fmt.Errorf("cannot list RoleAttachment %s: %w", d.Id(), err)
 	}
-	vList := []string{}
+	vList := []map[string]interface{}{}
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList, v.ID)
+		vList = append(vList,
+			map[string]interface{}{
+				"composite_role_id": v.CompositeRoleID,
+				"attached_role_id":  v.AttachedRoleID,
+			})
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)
