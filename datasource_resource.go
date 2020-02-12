@@ -2,7 +2,6 @@ package sdm
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
@@ -13,7 +12,7 @@ import (
 
 func dataSourceResource() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceResourceRead),
+		Read: wrapCrudOperation(dataSourceResourceList),
 		Schema: map[string]*schema.Schema{
 			"athena": {
 				Type:        schema.TypeList,
@@ -1750,6 +1749,11 @@ func dataSourceResource() *schema.Resource {
 					},
 				},
 			},
+			"resources": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -1757,493 +1761,38 @@ func dataSourceResource() *schema.Resource {
 	}
 }
 
-func dataSourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
+func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+	filter := ""
+	args := []interface{}{}
+	if d.Id() != "" {
+		filter += "id:? "
+		args = append(args, d.Id())
+	}
+	// todo
+	return filter, args
+}
+
+func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	resp, err := cc.Resources().Get(ctx, d.Id())
-	var errNotFound *apiv1.NotFoundError
-	if err != nil && errors.As(err, &errNotFound) {
-		d.SetId("")
-		return nil
-	} else if err != nil {
-		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
+	filter, args := resourceFilterFromResourceData(d)
+	resp, err := cc.Resources().List(ctx, filter, args...)
+	if err != nil {
+		return fmt.Errorf("cannot list Resource %s: %w", d.Id(), err)
 	}
-	switch v := resp.Resource.(type) {
-	case *apiv1.Athena:
-		d.Set("athena", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"output":            v.Output,
-				"port_override":     v.PortOverride,
-				"region":            v.Region,
-			},
-		})
-	case *apiv1.BigQuery:
-		d.Set("big_query", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"private_key":   v.PrivateKey,
-				"project":       v.Project,
-				"port_override": v.PortOverride,
-				"endpoint":      v.Endpoint,
-				"username":      v.Username,
-			},
-		})
-	case *apiv1.Cassandra:
-		d.Set("cassandra", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.Druid:
-		d.Set("druid", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.DynamoDB:
-		d.Set("dynamo_db", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
-				"endpoint":          v.Endpoint,
-				"port_override":     v.PortOverride,
-			},
-		})
-	case *apiv1.AmazonES:
-		d.Set("amazon_es", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"region":            v.Region,
-				"secret_access_key": v.SecretAccessKey,
-				"endpoint":          v.Endpoint,
-				"access_key":        v.AccessKey,
-				"port_override":     v.PortOverride,
-			},
-		})
-	case *apiv1.Elastic:
-		d.Set("elastic", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.HTTPBasicAuth:
-		d.Set("http_basic_auth", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"username":          v.Username,
-				"password":          v.Password,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
-			},
-		})
-	case *apiv1.HTTPNoAuth:
-		d.Set("http_no_auth", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
-			},
-		})
-	case *apiv1.HTTPAuth:
-		d.Set("http_auth", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"auth_header":       v.AuthHeader,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
-			},
-		})
-	case *apiv1.Kubernetes:
-		d.Set("kubernetes", []map[string]interface{}{
-			{
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
-			},
-		})
-	case *apiv1.KubernetesBasicAuth:
-		d.Set("kubernetes_basic_auth", []map[string]interface{}{
-			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
-			},
-		})
-	case *apiv1.AmazonEKS:
-		d.Set("amazon_eks", []map[string]interface{}{
-			{
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"access_key":                     v.AccessKey,
-				"secret_access_key":              v.SecretAccessKey,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"region":                         v.Region,
-				"cluster_name":                   v.ClusterName,
-			},
-		})
-	case *apiv1.GoogleGKE:
-		d.Set("google_gke", []map[string]interface{}{
-			{
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"service_account_key":            v.ServiceAccountKey,
-				"service_account_key_filename":   v.ServiceAccountKeyFilename,
-			},
-		})
-	case *apiv1.KubernetesServiceAccount:
-		d.Set("kubernetes_service_account", []map[string]interface{}{
-			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
-			},
-		})
-	case *apiv1.Memcached:
-		d.Set("memcached", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.MongoLegacyHost:
-		d.Set("mongo_legacy_host", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"replica_set":   v.ReplicaSet,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.MongoLegacyReplicaset:
-		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
-			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
-			},
-		})
-	case *apiv1.MongoHost:
-		d.Set("mongo_host", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.MongoReplicaSet:
-		d.Set("mongo_replica_set", []map[string]interface{}{
-			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
-			},
-		})
-	case *apiv1.Mysql:
-		d.Set("mysql", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.AuroraMysql:
-		d.Set("aurora_mysql", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Clustrix:
-		d.Set("clustrix", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Maria:
-		d.Set("maria", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Memsql:
-		d.Set("memsql", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Oracle:
-		d.Set("oracle", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port":          v.Port,
-				"port_override": v.PortOverride,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.Postgres:
-		d.Set("postgres", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
-			},
-		})
-	case *apiv1.AuroraPostgres:
-		d.Set("aurora_postgres", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
-			},
-		})
-	case *apiv1.Greenplum:
-		d.Set("greenplum", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
-			},
-		})
-	case *apiv1.Cockroach:
-		d.Set("cockroach", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
-			},
-		})
-	case *apiv1.Redshift:
-		d.Set("redshift", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
-			},
-		})
-	case *apiv1.Presto:
-		d.Set("presto", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"username":      v.Username,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.RDP:
-		d.Set("rdp", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.Redis:
-		d.Set("redis", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
-			},
-		})
-	case *apiv1.ElasticacheRedis:
-		d.Set("elasticache_redis", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
-			},
-		})
-	case *apiv1.Snowflake:
-		d.Set("snowflake", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"schema":        v.Schema,
-				"port_override": v.PortOverride,
-			},
-		})
-	case *apiv1.SQLServer:
-		d.Set("sql_server", []map[string]interface{}{
-			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"schema":            v.Schema,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
-			},
-		})
-	case *apiv1.SSH:
-		d.Set("ssh", []map[string]interface{}{
-			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"username": v.Username,
-				"port":     v.Port,
-			},
-		})
-	case *apiv1.Sybase:
-		d.Set("sybase", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
-			},
-		})
-	case *apiv1.Teradata:
-		d.Set("teradata", []map[string]interface{}{
-			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-			},
-		})
+	vList := []string{}
+	for resp.Next() {
+		v := resp.Value()
+		vList = append(vList, v.GetID())
 	}
+	if resp.Err() != nil {
+		return fmt.Errorf("failure during list: %w", err)
+	}
+
+	err = d.Set("resources", vList)
+	if err != nil {
+		return fmt.Errorf("cannot set vList: %w", err)
+	}
+	d.SetId("Resource" + filter + fmt.Sprint(args...))
 	return nil
 }

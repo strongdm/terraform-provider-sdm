@@ -2,7 +2,6 @@ package sdm
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
@@ -13,7 +12,7 @@ import (
 
 func dataSourceAccount() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceAccountRead),
+		Read: wrapCrudOperation(dataSourceAccountList),
 		Schema: map[string]*schema.Schema{
 			"user": {
 				Type:        schema.TypeList,
@@ -53,6 +52,11 @@ func dataSourceAccount() *schema.Resource {
 					},
 				},
 			},
+			"accounts": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -60,32 +64,38 @@ func dataSourceAccount() *schema.Resource {
 	}
 }
 
-func dataSourceAccountRead(d *schema.ResourceData, cc *apiv1.Client) error {
+func accountFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+	filter := ""
+	args := []interface{}{}
+	if d.Id() != "" {
+		filter += "id:? "
+		args = append(args, d.Id())
+	}
+	// todo
+	return filter, args
+}
+
+func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	resp, err := cc.Accounts().Get(ctx, d.Id())
-	var errNotFound *apiv1.NotFoundError
-	if err != nil && errors.As(err, &errNotFound) {
-		d.SetId("")
-		return nil
-	} else if err != nil {
-		return fmt.Errorf("cannot read Account %s: %w", d.Id(), err)
+	filter, args := accountFilterFromResourceData(d)
+	resp, err := cc.Accounts().List(ctx, filter, args...)
+	if err != nil {
+		return fmt.Errorf("cannot list Account %s: %w", d.Id(), err)
 	}
-	switch v := resp.Account.(type) {
-	case *apiv1.User:
-		d.Set("user", []map[string]interface{}{
-			{
-				"email":      v.Email,
-				"first_name": v.FirstName,
-				"last_name":  v.LastName,
-			},
-		})
-	case *apiv1.Service:
-		d.Set("service", []map[string]interface{}{
-			{
-				"name": v.Name,
-			},
-		})
+	vList := []string{}
+	for resp.Next() {
+		v := resp.Value()
+		vList = append(vList, v.GetID())
 	}
+	if resp.Err() != nil {
+		return fmt.Errorf("failure during list: %w", err)
+	}
+
+	err = d.Set("accounts", vList)
+	if err != nil {
+		return fmt.Errorf("cannot set vList: %w", err)
+	}
+	d.SetId("Account" + filter + fmt.Sprint(args...))
 	return nil
 }

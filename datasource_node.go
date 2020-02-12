@@ -2,7 +2,6 @@ package sdm
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
@@ -13,7 +12,7 @@ import (
 
 func dataSourceNode() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceNodeRead),
+		Read: wrapCrudOperation(dataSourceNodeList),
 		Schema: map[string]*schema.Schema{
 			"relay": {
 				Type:        schema.TypeList,
@@ -53,6 +52,11 @@ func dataSourceNode() *schema.Resource {
 					},
 				},
 			},
+			"nodes": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -60,32 +64,38 @@ func dataSourceNode() *schema.Resource {
 	}
 }
 
-func dataSourceNodeRead(d *schema.ResourceData, cc *apiv1.Client) error {
+func nodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+	filter := ""
+	args := []interface{}{}
+	if d.Id() != "" {
+		filter += "id:? "
+		args = append(args, d.Id())
+	}
+	// todo
+	return filter, args
+}
+
+func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	resp, err := cc.Nodes().Get(ctx, d.Id())
-	var errNotFound *apiv1.NotFoundError
-	if err != nil && errors.As(err, &errNotFound) {
-		d.SetId("")
-		return nil
-	} else if err != nil {
-		return fmt.Errorf("cannot read Node %s: %w", d.Id(), err)
+	filter, args := nodeFilterFromResourceData(d)
+	resp, err := cc.Nodes().List(ctx, filter, args...)
+	if err != nil {
+		return fmt.Errorf("cannot list Node %s: %w", d.Id(), err)
 	}
-	switch v := resp.Node.(type) {
-	case *apiv1.Relay:
-		d.Set("relay", []map[string]interface{}{
-			{
-				"name": v.Name,
-			},
-		})
-	case *apiv1.Gateway:
-		d.Set("gateway", []map[string]interface{}{
-			{
-				"name":           v.Name,
-				"listen_address": v.ListenAddress,
-				"bind_address":   v.BindAddress,
-			},
-		})
+	vList := []string{}
+	for resp.Next() {
+		v := resp.Value()
+		vList = append(vList, v.GetID())
 	}
+	if resp.Err() != nil {
+		return fmt.Errorf("failure during list: %w", err)
+	}
+
+	err = d.Set("nodes", vList)
+	if err != nil {
+		return fmt.Errorf("cannot set vList: %w", err)
+	}
+	d.SetId("Node" + filter + fmt.Sprint(args...))
 	return nil
 }

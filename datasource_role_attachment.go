@@ -2,7 +2,6 @@ package sdm
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
@@ -13,7 +12,7 @@ import (
 
 func dataSourceRoleAttachment() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceRoleAttachmentRead),
+		Read: wrapCrudOperation(dataSourceRoleAttachmentList),
 		Schema: map[string]*schema.Schema{
 			"composite_role_id": {
 				Type:        schema.TypeString,
@@ -25,6 +24,11 @@ func dataSourceRoleAttachment() *schema.Resource {
 				Optional:    true,
 				Description: "The id of the attached role of this RoleAttachment.",
 			},
+			"role_attachments": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -32,19 +36,45 @@ func dataSourceRoleAttachment() *schema.Resource {
 	}
 }
 
-func dataSourceRoleAttachmentRead(d *schema.ResourceData, cc *apiv1.Client) error {
+func roleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+	filter := ""
+	args := []interface{}{}
+	if d.Id() != "" {
+		filter += "id:? "
+		args = append(args, d.Id())
+	}
+	if v, ok := d.GetOk("composite_role_id"); ok {
+		filter += "composite_role_id:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("attached_role_id"); ok {
+		filter += "attached_role_id:? "
+		args = append(args, v)
+	}
+	return filter, args
+}
+
+func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	resp, err := cc.RoleAttachments().Get(ctx, d.Id())
-	var errNotFound *apiv1.NotFoundError
-	if err != nil && errors.As(err, &errNotFound) {
-		d.SetId("")
-		return nil
-	} else if err != nil {
-		return fmt.Errorf("cannot read RoleAttachment %s: %w", d.Id(), err)
+	filter, args := roleAttachmentFilterFromResourceData(d)
+	resp, err := cc.RoleAttachments().List(ctx, filter, args...)
+	if err != nil {
+		return fmt.Errorf("cannot list RoleAttachment %s: %w", d.Id(), err)
 	}
-	v := resp.RoleAttachment
-	d.Set("composite_role_id", v.CompositeRoleID)
-	d.Set("attached_role_id", v.AttachedRoleID)
+	vList := []string{}
+	for resp.Next() {
+		v := resp.Value()
+		vList = append(vList, v.ID)
+	}
+	if resp.Err() != nil {
+		return fmt.Errorf("failure during list: %w", err)
+	}
+
+	err = d.Set("role_attachments", vList)
+	if err != nil {
+		return fmt.Errorf("cannot set vList: %w", err)
+	}
+	d.SetId("RoleAttachment" + filter + fmt.Sprint(args...))
 	return nil
 }
