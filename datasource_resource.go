@@ -20,6 +20,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -59,6 +64,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -98,6 +108,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -142,6 +157,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -181,6 +201,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -220,6 +245,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -259,6 +289,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -303,6 +338,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -347,6 +387,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -381,6 +426,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -420,6 +470,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -474,6 +529,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -508,6 +568,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -557,6 +622,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -596,6 +666,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -625,6 +700,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -654,6 +734,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -708,6 +793,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -767,6 +857,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -816,6 +911,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -875,6 +975,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -919,6 +1024,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -963,6 +1073,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1007,6 +1122,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1051,6 +1171,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1095,6 +1220,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1144,6 +1274,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1193,6 +1328,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1242,6 +1382,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1291,6 +1436,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1340,6 +1490,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1389,6 +1544,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1438,6 +1598,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1477,6 +1642,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1511,6 +1681,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1550,6 +1725,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1594,6 +1774,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1648,6 +1833,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1677,6 +1867,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1716,6 +1911,11 @@ func dataSourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Resource.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1760,6 +1960,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1799,6 +2004,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1838,6 +2048,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1882,6 +2097,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1921,6 +2141,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1960,6 +2185,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1999,6 +2229,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2043,6 +2278,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2087,6 +2327,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2121,6 +2366,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2160,6 +2410,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2214,6 +2469,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2248,6 +2508,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2297,6 +2562,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2336,6 +2606,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2365,6 +2640,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2394,6 +2674,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2448,6 +2733,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2507,6 +2797,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2556,6 +2851,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2615,6 +2915,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2659,6 +2964,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2703,6 +3013,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2747,6 +3062,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2791,6 +3111,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2835,6 +3160,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2884,6 +3214,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2933,6 +3268,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2982,6 +3322,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3031,6 +3376,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3080,6 +3430,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3129,6 +3484,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3178,6 +3538,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3217,6 +3582,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3251,6 +3621,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3290,6 +3665,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3334,6 +3714,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3388,6 +3773,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3417,6 +3807,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3456,6 +3851,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,

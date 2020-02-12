@@ -14,6 +14,11 @@ func dataSourceRole() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceRoleList),
 		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the Role.",
+			},
 			"name": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -29,6 +34,11 @@ func dataSourceRole() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Role.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -80,6 +90,7 @@ func dataSourceRoleList(d *schema.ResourceData, cc *apiv1.Client) error {
 		v := resp.Value()
 		vList = append(vList,
 			map[string]interface{}{
+				"id":        v.ID,
 				"name":      v.Name,
 				"composite": v.Composite,
 			})

@@ -20,6 +20,11 @@ func dataSourceAccount() *schema.Resource {
 				Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the User.",
+						},
 						"email": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -44,6 +49,11 @@ func dataSourceAccount() *schema.Resource {
 				Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Service.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -63,6 +73,11 @@ func dataSourceAccount() *schema.Resource {
 							Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the User.",
+									},
 									"email": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -87,6 +102,11 @@ func dataSourceAccount() *schema.Resource {
 							Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Service.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,

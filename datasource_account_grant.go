@@ -14,6 +14,11 @@ func dataSourceAccountGrant() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceAccountGrantList),
 		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the AccountGrant.",
+			},
 			"resource_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -29,6 +34,11 @@ func dataSourceAccountGrant() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the AccountGrant.",
+						},
 						"resource_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -88,6 +98,7 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *apiv1.Client) error 
 		v := resp.Value()
 		vList = append(vList,
 			map[string]interface{}{
+				"id":          v.ID,
 				"resource_id": v.ResourceID,
 				"account_id":  v.AccountID,
 			})

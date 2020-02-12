@@ -20,6 +20,11 @@ func dataSourceNode() *schema.Resource {
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Relay.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -34,6 +39,11 @@ func dataSourceNode() *schema.Resource {
 				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Relay.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -63,6 +73,11 @@ func dataSourceNode() *schema.Resource {
 							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Relay.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -77,6 +92,11 @@ func dataSourceNode() *schema.Resource {
 							Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Relay.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,

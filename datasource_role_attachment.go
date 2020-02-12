@@ -14,6 +14,11 @@ func dataSourceRoleAttachment() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceRoleAttachmentList),
 		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the RoleAttachment.",
+			},
 			"composite_role_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -29,6 +34,11 @@ func dataSourceRoleAttachment() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the RoleAttachment.",
+						},
 						"composite_role_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -80,6 +90,7 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 		v := resp.Value()
 		vList = append(vList,
 			map[string]interface{}{
+				"id":                v.ID,
 				"composite_role_id": v.CompositeRoleID,
 				"attached_role_id":  v.AttachedRoleID,
 			})
