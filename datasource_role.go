@@ -62,9 +62,9 @@ func dataSourceRole() *schema.Resource {
 func roleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if d.Id() != "" {
+	if v, ok := d.GetOk("id"); ok {
 		filter += "id:? "
-		args = append(args, d.Id())
+		args = append(args, v)
 	}
 	if v, ok := d.GetOk("name"); ok {
 		filter += "name:? "

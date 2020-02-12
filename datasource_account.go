@@ -14,53 +14,25 @@ func dataSourceAccount() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceAccountList),
 		Schema: map[string]*schema.Schema{
-			"user": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique identifier of the User.",
-						},
-						"email": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The User's email address. Must be unique.",
-						},
-						"first_name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The User's first name.",
-						},
-						"last_name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The User's last name.",
-						},
-					},
-				},
+			"email": {
+				Type:     schema.TypeString,
+				Optional: true,
 			},
-			"service": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique identifier of the Service.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique human-readable name of the Service.",
-						},
-					},
-				},
+			"first_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"last_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"name": {
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"accounts": {
 				Type:     schema.TypeList,
@@ -128,11 +100,26 @@ func dataSourceAccount() *schema.Resource {
 func accountFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if d.Id() != "" {
-		filter += "id:? "
-		args = append(args, d.Id())
+	if v, ok := d.GetOk("email"); ok {
+		filter += "email:? "
+		args = append(args, v)
 	}
-	// todo
+	if v, ok := d.GetOk("first_name"); ok {
+		filter += "first_name:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("id"); ok {
+		filter += "id:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("last_name"); ok {
+		filter += "last_name:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("name"); ok {
+		filter += "name:? "
+		args = append(args, v)
+	}
 	return filter, args
 }
 
@@ -146,9 +133,32 @@ func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 	}
 	vList := []map[string]interface{}{}
 	for resp.Next() {
-		v := resp.Value()
-		// TODO: fix it!
-		fmt.Println(v)
+		switch v := resp.Value().(type) {
+		case *apiv1.User:
+			vList = append(vList,
+				map[string]interface{}{
+					"user": []map[string]interface{}{
+						{
+							"id":         v.ID,
+							"email":      v.Email,
+							"first_name": v.FirstName,
+							"last_name":  v.LastName,
+						},
+					},
+				},
+			)
+		case *apiv1.Service:
+			vList = append(vList,
+				map[string]interface{}{
+					"service": []map[string]interface{}{
+						{
+							"id":   v.ID,
+							"name": v.Name,
+						},
+					},
+				},
+			)
+		}
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)

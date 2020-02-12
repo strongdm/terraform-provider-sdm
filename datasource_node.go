@@ -14,53 +14,21 @@ func dataSourceNode() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceNodeList),
 		Schema: map[string]*schema.Schema{
-			"relay": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique identifier of the Relay.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique human-readable name of the Relay.",
-						},
-					},
-				},
+			"bind_address": {
+				Type:     schema.TypeString,
+				Optional: true,
 			},
-			"gateway": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique identifier of the Relay.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique human-readable name of the Relay.",
-						},
-						"listen_address": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
-						},
-						"bind_address": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The hostname/port tuple which the gateway daemon will bind to.",
-						},
-					},
-				},
+			"id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"listen_address": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"name": {
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"nodes": {
 				Type:     schema.TypeList,
@@ -128,11 +96,26 @@ func dataSourceNode() *schema.Resource {
 func nodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if d.Id() != "" {
-		filter += "id:? "
-		args = append(args, d.Id())
+	if v, ok := d.GetOk("bind_address"); ok {
+		filter += "bind_address:? "
+		args = append(args, v)
 	}
-	// todo
+	if v, ok := d.GetOk("id"); ok {
+		filter += "id:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("listen_address"); ok {
+		filter += "listen_address:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("name"); ok {
+		filter += "name:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("state"); ok {
+		filter += "state:? "
+		args = append(args, v)
+	}
 	return filter, args
 }
 
@@ -146,9 +129,32 @@ func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	}
 	vList := []map[string]interface{}{}
 	for resp.Next() {
-		v := resp.Value()
-		// TODO: fix it!
-		fmt.Println(v)
+		switch v := resp.Value().(type) {
+		case *apiv1.Relay:
+			vList = append(vList,
+				map[string]interface{}{
+					"relay": []map[string]interface{}{
+						{
+							"id":   v.ID,
+							"name": v.Name,
+						},
+					},
+				},
+			)
+		case *apiv1.Gateway:
+			vList = append(vList,
+				map[string]interface{}{
+					"gateway": []map[string]interface{}{
+						{
+							"id":             v.ID,
+							"name":           v.Name,
+							"listen_address": v.ListenAddress,
+							"bind_address":   v.BindAddress,
+						},
+					},
+				},
+			)
+		}
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", err)

@@ -62,9 +62,9 @@ func dataSourceRoleAttachment() *schema.Resource {
 func roleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if d.Id() != "" {
+	if v, ok := d.GetOk("id"); ok {
 		filter += "id:? "
-		args = append(args, d.Id())
+		args = append(args, v)
 	}
 	if v, ok := d.GetOk("composite_role_id"); ok {
 		filter += "composite_role_id:? "
