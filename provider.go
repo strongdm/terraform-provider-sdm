@@ -38,6 +38,14 @@ func Provider() *schema.Provider {
 			"sdm_role_attachment":    resourceRoleAttachment(),
 			"sdm_role":               resourceRole(),
 		},
+		DataSourcesMap: map[string]*schema.Resource{
+			"sdm_account_grant":   dataSourceAccountGrant(),
+			"sdm_account":         dataSourceAccount(),
+			"sdm_node":            dataSourceNode(),
+			"sdm_resource":        dataSourceResource(),
+			"sdm_role_attachment": dataSourceRoleAttachment(),
+			"sdm_role":            dataSourceRole(),
+		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			client, err := apiV1.New(d.Get("host").(string), d.Get("api_access_key").(string), d.Get("api_secret_key").(string))
 			if err != nil {
