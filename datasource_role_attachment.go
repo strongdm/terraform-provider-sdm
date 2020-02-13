@@ -14,6 +14,7 @@ func dataSourceRoleAttachment() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceRoleAttachmentList),
 		Schema: map[string]*schema.Schema{
+
 			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -32,6 +33,8 @@ func dataSourceRoleAttachment() *schema.Resource {
 			"role_attachments": {
 				Type:     schema.TypeList,
 				Computed: true,
+				MaxItems: 1,
+				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": {
@@ -85,7 +88,8 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 	if err != nil {
 		return fmt.Errorf("cannot list RoleAttachment %s: %w", d.Id(), err)
 	}
-	vList := []map[string]interface{}{}
+	vList := make([]map[string]interface{}, 0)
+
 	for resp.Next() {
 		v := resp.Value()
 		vList = append(vList,

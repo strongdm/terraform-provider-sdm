@@ -14,6 +14,7 @@ func dataSourceAccountGrant() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceAccountGrantList),
 		Schema: map[string]*schema.Schema{
+
 			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -32,6 +33,8 @@ func dataSourceAccountGrant() *schema.Resource {
 			"account_grants": {
 				Type:     schema.TypeList,
 				Computed: true,
+				MaxItems: 1,
+				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": {
@@ -93,7 +96,8 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *apiv1.Client) error 
 	if err != nil {
 		return fmt.Errorf("cannot list AccountGrant %s: %w", d.Id(), err)
 	}
-	vList := []map[string]interface{}{}
+	vList := make([]map[string]interface{}, 0)
+
 	for resp.Next() {
 		v := resp.Value()
 		vList = append(vList,

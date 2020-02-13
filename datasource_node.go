@@ -14,6 +14,10 @@ func dataSourceNode() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceNodeList),
 		Schema: map[string]*schema.Schema{
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"bind_address": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -33,27 +37,57 @@ func dataSourceNode() *schema.Resource {
 			"nodes": {
 				Type:     schema.TypeList,
 				Computed: true,
+				MaxItems: 1,
+				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"type": {
-							Type:     schema.TypeString,
-							Optional: true,
+						"relay": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Relay.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Relay.",
+									},
+								},
+							},
 						},
-						"bind_address": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"id": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"listen_address": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"name": {
-							Type:     schema.TypeString,
-							Optional: true,
+						"gateway": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Relay.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Relay.",
+									},
+									"listen_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
+									},
+									"bind_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The hostname/port tuple which the gateway daemon will bind to.",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -68,6 +102,10 @@ func dataSourceNode() *schema.Resource {
 func nodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
+	if v, ok := d.GetOk("type"); ok {
+		filter += "type:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOk("bind_address"); ok {
 		filter += "bind_address:? "
 		args = append(args, v)
@@ -99,25 +137,25 @@ func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot list Node %s: %w", d.Id(), err)
 	}
-	vList := []map[string]interface{}{}
+	vList := make([]map[string][]map[string]interface{}, 1)
+	vList[0] = make(map[string][]map[string]interface{})
+
 	for resp.Next() {
 		switch v := resp.Value().(type) {
 		case *apiv1.Relay:
-			vList = append(vList,
-				map[string]interface{}{
-					"type": "relay",
-					"id":   v.ID,
-					"name": v.Name,
-				})
+			vList[0]["relay"] = append(vList[0]["relay"], map[string]interface{}{
+				"id":   v.ID,
+				"name": v.Name,
+			},
+			)
 		case *apiv1.Gateway:
-			vList = append(vList,
-				map[string]interface{}{
-					"type":           "gateway",
-					"id":             v.ID,
-					"name":           v.Name,
-					"listen_address": v.ListenAddress,
-					"bind_address":   v.BindAddress,
-				})
+			vList[0]["gateway"] = append(vList[0]["gateway"], map[string]interface{}{
+				"id":             v.ID,
+				"name":           v.Name,
+				"listen_address": v.ListenAddress,
+				"bind_address":   v.BindAddress,
+			},
+			)
 		}
 	}
 	if resp.Err() != nil {
