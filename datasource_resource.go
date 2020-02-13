@@ -169,6 +169,7 @@ func dataSourceResource() *schema.Resource {
 				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"athena": {
 							Type:        schema.TypeList,
 							Optional:    true,
@@ -2290,7 +2291,6 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 	}
 	vList := make([]map[string][]map[string]interface{}, 1)
 	vList[0] = make(map[string][]map[string]interface{})
-
 	for resp.Next() {
 		switch v := resp.Value().(type) {
 		case *apiv1.Athena:

@@ -37,6 +37,7 @@ func dataSourceRoleAttachment() *schema.Resource {
 				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -89,7 +90,6 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 		return fmt.Errorf("cannot list RoleAttachment %s: %w", d.Id(), err)
 	}
 	vList := make([]map[string]interface{}, 0)
-
 	for resp.Next() {
 		v := resp.Value()
 		vList = append(vList,

@@ -37,6 +37,7 @@ func dataSourceAccountGrant() *schema.Resource {
 				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -97,7 +98,6 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *apiv1.Client) error 
 		return fmt.Errorf("cannot list AccountGrant %s: %w", d.Id(), err)
 	}
 	vList := make([]map[string]interface{}, 0)
-
 	for resp.Next() {
 		v := resp.Value()
 		vList = append(vList,

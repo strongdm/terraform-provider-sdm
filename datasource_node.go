@@ -41,6 +41,7 @@ func dataSourceNode() *schema.Resource {
 				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"relay": {
 							Type:        schema.TypeList,
 							Optional:    true,
@@ -139,7 +140,6 @@ func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	}
 	vList := make([]map[string][]map[string]interface{}, 1)
 	vList[0] = make(map[string][]map[string]interface{})
-
 	for resp.Next() {
 		switch v := resp.Value().(type) {
 		case *apiv1.Relay:
