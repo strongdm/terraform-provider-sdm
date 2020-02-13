@@ -163,1940 +163,153 @@ func dataSourceResource() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"athena": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"output": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"type": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"big_query": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"private_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"project": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"access_key": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"cassandra": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"auth_database": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"druid": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"auth_header": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"dynamo_db": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"certificate_authority": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"amazon_es": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"certificate_authority_filename": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"elastic": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"client_certificate": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"http_basic_auth": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"url": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"headers_blacklist": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"default_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"client_certificate_filename": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"http_no_auth": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"url": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"headers_blacklist": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"default_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"client_key": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"http_auth": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"url": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"auth_header": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"headers_blacklist": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"default_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"client_key_filename": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"kubernetes": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority_filename": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"client_certificate": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"client_certificate_filename": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"client_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"client_key_filename": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"cluster_name": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"kubernetes_basic_auth": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"connect_to_replica": {
+							Type:     schema.TypeBool,
+							Optional: true,
 						},
-						"amazon_eks": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority_filename": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"cluster_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"database": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"google_gke": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority_filename": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"service_account_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"service_account_key_filename": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"default_path": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"kubernetes_service_account": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"token": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"endpoint": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"memcached": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"headers_blacklist": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"mongo_legacy_host": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"auth_database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"replica_set": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"healthcheck_path": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"mongo_legacy_replicaset": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"auth_database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"replica_set": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"connect_to_replica": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"hostname": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"mongo_host": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"auth_database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"id": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"mongo_replica_set": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"auth_database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"replica_set": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"connect_to_replica": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"name": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"mysql": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"output": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"aurora_mysql": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"override_database": {
+							Type:     schema.TypeBool,
+							Optional: true,
 						},
-						"clustrix": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"password": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"maria": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"port": {
+							Type:     schema.TypeInt,
+							Optional: true,
 						},
-						"memsql": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"port_override": {
+							Type:     schema.TypeInt,
+							Optional: true,
 						},
-						"oracle": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"private_key": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"postgres": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"project": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"aurora_postgres": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"region": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"greenplum": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"replica_set": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"cockroach": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"schema": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"redshift": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"secret_access_key": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"presto": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"service_account_key": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"rdp": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"service_account_key_filename": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"redis": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"tls_required": {
+							Type:     schema.TypeBool,
+							Optional: true,
 						},
-						"elasticache_redis": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"token": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"snowflake": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"schema": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"url": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"sql_server": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"schema": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"ssh": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"sybase": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"teradata": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
+						"username": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -2284,678 +497,518 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 		case *apiv1.Athena:
 			vList = append(vList,
 				map[string]interface{}{
-					"athena": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"access_key":        v.AccessKey,
-							"secret_access_key": v.SecretAccessKey,
-							"output":            v.Output,
-							"port_override":     v.PortOverride,
-							"region":            v.Region,
-						},
-					},
-				},
-			)
+					"type":              "athena",
+					"id":                v.ID,
+					"name":              v.Name,
+					"access_key":        v.AccessKey,
+					"secret_access_key": v.SecretAccessKey,
+					"output":            v.Output,
+					"port_override":     v.PortOverride,
+					"region":            v.Region,
+				})
 		case *apiv1.BigQuery:
 			vList = append(vList,
 				map[string]interface{}{
-					"big_query": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"private_key":   v.PrivateKey,
-							"project":       v.Project,
-							"port_override": v.PortOverride,
-							"endpoint":      v.Endpoint,
-							"username":      v.Username,
-						},
-					},
-				},
-			)
+					"type":          "big_query",
+					"id":            v.ID,
+					"name":          v.Name,
+					"private_key":   v.PrivateKey,
+					"project":       v.Project,
+					"port_override": v.PortOverride,
+					"endpoint":      v.Endpoint,
+					"username":      v.Username,
+				})
 		case *apiv1.Cassandra:
 			vList = append(vList,
 				map[string]interface{}{
-					"cassandra": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "cassandra",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.Druid:
 			vList = append(vList,
 				map[string]interface{}{
-					"druid": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"port_override": v.PortOverride,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "druid",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"port_override": v.PortOverride,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port":          v.Port,
+				})
 		case *apiv1.DynamoDB:
 			vList = append(vList,
 				map[string]interface{}{
-					"dynamo_db": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"access_key":        v.AccessKey,
-							"secret_access_key": v.SecretAccessKey,
-							"region":            v.Region,
-							"endpoint":          v.Endpoint,
-							"port_override":     v.PortOverride,
-						},
-					},
-				},
-			)
+					"type":              "dynamo_db",
+					"id":                v.ID,
+					"name":              v.Name,
+					"access_key":        v.AccessKey,
+					"secret_access_key": v.SecretAccessKey,
+					"region":            v.Region,
+					"endpoint":          v.Endpoint,
+					"port_override":     v.PortOverride,
+				})
 		case *apiv1.AmazonES:
 			vList = append(vList,
 				map[string]interface{}{
-					"amazon_es": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"region":            v.Region,
-							"secret_access_key": v.SecretAccessKey,
-							"endpoint":          v.Endpoint,
-							"access_key":        v.AccessKey,
-							"port_override":     v.PortOverride,
-						},
-					},
-				},
-			)
+					"type":              "amazon_es",
+					"id":                v.ID,
+					"name":              v.Name,
+					"region":            v.Region,
+					"secret_access_key": v.SecretAccessKey,
+					"endpoint":          v.Endpoint,
+					"access_key":        v.AccessKey,
+					"port_override":     v.PortOverride,
+				})
 		case *apiv1.Elastic:
 			vList = append(vList,
 				map[string]interface{}{
-					"elastic": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "elastic",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.HTTPBasicAuth:
 			vList = append(vList,
 				map[string]interface{}{
-					"http_basic_auth": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"url":               v.Url,
-							"healthcheck_path":  v.HealthcheckPath,
-							"username":          v.Username,
-							"password":          v.Password,
-							"headers_blacklist": v.HeadersBlacklist,
-							"default_path":      v.DefaultPath,
-						},
-					},
-				},
-			)
+					"type":              "http_basic_auth",
+					"id":                v.ID,
+					"name":              v.Name,
+					"url":               v.Url,
+					"healthcheck_path":  v.HealthcheckPath,
+					"username":          v.Username,
+					"password":          v.Password,
+					"headers_blacklist": v.HeadersBlacklist,
+					"default_path":      v.DefaultPath,
+				})
 		case *apiv1.HTTPNoAuth:
 			vList = append(vList,
 				map[string]interface{}{
-					"http_no_auth": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"url":               v.Url,
-							"healthcheck_path":  v.HealthcheckPath,
-							"headers_blacklist": v.HeadersBlacklist,
-							"default_path":      v.DefaultPath,
-						},
-					},
-				},
-			)
+					"type":              "http_no_auth",
+					"id":                v.ID,
+					"name":              v.Name,
+					"url":               v.Url,
+					"healthcheck_path":  v.HealthcheckPath,
+					"headers_blacklist": v.HeadersBlacklist,
+					"default_path":      v.DefaultPath,
+				})
 		case *apiv1.HTTPAuth:
 			vList = append(vList,
 				map[string]interface{}{
-					"http_auth": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"url":               v.Url,
-							"healthcheck_path":  v.HealthcheckPath,
-							"auth_header":       v.AuthHeader,
-							"headers_blacklist": v.HeadersBlacklist,
-							"default_path":      v.DefaultPath,
-						},
-					},
-				},
-			)
+					"type":              "http_auth",
+					"id":                v.ID,
+					"name":              v.Name,
+					"url":               v.Url,
+					"healthcheck_path":  v.HealthcheckPath,
+					"auth_header":       v.AuthHeader,
+					"headers_blacklist": v.HeadersBlacklist,
+					"default_path":      v.DefaultPath,
+				})
 		case *apiv1.Kubernetes:
 			vList = append(vList,
 				map[string]interface{}{
-					"kubernetes": []map[string]interface{}{
-						{
-							"id":                             v.ID,
-							"name":                           v.Name,
-							"hostname":                       v.Hostname,
-							"port":                           v.Port,
-							"certificate_authority":          v.CertificateAuthority,
-							"certificate_authority_filename": v.CertificateAuthorityFilename,
-							"client_certificate":             v.ClientCertificate,
-							"client_certificate_filename":    v.ClientCertificateFilename,
-							"client_key":                     v.ClientKey,
-							"client_key_filename":            v.ClientKeyFilename,
-						},
-					},
-				},
-			)
+					"type":                           "kubernetes",
+					"id":                             v.ID,
+					"name":                           v.Name,
+					"hostname":                       v.Hostname,
+					"port":                           v.Port,
+					"certificate_authority":          v.CertificateAuthority,
+					"certificate_authority_filename": v.CertificateAuthorityFilename,
+					"client_certificate":             v.ClientCertificate,
+					"client_certificate_filename":    v.ClientCertificateFilename,
+					"client_key":                     v.ClientKey,
+					"client_key_filename":            v.ClientKeyFilename,
+				})
 		case *apiv1.KubernetesBasicAuth:
 			vList = append(vList,
 				map[string]interface{}{
-					"kubernetes_basic_auth": []map[string]interface{}{
-						{
-							"id":       v.ID,
-							"name":     v.Name,
-							"hostname": v.Hostname,
-							"port":     v.Port,
-							"username": v.Username,
-							"password": v.Password,
-						},
-					},
-				},
-			)
+					"type":     "kubernetes_basic_auth",
+					"id":       v.ID,
+					"name":     v.Name,
+					"hostname": v.Hostname,
+					"port":     v.Port,
+					"username": v.Username,
+					"password": v.Password,
+				})
 		case *apiv1.AmazonEKS:
 			vList = append(vList,
 				map[string]interface{}{
-					"amazon_eks": []map[string]interface{}{
-						{
-							"id":                             v.ID,
-							"name":                           v.Name,
-							"endpoint":                       v.Endpoint,
-							"access_key":                     v.AccessKey,
-							"secret_access_key":              v.SecretAccessKey,
-							"certificate_authority":          v.CertificateAuthority,
-							"certificate_authority_filename": v.CertificateAuthorityFilename,
-							"region":                         v.Region,
-							"cluster_name":                   v.ClusterName,
-						},
-					},
-				},
-			)
+					"type":                           "amazon_eks",
+					"id":                             v.ID,
+					"name":                           v.Name,
+					"endpoint":                       v.Endpoint,
+					"access_key":                     v.AccessKey,
+					"secret_access_key":              v.SecretAccessKey,
+					"certificate_authority":          v.CertificateAuthority,
+					"certificate_authority_filename": v.CertificateAuthorityFilename,
+					"region":                         v.Region,
+					"cluster_name":                   v.ClusterName,
+				})
 		case *apiv1.GoogleGKE:
 			vList = append(vList,
 				map[string]interface{}{
-					"google_gke": []map[string]interface{}{
-						{
-							"id":                             v.ID,
-							"name":                           v.Name,
-							"endpoint":                       v.Endpoint,
-							"certificate_authority":          v.CertificateAuthority,
-							"certificate_authority_filename": v.CertificateAuthorityFilename,
-							"service_account_key":            v.ServiceAccountKey,
-							"service_account_key_filename":   v.ServiceAccountKeyFilename,
-						},
-					},
-				},
-			)
+					"type":                           "google_gke",
+					"id":                             v.ID,
+					"name":                           v.Name,
+					"endpoint":                       v.Endpoint,
+					"certificate_authority":          v.CertificateAuthority,
+					"certificate_authority_filename": v.CertificateAuthorityFilename,
+					"service_account_key":            v.ServiceAccountKey,
+					"service_account_key_filename":   v.ServiceAccountKeyFilename,
+				})
 		case *apiv1.KubernetesServiceAccount:
 			vList = append(vList,
 				map[string]interface{}{
-					"kubernetes_service_account": []map[string]interface{}{
-						{
-							"id":       v.ID,
-							"name":     v.Name,
-							"hostname": v.Hostname,
-							"port":     v.Port,
-							"token":    v.Token,
-						},
-					},
-				},
-			)
+					"type":     "kubernetes_service_account",
+					"id":       v.ID,
+					"name":     v.Name,
+					"hostname": v.Hostname,
+					"port":     v.Port,
+					"token":    v.Token,
+				})
 		case *apiv1.Memcached:
 			vList = append(vList,
 				map[string]interface{}{
-					"memcached": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "memcached",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.MongoLegacyHost:
 			vList = append(vList,
 				map[string]interface{}{
-					"mongo_legacy_host": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"auth_database": v.AuthDatabase,
-							"port_override": v.PortOverride,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port":          v.Port,
-							"replica_set":   v.ReplicaSet,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "mongo_legacy_host",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"auth_database": v.AuthDatabase,
+					"port_override": v.PortOverride,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port":          v.Port,
+					"replica_set":   v.ReplicaSet,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.MongoLegacyReplicaset:
 			vList = append(vList,
 				map[string]interface{}{
-					"mongo_legacy_replicaset": []map[string]interface{}{
-						{
-							"id":                 v.ID,
-							"name":               v.Name,
-							"hostname":           v.Hostname,
-							"auth_database":      v.AuthDatabase,
-							"port_override":      v.PortOverride,
-							"username":           v.Username,
-							"password":           v.Password,
-							"port":               v.Port,
-							"replica_set":        v.ReplicaSet,
-							"connect_to_replica": v.ConnectToReplica,
-							"tls_required":       v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":               "mongo_legacy_replicaset",
+					"id":                 v.ID,
+					"name":               v.Name,
+					"hostname":           v.Hostname,
+					"auth_database":      v.AuthDatabase,
+					"port_override":      v.PortOverride,
+					"username":           v.Username,
+					"password":           v.Password,
+					"port":               v.Port,
+					"replica_set":        v.ReplicaSet,
+					"connect_to_replica": v.ConnectToReplica,
+					"tls_required":       v.TlsRequired,
+				})
 		case *apiv1.MongoHost:
 			vList = append(vList,
 				map[string]interface{}{
-					"mongo_host": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"auth_database": v.AuthDatabase,
-							"port_override": v.PortOverride,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port":          v.Port,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "mongo_host",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"auth_database": v.AuthDatabase,
+					"port_override": v.PortOverride,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port":          v.Port,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.MongoReplicaSet:
 			vList = append(vList,
 				map[string]interface{}{
-					"mongo_replica_set": []map[string]interface{}{
-						{
-							"id":                 v.ID,
-							"name":               v.Name,
-							"hostname":           v.Hostname,
-							"auth_database":      v.AuthDatabase,
-							"port_override":      v.PortOverride,
-							"username":           v.Username,
-							"password":           v.Password,
-							"port":               v.Port,
-							"replica_set":        v.ReplicaSet,
-							"connect_to_replica": v.ConnectToReplica,
-							"tls_required":       v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":               "mongo_replica_set",
+					"id":                 v.ID,
+					"name":               v.Name,
+					"hostname":           v.Hostname,
+					"auth_database":      v.AuthDatabase,
+					"port_override":      v.PortOverride,
+					"username":           v.Username,
+					"password":           v.Password,
+					"port":               v.Port,
+					"replica_set":        v.ReplicaSet,
+					"connect_to_replica": v.ConnectToReplica,
+					"tls_required":       v.TlsRequired,
+				})
 		case *apiv1.Mysql:
 			vList = append(vList,
 				map[string]interface{}{
-					"mysql": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "mysql",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.AuroraMysql:
 			vList = append(vList,
 				map[string]interface{}{
-					"aurora_mysql": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "aurora_mysql",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.Clustrix:
 			vList = append(vList,
 				map[string]interface{}{
-					"clustrix": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "clustrix",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.Maria:
 			vList = append(vList,
 				map[string]interface{}{
-					"maria": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "maria",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.Memsql:
 			vList = append(vList,
 				map[string]interface{}{
-					"memsql": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "memsql",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.Oracle:
 			vList = append(vList,
 				map[string]interface{}{
-					"oracle": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port":          v.Port,
-							"port_override": v.PortOverride,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "oracle",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port":          v.Port,
+					"port_override": v.PortOverride,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.Postgres:
 			vList = append(vList,
 				map[string]interface{}{
-					"postgres": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"hostname":          v.Hostname,
-							"username":          v.Username,
-							"password":          v.Password,
-							"database":          v.Database,
-							"port_override":     v.PortOverride,
-							"port":              v.Port,
-							"override_database": v.OverrideDatabase,
-						},
-					},
-				},
-			)
+					"type":              "postgres",
+					"id":                v.ID,
+					"name":              v.Name,
+					"hostname":          v.Hostname,
+					"username":          v.Username,
+					"password":          v.Password,
+					"database":          v.Database,
+					"port_override":     v.PortOverride,
+					"port":              v.Port,
+					"override_database": v.OverrideDatabase,
+				})
 		case *apiv1.AuroraPostgres:
 			vList = append(vList,
 				map[string]interface{}{
-					"aurora_postgres": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"hostname":          v.Hostname,
-							"username":          v.Username,
-							"password":          v.Password,
-							"database":          v.Database,
-							"port_override":     v.PortOverride,
-							"port":              v.Port,
-							"override_database": v.OverrideDatabase,
-						},
-					},
-				},
-			)
+					"type":              "aurora_postgres",
+					"id":                v.ID,
+					"name":              v.Name,
+					"hostname":          v.Hostname,
+					"username":          v.Username,
+					"password":          v.Password,
+					"database":          v.Database,
+					"port_override":     v.PortOverride,
+					"port":              v.Port,
+					"override_database": v.OverrideDatabase,
+				})
 		case *apiv1.Greenplum:
 			vList = append(vList,
 				map[string]interface{}{
-					"greenplum": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"hostname":          v.Hostname,
-							"username":          v.Username,
-							"password":          v.Password,
-							"database":          v.Database,
-							"port_override":     v.PortOverride,
-							"port":              v.Port,
-							"override_database": v.OverrideDatabase,
-						},
-					},
-				},
-			)
+					"type":              "greenplum",
+					"id":                v.ID,
+					"name":              v.Name,
+					"hostname":          v.Hostname,
+					"username":          v.Username,
+					"password":          v.Password,
+					"database":          v.Database,
+					"port_override":     v.PortOverride,
+					"port":              v.Port,
+					"override_database": v.OverrideDatabase,
+				})
 		case *apiv1.Cockroach:
 			vList = append(vList,
 				map[string]interface{}{
-					"cockroach": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"hostname":          v.Hostname,
-							"username":          v.Username,
-							"password":          v.Password,
-							"database":          v.Database,
-							"port_override":     v.PortOverride,
-							"port":              v.Port,
-							"override_database": v.OverrideDatabase,
-						},
-					},
-				},
-			)
+					"type":              "cockroach",
+					"id":                v.ID,
+					"name":              v.Name,
+					"hostname":          v.Hostname,
+					"username":          v.Username,
+					"password":          v.Password,
+					"database":          v.Database,
+					"port_override":     v.PortOverride,
+					"port":              v.Port,
+					"override_database": v.OverrideDatabase,
+				})
 		case *apiv1.Redshift:
 			vList = append(vList,
 				map[string]interface{}{
-					"redshift": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"hostname":          v.Hostname,
-							"username":          v.Username,
-							"password":          v.Password,
-							"database":          v.Database,
-							"port_override":     v.PortOverride,
-							"port":              v.Port,
-							"override_database": v.OverrideDatabase,
-						},
-					},
-				},
-			)
+					"type":              "redshift",
+					"id":                v.ID,
+					"name":              v.Name,
+					"hostname":          v.Hostname,
+					"username":          v.Username,
+					"password":          v.Password,
+					"database":          v.Database,
+					"port_override":     v.PortOverride,
+					"port":              v.Port,
+					"override_database": v.OverrideDatabase,
+				})
 		case *apiv1.Presto:
 			vList = append(vList,
 				map[string]interface{}{
-					"presto": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"password":      v.Password,
-							"database":      v.Database,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-							"username":      v.Username,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "presto",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"password":      v.Password,
+					"database":      v.Database,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+					"username":      v.Username,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.RDP:
 			vList = append(vList,
 				map[string]interface{}{
-					"rdp": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "rdp",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		case *apiv1.Redis:
 			vList = append(vList,
 				map[string]interface{}{
-					"redis": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"port_override": v.PortOverride,
-							"password":      v.Password,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "redis",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"port_override": v.PortOverride,
+					"password":      v.Password,
+					"port":          v.Port,
+				})
 		case *apiv1.ElasticacheRedis:
 			vList = append(vList,
 				map[string]interface{}{
-					"elasticache_redis": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"port_override": v.PortOverride,
-							"password":      v.Password,
-							"port":          v.Port,
-							"tls_required":  v.TlsRequired,
-						},
-					},
-				},
-			)
+					"type":          "elasticache_redis",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"port_override": v.PortOverride,
+					"password":      v.Password,
+					"port":          v.Port,
+					"tls_required":  v.TlsRequired,
+				})
 		case *apiv1.Snowflake:
 			vList = append(vList,
 				map[string]interface{}{
-					"snowflake": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"database":      v.Database,
-							"schema":        v.Schema,
-							"port_override": v.PortOverride,
-						},
-					},
-				},
-			)
+					"type":          "snowflake",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"database":      v.Database,
+					"schema":        v.Schema,
+					"port_override": v.PortOverride,
+				})
 		case *apiv1.SQLServer:
 			vList = append(vList,
 				map[string]interface{}{
-					"sql_server": []map[string]interface{}{
-						{
-							"id":                v.ID,
-							"name":              v.Name,
-							"hostname":          v.Hostname,
-							"username":          v.Username,
-							"password":          v.Password,
-							"database":          v.Database,
-							"port_override":     v.PortOverride,
-							"schema":            v.Schema,
-							"port":              v.Port,
-							"override_database": v.OverrideDatabase,
-						},
-					},
-				},
-			)
+					"type":              "sql_server",
+					"id":                v.ID,
+					"name":              v.Name,
+					"hostname":          v.Hostname,
+					"username":          v.Username,
+					"password":          v.Password,
+					"database":          v.Database,
+					"port_override":     v.PortOverride,
+					"schema":            v.Schema,
+					"port":              v.Port,
+					"override_database": v.OverrideDatabase,
+				})
 		case *apiv1.SSH:
 			vList = append(vList,
 				map[string]interface{}{
-					"ssh": []map[string]interface{}{
-						{
-							"id":       v.ID,
-							"name":     v.Name,
-							"hostname": v.Hostname,
-							"username": v.Username,
-							"port":     v.Port,
-						},
-					},
-				},
-			)
+					"type":     "ssh",
+					"id":       v.ID,
+					"name":     v.Name,
+					"hostname": v.Hostname,
+					"username": v.Username,
+					"port":     v.Port,
+				})
 		case *apiv1.Sybase:
 			vList = append(vList,
 				map[string]interface{}{
-					"sybase": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-							"password":      v.Password,
-						},
-					},
-				},
-			)
+					"type":          "sybase",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+					"password":      v.Password,
+				})
 		case *apiv1.Teradata:
 			vList = append(vList,
 				map[string]interface{}{
-					"teradata": []map[string]interface{}{
-						{
-							"id":            v.ID,
-							"name":          v.Name,
-							"hostname":      v.Hostname,
-							"username":      v.Username,
-							"password":      v.Password,
-							"port_override": v.PortOverride,
-							"port":          v.Port,
-						},
-					},
-				},
-			)
+					"type":          "teradata",
+					"id":            v.ID,
+					"name":          v.Name,
+					"hostname":      v.Hostname,
+					"username":      v.Username,
+					"password":      v.Password,
+					"port_override": v.PortOverride,
+					"port":          v.Port,
+				})
 		}
 	}
 	if resp.Err() != nil {

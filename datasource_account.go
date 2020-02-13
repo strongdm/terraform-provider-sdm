@@ -39,53 +39,29 @@ func dataSourceAccount() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"user": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the User.",
-									},
-									"email": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The User's email address. Must be unique.",
-									},
-									"first_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The User's first name.",
-									},
-									"last_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The User's last name.",
-									},
-								},
-							},
+						"type": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
-						"service": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Service.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Service.",
-									},
-								},
-							},
+						"email": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"first_name": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"id": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"last_name": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"name": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -137,27 +113,19 @@ func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 		case *apiv1.User:
 			vList = append(vList,
 				map[string]interface{}{
-					"user": []map[string]interface{}{
-						{
-							"id":         v.ID,
-							"email":      v.Email,
-							"first_name": v.FirstName,
-							"last_name":  v.LastName,
-						},
-					},
-				},
-			)
+					"type":       "user",
+					"id":         v.ID,
+					"email":      v.Email,
+					"first_name": v.FirstName,
+					"last_name":  v.LastName,
+				})
 		case *apiv1.Service:
 			vList = append(vList,
 				map[string]interface{}{
-					"service": []map[string]interface{}{
-						{
-							"id":   v.ID,
-							"name": v.Name,
-						},
-					},
-				},
-			)
+					"type": "service",
+					"id":   v.ID,
+					"name": v.Name,
+				})
 		}
 	}
 	if resp.Err() != nil {
