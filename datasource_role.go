@@ -14,6 +14,11 @@ func dataSourceRole() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceRoleList),
 		Schema: map[string]*schema.Schema{
+			"ids": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 
 			"id": {
 				Type:        schema.TypeString,
@@ -89,10 +94,12 @@ func dataSourceRoleList(d *schema.ResourceData, cc *apiv1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot list Roles %s: %w", d.Id(), err)
 	}
+	ids := []string{}
 	type entity = map[string]interface{}
 	output := make([]entity, 0)
 	for resp.Next() {
 		v := resp.Value()
+		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
 				"id":        v.ID,
@@ -104,9 +111,13 @@ func dataSourceRoleList(d *schema.ResourceData, cc *apiv1.Client) error {
 		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
+	err = d.Set("ids", ids)
+	if err != nil {
+		return fmt.Errorf("cannot set ids: %w", err)
+	}
 	err = d.Set("roles", output)
 	if err != nil {
-		return fmt.Errorf("cannot set vList: %w", err)
+		return fmt.Errorf("cannot set output: %w", err)
 	}
 	d.SetId("Role" + filter + fmt.Sprint(args...))
 	return nil

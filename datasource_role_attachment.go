@@ -14,6 +14,11 @@ func dataSourceRoleAttachment() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceRoleAttachmentList),
 		Schema: map[string]*schema.Schema{
+			"ids": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 
 			"id": {
 				Type:        schema.TypeString,
@@ -89,10 +94,12 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 	if err != nil {
 		return fmt.Errorf("cannot list RoleAttachments %s: %w", d.Id(), err)
 	}
+	ids := []string{}
 	type entity = map[string]interface{}
 	output := make([]entity, 0)
 	for resp.Next() {
 		v := resp.Value()
+		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
 				"id":                v.ID,
@@ -104,9 +111,13 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
+	err = d.Set("ids", ids)
+	if err != nil {
+		return fmt.Errorf("cannot set ids: %w", err)
+	}
 	err = d.Set("role_attachments", output)
 	if err != nil {
-		return fmt.Errorf("cannot set vList: %w", err)
+		return fmt.Errorf("cannot set output: %w", err)
 	}
 	d.SetId("RoleAttachment" + filter + fmt.Sprint(args...))
 	return nil

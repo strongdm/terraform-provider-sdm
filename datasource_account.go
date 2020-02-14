@@ -14,6 +14,11 @@ func dataSourceAccount() *schema.Resource {
 	return &schema.Resource{
 		Read: wrapCrudOperation(dataSourceAccountList),
 		Schema: map[string]*schema.Schema{
+			"ids": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 			"type": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -142,10 +147,12 @@ func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot list Accounts %s: %w", d.Id(), err)
 	}
+	ids := []string{}
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = make(map[string][]entity)
 	for resp.Next() {
+		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
 		case *apiv1.User:
 			output[0]["user"] = append(output[0]["user"], entity{
@@ -165,9 +172,13 @@ func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
+	err = d.Set("ids", ids)
+	if err != nil {
+		return fmt.Errorf("cannot set ids: %w", err)
+	}
 	err = d.Set("accounts", output)
 	if err != nil {
-		return fmt.Errorf("cannot set vList: %w", err)
+		return fmt.Errorf("cannot set output: %w", err)
 	}
 	d.SetId("Account" + filter + fmt.Sprint(args...))
 	return nil
