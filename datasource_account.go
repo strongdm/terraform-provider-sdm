@@ -116,7 +116,7 @@ func accountFilterFromResourceData(d *schema.ResourceData) (string, []interface{
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("first_name"); ok {
-		filter += "first_name:? "
+		filter += "firstname:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("id"); ok {
@@ -124,7 +124,7 @@ func accountFilterFromResourceData(d *schema.ResourceData) (string, []interface{
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("last_name"); ok {
-		filter += "last_name:? "
+		filter += "lastname:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("name"); ok {

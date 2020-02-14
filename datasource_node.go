@@ -108,7 +108,7 @@ func nodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) 
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("bind_address"); ok {
-		filter += "bind_address:? "
+		filter += "bindaddress:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("id"); ok {
@@ -116,7 +116,7 @@ func nodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) 
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("listen_address"); ok {
-		filter += "listen_address:? "
+		filter += "listenaddress:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("name"); ok {

@@ -71,11 +71,11 @@ func roleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []int
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("composite_role_id"); ok {
-		filter += "composite_role_id:? "
+		filter += "compositeroleid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("attached_role_id"); ok {
-		filter += "attached_role_id:? "
+		filter += "attachedroleid:? "
 		args = append(args, v)
 	}
 	return filter, args

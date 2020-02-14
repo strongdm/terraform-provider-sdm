@@ -2123,47 +2123,47 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("access_key"); ok {
-		filter += "access_key:? "
+		filter += "accesskey:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("auth_database"); ok {
-		filter += "auth_database:? "
+		filter += "authdatabase:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("auth_header"); ok {
-		filter += "auth_header:? "
+		filter += "authheader:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("certificate_authority"); ok {
-		filter += "certificate_authority:? "
+		filter += "certificateauthority:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("certificate_authority_filename"); ok {
-		filter += "certificate_authority_filename:? "
+		filter += "certificateauthorityfilename:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("client_certificate"); ok {
-		filter += "client_certificate:? "
+		filter += "clientcertificate:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("client_certificate_filename"); ok {
-		filter += "client_certificate_filename:? "
+		filter += "clientcertificatefilename:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("client_key"); ok {
-		filter += "client_key:? "
+		filter += "clientkey:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("client_key_filename"); ok {
-		filter += "client_key_filename:? "
+		filter += "clientkeyfilename:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("cluster_name"); ok {
-		filter += "cluster_name:? "
+		filter += "clustername:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("connect_to_replica"); ok {
-		filter += "connect_to_replica:? "
+		filter += "connecttoreplica:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("database"); ok {
@@ -2171,7 +2171,7 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("default_path"); ok {
-		filter += "default_path:? "
+		filter += "defaultpath:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("endpoint"); ok {
@@ -2179,11 +2179,11 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("headers_blacklist"); ok {
-		filter += "headers_blacklist:? "
+		filter += "headersblacklist:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("healthcheck_path"); ok {
-		filter += "healthcheck_path:? "
+		filter += "healthcheckpath:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("healthy"); ok {
@@ -2207,7 +2207,7 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("override_database"); ok {
-		filter += "override_database:? "
+		filter += "overridedatabase:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("password"); ok {
@@ -2219,11 +2219,11 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("port_override"); ok {
-		filter += "port_override:? "
+		filter += "portoverride:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("private_key"); ok {
-		filter += "private_key:? "
+		filter += "privatekey:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("project"); ok {
@@ -2231,7 +2231,7 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("public_key"); ok {
-		filter += "public_key:? "
+		filter += "publickey:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("region"); ok {
@@ -2239,7 +2239,7 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("replica_set"); ok {
-		filter += "replica_set:? "
+		filter += "replicaset:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("schema"); ok {
@@ -2247,15 +2247,15 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("secret_access_key"); ok {
-		filter += "secret_access_key:? "
+		filter += "secretaccesskey:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("service_account_key"); ok {
-		filter += "service_account_key:? "
+		filter += "serviceaccountkey:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("service_account_key_filename"); ok {
-		filter += "service_account_key_filename:? "
+		filter += "serviceaccountkeyfilename:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("subdomain"); ok {
@@ -2263,7 +2263,7 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("tls_required"); ok {
-		filter += "tls_required:? "
+		filter += "tlsrequired:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("token"); ok {

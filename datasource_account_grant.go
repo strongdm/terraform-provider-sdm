@@ -71,19 +71,19 @@ func accountGrantFilterFromResourceData(d *schema.ResourceData) (string, []inter
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("resource_id"); ok {
-		filter += "resource_id:? "
+		filter += "resourceid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("account_id"); ok {
-		filter += "account_id:? "
+		filter += "accountid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("start_from"); ok {
-		filter += "start_from:? "
+		filter += "startfrom:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("valid_until"); ok {
-		filter += "valid_until:? "
+		filter += "validuntil:? "
 		args = append(args, v)
 	}
 	return filter, args
