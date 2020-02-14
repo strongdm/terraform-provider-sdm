@@ -15,7 +15,7 @@ func dataSourceRole() *schema.Resource {
 		Read: wrapCrudOperation(dataSourceRoleList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
-				Type:     schema.TypeSet,
+				Type:     schema.TypeList,
 				Computed: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
