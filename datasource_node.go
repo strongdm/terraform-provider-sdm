@@ -136,33 +136,32 @@ func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	filter, args := nodeFilterFromResourceData(d)
 	resp, err := cc.Nodes().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list Node %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list Nodes %s: %w", d.Id(), err)
 	}
-	vList := make([]map[string][]map[string]interface{}, 1)
-	vList[0] = make(map[string][]map[string]interface{})
+	type entity = map[string]interface{}
+	output := make([]map[string][]entity, 1)
+	output[0] = make(map[string][]entity)
 	for resp.Next() {
 		switch v := resp.Value().(type) {
 		case *apiv1.Relay:
-			vList[0]["relay"] = append(vList[0]["relay"], map[string]interface{}{
+			output[0]["relay"] = append(output[0]["relay"], entity{
 				"id":   v.ID,
 				"name": v.Name,
-			},
-			)
+			})
 		case *apiv1.Gateway:
-			vList[0]["gateway"] = append(vList[0]["gateway"], map[string]interface{}{
+			output[0]["gateway"] = append(output[0]["gateway"], entity{
 				"id":             v.ID,
 				"name":           v.Name,
 				"listen_address": v.ListenAddress,
 				"bind_address":   v.BindAddress,
-			},
-			)
+			})
 		}
 	}
 	if resp.Err() != nil {
-		return fmt.Errorf("failure during list: %w", err)
+		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
-	err = d.Set("nodes", vList)
+	err = d.Set("nodes", output)
 	if err != nil {
 		return fmt.Errorf("cannot set vList: %w", err)
 	}

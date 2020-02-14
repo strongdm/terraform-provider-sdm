@@ -95,23 +95,24 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *apiv1.Client) error 
 	filter, args := accountGrantFilterFromResourceData(d)
 	resp, err := cc.AccountGrants().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list AccountGrant %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list AccountGrants %s: %w", d.Id(), err)
 	}
-	vList := make([]map[string]interface{}, 0)
+	type entity = map[string]interface{}
+	output := make([]entity, 0)
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList,
-			map[string]interface{}{
+		output = append(output,
+			entity{
 				"id":          v.ID,
 				"resource_id": v.ResourceID,
 				"account_id":  v.AccountID,
 			})
 	}
 	if resp.Err() != nil {
-		return fmt.Errorf("failure during list: %w", err)
+		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
-	err = d.Set("account_grants", vList)
+	err = d.Set("account_grants", output)
 	if err != nil {
 		return fmt.Errorf("cannot set vList: %w", err)
 	}

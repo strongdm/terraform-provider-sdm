@@ -87,23 +87,24 @@ func dataSourceRoleList(d *schema.ResourceData, cc *apiv1.Client) error {
 	filter, args := roleFilterFromResourceData(d)
 	resp, err := cc.Roles().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list Role %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list Roles %s: %w", d.Id(), err)
 	}
-	vList := make([]map[string]interface{}, 0)
+	type entity = map[string]interface{}
+	output := make([]entity, 0)
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList,
-			map[string]interface{}{
+		output = append(output,
+			entity{
 				"id":        v.ID,
 				"name":      v.Name,
 				"composite": v.Composite,
 			})
 	}
 	if resp.Err() != nil {
-		return fmt.Errorf("failure during list: %w", err)
+		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
-	err = d.Set("roles", vList)
+	err = d.Set("roles", output)
 	if err != nil {
 		return fmt.Errorf("cannot set vList: %w", err)
 	}

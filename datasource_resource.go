@@ -2287,14 +2287,15 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 	filter, args := resourceFilterFromResourceData(d)
 	resp, err := cc.Resources().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list Resource %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list Resources %s: %w", d.Id(), err)
 	}
-	vList := make([]map[string][]map[string]interface{}, 1)
-	vList[0] = make(map[string][]map[string]interface{})
+	type entity = map[string]interface{}
+	output := make([]map[string][]entity, 1)
+	output[0] = make(map[string][]entity)
 	for resp.Next() {
 		switch v := resp.Value().(type) {
 		case *apiv1.Athena:
-			vList[0]["athena"] = append(vList[0]["athena"], map[string]interface{}{
+			output[0]["athena"] = append(output[0]["athena"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"access_key":        v.AccessKey,
@@ -2302,10 +2303,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"output":            v.Output,
 				"port_override":     v.PortOverride,
 				"region":            v.Region,
-			},
-			)
+			})
 		case *apiv1.BigQuery:
-			vList[0]["big_query"] = append(vList[0]["big_query"], map[string]interface{}{
+			output[0]["big_query"] = append(output[0]["big_query"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"private_key":   v.PrivateKey,
@@ -2313,10 +2313,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override": v.PortOverride,
 				"endpoint":      v.Endpoint,
 				"username":      v.Username,
-			},
-			)
+			})
 		case *apiv1.Cassandra:
-			vList[0]["cassandra"] = append(vList[0]["cassandra"], map[string]interface{}{
+			output[0]["cassandra"] = append(output[0]["cassandra"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2325,10 +2324,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override": v.PortOverride,
 				"port":          v.Port,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.Druid:
-			vList[0]["druid"] = append(vList[0]["druid"], map[string]interface{}{
+			output[0]["druid"] = append(output[0]["druid"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2336,10 +2334,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username":      v.Username,
 				"password":      v.Password,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.DynamoDB:
-			vList[0]["dynamo_db"] = append(vList[0]["dynamo_db"], map[string]interface{}{
+			output[0]["dynamo_db"] = append(output[0]["dynamo_db"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"access_key":        v.AccessKey,
@@ -2347,10 +2344,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"region":            v.Region,
 				"endpoint":          v.Endpoint,
 				"port_override":     v.PortOverride,
-			},
-			)
+			})
 		case *apiv1.AmazonES:
-			vList[0]["amazon_es"] = append(vList[0]["amazon_es"], map[string]interface{}{
+			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"region":            v.Region,
@@ -2358,10 +2354,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"endpoint":          v.Endpoint,
 				"access_key":        v.AccessKey,
 				"port_override":     v.PortOverride,
-			},
-			)
+			})
 		case *apiv1.Elastic:
-			vList[0]["elastic"] = append(vList[0]["elastic"], map[string]interface{}{
+			output[0]["elastic"] = append(output[0]["elastic"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2370,10 +2365,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override": v.PortOverride,
 				"port":          v.Port,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.HTTPBasicAuth:
-			vList[0]["http_basic_auth"] = append(vList[0]["http_basic_auth"], map[string]interface{}{
+			output[0]["http_basic_auth"] = append(output[0]["http_basic_auth"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"url":               v.Url,
@@ -2382,20 +2376,18 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password":          v.Password,
 				"headers_blacklist": v.HeadersBlacklist,
 				"default_path":      v.DefaultPath,
-			},
-			)
+			})
 		case *apiv1.HTTPNoAuth:
-			vList[0]["http_no_auth"] = append(vList[0]["http_no_auth"], map[string]interface{}{
+			output[0]["http_no_auth"] = append(output[0]["http_no_auth"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"url":               v.Url,
 				"healthcheck_path":  v.HealthcheckPath,
 				"headers_blacklist": v.HeadersBlacklist,
 				"default_path":      v.DefaultPath,
-			},
-			)
+			})
 		case *apiv1.HTTPAuth:
-			vList[0]["http_auth"] = append(vList[0]["http_auth"], map[string]interface{}{
+			output[0]["http_auth"] = append(output[0]["http_auth"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"url":               v.Url,
@@ -2403,10 +2395,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"auth_header":       v.AuthHeader,
 				"headers_blacklist": v.HeadersBlacklist,
 				"default_path":      v.DefaultPath,
-			},
-			)
+			})
 		case *apiv1.Kubernetes:
-			vList[0]["kubernetes"] = append(vList[0]["kubernetes"], map[string]interface{}{
+			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
 				"id":                             v.ID,
 				"name":                           v.Name,
 				"hostname":                       v.Hostname,
@@ -2417,20 +2408,18 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"client_certificate_filename":    v.ClientCertificateFilename,
 				"client_key":                     v.ClientKey,
 				"client_key_filename":            v.ClientKeyFilename,
-			},
-			)
+			})
 		case *apiv1.KubernetesBasicAuth:
-			vList[0]["kubernetes_basic_auth"] = append(vList[0]["kubernetes_basic_auth"], map[string]interface{}{
+			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
 				"id":       v.ID,
 				"name":     v.Name,
 				"hostname": v.Hostname,
 				"port":     v.Port,
 				"username": v.Username,
 				"password": v.Password,
-			},
-			)
+			})
 		case *apiv1.AmazonEKS:
-			vList[0]["amazon_eks"] = append(vList[0]["amazon_eks"], map[string]interface{}{
+			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
 				"id":                             v.ID,
 				"name":                           v.Name,
 				"endpoint":                       v.Endpoint,
@@ -2440,10 +2429,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"certificate_authority_filename": v.CertificateAuthorityFilename,
 				"region":                         v.Region,
 				"cluster_name":                   v.ClusterName,
-			},
-			)
+			})
 		case *apiv1.GoogleGKE:
-			vList[0]["google_gke"] = append(vList[0]["google_gke"], map[string]interface{}{
+			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
 				"id":                             v.ID,
 				"name":                           v.Name,
 				"endpoint":                       v.Endpoint,
@@ -2451,28 +2439,25 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"certificate_authority_filename": v.CertificateAuthorityFilename,
 				"service_account_key":            v.ServiceAccountKey,
 				"service_account_key_filename":   v.ServiceAccountKeyFilename,
-			},
-			)
+			})
 		case *apiv1.KubernetesServiceAccount:
-			vList[0]["kubernetes_service_account"] = append(vList[0]["kubernetes_service_account"], map[string]interface{}{
+			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
 				"id":       v.ID,
 				"name":     v.Name,
 				"hostname": v.Hostname,
 				"port":     v.Port,
 				"token":    v.Token,
-			},
-			)
+			})
 		case *apiv1.Memcached:
-			vList[0]["memcached"] = append(vList[0]["memcached"], map[string]interface{}{
+			output[0]["memcached"] = append(output[0]["memcached"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.MongoLegacyHost:
-			vList[0]["mongo_legacy_host"] = append(vList[0]["mongo_legacy_host"], map[string]interface{}{
+			output[0]["mongo_legacy_host"] = append(output[0]["mongo_legacy_host"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2483,10 +2468,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port":          v.Port,
 				"replica_set":   v.ReplicaSet,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.MongoLegacyReplicaset:
-			vList[0]["mongo_legacy_replicaset"] = append(vList[0]["mongo_legacy_replicaset"], map[string]interface{}{
+			output[0]["mongo_legacy_replicaset"] = append(output[0]["mongo_legacy_replicaset"], entity{
 				"id":                 v.ID,
 				"name":               v.Name,
 				"hostname":           v.Hostname,
@@ -2498,10 +2482,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"replica_set":        v.ReplicaSet,
 				"connect_to_replica": v.ConnectToReplica,
 				"tls_required":       v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.MongoHost:
-			vList[0]["mongo_host"] = append(vList[0]["mongo_host"], map[string]interface{}{
+			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2511,10 +2494,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password":      v.Password,
 				"port":          v.Port,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.MongoReplicaSet:
-			vList[0]["mongo_replica_set"] = append(vList[0]["mongo_replica_set"], map[string]interface{}{
+			output[0]["mongo_replica_set"] = append(output[0]["mongo_replica_set"], entity{
 				"id":                 v.ID,
 				"name":               v.Name,
 				"hostname":           v.Hostname,
@@ -2526,10 +2508,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"replica_set":        v.ReplicaSet,
 				"connect_to_replica": v.ConnectToReplica,
 				"tls_required":       v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.Mysql:
-			vList[0]["mysql"] = append(vList[0]["mysql"], map[string]interface{}{
+			output[0]["mysql"] = append(output[0]["mysql"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2538,10 +2519,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.AuroraMysql:
-			vList[0]["aurora_mysql"] = append(vList[0]["aurora_mysql"], map[string]interface{}{
+			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2550,10 +2530,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.Clustrix:
-			vList[0]["clustrix"] = append(vList[0]["clustrix"], map[string]interface{}{
+			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2562,10 +2541,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.Maria:
-			vList[0]["maria"] = append(vList[0]["maria"], map[string]interface{}{
+			output[0]["maria"] = append(output[0]["maria"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2574,10 +2552,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.Memsql:
-			vList[0]["memsql"] = append(vList[0]["memsql"], map[string]interface{}{
+			output[0]["memsql"] = append(output[0]["memsql"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2586,10 +2563,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"database":      v.Database,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.Oracle:
-			vList[0]["oracle"] = append(vList[0]["oracle"], map[string]interface{}{
+			output[0]["oracle"] = append(output[0]["oracle"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2599,10 +2575,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port":          v.Port,
 				"port_override": v.PortOverride,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.Postgres:
-			vList[0]["postgres"] = append(vList[0]["postgres"], map[string]interface{}{
+			output[0]["postgres"] = append(output[0]["postgres"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"hostname":          v.Hostname,
@@ -2612,10 +2587,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override":     v.PortOverride,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
-			},
-			)
+			})
 		case *apiv1.AuroraPostgres:
-			vList[0]["aurora_postgres"] = append(vList[0]["aurora_postgres"], map[string]interface{}{
+			output[0]["aurora_postgres"] = append(output[0]["aurora_postgres"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"hostname":          v.Hostname,
@@ -2625,10 +2599,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override":     v.PortOverride,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
-			},
-			)
+			})
 		case *apiv1.Greenplum:
-			vList[0]["greenplum"] = append(vList[0]["greenplum"], map[string]interface{}{
+			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"hostname":          v.Hostname,
@@ -2638,10 +2611,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override":     v.PortOverride,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
-			},
-			)
+			})
 		case *apiv1.Cockroach:
-			vList[0]["cockroach"] = append(vList[0]["cockroach"], map[string]interface{}{
+			output[0]["cockroach"] = append(output[0]["cockroach"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"hostname":          v.Hostname,
@@ -2651,10 +2623,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override":     v.PortOverride,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
-			},
-			)
+			})
 		case *apiv1.Redshift:
-			vList[0]["redshift"] = append(vList[0]["redshift"], map[string]interface{}{
+			output[0]["redshift"] = append(output[0]["redshift"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"hostname":          v.Hostname,
@@ -2664,10 +2635,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override":     v.PortOverride,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
-			},
-			)
+			})
 		case *apiv1.Presto:
-			vList[0]["presto"] = append(vList[0]["presto"], map[string]interface{}{
+			output[0]["presto"] = append(output[0]["presto"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2677,10 +2647,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port":          v.Port,
 				"username":      v.Username,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.RDP:
-			vList[0]["rdp"] = append(vList[0]["rdp"], map[string]interface{}{
+			output[0]["rdp"] = append(output[0]["rdp"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2688,20 +2657,18 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password":      v.Password,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.Redis:
-			vList[0]["redis"] = append(vList[0]["redis"], map[string]interface{}{
+			output[0]["redis"] = append(output[0]["redis"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
 				"port_override": v.PortOverride,
 				"password":      v.Password,
 				"port":          v.Port,
-			},
-			)
+			})
 		case *apiv1.ElasticacheRedis:
-			vList[0]["elasticache_redis"] = append(vList[0]["elasticache_redis"], map[string]interface{}{
+			output[0]["elasticache_redis"] = append(output[0]["elasticache_redis"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2709,10 +2676,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password":      v.Password,
 				"port":          v.Port,
 				"tls_required":  v.TlsRequired,
-			},
-			)
+			})
 		case *apiv1.Snowflake:
-			vList[0]["snowflake"] = append(vList[0]["snowflake"], map[string]interface{}{
+			output[0]["snowflake"] = append(output[0]["snowflake"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2721,10 +2687,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"database":      v.Database,
 				"schema":        v.Schema,
 				"port_override": v.PortOverride,
-			},
-			)
+			})
 		case *apiv1.SQLServer:
-			vList[0]["sql_server"] = append(vList[0]["sql_server"], map[string]interface{}{
+			output[0]["sql_server"] = append(output[0]["sql_server"], entity{
 				"id":                v.ID,
 				"name":              v.Name,
 				"hostname":          v.Hostname,
@@ -2735,19 +2700,17 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"schema":            v.Schema,
 				"port":              v.Port,
 				"override_database": v.OverrideDatabase,
-			},
-			)
+			})
 		case *apiv1.SSH:
-			vList[0]["ssh"] = append(vList[0]["ssh"], map[string]interface{}{
+			output[0]["ssh"] = append(output[0]["ssh"], entity{
 				"id":       v.ID,
 				"name":     v.Name,
 				"hostname": v.Hostname,
 				"username": v.Username,
 				"port":     v.Port,
-			},
-			)
+			})
 		case *apiv1.Sybase:
-			vList[0]["sybase"] = append(vList[0]["sybase"], map[string]interface{}{
+			output[0]["sybase"] = append(output[0]["sybase"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2755,10 +2718,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"port_override": v.PortOverride,
 				"port":          v.Port,
 				"password":      v.Password,
-			},
-			)
+			})
 		case *apiv1.Teradata:
-			vList[0]["teradata"] = append(vList[0]["teradata"], map[string]interface{}{
+			output[0]["teradata"] = append(output[0]["teradata"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
@@ -2766,15 +2728,14 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password":      v.Password,
 				"port_override": v.PortOverride,
 				"port":          v.Port,
-			},
-			)
+			})
 		}
 	}
 	if resp.Err() != nil {
-		return fmt.Errorf("failure during list: %w", err)
+		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
-	err = d.Set("resources", vList)
+	err = d.Set("resources", output)
 	if err != nil {
 		return fmt.Errorf("cannot set vList: %w", err)
 	}

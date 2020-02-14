@@ -87,23 +87,24 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *apiv1.Client) erro
 	filter, args := roleAttachmentFilterFromResourceData(d)
 	resp, err := cc.RoleAttachments().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list RoleAttachment %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list RoleAttachments %s: %w", d.Id(), err)
 	}
-	vList := make([]map[string]interface{}, 0)
+	type entity = map[string]interface{}
+	output := make([]entity, 0)
 	for resp.Next() {
 		v := resp.Value()
-		vList = append(vList,
-			map[string]interface{}{
+		output = append(output,
+			entity{
 				"id":                v.ID,
 				"composite_role_id": v.CompositeRoleID,
 				"attached_role_id":  v.AttachedRoleID,
 			})
 	}
 	if resp.Err() != nil {
-		return fmt.Errorf("failure during list: %w", err)
+		return fmt.Errorf("failure during list: %w", resp.Err())
 	}
 
-	err = d.Set("role_attachments", vList)
+	err = d.Set("role_attachments", output)
 	if err != nil {
 		return fmt.Errorf("cannot set vList: %w", err)
 	}
