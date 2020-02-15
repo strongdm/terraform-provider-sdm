@@ -49,7 +49,7 @@ func dataSourceNode() *schema.Resource {
 
 						"relay": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -68,7 +68,7 @@ func dataSourceNode() *schema.Resource {
 						},
 						"gateway": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -146,7 +146,9 @@ func dataSourceNodeList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ids := []string{}
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
-	output[0] = make(map[string][]entity)
+	output[0] = map[string][]entity{
+		"relay": {},
+	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {

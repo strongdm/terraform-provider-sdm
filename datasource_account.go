@@ -53,7 +53,7 @@ func dataSourceAccount() *schema.Resource {
 
 						"user": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -82,7 +82,7 @@ func dataSourceAccount() *schema.Resource {
 						},
 						"service": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -150,7 +150,9 @@ func dataSourceAccountList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ids := []string{}
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
-	output[0] = make(map[string][]entity)
+	output[0] = map[string][]entity{
+		"user": {},
+	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {

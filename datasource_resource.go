@@ -177,7 +177,7 @@ func dataSourceResource() *schema.Resource {
 
 						"athena": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -221,7 +221,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"big_query": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -265,7 +265,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"cassandra": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -314,7 +314,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"druid": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -358,7 +358,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"dynamo_db": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -402,7 +402,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"amazon_es": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -446,7 +446,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"elastic": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -495,7 +495,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"http_basic_auth": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -544,7 +544,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"http_no_auth": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -583,7 +583,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"http_auth": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -627,7 +627,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"kubernetes": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -686,7 +686,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"kubernetes_basic_auth": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -725,7 +725,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"amazon_eks": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -779,7 +779,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"google_gke": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -823,7 +823,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"kubernetes_service_account": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -857,7 +857,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"memcached": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -891,7 +891,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"mongo_legacy_host": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -950,7 +950,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"mongo_legacy_replicaset": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1014,7 +1014,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"mongo_host": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1068,7 +1068,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"mongo_replica_set": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1132,7 +1132,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"mysql": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1181,7 +1181,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"aurora_mysql": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1230,7 +1230,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"clustrix": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1279,7 +1279,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"maria": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1328,7 +1328,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"memsql": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1377,7 +1377,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"oracle": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1431,7 +1431,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"postgres": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1485,7 +1485,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"aurora_postgres": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1539,7 +1539,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"greenplum": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1593,7 +1593,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"cockroach": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1647,7 +1647,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"redshift": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1701,7 +1701,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"presto": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1755,7 +1755,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"rdp": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1799,7 +1799,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"redis": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1838,7 +1838,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"elasticache_redis": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1882,7 +1882,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"snowflake": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1931,7 +1931,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"sql_server": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -1990,7 +1990,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"ssh": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -2024,7 +2024,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"sybase": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -2068,7 +2068,7 @@ func dataSourceResource() *schema.Resource {
 						},
 						"teradata": {
 							Type:        schema.TypeList,
-							Optional:    true,
+							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -2297,7 +2297,9 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 	ids := []string{}
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
-	output[0] = make(map[string][]entity)
+	output[0] = map[string][]entity{
+		"athena": {},
+	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
