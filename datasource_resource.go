@@ -23,75 +23,7 @@ func dataSourceResource() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"access_key": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"auth_database": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"auth_header": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"certificate_authority": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"certificate_authority_filename": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"client_certificate": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"client_certificate_filename": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"client_key": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"client_key_filename": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"cluster_name": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"connect_to_replica": {
-				Type:     schema.TypeBool,
-				Optional: true,
-			},
-			"database": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"default_path": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"endpoint": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"headers_blacklist": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"healthcheck_path": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 			"hostname": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"id": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -99,68 +31,8 @@ func dataSourceResource() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"output": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"override_database": {
-				Type:     schema.TypeBool,
-				Optional: true,
-			},
-			"password": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 			"port": {
 				Type:     schema.TypeInt,
-				Optional: true,
-			},
-			"port_override": {
-				Type:     schema.TypeInt,
-				Optional: true,
-			},
-			"private_key": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"project": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"region": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"replica_set": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"schema": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"secret_access_key": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"service_account_key": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"service_account_key_filename": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"tls_required": {
-				Type:     schema.TypeBool,
-				Optional: true,
-			},
-			"token": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"url": {
-				Type:     schema.TypeString,
 				Optional: true,
 			},
 			"username": {
@@ -2171,156 +2043,16 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 		filter += "type:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("access_key"); ok {
-		filter += "accesskey:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("auth_database"); ok {
-		filter += "authdatabase:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("auth_header"); ok {
-		filter += "authheader:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("certificate_authority"); ok {
-		filter += "certificateauthority:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("certificate_authority_filename"); ok {
-		filter += "certificateauthorityfilename:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("client_certificate"); ok {
-		filter += "clientcertificate:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("client_certificate_filename"); ok {
-		filter += "clientcertificatefilename:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("client_key"); ok {
-		filter += "clientkey:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("client_key_filename"); ok {
-		filter += "clientkeyfilename:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("cluster_name"); ok {
-		filter += "clustername:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("connect_to_replica"); ok {
-		filter += "connecttoreplica:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("database"); ok {
-		filter += "database:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("default_path"); ok {
-		filter += "defaultpath:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("endpoint"); ok {
-		filter += "endpoint:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("headers_blacklist"); ok {
-		filter += "headersblacklist:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("healthcheck_path"); ok {
-		filter += "healthcheckpath:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("healthy"); ok {
-		filter += "healthy:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOk("hostname"); ok {
 		filter += "hostname:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("id"); ok {
-		filter += "id:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("output"); ok {
-		filter += "output:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("override_database"); ok {
-		filter += "overridedatabase:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("password"); ok {
-		filter += "password:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOk("port"); ok {
 		filter += "port:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("port_override"); ok {
-		filter += "portoverride:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("private_key"); ok {
-		filter += "privatekey:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("project"); ok {
-		filter += "project:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("public_key"); ok {
-		filter += "publickey:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("region"); ok {
-		filter += "region:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("replica_set"); ok {
-		filter += "replicaset:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("schema"); ok {
-		filter += "schema:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("secret_access_key"); ok {
-		filter += "secretaccesskey:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("service_account_key"); ok {
-		filter += "serviceaccountkey:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("service_account_key_filename"); ok {
-		filter += "serviceaccountkeyfilename:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("subdomain"); ok {
-		filter += "subdomain:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("tls_required"); ok {
-		filter += "tlsrequired:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("token"); ok {
-		filter += "token:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("url"); ok {
-		filter += "url:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("username"); ok {
