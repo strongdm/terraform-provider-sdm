@@ -1,4 +1,4 @@
-// Package sdm is a terraform provider for strongDm
+// Package sdm is a terraform provider for strongDM
 package sdm
 
 import (

@@ -2066,6 +2066,50 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"sybase_iq": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"teradata": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -2720,6 +2764,16 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 			})
 		case *apiv1.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{
+				"id":            v.ID,
+				"name":          v.Name,
+				"hostname":      v.Hostname,
+				"username":      v.Username,
+				"port_override": v.PortOverride,
+				"port":          v.Port,
+				"password":      v.Password,
+			})
+		case *apiv1.SybaseIQ:
+			output[0]["sybase_iq"] = append(output[0]["sybase_iq"], entity{
 				"id":            v.ID,
 				"name":          v.Name,
 				"hostname":      v.Hostname,
