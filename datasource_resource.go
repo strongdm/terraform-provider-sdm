@@ -27,6 +27,10 @@ func dataSourceResource() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"name": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -2045,6 +2049,10 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 	}
 	if v, ok := d.GetOk("hostname"); ok {
 		filter += "hostname:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("id"); ok {
+		filter += "id:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("name"); ok {
