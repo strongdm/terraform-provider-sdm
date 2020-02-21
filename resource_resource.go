@@ -506,6 +506,35 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"kubernetes_service_account": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"token": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"amazon_eks": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -594,7 +623,95 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"kubernetes_service_account": {
+			"aks": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"certificate_authority": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"client_certificate": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"client_certificate_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"client_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"client_key_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"aks_basic_auth": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"aks_service_account": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -1947,6 +2064,16 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			Password: stringFromMap(raw, "password"),
 		}
 	}
+	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.KubernetesServiceAccount{
+			ID:       d.Id(),
+			Name:     stringFromMap(raw, "name"),
+			Hostname: stringFromMap(raw, "hostname"),
+			Port:     int32FromMap(raw, "port"),
+			Token:    stringFromMap(raw, "token"),
+		}
+	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
 		return &apiv1.AmazonEKS{
@@ -1973,9 +2100,35 @@ func resourceFromResourceData(d *schema.ResourceData) apiv1.Resource {
 			ServiceAccountKeyFilename:    stringFromMap(raw, "service_account_key_filename"),
 		}
 	}
-	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
+	if list := d.Get("aks").([]interface{}); len(list) > 0 {
 		raw := list[0].(map[string]interface{})
-		return &apiv1.KubernetesServiceAccount{
+		return &apiv1.AKS{
+			ID:                           d.Id(),
+			Name:                         stringFromMap(raw, "name"),
+			Hostname:                     stringFromMap(raw, "hostname"),
+			Port:                         int32FromMap(raw, "port"),
+			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            stringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    stringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    stringFromMap(raw, "client_key"),
+			ClientKeyFilename:            stringFromMap(raw, "client_key_filename"),
+		}
+	}
+	if list := d.Get("aks_basic_auth").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.AKSBasicAuth{
+			ID:       d.Id(),
+			Name:     stringFromMap(raw, "name"),
+			Hostname: stringFromMap(raw, "hostname"),
+			Port:     int32FromMap(raw, "port"),
+			Username: stringFromMap(raw, "username"),
+			Password: stringFromMap(raw, "password"),
+		}
+	}
+	if list := d.Get("aks_service_account").([]interface{}); len(list) > 0 {
+		raw := list[0].(map[string]interface{})
+		return &apiv1.AKSServiceAccount{
 			ID:       d.Id(),
 			Name:     stringFromMap(raw, "name"),
 			Hostname: stringFromMap(raw, "hostname"),
@@ -2488,6 +2641,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"password": v.Password,
 			},
 		})
+	case *apiv1.KubernetesServiceAccount:
+		d.Set("kubernetes_service_account", []map[string]interface{}{
+			{
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"port":     v.Port,
+				"token":    v.Token,
+			},
+		})
 	case *apiv1.AmazonEKS:
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
@@ -2512,8 +2674,32 @@ func resourceResourceRead(d *schema.ResourceData, cc *apiv1.Client) error {
 				"service_account_key_filename":   v.ServiceAccountKeyFilename,
 			},
 		})
-	case *apiv1.KubernetesServiceAccount:
-		d.Set("kubernetes_service_account", []map[string]interface{}{
+	case *apiv1.AKS:
+		d.Set("aks", []map[string]interface{}{
+			{
+				"name":                           v.Name,
+				"hostname":                       v.Hostname,
+				"port":                           v.Port,
+				"certificate_authority":          v.CertificateAuthority,
+				"certificate_authority_filename": v.CertificateAuthorityFilename,
+				"client_certificate":             v.ClientCertificate,
+				"client_certificate_filename":    v.ClientCertificateFilename,
+				"client_key":                     v.ClientKey,
+				"client_key_filename":            v.ClientKeyFilename,
+			},
+		})
+	case *apiv1.AKSBasicAuth:
+		d.Set("aks_basic_auth", []map[string]interface{}{
+			{
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"port":     v.Port,
+				"username": v.Username,
+				"password": v.Password,
+			},
+		})
+	case *apiv1.AKSServiceAccount:
+		d.Set("aks_service_account", []map[string]interface{}{
 			{
 				"name":     v.Name,
 				"hostname": v.Hostname,

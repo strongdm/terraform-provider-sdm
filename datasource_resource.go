@@ -599,6 +599,40 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"kubernetes_service_account": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"token": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"amazon_eks": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -697,7 +731,105 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"kubernetes_service_account": {
+						"aks": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_certificate_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_key_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_basic_auth": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_service_account": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
@@ -2211,6 +2343,14 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"username": v.Username,
 				"password": v.Password,
 			})
+		case *apiv1.KubernetesServiceAccount:
+			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
+				"id":       v.ID,
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"port":     v.Port,
+				"token":    v.Token,
+			})
 		case *apiv1.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
 				"id":                             v.ID,
@@ -2233,8 +2373,30 @@ func dataSourceResourceList(d *schema.ResourceData, cc *apiv1.Client) error {
 				"service_account_key":            v.ServiceAccountKey,
 				"service_account_key_filename":   v.ServiceAccountKeyFilename,
 			})
-		case *apiv1.KubernetesServiceAccount:
-			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
+		case *apiv1.AKS:
+			output[0]["aks"] = append(output[0]["aks"], entity{
+				"id":                             v.ID,
+				"name":                           v.Name,
+				"hostname":                       v.Hostname,
+				"port":                           v.Port,
+				"certificate_authority":          v.CertificateAuthority,
+				"certificate_authority_filename": v.CertificateAuthorityFilename,
+				"client_certificate":             v.ClientCertificate,
+				"client_certificate_filename":    v.ClientCertificateFilename,
+				"client_key":                     v.ClientKey,
+				"client_key_filename":            v.ClientKeyFilename,
+			})
+		case *apiv1.AKSBasicAuth:
+			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
+				"id":       v.ID,
+				"name":     v.Name,
+				"hostname": v.Hostname,
+				"port":     v.Port,
+				"username": v.Username,
+				"password": v.Password,
+			})
+		case *apiv1.AKSServiceAccount:
+			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
 				"id":       v.ID,
 				"name":     v.Name,
 				"hostname": v.Hostname,
