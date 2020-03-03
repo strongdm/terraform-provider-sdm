@@ -3,14 +3,14 @@ package sdm
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	apiV1 "github.com/strongdm/strongdm-sdk-go"
+	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
-type apiCrudOperation func(d *schema.ResourceData, client *apiV1.Client) error
+type apiCrudOperation func(d *schema.ResourceData, client *sdm.Client) error
 
 func wrapCrudOperation(op apiCrudOperation) func(d *schema.ResourceData, m interface{}) error {
 	return func(d *schema.ResourceData, m interface{}) error {
-		client := m.(*apiV1.Client)
+		client := m.(*sdm.Client)
 		return op(d, client)
 	}
 }

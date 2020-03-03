@@ -1,0 +1,27 @@
+---
+page_title: "SDM: sdm_role"
+description: |-
+  Query for existing Roles instances.
+---
+# Data Source: sdm_role
+
+A Role is a collection of permissions, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
+## Example Usage
+
+```hcl
+data "sdm_role" "composite_role_query" {
+    composite = true
+}
+```
+## Argument Reference
+The following arguments are supported by a Roles data source:
+* `id` - (Optional) Unique identifier of the Role.
+* `name` - (Optional) Unique human-readable name of the Role.
+* `composite` - (Optional) True if the Role is a composite role.
+## Attribute Reference
+In addition to provided arguments above, the following attributes are returned by a Roles data source:
+* `ids` - a list of strings of ids of data sources that match the given arguments.
+* `roles` - A list where each element has the following attributes:
+	* `id` - Unique identifier of the Role.
+	* `name` - Unique human-readable name of the Role.
+	* `composite` - True if the Role is a composite role.

@@ -2,30 +2,34 @@ package sdm
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	apiV1 "github.com/strongdm/strongdm-sdk-go"
+	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
+// Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"api_access_key": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("SDM_API_ACCESS_KEY", nil),
 				Description: "A GUID identifying the API key used to authenticate with the StrongDM API.",
 			},
 
 			"api_secret_key": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("SDM_API_SECRET_KEY", nil),
 				Description: "A base64 encoded secret key used to authenticate with the StrongDM API.",
 			},
 
 			"host": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "api.strongdm.com:443",
+				DefaultFunc: schema.EnvDefaultFunc("SDM_API_HOST", "api.strongdm.com:443"),
 				Description: "The host and port of the StrongDM API endpoint.",
 			},
 		},
@@ -50,7 +54,12 @@ func Provider() *schema.Provider {
 			"sdm_role":               dataSourceRole(),
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
-			client, err := apiV1.New(d.Get("host").(string), d.Get("api_access_key").(string), d.Get("api_secret_key").(string))
+			host := d.Get("host").(string)
+			opts := []sdm.ClientOption{sdm.WithHost(host)}
+			if strings.HasPrefix(host, "localhost:") {
+				opts = append(opts, sdm.WithInsecure())
+			}
+			client, err := sdm.New(d.Get("api_access_key").(string), d.Get("api_secret_key").(string), opts...)
 			if err != nil {
 				return nil, fmt.Errorf("cannot dial API server: %w", err)
 			}

@@ -8,24 +8,25 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 
-	apiv1 "github.com/strongdm/strongdm-sdk-go"
+	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
 func resourceAccountAttachment() *schema.Resource {
 	return &schema.Resource{
 		Create: wrapCrudOperation(resourceAccountAttachmentCreate),
 		Read:   wrapCrudOperation(resourceAccountAttachmentRead),
-		Update: wrapCrudOperation(resourceAccountAttachmentUpdate),
 		Delete: wrapCrudOperation(resourceAccountAttachmentDelete),
 		Schema: map[string]*schema.Schema{
 			"account_id": {
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
+				ForceNew:    true,
 				Description: "The id of the account of this AccountAttachment.",
 			},
 			"role_id": {
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
+				ForceNew:    true,
 				Description: "The id of the attached role of this AccountAttachment.",
 			},
 		},
@@ -34,15 +35,15 @@ func resourceAccountAttachment() *schema.Resource {
 		},
 	}
 }
-func accountAttachmentFromResourceData(d *schema.ResourceData) *apiv1.AccountAttachment {
-	return &apiv1.AccountAttachment{
+func accountAttachmentFromResourceData(d *schema.ResourceData) *sdm.AccountAttachment {
+	return &sdm.AccountAttachment{
 		ID:        d.Id(),
 		AccountID: stringFromResourceData(d, "account_id"),
 		RoleID:    stringFromResourceData(d, "role_id"),
 	}
 }
 
-func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *apiv1.Client) error {
+func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	resp, err := cc.AccountAttachments().Create(ctx, accountAttachmentFromResourceData(d))
@@ -50,14 +51,17 @@ func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *apiv1.Client) e
 		return fmt.Errorf("cannot create AccountAttachment %s: %w", "", err)
 	}
 	d.SetId(resp.AccountAttachment.ID)
-	return resourceAccountAttachmentRead(d, cc)
+	v := resp.AccountAttachment
+	d.Set("account_id", v.AccountID)
+	d.Set("role_id", v.RoleID)
+	return nil
 }
 
-func resourceAccountAttachmentRead(d *schema.ResourceData, cc *apiv1.Client) error {
+func resourceAccountAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
 	resp, err := cc.AccountAttachments().Get(ctx, d.Id())
-	var errNotFound *apiv1.NotFoundError
+	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
 		d.SetId("")
 		return nil
@@ -69,27 +73,13 @@ func resourceAccountAttachmentRead(d *schema.ResourceData, cc *apiv1.Client) err
 	d.Set("role_id", v.RoleID)
 	return nil
 }
-
-func resourceAccountAttachmentUpdate(d *schema.ResourceData, cc *apiv1.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
-	defer cancel()
-	model := accountAttachmentFromResourceData(d)
-	id := model.ID
-	_, err := cc.AccountAttachments().Delete(ctx, id)
-	if err != nil {
-		return fmt.Errorf("cannot update AccountAttachment %s: %w", d.Id(), err)
-	}
-	resp, err := cc.AccountAttachments().Create(ctx, model)
-	if err != nil {
-		return fmt.Errorf("cannot update AccountAttachment %s: %w", d.Id(), err)
-	}
-	d.SetId(resp.AccountAttachment.ID)
-	return resourceAccountAttachmentRead(d, cc)
-}
-
-func resourceAccountAttachmentDelete(d *schema.ResourceData, cc *apiv1.Client) error {
+func resourceAccountAttachmentDelete(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
 	defer cancel()
+	var errNotFound *sdm.NotFoundError
 	_, err := cc.AccountAttachments().Delete(ctx, d.Id())
+	if err != nil && errors.As(err, &errNotFound) {
+		return nil
+	}
 	return err
 }
