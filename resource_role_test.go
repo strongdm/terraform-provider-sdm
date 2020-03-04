@@ -128,6 +128,52 @@ func TestAccSDMRole_Update(t *testing.T) {
 	})
 }
 
+func TestAccSDMRole_UpdateComposite(t *testing.T) {
+	rsName := randomWithPrefix("test-role")
+	roleName := randomWithPrefix("test-role")
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMRoleConfig(rsName, roleName, false),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
+					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
+				),
+			},
+			{
+				Config: testAccSDMRoleConfig(rsName, roleName, true),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
+					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "true"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", rsName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually updated
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Role.Composite != true {
+							return fmt.Errorf("unexpected composite '%t'", resp.Role.Composite)
+						}
+
+						return nil
+					},
+				),
+			},
+		},
+	})
+}
+
 func testAccSDMRoleConfig(resourceName, roleName string, composite bool) string {
 	return fmt.Sprintf(`
 	resource "sdm_role" "%s" {

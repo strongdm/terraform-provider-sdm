@@ -28,6 +28,7 @@ func resourceRole() *schema.Resource {
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
+				ForceNew:    true,
 				Description: "True if the Role is a composite role.",
 			},
 		},
