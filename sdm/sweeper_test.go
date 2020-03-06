@@ -16,7 +16,7 @@ import (
 )
 
 var testAccProviders map[string]terraform.ResourceProvider
-var testAccProvider *schema.Provider
+var testAccProvider terraform.ResourceProvider
 
 func TestMain(m *testing.M) {
 	testAccProvider = Provider()
@@ -49,7 +49,7 @@ func testCreatedID(s *terraform.State, resourceType, resourceName string) (strin
 }
 
 func testClient() *sdm.Client {
-	return testAccProvider.Meta().(*sdm.Client)
+	return testAccProvider.(*schema.Provider).Meta().(*sdm.Client)
 }
 
 var preTestClientOnce sync.Once

@@ -7,11 +7,12 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
 // Provider returns a terraform.ResourceProvider.
-func Provider() *schema.Provider {
+func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"api_access_key": {
