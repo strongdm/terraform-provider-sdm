@@ -1796,6 +1796,11 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "",
 						},
+						"port_forwarding": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -2566,11 +2571,12 @@ func resourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SSH{}
 		}
 		return &sdm.SSH{
-			ID:       d.Id(),
-			Name:     stringFromMap(raw, "name"),
-			Hostname: stringFromMap(raw, "hostname"),
-			Username: stringFromMap(raw, "username"),
-			Port:     int32FromMap(raw, "port"),
+			ID:             d.Id(),
+			Name:           stringFromMap(raw, "name"),
+			Hostname:       stringFromMap(raw, "hostname"),
+			Username:       stringFromMap(raw, "username"),
+			Port:           int32FromMap(raw, "port"),
+			PortForwarding: boolFromMap(raw, "port_forwarding"),
 		}
 	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
@@ -3110,11 +3116,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	case *sdm.SSH:
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":       v.Name,
-				"hostname":   v.Hostname,
-				"username":   v.Username,
-				"port":       v.Port,
-				"public_key": v.PublicKey,
+				"name":            v.Name,
+				"hostname":        v.Hostname,
+				"username":        v.Username,
+				"port":            v.Port,
+				"public_key":      v.PublicKey,
+				"port_forwarding": v.PortForwarding,
 			},
 		})
 	case *sdm.Sybase:
@@ -3646,11 +3653,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 	case *sdm.SSH:
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":       v.Name,
-				"hostname":   v.Hostname,
-				"username":   v.Username,
-				"port":       v.Port,
-				"public_key": v.PublicKey,
+				"name":            v.Name,
+				"hostname":        v.Hostname,
+				"username":        v.Username,
+				"port":            v.Port,
+				"public_key":      v.PublicKey,
+				"port_forwarding": v.PortForwarding,
 			},
 		})
 	case *sdm.Sybase:

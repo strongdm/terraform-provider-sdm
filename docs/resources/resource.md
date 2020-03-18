@@ -352,6 +352,7 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `port` - (Required) 
+	* `port_forwarding` - (Optional) 
 * sybase:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 

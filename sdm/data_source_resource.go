@@ -2034,6 +2034,11 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
+									"port_forwarding": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -2665,12 +2670,13 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.SSH:
 			output[0]["ssh"] = append(output[0]["ssh"], entity{
-				"id":         v.ID,
-				"name":       v.Name,
-				"hostname":   v.Hostname,
-				"username":   v.Username,
-				"port":       v.Port,
-				"public_key": v.PublicKey,
+				"id":              v.ID,
+				"name":            v.Name,
+				"hostname":        v.Hostname,
+				"username":        v.Username,
+				"port":            v.Port,
+				"public_key":      v.PublicKey,
+				"port_forwarding": v.PortForwarding,
 			})
 		case *sdm.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{

@@ -390,6 +390,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - 
 		* `port` - 
 		* `public_key` - 
+		* `port_forwarding` - 
 	* sybase:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
