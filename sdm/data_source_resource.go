@@ -686,6 +686,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -2374,6 +2379,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"certificate_authority_filename": v.CertificateAuthorityFilename,
 				"region":                         v.Region,
 				"cluster_name":                   v.ClusterName,
+				"role_arn":                       v.RoleArn,
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{

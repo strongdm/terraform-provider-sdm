@@ -132,6 +132,7 @@ The following arguments are supported by the Resource resource:
 	* `certificate_authority_filename` - (Optional) 
 	* `region` - (Required) 
 	* `cluster_name` - (Required) 
+	* `role_arn` - (Optional) 
 * google_gke:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `endpoint` - (Required) 

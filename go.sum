@@ -180,6 +180,8 @@ github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/strongdm/strongdm-sdk-go v0.9.5 h1:qX55X/xg4zkIILUyt6AXjizGt4YdOBSPLZfv3aWyy70=
 github.com/strongdm/strongdm-sdk-go v0.9.5/go.mod h1:X5SMmakW9iBWArxTXrSh0gmUmkMP3HLaYSTCnu9/WKA=
+github.com/strongdm/strongdm-sdk-go v0.9.8 h1:lh4NgHVI8OBHOgxIuGjdf8xDfxMftoDrNpfymdPJM9A=
+github.com/strongdm/strongdm-sdk-go v0.9.8/go.mod h1:X5SMmakW9iBWArxTXrSh0gmUmkMP3HLaYSTCnu9/WKA=
 github.com/ulikunitz/xz v0.5.5 h1:pFrO0lVpTBXLpYw+pnLj6TbvHuyjXMfjGeCwSqCVwok=
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=

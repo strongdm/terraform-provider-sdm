@@ -924,6 +924,8 @@ type AmazonEKS struct {
 	Region string `json:"region"`
 
 	ClusterName string `json:"cluster_name"`
+
+	RoleArn string `json:"role_arn"`
 }
 
 type GoogleGKE struct {
