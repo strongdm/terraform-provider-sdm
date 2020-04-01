@@ -1,4 +1,4 @@
-# StrongDM Go SDK
+# StrongDM Go SDK [![GoDoc](https://godoc.org/github.com/strongdm/strongdm-sdk-go?status.svg)](https://godoc.org/github.com/strongdm/strongdm-sdk-go)
 
 Alpha API for accessing StrongDM
 

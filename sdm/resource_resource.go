@@ -583,6 +583,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -2140,6 +2145,7 @@ func resourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
 			Region:                       stringFromMap(raw, "region"),
 			ClusterName:                  stringFromMap(raw, "cluster_name"),
+			RoleArn:                      stringFromMap(raw, "role_arn"),
 		}
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
@@ -2792,6 +2798,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"certificate_authority_filename": v.CertificateAuthorityFilename,
 				"region":                         v.Region,
 				"cluster_name":                   v.ClusterName,
+				"role_arn":                       v.RoleArn,
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -3329,6 +3336,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"certificate_authority_filename": v.CertificateAuthorityFilename,
 				"region":                         v.Region,
 				"cluster_name":                   v.ClusterName,
+				"role_arn":                       v.RoleArn,
 			},
 		})
 	case *sdm.GoogleGKE:

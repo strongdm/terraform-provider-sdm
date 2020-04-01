@@ -142,6 +142,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority_filename` - 
 		* `region` - 
 		* `cluster_name` - 
+		* `role_arn` - 
 	* google_gke:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
