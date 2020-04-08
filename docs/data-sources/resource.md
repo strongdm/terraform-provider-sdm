@@ -5,7 +5,7 @@ description: |-
 ---
 # Data Source: sdm_resource
 
-A Resource is a server or service which clients connect to through relays.
+A Resource is a database or server for which strongDM manages access.
 ## Example Usage
 
 ```hcl
