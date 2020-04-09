@@ -48,8 +48,6 @@ func dataSourceResource() *schema.Resource {
 			"resources": {
 				Type:     schema.TypeList,
 				Computed: true,
-				MaxItems: 1,
-				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -68,6 +66,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"access_key": {
 										Type:        schema.TypeString,
@@ -113,6 +120,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"private_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -156,6 +172,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -206,6 +231,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -249,6 +283,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"access_key": {
 										Type:        schema.TypeString,
@@ -294,6 +337,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -337,6 +389,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -387,6 +448,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -436,6 +506,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -474,6 +553,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"url": {
 										Type:        schema.TypeString,
@@ -518,6 +606,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -578,6 +675,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -617,6 +723,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -650,6 +765,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"endpoint": {
 										Type:        schema.TypeString,
@@ -710,6 +834,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -753,6 +886,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -813,6 +955,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -852,6 +1003,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -886,6 +1046,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -919,6 +1088,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -978,6 +1156,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1043,6 +1230,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1096,6 +1292,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1161,6 +1366,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1209,6 +1423,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1259,6 +1482,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1307,6 +1539,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1357,6 +1598,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1405,6 +1655,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1460,6 +1719,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1513,6 +1781,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1568,6 +1845,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1621,6 +1907,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1676,6 +1971,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1729,6 +2033,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1784,6 +2097,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1828,6 +2150,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1866,6 +2197,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1910,6 +2250,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1959,6 +2308,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2019,6 +2377,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2062,6 +2429,15 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2107,6 +2483,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2151,6 +2536,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2189,7 +2583,7 @@ func dataSourceResource() *schema.Resource {
 	}
 }
 
-func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertResourceFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("type"); ok {
@@ -2222,7 +2616,7 @@ func resourceFilterFromResourceData(d *schema.ResourceData) (string, []interface
 func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := resourceFilterFromResourceData(d)
+	filter, args := convertResourceFilterFromResourceData(d)
 	resp, err := cc.Resources().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Resources %s: %w", d.Id(), err)
@@ -2238,481 +2632,525 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 		switch v := resp.Value().(type) {
 		case *sdm.Athena:
 			output[0]["athena"] = append(output[0]["athena"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"output":            v.Output,
-				"port_override":     v.PortOverride,
-				"region":            v.Region,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"access_key":        (v.AccessKey),
+				"secret_access_key": (v.SecretAccessKey),
+				"output":            (v.Output),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"private_key":   v.PrivateKey,
-				"project":       v.Project,
-				"port_override": v.PortOverride,
-				"endpoint":      v.Endpoint,
-				"username":      v.Username,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"private_key":   (v.PrivateKey),
+				"project":       (v.Project),
+				"port_override": (v.PortOverride),
+				"endpoint":      (v.Endpoint),
+				"username":      (v.Username),
 			})
 		case *sdm.Cassandra:
 			output[0]["cassandra"] = append(output[0]["cassandra"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.Druid:
 			output[0]["druid"] = append(output[0]["druid"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port":          (v.Port),
 			})
 		case *sdm.DynamoDB:
 			output[0]["dynamo_db"] = append(output[0]["dynamo_db"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
-				"endpoint":          v.Endpoint,
-				"port_override":     v.PortOverride,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"access_key":        (v.AccessKey),
+				"secret_access_key": (v.SecretAccessKey),
+				"region":            (v.Region),
+				"endpoint":          (v.Endpoint),
+				"port_override":     (v.PortOverride),
 			})
 		case *sdm.AmazonES:
 			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"region":            v.Region,
-				"secret_access_key": v.SecretAccessKey,
-				"endpoint":          v.Endpoint,
-				"access_key":        v.AccessKey,
-				"port_override":     v.PortOverride,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"region":            (v.Region),
+				"secret_access_key": (v.SecretAccessKey),
+				"endpoint":          (v.Endpoint),
+				"access_key":        (v.AccessKey),
+				"port_override":     (v.PortOverride),
 			})
 		case *sdm.Elastic:
 			output[0]["elastic"] = append(output[0]["elastic"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.HTTPBasicAuth:
 			output[0]["http_basic_auth"] = append(output[0]["http_basic_auth"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"username":          v.Username,
-				"password":          v.Password,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			})
 		case *sdm.HTTPNoAuth:
 			output[0]["http_no_auth"] = append(output[0]["http_no_auth"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			})
 		case *sdm.HTTPAuth:
 			output[0]["http_auth"] = append(output[0]["http_auth"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"auth_header":       v.AuthHeader,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"auth_header":       (v.AuthHeader),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			})
 		case *sdm.Kubernetes:
 			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
-				"id":                             v.ID,
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             (v.ClientCertificate),
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     (v.ClientKey),
+				"client_key_filename":            (v.ClientKeyFilename),
 			})
 		case *sdm.KubernetesBasicAuth:
 			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
-				"id":       v.ID,
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
+				"id":       (v.ID),
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"username": (v.Username),
+				"password": (v.Password),
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
-				"id":       v.ID,
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
+				"id":       (v.ID),
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"token":    (v.Token),
 			})
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
-				"id":                             v.ID,
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"access_key":                     v.AccessKey,
-				"secret_access_key":              v.SecretAccessKey,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"region":                         v.Region,
-				"cluster_name":                   v.ClusterName,
-				"role_arn":                       v.RoleArn,
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"access_key":                     (v.AccessKey),
+				"secret_access_key":              (v.SecretAccessKey),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"region":                         (v.Region),
+				"cluster_name":                   (v.ClusterName),
+				"role_arn":                       (v.RoleArn),
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
-				"id":                             v.ID,
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"service_account_key":            v.ServiceAccountKey,
-				"service_account_key_filename":   v.ServiceAccountKeyFilename,
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"service_account_key":            (v.ServiceAccountKey),
+				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
 			})
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
-				"id":                             v.ID,
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             (v.ClientCertificate),
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     (v.ClientKey),
+				"client_key_filename":            (v.ClientKeyFilename),
 			})
 		case *sdm.AKSBasicAuth:
 			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
-				"id":       v.ID,
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
+				"id":       (v.ID),
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"username": (v.Username),
+				"password": (v.Password),
 			})
 		case *sdm.AKSServiceAccount:
 			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
-				"id":       v.ID,
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
+				"id":       (v.ID),
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"token":    (v.Token),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.MongoLegacyHost:
 			output[0]["mongo_legacy_host"] = append(output[0]["mongo_legacy_host"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"replica_set":   v.ReplicaSet,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"auth_database": (v.AuthDatabase),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port":          (v.Port),
+				"replica_set":   (v.ReplicaSet),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.MongoLegacyReplicaset:
 			output[0]["mongo_legacy_replicaset"] = append(output[0]["mongo_legacy_replicaset"], entity{
-				"id":                 v.ID,
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"id":                 (v.ID),
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"hostname":           (v.Hostname),
+				"auth_database":      (v.AuthDatabase),
+				"port_override":      (v.PortOverride),
+				"username":           (v.Username),
+				"password":           (v.Password),
+				"port":               (v.Port),
+				"replica_set":        (v.ReplicaSet),
+				"connect_to_replica": (v.ConnectToReplica),
+				"tls_required":       (v.TlsRequired),
 			})
 		case *sdm.MongoHost:
 			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"auth_database": (v.AuthDatabase),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.MongoReplicaSet:
 			output[0]["mongo_replica_set"] = append(output[0]["mongo_replica_set"], entity{
-				"id":                 v.ID,
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"id":                 (v.ID),
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"hostname":           (v.Hostname),
+				"auth_database":      (v.AuthDatabase),
+				"port_override":      (v.PortOverride),
+				"username":           (v.Username),
+				"password":           (v.Password),
+				"port":               (v.Port),
+				"replica_set":        (v.ReplicaSet),
+				"connect_to_replica": (v.ConnectToReplica),
+				"tls_required":       (v.TlsRequired),
 			})
 		case *sdm.Mysql:
 			output[0]["mysql"] = append(output[0]["mysql"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.AuroraMysql:
 			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.Clustrix:
 			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.Maria:
 			output[0]["maria"] = append(output[0]["maria"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.Memsql:
 			output[0]["memsql"] = append(output[0]["memsql"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port":          v.Port,
-				"port_override": v.PortOverride,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port":          (v.Port),
+				"port_override": (v.PortOverride),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.Postgres:
 			output[0]["postgres"] = append(output[0]["postgres"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.AuroraPostgres:
 			output[0]["aurora_postgres"] = append(output[0]["aurora_postgres"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.Greenplum:
 			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.Cockroach:
 			output[0]["cockroach"] = append(output[0]["cockroach"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.Redshift:
 			output[0]["redshift"] = append(output[0]["redshift"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.Presto:
 			output[0]["presto"] = append(output[0]["presto"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"username":      v.Username,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"username":      (v.Username),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.Redis:
 			output[0]["redis"] = append(output[0]["redis"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"password":      (v.Password),
+				"port":          (v.Port),
 			})
 		case *sdm.ElasticacheRedis:
 			output[0]["elasticache_redis"] = append(output[0]["elasticache_redis"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"password":      (v.Password),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			})
 		case *sdm.Snowflake:
 			output[0]["snowflake"] = append(output[0]["snowflake"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"schema":        v.Schema,
-				"port_override": v.PortOverride,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"schema":        (v.Schema),
+				"port_override": (v.PortOverride),
 			})
 		case *sdm.SQLServer:
 			output[0]["sql_server"] = append(output[0]["sql_server"], entity{
-				"id":                v.ID,
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"schema":            v.Schema,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.SSH:
 			output[0]["ssh"] = append(output[0]["ssh"], entity{
-				"id":              v.ID,
-				"name":            v.Name,
-				"hostname":        v.Hostname,
-				"username":        v.Username,
-				"port":            v.Port,
-				"public_key":      v.PublicKey,
-				"port_forwarding": v.PortForwarding,
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port":            (v.Port),
+				"public_key":      (v.PublicKey),
+				"port_forwarding": (v.PortForwarding),
 			})
 		case *sdm.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"password":      (v.Password),
 			})
 		case *sdm.SybaseIQ:
 			output[0]["sybase_iq"] = append(output[0]["sybase_iq"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"password":      (v.Password),
 			})
 		case *sdm.Teradata:
 			output[0]["teradata"] = append(output[0]["teradata"], entity{
-				"id":            v.ID,
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		}
 	}

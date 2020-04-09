@@ -68,7 +68,7 @@ func dataSourceAccountGrant() *schema.Resource {
 	}
 }
 
-func accountGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertAccountGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("id"); ok {
@@ -97,7 +97,7 @@ func accountGrantFilterFromResourceData(d *schema.ResourceData) (string, []inter
 func dataSourceAccountGrantList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := accountGrantFilterFromResourceData(d)
+	filter, args := convertAccountGrantFilterFromResourceData(d)
 	resp, err := cc.AccountGrants().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list AccountGrants %s: %w", d.Id(), err)
@@ -110,9 +110,9 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *sdm.Client) error {
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":          v.ID,
-				"resource_id": v.ResourceID,
-				"account_id":  v.AccountID,
+				"id":          (v.ID),
+				"resource_id": (v.ResourceID),
+				"account_id":  (v.AccountID),
 			})
 	}
 	if resp.Err() != nil {

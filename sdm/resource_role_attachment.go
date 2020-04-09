@@ -18,6 +18,9 @@ func resourceRoleAttachment() *schema.Resource {
 		Create: wrapCrudOperation(resourceRoleAttachmentCreate),
 		Read:   wrapCrudOperation(resourceRoleAttachmentRead),
 		Delete: wrapCrudOperation(resourceRoleAttachmentDelete),
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 		Schema: map[string]*schema.Schema{
 			"composite_role_id": {
 				Type:        schema.TypeString,
@@ -37,25 +40,25 @@ func resourceRoleAttachment() *schema.Resource {
 		},
 	}
 }
-func roleAttachmentFromResourceData(d *schema.ResourceData) *sdm.RoleAttachment {
+func convertRoleAttachmentFromResourceData(d *schema.ResourceData) *sdm.RoleAttachment {
 	return &sdm.RoleAttachment{
 		ID:              d.Id(),
-		CompositeRoleID: stringFromResourceData(d, "composite_role_id"),
-		AttachedRoleID:  stringFromResourceData(d, "attached_role_id"),
+		CompositeRoleID: convertStringFromResourceData(d, "composite_role_id"),
+		AttachedRoleID:  convertStringFromResourceData(d, "attached_role_id"),
 	}
 }
 
 func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.RoleAttachments().Create(ctx, roleAttachmentFromResourceData(d))
+	resp, err := cc.RoleAttachments().Create(ctx, convertRoleAttachmentFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create RoleAttachment %s: %w", "", err)
 	}
 	d.SetId(resp.RoleAttachment.ID)
 	v := resp.RoleAttachment
-	d.Set("composite_role_id", v.CompositeRoleID)
-	d.Set("attached_role_id", v.AttachedRoleID)
+	d.Set("composite_role_id", (v.CompositeRoleID))
+	d.Set("attached_role_id", (v.AttachedRoleID))
 	return nil
 }
 
@@ -71,8 +74,8 @@ func resourceRoleAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read RoleAttachment %s: %w", d.Id(), err)
 	}
 	v := resp.RoleAttachment
-	d.Set("composite_role_id", v.CompositeRoleID)
-	d.Set("attached_role_id", v.AttachedRoleID)
+	d.Set("composite_role_id", (v.CompositeRoleID))
+	d.Set("attached_role_id", (v.AttachedRoleID))
 	return nil
 }
 func resourceRoleAttachmentDelete(d *schema.ResourceData, cc *sdm.Client) error {

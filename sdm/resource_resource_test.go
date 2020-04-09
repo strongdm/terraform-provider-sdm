@@ -81,6 +81,92 @@ func TestAccSDMResource_Create(t *testing.T) {
 					},
 				),
 			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccSDMResource_Tags(t *testing.T) {
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMResourceTagsConfig(name, name, port, sdm.Tags{"key": "value", "foo": "bar"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.tags.key", "value"),
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.tags.foo", "bar"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.GetTags()["key"] != "value" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Resource.GetTags()["key"])
+						}
+						if resp.Resource.GetTags()["foo"] != "bar" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Resource.GetTags()["key"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccSDMResourceTagsConfig(name, name, port, sdm.Tags{"goat": "bananas"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckNoResourceAttr("sdm_resource."+name, "redis.0.tags.key"),
+					resource.TestCheckNoResourceAttr("sdm_resource."+name, "redis.0.tags.foo"),
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.tags.goat", "bananas"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.GetTags()["goat"] != "bananas" {
+							return fmt.Errorf("unexpected value '%s' for tag 'goat', expected 'bananas'", resp.Resource.GetTags()["goat"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -123,6 +209,11 @@ func TestAccSDMResource_CreateSSH(t *testing.T) {
 					},
 				),
 			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -151,6 +242,11 @@ func TestAccSDMResource_Update(t *testing.T) {
 					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port", fmt.Sprint(port)),
 					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(pOverride)),
 				),
+			},
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 			{
 				Config: testAccSDMResourceRedisConfig(resourceName, updatedRedisName, updatedPort, updatedPortOverride),
@@ -190,6 +286,11 @@ func TestAccSDMResource_Update(t *testing.T) {
 					},
 				),
 			},
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -205,6 +306,25 @@ func testAccSDMResourceRedisConfig(resourceName string, sdmResourceName string, 
 		}
 	}
 	`, resourceName, sdmResourceName, port, pOverride)
+}
+
+func testAccSDMResourceTagsConfig(resourceName string, sdmResourceName string, pOverride int32, tags sdm.Tags) string {
+	tagString := ""
+	for key, value := range tags {
+		tagString += fmt.Sprintf("\t\t\t\t%s = \"%s\"\n", key, value)
+	}
+	return fmt.Sprintf(`
+	resource "sdm_resource" "%s" {
+		redis {
+			name = "%s"
+			hostname = "test.com"
+			port_override = %d
+			tags = {
+%s
+			}
+		}
+	}
+	`, resourceName, sdmResourceName, pOverride, tagString)
 }
 
 func testAccSDMResourceSSHConfig(resourceName string, sdmResourceName string, port int32) string {

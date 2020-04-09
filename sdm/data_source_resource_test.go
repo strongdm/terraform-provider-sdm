@@ -1,8 +1,10 @@
 package sdm
 
 import (
+	"context"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 
@@ -113,6 +115,46 @@ func TestAccSDMResource_GetNone(t *testing.T) {
 			},
 		},
 	})
+}
+
+func TestAccSDMResource_GetTags(t *testing.T) {
+	t.Parallel()
+
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	_, err = client.Resources().Create(ctx, &sdm.Redis{
+		Name:         name,
+		Hostname:     "example.com",
+		Port:         port,
+		PortOverride: port,
+		Tags:         sdm.Tags{"foo": "bar", "key": "value"},
+	})
+	if err != nil {
+		t.Fatalf("failed to create redis: %v", err)
+	}
+	dsName := randomWithPrefix("rs_test_query")
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMResourceFilterConfig(dsName, name),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.tags.key", "value"),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.tags.foo", "bar"),
+				),
+			},
+		},
+	})
+
 }
 
 func testAccSDMResourceFilterConfig(resourceDataSourceName, nameFilter string) string {

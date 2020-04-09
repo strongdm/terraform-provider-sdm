@@ -29,6 +29,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* athena:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `access_key` - 
 		* `secret_access_key` - 
 		* `output` - 
@@ -37,6 +38,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* big_query:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `private_key` - 
 		* `project` - 
 		* `port_override` - 
@@ -45,6 +47,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* cassandra:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -54,6 +57,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* druid:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port_override` - 
 		* `username` - 
@@ -62,6 +66,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* dynamo_db:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `access_key` - 
 		* `secret_access_key` - 
 		* `region` - 
@@ -70,6 +75,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* amazon_es:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `region` - 
 		* `secret_access_key` - 
 		* `endpoint` - 
@@ -78,6 +84,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* elastic:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -87,6 +94,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* http_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `url` - 
 		* `healthcheck_path` - 
 		* `username` - 
@@ -96,6 +104,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* http_no_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `url` - 
 		* `healthcheck_path` - 
 		* `headers_blacklist` - 
@@ -103,6 +112,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* http_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `url` - 
 		* `healthcheck_path` - 
 		* `auth_header` - 
@@ -111,6 +121,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* kubernetes:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port` - 
 		* `certificate_authority` - 
@@ -122,6 +133,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* kubernetes_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port` - 
 		* `username` - 
@@ -129,12 +141,14 @@ In addition to provided arguments above, the following attributes are returned b
 	* kubernetes_service_account:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
 	* amazon_eks:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `endpoint` - 
 		* `access_key` - 
 		* `secret_access_key` - 
@@ -146,6 +160,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* google_gke:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `endpoint` - 
 		* `certificate_authority` - 
 		* `certificate_authority_filename` - 
@@ -154,6 +169,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* aks:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port` - 
 		* `certificate_authority` - 
@@ -165,6 +181,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* aks_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port` - 
 		* `username` - 
@@ -172,18 +189,21 @@ In addition to provided arguments above, the following attributes are returned b
 	* aks_service_account:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
 	* memcached:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port_override` - 
 		* `port` - 
 	* mongo_legacy_host:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -195,6 +215,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* mongo_legacy_replicaset:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -207,6 +228,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* mongo_host:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -217,6 +239,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* mongo_replica_set:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -229,6 +252,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* mysql:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -238,6 +262,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* aurora_mysql:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -247,6 +272,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* clustrix:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -256,6 +282,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* maria:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -265,6 +292,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* memsql:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -274,6 +302,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* oracle:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -284,6 +313,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* postgres:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -294,6 +324,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* aurora_postgres:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -304,6 +335,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* greenplum:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -314,6 +346,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* cockroach:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -324,6 +357,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* redshift:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -334,6 +368,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* presto:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `password` - 
 		* `database` - 
@@ -344,6 +379,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* rdp:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -352,6 +388,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* redis:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port_override` - 
 		* `password` - 
@@ -359,6 +396,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* elasticache_redis:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `port_override` - 
 		* `password` - 
@@ -367,6 +405,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* snowflake:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -376,6 +415,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* sql_server:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -387,6 +427,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* ssh:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `port` - 
@@ -395,6 +436,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* sybase:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `port_override` - 
@@ -403,6 +445,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* sybase_iq:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `port_override` - 
@@ -411,6 +454,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* teradata:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 

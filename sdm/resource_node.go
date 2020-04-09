@@ -19,6 +19,9 @@ func resourceNode() *schema.Resource {
 		Read:   wrapCrudOperation(resourceNodeRead),
 		Update: wrapCrudOperation(resourceNodeUpdate),
 		Delete: wrapCrudOperation(resourceNodeDelete),
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 		Schema: map[string]*schema.Schema{
 			"relay": {
 				Type:        schema.TypeList,
@@ -83,7 +86,7 @@ func resourceNode() *schema.Resource {
 		},
 	}
 }
-func nodeFromResourceData(d *schema.ResourceData) sdm.Node {
+func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 	if list := d.Get("relay").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -91,7 +94,7 @@ func nodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		}
 		return &sdm.Relay{
 			ID:   d.Id(),
-			Name: stringFromMap(raw, "name"),
+			Name: convertStringFromMap(raw, "name"),
 		}
 	}
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
@@ -101,9 +104,9 @@ func nodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		}
 		return &sdm.Gateway{
 			ID:            d.Id(),
-			Name:          stringFromMap(raw, "name"),
-			ListenAddress: stringFromMap(raw, "listen_address"),
-			BindAddress:   stringFromMap(raw, "bind_address"),
+			Name:          convertStringFromMap(raw, "name"),
+			ListenAddress: convertStringFromMap(raw, "listen_address"),
+			BindAddress:   convertStringFromMap(raw, "bind_address"),
 		}
 	}
 	return nil
@@ -112,7 +115,7 @@ func nodeFromResourceData(d *schema.ResourceData) sdm.Node {
 func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.Nodes().Create(ctx, nodeFromResourceData(d))
+	resp, err := cc.Nodes().Create(ctx, convertNodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create Node %s: %w", "", err)
 	}
@@ -121,16 +124,16 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	case *sdm.Relay:
 		d.Set("relay", []map[string]interface{}{
 			{
-				"name":  v.Name,
+				"name":  (v.Name),
 				"token": resp.Token,
 			},
 		})
 	case *sdm.Gateway:
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"name":           v.Name,
-				"listen_address": v.ListenAddress,
-				"bind_address":   v.BindAddress,
+				"name":           (v.Name),
+				"listen_address": (v.ListenAddress),
+				"bind_address":   (v.BindAddress),
 				"token":          resp.Token,
 			},
 		})
@@ -153,16 +156,16 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	case *sdm.Relay:
 		d.Set("relay", []map[string]interface{}{
 			{
-				"name":  v.Name,
+				"name":  (v.Name),
 				"token": d.Get("relay.0.token"),
 			},
 		})
 	case *sdm.Gateway:
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"name":           v.Name,
-				"listen_address": v.ListenAddress,
-				"bind_address":   v.BindAddress,
+				"name":           (v.Name),
+				"listen_address": (v.ListenAddress),
+				"bind_address":   (v.BindAddress),
 				"token":          d.Get("gateway.0.token"),
 			},
 		})
@@ -172,7 +175,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceNodeUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Nodes().Update(ctx, nodeFromResourceData(d))
+	resp, err := cc.Nodes().Update(ctx, convertNodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)
 	}

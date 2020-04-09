@@ -116,6 +116,11 @@ func TestAccSDMRoleGrant_Create(t *testing.T) {
 					},
 				),
 			},
+			{
+				ResourceName:      "sdm_role_grant." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -168,6 +173,11 @@ func TestAccSDMRoleGrant_Update(t *testing.T) {
 				},
 			},
 			{
+				ResourceName:      "sdm_role_grant." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
 				Config: testAccSDMRoleGrantConfig(rsName, redisRsName, altRoleRsName),
 				Check: func(s *terraform.State) error {
 					roleID, err := testCreatedID(s, "sdm_role", altRoleRsName)
@@ -204,6 +214,11 @@ func TestAccSDMRoleGrant_Update(t *testing.T) {
 
 					return nil
 				},
+			},
+			{
+				ResourceName:      "sdm_role_grant." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
