@@ -1,4 +1,4 @@
-# Roles
+# Managing Roles
 
 Roles in strongDM are the primary method of providing access to datasources and servers. A role is a collection of permissions that are then granted to the users that are assigned to that role.
 

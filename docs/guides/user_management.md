@@ -1,4 +1,4 @@
-# User Management
+# Managing Users
 
 strongDM has two different types of user accounts
 

@@ -27,3 +27,10 @@ main.tf
 ```hcl
 provider "sdm" {}
 ```
+
+## Guides
+
+* [Adding Resources to strongDM](./adding_resources)
+* [How to Create a Gateway](./how_to_create_a_gateway)
+* [Managing Roles](./roles)
+* [Managing Users](./user_management)
