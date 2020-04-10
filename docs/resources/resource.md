@@ -35,13 +35,11 @@ The following arguments are supported by the Resource resource:
 	* `access_key` - (Required) 
 	* `secret_access_key` - (Required) 
 	* `output` - (Required) 
-	* `port_override` - (Required) 
 	* `region` - (Optional) 
 * big_query:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `private_key` - (Required) 
 	* `project` - (Required) 
-	* `port_override` - (Required) 
 	* `endpoint` - (Required) 
 	* `username` - (Optional) 
 * cassandra:
@@ -49,13 +47,11 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
 * druid:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
-	* `port_override` - (Required) 
 	* `username` - (Optional) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
@@ -65,20 +61,17 @@ The following arguments are supported by the Resource resource:
 	* `secret_access_key` - (Required) 
 	* `region` - (Required) 
 	* `endpoint` - (Required) 
-	* `port_override` - (Required) 
 * amazon_es:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `region` - (Required) 
 	* `secret_access_key` - (Optional) 
 	* `endpoint` - (Optional) 
 	* `access_key` - (Optional) 
-	* `port_override` - (Required) 
 * elastic:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
 * http_basic_auth:
@@ -164,13 +157,11 @@ The following arguments are supported by the Resource resource:
 * memcached:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * mongo_legacy_host:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
-	* `port_override` - (Required) 
 	* `username` - (Optional) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
@@ -180,7 +171,6 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
-	* `port_override` - (Required) 
 	* `username` - (Optional) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
@@ -191,7 +181,6 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
-	* `port_override` - (Required) 
 	* `username` - (Optional) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
@@ -200,7 +189,6 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
-	* `port_override` - (Required) 
 	* `username` - (Optional) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
@@ -213,7 +201,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * aurora_mysql:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -221,7 +208,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * clustrix:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -229,7 +215,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * maria:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -237,7 +222,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * memsql:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -245,7 +229,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * oracle:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -254,7 +237,6 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required) 
 	* `database` - (Required) 
 	* `port` - (Required) 
-	* `port_override` - (Required) 
 	* `tls_required` - (Optional) 
 * postgres:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -262,7 +244,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
 * aurora_postgres:
@@ -271,7 +252,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
 * greenplum:
@@ -280,7 +260,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
 * cockroach:
@@ -289,7 +268,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
 * redshift:
@@ -298,7 +276,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
 * presto:
@@ -306,7 +283,6 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `username` - (Optional) 
 	* `tls_required` - (Optional) 
@@ -315,18 +291,15 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 * redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
-	* `port_override` - (Required) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
 * elasticache_redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
-	* `port_override` - (Required) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
@@ -337,14 +310,12 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required) 
 	* `database` - (Required) 
 	* `schema` - (Required) 
-	* `port_override` - (Required) 
 * sql_server:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
-	* `port_override` - (Required) 
 	* `schema` - (Optional) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
@@ -358,14 +329,12 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `password` - (Optional) 
 * sybase_iq:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 	* `password` - (Optional) 
 * teradata:
@@ -373,10 +342,73 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
-	* `port_override` - (Required) 
 	* `port` - (Optional) 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
+* athena:
+	* `port_override` - 
+* big_query:
+	* `port_override` - 
+* cassandra:
+	* `port_override` - 
+* druid:
+	* `port_override` - 
+* dynamo_db:
+	* `port_override` - 
+* amazon_es:
+	* `port_override` - 
+* elastic:
+	* `port_override` - 
+* memcached:
+	* `port_override` - 
+* mongo_legacy_host:
+	* `port_override` - 
+* mongo_legacy_replicaset:
+	* `port_override` - 
+* mongo_host:
+	* `port_override` - 
+* mongo_replica_set:
+	* `port_override` - 
+* mysql:
+	* `port_override` - 
+* aurora_mysql:
+	* `port_override` - 
+* clustrix:
+	* `port_override` - 
+* maria:
+	* `port_override` - 
+* memsql:
+	* `port_override` - 
+* oracle:
+	* `port_override` - 
+* postgres:
+	* `port_override` - 
+* aurora_postgres:
+	* `port_override` - 
+* greenplum:
+	* `port_override` - 
+* cockroach:
+	* `port_override` - 
+* redshift:
+	* `port_override` - 
+* presto:
+	* `port_override` - 
+* rdp:
+	* `port_override` - 
+* redis:
+	* `port_override` - 
+* elasticache_redis:
+	* `port_override` - 
+* snowflake:
+	* `port_override` - 
+* sql_server:
+	* `port_override` - 
 * ssh:
 	* `public_key` - 
+* sybase:
+	* `port_override` - 
+* sybase_iq:
+	* `port_override` - 
+* teradata:
+	* `port_override` - 

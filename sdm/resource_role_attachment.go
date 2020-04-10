@@ -51,7 +51,8 @@ func convertRoleAttachmentFromResourceData(d *schema.ResourceData) *sdm.RoleAtta
 func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.RoleAttachments().Create(ctx, convertRoleAttachmentFromResourceData(d))
+	localVersion := convertRoleAttachmentFromResourceData(d)
+	resp, err := cc.RoleAttachments().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create RoleAttachment %s: %w", "", err)
 	}
@@ -65,6 +66,8 @@ func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error 
 func resourceRoleAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
+	localVersion := convertRoleAttachmentFromResourceData(d)
+	_ = localVersion
 	resp, err := cc.RoleAttachments().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {

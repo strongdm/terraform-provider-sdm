@@ -51,7 +51,8 @@ func convertAccountAttachmentFromResourceData(d *schema.ResourceData) *sdm.Accou
 func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.AccountAttachments().Create(ctx, convertAccountAttachmentFromResourceData(d))
+	localVersion := convertAccountAttachmentFromResourceData(d)
+	resp, err := cc.AccountAttachments().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create AccountAttachment %s: %w", "", err)
 	}
@@ -65,6 +66,8 @@ func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) err
 func resourceAccountAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
+	localVersion := convertAccountAttachmentFromResourceData(d)
+	_ = localVersion
 	resp, err := cc.AccountAttachments().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {

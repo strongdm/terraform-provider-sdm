@@ -93,7 +93,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"region": {
@@ -141,7 +141,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"endpoint": {
@@ -199,7 +199,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -247,7 +247,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"username": {
@@ -315,7 +315,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 								},
@@ -368,7 +368,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 								},
@@ -416,7 +416,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1062,7 +1062,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1110,7 +1110,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"username": {
@@ -1178,7 +1178,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"username": {
@@ -1251,7 +1251,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"username": {
@@ -1314,7 +1314,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"username": {
@@ -1397,7 +1397,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1455,7 +1455,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1513,7 +1513,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1571,7 +1571,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1629,7 +1629,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1692,7 +1692,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"tls_required": {
@@ -1750,7 +1750,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1813,7 +1813,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1876,7 +1876,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -1939,7 +1939,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -2002,7 +2002,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -2060,7 +2060,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -2123,7 +2123,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -2166,7 +2166,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"password": {
@@ -2214,7 +2214,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"password": {
@@ -2287,7 +2287,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 								},
@@ -2340,7 +2340,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"schema": {
@@ -2451,7 +2451,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -2504,7 +2504,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -2562,7 +2562,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Optional:    true,
+										Computed:    true,
 										Description: "",
 									},
 									"port": {

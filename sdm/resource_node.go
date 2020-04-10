@@ -92,22 +92,24 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		if !ok {
 			return &sdm.Relay{}
 		}
-		return &sdm.Relay{
+		out := &sdm.Relay{
 			ID:   d.Id(),
 			Name: convertStringFromMap(raw, "name"),
 		}
+		return out
 	}
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Gateway{}
 		}
-		return &sdm.Gateway{
+		out := &sdm.Gateway{
 			ID:            d.Id(),
 			Name:          convertStringFromMap(raw, "name"),
 			ListenAddress: convertStringFromMap(raw, "listen_address"),
 			BindAddress:   convertStringFromMap(raw, "bind_address"),
 		}
+		return out
 	}
 	return nil
 }
@@ -115,13 +117,16 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.Nodes().Create(ctx, convertNodeFromResourceData(d))
+	localVersion := convertNodeFromResourceData(d)
+	resp, err := cc.Nodes().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Node %s: %w", "", err)
 	}
 	d.SetId(resp.Node.GetID())
 	switch v := resp.Node.(type) {
 	case *sdm.Relay:
+		localV, _ := localVersion.(*sdm.Relay)
+		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
 				"name":  (v.Name),
@@ -129,6 +134,8 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			},
 		})
 	case *sdm.Gateway:
+		localV, _ := localVersion.(*sdm.Gateway)
+		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
 				"name":           (v.Name),
@@ -144,6 +151,8 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
+	localVersion := convertNodeFromResourceData(d)
+	_ = localVersion
 	resp, err := cc.Nodes().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -154,6 +163,11 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	switch v := resp.Node.(type) {
 	case *sdm.Relay:
+		localV, ok := localVersion.(*sdm.Relay)
+		if !ok {
+			localV = &sdm.Relay{}
+		}
+		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
 				"name":  (v.Name),
@@ -161,6 +175,11 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 			},
 		})
 	case *sdm.Gateway:
+		localV, ok := localVersion.(*sdm.Gateway)
+		if !ok {
+			localV = &sdm.Gateway{}
+		}
+		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
 				"name":           (v.Name),

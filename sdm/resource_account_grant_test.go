@@ -231,7 +231,6 @@ func testAccSDMAccountGrantConfig(grantResourceName, redisResourceName, accResou
 		redis {
 			name = "%s"
 			hostname = "test.com"
-			port_override = %d
 		}
 	}
 
@@ -250,7 +249,6 @@ func testAccSDMAccountGrantConfig(grantResourceName, redisResourceName, accResou
 	`,
 		redisResourceName,
 		randomWithPrefix("redis"),
-		portOverride.Count(),
 		accResourceName,
 		randomWithPrefix("first-name"),
 		randomWithPrefix("last-name"),

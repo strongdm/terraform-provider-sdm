@@ -51,7 +51,8 @@ func convertAccountGrantFromResourceData(d *schema.ResourceData) *sdm.AccountGra
 func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.AccountGrants().Create(ctx, convertAccountGrantFromResourceData(d))
+	localVersion := convertAccountGrantFromResourceData(d)
+	resp, err := cc.AccountGrants().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create AccountGrant %s: %w", "", err)
 	}
@@ -65,6 +66,8 @@ func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceAccountGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
+	localVersion := convertAccountGrantFromResourceData(d)
+	_ = localVersion
 	resp, err := cc.AccountGrants().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
