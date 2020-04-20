@@ -51,6 +51,7 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"output": {
@@ -94,6 +95,7 @@ func resourceResource() *schema.Resource {
 						"private_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"project": {
@@ -152,6 +154,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
@@ -210,6 +213,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -248,6 +252,7 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"region": {
@@ -296,6 +301,7 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"endpoint": {
@@ -349,6 +355,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
@@ -407,6 +414,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"headers_blacklist": {
@@ -498,6 +506,7 @@ func resourceResource() *schema.Resource {
 						"auth_header": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"headers_blacklist": {
@@ -546,6 +555,7 @@ func resourceResource() *schema.Resource {
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -556,6 +566,7 @@ func resourceResource() *schema.Resource {
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_certificate_filename": {
@@ -566,6 +577,7 @@ func resourceResource() *schema.Resource {
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_key_filename": {
@@ -614,6 +626,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -652,6 +665,7 @@ func resourceResource() *schema.Resource {
 						"token": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -690,11 +704,13 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -748,6 +764,7 @@ func resourceResource() *schema.Resource {
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -758,6 +775,7 @@ func resourceResource() *schema.Resource {
 						"service_account_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"service_account_key_filename": {
@@ -801,6 +819,7 @@ func resourceResource() *schema.Resource {
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -811,6 +830,7 @@ func resourceResource() *schema.Resource {
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_certificate_filename": {
@@ -821,6 +841,7 @@ func resourceResource() *schema.Resource {
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_key_filename": {
@@ -869,6 +890,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -907,6 +929,7 @@ func resourceResource() *schema.Resource {
 						"token": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -993,6 +1016,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1056,6 +1080,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1124,6 +1149,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1182,6 +1208,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1240,6 +1267,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1293,6 +1321,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1346,6 +1375,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1399,6 +1429,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1452,6 +1483,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1505,6 +1537,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1563,6 +1596,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1621,6 +1655,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1679,6 +1714,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1737,6 +1773,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1795,6 +1832,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1848,6 +1886,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1911,6 +1950,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
@@ -1959,6 +1999,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -2002,6 +2043,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -2050,6 +2092,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -2103,6 +2146,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -2224,6 +2268,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -2272,6 +2317,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -2310,6 +2356,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {

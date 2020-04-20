@@ -69,8 +69,9 @@ func resourceAccount() *schema.Resource {
 							Description: "The Service's suspended state.",
 						},
 						"token": {
-							Type:     schema.TypeString,
-							Computed: true,
+							Type:      schema.TypeString,
+							Computed:  true,
+							Sensitive: true,
 						},
 					},
 				},
