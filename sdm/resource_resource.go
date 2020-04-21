@@ -1960,7 +1960,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Optional:    true,
+							Required:    true,
 							Description: "",
 						},
 					},

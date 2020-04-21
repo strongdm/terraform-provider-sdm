@@ -291,7 +291,7 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
-	* `port` - (Optional) 
+	* `port` - (Required) 
 * redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
