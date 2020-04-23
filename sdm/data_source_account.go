@@ -52,8 +52,6 @@ func dataSourceAccount() *schema.Resource {
 			"accounts": {
 				Type:     schema.TypeList,
 				Computed: true,
-				MaxItems: 1,
-				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -125,7 +123,7 @@ func dataSourceAccount() *schema.Resource {
 	}
 }
 
-func accountFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertAccountFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("type"); ok {
@@ -162,7 +160,7 @@ func accountFilterFromResourceData(d *schema.ResourceData) (string, []interface{
 func dataSourceAccountList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := accountFilterFromResourceData(d)
+	filter, args := convertAccountFilterFromResourceData(d)
 	resp, err := cc.Accounts().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Accounts %s: %w", d.Id(), err)
@@ -178,17 +176,17 @@ func dataSourceAccountList(d *schema.ResourceData, cc *sdm.Client) error {
 		switch v := resp.Value().(type) {
 		case *sdm.User:
 			output[0]["user"] = append(output[0]["user"], entity{
-				"id":         v.ID,
-				"email":      v.Email,
-				"first_name": v.FirstName,
-				"last_name":  v.LastName,
-				"suspended":  v.Suspended,
+				"id":         (v.ID),
+				"email":      (v.Email),
+				"first_name": (v.FirstName),
+				"last_name":  (v.LastName),
+				"suspended":  (v.Suspended),
 			})
 		case *sdm.Service:
 			output[0]["service"] = append(output[0]["service"], entity{
-				"id":        v.ID,
-				"name":      v.Name,
-				"suspended": v.Suspended,
+				"id":        (v.ID),
+				"name":      (v.Name),
+				"suspended": (v.Suspended),
 			})
 		}
 	}

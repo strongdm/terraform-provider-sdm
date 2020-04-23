@@ -116,6 +116,11 @@ func TestAccSDMRoleGrant_Create(t *testing.T) {
 					},
 				),
 			},
+			{
+				ResourceName:      "sdm_role_grant." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -168,6 +173,11 @@ func TestAccSDMRoleGrant_Update(t *testing.T) {
 				},
 			},
 			{
+				ResourceName:      "sdm_role_grant." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
 				Config: testAccSDMRoleGrantConfig(rsName, redisRsName, altRoleRsName),
 				Check: func(s *terraform.State) error {
 					roleID, err := testCreatedID(s, "sdm_role", altRoleRsName)
@@ -205,6 +215,11 @@ func TestAccSDMRoleGrant_Update(t *testing.T) {
 					return nil
 				},
 			},
+			{
+				ResourceName:      "sdm_role_grant." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -215,22 +230,20 @@ func testAccSDMRoleGrantConfig(roleGrantResourceName, redisResourceName, roleRes
 		redis {
 			name = "%[2]s"
 			hostname = "test.com"
-			port_override = %[3]d
 		}
 	}
 
-	resource "sdm_role" "%[4]s" {
-		name = "%[5]s"
+	resource "sdm_role" "%[3]s" {
+		name = "%[4]s"
 	}
 
-	resource "sdm_role_grant" "%[6]s" {
-		role_id = sdm_role.%[7]s.id
-		resource_id = sdm_resource.%[8]s.id
+	resource "sdm_role_grant" "%[5]s" {
+		role_id = sdm_role.%[6]s.id
+		resource_id = sdm_resource.%[7]s.id
 	}
 	`,
 		redisResourceName,
 		randomWithPrefix("redisname"),
-		portOverride.Count(),
 		roleResourceName,
 		randomWithPrefix("rolename"),
 		roleGrantResourceName,

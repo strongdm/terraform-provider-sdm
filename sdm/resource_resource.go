@@ -19,6 +19,9 @@ func resourceResource() *schema.Resource {
 		Read:   wrapCrudOperation(resourceResourceRead),
 		Update: wrapCrudOperation(resourceResourceUpdate),
 		Delete: wrapCrudOperation(resourceResourceDelete),
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 		Schema: map[string]*schema.Schema{
 			"athena": {
 				Type:        schema.TypeList,
@@ -31,6 +34,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -39,6 +51,7 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"output": {
@@ -48,7 +61,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"region": {
@@ -70,9 +83,19 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"private_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"project": {
@@ -82,7 +105,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"endpoint": {
@@ -109,6 +132,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -122,11 +154,12 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -153,6 +186,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -160,7 +202,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"username": {
@@ -171,6 +213,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -192,6 +235,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -200,6 +252,7 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"region": {
@@ -214,7 +267,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 					},
@@ -231,6 +284,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -239,6 +301,7 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"endpoint": {
@@ -253,7 +316,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 					},
@@ -270,6 +333,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -283,11 +355,12 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -314,6 +387,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"url": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -332,6 +414,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"headers_blacklist": {
@@ -357,6 +440,15 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
 						},
 						"url": {
 							Type:        schema.TypeString,
@@ -392,6 +484,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"url": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -405,6 +506,7 @@ func resourceResource() *schema.Resource {
 						"auth_header": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"headers_blacklist": {
@@ -431,6 +533,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -444,6 +555,7 @@ func resourceResource() *schema.Resource {
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -454,6 +566,7 @@ func resourceResource() *schema.Resource {
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_certificate_filename": {
@@ -464,6 +577,7 @@ func resourceResource() *schema.Resource {
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_key_filename": {
@@ -485,6 +599,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -503,6 +626,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -519,6 +643,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -532,6 +665,7 @@ func resourceResource() *schema.Resource {
 						"token": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -548,6 +682,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"endpoint": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -561,11 +704,13 @@ func resourceResource() *schema.Resource {
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -602,6 +747,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"endpoint": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -610,6 +764,7 @@ func resourceResource() *schema.Resource {
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -620,6 +775,7 @@ func resourceResource() *schema.Resource {
 						"service_account_key": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"service_account_key_filename": {
@@ -641,6 +797,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -654,6 +819,7 @@ func resourceResource() *schema.Resource {
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"certificate_authority_filename": {
@@ -664,6 +830,7 @@ func resourceResource() *schema.Resource {
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_certificate_filename": {
@@ -674,6 +841,7 @@ func resourceResource() *schema.Resource {
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"client_key_filename": {
@@ -695,6 +863,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -713,6 +890,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -729,6 +907,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -742,6 +929,7 @@ func resourceResource() *schema.Resource {
 						"token": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -758,6 +946,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -765,7 +962,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -787,6 +984,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -799,7 +1005,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"username": {
@@ -810,6 +1016,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -841,6 +1048,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -853,7 +1069,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"username": {
@@ -864,6 +1080,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -900,6 +1117,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -912,7 +1138,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"username": {
@@ -923,6 +1149,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -949,6 +1176,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -961,7 +1197,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"username": {
@@ -972,6 +1208,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1008,6 +1245,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1021,6 +1267,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1030,7 +1277,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1052,6 +1299,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1065,6 +1321,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1074,7 +1331,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1096,6 +1353,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1109,6 +1375,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1118,7 +1385,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1140,6 +1407,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1153,6 +1429,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1162,7 +1439,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1184,6 +1461,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1197,6 +1483,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1206,7 +1493,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1228,6 +1515,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1241,6 +1537,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1255,7 +1552,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"tls_required": {
@@ -1277,6 +1574,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1290,6 +1596,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1299,7 +1606,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1326,6 +1633,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1339,6 +1655,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1348,7 +1665,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1375,6 +1692,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1388,6 +1714,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1397,7 +1724,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1424,6 +1751,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1437,6 +1773,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1446,7 +1783,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1473,6 +1810,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1486,6 +1832,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1495,7 +1842,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1522,6 +1869,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1530,6 +1886,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1539,7 +1896,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1571,6 +1928,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1584,16 +1950,17 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Optional:    true,
+							Required:    true,
 							Description: "",
 						},
 					},
@@ -1610,6 +1977,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1617,12 +1993,13 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1644,6 +2021,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1651,12 +2037,13 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port": {
@@ -1683,6 +2070,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1696,6 +2092,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1710,7 +2107,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 					},
@@ -1727,6 +2124,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1740,6 +2146,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"database": {
@@ -1749,7 +2156,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"schema": {
@@ -1780,6 +2187,15 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1820,6 +2236,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1832,7 +2257,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1843,6 +2268,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -1859,6 +2285,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1871,7 +2306,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1882,6 +2317,7 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 					},
@@ -1898,6 +2334,15 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1911,11 +2356,12 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Sensitive:   true,
 							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"port": {
@@ -1932,703 +2378,919 @@ func resourceResource() *schema.Resource {
 		},
 	}
 }
-func resourceFromResourceData(d *schema.ResourceData) sdm.Resource {
+func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Athena{}
 		}
-		return &sdm.Athena{
+		out := &sdm.Athena{
 			ID:              d.Id(),
-			Name:            stringFromMap(raw, "name"),
-			AccessKey:       stringFromMap(raw, "access_key"),
-			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Output:          stringFromMap(raw, "output"),
-			PortOverride:    int32FromMap(raw, "port_override"),
-			Region:          stringFromMap(raw, "region"),
+			Name:            convertStringFromMap(raw, "name"),
+			Tags:            convertTagsFromMap(raw, "tags"),
+			AccessKey:       convertStringFromMap(raw, "access_key"),
+			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
+			Output:          convertStringFromMap(raw, "output"),
+			Region:          convertStringFromMap(raw, "region"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.BigQuery{}
 		}
-		return &sdm.BigQuery{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			PrivateKey:   stringFromMap(raw, "private_key"),
-			Project:      stringFromMap(raw, "project"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Endpoint:     stringFromMap(raw, "endpoint"),
-			Username:     stringFromMap(raw, "username"),
+		out := &sdm.BigQuery{
+			ID:         d.Id(),
+			Name:       convertStringFromMap(raw, "name"),
+			Tags:       convertTagsFromMap(raw, "tags"),
+			PrivateKey: convertStringFromMap(raw, "private_key"),
+			Project:    convertStringFromMap(raw, "project"),
+			Endpoint:   convertStringFromMap(raw, "endpoint"),
+			Username:   convertStringFromMap(raw, "username"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Cassandra{}
 		}
-		return &sdm.Cassandra{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+		out := &sdm.Cassandra{
+			ID:          d.Id(),
+			Name:        convertStringFromMap(raw, "name"),
+			Tags:        convertTagsFromMap(raw, "tags"),
+			Hostname:    convertStringFromMap(raw, "hostname"),
+			Username:    convertStringFromMap(raw, "username"),
+			Password:    convertStringFromMap(raw, "password"),
+			Port:        convertInt32FromMap(raw, "port"),
+			TlsRequired: convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Druid{}
 		}
-		return &sdm.Druid{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Druid{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.DynamoDB{}
 		}
-		return &sdm.DynamoDB{
+		out := &sdm.DynamoDB{
 			ID:              d.Id(),
-			Name:            stringFromMap(raw, "name"),
-			AccessKey:       stringFromMap(raw, "access_key"),
-			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Region:          stringFromMap(raw, "region"),
-			Endpoint:        stringFromMap(raw, "endpoint"),
-			PortOverride:    int32FromMap(raw, "port_override"),
+			Name:            convertStringFromMap(raw, "name"),
+			Tags:            convertTagsFromMap(raw, "tags"),
+			AccessKey:       convertStringFromMap(raw, "access_key"),
+			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
+			Region:          convertStringFromMap(raw, "region"),
+			Endpoint:        convertStringFromMap(raw, "endpoint"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AmazonES{}
 		}
-		return &sdm.AmazonES{
+		out := &sdm.AmazonES{
 			ID:              d.Id(),
-			Name:            stringFromMap(raw, "name"),
-			Region:          stringFromMap(raw, "region"),
-			SecretAccessKey: stringFromMap(raw, "secret_access_key"),
-			Endpoint:        stringFromMap(raw, "endpoint"),
-			AccessKey:       stringFromMap(raw, "access_key"),
-			PortOverride:    int32FromMap(raw, "port_override"),
+			Name:            convertStringFromMap(raw, "name"),
+			Tags:            convertTagsFromMap(raw, "tags"),
+			Region:          convertStringFromMap(raw, "region"),
+			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
+			Endpoint:        convertStringFromMap(raw, "endpoint"),
+			AccessKey:       convertStringFromMap(raw, "access_key"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Elastic{}
 		}
-		return &sdm.Elastic{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+		out := &sdm.Elastic{
+			ID:          d.Id(),
+			Name:        convertStringFromMap(raw, "name"),
+			Tags:        convertTagsFromMap(raw, "tags"),
+			Hostname:    convertStringFromMap(raw, "hostname"),
+			Username:    convertStringFromMap(raw, "username"),
+			Password:    convertStringFromMap(raw, "password"),
+			Port:        convertInt32FromMap(raw, "port"),
+			TlsRequired: convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.HTTPBasicAuth{}
 		}
-		return &sdm.HTTPBasicAuth{
+		out := &sdm.HTTPBasicAuth{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Url:              stringFromMap(raw, "url"),
-			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
-			DefaultPath:      stringFromMap(raw, "default_path"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Url:              convertStringFromMap(raw, "url"),
+			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
+			DefaultPath:      convertStringFromMap(raw, "default_path"),
 		}
+		return out
 	}
 	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.HTTPNoAuth{}
 		}
-		return &sdm.HTTPNoAuth{
+		out := &sdm.HTTPNoAuth{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Url:              stringFromMap(raw, "url"),
-			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
-			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
-			DefaultPath:      stringFromMap(raw, "default_path"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Url:              convertStringFromMap(raw, "url"),
+			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
+			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
+			DefaultPath:      convertStringFromMap(raw, "default_path"),
 		}
+		return out
 	}
 	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.HTTPAuth{}
 		}
-		return &sdm.HTTPAuth{
+		out := &sdm.HTTPAuth{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Url:              stringFromMap(raw, "url"),
-			HealthcheckPath:  stringFromMap(raw, "healthcheck_path"),
-			AuthHeader:       stringFromMap(raw, "auth_header"),
-			HeadersBlacklist: stringFromMap(raw, "headers_blacklist"),
-			DefaultPath:      stringFromMap(raw, "default_path"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Url:              convertStringFromMap(raw, "url"),
+			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
+			AuthHeader:       convertStringFromMap(raw, "auth_header"),
+			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
+			DefaultPath:      convertStringFromMap(raw, "default_path"),
 		}
+		return out
 	}
 	if list := d.Get("kubernetes").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Kubernetes{}
 		}
-		return &sdm.Kubernetes{
+		out := &sdm.Kubernetes{
 			ID:                           d.Id(),
-			Name:                         stringFromMap(raw, "name"),
-			Hostname:                     stringFromMap(raw, "hostname"),
-			Port:                         int32FromMap(raw, "port"),
-			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
-			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
-			ClientCertificate:            stringFromMap(raw, "client_certificate"),
-			ClientCertificateFilename:    stringFromMap(raw, "client_certificate_filename"),
-			ClientKey:                    stringFromMap(raw, "client_key"),
-			ClientKeyFilename:            stringFromMap(raw, "client_key_filename"),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Hostname:                     convertStringFromMap(raw, "hostname"),
+			Port:                         convertInt32FromMap(raw, "port"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            convertStringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    convertStringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    convertStringFromMap(raw, "client_key"),
+			ClientKeyFilename:            convertStringFromMap(raw, "client_key_filename"),
 		}
+		return out
 	}
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.KubernetesBasicAuth{}
 		}
-		return &sdm.KubernetesBasicAuth{
+		out := &sdm.KubernetesBasicAuth{
 			ID:       d.Id(),
-			Name:     stringFromMap(raw, "name"),
-			Hostname: stringFromMap(raw, "hostname"),
-			Port:     int32FromMap(raw, "port"),
-			Username: stringFromMap(raw, "username"),
-			Password: stringFromMap(raw, "password"),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Port:     convertInt32FromMap(raw, "port"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
 		}
+		return out
 	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.KubernetesServiceAccount{}
 		}
-		return &sdm.KubernetesServiceAccount{
+		out := &sdm.KubernetesServiceAccount{
 			ID:       d.Id(),
-			Name:     stringFromMap(raw, "name"),
-			Hostname: stringFromMap(raw, "hostname"),
-			Port:     int32FromMap(raw, "port"),
-			Token:    stringFromMap(raw, "token"),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Port:     convertInt32FromMap(raw, "port"),
+			Token:    convertStringFromMap(raw, "token"),
 		}
+		return out
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AmazonEKS{}
 		}
-		return &sdm.AmazonEKS{
+		out := &sdm.AmazonEKS{
 			ID:                           d.Id(),
-			Name:                         stringFromMap(raw, "name"),
-			Endpoint:                     stringFromMap(raw, "endpoint"),
-			AccessKey:                    stringFromMap(raw, "access_key"),
-			SecretAccessKey:              stringFromMap(raw, "secret_access_key"),
-			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
-			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
-			Region:                       stringFromMap(raw, "region"),
-			ClusterName:                  stringFromMap(raw, "cluster_name"),
-			RoleArn:                      stringFromMap(raw, "role_arn"),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Endpoint:                     convertStringFromMap(raw, "endpoint"),
+			AccessKey:                    convertStringFromMap(raw, "access_key"),
+			SecretAccessKey:              convertStringFromMap(raw, "secret_access_key"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			Region:                       convertStringFromMap(raw, "region"),
+			ClusterName:                  convertStringFromMap(raw, "cluster_name"),
+			RoleArn:                      convertStringFromMap(raw, "role_arn"),
 		}
+		return out
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.GoogleGKE{}
 		}
-		return &sdm.GoogleGKE{
+		out := &sdm.GoogleGKE{
 			ID:                           d.Id(),
-			Name:                         stringFromMap(raw, "name"),
-			Endpoint:                     stringFromMap(raw, "endpoint"),
-			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
-			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
-			ServiceAccountKey:            stringFromMap(raw, "service_account_key"),
-			ServiceAccountKeyFilename:    stringFromMap(raw, "service_account_key_filename"),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Endpoint:                     convertStringFromMap(raw, "endpoint"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			ServiceAccountKey:            convertStringFromMap(raw, "service_account_key"),
+			ServiceAccountKeyFilename:    convertStringFromMap(raw, "service_account_key_filename"),
 		}
+		return out
 	}
 	if list := d.Get("aks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AKS{}
 		}
-		return &sdm.AKS{
+		out := &sdm.AKS{
 			ID:                           d.Id(),
-			Name:                         stringFromMap(raw, "name"),
-			Hostname:                     stringFromMap(raw, "hostname"),
-			Port:                         int32FromMap(raw, "port"),
-			CertificateAuthority:         stringFromMap(raw, "certificate_authority"),
-			CertificateAuthorityFilename: stringFromMap(raw, "certificate_authority_filename"),
-			ClientCertificate:            stringFromMap(raw, "client_certificate"),
-			ClientCertificateFilename:    stringFromMap(raw, "client_certificate_filename"),
-			ClientKey:                    stringFromMap(raw, "client_key"),
-			ClientKeyFilename:            stringFromMap(raw, "client_key_filename"),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Hostname:                     convertStringFromMap(raw, "hostname"),
+			Port:                         convertInt32FromMap(raw, "port"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            convertStringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    convertStringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    convertStringFromMap(raw, "client_key"),
+			ClientKeyFilename:            convertStringFromMap(raw, "client_key_filename"),
 		}
+		return out
 	}
 	if list := d.Get("aks_basic_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AKSBasicAuth{}
 		}
-		return &sdm.AKSBasicAuth{
+		out := &sdm.AKSBasicAuth{
 			ID:       d.Id(),
-			Name:     stringFromMap(raw, "name"),
-			Hostname: stringFromMap(raw, "hostname"),
-			Port:     int32FromMap(raw, "port"),
-			Username: stringFromMap(raw, "username"),
-			Password: stringFromMap(raw, "password"),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Port:     convertInt32FromMap(raw, "port"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
 		}
+		return out
 	}
 	if list := d.Get("aks_service_account").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AKSServiceAccount{}
 		}
-		return &sdm.AKSServiceAccount{
+		out := &sdm.AKSServiceAccount{
 			ID:       d.Id(),
-			Name:     stringFromMap(raw, "name"),
-			Hostname: stringFromMap(raw, "hostname"),
-			Port:     int32FromMap(raw, "port"),
-			Token:    stringFromMap(raw, "token"),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Port:     convertInt32FromMap(raw, "port"),
+			Token:    convertStringFromMap(raw, "token"),
 		}
+		return out
 	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Memcached{}
 		}
-		return &sdm.Memcached{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Memcached{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.MongoLegacyHost{}
 		}
-		return &sdm.MongoLegacyHost{
+		out := &sdm.MongoLegacyHost{
 			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			AuthDatabase: stringFromMap(raw, "auth_database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
-			ReplicaSet:   stringFromMap(raw, "replica_set"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+			Name:         convertStringFromMap(raw, "name"),
+			Tags:         convertTagsFromMap(raw, "tags"),
+			Hostname:     convertStringFromMap(raw, "hostname"),
+			AuthDatabase: convertStringFromMap(raw, "auth_database"),
+			Username:     convertStringFromMap(raw, "username"),
+			Password:     convertStringFromMap(raw, "password"),
+			Port:         convertInt32FromMap(raw, "port"),
+			ReplicaSet:   convertStringFromMap(raw, "replica_set"),
+			TlsRequired:  convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.MongoLegacyReplicaset{}
 		}
-		return &sdm.MongoLegacyReplicaset{
+		out := &sdm.MongoLegacyReplicaset{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			AuthDatabase:     stringFromMap(raw, "auth_database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Port:             int32FromMap(raw, "port"),
-			ReplicaSet:       stringFromMap(raw, "replica_set"),
-			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
-			TlsRequired:      boolFromMap(raw, "tls_required"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Port:             convertInt32FromMap(raw, "port"),
+			ReplicaSet:       convertStringFromMap(raw, "replica_set"),
+			ConnectToReplica: convertBoolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.MongoHost{}
 		}
-		return &sdm.MongoHost{
+		out := &sdm.MongoHost{
 			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			AuthDatabase: stringFromMap(raw, "auth_database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+			Name:         convertStringFromMap(raw, "name"),
+			Tags:         convertTagsFromMap(raw, "tags"),
+			Hostname:     convertStringFromMap(raw, "hostname"),
+			AuthDatabase: convertStringFromMap(raw, "auth_database"),
+			Username:     convertStringFromMap(raw, "username"),
+			Password:     convertStringFromMap(raw, "password"),
+			Port:         convertInt32FromMap(raw, "port"),
+			TlsRequired:  convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.MongoReplicaSet{}
 		}
-		return &sdm.MongoReplicaSet{
+		out := &sdm.MongoReplicaSet{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			AuthDatabase:     stringFromMap(raw, "auth_database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Port:             int32FromMap(raw, "port"),
-			ReplicaSet:       stringFromMap(raw, "replica_set"),
-			ConnectToReplica: boolFromMap(raw, "connect_to_replica"),
-			TlsRequired:      boolFromMap(raw, "tls_required"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Port:             convertInt32FromMap(raw, "port"),
+			ReplicaSet:       convertStringFromMap(raw, "replica_set"),
+			ConnectToReplica: convertBoolFromMap(raw, "connect_to_replica"),
+			TlsRequired:      convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Mysql{}
 		}
-		return &sdm.Mysql{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Mysql{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AuroraMysql{}
 		}
-		return &sdm.AuroraMysql{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.AuroraMysql{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Clustrix{}
 		}
-		return &sdm.Clustrix{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Clustrix{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Maria{}
 		}
-		return &sdm.Maria{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Maria{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("memsql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Memsql{}
 		}
-		return &sdm.Memsql{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Memsql{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Oracle{}
 		}
-		return &sdm.Oracle{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			Port:         int32FromMap(raw, "port"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+		out := &sdm.Oracle{
+			ID:          d.Id(),
+			Name:        convertStringFromMap(raw, "name"),
+			Tags:        convertTagsFromMap(raw, "tags"),
+			Hostname:    convertStringFromMap(raw, "hostname"),
+			Username:    convertStringFromMap(raw, "username"),
+			Password:    convertStringFromMap(raw, "password"),
+			Database:    convertStringFromMap(raw, "database"),
+			Port:        convertInt32FromMap(raw, "port"),
+			TlsRequired: convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Postgres{}
 		}
-		return &sdm.Postgres{
+		out := &sdm.Postgres{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Database:         stringFromMap(raw, "database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Port:             int32FromMap(raw, "port"),
-			OverrideDatabase: boolFromMap(raw, "override_database"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("aurora_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.AuroraPostgres{}
 		}
-		return &sdm.AuroraPostgres{
+		out := &sdm.AuroraPostgres{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Database:         stringFromMap(raw, "database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Port:             int32FromMap(raw, "port"),
-			OverrideDatabase: boolFromMap(raw, "override_database"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("greenplum").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Greenplum{}
 		}
-		return &sdm.Greenplum{
+		out := &sdm.Greenplum{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Database:         stringFromMap(raw, "database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Port:             int32FromMap(raw, "port"),
-			OverrideDatabase: boolFromMap(raw, "override_database"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("cockroach").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Cockroach{}
 		}
-		return &sdm.Cockroach{
+		out := &sdm.Cockroach{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Database:         stringFromMap(raw, "database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Port:             int32FromMap(raw, "port"),
-			OverrideDatabase: boolFromMap(raw, "override_database"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Redshift{}
 		}
-		return &sdm.Redshift{
+		out := &sdm.Redshift{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Database:         stringFromMap(raw, "database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Port:             int32FromMap(raw, "port"),
-			OverrideDatabase: boolFromMap(raw, "override_database"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("presto").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Presto{}
 		}
-		return &sdm.Presto{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-			Username:     stringFromMap(raw, "username"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+		out := &sdm.Presto{
+			ID:          d.Id(),
+			Name:        convertStringFromMap(raw, "name"),
+			Tags:        convertTagsFromMap(raw, "tags"),
+			Hostname:    convertStringFromMap(raw, "hostname"),
+			Password:    convertStringFromMap(raw, "password"),
+			Database:    convertStringFromMap(raw, "database"),
+			Port:        convertInt32FromMap(raw, "port"),
+			Username:    convertStringFromMap(raw, "username"),
+			TlsRequired: convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("rdp").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.RDP{}
 		}
-		return &sdm.RDP{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.RDP{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Redis{}
 		}
-		return &sdm.Redis{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Redis{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Password: convertStringFromMap(raw, "password"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.ElasticacheRedis{}
 		}
-		return &sdm.ElasticacheRedis{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Password:     stringFromMap(raw, "password"),
-			Port:         int32FromMap(raw, "port"),
-			TlsRequired:  boolFromMap(raw, "tls_required"),
+		out := &sdm.ElasticacheRedis{
+			ID:          d.Id(),
+			Name:        convertStringFromMap(raw, "name"),
+			Tags:        convertTagsFromMap(raw, "tags"),
+			Hostname:    convertStringFromMap(raw, "hostname"),
+			Password:    convertStringFromMap(raw, "password"),
+			Port:        convertInt32FromMap(raw, "port"),
+			TlsRequired: convertBoolFromMap(raw, "tls_required"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Snowflake{}
 		}
-		return &sdm.Snowflake{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			Database:     stringFromMap(raw, "database"),
-			Schema:       stringFromMap(raw, "schema"),
-			PortOverride: int32FromMap(raw, "port_override"),
+		out := &sdm.Snowflake{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Schema:   convertStringFromMap(raw, "schema"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.SQLServer{}
 		}
-		return &sdm.SQLServer{
+		out := &sdm.SQLServer{
 			ID:               d.Id(),
-			Name:             stringFromMap(raw, "name"),
-			Hostname:         stringFromMap(raw, "hostname"),
-			Username:         stringFromMap(raw, "username"),
-			Password:         stringFromMap(raw, "password"),
-			Database:         stringFromMap(raw, "database"),
-			PortOverride:     int32FromMap(raw, "port_override"),
-			Schema:           stringFromMap(raw, "schema"),
-			Port:             int32FromMap(raw, "port"),
-			OverrideDatabase: boolFromMap(raw, "override_database"),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Schema:           convertStringFromMap(raw, "schema"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.SSH{}
 		}
-		return &sdm.SSH{
+		out := &sdm.SSH{
 			ID:             d.Id(),
-			Name:           stringFromMap(raw, "name"),
-			Hostname:       stringFromMap(raw, "hostname"),
-			Username:       stringFromMap(raw, "username"),
-			Port:           int32FromMap(raw, "port"),
-			PortForwarding: boolFromMap(raw, "port_forwarding"),
+			Name:           convertStringFromMap(raw, "name"),
+			Tags:           convertTagsFromMap(raw, "tags"),
+			Hostname:       convertStringFromMap(raw, "hostname"),
+			Username:       convertStringFromMap(raw, "username"),
+			Port:           convertInt32FromMap(raw, "port"),
+			PortForwarding: convertBoolFromMap(raw, "port_forwarding"),
 		}
+		return out
 	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Sybase{}
 		}
-		return &sdm.Sybase{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-			Password:     stringFromMap(raw, "password"),
+		out := &sdm.Sybase{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Port:     convertInt32FromMap(raw, "port"),
+			Password: convertStringFromMap(raw, "password"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("sybase_iq").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.SybaseIQ{}
 		}
-		return &sdm.SybaseIQ{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
-			Password:     stringFromMap(raw, "password"),
+		out := &sdm.SybaseIQ{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Port:     convertInt32FromMap(raw, "port"),
+			Password: convertStringFromMap(raw, "password"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Teradata{}
 		}
-		return &sdm.Teradata{
-			ID:           d.Id(),
-			Name:         stringFromMap(raw, "name"),
-			Hostname:     stringFromMap(raw, "hostname"),
-			Username:     stringFromMap(raw, "username"),
-			Password:     stringFromMap(raw, "password"),
-			PortOverride: int32FromMap(raw, "port_override"),
-			Port:         int32FromMap(raw, "port"),
+		out := &sdm.Teradata{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
 	}
 	return nil
 }
@@ -2636,532 +3298,665 @@ func resourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.Resources().Create(ctx, resourceFromResourceData(d))
+	localVersion := convertResourceFromResourceData(d)
+	resp, err := cc.Resources().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Resource %s: %w", "", err)
 	}
 	d.SetId(resp.Resource.GetID())
 	switch v := resp.Resource.(type) {
 	case *sdm.Athena:
+		localV, _ := localVersion.(*sdm.Athena)
+		_ = localV
 		d.Set("athena", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"output":            v.Output,
-				"port_override":     v.PortOverride,
-				"region":            v.Region,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"access_key":        (v.AccessKey),
+				"secret_access_key": localV.SecretAccessKey,
+				"output":            (v.Output),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
 			},
 		})
 	case *sdm.BigQuery:
+		localV, _ := localVersion.(*sdm.BigQuery)
+		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"private_key":   v.PrivateKey,
-				"project":       v.Project,
-				"port_override": v.PortOverride,
-				"endpoint":      v.Endpoint,
-				"username":      v.Username,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"private_key":   localV.PrivateKey,
+				"project":       (v.Project),
+				"port_override": (v.PortOverride),
+				"endpoint":      (v.Endpoint),
+				"username":      (v.Username),
 			},
 		})
 	case *sdm.Cassandra:
+		localV, _ := localVersion.(*sdm.Cassandra)
+		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.Druid:
+		localV, _ := localVersion.(*sdm.Druid)
+		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.DynamoDB:
+		localV, _ := localVersion.(*sdm.DynamoDB)
+		_ = localV
 		d.Set("dynamo_db", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
-				"endpoint":          v.Endpoint,
-				"port_override":     v.PortOverride,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"access_key":        (v.AccessKey),
+				"secret_access_key": localV.SecretAccessKey,
+				"region":            (v.Region),
+				"endpoint":          (v.Endpoint),
+				"port_override":     (v.PortOverride),
 			},
 		})
 	case *sdm.AmazonES:
+		localV, _ := localVersion.(*sdm.AmazonES)
+		_ = localV
 		d.Set("amazon_es", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"region":            v.Region,
-				"secret_access_key": v.SecretAccessKey,
-				"endpoint":          v.Endpoint,
-				"access_key":        v.AccessKey,
-				"port_override":     v.PortOverride,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"region":            (v.Region),
+				"secret_access_key": localV.SecretAccessKey,
+				"endpoint":          (v.Endpoint),
+				"access_key":        (v.AccessKey),
+				"port_override":     (v.PortOverride),
 			},
 		})
 	case *sdm.Elastic:
+		localV, _ := localVersion.(*sdm.Elastic)
+		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.HTTPBasicAuth:
+		localV, _ := localVersion.(*sdm.HTTPBasicAuth)
+		_ = localV
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"username":          v.Username,
-				"password":          v.Password,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			},
 		})
 	case *sdm.HTTPNoAuth:
+		localV, _ := localVersion.(*sdm.HTTPNoAuth)
+		_ = localV
 		d.Set("http_no_auth", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			},
 		})
 	case *sdm.HTTPAuth:
+		localV, _ := localVersion.(*sdm.HTTPAuth)
+		_ = localV
 		d.Set("http_auth", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"auth_header":       v.AuthHeader,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"auth_header":       localV.AuthHeader,
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			},
 		})
 	case *sdm.Kubernetes:
+		localV, _ := localVersion.(*sdm.Kubernetes)
+		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
+		localV, _ := localVersion.(*sdm.KubernetesBasicAuth)
+		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"username": (v.Username),
+				"password": localV.Password,
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
+		localV, _ := localVersion.(*sdm.KubernetesServiceAccount)
+		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"token":    localV.Token,
 			},
 		})
 	case *sdm.AmazonEKS:
+		localV, _ := localVersion.(*sdm.AmazonEKS)
+		_ = localV
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"access_key":                     v.AccessKey,
-				"secret_access_key":              v.SecretAccessKey,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"region":                         v.Region,
-				"cluster_name":                   v.ClusterName,
-				"role_arn":                       v.RoleArn,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"access_key":                     (v.AccessKey),
+				"secret_access_key":              localV.SecretAccessKey,
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"region":                         (v.Region),
+				"cluster_name":                   (v.ClusterName),
+				"role_arn":                       (v.RoleArn),
 			},
 		})
 	case *sdm.GoogleGKE:
+		localV, _ := localVersion.(*sdm.GoogleGKE)
+		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"service_account_key":            v.ServiceAccountKey,
-				"service_account_key_filename":   v.ServiceAccountKeyFilename,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"service_account_key":            localV.ServiceAccountKey,
+				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
 			},
 		})
 	case *sdm.AKS:
+		localV, _ := localVersion.(*sdm.AKS)
+		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
 			},
 		})
 	case *sdm.AKSBasicAuth:
+		localV, _ := localVersion.(*sdm.AKSBasicAuth)
+		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"username": (v.Username),
+				"password": localV.Password,
 			},
 		})
 	case *sdm.AKSServiceAccount:
+		localV, _ := localVersion.(*sdm.AKSServiceAccount)
+		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"token":    localV.Token,
 			},
 		})
 	case *sdm.Memcached:
+		localV, _ := localVersion.(*sdm.Memcached)
+		_ = localV
 		d.Set("memcached", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.MongoLegacyHost:
+		localV, _ := localVersion.(*sdm.MongoLegacyHost)
+		_ = localV
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"replica_set":   v.ReplicaSet,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"auth_database": (v.AuthDatabase),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port":          (v.Port),
+				"replica_set":   (v.ReplicaSet),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoLegacyReplicaset:
+		localV, _ := localVersion.(*sdm.MongoLegacyReplicaset)
+		_ = localV
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"hostname":           (v.Hostname),
+				"auth_database":      (v.AuthDatabase),
+				"port_override":      (v.PortOverride),
+				"username":           (v.Username),
+				"password":           localV.Password,
+				"port":               (v.Port),
+				"replica_set":        (v.ReplicaSet),
+				"connect_to_replica": (v.ConnectToReplica),
+				"tls_required":       (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoHost:
+		localV, _ := localVersion.(*sdm.MongoHost)
+		_ = localV
 		d.Set("mongo_host", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"auth_database": (v.AuthDatabase),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoReplicaSet:
+		localV, _ := localVersion.(*sdm.MongoReplicaSet)
+		_ = localV
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"hostname":           (v.Hostname),
+				"auth_database":      (v.AuthDatabase),
+				"port_override":      (v.PortOverride),
+				"username":           (v.Username),
+				"password":           localV.Password,
+				"port":               (v.Port),
+				"replica_set":        (v.ReplicaSet),
+				"connect_to_replica": (v.ConnectToReplica),
+				"tls_required":       (v.TlsRequired),
 			},
 		})
 	case *sdm.Mysql:
+		localV, _ := localVersion.(*sdm.Mysql)
+		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.AuroraMysql:
+		localV, _ := localVersion.(*sdm.AuroraMysql)
+		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Clustrix:
+		localV, _ := localVersion.(*sdm.Clustrix)
+		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Maria:
+		localV, _ := localVersion.(*sdm.Maria)
+		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Memsql:
+		localV, _ := localVersion.(*sdm.Memsql)
+		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Oracle:
+		localV, _ := localVersion.(*sdm.Oracle)
+		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port":          v.Port,
-				"port_override": v.PortOverride,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port":          (v.Port),
+				"port_override": (v.PortOverride),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.Postgres:
+		localV, _ := localVersion.(*sdm.Postgres)
+		_ = localV
 		d.Set("postgres", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.AuroraPostgres:
+		localV, _ := localVersion.(*sdm.AuroraPostgres)
+		_ = localV
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Greenplum:
+		localV, _ := localVersion.(*sdm.Greenplum)
+		_ = localV
 		d.Set("greenplum", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Cockroach:
+		localV, _ := localVersion.(*sdm.Cockroach)
+		_ = localV
 		d.Set("cockroach", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Redshift:
+		localV, _ := localVersion.(*sdm.Redshift)
+		_ = localV
 		d.Set("redshift", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Presto:
+		localV, _ := localVersion.(*sdm.Presto)
+		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"username":      v.Username,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"username":      (v.Username),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.RDP:
+		localV, _ := localVersion.(*sdm.RDP)
+		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Redis:
+		localV, _ := localVersion.(*sdm.Redis)
+		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"password":      localV.Password,
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.ElasticacheRedis:
+		localV, _ := localVersion.(*sdm.ElasticacheRedis)
+		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"password":      localV.Password,
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.Snowflake:
+		localV, _ := localVersion.(*sdm.Snowflake)
+		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"schema":        v.Schema,
-				"port_override": v.PortOverride,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"schema":        (v.Schema),
+				"port_override": (v.PortOverride),
 			},
 		})
 	case *sdm.SQLServer:
+		localV, _ := localVersion.(*sdm.SQLServer)
+		_ = localV
 		d.Set("sql_server", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"schema":            v.Schema,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.SSH:
+		localV, _ := localVersion.(*sdm.SSH)
+		_ = localV
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":            v.Name,
-				"hostname":        v.Hostname,
-				"username":        v.Username,
-				"port":            v.Port,
-				"public_key":      v.PublicKey,
-				"port_forwarding": v.PortForwarding,
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port":            (v.Port),
+				"public_key":      (v.PublicKey),
+				"port_forwarding": (v.PortForwarding),
 			},
 		})
 	case *sdm.Sybase:
+		localV, _ := localVersion.(*sdm.Sybase)
+		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"password":      localV.Password,
 			},
 		})
 	case *sdm.SybaseIQ:
+		localV, _ := localVersion.(*sdm.SybaseIQ)
+		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"password":      localV.Password,
 			},
 		})
 	case *sdm.Teradata:
+		localV, _ := localVersion.(*sdm.Teradata)
+		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	}
@@ -3171,6 +3966,8 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
+	localVersion := convertResourceFromResourceData(d)
+	_ = localVersion
 	resp, err := cc.Resources().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -3181,525 +3978,789 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	switch v := resp.Resource.(type) {
 	case *sdm.Athena:
+		localV, ok := localVersion.(*sdm.Athena)
+		if !ok {
+			localV = &sdm.Athena{}
+		}
+		_ = localV
 		d.Set("athena", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"output":            v.Output,
-				"port_override":     v.PortOverride,
-				"region":            v.Region,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"access_key":        (v.AccessKey),
+				"secret_access_key": localV.SecretAccessKey,
+				"output":            (v.Output),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
 			},
 		})
 	case *sdm.BigQuery:
+		localV, ok := localVersion.(*sdm.BigQuery)
+		if !ok {
+			localV = &sdm.BigQuery{}
+		}
+		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"private_key":   v.PrivateKey,
-				"project":       v.Project,
-				"port_override": v.PortOverride,
-				"endpoint":      v.Endpoint,
-				"username":      v.Username,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"private_key":   localV.PrivateKey,
+				"project":       (v.Project),
+				"port_override": (v.PortOverride),
+				"endpoint":      (v.Endpoint),
+				"username":      (v.Username),
 			},
 		})
 	case *sdm.Cassandra:
+		localV, ok := localVersion.(*sdm.Cassandra)
+		if !ok {
+			localV = &sdm.Cassandra{}
+		}
+		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.Druid:
+		localV, ok := localVersion.(*sdm.Druid)
+		if !ok {
+			localV = &sdm.Druid{}
+		}
+		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.DynamoDB:
+		localV, ok := localVersion.(*sdm.DynamoDB)
+		if !ok {
+			localV = &sdm.DynamoDB{}
+		}
+		_ = localV
 		d.Set("dynamo_db", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"access_key":        v.AccessKey,
-				"secret_access_key": v.SecretAccessKey,
-				"region":            v.Region,
-				"endpoint":          v.Endpoint,
-				"port_override":     v.PortOverride,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"access_key":        (v.AccessKey),
+				"secret_access_key": localV.SecretAccessKey,
+				"region":            (v.Region),
+				"endpoint":          (v.Endpoint),
+				"port_override":     (v.PortOverride),
 			},
 		})
 	case *sdm.AmazonES:
+		localV, ok := localVersion.(*sdm.AmazonES)
+		if !ok {
+			localV = &sdm.AmazonES{}
+		}
+		_ = localV
 		d.Set("amazon_es", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"region":            v.Region,
-				"secret_access_key": v.SecretAccessKey,
-				"endpoint":          v.Endpoint,
-				"access_key":        v.AccessKey,
-				"port_override":     v.PortOverride,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"region":            (v.Region),
+				"secret_access_key": localV.SecretAccessKey,
+				"endpoint":          (v.Endpoint),
+				"access_key":        (v.AccessKey),
+				"port_override":     (v.PortOverride),
 			},
 		})
 	case *sdm.Elastic:
+		localV, ok := localVersion.(*sdm.Elastic)
+		if !ok {
+			localV = &sdm.Elastic{}
+		}
+		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.HTTPBasicAuth:
+		localV, ok := localVersion.(*sdm.HTTPBasicAuth)
+		if !ok {
+			localV = &sdm.HTTPBasicAuth{}
+		}
+		_ = localV
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"username":          v.Username,
-				"password":          v.Password,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			},
 		})
 	case *sdm.HTTPNoAuth:
+		localV, ok := localVersion.(*sdm.HTTPNoAuth)
+		if !ok {
+			localV = &sdm.HTTPNoAuth{}
+		}
+		_ = localV
 		d.Set("http_no_auth", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			},
 		})
 	case *sdm.HTTPAuth:
+		localV, ok := localVersion.(*sdm.HTTPAuth)
+		if !ok {
+			localV = &sdm.HTTPAuth{}
+		}
+		_ = localV
 		d.Set("http_auth", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"url":               v.Url,
-				"healthcheck_path":  v.HealthcheckPath,
-				"auth_header":       v.AuthHeader,
-				"headers_blacklist": v.HeadersBlacklist,
-				"default_path":      v.DefaultPath,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"auth_header":       localV.AuthHeader,
+				"headers_blacklist": (v.HeadersBlacklist),
+				"default_path":      (v.DefaultPath),
 			},
 		})
 	case *sdm.Kubernetes:
+		localV, ok := localVersion.(*sdm.Kubernetes)
+		if !ok {
+			localV = &sdm.Kubernetes{}
+		}
+		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
+		localV, ok := localVersion.(*sdm.KubernetesBasicAuth)
+		if !ok {
+			localV = &sdm.KubernetesBasicAuth{}
+		}
+		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"username": (v.Username),
+				"password": localV.Password,
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
+		localV, ok := localVersion.(*sdm.KubernetesServiceAccount)
+		if !ok {
+			localV = &sdm.KubernetesServiceAccount{}
+		}
+		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"token":    localV.Token,
 			},
 		})
 	case *sdm.AmazonEKS:
+		localV, ok := localVersion.(*sdm.AmazonEKS)
+		if !ok {
+			localV = &sdm.AmazonEKS{}
+		}
+		_ = localV
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"access_key":                     v.AccessKey,
-				"secret_access_key":              v.SecretAccessKey,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"region":                         v.Region,
-				"cluster_name":                   v.ClusterName,
-				"role_arn":                       v.RoleArn,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"access_key":                     (v.AccessKey),
+				"secret_access_key":              localV.SecretAccessKey,
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"region":                         (v.Region),
+				"cluster_name":                   (v.ClusterName),
+				"role_arn":                       (v.RoleArn),
 			},
 		})
 	case *sdm.GoogleGKE:
+		localV, ok := localVersion.(*sdm.GoogleGKE)
+		if !ok {
+			localV = &sdm.GoogleGKE{}
+		}
+		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"endpoint":                       v.Endpoint,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"service_account_key":            v.ServiceAccountKey,
-				"service_account_key_filename":   v.ServiceAccountKeyFilename,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"service_account_key":            localV.ServiceAccountKey,
+				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
 			},
 		})
 	case *sdm.AKS:
+		localV, ok := localVersion.(*sdm.AKS)
+		if !ok {
+			localV = &sdm.AKS{}
+		}
+		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
-				"name":                           v.Name,
-				"hostname":                       v.Hostname,
-				"port":                           v.Port,
-				"certificate_authority":          v.CertificateAuthority,
-				"certificate_authority_filename": v.CertificateAuthorityFilename,
-				"client_certificate":             v.ClientCertificate,
-				"client_certificate_filename":    v.ClientCertificateFilename,
-				"client_key":                     v.ClientKey,
-				"client_key_filename":            v.ClientKeyFilename,
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
 			},
 		})
 	case *sdm.AKSBasicAuth:
+		localV, ok := localVersion.(*sdm.AKSBasicAuth)
+		if !ok {
+			localV = &sdm.AKSBasicAuth{}
+		}
+		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"username": v.Username,
-				"password": v.Password,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"username": (v.Username),
+				"password": localV.Password,
 			},
 		})
 	case *sdm.AKSServiceAccount:
+		localV, ok := localVersion.(*sdm.AKSServiceAccount)
+		if !ok {
+			localV = &sdm.AKSServiceAccount{}
+		}
+		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
-				"name":     v.Name,
-				"hostname": v.Hostname,
-				"port":     v.Port,
-				"token":    v.Token,
+				"name":     (v.Name),
+				"tags":     convertTagsToMap(v.Tags),
+				"hostname": (v.Hostname),
+				"port":     (v.Port),
+				"token":    localV.Token,
 			},
 		})
 	case *sdm.Memcached:
+		localV, ok := localVersion.(*sdm.Memcached)
+		if !ok {
+			localV = &sdm.Memcached{}
+		}
+		_ = localV
 		d.Set("memcached", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.MongoLegacyHost:
+		localV, ok := localVersion.(*sdm.MongoLegacyHost)
+		if !ok {
+			localV = &sdm.MongoLegacyHost{}
+		}
+		_ = localV
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"replica_set":   v.ReplicaSet,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"auth_database": (v.AuthDatabase),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port":          (v.Port),
+				"replica_set":   (v.ReplicaSet),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoLegacyReplicaset:
+		localV, ok := localVersion.(*sdm.MongoLegacyReplicaset)
+		if !ok {
+			localV = &sdm.MongoLegacyReplicaset{}
+		}
+		_ = localV
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"hostname":           (v.Hostname),
+				"auth_database":      (v.AuthDatabase),
+				"port_override":      (v.PortOverride),
+				"username":           (v.Username),
+				"password":           localV.Password,
+				"port":               (v.Port),
+				"replica_set":        (v.ReplicaSet),
+				"connect_to_replica": (v.ConnectToReplica),
+				"tls_required":       (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoHost:
+		localV, ok := localVersion.(*sdm.MongoHost)
+		if !ok {
+			localV = &sdm.MongoHost{}
+		}
+		_ = localV
 		d.Set("mongo_host", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"auth_database": v.AuthDatabase,
-				"port_override": v.PortOverride,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"auth_database": (v.AuthDatabase),
+				"port_override": (v.PortOverride),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoReplicaSet:
+		localV, ok := localVersion.(*sdm.MongoReplicaSet)
+		if !ok {
+			localV = &sdm.MongoReplicaSet{}
+		}
+		_ = localV
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
-				"name":               v.Name,
-				"hostname":           v.Hostname,
-				"auth_database":      v.AuthDatabase,
-				"port_override":      v.PortOverride,
-				"username":           v.Username,
-				"password":           v.Password,
-				"port":               v.Port,
-				"replica_set":        v.ReplicaSet,
-				"connect_to_replica": v.ConnectToReplica,
-				"tls_required":       v.TlsRequired,
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"hostname":           (v.Hostname),
+				"auth_database":      (v.AuthDatabase),
+				"port_override":      (v.PortOverride),
+				"username":           (v.Username),
+				"password":           localV.Password,
+				"port":               (v.Port),
+				"replica_set":        (v.ReplicaSet),
+				"connect_to_replica": (v.ConnectToReplica),
+				"tls_required":       (v.TlsRequired),
 			},
 		})
 	case *sdm.Mysql:
+		localV, ok := localVersion.(*sdm.Mysql)
+		if !ok {
+			localV = &sdm.Mysql{}
+		}
+		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.AuroraMysql:
+		localV, ok := localVersion.(*sdm.AuroraMysql)
+		if !ok {
+			localV = &sdm.AuroraMysql{}
+		}
+		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Clustrix:
+		localV, ok := localVersion.(*sdm.Clustrix)
+		if !ok {
+			localV = &sdm.Clustrix{}
+		}
+		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Maria:
+		localV, ok := localVersion.(*sdm.Maria)
+		if !ok {
+			localV = &sdm.Maria{}
+		}
+		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Memsql:
+		localV, ok := localVersion.(*sdm.Memsql)
+		if !ok {
+			localV = &sdm.Memsql{}
+		}
+		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Oracle:
+		localV, ok := localVersion.(*sdm.Oracle)
+		if !ok {
+			localV = &sdm.Oracle{}
+		}
+		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port":          v.Port,
-				"port_override": v.PortOverride,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port":          (v.Port),
+				"port_override": (v.PortOverride),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.Postgres:
+		localV, ok := localVersion.(*sdm.Postgres)
+		if !ok {
+			localV = &sdm.Postgres{}
+		}
+		_ = localV
 		d.Set("postgres", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.AuroraPostgres:
+		localV, ok := localVersion.(*sdm.AuroraPostgres)
+		if !ok {
+			localV = &sdm.AuroraPostgres{}
+		}
+		_ = localV
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Greenplum:
+		localV, ok := localVersion.(*sdm.Greenplum)
+		if !ok {
+			localV = &sdm.Greenplum{}
+		}
+		_ = localV
 		d.Set("greenplum", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Cockroach:
+		localV, ok := localVersion.(*sdm.Cockroach)
+		if !ok {
+			localV = &sdm.Cockroach{}
+		}
+		_ = localV
 		d.Set("cockroach", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Redshift:
+		localV, ok := localVersion.(*sdm.Redshift)
+		if !ok {
+			localV = &sdm.Redshift{}
+		}
+		_ = localV
 		d.Set("redshift", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.Presto:
+		localV, ok := localVersion.(*sdm.Presto)
+		if !ok {
+			localV = &sdm.Presto{}
+		}
+		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"password":      v.Password,
-				"database":      v.Database,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"username":      v.Username,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"username":      (v.Username),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.RDP:
+		localV, ok := localVersion.(*sdm.RDP)
+		if !ok {
+			localV = &sdm.RDP{}
+		}
+		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Redis:
+		localV, ok := localVersion.(*sdm.Redis)
+		if !ok {
+			localV = &sdm.Redis{}
+		}
+		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"password":      localV.Password,
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.ElasticacheRedis:
+		localV, ok := localVersion.(*sdm.ElasticacheRedis)
+		if !ok {
+			localV = &sdm.ElasticacheRedis{}
+		}
+		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"port_override": v.PortOverride,
-				"password":      v.Password,
-				"port":          v.Port,
-				"tls_required":  v.TlsRequired,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"port_override": (v.PortOverride),
+				"password":      localV.Password,
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
 			},
 		})
 	case *sdm.Snowflake:
+		localV, ok := localVersion.(*sdm.Snowflake)
+		if !ok {
+			localV = &sdm.Snowflake{}
+		}
+		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"database":      v.Database,
-				"schema":        v.Schema,
-				"port_override": v.PortOverride,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"schema":        (v.Schema),
+				"port_override": (v.PortOverride),
 			},
 		})
 	case *sdm.SQLServer:
+		localV, ok := localVersion.(*sdm.SQLServer)
+		if !ok {
+			localV = &sdm.SQLServer{}
+		}
+		_ = localV
 		d.Set("sql_server", []map[string]interface{}{
 			{
-				"name":              v.Name,
-				"hostname":          v.Hostname,
-				"username":          v.Username,
-				"password":          v.Password,
-				"database":          v.Database,
-				"port_override":     v.PortOverride,
-				"schema":            v.Schema,
-				"port":              v.Port,
-				"override_database": v.OverrideDatabase,
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
 			},
 		})
 	case *sdm.SSH:
+		localV, ok := localVersion.(*sdm.SSH)
+		if !ok {
+			localV = &sdm.SSH{}
+		}
+		_ = localV
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":            v.Name,
-				"hostname":        v.Hostname,
-				"username":        v.Username,
-				"port":            v.Port,
-				"public_key":      v.PublicKey,
-				"port_forwarding": v.PortForwarding,
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port":            (v.Port),
+				"public_key":      (v.PublicKey),
+				"port_forwarding": (v.PortForwarding),
 			},
 		})
 	case *sdm.Sybase:
+		localV, ok := localVersion.(*sdm.Sybase)
+		if !ok {
+			localV = &sdm.Sybase{}
+		}
+		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"password":      localV.Password,
 			},
 		})
 	case *sdm.SybaseIQ:
+		localV, ok := localVersion.(*sdm.SybaseIQ)
+		if !ok {
+			localV = &sdm.SybaseIQ{}
+		}
+		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
-				"password":      v.Password,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"password":      localV.Password,
 			},
 		})
 	case *sdm.Teradata:
+		localV, ok := localVersion.(*sdm.Teradata)
+		if !ok {
+			localV = &sdm.Teradata{}
+		}
+		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
-				"name":          v.Name,
-				"hostname":      v.Hostname,
-				"username":      v.Username,
-				"password":      v.Password,
-				"port_override": v.PortOverride,
-				"port":          v.Port,
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	}
@@ -3708,7 +4769,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceResourceUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Resources().Update(ctx, resourceFromResourceData(d))
+	resp, err := cc.Resources().Update(ctx, convertResourceFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
 	}

@@ -68,7 +68,7 @@ func dataSourceAccountAttachment() *schema.Resource {
 	}
 }
 
-func accountAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertAccountAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("id"); ok {
@@ -89,7 +89,7 @@ func accountAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []
 func dataSourceAccountAttachmentList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := accountAttachmentFilterFromResourceData(d)
+	filter, args := convertAccountAttachmentFilterFromResourceData(d)
 	resp, err := cc.AccountAttachments().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list AccountAttachments %s: %w", d.Id(), err)
@@ -102,9 +102,9 @@ func dataSourceAccountAttachmentList(d *schema.ResourceData, cc *sdm.Client) err
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":         v.ID,
-				"account_id": v.AccountID,
-				"role_id":    v.RoleID,
+				"id":         (v.ID),
+				"account_id": (v.AccountID),
+				"role_id":    (v.RoleID),
 			})
 	}
 	if resp.Err() != nil {

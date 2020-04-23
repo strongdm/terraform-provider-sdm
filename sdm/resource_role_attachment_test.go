@@ -115,6 +115,11 @@ func TestAccSDMRoleAttachment_Create(t *testing.T) {
 					},
 				),
 			},
+			{
+				ResourceName:      "sdm_role_attachment." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 		},
 	})
 }
@@ -168,6 +173,11 @@ func TestAccSDMRoleAttachment_Update(t *testing.T) {
 				},
 			},
 			{
+				ResourceName:      "sdm_role_attachment." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
 				Config: testAccSDMRoleAttachmentConfig(rsName, altCompRoleRsName, roleRsName),
 				Check: func(s *terraform.State) error {
 					compositeID, err := testCreatedID(s, "sdm_role", altCompRoleRsName)
@@ -204,6 +214,11 @@ func TestAccSDMRoleAttachment_Update(t *testing.T) {
 
 					return nil
 				},
+			},
+			{
+				ResourceName:      "sdm_role_attachment." + rsName,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})

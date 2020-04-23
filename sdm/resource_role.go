@@ -19,6 +19,9 @@ func resourceRole() *schema.Resource {
 		Read:   wrapCrudOperation(resourceRoleRead),
 		Update: wrapCrudOperation(resourceRoleUpdate),
 		Delete: wrapCrudOperation(resourceRoleDelete),
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 		Schema: map[string]*schema.Schema{
 			"name": {
 				Type:        schema.TypeString,
@@ -37,31 +40,34 @@ func resourceRole() *schema.Resource {
 		},
 	}
 }
-func roleFromResourceData(d *schema.ResourceData) *sdm.Role {
+func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:        d.Id(),
-		Name:      stringFromResourceData(d, "name"),
-		Composite: boolFromResourceData(d, "composite"),
+		Name:      convertStringFromResourceData(d, "name"),
+		Composite: convertBoolFromResourceData(d, "composite"),
 	}
 }
 
 func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	resp, err := cc.Roles().Create(ctx, roleFromResourceData(d))
+	localVersion := convertRoleFromResourceData(d)
+	resp, err := cc.Roles().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Role %s: %w", "", err)
 	}
 	d.SetId(resp.Role.ID)
 	v := resp.Role
-	d.Set("name", v.Name)
-	d.Set("composite", v.Composite)
+	d.Set("name", (v.Name))
+	d.Set("composite", (v.Composite))
 	return nil
 }
 
 func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
+	localVersion := convertRoleFromResourceData(d)
+	_ = localVersion
 	resp, err := cc.Roles().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -71,14 +77,14 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read Role %s: %w", d.Id(), err)
 	}
 	v := resp.Role
-	d.Set("name", v.Name)
-	d.Set("composite", v.Composite)
+	d.Set("name", (v.Name))
+	d.Set("composite", (v.Composite))
 	return nil
 }
 func resourceRoleUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Roles().Update(ctx, roleFromResourceData(d))
+	resp, err := cc.Roles().Update(ctx, convertRoleFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Role %s: %w", d.Id(), err)
 	}
