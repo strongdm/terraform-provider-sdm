@@ -18,9 +18,6 @@ func resourceRoleGrant() *schema.Resource {
 		Create: wrapCrudOperation(resourceRoleGrantCreate),
 		Read:   wrapCrudOperation(resourceRoleGrantRead),
 		Delete: wrapCrudOperation(resourceRoleGrantDelete),
-		Importer: &schema.ResourceImporter{
-			State: schema.ImportStatePassthrough,
-		},
 		Schema: map[string]*schema.Schema{
 			"resource_id": {
 				Type:        schema.TypeString,
@@ -40,34 +37,31 @@ func resourceRoleGrant() *schema.Resource {
 		},
 	}
 }
-func convertRoleGrantFromResourceData(d *schema.ResourceData) *sdm.RoleGrant {
+func roleGrantFromResourceData(d *schema.ResourceData) *sdm.RoleGrant {
 	return &sdm.RoleGrant{
 		ID:         d.Id(),
-		ResourceID: convertStringFromResourceData(d, "resource_id"),
-		RoleID:     convertStringFromResourceData(d, "role_id"),
+		ResourceID: stringFromResourceData(d, "resource_id"),
+		RoleID:     stringFromResourceData(d, "role_id"),
 	}
 }
 
 func resourceRoleGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	localVersion := convertRoleGrantFromResourceData(d)
-	resp, err := cc.RoleGrants().Create(ctx, localVersion)
+	resp, err := cc.RoleGrants().Create(ctx, roleGrantFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create RoleGrant %s: %w", "", err)
 	}
 	d.SetId(resp.RoleGrant.ID)
 	v := resp.RoleGrant
-	d.Set("resource_id", (v.ResourceID))
-	d.Set("role_id", (v.RoleID))
+	d.Set("resource_id", v.ResourceID)
+	d.Set("role_id", v.RoleID)
 	return nil
 }
 
 func resourceRoleGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	localVersion := convertRoleGrantFromResourceData(d)
-	_ = localVersion
 	resp, err := cc.RoleGrants().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -77,8 +71,8 @@ func resourceRoleGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read RoleGrant %s: %w", d.Id(), err)
 	}
 	v := resp.RoleGrant
-	d.Set("resource_id", (v.ResourceID))
-	d.Set("role_id", (v.RoleID))
+	d.Set("resource_id", v.ResourceID)
+	d.Set("role_id", v.RoleID)
 	return nil
 }
 func resourceRoleGrantDelete(d *schema.ResourceData, cc *sdm.Client) error {

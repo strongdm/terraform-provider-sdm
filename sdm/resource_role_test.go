@@ -77,11 +77,6 @@ func TestAccSDMRole_Create(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
 		},
 	})
 }
@@ -100,11 +95,6 @@ func TestAccSDMRole_Update(t *testing.T) {
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
 				),
-			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
 			},
 			{
 				Config: testAccSDMRoleConfig(rsName, updatedRoleName, false),
@@ -134,11 +124,6 @@ func TestAccSDMRole_Update(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
 		},
 	})
 }
@@ -156,11 +141,6 @@ func TestAccSDMRole_UpdateComposite(t *testing.T) {
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
 				),
-			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
 			},
 			{
 				Config: testAccSDMRoleConfig(rsName, roleName, true),
@@ -189,11 +169,6 @@ func TestAccSDMRole_UpdateComposite(t *testing.T) {
 						return nil
 					},
 				),
-			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
 			},
 		},
 	})

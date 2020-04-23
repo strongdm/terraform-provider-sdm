@@ -1,36 +1,20 @@
 # SDM Provider
 
-The SDM provider is used to manage your strongDM resources. 
+The SDM provider is used to manage your strongDM resources. This provider needs to be configured with API credentials from the strongDM account you wish to manage.
 
-## Configuration
+## Example Usage
 
-This provider needs to be configured with API credentials from your strongDM account. These credentials can be supplied to the provider directly or set using environment variables.
+    # main.tf
 
-### Example Usage
+    provider "sdm" {
+      api_access_key = file("~/.secrets/sdm_access_key.txt")
+      api_secret_key = file("~/.secrets/sdm_secret_key.txt")
+    }
 
-main.tf
-```hcl
-provider "sdm" {
-  api_access_key = file("~/.secrets/sdm_access_key.txt")
-  api_secret_key = file("~/.secrets/sdm_secret_key.txt")
-}
-```
+## Authentication
 
-#### Using environment variables
+Generate your authentication credentials from your strongDM account settings.
 
-```shell
-$ export SDM_API_ACCESS_KEY=<YOUR KEY>
-$ export SDM_API_SECRET_KEY=<YOUR SECRET KEY>
-```
+place holder for API key creation images
 
-main.tf
-```hcl
-provider "sdm" {}
-```
-
-## Guides
-
-* [Adding Resources to strongDM](./adding_resources)
-* [How to Create a Gateway](./how_to_create_a_gateway)
-* [Managing Roles](./roles)
-* [Managing Users](./user_management)
+**These keys are secrets and should be treated as such.**

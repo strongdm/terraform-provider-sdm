@@ -11,61 +11,13 @@ import (
 type apiCrudOperation func(d *schema.ResourceData, client *sdm.Client) error
 
 func wrapCrudOperation(op apiCrudOperation) func(d *schema.ResourceData, m interface{}) error {
-	return func(d *schema.ResourceData, meta interface{}) error {
-		client := meta.(*sdm.Client)
+	return func(d *schema.ResourceData, m interface{}) error {
+		client := m.(*sdm.Client)
 		return op(d, client)
 	}
 }
 
-func convertTagsFromMap(m map[string]interface{}, key string) sdm.Tags {
-	value := m[key]
-	if value == nil {
-		return nil
-	}
-	tags, ok := value.(map[string]interface{})
-	if !ok {
-		return nil
-	}
-	res := sdm.Tags{}
-	for key, value := range tags {
-		str, ok := value.(string)
-		if !ok {
-			continue
-		}
-		res[key] = str
-	}
-	return res
-}
-
-func convertTagsFromResourceData(d *schema.ResourceData, key string) sdm.Tags {
-	value := d.Get(key)
-	if value == nil {
-		return nil
-	}
-	tags, ok := value.(map[string]interface{})
-	if !ok {
-		return nil
-	}
-	res := sdm.Tags{}
-	for key, value := range tags {
-		str, ok := value.(string)
-		if !ok {
-			continue
-		}
-		res[key] = str
-	}
-	return res
-}
-
-func convertTagsToMap(tags sdm.Tags) map[string]interface{} {
-	res := map[string]interface{}{}
-	for key, value := range tags {
-		res[key] = value
-	}
-	return res
-}
-
-func convertStringFromMap(m map[string]interface{}, key string) string {
+func stringFromMap(m map[string]interface{}, key string) string {
 	value := m[key]
 	if value == nil {
 		return ""
@@ -73,15 +25,7 @@ func convertStringFromMap(m map[string]interface{}, key string) string {
 	return value.(string)
 }
 
-func convertStringFromResourceData(d *schema.ResourceData, key string) string {
-	value := d.Get(key)
-	if value == nil {
-		return ""
-	}
-	return value.(string)
-}
-
-func convertInt32FromMap(m map[string]interface{}, key string) int32 {
+func int32FromMap(m map[string]interface{}, key string) int32 {
 	value := m[key]
 	if value == nil {
 		return 0
@@ -89,15 +33,7 @@ func convertInt32FromMap(m map[string]interface{}, key string) int32 {
 	return int32(value.(int))
 }
 
-func convertInt32FromResourceData(d *schema.ResourceData, key string) int32 {
-	value := d.Get(key)
-	if value == nil {
-		return 0
-	}
-	return int32(value.(int))
-}
-
-func convertBoolFromMap(m map[string]interface{}, key string) bool {
+func boolFromMap(m map[string]interface{}, key string) bool {
 	value := m[key]
 	if value == nil {
 		return false
@@ -105,7 +41,23 @@ func convertBoolFromMap(m map[string]interface{}, key string) bool {
 	return value.(bool)
 }
 
-func convertBoolFromResourceData(d *schema.ResourceData, key string) bool {
+func stringFromResourceData(d *schema.ResourceData, key string) string {
+	value := d.Get(key)
+	if value == nil {
+		return ""
+	}
+	return value.(string)
+}
+
+func int32FromResourceData(d *schema.ResourceData, key string) int32 {
+	value := d.Get(key)
+	if value == nil {
+		return 0
+	}
+	return int32(value.(int))
+}
+
+func boolFromResourceData(d *schema.ResourceData, key string) bool {
 	value := d.Get(key)
 	if value == nil {
 		return false

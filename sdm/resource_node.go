@@ -19,9 +19,6 @@ func resourceNode() *schema.Resource {
 		Read:   wrapCrudOperation(resourceNodeRead),
 		Update: wrapCrudOperation(resourceNodeUpdate),
 		Delete: wrapCrudOperation(resourceNodeDelete),
-		Importer: &schema.ResourceImporter{
-			State: schema.ImportStatePassthrough,
-		},
 		Schema: map[string]*schema.Schema{
 			"relay": {
 				Type:        schema.TypeList,
@@ -38,9 +35,8 @@ func resourceNode() *schema.Resource {
 							},
 						},
 						"token": {
-							Type:      schema.TypeString,
-							Computed:  true,
-							Sensitive: true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 					},
 				},
@@ -75,9 +71,8 @@ func resourceNode() *schema.Resource {
 							},
 						},
 						"token": {
-							Type:      schema.TypeString,
-							Computed:  true,
-							Sensitive: true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 					},
 				},
@@ -88,30 +83,28 @@ func resourceNode() *schema.Resource {
 		},
 	}
 }
-func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
+func nodeFromResourceData(d *schema.ResourceData) sdm.Node {
 	if list := d.Get("relay").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Relay{}
 		}
-		out := &sdm.Relay{
+		return &sdm.Relay{
 			ID:   d.Id(),
-			Name: convertStringFromMap(raw, "name"),
+			Name: stringFromMap(raw, "name"),
 		}
-		return out
 	}
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Gateway{}
 		}
-		out := &sdm.Gateway{
+		return &sdm.Gateway{
 			ID:            d.Id(),
-			Name:          convertStringFromMap(raw, "name"),
-			ListenAddress: convertStringFromMap(raw, "listen_address"),
-			BindAddress:   convertStringFromMap(raw, "bind_address"),
+			Name:          stringFromMap(raw, "name"),
+			ListenAddress: stringFromMap(raw, "listen_address"),
+			BindAddress:   stringFromMap(raw, "bind_address"),
 		}
-		return out
 	}
 	return nil
 }
@@ -119,30 +112,25 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	localVersion := convertNodeFromResourceData(d)
-	resp, err := cc.Nodes().Create(ctx, localVersion)
+	resp, err := cc.Nodes().Create(ctx, nodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create Node %s: %w", "", err)
 	}
 	d.SetId(resp.Node.GetID())
 	switch v := resp.Node.(type) {
 	case *sdm.Relay:
-		localV, _ := localVersion.(*sdm.Relay)
-		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"name":  (v.Name),
+				"name":  v.Name,
 				"token": resp.Token,
 			},
 		})
 	case *sdm.Gateway:
-		localV, _ := localVersion.(*sdm.Gateway)
-		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"name":           (v.Name),
-				"listen_address": (v.ListenAddress),
-				"bind_address":   (v.BindAddress),
+				"name":           v.Name,
+				"listen_address": v.ListenAddress,
+				"bind_address":   v.BindAddress,
 				"token":          resp.Token,
 			},
 		})
@@ -153,8 +141,6 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	localVersion := convertNodeFromResourceData(d)
-	_ = localVersion
 	resp, err := cc.Nodes().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -165,28 +151,18 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	switch v := resp.Node.(type) {
 	case *sdm.Relay:
-		localV, ok := localVersion.(*sdm.Relay)
-		if !ok {
-			localV = &sdm.Relay{}
-		}
-		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"name":  (v.Name),
+				"name":  v.Name,
 				"token": d.Get("relay.0.token"),
 			},
 		})
 	case *sdm.Gateway:
-		localV, ok := localVersion.(*sdm.Gateway)
-		if !ok {
-			localV = &sdm.Gateway{}
-		}
-		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"name":           (v.Name),
-				"listen_address": (v.ListenAddress),
-				"bind_address":   (v.BindAddress),
+				"name":           v.Name,
+				"listen_address": v.ListenAddress,
+				"bind_address":   v.BindAddress,
 				"token":          d.Get("gateway.0.token"),
 			},
 		})
@@ -196,7 +172,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceNodeUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Nodes().Update(ctx, convertNodeFromResourceData(d))
+	resp, err := cc.Nodes().Update(ctx, nodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)
 	}

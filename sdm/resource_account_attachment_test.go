@@ -116,11 +116,6 @@ func TestAccSDMAccountAttachment_Create(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_account_attachment." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
 		},
 	})
 }
@@ -174,11 +169,6 @@ func TestAccSDMAccountAttachment_Update(t *testing.T) {
 				},
 			},
 			{
-				ResourceName:      "sdm_account_attachment." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
-			{
 				Config: testAccSDMAccountAttachmentConfig(rsName, roleRsName, altAccountRsName),
 				Check: func(s *terraform.State) error {
 					accountID, err := testCreatedID(s, "sdm_account", altAccountRsName)
@@ -215,11 +205,6 @@ func TestAccSDMAccountAttachment_Update(t *testing.T) {
 
 					return nil
 				},
-			},
-			{
-				ResourceName:      "sdm_account_attachment." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
 			},
 		},
 	})

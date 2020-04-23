@@ -44,6 +44,8 @@ func dataSourceNode() *schema.Resource {
 			"nodes": {
 				Type:     schema.TypeList,
 				Computed: true,
+				MaxItems: 1,
+				MinItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -105,7 +107,7 @@ func dataSourceNode() *schema.Resource {
 	}
 }
 
-func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func nodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("type"); ok {
@@ -138,7 +140,7 @@ func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interf
 func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := convertNodeFilterFromResourceData(d)
+	filter, args := nodeFilterFromResourceData(d)
 	resp, err := cc.Nodes().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Nodes %s: %w", d.Id(), err)
@@ -154,15 +156,15 @@ func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 		switch v := resp.Value().(type) {
 		case *sdm.Relay:
 			output[0]["relay"] = append(output[0]["relay"], entity{
-				"id":   (v.ID),
-				"name": (v.Name),
+				"id":   v.ID,
+				"name": v.Name,
 			})
 		case *sdm.Gateway:
 			output[0]["gateway"] = append(output[0]["gateway"], entity{
-				"id":             (v.ID),
-				"name":           (v.Name),
-				"listen_address": (v.ListenAddress),
-				"bind_address":   (v.BindAddress),
+				"id":             v.ID,
+				"name":           v.Name,
+				"listen_address": v.ListenAddress,
+				"bind_address":   v.BindAddress,
 			})
 		}
 	}

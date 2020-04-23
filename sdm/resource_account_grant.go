@@ -18,9 +18,6 @@ func resourceAccountGrant() *schema.Resource {
 		Create: wrapCrudOperation(resourceAccountGrantCreate),
 		Read:   wrapCrudOperation(resourceAccountGrantRead),
 		Delete: wrapCrudOperation(resourceAccountGrantDelete),
-		Importer: &schema.ResourceImporter{
-			State: schema.ImportStatePassthrough,
-		},
 		Schema: map[string]*schema.Schema{
 			"resource_id": {
 				Type:        schema.TypeString,
@@ -40,34 +37,31 @@ func resourceAccountGrant() *schema.Resource {
 		},
 	}
 }
-func convertAccountGrantFromResourceData(d *schema.ResourceData) *sdm.AccountGrant {
+func accountGrantFromResourceData(d *schema.ResourceData) *sdm.AccountGrant {
 	return &sdm.AccountGrant{
 		ID:         d.Id(),
-		ResourceID: convertStringFromResourceData(d, "resource_id"),
-		AccountID:  convertStringFromResourceData(d, "account_id"),
+		ResourceID: stringFromResourceData(d, "resource_id"),
+		AccountID:  stringFromResourceData(d, "account_id"),
 	}
 }
 
 func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	localVersion := convertAccountGrantFromResourceData(d)
-	resp, err := cc.AccountGrants().Create(ctx, localVersion)
+	resp, err := cc.AccountGrants().Create(ctx, accountGrantFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create AccountGrant %s: %w", "", err)
 	}
 	d.SetId(resp.AccountGrant.ID)
 	v := resp.AccountGrant
-	d.Set("resource_id", (v.ResourceID))
-	d.Set("account_id", (v.AccountID))
+	d.Set("resource_id", v.ResourceID)
+	d.Set("account_id", v.AccountID)
 	return nil
 }
 
 func resourceAccountGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	localVersion := convertAccountGrantFromResourceData(d)
-	_ = localVersion
 	resp, err := cc.AccountGrants().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -77,8 +71,8 @@ func resourceAccountGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read AccountGrant %s: %w", d.Id(), err)
 	}
 	v := resp.AccountGrant
-	d.Set("resource_id", (v.ResourceID))
-	d.Set("account_id", (v.AccountID))
+	d.Set("resource_id", v.ResourceID)
+	d.Set("account_id", v.AccountID)
 	return nil
 }
 func resourceAccountGrantDelete(d *schema.ResourceData, cc *sdm.Client) error {

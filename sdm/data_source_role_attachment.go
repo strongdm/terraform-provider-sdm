@@ -68,7 +68,7 @@ func dataSourceRoleAttachment() *schema.Resource {
 	}
 }
 
-func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func roleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("id"); ok {
@@ -89,7 +89,7 @@ func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string
 func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := convertRoleAttachmentFilterFromResourceData(d)
+	filter, args := roleAttachmentFilterFromResourceData(d)
 	resp, err := cc.RoleAttachments().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list RoleAttachments %s: %w", d.Id(), err)
@@ -102,9 +102,9 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *sdm.Client) error 
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":                (v.ID),
-				"composite_role_id": (v.CompositeRoleID),
-				"attached_role_id":  (v.AttachedRoleID),
+				"id":                v.ID,
+				"composite_role_id": v.CompositeRoleID,
+				"attached_role_id":  v.AttachedRoleID,
 			})
 	}
 	if resp.Err() != nil {

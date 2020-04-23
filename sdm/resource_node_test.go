@@ -94,11 +94,6 @@ func TestAccSDMNode_GatewayCreate(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
 		},
 	})
 }
@@ -154,11 +149,6 @@ func TestAccSDMNode_GatewayCreateNoBindAddress(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
 		},
 	})
 }
@@ -204,11 +194,6 @@ func TestAccSDMNode_RelayCreate(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
 		},
 	})
 }
@@ -252,11 +237,6 @@ func TestAccSDMNode_RelayCreateGeneratedName(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
 		},
 	})
 }
@@ -276,11 +256,6 @@ func TestAccSDMNode_Update(t *testing.T) {
 					resource.TestCheckResourceAttr("sdm_node."+rsName, "relay.0.name", relayName),
 					resource.TestCheckResourceAttr("sdm_node."+rsName, "relay.#", "1"),
 				),
-			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
 			},
 			{
 				Config: testAccSDMNodeRelayConfig(rsName, updatedRelayName),
@@ -315,11 +290,6 @@ func TestAccSDMNode_Update(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
 		},
 	})
 }
@@ -349,11 +319,6 @@ func TestAccSDMNode_UpdateTokenStays(t *testing.T) {
 				),
 			},
 			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
-			{
 				Config: testAccSDMNodeRelayConfig(rsName, updatedRelayName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("sdm_node."+rsName, "relay.0.token"),
@@ -368,11 +333,6 @@ func TestAccSDMNode_UpdateTokenStays(t *testing.T) {
 						return nil
 					},
 				),
-			},
-			{
-				ResourceName:      "sdm_node." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
 			},
 		},
 	})

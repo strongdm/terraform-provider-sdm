@@ -4,13 +4,8 @@ page_title: "strongDM Provider"
 
 # strongDM Provider
 
-The strongDM provider is used to configure and manage your strongDM account. It provides resources and datasources that allow you to:
-
-* Register gateways
-* Enroll databases and servers
-* Grant access
-* Create and suspend users
-* Manage roles
+Summary of what the provider is for, including use cases and links to
+app/service documentation.
 
 ## Example Usage
 
@@ -18,6 +13,7 @@ The strongDM provider is used to configure and manage your strongDM account. It 
 provider "sdm" {
    	api_access_key = "ACCESS_KEY"
 	api_secret_key = "SECRET_KEY"
+	host = "api.strongdm.com:443"
 }
 
 resource "sdm_node" "example_gateway" {
@@ -30,29 +26,19 @@ resource "sdm_node" "example_gateway" {
 
 ```
 
+
+
+## Authentication
+The strongDM provider allows for two methods of authentication:
+- static credentials
+- environment variables
+
+
 ## Argument Reference
-* `api_access_key` - (Required) Your strongDM API access key. It can also be sourced from the `SDM_API_ACCESS_KEY` environment variable.
+The following arguments are supported by the strongDM provider:
 
-* `api_secret_key` - (Required) Your strongDM API secret key. It can also be sourced from the `SDM_API_SECRET_KEY` environment variable.
+* `api_access_key` - (Optional) This is the strongDM API access key. Alternatively, sourced via the environment variable `SDM_API_ACCESS_KEY`.
 
-## Environment Variables
-You can provide your credentials via the SDM_API_ACCESS_KEY and SDM_API_SECRET_KEY environment variables.
+* `api_secret_key` - (Optional) This is the strongDM API secret key. Alternatively, sourced via the environment variable `SDM_API_SECRET_KEY`.
 
-```hcl
-provider "sdm" {}
-```
-
-Usage:
-
-```shell
-$ export SDM_API_ACCESS_KEY="<access-key>"
-$ export SDM_API_SECRET_KEY="<secret-key>"
-$ terraform plan
-```
-
-## Documentation
-
-* [Guides](./guides/)
-* [Data Sources](./data-sources/)
-* [Resources](./resources/)
-
+* `host` - (Optional) This is the host that strongDM API requests will be sent to. Alternatively, sourced via the environment variable `SDM_API_HOST`. 

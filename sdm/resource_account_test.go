@@ -84,11 +84,6 @@ func TestAccSDMAccount_ServiceCreate(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_account." + rsName,
-				ImportState:       true,
-				ImportStateVerify: false, // can't verify because token cannot be recovered
-			},
 		},
 	})
 }
@@ -137,11 +132,6 @@ func TestAccSDMAccount_UserCreate(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_account." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
 		},
 	})
 }
@@ -168,11 +158,6 @@ func TestAccSDMAccount_Update(t *testing.T) {
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.email", email),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.#", "1"),
 				),
-			},
-			{
-				ResourceName:      "sdm_account." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
 			},
 			{
 				Config: testAccSDMAccountUserConfig(rsName, firstName2, lastName2, email2),
@@ -208,11 +193,6 @@ func TestAccSDMAccount_Update(t *testing.T) {
 						return nil
 					},
 				),
-			},
-			{
-				ResourceName:      "sdm_account." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
 			},
 		},
 	})

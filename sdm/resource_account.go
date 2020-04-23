@@ -19,9 +19,6 @@ func resourceAccount() *schema.Resource {
 		Read:   wrapCrudOperation(resourceAccountRead),
 		Update: wrapCrudOperation(resourceAccountUpdate),
 		Delete: wrapCrudOperation(resourceAccountDelete),
-		Importer: &schema.ResourceImporter{
-			State: schema.ImportStatePassthrough,
-		},
 		Schema: map[string]*schema.Schema{
 			"user": {
 				Type:        schema.TypeList,
@@ -69,9 +66,8 @@ func resourceAccount() *schema.Resource {
 							Description: "The Service's suspended state.",
 						},
 						"token": {
-							Type:      schema.TypeString,
-							Computed:  true,
-							Sensitive: true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 					},
 				},
@@ -82,32 +78,30 @@ func resourceAccount() *schema.Resource {
 		},
 	}
 }
-func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
+func accountFromResourceData(d *schema.ResourceData) sdm.Account {
 	if list := d.Get("user").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.User{}
 		}
-		out := &sdm.User{
+		return &sdm.User{
 			ID:        d.Id(),
-			Email:     convertStringFromMap(raw, "email"),
-			FirstName: convertStringFromMap(raw, "first_name"),
-			LastName:  convertStringFromMap(raw, "last_name"),
-			Suspended: convertBoolFromMap(raw, "suspended"),
+			Email:     stringFromMap(raw, "email"),
+			FirstName: stringFromMap(raw, "first_name"),
+			LastName:  stringFromMap(raw, "last_name"),
+			Suspended: boolFromMap(raw, "suspended"),
 		}
-		return out
 	}
 	if list := d.Get("service").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return &sdm.Service{}
 		}
-		out := &sdm.Service{
+		return &sdm.Service{
 			ID:        d.Id(),
-			Name:      convertStringFromMap(raw, "name"),
-			Suspended: convertBoolFromMap(raw, "suspended"),
+			Name:      stringFromMap(raw, "name"),
+			Suspended: boolFromMap(raw, "suspended"),
 		}
-		return out
 	}
 	return nil
 }
@@ -115,31 +109,26 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
-	localVersion := convertAccountFromResourceData(d)
-	resp, err := cc.Accounts().Create(ctx, localVersion)
+	resp, err := cc.Accounts().Create(ctx, accountFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot create Account %s: %w", "", err)
 	}
 	d.SetId(resp.Account.GetID())
 	switch v := resp.Account.(type) {
 	case *sdm.User:
-		localV, _ := localVersion.(*sdm.User)
-		_ = localV
 		d.Set("user", []map[string]interface{}{
 			{
-				"email":      (v.Email),
-				"first_name": (v.FirstName),
-				"last_name":  (v.LastName),
-				"suspended":  (v.Suspended),
+				"email":      v.Email,
+				"first_name": v.FirstName,
+				"last_name":  v.LastName,
+				"suspended":  v.Suspended,
 			},
 		})
 	case *sdm.Service:
-		localV, _ := localVersion.(*sdm.Service)
-		_ = localV
 		d.Set("service", []map[string]interface{}{
 			{
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
+				"name":      v.Name,
+				"suspended": v.Suspended,
 				"token":     resp.Token,
 			},
 		})
@@ -150,8 +139,6 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	localVersion := convertAccountFromResourceData(d)
-	_ = localVersion
 	resp, err := cc.Accounts().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -162,29 +149,19 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	switch v := resp.Account.(type) {
 	case *sdm.User:
-		localV, ok := localVersion.(*sdm.User)
-		if !ok {
-			localV = &sdm.User{}
-		}
-		_ = localV
 		d.Set("user", []map[string]interface{}{
 			{
-				"email":      (v.Email),
-				"first_name": (v.FirstName),
-				"last_name":  (v.LastName),
-				"suspended":  (v.Suspended),
+				"email":      v.Email,
+				"first_name": v.FirstName,
+				"last_name":  v.LastName,
+				"suspended":  v.Suspended,
 			},
 		})
 	case *sdm.Service:
-		localV, ok := localVersion.(*sdm.Service)
-		if !ok {
-			localV = &sdm.Service{}
-		}
-		_ = localV
 		d.Set("service", []map[string]interface{}{
 			{
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
+				"name":      v.Name,
+				"suspended": v.Suspended,
 				"token":     d.Get("service.0.token"),
 			},
 		})
@@ -194,7 +171,7 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceAccountUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
-	resp, err := cc.Accounts().Update(ctx, convertAccountFromResourceData(d))
+	resp, err := cc.Accounts().Update(ctx, accountFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Account %s: %w", d.Id(), err)
 	}

@@ -116,11 +116,6 @@ func TestAccSDMAccountGrant_Create(t *testing.T) {
 					},
 				),
 			},
-			{
-				ResourceName:      "sdm_account_grant." + grantRsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
 		},
 	})
 }
@@ -174,11 +169,6 @@ func TestAccSDMAccountGrant_Update(t *testing.T) {
 				},
 			},
 			{
-				ResourceName:      "sdm_account_grant." + grantRsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
-			{
 				Config: testAccSDMAccountGrantConfig(grantRsName, redisRsName, altAccountRsName),
 				Check: func(s *terraform.State) error {
 					accountID, err := testCreatedID(s, "sdm_account", altAccountRsName)
@@ -216,11 +206,6 @@ func TestAccSDMAccountGrant_Update(t *testing.T) {
 					return nil
 				},
 			},
-			{
-				ResourceName:      "sdm_account_grant." + grantRsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
 		},
 	})
 }
@@ -231,6 +216,7 @@ func testAccSDMAccountGrantConfig(grantResourceName, redisResourceName, accResou
 		redis {
 			name = "%s"
 			hostname = "test.com"
+			port_override = %d
 		}
 	}
 
@@ -249,6 +235,7 @@ func testAccSDMAccountGrantConfig(grantResourceName, redisResourceName, accResou
 	`,
 		redisResourceName,
 		randomWithPrefix("redis"),
+		portOverride.Count(),
 		accResourceName,
 		randomWithPrefix("first-name"),
 		randomWithPrefix("last-name"),

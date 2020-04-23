@@ -68,7 +68,7 @@ func dataSourceRole() *schema.Resource {
 	}
 }
 
-func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func roleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOk("id"); ok {
@@ -89,7 +89,7 @@ func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interf
 func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
 	defer cancel()
-	filter, args := convertRoleFilterFromResourceData(d)
+	filter, args := roleFilterFromResourceData(d)
 	resp, err := cc.Roles().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Roles %s: %w", d.Id(), err)
@@ -102,9 +102,9 @@ func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":        (v.ID),
-				"name":      (v.Name),
-				"composite": (v.Composite),
+				"id":        v.ID,
+				"name":      v.Name,
+				"composite": v.Composite,
 			})
 	}
 	if resp.Err() != nil {
