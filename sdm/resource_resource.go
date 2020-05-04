@@ -698,12 +698,12 @@ func resourceResource() *schema.Resource {
 						},
 						"access_key": {
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 							Description: "",
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 							Sensitive:   true,
 							Description: "",
 						},

@@ -119,8 +119,8 @@ The following arguments are supported by the Resource resource:
 * amazon_eks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `endpoint` - (Required) 
-	* `access_key` - (Optional) 
-	* `secret_access_key` - (Optional) 
+	* `access_key` - (Required) 
+	* `secret_access_key` - (Required) 
 	* `certificate_authority` - (Required) 
 	* `certificate_authority_filename` - (Optional) 
 	* `region` - (Required) 

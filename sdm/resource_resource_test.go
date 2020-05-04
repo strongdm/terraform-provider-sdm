@@ -427,6 +427,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"name", `"amazon_eks"`},
 				{"endpoint", `"Endpoint"`},
+				{"access_key", `"AccessKey"`},
+				{"secret_access_key", `"SecretAccessKey"`},
 				{"certificate_authority", certificateAuthority},
 				{"region", `"Region"`},
 				{"cluster_name", `"ClusterName"`},
