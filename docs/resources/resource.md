@@ -105,17 +105,20 @@ The following arguments are supported by the Resource resource:
 	* `client_certificate_filename` - (Optional) 
 	* `client_key` - (Optional) 
 	* `client_key_filename` - (Optional) 
+	* `healthcheck_namespace` - (Optional) 
 * kubernetes_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
+	* `healthcheck_namespace` - (Optional) 
 * kubernetes_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `token` - (Required) 
+	* `healthcheck_namespace` - (Optional) 
 * amazon_eks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `endpoint` - (Required) 
@@ -126,6 +129,7 @@ The following arguments are supported by the Resource resource:
 	* `region` - (Required) 
 	* `cluster_name` - (Required) 
 	* `role_arn` - (Optional) 
+	* `healthcheck_namespace` - (Optional) 
 * google_gke:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `endpoint` - (Required) 
@@ -133,6 +137,7 @@ The following arguments are supported by the Resource resource:
 	* `certificate_authority_filename` - (Optional) 
 	* `service_account_key` - (Required) 
 	* `service_account_key_filename` - (Optional) 
+	* `healthcheck_namespace` - (Optional) 
 * aks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
@@ -143,17 +148,20 @@ The following arguments are supported by the Resource resource:
 	* `client_certificate_filename` - (Optional) 
 	* `client_key` - (Optional) 
 	* `client_key_filename` - (Optional) 
+	* `healthcheck_namespace` - (Optional) 
 * aks_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
+	* `healthcheck_namespace` - (Optional) 
 * aks_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `token` - (Required) 
+	* `healthcheck_namespace` - (Optional) 
 * memcached:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
@@ -278,6 +286,14 @@ The following arguments are supported by the Resource resource:
 	* `database` - (Required) 
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
+* citus:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `hostname` - (Required) 
+	* `username` - (Required) 
+	* `password` - (Required) 
+	* `database` - (Required) 
+	* `port` - (Optional) 
+	* `override_database` - (Optional) 
 * presto:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
@@ -320,6 +336,12 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `override_database` - (Optional) 
 * ssh:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `hostname` - (Required) 
+	* `username` - (Required) 
+	* `port` - (Required) 
+	* `port_forwarding` - (Optional) 
+* ssh_cert:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
@@ -391,6 +413,8 @@ In addition to provided arguments above, the following attributes are returned b
 * cockroach:
 	* `port_override` - 
 * redshift:
+	* `port_override` - 
+* citus:
 	* `port_override` - 
 * presto:
 	* `port_override` - 

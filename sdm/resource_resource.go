@@ -585,6 +585,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -629,6 +634,11 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -666,6 +676,11 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Sensitive:   true,
+							Description: "",
+						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -733,6 +748,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -779,6 +799,11 @@ func resourceResource() *schema.Resource {
 							Description: "",
 						},
 						"service_account_key_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
@@ -849,6 +874,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -893,6 +923,11 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -930,6 +965,11 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Sensitive:   true,
+							Description: "",
+						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 					},
@@ -1858,6 +1898,65 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"citus": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"presto": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -2215,6 +2314,49 @@ func resourceResource() *schema.Resource {
 						"public_key": {
 							Type:        schema.TypeString,
 							Computed:    true,
+							Description: "",
+						},
+						"port_forwarding": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"ssh_cert": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
 							Description: "",
 						},
 						"port_forwarding": {
@@ -2596,6 +2738,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ClientCertificateFilename:    convertStringFromMap(raw, "client_certificate_filename"),
 			ClientKey:                    convertStringFromMap(raw, "client_key"),
 			ClientKeyFilename:            convertStringFromMap(raw, "client_key_filename"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2605,13 +2748,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.KubernetesBasicAuth{}
 		}
 		out := &sdm.KubernetesBasicAuth{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Port:     convertInt32FromMap(raw, "port"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
+			ID:                   d.Id(),
+			Name:                 convertStringFromMap(raw, "name"),
+			Tags:                 convertTagsFromMap(raw, "tags"),
+			Hostname:             convertStringFromMap(raw, "hostname"),
+			Port:                 convertInt32FromMap(raw, "port"),
+			Username:             convertStringFromMap(raw, "username"),
+			Password:             convertStringFromMap(raw, "password"),
+			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2621,12 +2765,13 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.KubernetesServiceAccount{}
 		}
 		out := &sdm.KubernetesServiceAccount{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Port:     convertInt32FromMap(raw, "port"),
-			Token:    convertStringFromMap(raw, "token"),
+			ID:                   d.Id(),
+			Name:                 convertStringFromMap(raw, "name"),
+			Tags:                 convertTagsFromMap(raw, "tags"),
+			Hostname:             convertStringFromMap(raw, "hostname"),
+			Port:                 convertInt32FromMap(raw, "port"),
+			Token:                convertStringFromMap(raw, "token"),
+			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2647,6 +2792,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			Region:                       convertStringFromMap(raw, "region"),
 			ClusterName:                  convertStringFromMap(raw, "cluster_name"),
 			RoleArn:                      convertStringFromMap(raw, "role_arn"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2664,6 +2810,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
 			ServiceAccountKey:            convertStringFromMap(raw, "service_account_key"),
 			ServiceAccountKeyFilename:    convertStringFromMap(raw, "service_account_key_filename"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2684,6 +2831,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ClientCertificateFilename:    convertStringFromMap(raw, "client_certificate_filename"),
 			ClientKey:                    convertStringFromMap(raw, "client_key"),
 			ClientKeyFilename:            convertStringFromMap(raw, "client_key_filename"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2693,13 +2841,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AKSBasicAuth{}
 		}
 		out := &sdm.AKSBasicAuth{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Port:     convertInt32FromMap(raw, "port"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
+			ID:                   d.Id(),
+			Name:                 convertStringFromMap(raw, "name"),
+			Tags:                 convertTagsFromMap(raw, "tags"),
+			Hostname:             convertStringFromMap(raw, "hostname"),
+			Port:                 convertInt32FromMap(raw, "port"),
+			Username:             convertStringFromMap(raw, "username"),
+			Password:             convertStringFromMap(raw, "password"),
+			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2709,12 +2858,13 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AKSServiceAccount{}
 		}
 		out := &sdm.AKSServiceAccount{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Port:     convertInt32FromMap(raw, "port"),
-			Token:    convertStringFromMap(raw, "token"),
+			ID:                   d.Id(),
+			Name:                 convertStringFromMap(raw, "name"),
+			Tags:                 convertTagsFromMap(raw, "tags"),
+			Hostname:             convertStringFromMap(raw, "hostname"),
+			Port:                 convertInt32FromMap(raw, "port"),
+			Token:                convertStringFromMap(raw, "token"),
+			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -3082,6 +3232,29 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("citus").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.Citus{}
+		}
+		out := &sdm.Citus{
+			ID:               d.Id(),
+			Name:             convertStringFromMap(raw, "name"),
+			Tags:             convertTagsFromMap(raw, "tags"),
+			Hostname:         convertStringFromMap(raw, "hostname"),
+			Username:         convertStringFromMap(raw, "username"),
+			Password:         convertStringFromMap(raw, "password"),
+			Database:         convertStringFromMap(raw, "database"),
+			Port:             convertInt32FromMap(raw, "port"),
+			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("presto").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -3219,6 +3392,22 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SSH{}
 		}
 		out := &sdm.SSH{
+			ID:             d.Id(),
+			Name:           convertStringFromMap(raw, "name"),
+			Tags:           convertTagsFromMap(raw, "tags"),
+			Hostname:       convertStringFromMap(raw, "hostname"),
+			Username:       convertStringFromMap(raw, "username"),
+			Port:           convertInt32FromMap(raw, "port"),
+			PortForwarding: convertBoolFromMap(raw, "port_forwarding"),
+		}
+		return out
+	}
+	if list := d.Get("ssh_cert").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.SSHCert{}
+		}
+		out := &sdm.SSHCert{
 			ID:             d.Id(),
 			Name:           convertStringFromMap(raw, "name"),
 			Tags:           convertTagsFromMap(raw, "tags"),
@@ -3462,6 +3651,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_certificate_filename":    (v.ClientCertificateFilename),
 				"client_key":                     localV.ClientKey,
 				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -3469,12 +3659,13 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"username": (v.Username),
-				"password": localV.Password,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"username":              (v.Username),
+				"password":              localV.Password,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
@@ -3482,11 +3673,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"token":    localV.Token,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 localV.Token,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AmazonEKS:
@@ -3504,6 +3696,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":                         (v.Region),
 				"cluster_name":                   (v.ClusterName),
 				"role_arn":                       (v.RoleArn),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -3518,6 +3711,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"certificate_authority_filename": (v.CertificateAuthorityFilename),
 				"service_account_key":            localV.ServiceAccountKey,
 				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKS:
@@ -3535,6 +3729,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_certificate_filename":    (v.ClientCertificateFilename),
 				"client_key":                     localV.ClientKey,
 				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -3542,12 +3737,13 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"username": (v.Username),
-				"password": localV.Password,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"username":              (v.Username),
+				"password":              localV.Password,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKSServiceAccount:
@@ -3555,11 +3751,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"token":    localV.Token,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 localV.Token,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.Memcached:
@@ -3814,6 +4011,22 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"override_database": (v.OverrideDatabase),
 			},
 		})
+	case *sdm.Citus:
+		localV, _ := localVersion.(*sdm.Citus)
+		_ = localV
+		d.Set("citus", []map[string]interface{}{
+			{
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
+			},
+		})
 	case *sdm.Presto:
 		localV, _ := localVersion.(*sdm.Presto)
 		_ = localV
@@ -3914,6 +4127,19 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"username":        (v.Username),
 				"port":            (v.Port),
 				"public_key":      (v.PublicKey),
+				"port_forwarding": (v.PortForwarding),
+			},
+		})
+	case *sdm.SSHCert:
+		localV, _ := localVersion.(*sdm.SSHCert)
+		_ = localV
+		d.Set("ssh_cert", []map[string]interface{}{
+			{
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port":            (v.Port),
 				"port_forwarding": (v.PortForwarding),
 			},
 		})
@@ -4167,6 +4393,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_certificate_filename":    (v.ClientCertificateFilename),
 				"client_key":                     localV.ClientKey,
 				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -4177,12 +4404,13 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"username": (v.Username),
-				"password": localV.Password,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"username":              (v.Username),
+				"password":              localV.Password,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
@@ -4193,11 +4421,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"token":    localV.Token,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 localV.Token,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AmazonEKS:
@@ -4218,6 +4447,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":                         (v.Region),
 				"cluster_name":                   (v.ClusterName),
 				"role_arn":                       (v.RoleArn),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -4235,6 +4465,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"certificate_authority_filename": (v.CertificateAuthorityFilename),
 				"service_account_key":            localV.ServiceAccountKey,
 				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKS:
@@ -4255,6 +4486,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_certificate_filename":    (v.ClientCertificateFilename),
 				"client_key":                     localV.ClientKey,
 				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -4265,12 +4497,13 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"username": (v.Username),
-				"password": localV.Password,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"username":              (v.Username),
+				"password":              localV.Password,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKSServiceAccount:
@@ -4281,11 +4514,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"token":    localV.Token,
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 localV.Token,
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.Memcached:
@@ -4588,6 +4822,25 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"override_database": (v.OverrideDatabase),
 			},
 		})
+	case *sdm.Citus:
+		localV, ok := localVersion.(*sdm.Citus)
+		if !ok {
+			localV = &sdm.Citus{}
+		}
+		_ = localV
+		d.Set("citus", []map[string]interface{}{
+			{
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          localV.Password,
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
+			},
+		})
 	case *sdm.Presto:
 		localV, ok := localVersion.(*sdm.Presto)
 		if !ok {
@@ -4709,6 +4962,22 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"username":        (v.Username),
 				"port":            (v.Port),
 				"public_key":      (v.PublicKey),
+				"port_forwarding": (v.PortForwarding),
+			},
+		})
+	case *sdm.SSHCert:
+		localV, ok := localVersion.(*sdm.SSHCert)
+		if !ok {
+			localV = &sdm.SSHCert{}
+		}
+		_ = localV
+		d.Set("ssh_cert", []map[string]interface{}{
+			{
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port":            (v.Port),
 				"port_forwarding": (v.PortForwarding),
 			},
 		})

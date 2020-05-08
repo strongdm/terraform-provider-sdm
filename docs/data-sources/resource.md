@@ -130,6 +130,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `client_certificate_filename` - 
 		* `client_key` - 
 		* `client_key_filename` - 
+		* `healthcheck_namespace` - 
 	* kubernetes_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -138,6 +139,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `username` - 
 		* `password` - 
+		* `healthcheck_namespace` - 
 	* kubernetes_service_account:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -145,6 +147,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
+		* `healthcheck_namespace` - 
 	* amazon_eks:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -157,6 +160,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `region` - 
 		* `cluster_name` - 
 		* `role_arn` - 
+		* `healthcheck_namespace` - 
 	* google_gke:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -166,6 +170,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority_filename` - 
 		* `service_account_key` - 
 		* `service_account_key_filename` - 
+		* `healthcheck_namespace` - 
 	* aks:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -178,6 +183,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `client_certificate_filename` - 
 		* `client_key` - 
 		* `client_key_filename` - 
+		* `healthcheck_namespace` - 
 	* aks_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -186,6 +192,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `username` - 
 		* `password` - 
+		* `healthcheck_namespace` - 
 	* aks_service_account:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -193,6 +200,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
+		* `healthcheck_namespace` - 
 	* memcached:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -365,6 +373,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `port` - 
 		* `override_database` - 
+	* citus:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `hostname` - 
+		* `username` - 
+		* `password` - 
+		* `database` - 
+		* `port_override` - 
+		* `port` - 
+		* `override_database` - 
 	* presto:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -432,6 +451,14 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - 
 		* `port` - 
 		* `public_key` - 
+		* `port_forwarding` - 
+	* ssh_cert:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `hostname` - 
+		* `username` - 
+		* `port` - 
 		* `port_forwarding` - 
 	* sybase:
 		* `id` - Unique identifier of the Resource.

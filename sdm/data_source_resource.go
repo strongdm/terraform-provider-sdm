@@ -668,6 +668,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -717,6 +722,11 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -759,6 +769,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 								},
@@ -831,6 +846,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -882,6 +902,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"service_account_key_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -957,6 +982,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -1006,6 +1036,11 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -1048,6 +1083,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 								},
@@ -2056,6 +2096,70 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"citus": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"presto": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -2458,6 +2562,54 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"ssh_cert": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_forwarding": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"sybase": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -2802,25 +2954,28 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_certificate_filename":    (v.ClientCertificateFilename),
 				"client_key":                     (v.ClientKey),
 				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.KubernetesBasicAuth:
 			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
-				"id":       (v.ID),
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"username": (v.Username),
-				"password": (v.Password),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"username":              (v.Username),
+				"password":              (v.Password),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
-				"id":       (v.ID),
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"token":    (v.Token),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 (v.Token),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			})
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
@@ -2835,6 +2990,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":                         (v.Region),
 				"cluster_name":                   (v.ClusterName),
 				"role_arn":                       (v.RoleArn),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
@@ -2846,6 +3002,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"certificate_authority_filename": (v.CertificateAuthorityFilename),
 				"service_account_key":            (v.ServiceAccountKey),
 				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
@@ -2860,25 +3017,28 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_certificate_filename":    (v.ClientCertificateFilename),
 				"client_key":                     (v.ClientKey),
 				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.AKSBasicAuth:
 			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
-				"id":       (v.ID),
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"username": (v.Username),
-				"password": (v.Password),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"username":              (v.Username),
+				"password":              (v.Password),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			})
 		case *sdm.AKSServiceAccount:
 			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
-				"id":       (v.ID),
-				"name":     (v.Name),
-				"tags":     convertTagsToMap(v.Tags),
-				"hostname": (v.Hostname),
-				"port":     (v.Port),
-				"token":    (v.Token),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 (v.Token),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
@@ -3084,6 +3244,19 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":              (v.Port),
 				"override_database": (v.OverrideDatabase),
 			})
+		case *sdm.Citus:
+			output[0]["citus"] = append(output[0]["citus"], entity{
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"tags":              convertTagsToMap(v.Tags),
+				"hostname":          (v.Hostname),
+				"username":          (v.Username),
+				"password":          (v.Password),
+				"database":          (v.Database),
+				"port_override":     (v.PortOverride),
+				"port":              (v.Port),
+				"override_database": (v.OverrideDatabase),
+			})
 		case *sdm.Presto:
 			output[0]["presto"] = append(output[0]["presto"], entity{
 				"id":            (v.ID),
@@ -3164,6 +3337,16 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"username":        (v.Username),
 				"port":            (v.Port),
 				"public_key":      (v.PublicKey),
+				"port_forwarding": (v.PortForwarding),
+			})
+		case *sdm.SSHCert:
+			output[0]["ssh_cert"] = append(output[0]["ssh_cert"], entity{
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port":            (v.Port),
 				"port_forwarding": (v.PortForwarding),
 			})
 		case *sdm.Sybase:

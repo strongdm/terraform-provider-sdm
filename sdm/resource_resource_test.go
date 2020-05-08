@@ -660,6 +660,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "ssh_cert",
+			pairs: [][2]string{
+				{"name", `"ssh_cert"`},
+				{"hostname", `"Hostname"`},
+				{"username", `"Username"`},
+				{"port", "22"},
+				{"port_forwarding", "true"},
+			},
+		},
+		{
 			resource: "sybase",
 			pairs: [][2]string{
 				{"name", `"sybase"`},
