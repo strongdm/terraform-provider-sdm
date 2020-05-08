@@ -21,6 +21,16 @@ import (
 	"time"
 )
 
+type Tags map[string]string
+
+func (t Tags) clone() Tags {
+	res := Tags{}
+	for k, v := range t {
+		res[k] = v
+	}
+	return res
+}
+
 // CreateResponseMetadata is reserved for future use.
 type CreateResponseMetadata struct {
 }
@@ -192,6 +202,8 @@ type Account interface {
 	GetID() string
 	// IsSuspended returns whether the Account is suspended.
 	IsSuspended() bool
+	// SetSuspended sets the suspended of the Account.
+	SetSuspended(bool)
 	isOneOf_Account()
 }
 
@@ -204,6 +216,11 @@ func (m *User) GetID() string { return m.ID }
 func (m *User) IsSuspended() bool {
 	return m.Suspended
 }
+
+// SetSuspended sets the suspended of the User.
+func (m *User) SetSuspended(v bool) {
+	m.Suspended = v
+}
 func (*Service) isOneOf_Account() {}
 
 // GetID returns the unique identifier of the Service.
@@ -212,6 +229,11 @@ func (m *Service) GetID() string { return m.ID }
 // IsSuspended returns whether the Service is suspended.
 func (m *Service) IsSuspended() bool {
 	return m.Suspended
+}
+
+// SetSuspended sets the suspended of the Service.
+func (m *Service) SetSuspended(v bool) {
+	m.Suspended = v
 }
 
 // A User can connect to resources they are granted directly, or granted
@@ -240,12 +262,18 @@ type Service struct {
 	Suspended bool `json:"suspended"`
 }
 
-// A Resource is a server or service which clients connect to through relays.
+// A Resource is a database or server for which strongDM manages access.
 type Resource interface {
 	// GetID returns the unique identifier of the Resource.
 	GetID() string
 	// GetName returns the name of the Resource.
 	GetName() string
+	// SetName sets the name of the Resource.
+	SetName(string)
+	// GetTags returns the tags of the Resource.
+	GetTags() Tags
+	// SetTags sets the tags of the Resource.
+	SetTags(Tags)
 	isOneOf_Resource()
 }
 
@@ -258,6 +286,21 @@ func (m *Athena) GetID() string { return m.ID }
 func (m *Athena) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Athena.
+func (m *Athena) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Athena.
+func (m *Athena) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Athena.
+func (m *Athena) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*BigQuery) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the BigQuery.
@@ -266,6 +309,21 @@ func (m *BigQuery) GetID() string { return m.ID }
 // GetName returns the name of the BigQuery.
 func (m *BigQuery) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the BigQuery.
+func (m *BigQuery) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the BigQuery.
+func (m *BigQuery) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the BigQuery.
+func (m *BigQuery) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Cassandra) isOneOf_Resource() {}
 
@@ -276,6 +334,21 @@ func (m *Cassandra) GetID() string { return m.ID }
 func (m *Cassandra) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Cassandra.
+func (m *Cassandra) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Cassandra.
+func (m *Cassandra) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Cassandra.
+func (m *Cassandra) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Druid) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Druid.
@@ -284,6 +357,21 @@ func (m *Druid) GetID() string { return m.ID }
 // GetName returns the name of the Druid.
 func (m *Druid) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Druid.
+func (m *Druid) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Druid.
+func (m *Druid) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Druid.
+func (m *Druid) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*DynamoDB) isOneOf_Resource() {}
 
@@ -294,6 +382,21 @@ func (m *DynamoDB) GetID() string { return m.ID }
 func (m *DynamoDB) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the DynamoDB.
+func (m *DynamoDB) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the DynamoDB.
+func (m *DynamoDB) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DynamoDB.
+func (m *DynamoDB) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*AmazonES) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AmazonES.
@@ -302,6 +405,21 @@ func (m *AmazonES) GetID() string { return m.ID }
 // GetName returns the name of the AmazonES.
 func (m *AmazonES) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the AmazonES.
+func (m *AmazonES) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonES.
+func (m *AmazonES) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonES.
+func (m *AmazonES) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Elastic) isOneOf_Resource() {}
 
@@ -312,6 +430,21 @@ func (m *Elastic) GetID() string { return m.ID }
 func (m *Elastic) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Elastic.
+func (m *Elastic) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Elastic.
+func (m *Elastic) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Elastic.
+func (m *Elastic) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*HTTPBasicAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the HTTPBasicAuth.
@@ -320,6 +453,21 @@ func (m *HTTPBasicAuth) GetID() string { return m.ID }
 // GetName returns the name of the HTTPBasicAuth.
 func (m *HTTPBasicAuth) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*HTTPNoAuth) isOneOf_Resource() {}
 
@@ -330,6 +478,21 @@ func (m *HTTPNoAuth) GetID() string { return m.ID }
 func (m *HTTPNoAuth) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the HTTPNoAuth.
+func (m *HTTPNoAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the HTTPNoAuth.
+func (m *HTTPNoAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the HTTPNoAuth.
+func (m *HTTPNoAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*HTTPAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the HTTPAuth.
@@ -338,6 +501,21 @@ func (m *HTTPAuth) GetID() string { return m.ID }
 // GetName returns the name of the HTTPAuth.
 func (m *HTTPAuth) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the HTTPAuth.
+func (m *HTTPAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the HTTPAuth.
+func (m *HTTPAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the HTTPAuth.
+func (m *HTTPAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Kubernetes) isOneOf_Resource() {}
 
@@ -348,6 +526,21 @@ func (m *Kubernetes) GetID() string { return m.ID }
 func (m *Kubernetes) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Kubernetes.
+func (m *Kubernetes) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Kubernetes.
+func (m *Kubernetes) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Kubernetes.
+func (m *Kubernetes) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*KubernetesBasicAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the KubernetesBasicAuth.
@@ -356,6 +549,21 @@ func (m *KubernetesBasicAuth) GetID() string { return m.ID }
 // GetName returns the name of the KubernetesBasicAuth.
 func (m *KubernetesBasicAuth) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*KubernetesServiceAccount) isOneOf_Resource() {}
 
@@ -366,6 +574,21 @@ func (m *KubernetesServiceAccount) GetID() string { return m.ID }
 func (m *KubernetesServiceAccount) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*AmazonEKS) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AmazonEKS.
@@ -374,6 +597,21 @@ func (m *AmazonEKS) GetID() string { return m.ID }
 // GetName returns the name of the AmazonEKS.
 func (m *AmazonEKS) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the AmazonEKS.
+func (m *AmazonEKS) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonEKS.
+func (m *AmazonEKS) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonEKS.
+func (m *AmazonEKS) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*GoogleGKE) isOneOf_Resource() {}
 
@@ -384,6 +622,21 @@ func (m *GoogleGKE) GetID() string { return m.ID }
 func (m *GoogleGKE) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the GoogleGKE.
+func (m *GoogleGKE) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GoogleGKE.
+func (m *GoogleGKE) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GoogleGKE.
+func (m *GoogleGKE) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*AKS) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKS.
@@ -392,6 +645,21 @@ func (m *AKS) GetID() string { return m.ID }
 // GetName returns the name of the AKS.
 func (m *AKS) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the AKS.
+func (m *AKS) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKS.
+func (m *AKS) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKS.
+func (m *AKS) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*AKSBasicAuth) isOneOf_Resource() {}
 
@@ -402,6 +670,21 @@ func (m *AKSBasicAuth) GetID() string { return m.ID }
 func (m *AKSBasicAuth) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*AKSServiceAccount) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKSServiceAccount.
@@ -410,6 +693,21 @@ func (m *AKSServiceAccount) GetID() string { return m.ID }
 // GetName returns the name of the AKSServiceAccount.
 func (m *AKSServiceAccount) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Memcached) isOneOf_Resource() {}
 
@@ -420,6 +718,21 @@ func (m *Memcached) GetID() string { return m.ID }
 func (m *Memcached) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Memcached.
+func (m *Memcached) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Memcached.
+func (m *Memcached) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Memcached.
+func (m *Memcached) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*MongoLegacyHost) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoLegacyHost.
@@ -428,6 +741,21 @@ func (m *MongoLegacyHost) GetID() string { return m.ID }
 // GetName returns the name of the MongoLegacyHost.
 func (m *MongoLegacyHost) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the MongoLegacyHost.
+func (m *MongoLegacyHost) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MongoLegacyHost.
+func (m *MongoLegacyHost) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MongoLegacyHost.
+func (m *MongoLegacyHost) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*MongoLegacyReplicaset) isOneOf_Resource() {}
 
@@ -438,6 +766,21 @@ func (m *MongoLegacyReplicaset) GetID() string { return m.ID }
 func (m *MongoLegacyReplicaset) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*MongoHost) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoHost.
@@ -446,6 +789,21 @@ func (m *MongoHost) GetID() string { return m.ID }
 // GetName returns the name of the MongoHost.
 func (m *MongoHost) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the MongoHost.
+func (m *MongoHost) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MongoHost.
+func (m *MongoHost) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MongoHost.
+func (m *MongoHost) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*MongoReplicaSet) isOneOf_Resource() {}
 
@@ -456,6 +814,21 @@ func (m *MongoReplicaSet) GetID() string { return m.ID }
 func (m *MongoReplicaSet) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the MongoReplicaSet.
+func (m *MongoReplicaSet) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MongoReplicaSet.
+func (m *MongoReplicaSet) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MongoReplicaSet.
+func (m *MongoReplicaSet) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Mysql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Mysql.
@@ -464,6 +837,21 @@ func (m *Mysql) GetID() string { return m.ID }
 // GetName returns the name of the Mysql.
 func (m *Mysql) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Mysql.
+func (m *Mysql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Mysql.
+func (m *Mysql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Mysql.
+func (m *Mysql) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*AuroraMysql) isOneOf_Resource() {}
 
@@ -474,6 +862,21 @@ func (m *AuroraMysql) GetID() string { return m.ID }
 func (m *AuroraMysql) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the AuroraMysql.
+func (m *AuroraMysql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AuroraMysql.
+func (m *AuroraMysql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AuroraMysql.
+func (m *AuroraMysql) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Clustrix) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Clustrix.
@@ -482,6 +885,21 @@ func (m *Clustrix) GetID() string { return m.ID }
 // GetName returns the name of the Clustrix.
 func (m *Clustrix) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Clustrix.
+func (m *Clustrix) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Clustrix.
+func (m *Clustrix) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Clustrix.
+func (m *Clustrix) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Maria) isOneOf_Resource() {}
 
@@ -492,6 +910,21 @@ func (m *Maria) GetID() string { return m.ID }
 func (m *Maria) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Maria.
+func (m *Maria) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Maria.
+func (m *Maria) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Maria.
+func (m *Maria) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Memsql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Memsql.
@@ -500,6 +933,21 @@ func (m *Memsql) GetID() string { return m.ID }
 // GetName returns the name of the Memsql.
 func (m *Memsql) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Memsql.
+func (m *Memsql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Memsql.
+func (m *Memsql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Memsql.
+func (m *Memsql) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Oracle) isOneOf_Resource() {}
 
@@ -510,6 +958,21 @@ func (m *Oracle) GetID() string { return m.ID }
 func (m *Oracle) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Oracle.
+func (m *Oracle) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Oracle.
+func (m *Oracle) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Oracle.
+func (m *Oracle) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Postgres) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Postgres.
@@ -518,6 +981,21 @@ func (m *Postgres) GetID() string { return m.ID }
 // GetName returns the name of the Postgres.
 func (m *Postgres) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Postgres.
+func (m *Postgres) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Postgres.
+func (m *Postgres) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Postgres.
+func (m *Postgres) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*AuroraPostgres) isOneOf_Resource() {}
 
@@ -528,6 +1006,21 @@ func (m *AuroraPostgres) GetID() string { return m.ID }
 func (m *AuroraPostgres) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the AuroraPostgres.
+func (m *AuroraPostgres) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AuroraPostgres.
+func (m *AuroraPostgres) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AuroraPostgres.
+func (m *AuroraPostgres) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Greenplum) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Greenplum.
@@ -536,6 +1029,21 @@ func (m *Greenplum) GetID() string { return m.ID }
 // GetName returns the name of the Greenplum.
 func (m *Greenplum) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Greenplum.
+func (m *Greenplum) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Greenplum.
+func (m *Greenplum) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Greenplum.
+func (m *Greenplum) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Cockroach) isOneOf_Resource() {}
 
@@ -546,6 +1054,21 @@ func (m *Cockroach) GetID() string { return m.ID }
 func (m *Cockroach) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Cockroach.
+func (m *Cockroach) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Cockroach.
+func (m *Cockroach) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Cockroach.
+func (m *Cockroach) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Redshift) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Redshift.
@@ -554,6 +1077,45 @@ func (m *Redshift) GetID() string { return m.ID }
 // GetName returns the name of the Redshift.
 func (m *Redshift) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the Redshift.
+func (m *Redshift) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Redshift.
+func (m *Redshift) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Redshift.
+func (m *Redshift) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+func (*Citus) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Citus.
+func (m *Citus) GetID() string { return m.ID }
+
+// GetName returns the name of the Citus.
+func (m *Citus) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Citus.
+func (m *Citus) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Citus.
+func (m *Citus) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Citus.
+func (m *Citus) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Presto) isOneOf_Resource() {}
 
@@ -564,6 +1126,21 @@ func (m *Presto) GetID() string { return m.ID }
 func (m *Presto) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Presto.
+func (m *Presto) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Presto.
+func (m *Presto) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Presto.
+func (m *Presto) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*RDP) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the RDP.
@@ -572,6 +1149,21 @@ func (m *RDP) GetID() string { return m.ID }
 // GetName returns the name of the RDP.
 func (m *RDP) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the RDP.
+func (m *RDP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RDP.
+func (m *RDP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RDP.
+func (m *RDP) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Redis) isOneOf_Resource() {}
 
@@ -582,6 +1174,21 @@ func (m *Redis) GetID() string { return m.ID }
 func (m *Redis) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Redis.
+func (m *Redis) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Redis.
+func (m *Redis) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Redis.
+func (m *Redis) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*ElasticacheRedis) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the ElasticacheRedis.
@@ -590,6 +1197,21 @@ func (m *ElasticacheRedis) GetID() string { return m.ID }
 // GetName returns the name of the ElasticacheRedis.
 func (m *ElasticacheRedis) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Snowflake) isOneOf_Resource() {}
 
@@ -600,6 +1222,21 @@ func (m *Snowflake) GetID() string { return m.ID }
 func (m *Snowflake) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Snowflake.
+func (m *Snowflake) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Snowflake.
+func (m *Snowflake) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Snowflake.
+func (m *Snowflake) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*SQLServer) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SQLServer.
@@ -608,6 +1245,21 @@ func (m *SQLServer) GetID() string { return m.ID }
 // GetName returns the name of the SQLServer.
 func (m *SQLServer) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the SQLServer.
+func (m *SQLServer) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SQLServer.
+func (m *SQLServer) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SQLServer.
+func (m *SQLServer) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*SSH) isOneOf_Resource() {}
 
@@ -618,6 +1270,45 @@ func (m *SSH) GetID() string { return m.ID }
 func (m *SSH) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the SSH.
+func (m *SSH) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SSH.
+func (m *SSH) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SSH.
+func (m *SSH) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+func (*SSHCert) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the SSHCert.
+func (m *SSHCert) GetID() string { return m.ID }
+
+// GetName returns the name of the SSHCert.
+func (m *SSHCert) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SSHCert.
+func (m *SSHCert) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SSHCert.
+func (m *SSHCert) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SSHCert.
+func (m *SSHCert) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*Sybase) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Sybase.
@@ -627,6 +1318,21 @@ func (m *Sybase) GetID() string { return m.ID }
 func (m *Sybase) GetName() string {
 	return m.Name
 }
+
+// SetName sets the name of the Sybase.
+func (m *Sybase) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Sybase.
+func (m *Sybase) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Sybase.
+func (m *Sybase) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
 func (*SybaseIQ) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SybaseIQ.
@@ -635,6 +1341,21 @@ func (m *SybaseIQ) GetID() string { return m.ID }
 // GetName returns the name of the SybaseIQ.
 func (m *SybaseIQ) GetName() string {
 	return m.Name
+}
+
+// SetName sets the name of the SybaseIQ.
+func (m *SybaseIQ) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SybaseIQ.
+func (m *SybaseIQ) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SybaseIQ.
+func (m *SybaseIQ) SetTags(v Tags) {
+	m.Tags = v.clone()
 }
 func (*Teradata) isOneOf_Resource() {}
 
@@ -646,6 +1367,21 @@ func (m *Teradata) GetName() string {
 	return m.Name
 }
 
+// SetName sets the name of the Teradata.
+func (m *Teradata) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Teradata.
+func (m *Teradata) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Teradata.
+func (m *Teradata) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
 type Athena struct {
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -653,6 +1389,8 @@ type Athena struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	AccessKey string `json:"access_key"`
 
@@ -672,6 +1410,8 @@ type BigQuery struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	PrivateKey string `json:"private_key"`
 
@@ -691,6 +1431,8 @@ type Cassandra struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -712,6 +1454,8 @@ type Druid struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -731,6 +1475,8 @@ type DynamoDB struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	AccessKey string `json:"access_key"`
 
@@ -750,6 +1496,8 @@ type AmazonES struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Region string `json:"region"`
 
@@ -769,6 +1517,8 @@ type Elastic struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -790,6 +1540,8 @@ type HTTPBasicAuth struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Url string `json:"url"`
 
@@ -813,6 +1565,8 @@ type HTTPNoAuth struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Url string `json:"url"`
 
@@ -832,6 +1586,8 @@ type HTTPAuth struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Url string `json:"url"`
 
@@ -853,6 +1609,8 @@ type Kubernetes struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -869,6 +1627,8 @@ type Kubernetes struct {
 	ClientKey string `json:"client_key"`
 
 	ClientKeyFilename string `json:"client_key_filename"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type KubernetesBasicAuth struct {
@@ -878,6 +1638,8 @@ type KubernetesBasicAuth struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -886,6 +1648,8 @@ type KubernetesBasicAuth struct {
 	Username string `json:"username"`
 
 	Password string `json:"password"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type KubernetesServiceAccount struct {
@@ -895,12 +1659,16 @@ type KubernetesServiceAccount struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
 	Port int32 `json:"port"`
 
 	Token string `json:"token"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type AmazonEKS struct {
@@ -910,6 +1678,8 @@ type AmazonEKS struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Endpoint string `json:"endpoint"`
 
@@ -926,6 +1696,8 @@ type AmazonEKS struct {
 	ClusterName string `json:"cluster_name"`
 
 	RoleArn string `json:"role_arn"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type GoogleGKE struct {
@@ -935,6 +1707,8 @@ type GoogleGKE struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Endpoint string `json:"endpoint"`
 
@@ -945,6 +1719,8 @@ type GoogleGKE struct {
 	ServiceAccountKey string `json:"service_account_key"`
 
 	ServiceAccountKeyFilename string `json:"service_account_key_filename"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type AKS struct {
@@ -954,6 +1730,8 @@ type AKS struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -970,6 +1748,8 @@ type AKS struct {
 	ClientKey string `json:"client_key"`
 
 	ClientKeyFilename string `json:"client_key_filename"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type AKSBasicAuth struct {
@@ -979,6 +1759,8 @@ type AKSBasicAuth struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -987,6 +1769,8 @@ type AKSBasicAuth struct {
 	Username string `json:"username"`
 
 	Password string `json:"password"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type AKSServiceAccount struct {
@@ -996,12 +1780,16 @@ type AKSServiceAccount struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
 	Port int32 `json:"port"`
 
 	Token string `json:"token"`
+
+	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
 
 type Memcached struct {
@@ -1011,6 +1799,8 @@ type Memcached struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1026,6 +1816,8 @@ type MongoLegacyHost struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1051,6 +1843,8 @@ type MongoLegacyReplicaset struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1078,6 +1872,8 @@ type MongoHost struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1101,6 +1897,8 @@ type MongoReplicaSet struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1128,6 +1926,8 @@ type Mysql struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1149,6 +1949,8 @@ type AuroraMysql struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1170,6 +1972,8 @@ type Clustrix struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1191,6 +1995,8 @@ type Maria struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1212,6 +2018,8 @@ type Memsql struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1233,6 +2041,8 @@ type Oracle struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1256,6 +2066,8 @@ type Postgres struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1279,6 +2091,8 @@ type AuroraPostgres struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1302,6 +2116,8 @@ type Greenplum struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1325,6 +2141,8 @@ type Cockroach struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1348,6 +2166,33 @@ type Redshift struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Hostname string `json:"hostname"`
+
+	Username string `json:"username"`
+
+	Password string `json:"password"`
+
+	Database string `json:"database"`
+
+	PortOverride int32 `json:"port_override"`
+
+	Port int32 `json:"port"`
+
+	OverrideDatabase bool `json:"override_database"`
+}
+
+type Citus struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1371,6 +2216,8 @@ type Presto struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1394,6 +2241,8 @@ type RDP struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1413,6 +2262,8 @@ type Redis struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1430,6 +2281,8 @@ type ElasticacheRedis struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1449,6 +2302,8 @@ type Snowflake struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1470,6 +2325,8 @@ type SQLServer struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1495,6 +2352,8 @@ type SSH struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1507,6 +2366,25 @@ type SSH struct {
 	PortForwarding bool `json:"port_forwarding"`
 }
 
+type SSHCert struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Hostname string `json:"hostname"`
+
+	Username string `json:"username"`
+
+	Port int32 `json:"port"`
+
+	PortForwarding bool `json:"port_forwarding"`
+}
+
 type Sybase struct {
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -1514,6 +2392,8 @@ type Sybase struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1533,6 +2413,8 @@ type SybaseIQ struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1552,6 +2434,8 @@ type Teradata struct {
 	Name string `json:"name"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 
 	Hostname string `json:"hostname"`
 
@@ -1632,7 +2516,8 @@ type Relay struct {
 	// Unique human-readable name of the Relay. Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the relay. One of: "new", "verifying_restart",
-	// "restarting", "started", "stopped", "dead", "unknown",
+	// "awaiting_restart", "restarting", "started", "stopped", "dead",
+	// "unknown".
 	State string `json:"state"`
 }
 
