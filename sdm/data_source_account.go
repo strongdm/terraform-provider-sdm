@@ -86,6 +86,15 @@ func dataSourceAccount() *schema.Resource {
 										Optional:    true,
 										Description: "The User's suspended state.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 								},
 							},
 						},
@@ -109,6 +118,15 @@ func dataSourceAccount() *schema.Resource {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "The Service's suspended state.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 								},
 							},
@@ -154,6 +172,10 @@ func convertAccountFilterFromResourceData(d *schema.ResourceData) (string, []int
 		filter += "suspended:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOk("tags"); ok {
+		filter += "tags:? "
+		args = append(args, v)
+	}
 	return filter, args
 }
 
@@ -181,12 +203,14 @@ func dataSourceAccountList(d *schema.ResourceData, cc *sdm.Client) error {
 				"first_name": (v.FirstName),
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
+				"tags":       convertTagsToMap(v.Tags),
 			})
 		case *sdm.Service:
 			output[0]["service"] = append(output[0]["service"], entity{
 				"id":        (v.ID),
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
+				"tags":      convertTagsToMap(v.Tags),
 			})
 		}
 	}

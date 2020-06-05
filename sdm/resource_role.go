@@ -34,6 +34,15 @@ func resourceRole() *schema.Resource {
 				ForceNew:    true,
 				Description: "True if the Role is a composite role.",
 			},
+			"tags": {
+				Type: schema.TypeMap,
+
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Optional:    true,
+				Description: "Tags is a map of key, value pairs.",
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -45,6 +54,7 @@ func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
 		ID:        d.Id(),
 		Name:      convertStringFromResourceData(d, "name"),
 		Composite: convertBoolFromResourceData(d, "composite"),
+		Tags:      convertTagsFromResourceData(d, "tags"),
 	}
 }
 
@@ -60,6 +70,7 @@ func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	v := resp.Role
 	d.Set("name", (v.Name))
 	d.Set("composite", (v.Composite))
+	d.Set("tags", convertTagsToMap(v.Tags))
 	return nil
 }
 
@@ -79,6 +90,7 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 	v := resp.Role
 	d.Set("name", (v.Name))
 	d.Set("composite", (v.Composite))
+	d.Set("tags", convertTagsToMap(v.Tags))
 	return nil
 }
 func resourceRoleUpdate(d *schema.ResourceData, cc *sdm.Client) error {

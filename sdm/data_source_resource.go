@@ -218,6 +218,65 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"db_2": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"druid": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -2559,6 +2618,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"allow_deprecated_key_exchanges": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -2603,6 +2667,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"port_forwarding": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"allow_deprecated_key_exchanges": {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
@@ -2862,6 +2931,18 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"port_override": (v.PortOverride),
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),
+			})
+		case *sdm.DB2:
+			output[0]["db_2"] = append(output[0]["db_2"], entity{
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			})
 		case *sdm.Druid:
 			output[0]["druid"] = append(output[0]["druid"], entity{
@@ -3330,24 +3411,26 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.SSH:
 			output[0]["ssh"] = append(output[0]["ssh"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port":            (v.Port),
-				"public_key":      (v.PublicKey),
-				"port_forwarding": (v.PortForwarding),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"public_key":                     (v.PublicKey),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			})
 		case *sdm.SSHCert:
 			output[0]["ssh_cert"] = append(output[0]["ssh_cert"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port":            (v.Port),
-				"port_forwarding": (v.PortForwarding),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			})
 		case *sdm.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{

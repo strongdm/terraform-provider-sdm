@@ -31,9 +31,11 @@ In addition to provided arguments above, the following attributes are returned b
 	* relay:
 		* `id` - Unique identifier of the Relay.
 		* `name` - Unique human-readable name of the Relay. Generated if not provided on create.
+		* `tags` - Tags is a map of key, value pairs.
 	* gateway:
 		* `id` - Unique identifier of the Gateway.
 		* `name` - Unique human-readable name of the Gateway. Generated if not provided on create.
 		* `listen_address` - The public hostname/port tuple at which the gateway will be accessible to clients.
 		* `bind_address` - The hostname/port tuple which the gateway daemon will bind to.
  If not provided on create, set to "0.0.0.0:<listen_address_port>".
+		* `tags` - Tags is a map of key, value pairs.

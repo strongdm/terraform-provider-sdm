@@ -49,6 +49,15 @@ func resourceAccount() *schema.Resource {
 							Optional:    true,
 							Description: "The User's suspended state.",
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 					},
 				},
 			},
@@ -67,6 +76,15 @@ func resourceAccount() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "The Service's suspended state.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
 						},
 						"token": {
 							Type:      schema.TypeString,
@@ -94,6 +112,7 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 			FirstName: convertStringFromMap(raw, "first_name"),
 			LastName:  convertStringFromMap(raw, "last_name"),
 			Suspended: convertBoolFromMap(raw, "suspended"),
+			Tags:      convertTagsFromMap(raw, "tags"),
 		}
 		return out
 	}
@@ -106,6 +125,7 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 			ID:        d.Id(),
 			Name:      convertStringFromMap(raw, "name"),
 			Suspended: convertBoolFromMap(raw, "suspended"),
+			Tags:      convertTagsFromMap(raw, "tags"),
 		}
 		return out
 	}
@@ -131,6 +151,7 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"first_name": (v.FirstName),
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
+				"tags":       convertTagsToMap(v.Tags),
 			},
 		})
 	case *sdm.Service:
@@ -140,6 +161,7 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
+				"tags":      convertTagsToMap(v.Tags),
 				"token":     resp.Token,
 			},
 		})
@@ -173,6 +195,7 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"first_name": (v.FirstName),
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
+				"tags":       convertTagsToMap(v.Tags),
 			},
 		})
 	case *sdm.Service:
@@ -185,6 +208,7 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
+				"tags":      convertTagsToMap(v.Tags),
 				"token":     d.Get("service.0.token"),
 			},
 		})

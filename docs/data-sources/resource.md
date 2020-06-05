@@ -54,6 +54,16 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `port` - 
 		* `tls_required` - 
+	* db_2:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `hostname` - 
+		* `username` - 
+		* `password` - 
+		* `database` - 
+		* `port_override` - 
+		* `port` - 
 	* druid:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -452,6 +462,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `public_key` - 
 		* `port_forwarding` - 
+		* `allow_deprecated_key_exchanges` - 
 	* ssh_cert:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -460,6 +471,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - 
 		* `port` - 
 		* `port_forwarding` - 
+		* `allow_deprecated_key_exchanges` - 
 	* sybase:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.

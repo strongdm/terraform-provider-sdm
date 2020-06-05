@@ -49,6 +49,13 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
+* db_2:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `hostname` - (Required) 
+	* `username` - (Required) 
+	* `password` - (Required) 
+	* `database` - (Required) 
+	* `port` - (Optional) 
 * druid:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
@@ -341,12 +348,14 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
+	* `allow_deprecated_key_exchanges` - (Optional) 
 * ssh_cert:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
+	* `allow_deprecated_key_exchanges` - (Optional) 
 * sybase:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
@@ -373,6 +382,8 @@ In addition to provided arguments above, the following attributes are returned b
 * big_query:
 	* `port_override` - 
 * cassandra:
+	* `port_override` - 
+* db_2:
 	* `port_override` - 
 * druid:
 	* `port_override` - 

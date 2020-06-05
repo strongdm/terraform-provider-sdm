@@ -63,6 +63,15 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Relay. Generated if not provided on create.",
 									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 								},
 							},
 						},
@@ -91,6 +100,15 @@ func dataSourceNode() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The hostname/port tuple which the gateway daemon will bind to.\n If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 								},
 							},
@@ -132,6 +150,10 @@ func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interf
 		filter += "state:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOk("tags"); ok {
+		filter += "tags:? "
+		args = append(args, v)
+	}
 	return filter, args
 }
 
@@ -156,6 +178,7 @@ func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 			output[0]["relay"] = append(output[0]["relay"], entity{
 				"id":   (v.ID),
 				"name": (v.Name),
+				"tags": convertTagsToMap(v.Tags),
 			})
 		case *sdm.Gateway:
 			output[0]["gateway"] = append(output[0]["gateway"], entity{
@@ -163,6 +186,7 @@ func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":           (v.Name),
 				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
+				"tags":           convertTagsToMap(v.Tags),
 			})
 		}
 	}

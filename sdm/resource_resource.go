@@ -175,6 +175,60 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"db_2": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"druid": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -2321,6 +2375,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"allow_deprecated_key_exchanges": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -2360,6 +2419,11 @@ func resourceResource() *schema.Resource {
 							Description: "",
 						},
 						"port_forwarding": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"allow_deprecated_key_exchanges": {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "",
@@ -2577,6 +2641,28 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			Password:    convertStringFromMap(raw, "password"),
 			Port:        convertInt32FromMap(raw, "port"),
 			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("db_2").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DB2{}
+		}
+		out := &sdm.DB2{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			Hostname: convertStringFromMap(raw, "hostname"),
+			Username: convertStringFromMap(raw, "username"),
+			Password: convertStringFromMap(raw, "password"),
+			Database: convertStringFromMap(raw, "database"),
+			Port:     convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3392,13 +3478,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SSH{}
 		}
 		out := &sdm.SSH{
-			ID:             d.Id(),
-			Name:           convertStringFromMap(raw, "name"),
-			Tags:           convertTagsFromMap(raw, "tags"),
-			Hostname:       convertStringFromMap(raw, "hostname"),
-			Username:       convertStringFromMap(raw, "username"),
-			Port:           convertInt32FromMap(raw, "port"),
-			PortForwarding: convertBoolFromMap(raw, "port_forwarding"),
+			ID:                          d.Id(),
+			Name:                        convertStringFromMap(raw, "name"),
+			Tags:                        convertTagsFromMap(raw, "tags"),
+			Hostname:                    convertStringFromMap(raw, "hostname"),
+			Username:                    convertStringFromMap(raw, "username"),
+			Port:                        convertInt32FromMap(raw, "port"),
+			PortForwarding:              convertBoolFromMap(raw, "port_forwarding"),
+			AllowDeprecatedKeyExchanges: convertBoolFromMap(raw, "allow_deprecated_key_exchanges"),
 		}
 		return out
 	}
@@ -3408,13 +3495,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SSHCert{}
 		}
 		out := &sdm.SSHCert{
-			ID:             d.Id(),
-			Name:           convertStringFromMap(raw, "name"),
-			Tags:           convertTagsFromMap(raw, "tags"),
-			Hostname:       convertStringFromMap(raw, "hostname"),
-			Username:       convertStringFromMap(raw, "username"),
-			Port:           convertInt32FromMap(raw, "port"),
-			PortForwarding: convertBoolFromMap(raw, "port_forwarding"),
+			ID:                          d.Id(),
+			Name:                        convertStringFromMap(raw, "name"),
+			Tags:                        convertTagsFromMap(raw, "tags"),
+			Hostname:                    convertStringFromMap(raw, "hostname"),
+			Username:                    convertStringFromMap(raw, "username"),
+			Port:                        convertInt32FromMap(raw, "port"),
+			PortForwarding:              convertBoolFromMap(raw, "port_forwarding"),
+			AllowDeprecatedKeyExchanges: convertBoolFromMap(raw, "allow_deprecated_key_exchanges"),
 		}
 		return out
 	}
@@ -3535,6 +3623,21 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"port_override": (v.PortOverride),
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),
+			},
+		})
+	case *sdm.DB2:
+		localV, _ := localVersion.(*sdm.DB2)
+		_ = localV
+		d.Set("db_2", []map[string]interface{}{
+			{
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Druid:
@@ -4121,13 +4224,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port":            (v.Port),
-				"public_key":      (v.PublicKey),
-				"port_forwarding": (v.PortForwarding),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"public_key":                     (v.PublicKey),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			},
 		})
 	case *sdm.SSHCert:
@@ -4135,12 +4239,13 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port":            (v.Port),
-				"port_forwarding": (v.PortForwarding),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			},
 		})
 	case *sdm.Sybase:
@@ -4253,6 +4358,24 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"port_override": (v.PortOverride),
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),
+			},
+		})
+	case *sdm.DB2:
+		localV, ok := localVersion.(*sdm.DB2)
+		if !ok {
+			localV = &sdm.DB2{}
+		}
+		_ = localV
+		d.Set("db_2", []map[string]interface{}{
+			{
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
 			},
 		})
 	case *sdm.Druid:
@@ -4956,13 +5079,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("ssh", []map[string]interface{}{
 			{
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port":            (v.Port),
-				"public_key":      (v.PublicKey),
-				"port_forwarding": (v.PortForwarding),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"public_key":                     (v.PublicKey),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			},
 		})
 	case *sdm.SSHCert:
@@ -4973,12 +5097,13 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port":            (v.Port),
-				"port_forwarding": (v.PortForwarding),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			},
 		})
 	case *sdm.Sybase:

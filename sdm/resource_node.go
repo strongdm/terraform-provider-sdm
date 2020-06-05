@@ -37,6 +37,15 @@ func resourceNode() *schema.Resource {
 								return new == ""
 							},
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"token": {
 							Type:      schema.TypeString,
 							Computed:  true,
@@ -74,6 +83,15 @@ func resourceNode() *schema.Resource {
 								return new == ""
 							},
 						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
 						"token": {
 							Type:      schema.TypeString,
 							Computed:  true,
@@ -97,6 +115,7 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		out := &sdm.Relay{
 			ID:   d.Id(),
 			Name: convertStringFromMap(raw, "name"),
+			Tags: convertTagsFromMap(raw, "tags"),
 		}
 		return out
 	}
@@ -110,6 +129,7 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 			Name:          convertStringFromMap(raw, "name"),
 			ListenAddress: convertStringFromMap(raw, "listen_address"),
 			BindAddress:   convertStringFromMap(raw, "bind_address"),
+			Tags:          convertTagsFromMap(raw, "tags"),
 		}
 		return out
 	}
@@ -132,6 +152,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		d.Set("relay", []map[string]interface{}{
 			{
 				"name":  (v.Name),
+				"tags":  convertTagsToMap(v.Tags),
 				"token": resp.Token,
 			},
 		})
@@ -143,6 +164,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":           (v.Name),
 				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
+				"tags":           convertTagsToMap(v.Tags),
 				"token":          resp.Token,
 			},
 		})
@@ -173,6 +195,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 		d.Set("relay", []map[string]interface{}{
 			{
 				"name":  (v.Name),
+				"tags":  convertTagsToMap(v.Tags),
 				"token": d.Get("relay.0.token"),
 			},
 		})
@@ -187,6 +210,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":           (v.Name),
 				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
+				"tags":           convertTagsToMap(v.Tags),
 				"token":          d.Get("gateway.0.token"),
 			},
 		})

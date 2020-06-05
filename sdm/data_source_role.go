@@ -37,6 +37,15 @@ func dataSourceRole() *schema.Resource {
 				Optional:    true,
 				Description: "True if the Role is a composite role.",
 			},
+			"tags": {
+				Type: schema.TypeMap,
+
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Optional:    true,
+				Description: "Tags is a map of key, value pairs.",
+			},
 			"roles": {
 				Type:     schema.TypeList,
 				Computed: true,
@@ -57,6 +66,15 @@ func dataSourceRole() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "True if the Role is a composite role.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
 						},
 					},
 				},
@@ -83,6 +101,10 @@ func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interf
 		filter += "composite:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOk("tags"); ok {
+		filter += "tags:? "
+		args = append(args, v)
+	}
 	return filter, args
 }
 
@@ -105,6 +127,7 @@ func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":        (v.ID),
 				"name":      (v.Name),
 				"composite": (v.Composite),
+				"tags":      convertTagsToMap(v.Tags),
 			})
 	}
 	if resp.Err() != nil {

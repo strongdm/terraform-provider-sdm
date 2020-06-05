@@ -36,7 +36,9 @@ In addition to provided arguments above, the following attributes are returned b
 		* `first_name` - The User's first name.
 		* `last_name` - The User's last name.
 		* `suspended` - The User's suspended state.
+		* `tags` - Tags is a map of key, value pairs.
 	* service:
 		* `id` - Unique identifier of the Service.
 		* `name` - Unique human-readable name of the Service.
 		* `suspended` - The Service's suspended state.
+		* `tags` - Tags is a map of key, value pairs.

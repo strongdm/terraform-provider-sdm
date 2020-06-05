@@ -25,3 +25,4 @@ In addition to provided arguments above, the following attributes are returned b
 	* `id` - Unique identifier of the Role.
 	* `name` - Unique human-readable name of the Role.
 	* `composite` - True if the Role is a composite role.
+	* `tags` - Tags is a map of key, value pairs.
