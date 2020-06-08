@@ -89,12 +89,14 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) 
 	* `headers_blacklist` - (Optional) 
 	* `default_path` - (Optional) 
+	* `subdomain` - (Required) 
 * http_no_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `headers_blacklist` - (Optional) 
 	* `default_path` - (Optional) 
+	* `subdomain` - (Required) 
 * http_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `url` - (Required) 
@@ -102,6 +104,7 @@ The following arguments are supported by the Resource resource:
 	* `auth_header` - (Required) 
 	* `headers_blacklist` - (Optional) 
 	* `default_path` - (Optional) 
+	* `subdomain` - (Required) 
 * kubernetes:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 

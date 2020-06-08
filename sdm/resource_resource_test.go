@@ -385,6 +385,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"name", `"http_basic"`},
 				{"url", `"http://example.com"`},
 				{"healthcheck_path", `"/"`},
+				{"subdomain", `"basic"`},
 			},
 		},
 		{
@@ -393,6 +394,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"name", `"http_no_auth"`},
 				{"url", `"http://example.com"`},
 				{"healthcheck_path", `"/"`},
+				{"subdomain", `"noauth"`},
 			},
 		},
 		{
@@ -402,6 +404,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"url", `"http://example.com"`},
 				{"healthcheck_path", `"/"`},
 				{"auth_header", `"AuthHeader"`},
+				{"subdomain", `"auth"`},
 			},
 		},
 		{

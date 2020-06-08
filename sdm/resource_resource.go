@@ -481,6 +481,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
 					},
 				},
 			},
@@ -522,6 +527,11 @@ func resourceResource() *schema.Resource {
 						"default_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Description: "",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
 							Description: "",
 						},
 					},
@@ -571,6 +581,11 @@ func resourceResource() *schema.Resource {
 						"default_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Description: "",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
 							Description: "",
 						},
 					},
@@ -2771,6 +2786,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			Password:         convertStringFromMap(raw, "password"),
 			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
 			DefaultPath:      convertStringFromMap(raw, "default_path"),
+			Subdomain:        convertStringFromMap(raw, "subdomain"),
 		}
 		return out
 	}
@@ -2787,6 +2803,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
 			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
 			DefaultPath:      convertStringFromMap(raw, "default_path"),
+			Subdomain:        convertStringFromMap(raw, "subdomain"),
 		}
 		return out
 	}
@@ -2804,6 +2821,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			AuthHeader:       convertStringFromMap(raw, "auth_header"),
 			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
 			DefaultPath:      convertStringFromMap(raw, "default_path"),
+			Subdomain:        convertStringFromMap(raw, "subdomain"),
 		}
 		return out
 	}
@@ -3710,6 +3728,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"password":          localV.Password,
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			},
 		})
 	case *sdm.HTTPNoAuth:
@@ -3723,6 +3742,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			},
 		})
 	case *sdm.HTTPAuth:
@@ -3737,6 +3757,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"auth_header":       localV.AuthHeader,
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			},
 		})
 	case *sdm.Kubernetes:
@@ -4463,6 +4484,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"password":          localV.Password,
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			},
 		})
 	case *sdm.HTTPNoAuth:
@@ -4479,6 +4501,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			},
 		})
 	case *sdm.HTTPAuth:
@@ -4496,6 +4519,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"auth_header":       localV.AuthHeader,
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			},
 		})
 	case *sdm.Kubernetes:

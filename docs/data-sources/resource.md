@@ -111,6 +111,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `headers_blacklist` - 
 		* `default_path` - 
+		* `subdomain` - 
 	* http_no_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -119,6 +120,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_path` - 
 		* `headers_blacklist` - 
 		* `default_path` - 
+		* `subdomain` - 
 	* http_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -128,6 +130,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `auth_header` - 
 		* `headers_blacklist` - 
 		* `default_path` - 
+		* `subdomain` - 
 	* kubernetes:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.

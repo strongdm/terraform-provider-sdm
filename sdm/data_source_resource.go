@@ -554,6 +554,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -598,6 +603,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"default_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -652,6 +662,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"default_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -3000,6 +3015,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"password":          (v.Password),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			})
 		case *sdm.HTTPNoAuth:
 			output[0]["http_no_auth"] = append(output[0]["http_no_auth"], entity{
@@ -3010,6 +3026,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			})
 		case *sdm.HTTPAuth:
 			output[0]["http_auth"] = append(output[0]["http_auth"], entity{
@@ -3021,6 +3038,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"auth_header":       (v.AuthHeader),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"default_path":      (v.DefaultPath),
+				"subdomain":         (v.Subdomain),
 			})
 		case *sdm.Kubernetes:
 			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
