@@ -28,12 +28,12 @@ resource "sdm_node" "my_relay" {
 
 # Output the tokens for use in other modules
 output "gateway_token" {
-  value = sdm_node.my_gateway..gateway.token
+  value = sdm_node.my_gateway.gateway[0].token
   sensitive = true
 }
 
 output "relay_token" {
-  value = sdm_node.my_relay.relay.token
+  value = sdm_node.my_relay.relay[0].token
   sensitive = true
 }
 ```
