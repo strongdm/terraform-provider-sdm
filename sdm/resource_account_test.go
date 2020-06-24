@@ -218,6 +218,104 @@ func TestAccSDMAccount_Update(t *testing.T) {
 	})
 }
 
+func TestAccSDMAccount_Tags(t *testing.T) {
+	name := randomWithPrefix("test")
+	firstName := randomWithPrefix("ursula")
+	lastName := randomWithPrefix("leguin")
+	email := randomWithPrefix("testsuites@strongdm.com")
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMAccountTagsConfig(name, firstName, lastName, email, sdm.Tags{"key": "value", "foo": "bar"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_account."+name, "user.0.tags.key", "value"),
+					resource.TestCheckResourceAttr("sdm_account."+name, "user.0.tags.foo", "bar"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_account", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Accounts().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created account: %w", err)
+						}
+
+						if resp.Account.GetTags()["key"] != "value" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Account.GetTags()["key"])
+						}
+						if resp.Account.GetTags()["foo"] != "bar" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Account.GetTags()["key"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_account." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccSDMAccountTagsConfig(name, firstName, lastName, email, sdm.Tags{"goat": "bananas"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckNoResourceAttr("sdm_account."+name, "user.0.tags.key"),
+					resource.TestCheckNoResourceAttr("sdm_account."+name, "user.0.tags.foo"),
+					resource.TestCheckResourceAttr("sdm_account."+name, "user.0.tags.goat", "bananas"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_account", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Accounts().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created account: %w", err)
+						}
+
+						if resp.Account.GetTags()["goat"] != "bananas" {
+							return fmt.Errorf("unexpected value '%s' for tag 'goat', expected 'bananas'", resp.Account.GetTags()["goat"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_account." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func testAccSDMAccountTagsConfig(resourceName string, firstName, lastName, email string, tags sdm.Tags) string {
+	return fmt.Sprintf(`
+	resource "sdm_account" "%s" {
+		user {
+			first_name = "%s"
+			last_name = "%s"
+			email = "%s"
+			tags = {
+%s
+			}
+		}
+	}
+	`, resourceName, firstName, lastName, email, tagsToConfigString(tags))
+}
+
 func testAccSDMAccountUserConfig(resourceName, firstName, lastName, email string) string {
 
 	return fmt.Sprintf(`

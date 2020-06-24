@@ -376,8 +376,101 @@ func TestAccSDMNode_UpdateTokenStays(t *testing.T) {
 			},
 		},
 	})
-
 }
+
+func TestAccSDMNode_Tags(t *testing.T) {
+	name := randomWithPrefix("test")
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMNodeTagsConfig(name, name, sdm.Tags{"key": "value", "foo": "bar"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_node."+name, "relay.0.tags.key", "value"),
+					resource.TestCheckResourceAttr("sdm_node."+name, "relay.0.tags.foo", "bar"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_node", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created node: %w", err)
+						}
+
+						if resp.Node.GetTags()["key"] != "value" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Node.GetTags()["key"])
+						}
+						if resp.Node.GetTags()["foo"] != "bar" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Node.GetTags()["key"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + name,
+				ImportState:       true,
+				ImportStateVerify: false,
+			},
+			{
+				Config: testAccSDMNodeTagsConfig(name, name, sdm.Tags{"goat": "bananas"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckNoResourceAttr("sdm_node."+name, "relay.0.tags.key"),
+					resource.TestCheckNoResourceAttr("sdm_node."+name, "relay.0.tags.foo"),
+					resource.TestCheckResourceAttr("sdm_node."+name, "relay.0.tags.goat", "bananas"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_node", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created node: %w", err)
+						}
+
+						if resp.Node.GetTags()["goat"] != "bananas" {
+							return fmt.Errorf("unexpected value '%s' for tag 'goat', expected 'bananas'", resp.Node.GetTags()["goat"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + name,
+				ImportState:       true,
+				ImportStateVerify: false,
+			},
+		},
+	})
+}
+
+func testAccSDMNodeTagsConfig(resourceName string, nodeName string, tags sdm.Tags) string {
+	return fmt.Sprintf(`
+	resource "sdm_node" "%s" {
+		relay {
+			name = "%s"
+			tags = {
+%s
+			}
+		}
+	}
+	`, resourceName, nodeName, tagsToConfigString(tags))
+}
+
 func testAccSDMNodeGatewayConfig(resourceName, gatewayName, listenAddr string) string {
 	return fmt.Sprintf(`
 	resource "sdm_node" "%s" {

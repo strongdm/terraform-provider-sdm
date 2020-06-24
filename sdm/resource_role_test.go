@@ -199,6 +199,86 @@ func TestAccSDMRole_UpdateComposite(t *testing.T) {
 	})
 }
 
+func TestAccSDMRole_Tags(t *testing.T) {
+	name := randomWithPrefix("test")
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMRoleTagsConfig(name, name, false, sdm.Tags{"key": "value", "foo": "bar"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+name, "tags.key", "value"),
+					resource.TestCheckResourceAttr("sdm_role."+name, "tags.foo", "bar"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if resp.Role.Tags["key"] != "value" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Role.Tags["key"])
+						}
+						if resp.Role.Tags["foo"] != "bar" {
+							return fmt.Errorf("unexpected value '%s' for tag 'key', expected 'value'", resp.Role.Tags["key"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccSDMRoleTagsConfig(name, name, false, sdm.Tags{"goat": "bananas"}),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckNoResourceAttr("sdm_role."+name, "tags.key"),
+					resource.TestCheckNoResourceAttr("sdm_role."+name, "tags.foo"),
+					resource.TestCheckResourceAttr("sdm_role."+name, "tags.goat", "bananas"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if resp.Role.Tags["goat"] != "bananas" {
+							return fmt.Errorf("unexpected value '%s' for tag 'goat', expected 'bananas'", resp.Role.Tags["goat"])
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func testAccSDMRoleConfig(resourceName, roleName string, composite bool) string {
 	return fmt.Sprintf(`
 	resource "sdm_role" "%s" {
@@ -206,6 +286,18 @@ func testAccSDMRoleConfig(resourceName, roleName string, composite bool) string 
 		composite = %t
 	}
 	`, resourceName, roleName, composite)
+}
+
+func testAccSDMRoleTagsConfig(resourceName string, roleName string, composite bool, tags sdm.Tags) string {
+	return fmt.Sprintf(`
+	resource "sdm_role" "%s" {
+		name = "%s"
+		composite = %t
+		tags = {
+%s
+		}
+	}
+	`, resourceName, roleName, composite, tagsToConfigString(tags))
 }
 
 func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Role, error) {

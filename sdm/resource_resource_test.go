@@ -697,6 +697,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"password", `"Password"`},
 			},
 		},
+		{
+			resource: "db_2",
+			pairs: [][2]string{
+				{"name", `"db2"`},
+				{"hostname", `"Hostname"`},
+				{"username", `"Username"`},
+				{"password", `"Password"`},
+				{"database", `"Database"`},
+				{"port", `50000`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")
@@ -767,11 +778,15 @@ func testAccSDMResourceRedisConfig(resourceName string, sdmResourceName string, 
 	`, resourceName, sdmResourceName, port)
 }
 
-func testAccSDMResourceTagsConfig(resourceName string, sdmResourceName string, tags sdm.Tags) string {
+func tagsToConfigString(tags sdm.Tags) string {
 	tagString := ""
 	for key, value := range tags {
 		tagString += fmt.Sprintf("\t\t\t\t%s = \"%s\"\n", key, value)
 	}
+	return tagString
+}
+
+func testAccSDMResourceTagsConfig(resourceName string, sdmResourceName string, tags sdm.Tags) string {
 	return fmt.Sprintf(`
 	resource "sdm_resource" "%s" {
 		redis {
@@ -782,7 +797,7 @@ func testAccSDMResourceTagsConfig(resourceName string, sdmResourceName string, t
 			}
 		}
 	}
-	`, resourceName, sdmResourceName, tagString)
+	`, resourceName, sdmResourceName, tagsToConfigString(tags))
 }
 
 func testAccSDMResourceSSHConfig(resourceName string, sdmResourceName string, port int32) string {
