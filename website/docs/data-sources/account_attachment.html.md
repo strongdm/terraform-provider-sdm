@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_account_attachment"
 description: |-
   Query for existing AccountAttachments instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-account-attachment"
 ---
 # Data Source: sdm_account_attachment
 

@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_account_grant"
 description: |-
   Provides settings for AccountGrant.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-account-grant"
 ---
 # sdm_account_grant
 

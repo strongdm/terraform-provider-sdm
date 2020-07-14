@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_account_grant"
 description: |-
   Query for existing AccountGrants instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-account-grant"
 ---
 # Data Source: sdm_account_grant
 

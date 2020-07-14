@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_role_grant"
 description: |-
   Query for existing RoleGrants instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-role-grant"
 ---
 # Data Source: sdm_role_grant
 

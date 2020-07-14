@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_node"
 description: |-
   Query for existing Nodes instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-node"
 ---
 # Data Source: sdm_node
 

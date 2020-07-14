@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_role_attachment"
 description: |-
   Provides settings for RoleAttachment.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-role-attachment"
 ---
 # sdm_role_attachment
 

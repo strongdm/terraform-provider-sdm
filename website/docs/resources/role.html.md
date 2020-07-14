@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_role"
 description: |-
   Provides settings for Role.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-role"
 ---
 # sdm_role
 

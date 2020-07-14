@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_account_attachment"
 description: |-
   Provides settings for AccountAttachment.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-account-attachment"
 ---
 # sdm_account_attachment
 

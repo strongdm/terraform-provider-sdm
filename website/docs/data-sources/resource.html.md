@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_resource"
 description: |-
   Query for existing Resources instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-resource"
 ---
 # Data Source: sdm_resource
 

@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_role"
 description: |-
   Query for existing Roles instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-role"
 ---
 # Data Source: sdm_role
 

@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_role_grant"
 description: |-
   Provides settings for RoleGrant.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-role-grant"
 ---
 # sdm_role_grant
 

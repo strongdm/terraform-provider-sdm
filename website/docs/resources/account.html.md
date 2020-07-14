@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_account"
 description: |-
   Provides settings for Account.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-account"
 ---
 # sdm_account
 

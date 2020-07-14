@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_role_attachment"
 description: |-
   Query for existing RoleAttachments instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-role-attachment"
 ---
 # Data Source: sdm_role_attachment
 

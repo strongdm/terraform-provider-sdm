@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_resource"
 description: |-
   Provides settings for Resource.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-resource"
 ---
 # sdm_resource
 

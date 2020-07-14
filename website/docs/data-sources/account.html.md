@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_account"
 description: |-
   Query for existing Accounts instances.
+layout: “sdm”
+sidebar_current: “docs-sdm-datasource-account"
 ---
 # Data Source: sdm_account
 

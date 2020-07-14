@@ -2,6 +2,8 @@
 page_title: "SDM: sdm_node"
 description: |-
   Provides settings for Node.
+layout: “sdm”
+sidebar_current: “docs-sdm-resource-node"
 ---
 # sdm_node
 
