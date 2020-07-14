@@ -698,25 +698,14 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
-			resource: "db_2_luw",
+			resource: "db_2",
 			pairs: [][2]string{
-				{"name", `"db2luw"`},
+				{"name", `"db2"`},
 				{"hostname", `"Hostname"`},
 				{"username", `"Username"`},
 				{"password", `"Password"`},
 				{"database", `"Database"`},
 				{"port", `50000`},
-			},
-		},
-		{
-			resource: "db_2_i",
-			pairs: [][2]string{
-				{"name", `"db2i"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"port", `50000`},
-				{"tls_required", "true"},
 			},
 		},
 	}

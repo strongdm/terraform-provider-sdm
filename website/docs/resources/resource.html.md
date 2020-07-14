@@ -51,14 +51,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
-* db_2_i:
-	* `name` - (Required) Unique human-readable name of the Resource.
-	* `hostname` - (Required) 
-	* `username` - (Required) 
-	* `password` - (Required) 
-	* `port` - (Optional) 
-	* `tls_required` - (Optional) 
-* db_2_luw:
+* db_2:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
@@ -395,9 +388,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* `port_override` - 
 * cassandra:
 	* `port_override` - 
-* db_2_i:
-	* `port_override` - 
-* db_2_luw:
+* db_2:
 	* `port_override` - 
 * druid:
 	* `port_override` - 

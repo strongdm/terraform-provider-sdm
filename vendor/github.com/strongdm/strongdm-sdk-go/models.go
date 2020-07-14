@@ -370,52 +370,28 @@ func (m *Cassandra) GetTags() Tags {
 func (m *Cassandra) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
-func (*DB2I) isOneOf_Resource() {}
+func (*DB2) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the DB2I.
-func (m *DB2I) GetID() string { return m.ID }
+// GetID returns the unique identifier of the DB2.
+func (m *DB2) GetID() string { return m.ID }
 
-// GetName returns the name of the DB2I.
-func (m *DB2I) GetName() string {
+// GetName returns the name of the DB2.
+func (m *DB2) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the DB2I.
-func (m *DB2I) SetName(v string) {
+// SetName sets the name of the DB2.
+func (m *DB2) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the DB2I.
-func (m *DB2I) GetTags() Tags {
+// GetTags returns the tags of the DB2.
+func (m *DB2) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the DB2I.
-func (m *DB2I) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-func (*DB2LUW) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the DB2LUW.
-func (m *DB2LUW) GetID() string { return m.ID }
-
-// GetName returns the name of the DB2LUW.
-func (m *DB2LUW) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the DB2LUW.
-func (m *DB2LUW) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the DB2LUW.
-func (m *DB2LUW) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the DB2LUW.
-func (m *DB2LUW) SetTags(v Tags) {
+// SetTags sets the tags of the DB2.
+func (m *DB2) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 func (*Druid) isOneOf_Resource() {}
@@ -1516,30 +1492,7 @@ type Cassandra struct {
 	TlsRequired bool `json:"tls_required"`
 }
 
-type DB2I struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"port_override"`
-
-	Port int32 `json:"port"`
-
-	TlsRequired bool `json:"tls_required"`
-}
-
-type DB2LUW struct {
+type DB2 struct {
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.

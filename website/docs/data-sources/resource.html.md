@@ -56,17 +56,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `port` - 
 		* `tls_required` - 
-	* db_2_i:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `port_override` - 
-		* `port` - 
-		* `tls_required` - 
-	* db_2_luw:
+	* db_2:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
