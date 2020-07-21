@@ -218,7 +218,71 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"db_2": {
+						"db_2_i": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"db_2_luw": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
@@ -2947,8 +3011,21 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),
 			})
-		case *sdm.DB2:
-			output[0]["db_2"] = append(output[0]["db_2"], entity{
+		case *sdm.DB2I:
+			output[0]["db_2_i"] = append(output[0]["db_2_i"], entity{
+				"id":            (v.ID),
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      (v.Password),
+				"database":      (v.Database),
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
+			})
+		case *sdm.DB2LUW:
+			output[0]["db_2_luw"] = append(output[0]["db_2_luw"], entity{
 				"id":            (v.ID),
 				"name":          (v.Name),
 				"tags":          convertTagsToMap(v.Tags),
