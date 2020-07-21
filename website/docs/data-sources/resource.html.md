@@ -63,7 +63,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
-		* `database` - 
 		* `port_override` - 
 		* `port` - 
 		* `tls_required` - 

@@ -715,7 +715,6 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"hostname", `"Hostname"`},
 				{"username", `"Username"`},
 				{"password", `"Password"`},
-				{"database", `"Database"`},
 				{"port", `50000`},
 				{"tls_required", "true"},
 			},

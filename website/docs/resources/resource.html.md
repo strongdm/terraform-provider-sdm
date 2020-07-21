@@ -56,7 +56,6 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
-	* `database` - (Required) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
 * db_2_luw:

@@ -259,11 +259,6 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Computed:    true,
@@ -3019,7 +3014,6 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"hostname":      (v.Hostname),
 				"username":      (v.Username),
 				"password":      (v.Password),
-				"database":      (v.Database),
 				"port_override": (v.PortOverride),
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),

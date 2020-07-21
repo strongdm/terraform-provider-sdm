@@ -211,11 +211,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Computed:    true,
@@ -2735,7 +2730,6 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			Hostname:    convertStringFromMap(raw, "hostname"),
 			Username:    convertStringFromMap(raw, "username"),
 			Password:    convertStringFromMap(raw, "password"),
-			Database:    convertStringFromMap(raw, "database"),
 			Port:        convertInt32FromMap(raw, "port"),
 			TlsRequired: convertBoolFromMap(raw, "tls_required"),
 		}
@@ -3735,7 +3729,6 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"hostname":      (v.Hostname),
 				"username":      (v.Username),
 				"password":      localV.Password,
-				"database":      (v.Database),
 				"port_override": (v.PortOverride),
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),
@@ -4492,7 +4485,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"hostname":      (v.Hostname),
 				"username":      (v.Username),
 				"password":      localV.Password,
-				"database":      (v.Database),
 				"port_override": (v.PortOverride),
 				"port":          (v.Port),
 				"tls_required":  (v.TlsRequired),
