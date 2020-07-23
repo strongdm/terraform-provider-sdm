@@ -175,7 +175,61 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"db_2": {
+			"db_2_i": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"db_2_luw": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "",
@@ -2664,12 +2718,34 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
-	if list := d.Get("db_2").([]interface{}); len(list) > 0 {
+	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return &sdm.DB2{}
+			return &sdm.DB2I{}
 		}
-		out := &sdm.DB2{
+		out := &sdm.DB2I{
+			ID:          d.Id(),
+			Name:        convertStringFromMap(raw, "name"),
+			Tags:        convertTagsFromMap(raw, "tags"),
+			Hostname:    convertStringFromMap(raw, "hostname"),
+			Username:    convertStringFromMap(raw, "username"),
+			Password:    convertStringFromMap(raw, "password"),
+			Port:        convertInt32FromMap(raw, "port"),
+			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("db_2_luw").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DB2LUW{}
+		}
+		out := &sdm.DB2LUW{
 			ID:       d.Id(),
 			Name:     convertStringFromMap(raw, "name"),
 			Tags:     convertTagsFromMap(raw, "tags"),
@@ -3643,10 +3719,25 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"tls_required":  (v.TlsRequired),
 			},
 		})
-	case *sdm.DB2:
-		localV, _ := localVersion.(*sdm.DB2)
+	case *sdm.DB2I:
+		localV, _ := localVersion.(*sdm.DB2I)
 		_ = localV
-		d.Set("db_2", []map[string]interface{}{
+		d.Set("db_2_i", []map[string]interface{}{
+			{
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
+			},
+		})
+	case *sdm.DB2LUW:
+		localV, _ := localVersion.(*sdm.DB2LUW)
+		_ = localV
+		d.Set("db_2_luw", []map[string]interface{}{
 			{
 				"name":          (v.Name),
 				"tags":          convertTagsToMap(v.Tags),
@@ -4381,13 +4472,31 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"tls_required":  (v.TlsRequired),
 			},
 		})
-	case *sdm.DB2:
-		localV, ok := localVersion.(*sdm.DB2)
+	case *sdm.DB2I:
+		localV, ok := localVersion.(*sdm.DB2I)
 		if !ok {
-			localV = &sdm.DB2{}
+			localV = &sdm.DB2I{}
 		}
 		_ = localV
-		d.Set("db_2", []map[string]interface{}{
+		d.Set("db_2_i", []map[string]interface{}{
+			{
+				"name":          (v.Name),
+				"tags":          convertTagsToMap(v.Tags),
+				"hostname":      (v.Hostname),
+				"username":      (v.Username),
+				"password":      localV.Password,
+				"port_override": (v.PortOverride),
+				"port":          (v.Port),
+				"tls_required":  (v.TlsRequired),
+			},
+		})
+	case *sdm.DB2LUW:
+		localV, ok := localVersion.(*sdm.DB2LUW)
+		if !ok {
+			localV = &sdm.DB2LUW{}
+		}
+		_ = localV
+		d.Set("db_2_luw", []map[string]interface{}{
 			{
 				"name":          (v.Name),
 				"tags":          convertTagsToMap(v.Tags),
