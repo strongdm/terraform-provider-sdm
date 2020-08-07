@@ -1726,11 +1726,8 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) *Kubernetes {
 	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.Port = (plumbing.Port)
 	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.CertificateAuthorityFilename = (plumbing.CertificateAuthorityFilename)
 	porcelain.ClientCertificate = (plumbing.ClientCertificate)
-	porcelain.ClientCertificateFilename = (plumbing.ClientCertificateFilename)
 	porcelain.ClientKey = (plumbing.ClientKey)
-	porcelain.ClientKeyFilename = (plumbing.ClientKeyFilename)
 	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
 	return porcelain
 }
@@ -1747,11 +1744,8 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Port = (porcelain.Port)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.CertificateAuthorityFilename = (porcelain.CertificateAuthorityFilename)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
-	plumbing.ClientCertificateFilename = (porcelain.ClientCertificateFilename)
 	plumbing.ClientKey = (porcelain.ClientKey)
-	plumbing.ClientKeyFilename = (porcelain.ClientKeyFilename)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	return plumbing
 }
@@ -1883,7 +1877,6 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) *AmazonEKS {
 	porcelain.AccessKey = (plumbing.AccessKey)
 	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
 	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.CertificateAuthorityFilename = (plumbing.CertificateAuthorityFilename)
 	porcelain.Region = (plumbing.Region)
 	porcelain.ClusterName = (plumbing.ClusterName)
 	porcelain.RoleArn = (plumbing.RoleArn)
@@ -1904,7 +1897,6 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	plumbing.AccessKey = (porcelain.AccessKey)
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.CertificateAuthorityFilename = (porcelain.CertificateAuthorityFilename)
 	plumbing.Region = (porcelain.Region)
 	plumbing.ClusterName = (porcelain.ClusterName)
 	plumbing.RoleArn = (porcelain.RoleArn)
@@ -1939,9 +1931,7 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) *GoogleGKE {
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.Endpoint = (plumbing.Endpoint)
 	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.CertificateAuthorityFilename = (plumbing.CertificateAuthorityFilename)
 	porcelain.ServiceAccountKey = (plumbing.ServiceAccountKey)
-	porcelain.ServiceAccountKeyFilename = (plumbing.ServiceAccountKeyFilename)
 	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
 	return porcelain
 }
@@ -1957,9 +1947,7 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.CertificateAuthorityFilename = (porcelain.CertificateAuthorityFilename)
 	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
-	plumbing.ServiceAccountKeyFilename = (porcelain.ServiceAccountKeyFilename)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	return plumbing
 }
@@ -1992,11 +1980,8 @@ func convertAKSToPorcelain(plumbing *proto.AKS) *AKS {
 	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.Port = (plumbing.Port)
 	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.CertificateAuthorityFilename = (plumbing.CertificateAuthorityFilename)
 	porcelain.ClientCertificate = (plumbing.ClientCertificate)
-	porcelain.ClientCertificateFilename = (plumbing.ClientCertificateFilename)
 	porcelain.ClientKey = (plumbing.ClientKey)
-	porcelain.ClientKeyFilename = (plumbing.ClientKeyFilename)
 	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
 	return porcelain
 }
@@ -2013,11 +1998,8 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Port = (porcelain.Port)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.CertificateAuthorityFilename = (porcelain.CertificateAuthorityFilename)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
-	plumbing.ClientCertificateFilename = (porcelain.ClientCertificateFilename)
 	plumbing.ClientKey = (porcelain.ClientKey)
-	plumbing.ClientKeyFilename = (porcelain.ClientKeyFilename)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	return plumbing
 }

@@ -8,6 +8,7 @@ sidebar_current: “docs-sdm-datasource-resource"
 # Data Source: sdm_resource
 
 A Resource is a database or server for which strongDM manages access.
+
 ## Example Usage
 
 ```hcl
@@ -16,6 +17,7 @@ data "sdm_resource" "aurora_datasources" {
     type = "aurora_mysql"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported by a Resources data source:
 * `type` - (Optional) a filter to query only one subtype. See Attribute Reference for all subtypes.
@@ -24,6 +26,7 @@ The following arguments are supported by a Resources data source:
 * `name` - (Optional) Unique human-readable name of the Resource.
 * `port` - (Optional) 
 * `username` - (Optional) 
+
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Resources data source:
 * `ids` - a list of strings of ids of data sources that match the given arguments.
@@ -150,11 +153,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `certificate_authority` - 
-		* `certificate_authority_filename` - 
 		* `client_certificate` - 
-		* `client_certificate_filename` - 
 		* `client_key` - 
-		* `client_key_filename` - 
 		* `healthcheck_namespace` - 
 	* kubernetes_basic_auth:
 		* `id` - Unique identifier of the Resource.
@@ -181,7 +181,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `access_key` - 
 		* `secret_access_key` - 
 		* `certificate_authority` - 
-		* `certificate_authority_filename` - 
 		* `region` - 
 		* `cluster_name` - 
 		* `role_arn` - 
@@ -192,9 +191,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 		* `endpoint` - 
 		* `certificate_authority` - 
-		* `certificate_authority_filename` - 
 		* `service_account_key` - 
-		* `service_account_key_filename` - 
 		* `healthcheck_namespace` - 
 	* aks:
 		* `id` - Unique identifier of the Resource.
@@ -203,11 +200,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `certificate_authority` - 
-		* `certificate_authority_filename` - 
 		* `client_certificate` - 
-		* `client_certificate_filename` - 
 		* `client_key` - 
-		* `client_key_filename` - 
 		* `healthcheck_namespace` - 
 	* aks_basic_auth:
 		* `id` - Unique identifier of the Resource.

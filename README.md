@@ -11,24 +11,6 @@ The strongDM provider is used to configure and manage your strongDM account. It 
 ## Requirements
 - [Terraform](https://www.terraform.io/downloads.html) 0.12+
 
-## Downloading the provider
-
-### macOS
-
-```sh
-curl -J -O -L https://app.strongdm.com/downloads/terraform-provider/darwin
-```
-
-### linux
-
-```sh
-curl -J -O -L https://app.strongdm.com/downloads/terraform-provider/linux
-```
-
-## Installing the provider
-
-Follow these instructions to [install strongDM as a plugin](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin). Finally, run `terraform init`.
-
 ## Authentication
 
 If you don't already have them you will need to generate a set of API keys, instructions are here: [API Credentials](https://www.strongdm.com/docs/admin-guide/api-credentials/)

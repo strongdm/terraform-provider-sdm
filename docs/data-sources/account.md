@@ -7,10 +7,10 @@ sidebar_current: “docs-sdm-datasource-account"
 ---
 # Data Source: sdm_account
 
-Accounts are users that have access to strongDM.
- There are two types of accounts:
- 1. **Regular users:** humans who are authenticated through username and password or SSO
- 2. **Service users:** machines that are authneticated using a service token
+Accounts are users that have access to strongDM. There are two types of accounts:
+ 1. **Users:** humans who are authenticated through username and password or SSO.
+ 2. **Service Accounts:** machines that are authenticated using a service token.
+
 ## Example Usage
 
 ```hcl
@@ -19,6 +19,7 @@ data "sdm_account" "user-queries" {
     email = "*@strongdm.com"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported by a Accounts data source:
 * `type` - (Optional) a filter to query only one subtype. See Attribute Reference for all subtypes.
@@ -28,6 +29,7 @@ The following arguments are supported by a Accounts data source:
 * `last_name` - (Optional) The User's last name.
 * `name` - (Optional) Unique human-readable name of the Service.
 * `suspended` - (Optional) The Service's suspended state.
+
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Accounts data source:
 * `ids` - a list of strings of ids of data sources that match the given arguments.

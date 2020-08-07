@@ -61,7 +61,7 @@ func dataSourceNode() *schema.Resource {
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Relay. Generated if not provided on create.",
+										Description: "Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -89,7 +89,7 @@ func dataSourceNode() *schema.Resource {
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Gateway. Generated if not provided on create.",
+										Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 									},
 									"listen_address": {
 										Type:        schema.TypeString,

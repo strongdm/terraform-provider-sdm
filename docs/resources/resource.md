@@ -5,9 +5,10 @@ description: |-
 layout: “sdm”
 sidebar_current: “docs-sdm-resource-resource"
 ---
-# sdm_resource
+# Resource: sdm_resource
 
 A Resource is a database or server for which strongDM manages access.
+
 ## Example Usage
 
 ```hcl
@@ -30,6 +31,7 @@ resource "sdm_resource" "postgres-test" {
     }
 }
 ```
+
 ## Argument Reference
 The following arguments are supported by the Resource resource:
 * athena:
@@ -119,11 +121,8 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `certificate_authority` - (Optional) 
-	* `certificate_authority_filename` - (Optional) 
 	* `client_certificate` - (Optional) 
-	* `client_certificate_filename` - (Optional) 
 	* `client_key` - (Optional) 
-	* `client_key_filename` - (Optional) 
 	* `healthcheck_namespace` - (Optional) 
 * kubernetes_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -144,7 +143,6 @@ The following arguments are supported by the Resource resource:
 	* `access_key` - (Required) 
 	* `secret_access_key` - (Required) 
 	* `certificate_authority` - (Required) 
-	* `certificate_authority_filename` - (Optional) 
 	* `region` - (Required) 
 	* `cluster_name` - (Required) 
 	* `role_arn` - (Optional) 
@@ -153,20 +151,15 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `endpoint` - (Required) 
 	* `certificate_authority` - (Required) 
-	* `certificate_authority_filename` - (Optional) 
 	* `service_account_key` - (Required) 
-	* `service_account_key_filename` - (Optional) 
 	* `healthcheck_namespace` - (Optional) 
 * aks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `certificate_authority` - (Optional) 
-	* `certificate_authority_filename` - (Optional) 
 	* `client_certificate` - (Optional) 
-	* `client_certificate_filename` - (Optional) 
 	* `client_key` - (Optional) 
-	* `client_key_filename` - (Optional) 
 	* `healthcheck_namespace` - (Optional) 
 * aks_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -386,6 +379,7 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `port` - (Optional) 
+
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
