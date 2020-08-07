@@ -1,5 +1,5 @@
 
-# Data Sources
+# Resources
 * [account_attachment](./account_attachment) - AccountAttachments assign an account to a role.
 * [account_grant](./account_grant) - AccountGrants connect a resource directly to an account, giving the account the permission to connect to that resource.
 * [account](./account) - Accounts are users that have access to strongDM.

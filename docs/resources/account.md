@@ -5,15 +5,21 @@ description: |-
 layout: “sdm”
 sidebar_current: “docs-sdm-resource-account"
 ---
-# Resource: sdm_account
+# sdm_account
 
-Accounts are users that have access to strongDM. There are two types of accounts:
- 1. **Users:** humans who are authenticated through username and password or SSO.
- 2. **Service Accounts:** machines that are authenticated using a service token.
-
+Accounts are users that have access to strongDM.
+ There are two types of accounts:
+ 1. **Regular users:** humans who are authenticated through username and password or SSO
+ 2. **Service users:** machines that are authneticated using a service token
 ## Example Usage
 
 ```hcl
+resource "sdm_account" "test-service" {
+    service {
+        name = "test-service"
+    }
+}
+
 resource "sdm_account" "test-user" {
     user {
         first_name = "al"
@@ -21,14 +27,7 @@ resource "sdm_account" "test-user" {
         email = "albob@strongdm.com"
     }
 }
-
-resource "sdm_account" "test-service" {
-    service {
-        name = "test-service"
-    }
-}
 ```
-
 ## Argument Reference
 The following arguments are supported by the Account resource:
 * user:
@@ -39,7 +38,6 @@ The following arguments are supported by the Account resource:
 * service:
 	* `name` - (Required) Unique human-readable name of the Service.
 	* `suspended` - (Optional) The Service's suspended state.
-
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Account resource:
 * `id` - A unique identifier for the Account resource.

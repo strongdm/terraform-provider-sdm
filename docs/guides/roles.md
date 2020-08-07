@@ -20,6 +20,8 @@ resource "sdm_role" "IT_team" {
 resource "sdm_role" "DevOps" {
   name      = "DevOps"
   composite = true
+# It would be nice if roles were listed in the resource object.
+#	roles     = [sdm_role.Dev.id, sdm_role.Ops.id]
 }
 resource "sdm_role" "Dev" {
   name      = "Devs"
@@ -43,7 +45,7 @@ resource "sdm_role_attachment" "Ops" {
 
 ```hcl
 resource "sdm_role" "ops" {
-  name      = "Network Operations"
+  name      = "Netowrk Operations"
 }
 
 data "sdm_resource" "prod_db" {
@@ -58,12 +60,12 @@ data "sdm_resource" "bastion" {
 
 resource "sdm_role_grant" "prod_db" {
   role_id = sdm_role.ops.id
-  resource_id = data.sdm_resource.prod_db.id
+  resource_id = data.sdm_resource.prod_db.0.id
 }
 
 resource "sdm_role_grant" "bastion" {
   role_id = sdm_role.ops.id
-  resource_id = data.sdm_resource.bastion.id
+  resource_id = data.sdm_resource.bastion.0.id
 }
 ```
 
@@ -71,7 +73,7 @@ resource "sdm_role_grant" "bastion" {
 
 ```hcl
 resource "sdm_role" "ops" {
-  name      = "Network Operations"
+  name      = "Netowrk Operations"
 }
 
 data "sdm_account" "dave" {
@@ -80,6 +82,6 @@ data "sdm_account" "dave" {
 
 resource "sdm_role_attachment" "dave_ops" {
   role_id = sdm_role.ops.id
-  account_id = data.sdm_accounts.dave.id
+  user_id = data.sdm_accounts.dave.0.id
 }
 ```

@@ -2,14 +2,14 @@
 
 strongDM has two different types of user accounts
 
-1. **Users:** humans who are authenticated through username and password or SSO.
-2. **Service Accounts:** machines that are authenticated using a service token.
+1. **Regular users:** humans who are authenticated through username and password or SSO.
+2. **Service users:** machines that are authneticated using a service token.
 
 Both types of accounts are managed using the `sdm_account` resource.
 
 ## Creating users
 
-### How to create a User
+### How to create a regular user
 
 ```hcl
 resource "sdm_account" "jane_doe" {
@@ -21,7 +21,7 @@ resource "sdm_account" "jane_doe" {
 }
 ```
 
-### How to create a Service Account
+### How to create a service user
 
 ```hcl
 resource "sdm_account" "dev_ci_pipeline" {
@@ -31,7 +31,7 @@ resource "sdm_account" "dev_ci_pipeline" {
 }
 
 output "dev_ci_pipeline_token" {
-  value = sdm_account.dev_ci_pipeline.service[0].token
+  value = sdm_account.dev_ci_pipeline.token
 }
 ```
 
@@ -61,8 +61,8 @@ resource "sdm_role" "developers" {
 }
 
 resource "sdm_account_attachment" "developers_jane_doe" {
-  account_id  = sdm_account.jane_doe.id
-  role_id     = sdm_role.developers.id
+  account_id  = "${sdm_account.jane_doe.id}"
+  role_id     = "${sdm_role.developers.id}"
 }
 ```
 
@@ -78,20 +78,12 @@ resource "sdm_account" "jane_doe" {
   }
 }
 
-resource "sdm_resource" "mysql" {
-  mysql {
-    name          = "mysql_prod_db"
-    hostname      = "prod.mysql.corp.net"
-    username      = "admin"
-    password      = "password"
-    database      = "master"
-    port          = 3306
-    port_override = 13306
-  }
+resource "sdm_resource" "datawarehouse" {
+  ...
 }
 
-resource "sdm_account_grant" "mysql_jane_doe" {
-  account_id  = sdm_account.jane_doe.id
-  resource_id = sdm_resource.mysql.id
+resource "sdm_account_grant" "datawarehouse_jane_doe" {
+  account_id  = "${sdm_account.jane_doe.id}"
+  resource_id = "${sdm_resource.datawarehouse.id}"
 }
 ```

@@ -2,11 +2,10 @@
 
 Resources in strongDM are the databases, servers, and clusters for which strongDM manages access.
 
-<!-- ## Leased Credentials
+## Leased Credentials
 
 [Credential Leasing](https://www.strongdm.com/docs/architecture/leasing/)
 
--->
 ## Example Usage
 
 ### MySQL Database
@@ -24,7 +23,6 @@ resource "sdm_resource" "mysql" {
     database      = "master"
     port          = 3306
   }
-}
 ```
 
 ### SSH Server
@@ -39,10 +37,9 @@ resource "sdm_resource" "rack_server" {
     username      = "awsuser"
     port          = 22
   }
-}
 
 output "rack_server_public_key" {
-  value = sdm_resource.rack_server.ssh[0].public_key
+  value = sdm_resource.rack_server.public_key
 }
 ```
 
@@ -54,7 +51,7 @@ resource "sdm_resource" "win_server_2019" {
     name          = "windows server 2019"
     hostname      = "admin.windows.corp.net"
     username      = "Administrator"
-    password      = "password"
+    password      = var.win_admin_pass
     port          = 3389
   }
 }

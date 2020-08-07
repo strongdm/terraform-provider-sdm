@@ -1,8 +1,6 @@
 # strongDM SDK for Go
 
-This is the official [strongDM](https://www.strongdm.com/) SDK for the Go programming language. 
-
-Learn more with our [📚strongDM API docs](https://www.strongdm.com/docs/api/) or [📓browse the SDK reference](https://pkg.go.dev/github.com/strongdm/strongdm-sdk-go?tab=doc).
+This is the official [strongDM](https://www.strongdm.com/) SDK for the Go programming language.
 
 ## Installation
 
@@ -62,7 +60,7 @@ func main() {
 	1. [Managing Accounts](https://github.com/strongdm/strongdm-sdk-go-examples/tree/master/2_managing_accounts)
 	1. [Managing Roles](https://github.com/strongdm/strongdm-sdk-go-examples/tree/master/3_managing_roles)
 	1. [Managing Gateways](https://github.com/strongdm/strongdm-sdk-go-examples/tree/master/4_managing_gateways)
-   
+	
 ## License
 
 [Apache 2](https://github.com/strongdm/strongdm-sdk-go/blob/master/LICENSE)

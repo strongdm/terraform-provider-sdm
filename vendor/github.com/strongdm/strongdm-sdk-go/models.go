@@ -1733,9 +1733,15 @@ type Kubernetes struct {
 
 	CertificateAuthority string `json:"certificate_authority"`
 
+	CertificateAuthorityFilename string `json:"certificate_authority_filename"`
+
 	ClientCertificate string `json:"client_certificate"`
 
+	ClientCertificateFilename string `json:"client_certificate_filename"`
+
 	ClientKey string `json:"client_key"`
+
+	ClientKeyFilename string `json:"client_key_filename"`
 
 	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
@@ -1798,6 +1804,8 @@ type AmazonEKS struct {
 
 	CertificateAuthority string `json:"certificate_authority"`
 
+	CertificateAuthorityFilename string `json:"certificate_authority_filename"`
+
 	Region string `json:"region"`
 
 	ClusterName string `json:"cluster_name"`
@@ -1821,7 +1829,11 @@ type GoogleGKE struct {
 
 	CertificateAuthority string `json:"certificate_authority"`
 
+	CertificateAuthorityFilename string `json:"certificate_authority_filename"`
+
 	ServiceAccountKey string `json:"service_account_key"`
+
+	ServiceAccountKeyFilename string `json:"service_account_key_filename"`
 
 	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }
@@ -1842,9 +1854,15 @@ type AKS struct {
 
 	CertificateAuthority string `json:"certificate_authority"`
 
+	CertificateAuthorityFilename string `json:"certificate_authority_filename"`
+
 	ClientCertificate string `json:"client_certificate"`
 
+	ClientCertificateFilename string `json:"client_certificate_filename"`
+
 	ClientKey string `json:"client_key"`
+
+	ClientKeyFilename string `json:"client_key_filename"`
 
 	HealthcheckNamespace string `json:"healthcheck_namespace"`
 }

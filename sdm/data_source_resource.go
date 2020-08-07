@@ -774,16 +774,31 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"certificate_authority_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
 									},
+									"client_certificate_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
+										Description: "",
+									},
+									"client_key_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 									"healthcheck_namespace": {
@@ -944,6 +959,11 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"certificate_authority_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1003,10 +1023,20 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"certificate_authority_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"service_account_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
+										Description: "",
+									},
+									"service_account_key_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 									"healthcheck_namespace": {
@@ -1058,16 +1088,31 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"certificate_authority_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
 									},
+									"client_certificate_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
+										Description: "",
+									},
+									"client_key_filename": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 									"healthcheck_namespace": {
@@ -3068,15 +3113,18 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.Kubernetes:
 			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             (v.ClientCertificate),
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     (v.ClientKey),
+				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.KubernetesBasicAuth:
 			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
@@ -3101,39 +3149,45 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"endpoint":              (v.Endpoint),
-				"access_key":            (v.AccessKey),
-				"secret_access_key":     (v.SecretAccessKey),
-				"certificate_authority": (v.CertificateAuthority),
-				"region":                (v.Region),
-				"cluster_name":          (v.ClusterName),
-				"role_arn":              (v.RoleArn),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"access_key":                     (v.AccessKey),
+				"secret_access_key":              (v.SecretAccessKey),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"region":                         (v.Region),
+				"cluster_name":                   (v.ClusterName),
+				"role_arn":                       (v.RoleArn),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"endpoint":              (v.Endpoint),
-				"certificate_authority": (v.CertificateAuthority),
-				"service_account_key":   (v.ServiceAccountKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"service_account_key":            (v.ServiceAccountKey),
+				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          (v.CertificateAuthority),
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             (v.ClientCertificate),
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     (v.ClientKey),
+				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			})
 		case *sdm.AKSBasicAuth:
 			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{

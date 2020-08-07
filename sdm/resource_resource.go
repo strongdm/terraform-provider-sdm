@@ -681,16 +681,31 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
+						"client_certificate_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
+							Description: "",
+						},
+						"client_key_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"healthcheck_namespace": {
@@ -836,6 +851,11 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -890,10 +910,20 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"service_account_key": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Sensitive:   true,
+							Description: "",
+						},
+						"service_account_key_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"healthcheck_namespace": {
@@ -940,16 +970,31 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"certificate_authority_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
+						"client_certificate_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
+							Description: "",
+						},
+						"client_key_filename": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"healthcheck_namespace": {
@@ -2862,15 +2907,18 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Kubernetes{}
 		}
 		out := &sdm.Kubernetes{
-			ID:                   d.Id(),
-			Name:                 convertStringFromMap(raw, "name"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
+			ID:                           d.Id(),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Hostname:                     convertStringFromMap(raw, "hostname"),
+			Port:                         convertInt32FromMap(raw, "port"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            convertStringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    convertStringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    convertStringFromMap(raw, "client_key"),
+			ClientKeyFilename:            convertStringFromMap(raw, "client_key_filename"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2913,17 +2961,18 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AmazonEKS{}
 		}
 		out := &sdm.AmazonEKS{
-			ID:                   d.Id(),
-			Name:                 convertStringFromMap(raw, "name"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Endpoint:             convertStringFromMap(raw, "endpoint"),
-			AccessKey:            convertStringFromMap(raw, "access_key"),
-			SecretAccessKey:      convertStringFromMap(raw, "secret_access_key"),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			Region:               convertStringFromMap(raw, "region"),
-			ClusterName:          convertStringFromMap(raw, "cluster_name"),
-			RoleArn:              convertStringFromMap(raw, "role_arn"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
+			ID:                           d.Id(),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Endpoint:                     convertStringFromMap(raw, "endpoint"),
+			AccessKey:                    convertStringFromMap(raw, "access_key"),
+			SecretAccessKey:              convertStringFromMap(raw, "secret_access_key"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			Region:                       convertStringFromMap(raw, "region"),
+			ClusterName:                  convertStringFromMap(raw, "cluster_name"),
+			RoleArn:                      convertStringFromMap(raw, "role_arn"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2933,13 +2982,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.GoogleGKE{}
 		}
 		out := &sdm.GoogleGKE{
-			ID:                   d.Id(),
-			Name:                 convertStringFromMap(raw, "name"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Endpoint:             convertStringFromMap(raw, "endpoint"),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ServiceAccountKey:    convertStringFromMap(raw, "service_account_key"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
+			ID:                           d.Id(),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Endpoint:                     convertStringFromMap(raw, "endpoint"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			ServiceAccountKey:            convertStringFromMap(raw, "service_account_key"),
+			ServiceAccountKeyFilename:    convertStringFromMap(raw, "service_account_key_filename"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -2949,15 +3000,18 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AKS{}
 		}
 		out := &sdm.AKS{
-			ID:                   d.Id(),
-			Name:                 convertStringFromMap(raw, "name"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
+			ID:                           d.Id(),
+			Name:                         convertStringFromMap(raw, "name"),
+			Tags:                         convertTagsFromMap(raw, "tags"),
+			Hostname:                     convertStringFromMap(raw, "hostname"),
+			Port:                         convertInt32FromMap(raw, "port"),
+			CertificateAuthority:         convertStringFromMap(raw, "certificate_authority"),
+			CertificateAuthorityFilename: convertStringFromMap(raw, "certificate_authority_filename"),
+			ClientCertificate:            convertStringFromMap(raw, "client_certificate"),
+			ClientCertificateFilename:    convertStringFromMap(raw, "client_certificate_filename"),
+			ClientKey:                    convertStringFromMap(raw, "client_key"),
+			ClientKeyFilename:            convertStringFromMap(raw, "client_key_filename"),
+			HealthcheckNamespace:         convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		return out
 	}
@@ -3802,14 +3856,17 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": localV.CertificateAuthority,
-				"client_certificate":    localV.ClientCertificate,
-				"client_key":            localV.ClientKey,
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -3844,16 +3901,17 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"endpoint":              (v.Endpoint),
-				"access_key":            (v.AccessKey),
-				"secret_access_key":     localV.SecretAccessKey,
-				"certificate_authority": localV.CertificateAuthority,
-				"region":                (v.Region),
-				"cluster_name":          (v.ClusterName),
-				"role_arn":              (v.RoleArn),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"access_key":                     (v.AccessKey),
+				"secret_access_key":              localV.SecretAccessKey,
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"region":                         (v.Region),
+				"cluster_name":                   (v.ClusterName),
+				"role_arn":                       (v.RoleArn),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -3861,12 +3919,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"endpoint":              (v.Endpoint),
-				"certificate_authority": localV.CertificateAuthority,
-				"service_account_key":   localV.ServiceAccountKey,
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"service_account_key":            localV.ServiceAccountKey,
+				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKS:
@@ -3874,14 +3934,17 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": localV.CertificateAuthority,
-				"client_certificate":    localV.ClientCertificate,
-				"client_key":            localV.ClientKey,
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -4576,14 +4639,17 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": localV.CertificateAuthority,
-				"client_certificate":    localV.ClientCertificate,
-				"client_key":            localV.ClientKey,
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -4627,16 +4693,17 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"endpoint":              (v.Endpoint),
-				"access_key":            (v.AccessKey),
-				"secret_access_key":     localV.SecretAccessKey,
-				"certificate_authority": localV.CertificateAuthority,
-				"region":                (v.Region),
-				"cluster_name":          (v.ClusterName),
-				"role_arn":              (v.RoleArn),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"access_key":                     (v.AccessKey),
+				"secret_access_key":              localV.SecretAccessKey,
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"region":                         (v.Region),
+				"cluster_name":                   (v.ClusterName),
+				"role_arn":                       (v.RoleArn),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -4647,12 +4714,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"endpoint":              (v.Endpoint),
-				"certificate_authority": localV.CertificateAuthority,
-				"service_account_key":   localV.ServiceAccountKey,
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"endpoint":                       (v.Endpoint),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"service_account_key":            localV.ServiceAccountKey,
+				"service_account_key_filename":   (v.ServiceAccountKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKS:
@@ -4663,14 +4732,17 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": localV.CertificateAuthority,
-				"client_certificate":    localV.ClientCertificate,
-				"client_key":            localV.ClientKey,
-				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"hostname":                       (v.Hostname),
+				"port":                           (v.Port),
+				"certificate_authority":          localV.CertificateAuthority,
+				"certificate_authority_filename": (v.CertificateAuthorityFilename),
+				"client_certificate":             localV.ClientCertificate,
+				"client_certificate_filename":    (v.ClientCertificateFilename),
+				"client_key":                     localV.ClientKey,
+				"client_key_filename":            (v.ClientKeyFilename),
+				"healthcheck_namespace":          (v.HealthcheckNamespace),
 			},
 		})
 	case *sdm.AKSBasicAuth:
