@@ -32,6 +32,7 @@ The following arguments are supported by a Accounts data source:
 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Accounts data source:
+* `id` - a generated id representing this request, unrelated to input id and sdm_account ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `accounts` - A single element list containing a map, where each key lists one of the following objects:
 	* user:
