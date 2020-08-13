@@ -289,8 +289,6 @@ func TestAccSDMResource_Update(t *testing.T) {
 }
 
 func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
-	t.Parallel()
-
 	certificateAuthorityRaw := []string{
 		"\"-----BEGIN CERTIFICATE-----",
 		"MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p",
@@ -739,7 +737,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				checks[i] = resource.TestCheckResourceAttr("sdm_resource."+name, tc.resource+".0."+p[0], val)
 			}
 
-			resource.ParallelTest(t, resource.TestCase{
+			resource.Test(t, resource.TestCase{
 				Providers:    testAccProviders,
 				CheckDestroy: testCheckDestroy,
 				Steps: []resource.TestStep{
