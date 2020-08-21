@@ -58,12 +58,12 @@ data "sdm_resource" "bastion" {
 
 resource "sdm_role_grant" "prod_db" {
   role_id = sdm_role.ops.id
-  resource_id = data.sdm_resource.prod_db.id
+  resource_id = data.sdm_resource.prod_db.ids[0]
 }
 
 resource "sdm_role_grant" "bastion" {
   role_id = sdm_role.ops.id
-  resource_id = data.sdm_resource.bastion.id
+  resource_id = data.sdm_resource.bastion.ids[0]
 }
 ```
 
@@ -80,6 +80,6 @@ data "sdm_account" "dave" {
 
 resource "sdm_role_attachment" "dave_ops" {
   role_id = sdm_role.ops.id
-  account_id = data.sdm_accounts.dave.id
+  account_id = data.sdm_accounts.dave.ids[0]
 }
 ```
