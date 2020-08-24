@@ -25,7 +25,6 @@ The following arguments are supported by a RoleAttachments data source:
 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a RoleAttachments data source:
-* `id` - a generated id representing this request, unrelated to input id and sdm_role_attachment ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `role_attachments` - A list where each element has the following attributes:
 	* `id` - Unique identifier of the RoleAttachment.
