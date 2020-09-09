@@ -11,7 +11,6 @@ Nodes make up the strongDM network, and allow your users to connect securely to 
  There are two types of nodes:
  1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
  1. **Gateways:** a relay that also listens for connections from strongDM clients
-
 ## Example Usage
 
 ```hcl
@@ -29,7 +28,6 @@ resource "sdm_node" "relay" {
     }
 }
 ```
-
 ## Argument Reference
 The following arguments are supported by the Node resource:
 * relay:
@@ -39,7 +37,6 @@ The following arguments are supported by the Node resource:
 	* `listen_address` - (Required) The public hostname/port tuple at which the gateway will be accessible to clients.
 	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to.
  If not provided on create, set to "0.0.0.0:<listen_address_port>".
-
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Node resource:
 * `id` - A unique identifier for the Node resource.

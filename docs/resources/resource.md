@@ -8,7 +8,6 @@ sidebar_current: “docs-sdm-resource-resource"
 # Resource: sdm_resource
 
 A Resource is a database or server for which strongDM manages access.
-
 ## Example Usage
 
 ```hcl
@@ -31,7 +30,6 @@ resource "sdm_resource" "postgres-test" {
     }
 }
 ```
-
 ## Argument Reference
 The following arguments are supported by the Resource resource:
 * athena:
@@ -379,7 +377,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `port` - (Optional) 
-
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.

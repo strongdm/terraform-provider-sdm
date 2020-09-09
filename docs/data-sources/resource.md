@@ -8,7 +8,6 @@ sidebar_current: “docs-sdm-datasource-resource"
 # Data Source: sdm_resource
 
 A Resource is a database or server for which strongDM manages access.
-
 ## Example Usage
 
 ```hcl
@@ -17,7 +16,6 @@ data "sdm_resource" "aurora_datasources" {
     type = "aurora_mysql"
 }
 ```
-
 ## Argument Reference
 The following arguments are supported by a Resources data source:
 * `type` - (Optional) a filter to query only one subtype. See Attribute Reference for all subtypes.
@@ -26,7 +24,6 @@ The following arguments are supported by a Resources data source:
 * `name` - (Optional) Unique human-readable name of the Resource.
 * `port` - (Optional) 
 * `username` - (Optional) 
-
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Resources data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_resource ids.
