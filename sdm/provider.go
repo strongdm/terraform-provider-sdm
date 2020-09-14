@@ -47,6 +47,7 @@ func Provider() terraform.ResourceProvider {
 			"sdm_role":               resourceRole(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
+			"sdm_ssh_ca_pubkey":      dataSourceControlPanelSSHCAPublicKey(),
 			"sdm_account_attachment": dataSourceAccountAttachment(),
 			"sdm_account_grant":      dataSourceAccountGrant(),
 			"sdm_account":            dataSourceAccount(),
