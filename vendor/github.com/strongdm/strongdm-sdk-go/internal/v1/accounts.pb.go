@@ -601,10 +601,9 @@ func (m *AccountListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// Accounts are users that have access to strongDM.
-// There are two types of accounts:
-// 1. **Regular users:** humans who are authenticated through username and password or SSO
-// 2. **Service users:** machines that are authneticated using a service token
+// Accounts are users that have access to strongDM. There are two types of accounts:
+// 1. **Users:** humans who are authenticated through username and password or SSO.
+// 2. **Service Accounts:** machines that are authenticated using a service token.
 type Account struct {
 	// Types that are valid to be assigned to Account:
 	//	*Account_User

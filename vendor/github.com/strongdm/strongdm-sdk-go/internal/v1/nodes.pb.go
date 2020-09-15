@@ -689,7 +689,7 @@ func (*Node) XXX_OneofWrappers() []interface{} {
 type Relay struct {
 	// Unique identifier of the Relay.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Unique human-readable name of the Relay. Generated if not provided on create.
+	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The current state of the relay. One of: "new", "verifying_restart",
 	// "awaiting_restart", "restarting", "started", "stopped", "dead",
@@ -759,7 +759,7 @@ func (m *Relay) GetTags() *Tags {
 type Gateway struct {
 	// Unique identifier of the Gateway.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Unique human-readable name of the Gateway. Generated if not provided on create.
+	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The current state of the gateway. One of: "new", "verifying_restart",
 	// "restarting", "started", "stopped", "dead", "unknown"

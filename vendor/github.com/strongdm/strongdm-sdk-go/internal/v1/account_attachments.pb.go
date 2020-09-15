@@ -469,7 +469,7 @@ func (m *AccountAttachmentListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// AccountAttachments assign an account to a role.
+// AccountAttachments assign an account to a role or composite role.
 type AccountAttachment struct {
 	// Unique identifier of the AccountAttachment.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`

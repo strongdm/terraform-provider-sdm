@@ -592,7 +592,7 @@ func (m *RoleListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// A Role is a collection of permissions, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
+// A Role is a collection of access grants, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
 type Role struct {
 	// Unique identifier of the Role.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`

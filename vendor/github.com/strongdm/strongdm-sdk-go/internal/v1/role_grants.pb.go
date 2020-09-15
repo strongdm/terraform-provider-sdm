@@ -469,8 +469,7 @@ func (m *RoleGrantListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// A RoleGrant connects a resource to a role, granting members of the role
-// access to that resource.
+// A RoleGrant connects a resource to a role, granting members of the role access to that resource.
 type RoleGrant struct {
 	// Unique identifier of the RoleGrant.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`

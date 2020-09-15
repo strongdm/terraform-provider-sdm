@@ -829,6 +829,44 @@ func convertRepeatedServiceToPorcelain(plumbings []*proto.Service) []*Service {
 	}
 	return items
 }
+func convertControlPanelGetSSHCAPublicKeyResponseToPorcelain(plumbing *proto.ControlPanelGetSSHCAPublicKeyResponse) *ControlPanelGetSSHCAPublicKeyResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &ControlPanelGetSSHCAPublicKeyResponse{}
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.PublicKey = (plumbing.PublicKey)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertControlPanelGetSSHCAPublicKeyResponseToPlumbing(porcelain *ControlPanelGetSSHCAPublicKeyResponse) *proto.ControlPanelGetSSHCAPublicKeyResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ControlPanelGetSSHCAPublicKeyResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedControlPanelGetSSHCAPublicKeyResponseToPlumbing(
+	porcelains []*ControlPanelGetSSHCAPublicKeyResponse,
+) []*proto.ControlPanelGetSSHCAPublicKeyResponse {
+	var items []*proto.ControlPanelGetSSHCAPublicKeyResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertControlPanelGetSSHCAPublicKeyResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedControlPanelGetSSHCAPublicKeyResponseToPorcelain(plumbings []*proto.ControlPanelGetSSHCAPublicKeyResponse) []*ControlPanelGetSSHCAPublicKeyResponse {
+	var items []*ControlPanelGetSSHCAPublicKeyResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertControlPanelGetSSHCAPublicKeyResponseToPorcelain(plumbing))
+	}
+	return items
+}
 func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	if porcelain == nil {
 		return nil
