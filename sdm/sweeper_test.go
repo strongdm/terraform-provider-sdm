@@ -92,6 +92,10 @@ func testCheckDestroy(s *terraform.State) error {
 			_, err = client.RoleAttachments().Get(context.Background(), rs.Primary.ID)
 		case "sdm_role_grant":
 			_, err = client.RoleGrants().Get(context.Background(), rs.Primary.ID)
+		case "sdm_secret_store":
+			_, err = client.SecretStores().Get(context.Background(), rs.Primary.ID)
+		default:
+			return fmt.Errorf("undefined resource type in testCheckDestroy: %s", rs.Type)
 		}
 
 		if err == nil {

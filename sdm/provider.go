@@ -45,6 +45,7 @@ func Provider() terraform.ResourceProvider {
 			"sdm_role_attachment":    resourceRoleAttachment(),
 			"sdm_role_grant":         resourceRoleGrant(),
 			"sdm_role":               resourceRole(),
+			"sdm_secret_store":       resourceSecretStore(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"sdm_ssh_ca_pubkey":      dataSourceControlPanelSSHCAPublicKey(),
@@ -56,6 +57,7 @@ func Provider() terraform.ResourceProvider {
 			"sdm_role_attachment":    dataSourceRoleAttachment(),
 			"sdm_role_grant":         dataSourceRoleGrant(),
 			"sdm_role":               dataSourceRole(),
+			"sdm_secret_store":       dataSourceSecretStore(),
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			host := d.Get("host").(string)

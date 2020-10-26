@@ -13,3 +13,4 @@
 * [role_attachment](./role_attachment) - A RoleAttachment assigns a role to a composite role.
 * [role_grant](./role_grant) - A RoleGrant connects a resource to a role, granting members of the role access to that resource.
 * [role](./role) - A Role is a collection of access grants, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
+* [secret_store](./secret_store) - A SecretStore is a beta feature. 
