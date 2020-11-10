@@ -23,29 +23,76 @@ func resourceSecretStore() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
-			"name": {
-				Type:        schema.TypeString,
-				Required:    true,
-				Description: "Unique human-readable name of the SecretStore.",
-			},
-			"server_address": {
-				Type:        schema.TypeString,
-				Required:    true,
-				Description: "",
-			},
-			"kind": {
-				Type:        schema.TypeString,
-				Required:    true,
-				Description: "",
-			},
-			"tags": {
-				Type: schema.TypeMap,
-
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+			"vault_tls": {
+				Type:        schema.TypeList,
 				Optional:    true,
-				Description: "Tags is a map of key, value pairs.",
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"ca_cert_path": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"client_cert_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"client_key_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"vault_token": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -53,14 +100,37 @@ func resourceSecretStore() *schema.Resource {
 		},
 	}
 }
-func convertSecretStoreFromResourceData(d *schema.ResourceData) *sdm.SecretStore {
-	return &sdm.SecretStore{
-		ID:            d.Id(),
-		Name:          convertStringFromResourceData(d, "name"),
-		ServerAddress: convertStringFromResourceData(d, "server_address"),
-		Kind:          convertStringFromResourceData(d, "kind"),
-		Tags:          convertTagsFromResourceData(d, "tags"),
+func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore {
+	if list := d.Get("vault_tls").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultTLSStore{}
+		}
+		out := &sdm.VaultTLSStore{
+			ID:             d.Id(),
+			Name:           convertStringFromMap(raw, "name"),
+			ServerAddress:  convertStringFromMap(raw, "server_address"),
+			CACertPath:     convertStringFromMap(raw, "ca_cert_path"),
+			ClientCertPath: convertStringFromMap(raw, "client_cert_path"),
+			ClientKeyPath:  convertStringFromMap(raw, "client_key_path"),
+			Tags:           convertTagsFromMap(raw, "tags"),
+		}
+		return out
 	}
+	if list := d.Get("vault_token").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultTokenStore{}
+		}
+		out := &sdm.VaultTokenStore{
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			ServerAddress: convertStringFromMap(raw, "server_address"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+		}
+		return out
+	}
+	return nil
 }
 
 func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
@@ -71,12 +141,32 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot create SecretStore %s: %w", "", err)
 	}
-	d.SetId(resp.SecretStore.ID)
-	v := resp.SecretStore
-	d.Set("name", (v.Name))
-	d.Set("server_address", (v.ServerAddress))
-	d.Set("kind", (v.Kind))
-	d.Set("tags", convertTagsToMap(v.Tags))
+	d.SetId(resp.SecretStore.GetID())
+	switch v := resp.SecretStore.(type) {
+	case *sdm.VaultTLSStore:
+		localV, _ := localVersion.(*sdm.VaultTLSStore)
+		_ = localV
+		d.Set("vault_tls", []map[string]interface{}{
+			{
+				"name":             (v.Name),
+				"server_address":   (v.ServerAddress),
+				"ca_cert_path":     (v.CACertPath),
+				"client_cert_path": (v.ClientCertPath),
+				"client_key_path":  (v.ClientKeyPath),
+				"tags":             convertTagsToMap(v.Tags),
+			},
+		})
+	case *sdm.VaultTokenStore:
+		localV, _ := localVersion.(*sdm.VaultTokenStore)
+		_ = localV
+		d.Set("vault_token", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToMap(v.Tags),
+			},
+		})
+	}
 	return nil
 }
 
@@ -93,11 +183,37 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 	} else if err != nil {
 		return fmt.Errorf("cannot read SecretStore %s: %w", d.Id(), err)
 	}
-	v := resp.SecretStore
-	d.Set("name", (v.Name))
-	d.Set("server_address", (v.ServerAddress))
-	d.Set("kind", (v.Kind))
-	d.Set("tags", convertTagsToMap(v.Tags))
+	switch v := resp.SecretStore.(type) {
+	case *sdm.VaultTLSStore:
+		localV, ok := localVersion.(*sdm.VaultTLSStore)
+		if !ok {
+			localV = &sdm.VaultTLSStore{}
+		}
+		_ = localV
+		d.Set("vault_tls", []map[string]interface{}{
+			{
+				"name":             (v.Name),
+				"server_address":   (v.ServerAddress),
+				"ca_cert_path":     (v.CACertPath),
+				"client_cert_path": (v.ClientCertPath),
+				"client_key_path":  (v.ClientKeyPath),
+				"tags":             convertTagsToMap(v.Tags),
+			},
+		})
+	case *sdm.VaultTokenStore:
+		localV, ok := localVersion.(*sdm.VaultTokenStore)
+		if !ok {
+			localV = &sdm.VaultTokenStore{}
+		}
+		_ = localV
+		d.Set("vault_token", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToMap(v.Tags),
+			},
+		})
+	}
 	return nil
 }
 func resourceSecretStoreUpdate(d *schema.ResourceData, cc *sdm.Client) error {
@@ -107,7 +223,7 @@ func resourceSecretStoreUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot update SecretStore %s: %w", d.Id(), err)
 	}
-	d.SetId(resp.SecretStore.ID)
+	d.SetId(resp.SecretStore.GetID())
 	return resourceSecretStoreRead(d, cc)
 }
 func resourceSecretStoreDelete(d *schema.ResourceData, cc *sdm.Client) error {

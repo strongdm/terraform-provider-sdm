@@ -21,35 +21,33 @@ func dataSourceSecretStore() *schema.Resource {
 				Computed: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"ca_cert_path": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"client_cert_path": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"client_key_path": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"id": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {\n     example: { value: '{ \"id\": \"r-7\", \"name\": \"happy-goat\"}' }\n };\n Unique identifier of the SecretStore.",
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"name": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "Unique human-readable name of the SecretStore.",
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"server_address": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "",
-			},
-			"kind": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "",
-			},
-			"tags": {
-				Type: schema.TypeMap,
-
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Optional:    true,
-				Description: "Tags is a map of key, value pairs.",
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"secret_stores": {
 				Type:     schema.TypeList,
@@ -57,34 +55,86 @@ func dataSourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {\n     example: { value: '{ \"id\": \"r-7\", \"name\": \"happy-goat\"}' }\n };\n Unique identifier of the SecretStore.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique human-readable name of the SecretStore.",
-						},
-						"server_address": {
-							Type:        schema.TypeString,
-							Optional:    true,
+						"vault_tls": {
+							Type:        schema.TypeList,
+							Computed:    true,
 							Description: "",
-						},
-						"kind": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "",
-						},
-						"tags": {
-							Type: schema.TypeMap,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {\n     example:  '{ \"id\": \"r-7\", \"name\": \"happy-goat\"}'\n };\n Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"ca_cert_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_cert_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_key_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
 
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
 							},
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
+						},
+						"vault_token": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {\n     example:  '{ \"id\": \"r-7\", \"name\": \"happy-goat\"}' \n };\n Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -99,6 +149,22 @@ func dataSourceSecretStore() *schema.Resource {
 func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
+	if v, ok := d.GetOk("type"); ok {
+		filter += "type:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("CA_cert_path"); ok {
+		filter += "cacertpath:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("client_cert_path"); ok {
+		filter += "clientcertpath:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("client_key_path"); ok {
+		filter += "clientkeypath:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOk("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
@@ -109,10 +175,6 @@ func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, [
 	}
 	if v, ok := d.GetOk("server_address"); ok {
 		filter += "serveraddress:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("kind"); ok {
-		filter += "kind:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("tags"); ok {
@@ -132,18 +194,31 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	ids := []string{}
 	type entity = map[string]interface{}
-	output := make([]entity, 0)
+	output := make([]map[string][]entity, 1)
+	output[0] = map[string][]entity{
+		"vault_tls": {},
+	}
 	for resp.Next() {
-		v := resp.Value()
-		ids = append(ids, v.ID)
-		output = append(output,
-			entity{
+		ids = append(ids, resp.Value().GetID())
+		switch v := resp.Value().(type) {
+		case *sdm.VaultTLSStore:
+			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{
+				"id":               (v.ID),
+				"name":             (v.Name),
+				"server_address":   (v.ServerAddress),
+				"ca_cert_path":     (v.CACertPath),
+				"client_cert_path": (v.ClientCertPath),
+				"client_key_path":  (v.ClientKeyPath),
+				"tags":             convertTagsToMap(v.Tags),
+			})
+		case *sdm.VaultTokenStore:
+			output[0]["vault_token"] = append(output[0]["vault_token"], entity{
 				"id":             (v.ID),
 				"name":           (v.Name),
 				"server_address": (v.ServerAddress),
-				"kind":           (v.Kind),
 				"tags":           convertTagsToMap(v.Tags),
 			})
+		}
 	}
 	if resp.Err() != nil {
 		return fmt.Errorf("failure during list: %w", resp.Err())

@@ -1,126 +1,132 @@
 package sdm
 
 import (
+	"context"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
+
+	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
-func TestAccSDMSecretStoreDataSource_Get(t *testing.T) {
+func TestAccSDMSecretStore_Get(t *testing.T) {
 	t.Parallel()
 
-	secretStores, err := createSecretStoresWithPrefix("test-secret-store", 1)
+	stores, err := createVaultTokenStoresWithPrefix("secret-store-get-test", 1)
 	if err != nil {
-		t.Fatal("failed to create secret store: ", err)
+		t.Fatal("failed to create redis in setup: ", err)
 	}
-	secretStore := secretStores[0]
+	store := stores[0].(*sdm.VaultTokenStore)
 
-	rsName := randomWithPrefix("test-secret-store-ds")
+	dsName := randomWithPrefix("se_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMSecretStoreFilterConfig(dsName, "secret-store-get-test*"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.0.name", store.Name),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.0.server_address", store.ServerAddress),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "ids.0", store.ID),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "ids.#", "1"),
+				),
+			},
+		},
+	})
+}
+
+func TestAccSDMSecretStore_GetMultiple(t *testing.T) {
+	t.Parallel()
+	_, err := createVaultTokenStoresWithPrefix("secret-store-multiple", 2)
+	if err != nil {
+		t.Fatal("failed to create stores in setup: ", err)
+	}
+	_, err = createVaultTokenStoresWithPrefix("nomatch", 1)
+	if err != nil {
+		t.Fatal("failed to create store in setup: ", err)
+	}
+
+	dsName := randomWithPrefix("se_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMSecretStoreFilterConfig(dsName, "secret-store-multiple*"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.#", "2"),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "ids.#", "2"),
+				),
+			},
+		},
+	})
+}
+
+func TestAccSDMSecretStore_GetNone(t *testing.T) {
+	t.Parallel()
+
+	_, err := createVaultTokenStoresWithPrefix("test", 1)
+	if err != nil {
+		t.Fatal("failed to create store in setup: ", err)
+	}
+
+	dsName := randomWithPrefix("rs_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMSecretStoreFilterConfig(dsName, "nothingWillEverMatch"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.#", "0"),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "ids.#", "0"),
+				),
+			},
+		},
+	})
+}
+
+func TestAccSDMSecretStore_GetTags(t *testing.T) {
+	t.Parallel()
+
+	name := randomWithPrefix("test")
+	address := randomWithPrefix("test")
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	_, err = client.SecretStores().Create(ctx, &sdm.VaultTokenStore{
+		Name:          name,
+		ServerAddress: address,
+		Tags:          sdm.Tags{"foo": "bar", "key": "value"},
+	})
+	if err != nil {
+		t.Fatalf("failed to create store: %v", err)
+	}
+	dsName := randomWithPrefix("se_test_query")
 
 	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMSecretStoreDataSourceGetFilterConfig(rsName, secretStore.Name, secretStore.Kind, secretStore.ServerAddress),
+				Config: testAccSDMSecretStoreFilterConfig(dsName, name),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+rsName, "secret_stores.0.name", secretStore.Name),
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+rsName, "secret_stores.0.kind", secretStore.Kind),
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+rsName, "secret_stores.0.server_address", secretStore.ServerAddress),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.0.tags.key", "value"),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.0.tags.foo", "bar"),
 				),
 			},
 		},
 	})
+
 }
 
-func TestAccSDMSecretStoreDataSource_GetMultiple(t *testing.T) {
-	t.Parallel()
-
-	_, err := createSecretStoresWithPrefix("multi-test", 2)
-	if err != nil {
-		t.Fatal("failed to create secret stores: ", err)
-	}
-	_, err = createSecretStoresWithPrefix("nomatch", 1)
-	if err != nil {
-		t.Fatal("failed to create secret store: ", err)
-	}
-
-	rsName := randomWithPrefix("test-secret-store")
-	resource.Test(t, resource.TestCase{
-		Providers: testAccProviders,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccSDMSecretStoreDataSourceGetFilterConfig(rsName, "multi-test*", "*", "*"),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+rsName, "secret_stores.#", "2"),
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+rsName, "secret_stores.0.kind", "vault"),
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+rsName, "secret_stores.1.kind", "vault"),
-				),
-			},
-		},
-	})
-}
-
-func TestAccSDMSecretStoreDataSource_GetNone(t *testing.T) {
-	t.Parallel()
-
-	_, err := createSecretStoresWithPrefix("dontfind", 1)
-	if err != nil {
-		t.Fatal("failed to create secret store: ", err)
-	}
-
-	dsName := randomWithPrefix("secretStore-ds")
-	resource.Test(t, resource.TestCase{
-		Providers: testAccProviders,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccSDMSecretStoreDataSourceGetFilterConfig(dsName, "neverWillMatch", "*", "*"),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.#", "0"),
-				),
-			},
-		},
-	})
-}
-
-func TestAccSDMSecretStoreDataSource_GetByID(t *testing.T) {
-	secretStoreName := randomWithPrefix("secret-store")
-	dsName := randomWithPrefix("secret-store")
-	kind := "vault"
-	serverAddress := randomWithPrefix("secret-store")
-	resource.ParallelTest(t, resource.TestCase{
-		Providers: testAccProviders,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccSDMSecretStoreDataSourceGetByIDConfig(secretStoreName, kind, serverAddress, dsName),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.#", "1"),
-				),
-			},
-		},
-	})
-}
-
-func testAccSDMSecretStoreDataSourceGetFilterConfig(secretStoreDataSourceName, nameFilter, kindFilter, serverAddressFilter string) string {
+func testAccSDMSecretStoreFilterConfig(resourceDataSourceName, nameFilter string) string {
 	return fmt.Sprintf(`
-	data "sdm_secret_store" "%s" {
-		name = "%s"
-		kind = "%s"
-		server_address = "%s"
-	}`, secretStoreDataSourceName, nameFilter, kindFilter, serverAddressFilter)
-}
-
-func testAccSDMSecretStoreDataSourceGetByIDConfig(secretStoreName, kind, serverAddress string, secretStoreDataSourceName string) string {
-	return fmt.Sprintf(`
-	resource "sdm_secret_store" "test_secretStore" {
-		name = "%s"
-		kind = "%s"
-		server_address = "%s"
-	}
-
-	data "sdm_secret_store" "%s" {
-		id = sdm_secret_store.test_secretStore.id
-	}
-	`, secretStoreName, kind, serverAddress, secretStoreDataSourceName)
+		data "sdm_secret_store" "%s" {
+			name = "%s"
+		}`, resourceDataSourceName, nameFilter)
 }
