@@ -62,7 +62,7 @@ func Provider() terraform.ResourceProvider {
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			host := d.Get("host").(string)
 			opts := []sdm.ClientOption{sdm.WithHost(host)}
-			if strings.HasPrefix(host, "localhost:") {
+			if strings.HasPrefix(host, "localhost:") || strings.HasPrefix(host, "127.0.0.1:") {
 				opts = append(opts, sdm.WithInsecure())
 			}
 			client, err := sdm.New(d.Get("api_access_key").(string), d.Get("api_secret_key").(string), opts...)
