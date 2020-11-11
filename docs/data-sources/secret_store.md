@@ -15,10 +15,7 @@ The following arguments are supported by a SecretStores data source:
 * `ca_cert_path` - (Optional) 
 * `client_cert_path` - (Optional) 
 * `client_key_path` - (Optional) 
-* `id` - (Optional) option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-     example:  '{ "id": "r-7", "name": "happy-goat"}' 
- };
- Unique identifier of the SecretStore.
+* `id` - (Optional) Unique identifier of the SecretStore.
 * `name` - (Optional) Unique human-readable name of the SecretStore.
 * `server_address` - (Optional) 
 ## Attribute Reference
@@ -27,10 +24,7 @@ In addition to provided arguments above, the following attributes are returned b
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `secret_stores` - A single element list containing a map, where each key lists one of the following objects:
 	* vault_tls:
-		* `id` - option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-     example:  '{ "id": "r-7", "name": "happy-goat"}'
- };
- Unique identifier of the SecretStore.
+		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `server_address` - 
 		* `ca_cert_path` - 
@@ -38,10 +32,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `client_key_path` - 
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_token:
-		* `id` - option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-     example:  '{ "id": "r-7", "name": "happy-goat"}' 
- };
- Unique identifier of the SecretStore.
+		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `server_address` - 
 		* `tags` - Tags is a map of key, value pairs.

@@ -64,7 +64,7 @@ func dataSourceSecretStore() *schema.Resource {
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {\n     example:  '{ \"id\": \"r-7\", \"name\": \"happy-goat\"}'\n };\n Unique identifier of the SecretStore.",
+										Description: "Unique identifier of the SecretStore.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -112,7 +112,7 @@ func dataSourceSecretStore() *schema.Resource {
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {\n     example:  '{ \"id\": \"r-7\", \"name\": \"happy-goat\"}' \n };\n Unique identifier of the SecretStore.",
+										Description: "Unique identifier of the SecretStore.",
 									},
 									"name": {
 										Type:        schema.TypeString,
