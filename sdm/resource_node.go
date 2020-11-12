@@ -78,7 +78,7 @@ func resourceNode() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							ForceNew:    true,
-							Description: "The hostname/port tuple which the gateway daemon will bind to.\n If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
+							Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								return new == ""
 							},

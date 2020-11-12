@@ -99,7 +99,7 @@ func dataSourceNode() *schema.Resource {
 									"bind_address": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The hostname/port tuple which the gateway daemon will bind to.\n If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
+										Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
 									},
 									"tags": {
 										Type: schema.TypeMap,

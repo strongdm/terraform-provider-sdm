@@ -26,7 +26,7 @@ func resourceAccount() *schema.Resource {
 			"user": {
 				Type:        schema.TypeList,
 				Optional:    true,
-				Description: "A User can connect to resources they are granted directly, or granted\n via roles.",
+				Description: "A User can connect to resources they are granted directly, or granted via roles.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"email": {
@@ -64,7 +64,7 @@ func resourceAccount() *schema.Resource {
 			"service": {
 				Type:        schema.TypeList,
 				Optional:    true,
-				Description: "A Service is a service account that can connect to resources they are granted\n directly, or granted via roles. Services are typically automated jobs.",
+				Description: "A Service is a service account that can connect to resources they are granted directly, or granted via roles. Services are typically automated jobs.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
