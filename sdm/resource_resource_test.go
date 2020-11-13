@@ -91,6 +91,59 @@ func TestAccSDMResource_Create(t *testing.T) {
 	})
 }
 
+func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+
+	vaults, err := createVaultTokenStoresWithPrefix("vaultTest", 1)
+	if err != nil {
+		t.Fatalf("failed to create secret store: %v", err)
+	}
+	vault := vaults[0]
+
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMResourceRedisSecretStoreConfig(name, name, port, vault.GetID()),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.name", name),
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttrSet("sdm_resource."+name, "redis.0.port_override"),
+					resource.TestCheckResourceAttrSet("sdm_resource."+name, "redis.0.secret_store_id"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.(*sdm.Redis).SecretStoreID != vault.GetID() {
+							return fmt.Errorf("unexpected secret store id '%s', expected '%s'", resp.Resource.(*sdm.Redis).SecretStoreID, vault.GetID())
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func TestAccSDMResource_Tags(t *testing.T) {
 	name := randomWithPrefix("test")
 	resource.ParallelTest(t, resource.TestCase{
@@ -787,6 +840,19 @@ func testAccSDMResourceRedisConfig(resourceName string, sdmResourceName string, 
 		}
 	}
 	`, resourceName, sdmResourceName, port)
+}
+
+func testAccSDMResourceRedisSecretStoreConfig(resourceName string, sdmResourceName string, port int32, seID string) string {
+	return fmt.Sprintf(`
+	resource "sdm_resource" "%s" {
+		redis {
+			name = "%s"
+			hostname = "test.com"
+			port = %d
+			secret_store_id = "%s"
+		}
+	}
+	`, resourceName, sdmResourceName, port, seID)
 }
 
 func tagsToConfigString(tags sdm.Tags) string {
