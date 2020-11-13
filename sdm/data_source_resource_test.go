@@ -39,6 +39,45 @@ func TestAccSDMResource_Get(t *testing.T) {
 	})
 }
 
+func TestAccSDMResource_SecretStoreGet(t *testing.T) {
+	t.Parallel()
+
+	vaults, err := createVaultTokenStoresWithPrefix("vaultTest", 1)
+	if err != nil {
+		t.Fatalf("failed to create secret store: %v", err)
+	}
+	vault := vaults[0]
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
+
+	_, err = client.Resources().Create(context.Background(), &sdm.Redis{
+		Name:          randomWithPrefix("redis-secret-store-get"),
+		Hostname:      "hostname",
+		Password:      "/secret/path?key=password",
+		PortOverride:  portOverride.Count(),
+		SecretStoreID: vault.GetID(),
+	})
+	if err != nil {
+		t.Fatalf("failed to create resource: %v", err)
+	}
+
+	dsName := randomWithPrefix("rs_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMResourceFilterConfig(dsName, "redis-secret-store-get*"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.secret_store_id", vault.GetID()),
+				),
+			},
+		},
+	})
+}
+
 func TestAccSDMResource_SSHGet(t *testing.T) {
 	t.Parallel()
 
