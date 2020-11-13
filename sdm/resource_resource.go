@@ -43,6 +43,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"access_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -92,6 +97,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"private_key": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -140,6 +150,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -195,6 +210,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -248,6 +268,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -303,6 +328,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -351,6 +381,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"access_key": {
 							Type:        schema.TypeString,
@@ -401,6 +436,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -449,6 +489,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -503,6 +548,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"url": {
 							Type:        schema.TypeString,
@@ -563,6 +613,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"url": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -610,6 +665,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"url": {
 							Type:        schema.TypeString,
@@ -664,6 +724,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -721,6 +786,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -770,6 +840,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -813,6 +888,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"endpoint": {
 							Type:        schema.TypeString,
@@ -879,6 +959,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"endpoint": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -923,6 +1008,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -980,6 +1070,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1029,6 +1124,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1073,6 +1173,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1110,6 +1215,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1174,6 +1284,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1244,6 +1359,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1302,6 +1422,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1372,6 +1497,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1425,6 +1555,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1480,6 +1615,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1533,6 +1673,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1588,6 +1733,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1641,6 +1791,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1701,6 +1856,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1759,6 +1919,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1819,6 +1984,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1877,6 +2047,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -1937,6 +2112,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1995,6 +2175,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -2055,6 +2240,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2114,6 +2304,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2163,6 +2358,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2206,6 +2406,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -2255,6 +2460,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -2309,6 +2519,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -2374,6 +2589,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2427,6 +2647,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2474,6 +2699,11 @@ func resourceResource() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"hostname": {
 							Type:        schema.TypeString,
@@ -2524,6 +2754,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2573,6 +2808,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2618,6 +2858,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:              d.Id(),
 			Name:            convertStringFromMap(raw, "name"),
 			Tags:            convertTagsFromMap(raw, "tags"),
+			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
 			AccessKey:       convertStringFromMap(raw, "access_key"),
 			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
 			Output:          convertStringFromMap(raw, "output"),
@@ -2636,13 +2877,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.BigQuery{}
 		}
 		out := &sdm.BigQuery{
-			ID:         d.Id(),
-			Name:       convertStringFromMap(raw, "name"),
-			Tags:       convertTagsFromMap(raw, "tags"),
-			PrivateKey: convertStringFromMap(raw, "private_key"),
-			Project:    convertStringFromMap(raw, "project"),
-			Endpoint:   convertStringFromMap(raw, "endpoint"),
-			Username:   convertStringFromMap(raw, "username"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			PrivateKey:    convertStringFromMap(raw, "private_key"),
+			Project:       convertStringFromMap(raw, "project"),
+			Endpoint:      convertStringFromMap(raw, "endpoint"),
+			Username:      convertStringFromMap(raw, "username"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -2657,14 +2899,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Cassandra{}
 		}
 		out := &sdm.Cassandra{
-			ID:          d.Id(),
-			Name:        convertStringFromMap(raw, "name"),
-			Tags:        convertTagsFromMap(raw, "tags"),
-			Hostname:    convertStringFromMap(raw, "hostname"),
-			Username:    convertStringFromMap(raw, "username"),
-			Password:    convertStringFromMap(raw, "password"),
-			Port:        convertInt32FromMap(raw, "port"),
-			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -2679,14 +2922,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.DB2I{}
 		}
 		out := &sdm.DB2I{
-			ID:          d.Id(),
-			Name:        convertStringFromMap(raw, "name"),
-			Tags:        convertTagsFromMap(raw, "tags"),
-			Hostname:    convertStringFromMap(raw, "hostname"),
-			Username:    convertStringFromMap(raw, "username"),
-			Password:    convertStringFromMap(raw, "password"),
-			Port:        convertInt32FromMap(raw, "port"),
-			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -2701,14 +2945,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.DB2LUW{}
 		}
 		out := &sdm.DB2LUW{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -2723,13 +2968,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Druid{}
 		}
 		out := &sdm.Druid{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -2747,6 +2993,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:              d.Id(),
 			Name:            convertStringFromMap(raw, "name"),
 			Tags:            convertTagsFromMap(raw, "tags"),
+			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
 			AccessKey:       convertStringFromMap(raw, "access_key"),
 			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
 			Region:          convertStringFromMap(raw, "region"),
@@ -2768,6 +3015,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:              d.Id(),
 			Name:            convertStringFromMap(raw, "name"),
 			Tags:            convertTagsFromMap(raw, "tags"),
+			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
 			Region:          convertStringFromMap(raw, "region"),
 			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
 			Endpoint:        convertStringFromMap(raw, "endpoint"),
@@ -2786,14 +3034,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Elastic{}
 		}
 		out := &sdm.Elastic{
-			ID:          d.Id(),
-			Name:        convertStringFromMap(raw, "name"),
-			Tags:        convertTagsFromMap(raw, "tags"),
-			Hostname:    convertStringFromMap(raw, "hostname"),
-			Username:    convertStringFromMap(raw, "username"),
-			Password:    convertStringFromMap(raw, "password"),
-			Port:        convertInt32FromMap(raw, "port"),
-			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -2811,6 +3060,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Url:              convertStringFromMap(raw, "url"),
 			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
 			Username:         convertStringFromMap(raw, "username"),
@@ -2830,6 +3080,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Url:              convertStringFromMap(raw, "url"),
 			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
 			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
@@ -2847,6 +3098,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Url:              convertStringFromMap(raw, "url"),
 			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
 			AuthHeader:       convertStringFromMap(raw, "auth_header"),
@@ -2865,6 +3117,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Hostname:             convertStringFromMap(raw, "hostname"),
 			Port:                 convertInt32FromMap(raw, "port"),
 			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
@@ -2883,6 +3136,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Hostname:             convertStringFromMap(raw, "hostname"),
 			Port:                 convertInt32FromMap(raw, "port"),
 			Username:             convertStringFromMap(raw, "username"),
@@ -2900,6 +3154,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Hostname:             convertStringFromMap(raw, "hostname"),
 			Port:                 convertInt32FromMap(raw, "port"),
 			Token:                convertStringFromMap(raw, "token"),
@@ -2916,6 +3171,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Endpoint:             convertStringFromMap(raw, "endpoint"),
 			AccessKey:            convertStringFromMap(raw, "access_key"),
 			SecretAccessKey:      convertStringFromMap(raw, "secret_access_key"),
@@ -2936,6 +3192,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Endpoint:             convertStringFromMap(raw, "endpoint"),
 			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
 			ServiceAccountKey:    convertStringFromMap(raw, "service_account_key"),
@@ -2952,6 +3209,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Hostname:             convertStringFromMap(raw, "hostname"),
 			Port:                 convertInt32FromMap(raw, "port"),
 			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
@@ -2970,6 +3228,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Hostname:             convertStringFromMap(raw, "hostname"),
 			Port:                 convertInt32FromMap(raw, "port"),
 			Username:             convertStringFromMap(raw, "username"),
@@ -2987,6 +3246,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                   d.Id(),
 			Name:                 convertStringFromMap(raw, "name"),
 			Tags:                 convertTagsFromMap(raw, "tags"),
+			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
 			Hostname:             convertStringFromMap(raw, "hostname"),
 			Port:                 convertInt32FromMap(raw, "port"),
 			Token:                convertStringFromMap(raw, "token"),
@@ -3000,11 +3260,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Memcached{}
 		}
 		out := &sdm.Memcached{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3019,16 +3280,17 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.MongoLegacyHost{}
 		}
 		out := &sdm.MongoLegacyHost{
-			ID:           d.Id(),
-			Name:         convertStringFromMap(raw, "name"),
-			Tags:         convertTagsFromMap(raw, "tags"),
-			Hostname:     convertStringFromMap(raw, "hostname"),
-			AuthDatabase: convertStringFromMap(raw, "auth_database"),
-			Username:     convertStringFromMap(raw, "username"),
-			Password:     convertStringFromMap(raw, "password"),
-			Port:         convertInt32FromMap(raw, "port"),
-			ReplicaSet:   convertStringFromMap(raw, "replica_set"),
-			TlsRequired:  convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
+			ReplicaSet:    convertStringFromMap(raw, "replica_set"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3046,6 +3308,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
 			Username:         convertStringFromMap(raw, "username"),
@@ -3068,15 +3331,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.MongoHost{}
 		}
 		out := &sdm.MongoHost{
-			ID:           d.Id(),
-			Name:         convertStringFromMap(raw, "name"),
-			Tags:         convertTagsFromMap(raw, "tags"),
-			Hostname:     convertStringFromMap(raw, "hostname"),
-			AuthDatabase: convertStringFromMap(raw, "auth_database"),
-			Username:     convertStringFromMap(raw, "username"),
-			Password:     convertStringFromMap(raw, "password"),
-			Port:         convertInt32FromMap(raw, "port"),
-			TlsRequired:  convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3094,6 +3358,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
 			Username:         convertStringFromMap(raw, "username"),
@@ -3116,14 +3381,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Mysql{}
 		}
 		out := &sdm.Mysql{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3138,14 +3404,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AuroraMysql{}
 		}
 		out := &sdm.AuroraMysql{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3160,14 +3427,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Clustrix{}
 		}
 		out := &sdm.Clustrix{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3182,14 +3450,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Maria{}
 		}
 		out := &sdm.Maria{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3204,14 +3473,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Memsql{}
 		}
 		out := &sdm.Memsql{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3226,15 +3496,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Oracle{}
 		}
 		out := &sdm.Oracle{
-			ID:          d.Id(),
-			Name:        convertStringFromMap(raw, "name"),
-			Tags:        convertTagsFromMap(raw, "tags"),
-			Hostname:    convertStringFromMap(raw, "hostname"),
-			Username:    convertStringFromMap(raw, "username"),
-			Password:    convertStringFromMap(raw, "password"),
-			Database:    convertStringFromMap(raw, "database"),
-			Port:        convertInt32FromMap(raw, "port"),
-			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3252,6 +3523,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3275,6 +3547,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3298,6 +3571,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3321,6 +3595,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3344,6 +3619,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3367,6 +3643,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3387,15 +3664,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Presto{}
 		}
 		out := &sdm.Presto{
-			ID:          d.Id(),
-			Name:        convertStringFromMap(raw, "name"),
-			Tags:        convertTagsFromMap(raw, "tags"),
-			Hostname:    convertStringFromMap(raw, "hostname"),
-			Password:    convertStringFromMap(raw, "password"),
-			Database:    convertStringFromMap(raw, "database"),
-			Port:        convertInt32FromMap(raw, "port"),
-			Username:    convertStringFromMap(raw, "username"),
-			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
+			Username:      convertStringFromMap(raw, "username"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3410,13 +3688,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.RDP{}
 		}
 		out := &sdm.RDP{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3431,12 +3710,13 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Redis{}
 		}
 		out := &sdm.Redis{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Password: convertStringFromMap(raw, "password"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3451,13 +3731,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.ElasticacheRedis{}
 		}
 		out := &sdm.ElasticacheRedis{
-			ID:          d.Id(),
-			Name:        convertStringFromMap(raw, "name"),
-			Tags:        convertTagsFromMap(raw, "tags"),
-			Hostname:    convertStringFromMap(raw, "hostname"),
-			Password:    convertStringFromMap(raw, "password"),
-			Port:        convertInt32FromMap(raw, "port"),
-			TlsRequired: convertBoolFromMap(raw, "tls_required"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3472,14 +3753,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Snowflake{}
 		}
 		out := &sdm.Snowflake{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Database: convertStringFromMap(raw, "database"),
-			Schema:   convertStringFromMap(raw, "schema"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Schema:        convertStringFromMap(raw, "schema"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3497,6 +3779,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:               d.Id(),
 			Name:             convertStringFromMap(raw, "name"),
 			Tags:             convertTagsFromMap(raw, "tags"),
+			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
 			Hostname:         convertStringFromMap(raw, "hostname"),
 			Username:         convertStringFromMap(raw, "username"),
 			Password:         convertStringFromMap(raw, "password"),
@@ -3521,6 +3804,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                          d.Id(),
 			Name:                        convertStringFromMap(raw, "name"),
 			Tags:                        convertTagsFromMap(raw, "tags"),
+			SecretStoreID:               convertStringFromMap(raw, "secret_store_id"),
 			Hostname:                    convertStringFromMap(raw, "hostname"),
 			Username:                    convertStringFromMap(raw, "username"),
 			Port:                        convertInt32FromMap(raw, "port"),
@@ -3538,6 +3822,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			ID:                          d.Id(),
 			Name:                        convertStringFromMap(raw, "name"),
 			Tags:                        convertTagsFromMap(raw, "tags"),
+			SecretStoreID:               convertStringFromMap(raw, "secret_store_id"),
 			Hostname:                    convertStringFromMap(raw, "hostname"),
 			Username:                    convertStringFromMap(raw, "username"),
 			Port:                        convertInt32FromMap(raw, "port"),
@@ -3552,13 +3837,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Sybase{}
 		}
 		out := &sdm.Sybase{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Port:     convertInt32FromMap(raw, "port"),
-			Password: convertStringFromMap(raw, "password"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Port:          convertInt32FromMap(raw, "port"),
+			Password:      convertStringFromMap(raw, "password"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3573,13 +3859,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SybaseIQ{}
 		}
 		out := &sdm.SybaseIQ{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Port:     convertInt32FromMap(raw, "port"),
-			Password: convertStringFromMap(raw, "password"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Port:          convertInt32FromMap(raw, "port"),
+			Password:      convertStringFromMap(raw, "password"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3594,13 +3881,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Teradata{}
 		}
 		out := &sdm.Teradata{
-			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			Hostname: convertStringFromMap(raw, "hostname"),
-			Username: convertStringFromMap(raw, "username"),
-			Password: convertStringFromMap(raw, "password"),
-			Port:     convertInt32FromMap(raw, "port"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Port:          convertInt32FromMap(raw, "port"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -3629,6 +3917,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": localV.SecretAccessKey,
 				"output":            (v.Output),
@@ -3641,13 +3930,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"private_key":   localV.PrivateKey,
-				"project":       (v.Project),
-				"port_override": (v.PortOverride),
-				"endpoint":      (v.Endpoint),
-				"username":      (v.Username),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"private_key":     localV.PrivateKey,
+				"project":         (v.Project),
+				"port_override":   (v.PortOverride),
+				"endpoint":        (v.Endpoint),
+				"username":        (v.Username),
 			},
 		})
 	case *sdm.Cassandra:
@@ -3655,14 +3945,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.DB2I:
@@ -3670,14 +3961,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("db_2_i", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.DB2LUW:
@@ -3685,14 +3977,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Druid:
@@ -3700,13 +3993,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.DynamoDB:
@@ -3716,6 +4010,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": localV.SecretAccessKey,
 				"region":            (v.Region),
@@ -3730,6 +4025,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"region":            (v.Region),
 				"secret_access_key": localV.SecretAccessKey,
 				"endpoint":          (v.Endpoint),
@@ -3742,14 +4038,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.HTTPBasicAuth:
@@ -3759,6 +4056,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"username":          (v.Username),
@@ -3775,6 +4073,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -3789,6 +4088,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"auth_header":       localV.AuthHeader,
@@ -3804,6 +4104,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": localV.CertificateAuthority,
@@ -3819,6 +4120,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -3833,6 +4135,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 localV.Token,
@@ -3846,6 +4149,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"endpoint":              (v.Endpoint),
 				"access_key":            (v.AccessKey),
 				"secret_access_key":     localV.SecretAccessKey,
@@ -3863,6 +4167,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"endpoint":              (v.Endpoint),
 				"certificate_authority": localV.CertificateAuthority,
 				"service_account_key":   localV.ServiceAccountKey,
@@ -3876,6 +4181,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": localV.CertificateAuthority,
@@ -3891,6 +4197,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -3905,6 +4212,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 localV.Token,
@@ -3916,11 +4224,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("memcached", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.MongoLegacyHost:
@@ -3928,16 +4237,17 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"auth_database": (v.AuthDatabase),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port":          (v.Port),
-				"replica_set":   (v.ReplicaSet),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"auth_database":   (v.AuthDatabase),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port":            (v.Port),
+				"replica_set":     (v.ReplicaSet),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoLegacyReplicaset:
@@ -3947,6 +4257,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -3963,15 +4274,16 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("mongo_host", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"auth_database": (v.AuthDatabase),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"auth_database":   (v.AuthDatabase),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoReplicaSet:
@@ -3981,6 +4293,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -3997,14 +4310,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.AuroraMysql:
@@ -4012,14 +4326,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Clustrix:
@@ -4027,14 +4342,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Maria:
@@ -4042,14 +4358,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Memsql:
@@ -4057,14 +4374,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Oracle:
@@ -4072,15 +4390,16 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port":          (v.Port),
-				"port_override": (v.PortOverride),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.Postgres:
@@ -4090,6 +4409,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4106,6 +4426,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4122,6 +4443,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4138,6 +4460,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4154,6 +4477,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4170,6 +4494,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4184,15 +4509,16 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"username":      (v.Username),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"username":        (v.Username),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.RDP:
@@ -4200,13 +4526,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Redis:
@@ -4214,12 +4541,13 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"password":      localV.Password,
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"password":        localV.Password,
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.ElasticacheRedis:
@@ -4227,13 +4555,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"password":      localV.Password,
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"password":        localV.Password,
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.Snowflake:
@@ -4241,14 +4570,15 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"schema":        (v.Schema),
-				"port_override": (v.PortOverride),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"schema":          (v.Schema),
+				"port_override":   (v.PortOverride),
 			},
 		})
 	case *sdm.SQLServer:
@@ -4258,6 +4588,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4275,6 +4606,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -4290,6 +4622,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -4302,13 +4635,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"password":      localV.Password,
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"password":        localV.Password,
 			},
 		})
 	case *sdm.SybaseIQ:
@@ -4316,13 +4650,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"password":      localV.Password,
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"password":        localV.Password,
 			},
 		})
 	case *sdm.Teradata:
@@ -4330,13 +4665,14 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	}
@@ -4367,6 +4703,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": localV.SecretAccessKey,
 				"output":            (v.Output),
@@ -4382,13 +4719,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"private_key":   localV.PrivateKey,
-				"project":       (v.Project),
-				"port_override": (v.PortOverride),
-				"endpoint":      (v.Endpoint),
-				"username":      (v.Username),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"private_key":     localV.PrivateKey,
+				"project":         (v.Project),
+				"port_override":   (v.PortOverride),
+				"endpoint":        (v.Endpoint),
+				"username":        (v.Username),
 			},
 		})
 	case *sdm.Cassandra:
@@ -4399,14 +4737,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.DB2I:
@@ -4417,14 +4756,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("db_2_i", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.DB2LUW:
@@ -4435,14 +4775,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Druid:
@@ -4453,13 +4794,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.DynamoDB:
@@ -4472,6 +4814,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": localV.SecretAccessKey,
 				"region":            (v.Region),
@@ -4489,6 +4832,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"region":            (v.Region),
 				"secret_access_key": localV.SecretAccessKey,
 				"endpoint":          (v.Endpoint),
@@ -4504,14 +4848,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.HTTPBasicAuth:
@@ -4524,6 +4869,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"username":          (v.Username),
@@ -4543,6 +4889,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -4560,6 +4907,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"auth_header":       localV.AuthHeader,
@@ -4578,6 +4926,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": localV.CertificateAuthority,
@@ -4596,6 +4945,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -4613,6 +4963,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 localV.Token,
@@ -4629,6 +4980,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"endpoint":              (v.Endpoint),
 				"access_key":            (v.AccessKey),
 				"secret_access_key":     localV.SecretAccessKey,
@@ -4649,6 +5001,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"endpoint":              (v.Endpoint),
 				"certificate_authority": localV.CertificateAuthority,
 				"service_account_key":   localV.ServiceAccountKey,
@@ -4665,6 +5018,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": localV.CertificateAuthority,
@@ -4683,6 +5037,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -4700,6 +5055,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 localV.Token,
@@ -4714,11 +5070,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("memcached", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.MongoLegacyHost:
@@ -4729,16 +5086,17 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"auth_database": (v.AuthDatabase),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port":          (v.Port),
-				"replica_set":   (v.ReplicaSet),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"auth_database":   (v.AuthDatabase),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port":            (v.Port),
+				"replica_set":     (v.ReplicaSet),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoLegacyReplicaset:
@@ -4751,6 +5109,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -4770,15 +5129,16 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("mongo_host", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"auth_database": (v.AuthDatabase),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"auth_database":   (v.AuthDatabase),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.MongoReplicaSet:
@@ -4791,6 +5151,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -4810,14 +5171,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.AuroraMysql:
@@ -4828,14 +5190,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Clustrix:
@@ -4846,14 +5209,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Maria:
@@ -4864,14 +5228,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Memsql:
@@ -4882,14 +5247,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Oracle:
@@ -4900,15 +5266,16 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port":          (v.Port),
-				"port_override": (v.PortOverride),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.Postgres:
@@ -4921,6 +5288,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4940,6 +5308,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4959,6 +5328,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4978,6 +5348,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -4997,6 +5368,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -5016,6 +5388,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -5033,15 +5406,16 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"username":      (v.Username),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"username":        (v.Username),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.RDP:
@@ -5052,13 +5426,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.Redis:
@@ -5069,12 +5444,13 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"password":      localV.Password,
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"password":        localV.Password,
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.ElasticacheRedis:
@@ -5085,13 +5461,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"password":      localV.Password,
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"password":        localV.Password,
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			},
 		})
 	case *sdm.Snowflake:
@@ -5102,14 +5479,15 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"database":      (v.Database),
-				"schema":        (v.Schema),
-				"port_override": (v.PortOverride),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"database":        (v.Database),
+				"schema":          (v.Schema),
+				"port_override":   (v.PortOverride),
 			},
 		})
 	case *sdm.SQLServer:
@@ -5122,6 +5500,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          localV.Password,
@@ -5142,6 +5521,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -5160,6 +5540,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 			{
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -5175,13 +5556,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"password":      localV.Password,
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"password":        localV.Password,
 			},
 		})
 	case *sdm.SybaseIQ:
@@ -5192,13 +5574,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"password":      localV.Password,
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"password":        localV.Password,
 			},
 		})
 	case *sdm.Teradata:
@@ -5209,13 +5592,14 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      localV.Password,
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        localV.Password,
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	}

@@ -34,18 +34,21 @@ resource "sdm_resource" "postgres-test" {
 The following arguments are supported by the Resource resource:
 * athena:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `access_key` - (Required) 
 	* `secret_access_key` - (Required) 
 	* `output` - (Required) 
 	* `region` - (Optional) 
 * big_query:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `private_key` - (Required) 
 	* `project` - (Required) 
 	* `endpoint` - (Required) 
 	* `username` - (Optional) 
 * cassandra:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -53,6 +56,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * db_2_i:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -60,6 +64,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * db_2_luw:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -67,24 +72,28 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 * druid:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
 * dynamo_db:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `access_key` - (Required) 
 	* `secret_access_key` - (Required) 
 	* `region` - (Required) 
 	* `endpoint` - (Required) 
 * amazon_es:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `region` - (Required) 
 	* `secret_access_key` - (Optional) 
 	* `endpoint` - (Optional) 
 	* `access_key` - (Optional) 
 * elastic:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -92,6 +101,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * http_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `username` - (Optional) 
@@ -101,6 +111,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Required) 
 * http_no_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `headers_blacklist` - (Optional) 
@@ -108,6 +119,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Required) 
 * http_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `auth_header` - (Required) 
@@ -116,6 +128,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Required) 
 * kubernetes:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `certificate_authority` - (Optional) 
@@ -124,6 +137,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - (Optional) 
 * kubernetes_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `username` - (Required) 
@@ -131,12 +145,14 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - (Optional) 
 * kubernetes_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `token` - (Required) 
 	* `healthcheck_namespace` - (Optional) 
 * amazon_eks:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `endpoint` - (Required) 
 	* `access_key` - (Required) 
 	* `secret_access_key` - (Required) 
@@ -147,12 +163,14 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - (Optional) 
 * google_gke:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `endpoint` - (Required) 
 	* `certificate_authority` - (Required) 
 	* `service_account_key` - (Required) 
 	* `healthcheck_namespace` - (Optional) 
 * aks:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `certificate_authority` - (Optional) 
@@ -161,6 +179,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - (Optional) 
 * aks_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `username` - (Required) 
@@ -168,16 +187,19 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - (Optional) 
 * aks_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `token` - (Required) 
 	* `healthcheck_namespace` - (Optional) 
 * memcached:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `port` - (Optional) 
 * mongo_legacy_host:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -187,6 +209,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * mongo_legacy_replicaset:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -197,6 +220,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * mongo_host:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -205,6 +229,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * mongo_replica_set:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -215,6 +240,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * mysql:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -222,6 +248,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 * aurora_mysql:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -229,6 +256,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 * clustrix:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -236,6 +264,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 * maria:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -243,6 +272,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 * memsql:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -250,6 +280,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 * oracle:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -258,6 +289,7 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * postgres:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -266,6 +298,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * aurora_postgres:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -274,6 +307,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * greenplum:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -282,6 +316,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * cockroach:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -290,6 +325,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * redshift:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -298,6 +334,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * citus:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -306,6 +343,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * presto:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `password` - (Required) 
 	* `database` - (Required) 
@@ -314,23 +352,27 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * rdp:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
 	* `port` - (Required) 
 * redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
 * elasticache_redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `password` - (Optional) 
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
 * snowflake:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -338,6 +380,7 @@ The following arguments are supported by the Resource resource:
 	* `schema` - (Required) 
 * sql_server:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 
@@ -347,6 +390,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) 
 * ssh:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `port` - (Required) 
@@ -354,6 +398,7 @@ The following arguments are supported by the Resource resource:
 	* `allow_deprecated_key_exchanges` - (Optional) 
 * ssh_cert:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `port` - (Required) 
@@ -361,18 +406,21 @@ The following arguments are supported by the Resource resource:
 	* `allow_deprecated_key_exchanges` - (Optional) 
 * sybase:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `port` - (Optional) 
 	* `password` - (Optional) 
 * sybase_iq:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `port` - (Optional) 
 	* `password` - (Optional) 
 * teradata:
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `username` - (Required) 
 	* `password` - (Required) 

@@ -76,6 +76,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -130,6 +135,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"private_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -183,6 +193,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -243,6 +258,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -301,6 +321,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -361,6 +386,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -414,6 +444,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"access_key": {
 										Type:        schema.TypeString,
@@ -469,6 +504,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -522,6 +562,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -581,6 +626,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"url": {
 										Type:        schema.TypeString,
@@ -646,6 +696,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -698,6 +753,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"url": {
 										Type:        schema.TypeString,
@@ -757,6 +817,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -819,6 +884,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -873,6 +943,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -921,6 +996,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"endpoint": {
 										Type:        schema.TypeString,
@@ -992,6 +1072,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1041,6 +1126,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1103,6 +1193,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1157,6 +1252,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1206,6 +1306,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1248,6 +1353,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1317,6 +1427,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1392,6 +1507,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1455,6 +1575,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1530,6 +1655,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1588,6 +1718,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1648,6 +1783,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1706,6 +1846,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1766,6 +1911,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1824,6 +1974,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1889,6 +2044,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1952,6 +2112,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2017,6 +2182,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2080,6 +2250,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2145,6 +2320,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2208,6 +2388,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2273,6 +2458,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2337,6 +2527,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2391,6 +2586,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2439,6 +2639,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2493,6 +2698,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2552,6 +2762,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2622,6 +2837,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2680,6 +2900,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2732,6 +2957,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2787,6 +3017,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2840,6 +3075,11 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2932,6 +3172,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": (v.SecretAccessKey),
 				"output":            (v.Output),
@@ -2940,67 +3181,73 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"private_key":   (v.PrivateKey),
-				"project":       (v.Project),
-				"port_override": (v.PortOverride),
-				"endpoint":      (v.Endpoint),
-				"username":      (v.Username),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"private_key":     (v.PrivateKey),
+				"project":         (v.Project),
+				"port_override":   (v.PortOverride),
+				"endpoint":        (v.Endpoint),
+				"username":        (v.Username),
 			})
 		case *sdm.Cassandra:
 			output[0]["cassandra"] = append(output[0]["cassandra"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.DB2I:
 			output[0]["db_2_i"] = append(output[0]["db_2_i"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.DB2LUW:
 			output[0]["db_2_luw"] = append(output[0]["db_2_luw"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.Druid:
 			output[0]["druid"] = append(output[0]["druid"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port":            (v.Port),
 			})
 		case *sdm.DynamoDB:
 			output[0]["dynamo_db"] = append(output[0]["dynamo_db"], entity{
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": (v.SecretAccessKey),
 				"region":            (v.Region),
@@ -3012,6 +3259,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"region":            (v.Region),
 				"secret_access_key": (v.SecretAccessKey),
 				"endpoint":          (v.Endpoint),
@@ -3020,21 +3268,23 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.Elastic:
 			output[0]["elastic"] = append(output[0]["elastic"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.HTTPBasicAuth:
 			output[0]["http_basic_auth"] = append(output[0]["http_basic_auth"], entity{
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"username":          (v.Username),
@@ -3048,6 +3298,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -3059,6 +3310,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"auth_header":       (v.AuthHeader),
@@ -3071,6 +3323,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": (v.CertificateAuthority),
@@ -3083,6 +3336,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -3094,6 +3348,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 (v.Token),
@@ -3104,6 +3359,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"endpoint":              (v.Endpoint),
 				"access_key":            (v.AccessKey),
 				"secret_access_key":     (v.SecretAccessKey),
@@ -3118,6 +3374,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"endpoint":              (v.Endpoint),
 				"certificate_authority": (v.CertificateAuthority),
 				"service_account_key":   (v.ServiceAccountKey),
@@ -3128,6 +3385,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": (v.CertificateAuthority),
@@ -3140,6 +3398,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -3151,6 +3410,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 (v.Token),
@@ -3158,32 +3418,35 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.MongoLegacyHost:
 			output[0]["mongo_legacy_host"] = append(output[0]["mongo_legacy_host"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"auth_database": (v.AuthDatabase),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port":          (v.Port),
-				"replica_set":   (v.ReplicaSet),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"auth_database":   (v.AuthDatabase),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"replica_set":     (v.ReplicaSet),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.MongoLegacyReplicaset:
 			output[0]["mongo_legacy_replicaset"] = append(output[0]["mongo_legacy_replicaset"], entity{
 				"id":                 (v.ID),
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -3196,22 +3459,24 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.MongoHost:
 			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"auth_database": (v.AuthDatabase),
-				"port_override": (v.PortOverride),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"auth_database":   (v.AuthDatabase),
+				"port_override":   (v.PortOverride),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.MongoReplicaSet:
 			output[0]["mongo_replica_set"] = append(output[0]["mongo_replica_set"], entity{
 				"id":                 (v.ID),
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -3224,82 +3489,89 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.Mysql:
 			output[0]["mysql"] = append(output[0]["mysql"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.AuroraMysql:
 			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.Clustrix:
 			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.Maria:
 			output[0]["maria"] = append(output[0]["maria"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.Memsql:
 			output[0]["memsql"] = append(output[0]["memsql"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port":          (v.Port),
-				"port_override": (v.PortOverride),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.Postgres:
 			output[0]["postgres"] = append(output[0]["postgres"], entity{
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3313,6 +3585,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3326,6 +3599,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3339,6 +3613,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3352,6 +3627,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3365,6 +3641,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3375,66 +3652,72 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.Presto:
 			output[0]["presto"] = append(output[0]["presto"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"username":      (v.Username),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"username":        (v.Username),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.Redis:
 			output[0]["redis"] = append(output[0]["redis"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"password":      (v.Password),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"password":        (v.Password),
+				"port":            (v.Port),
 			})
 		case *sdm.ElasticacheRedis:
 			output[0]["elasticache_redis"] = append(output[0]["elasticache_redis"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"port_override": (v.PortOverride),
-				"password":      (v.Password),
-				"port":          (v.Port),
-				"tls_required":  (v.TlsRequired),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.Snowflake:
 			output[0]["snowflake"] = append(output[0]["snowflake"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"database":      (v.Database),
-				"schema":        (v.Schema),
-				"port_override": (v.PortOverride),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"schema":          (v.Schema),
+				"port_override":   (v.PortOverride),
 			})
 		case *sdm.SQLServer:
 			output[0]["sql_server"] = append(output[0]["sql_server"], entity{
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
+				"secret_store_id":   (v.SecretStoreID),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3449,6 +3732,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                             (v.ID),
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -3461,6 +3745,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"id":                             (v.ID),
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -3469,36 +3754,39 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"password":      (v.Password),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"password":        (v.Password),
 			})
 		case *sdm.SybaseIQ:
 			output[0]["sybase_iq"] = append(output[0]["sybase_iq"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
-				"password":      (v.Password),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"password":        (v.Password),
 			})
 		case *sdm.Teradata:
 			output[0]["teradata"] = append(output[0]["teradata"], entity{
-				"id":            (v.ID),
-				"name":          (v.Name),
-				"tags":          convertTagsToMap(v.Tags),
-				"hostname":      (v.Hostname),
-				"username":      (v.Username),
-				"password":      (v.Password),
-				"port_override": (v.PortOverride),
-				"port":          (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		}
 	}
