@@ -3520,13 +3520,35 @@ func resourceResource() *schema.Resource {
 		},
 	}
 }
-func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
+func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, error) {
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"access_key":                          convertStringFromMap(raw, "access_key"),
 			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
@@ -3534,26 +3556,61 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
 			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
 			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["private_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential private_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_private_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_private_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_private_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_private_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"private_key":                   convertStringFromMap(raw, "private_key"),
 			"secret_store_private_key_path": convertStringFromMap(raw, "secret_store_private_key_path"),
 			"secret_store_private_key_key":  convertStringFromMap(raw, "secret_store_private_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3561,14 +3618,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3576,14 +3655,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("db_2_luw").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3591,14 +3692,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3606,14 +3729,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"access_key":                          convertStringFromMap(raw, "access_key"),
 			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
@@ -3621,14 +3766,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
 			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
 			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
 			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
@@ -3636,14 +3803,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"access_key":                          convertStringFromMap(raw, "access_key"),
 			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
 			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3651,14 +3840,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3666,34 +3877,82 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
-		return map[string]string{}
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		} else {
+		}
+
+		return map[string]string{}, nil
 	}
 	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["auth_header"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential auth_header cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_auth_header_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_auth_header_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_auth_header_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_auth_header_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"auth_header":                   convertStringFromMap(raw, "auth_header"),
 			"secret_store_auth_header_path": convertStringFromMap(raw, "secret_store_auth_header_path"),
 			"secret_store_auth_header_key":  convertStringFromMap(raw, "secret_store_auth_header_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("kubernetes").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+			}
+			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+			}
+			if v := raw["client_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
 			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
@@ -3704,14 +3963,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"client_key":                              convertStringFromMap(raw, "client_key"),
 			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
 			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3719,26 +4000,79 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["token"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential token cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_token_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_token_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_token_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_token_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"token":                   convertStringFromMap(raw, "token"),
 			"secret_store_token_path": convertStringFromMap(raw, "secret_store_token_path"),
 			"secret_store_token_key":  convertStringFromMap(raw, "secret_store_token_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"access_key":                              convertStringFromMap(raw, "access_key"),
 			"secret_store_access_key_path":            convertStringFromMap(raw, "secret_store_access_key_path"),
@@ -3752,14 +4086,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"role_arn":                                convertStringFromMap(raw, "role_arn"),
 			"secret_store_role_arn_path":              convertStringFromMap(raw, "secret_store_role_arn_path"),
 			"secret_store_role_arn_key":               convertStringFromMap(raw, "secret_store_role_arn_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+			}
+			if v := raw["service_account_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential service_account_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_service_account_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_service_account_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_service_account_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_service_account_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
 			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
@@ -3767,14 +4123,45 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"service_account_key":                     convertStringFromMap(raw, "service_account_key"),
 			"secret_store_service_account_key_path":   convertStringFromMap(raw, "secret_store_service_account_key_path"),
 			"secret_store_service_account_key_key":    convertStringFromMap(raw, "secret_store_service_account_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("aks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+			}
+			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+			}
+			if v := raw["client_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
 			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
@@ -3785,14 +4172,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"client_key":                              convertStringFromMap(raw, "client_key"),
 			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
 			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("aks_basic_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3800,34 +4209,73 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("aks_service_account").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["token"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential token cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_token_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_token_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_token_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_token_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"token":                   convertStringFromMap(raw, "token"),
 			"secret_store_token_path": convertStringFromMap(raw, "secret_store_token_path"),
 			"secret_store_token_key":  convertStringFromMap(raw, "secret_store_token_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
-		return map[string]string{}
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		} else {
+		}
+
+		return map[string]string{}, nil
 	}
 	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3835,14 +4283,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3850,14 +4320,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3865,14 +4357,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3880,14 +4394,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3895,14 +4431,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3910,14 +4468,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3925,14 +4505,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3940,14 +4542,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("memsql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3955,14 +4579,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3970,14 +4616,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -3985,14 +4653,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("aurora_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4000,14 +4690,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("greenplum").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4015,14 +4727,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("cockroach").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4030,14 +4764,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4045,14 +4801,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("citus").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4060,26 +4838,61 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("presto").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("rdp").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4087,34 +4900,73 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
-		return map[string]string{}
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		} else {
+		}
+
+		return map[string]string{}, nil
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4122,14 +4974,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4137,30 +5011,60 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
-		return map[string]string{}
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		} else {
+		}
+
+		return map[string]string{}, nil
 	}
 	if list := d.Get("ssh_cert").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
-		return map[string]string{}
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		} else {
+		}
+
+		return map[string]string{}, nil
 	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4168,14 +5072,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("sybase_iq").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4183,14 +5109,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
 	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return map[string]string{}
+			return map[string]string{}, nil
 		}
 		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
 		return map[string]string{
 			"username":                   convertStringFromMap(raw, "username"),
 			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
@@ -4198,9 +5146,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) map[string]string {
 			"password":                   convertStringFromMap(raw, "password"),
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-		}
+		}, nil
 	}
-	return map[string]string{}
+	return map[string]string{}, nil
 }
 func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
@@ -5510,10 +6458,13 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	localVersion := convertResourceFromResourceData(d)
-	seValues := secretStoreValuesForResource(d)
+	seValues, err := secretStoreValuesForResource(d)
+	if err != nil {
+		return fmt.Errorf("cannot create Resource: %w", err)
+	}
 	resp, err := cc.Resources().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create Resource %s: %w", "", err)
+		return fmt.Errorf("cannot create Resource: %w", err)
 	}
 	d.SetId(resp.Resource.GetID())
 	switch v := resp.Resource.(type) {
@@ -6459,7 +7410,10 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 	defer cancel()
 	localVersion := convertResourceFromResourceData(d)
 	_ = localVersion
-	seValues := secretStoreValuesForResource(d)
+	seValues, err := secretStoreValuesForResource(d)
+	if err != nil {
+		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
+	}
 	resp, err := cc.Resources().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -7552,6 +8506,10 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceResourceUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
+	_, err := secretStoreValuesForResource(d)
+	if err != nil {
+		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
+	}
 	resp, err := cc.Resources().Update(ctx, convertResourceFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)

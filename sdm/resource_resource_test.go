@@ -3,6 +3,7 @@ package sdm
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strings"
 	"testing"
 	"time"
@@ -147,6 +148,47 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 					"redis.0.secret_store_password_path",
 					"redis.0.secret_store_password_key",
 				},
+			},
+		},
+	})
+}
+
+func TestAccSDMResource_CreateWithSecretStoreNoSecretStoreID(t *testing.T) {
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+
+	path := "/path/to/secret"
+	key := "password2"
+
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config:      testAccSDMResourceRedisSecretStoreConfig(name, name, port, "", path, key),
+				ExpectError: regexp.MustCompile("secret store credential secret_store_password_path must be combined with secret_store_id"),
+			},
+		},
+	})
+}
+
+func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+
+	vaults, err := createVaultTokenStoresWithPrefix("vaultTest", 1)
+	if err != nil {
+		t.Fatalf("failed to create secret store: %v", err)
+	}
+	vault := vaults[0]
+
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config:      testAccSDMResourceRedisSecretStoreRawCredentialConfig(name, name, port, vault.GetID(), "password"),
+				ExpectError: regexp.MustCompile("raw credential password cannot be combined with secret_store_id"),
 			},
 		},
 	})
@@ -863,6 +905,20 @@ func testAccSDMResourceRedisSecretStoreConfig(resourceName, sdmResourceName stri
 		}
 	}
 	`, resourceName, sdmResourceName, port, seID, path, key)
+}
+
+func testAccSDMResourceRedisSecretStoreRawCredentialConfig(resourceName, sdmResourceName string, port int32, seID, password string) string {
+	return fmt.Sprintf(`
+	resource "sdm_resource" "%s" {
+		redis {
+			name = "%s"
+			hostname = "test.com"
+			port = %d
+			secret_store_id = "%s"
+			password = "%s"
+		}
+	}
+	`, resourceName, sdmResourceName, port, seID, password)
 }
 
 func tagsToConfigString(tags sdm.Tags) string {
