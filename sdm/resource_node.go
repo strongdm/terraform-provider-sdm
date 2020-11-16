@@ -142,7 +142,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertNodeFromResourceData(d)
 	resp, err := cc.Nodes().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create Node %s: %w", "", err)
+		return fmt.Errorf("cannot create Node: %w", err)
 	}
 	d.SetId(resp.Node.GetID())
 	switch v := resp.Node.(type) {

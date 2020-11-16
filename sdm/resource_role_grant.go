@@ -54,7 +54,7 @@ func resourceRoleGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleGrantFromResourceData(d)
 	resp, err := cc.RoleGrants().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create RoleGrant %s: %w", "", err)
+		return fmt.Errorf("cannot create RoleGrant: %w", err)
 	}
 	d.SetId(resp.RoleGrant.ID)
 	v := resp.RoleGrant

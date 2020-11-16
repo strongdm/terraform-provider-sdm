@@ -54,7 +54,7 @@ func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error 
 	localVersion := convertRoleAttachmentFromResourceData(d)
 	resp, err := cc.RoleAttachments().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create RoleAttachment %s: %w", "", err)
+		return fmt.Errorf("cannot create RoleAttachment: %w", err)
 	}
 	d.SetId(resp.RoleAttachment.ID)
 	v := resp.RoleAttachment

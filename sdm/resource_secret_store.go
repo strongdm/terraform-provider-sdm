@@ -139,7 +139,7 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertSecretStoreFromResourceData(d)
 	resp, err := cc.SecretStores().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create SecretStore %s: %w", "", err)
+		return fmt.Errorf("cannot create SecretStore: %w", err)
 	}
 	d.SetId(resp.SecretStore.GetID())
 	switch v := resp.SecretStore.(type) {

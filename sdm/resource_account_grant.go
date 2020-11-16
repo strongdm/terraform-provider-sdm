@@ -54,7 +54,7 @@ func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountGrantFromResourceData(d)
 	resp, err := cc.AccountGrants().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create AccountGrant %s: %w", "", err)
+		return fmt.Errorf("cannot create AccountGrant: %w", err)
 	}
 	d.SetId(resp.AccountGrant.ID)
 	v := resp.AccountGrant

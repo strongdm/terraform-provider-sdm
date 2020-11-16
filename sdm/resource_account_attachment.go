@@ -54,7 +54,7 @@ func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) err
 	localVersion := convertAccountAttachmentFromResourceData(d)
 	resp, err := cc.AccountAttachments().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create AccountAttachment %s: %w", "", err)
+		return fmt.Errorf("cannot create AccountAttachment: %w", err)
 	}
 	d.SetId(resp.AccountAttachment.ID)
 	v := resp.AccountAttachment

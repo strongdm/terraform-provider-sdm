@@ -138,7 +138,7 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountFromResourceData(d)
 	resp, err := cc.Accounts().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create Account %s: %w", "", err)
+		return fmt.Errorf("cannot create Account: %w", err)
 	}
 	d.SetId(resp.Account.GetID())
 	switch v := resp.Account.(type) {

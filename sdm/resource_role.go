@@ -64,7 +64,7 @@ func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleFromResourceData(d)
 	resp, err := cc.Roles().Create(ctx, localVersion)
 	if err != nil {
-		return fmt.Errorf("cannot create Role %s: %w", "", err)
+		return fmt.Errorf("cannot create Role: %w", err)
 	}
 	d.SetId(resp.Role.ID)
 	v := resp.Role
