@@ -112,3 +112,12 @@ func convertBoolFromResourceData(d *schema.ResourceData, key string) bool {
 	}
 	return value.(bool)
 }
+
+func fullSecretStorePath(raw map[string]interface{}, cred string) string {
+	path := convertStringFromMap(raw, "secret_store_"+cred+"_path")
+	key := convertStringFromMap(raw, "secret_store_"+cred+"_key")
+	if key != "" {
+		return path + "?key=" + key
+	}
+	return path
+}
