@@ -100,16 +100,20 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 		t.Fatalf("failed to create secret store: %v", err)
 	}
 	vault := vaults[0]
+	path := "/path/to/secret"
+	key := "password2"
 
 	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMResourceRedisSecretStoreConfig(name, name, port, vault.GetID()),
+				Config: testAccSDMResourceRedisSecretStoreConfig(name, name, port, vault.GetID(), path, key),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.name", name),
 					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.secret_store_password_path", path),
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.secret_store_password_key", key),
 					resource.TestCheckResourceAttrSet("sdm_resource."+name, "redis.0.port_override"),
 					resource.TestCheckResourceAttrSet("sdm_resource."+name, "redis.0.secret_store_id"),
 					func(s *terraform.State) error {
@@ -139,6 +143,10 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 				ResourceName:      "sdm_resource." + name,
 				ImportState:       true,
 				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"redis.0.secret_store_password_path",
+					"redis.0.secret_store_password_key",
+				},
 			},
 		},
 	})
@@ -842,7 +850,7 @@ func testAccSDMResourceRedisConfig(resourceName string, sdmResourceName string, 
 	`, resourceName, sdmResourceName, port)
 }
 
-func testAccSDMResourceRedisSecretStoreConfig(resourceName string, sdmResourceName string, port int32, seID string) string {
+func testAccSDMResourceRedisSecretStoreConfig(resourceName, sdmResourceName string, port int32, seID, path, key string) string {
 	return fmt.Sprintf(`
 	resource "sdm_resource" "%s" {
 		redis {
@@ -850,9 +858,11 @@ func testAccSDMResourceRedisSecretStoreConfig(resourceName string, sdmResourceNa
 			hostname = "test.com"
 			port = %d
 			secret_store_id = "%s"
+			secret_store_password_path = "%s"
+			secret_store_password_key = "%s"
 		}
 	}
-	`, resourceName, sdmResourceName, port, seID)
+	`, resourceName, sdmResourceName, port, seID, path, key)
 }
 
 func tagsToConfigString(tags sdm.Tags) string {
