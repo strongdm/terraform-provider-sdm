@@ -94,6 +94,34 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"aws": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -130,6 +158,19 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		return out
 	}
+	if list := d.Get("aws").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWSStore{}
+		}
+		out := &sdm.AWSStore{
+			ID:     d.Id(),
+			Name:   convertStringFromMap(raw, "name"),
+			Region: convertStringFromMap(raw, "region"),
+			Tags:   convertTagsFromMap(raw, "tags"),
+		}
+		return out
+	}
 	return nil
 }
 
@@ -137,6 +178,7 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	localVersion := convertSecretStoreFromResourceData(d)
+
 	resp, err := cc.SecretStores().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create SecretStore: %w", err)
@@ -166,6 +208,16 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"tags":           convertTagsToMap(v.Tags),
 			},
 		})
+	case *sdm.AWSStore:
+		localV, _ := localVersion.(*sdm.AWSStore)
+		_ = localV
+		d.Set("aws", []map[string]interface{}{
+			{
+				"name":   (v.Name),
+				"region": (v.Region),
+				"tags":   convertTagsToMap(v.Tags),
+			},
+		})
 	}
 	return nil
 }
@@ -175,6 +227,7 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 	defer cancel()
 	localVersion := convertSecretStoreFromResourceData(d)
 	_ = localVersion
+
 	resp, err := cc.SecretStores().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -213,12 +266,26 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"tags":           convertTagsToMap(v.Tags),
 			},
 		})
+	case *sdm.AWSStore:
+		localV, ok := localVersion.(*sdm.AWSStore)
+		if !ok {
+			localV = &sdm.AWSStore{}
+		}
+		_ = localV
+		d.Set("aws", []map[string]interface{}{
+			{
+				"name":   (v.Name),
+				"region": (v.Region),
+				"tags":   convertTagsToMap(v.Tags),
+			},
+		})
 	}
 	return nil
 }
 func resourceSecretStoreUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
+
 	resp, err := cc.SecretStores().Update(ctx, convertSecretStoreFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update SecretStore %s: %w", d.Id(), err)

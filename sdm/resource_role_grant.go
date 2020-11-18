@@ -52,6 +52,7 @@ func resourceRoleGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	localVersion := convertRoleGrantFromResourceData(d)
+
 	resp, err := cc.RoleGrants().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create RoleGrant: %w", err)
@@ -68,6 +69,7 @@ func resourceRoleGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 	defer cancel()
 	localVersion := convertRoleGrantFromResourceData(d)
 	_ = localVersion
+
 	resp, err := cc.RoleGrants().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {

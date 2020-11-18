@@ -136,6 +136,7 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	localVersion := convertAccountFromResourceData(d)
+
 	resp, err := cc.Accounts().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Account: %w", err)
@@ -174,6 +175,7 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 	defer cancel()
 	localVersion := convertAccountFromResourceData(d)
 	_ = localVersion
+
 	resp, err := cc.Accounts().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -218,6 +220,7 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceAccountUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
+
 	resp, err := cc.Accounts().Update(ctx, convertAccountFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Account %s: %w", d.Id(), err)

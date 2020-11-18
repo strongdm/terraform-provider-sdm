@@ -62,6 +62,7 @@ func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	localVersion := convertRoleFromResourceData(d)
+
 	resp, err := cc.Roles().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Role: %w", err)
@@ -79,6 +80,7 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 	defer cancel()
 	localVersion := convertRoleFromResourceData(d)
 	_ = localVersion
+
 	resp, err := cc.Roles().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -96,6 +98,7 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceRoleUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
+
 	resp, err := cc.Roles().Update(ctx, convertRoleFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Role %s: %w", d.Id(), err)

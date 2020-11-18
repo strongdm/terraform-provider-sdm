@@ -140,6 +140,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
 	defer cancel()
 	localVersion := convertNodeFromResourceData(d)
+
 	resp, err := cc.Nodes().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Node: %w", err)
@@ -177,6 +178,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	defer cancel()
 	localVersion := convertNodeFromResourceData(d)
 	_ = localVersion
+
 	resp, err := cc.Nodes().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -220,6 +222,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 func resourceNodeUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
 	defer cancel()
+
 	resp, err := cc.Nodes().Update(ctx, convertNodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)

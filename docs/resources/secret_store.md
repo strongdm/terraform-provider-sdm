@@ -20,6 +20,9 @@ The following arguments are supported by the SecretStore resource:
 * vault_token:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `server_address` - (Required) 
+* aws:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `region` - (Required) 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the SecretStore resource:
 * `id` - A unique identifier for the SecretStore resource.

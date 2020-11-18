@@ -1385,3 +1385,182 @@ func (svc *Roles) List(
 		},
 	), nil
 }
+
+// SecretStores are servers where resource secrets (passwords, keys) are stored.
+type SecretStores struct {
+	client plumbing.SecretStoresClient
+	parent *Client
+}
+
+func (svc *SecretStores) Create(
+	ctx context.Context,
+	secretStore SecretStore) (
+	*SecretStoreCreateResponse,
+	error) {
+	req := &plumbing.SecretStoreCreateRequest{}
+
+	req.SecretStore = convertSecretStoreToPlumbing(secretStore)
+	var plumbingResponse *plumbing.SecretStoreCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "SecretStores.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &SecretStoreCreateResponse{}
+	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
+	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
+	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	return resp, nil
+}
+
+// Get reads one SecretStore by ID.
+func (svc *SecretStores) Get(
+	ctx context.Context,
+	id string) (
+	*SecretStoreGetResponse,
+	error) {
+	req := &plumbing.SecretStoreGetRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.SecretStoreGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "SecretStores.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &SecretStoreGetResponse{}
+	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
+	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
+	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	return resp, nil
+}
+
+// Update patches a SecretStore by ID.
+func (svc *SecretStores) Update(
+	ctx context.Context,
+	secretStore SecretStore) (
+	*SecretStoreUpdateResponse,
+	error) {
+	req := &plumbing.SecretStoreUpdateRequest{}
+
+	req.SecretStore = convertSecretStoreToPlumbing(secretStore)
+	var plumbingResponse *plumbing.SecretStoreUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "SecretStores.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &SecretStoreUpdateResponse{}
+	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
+	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
+	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	return resp, nil
+}
+
+// Delete removes a SecretStore by ID.
+func (svc *SecretStores) Delete(
+	ctx context.Context,
+	id string) (
+	*SecretStoreDeleteResponse,
+	error) {
+	req := &plumbing.SecretStoreDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.SecretStoreDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "SecretStores.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &SecretStoreDeleteResponse{}
+	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
+	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	return resp, nil
+}
+
+// List gets a list of SecretStores matching a given set of criteria.
+func (svc *SecretStores) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	SecretStoreIterator,
+	error) {
+	req := &plumbing.SecretStoreListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if value := svc.parent.testOption("PageLimit"); value != nil {
+		v, ok := value.(int)
+		if ok {
+			req.Meta.Limit = int32(v)
+		}
+	}
+	return newSecretStoreIteratorImpl(
+		func() (
+			[]SecretStore,
+			bool, error) {
+			var plumbingResponse *plumbing.SecretStoreListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "SecretStores.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result := convertRepeatedSecretStoreToPorcelain(plumbingResponse.SecretStores)
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}

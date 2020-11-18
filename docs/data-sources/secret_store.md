@@ -17,6 +17,7 @@ The following arguments are supported by a SecretStores data source:
 * `client_key_path` - (Optional) 
 * `id` - (Optional) Unique identifier of the SecretStore.
 * `name` - (Optional) Unique human-readable name of the SecretStore.
+* `region` - (Optional) 
 * `server_address` - (Optional) 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a SecretStores data source:
@@ -35,4 +36,9 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `server_address` - 
+		* `tags` - Tags is a map of key, value pairs.
+	* aws:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `region` - 
 		* `tags` - Tags is a map of key, value pairs.

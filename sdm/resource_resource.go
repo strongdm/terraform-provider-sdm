@@ -6462,6 +6462,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot create Resource: %w", err)
 	}
+
 	resp, err := cc.Resources().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Resource: %w", err)
@@ -7414,6 +7415,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
 	}
+
 	resp, err := cc.Resources().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -8510,6 +8512,7 @@ func resourceResourceUpdate(d *schema.ResourceData, cc *sdm.Client) error {
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
 	}
+
 	resp, err := cc.Resources().Update(ctx, convertResourceFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)

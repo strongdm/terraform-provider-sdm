@@ -45,6 +45,10 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"region": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"server_address": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -136,6 +140,39 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"aws": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 					},
 				},
 			},
@@ -171,6 +208,10 @@ func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, [
 	}
 	if v, ok := d.GetOk("name"); ok {
 		filter += "name:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("region"); ok {
+		filter += "region:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("server_address"); ok {
@@ -217,6 +258,13 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":           (v.Name),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToMap(v.Tags),
+			})
+		case *sdm.AWSStore:
+			output[0]["aws"] = append(output[0]["aws"], entity{
+				"id":     (v.ID),
+				"name":   (v.Name),
+				"region": (v.Region),
+				"tags":   convertTagsToMap(v.Tags),
 			})
 		}
 	}

@@ -31,13 +31,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	plumbing "github.com/strongdm/strongdm-sdk-go/internal/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/proto"
 )
 
 var (
@@ -69,6 +69,7 @@ type Client struct {
 	roleAttachments    *RoleAttachments
 	roleGrants         *RoleGrants
 	roles              *Roles
+	secretStores       *SecretStores
 }
 
 // New creates a new strongDM API client.
@@ -140,6 +141,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.roles = &Roles{
 		client: plumbing.NewRolesClient(client.grpcConn),
+		parent: client,
+	}
+	client.secretStores = &SecretStores{
+		client: plumbing.NewSecretStoresClient(client.grpcConn),
 		parent: client,
 	}
 	return client, nil
@@ -215,6 +220,11 @@ func (c *Client) RoleGrants() *RoleGrants {
 // Each user can be a member of one Role or composite role.
 func (c *Client) Roles() *Roles {
 	return c.roles
+}
+
+// SecretStores are servers where resource secrets (passwords, keys) are stored.
+func (c *Client) SecretStores() *SecretStores {
+	return c.secretStores
 }
 
 // Sign returns the signature for the given byte array

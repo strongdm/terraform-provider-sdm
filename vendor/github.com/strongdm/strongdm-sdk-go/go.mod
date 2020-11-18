@@ -1,10 +1,9 @@
 module github.com/strongdm/strongdm-sdk-go
 
-go 1.13
+go 1.15
 
 require (
-	github.com/golang/protobuf v1.3.3
-	github.com/grpc-ecosystem/grpc-gateway v1.13.0
-	google.golang.org/genproto v0.0.0-20200218151345-dad8c97a84f5
-	google.golang.org/grpc v1.27.1
+	github.com/golang/protobuf v1.4.1
+	google.golang.org/grpc v1.33.1
+	google.golang.org/protobuf v1.25.0
 )
