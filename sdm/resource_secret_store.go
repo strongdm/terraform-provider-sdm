@@ -23,6 +23,34 @@ func resourceSecretStore() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"aws": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"vault_tls": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -94,34 +122,6 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
-			"aws": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the SecretStore.",
-						},
-						"region": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-					},
-				},
-			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -129,6 +129,19 @@ func resourceSecretStore() *schema.Resource {
 	}
 }
 func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore {
+	if list := d.Get("aws").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWSStore{}
+		}
+		out := &sdm.AWSStore{
+			ID:     d.Id(),
+			Name:   convertStringFromMap(raw, "name"),
+			Region: convertStringFromMap(raw, "region"),
+			Tags:   convertTagsFromMap(raw, "tags"),
+		}
+		return out
+	}
 	if list := d.Get("vault_tls").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -158,19 +171,6 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		return out
 	}
-	if list := d.Get("aws").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.AWSStore{}
-		}
-		out := &sdm.AWSStore{
-			ID:     d.Id(),
-			Name:   convertStringFromMap(raw, "name"),
-			Region: convertStringFromMap(raw, "region"),
-			Tags:   convertTagsFromMap(raw, "tags"),
-		}
-		return out
-	}
 	return nil
 }
 
@@ -185,6 +185,16 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.SecretStore.GetID())
 	switch v := resp.SecretStore.(type) {
+	case *sdm.AWSStore:
+		localV, _ := localVersion.(*sdm.AWSStore)
+		_ = localV
+		d.Set("aws", []map[string]interface{}{
+			{
+				"name":   (v.Name),
+				"region": (v.Region),
+				"tags":   convertTagsToMap(v.Tags),
+			},
+		})
 	case *sdm.VaultTLSStore:
 		localV, _ := localVersion.(*sdm.VaultTLSStore)
 		_ = localV
@@ -208,16 +218,6 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"tags":           convertTagsToMap(v.Tags),
 			},
 		})
-	case *sdm.AWSStore:
-		localV, _ := localVersion.(*sdm.AWSStore)
-		_ = localV
-		d.Set("aws", []map[string]interface{}{
-			{
-				"name":   (v.Name),
-				"region": (v.Region),
-				"tags":   convertTagsToMap(v.Tags),
-			},
-		})
 	}
 	return nil
 }
@@ -237,6 +237,19 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read SecretStore %s: %w", d.Id(), err)
 	}
 	switch v := resp.SecretStore.(type) {
+	case *sdm.AWSStore:
+		localV, ok := localVersion.(*sdm.AWSStore)
+		if !ok {
+			localV = &sdm.AWSStore{}
+		}
+		_ = localV
+		d.Set("aws", []map[string]interface{}{
+			{
+				"name":   (v.Name),
+				"region": (v.Region),
+				"tags":   convertTagsToMap(v.Tags),
+			},
+		})
 	case *sdm.VaultTLSStore:
 		localV, ok := localVersion.(*sdm.VaultTLSStore)
 		if !ok {
@@ -264,19 +277,6 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":           (v.Name),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToMap(v.Tags),
-			},
-		})
-	case *sdm.AWSStore:
-		localV, ok := localVersion.(*sdm.AWSStore)
-		if !ok {
-			localV = &sdm.AWSStore{}
-		}
-		_ = localV
-		d.Set("aws", []map[string]interface{}{
-			{
-				"name":   (v.Name),
-				"region": (v.Region),
-				"tags":   convertTagsToMap(v.Tags),
 			},
 		})
 	}

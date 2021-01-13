@@ -347,6 +347,40 @@ func (m *Athena) GetSecretStoreID() string {
 func (m *Athena) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+func (*AWS) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AWS.
+func (m *AWS) GetID() string { return m.ID }
+
+// GetName returns the name of the AWS.
+func (m *AWS) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWS.
+func (m *AWS) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AWS.
+func (m *AWS) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AWS.
+func (m *AWS) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AWS.
+func (m *AWS) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AWS.
+func (m *AWS) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
 func (*BigQuery) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the BigQuery.
@@ -1969,6 +2003,27 @@ type Athena struct {
 	Region string `json:"region"`
 }
 
+type AWS struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	AccessKey string `json:"accessKey"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+
+	HealthcheckRegion string `json:"healthcheckRegion"`
+
+	RoleArn string `json:"roleArn"`
+}
+
 type BigQuery struct {
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -3424,45 +3479,6 @@ type Role struct {
 	Tags Tags `json:"tags"`
 }
 
-// SecretStoreCreateResponse reports how the SecretStores were created in the system.
-type SecretStoreCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created SecretStore.
-	SecretStore SecretStore `json:"secretStore"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// SecretStoreGetResponse returns a requested SecretStore.
-type SecretStoreGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested SecretStore.
-	SecretStore SecretStore `json:"secretStore"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// SecretStoreUpdateResponse returns the fields of a SecretStore after it has been updated by
-// a SecretStoreUpdateRequest.
-type SecretStoreUpdateResponse struct {
-	// Reserved for future use.
-	Meta *UpdateResponseMetadata `json:"meta"`
-	// The updated SecretStore.
-	SecretStore SecretStore `json:"secretStore"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// SecretStoreDeleteResponse returns information about a SecretStore that was deleted.
-type SecretStoreDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
 // A SecretStore is a server where resource secrets (passwords, keys) are stored.
 // Coming soon support for HashiCorp Vault and AWS Secret Store. Contact support@strongdm.com to request access to the beta.
 type SecretStore interface {
@@ -3479,6 +3495,30 @@ type SecretStore interface {
 	isOneOf_SecretStore()
 }
 
+func (*AWSStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the AWSStore.
+func (m *AWSStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the AWSStore.
+func (m *AWSStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AWSStore.
+func (m *AWSStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the AWSStore.
+func (m *AWSStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWSStore.
+func (m *AWSStore) SetName(v string) {
+	m.Name = v
+}
 func (*VaultTLSStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultTLSStore.
@@ -3527,38 +3567,14 @@ func (m *VaultTokenStore) GetName() string {
 func (m *VaultTokenStore) SetName(v string) {
 	m.Name = v
 }
-func (*AWSStore) isOneOf_SecretStore() {}
 
-// GetID returns the unique identifier of the AWSStore.
-func (m *AWSStore) GetID() string { return m.ID }
-
-// GetTags returns the tags of the AWSStore.
-func (m *AWSStore) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AWSStore.
-func (m *AWSStore) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetName returns the name of the AWSStore.
-func (m *AWSStore) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AWSStore.
-func (m *AWSStore) SetName(v string) {
-	m.Name = v
-}
-
-type VaultTokenStore struct {
+type AWSStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 
-	ServerAddress string `json:"serverAddress"`
+	Region string `json:"region"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -3580,15 +3596,54 @@ type VaultTLSStore struct {
 	Tags Tags `json:"tags"`
 }
 
-type AWSStore struct {
+type VaultTokenStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 
-	Region string `json:"region"`
+	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+// SecretStoreCreateResponse reports how the SecretStores were created in the system.
+type SecretStoreCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created SecretStore.
+	SecretStore SecretStore `json:"secretStore"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// SecretStoreGetResponse returns a requested SecretStore.
+type SecretStoreGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested SecretStore.
+	SecretStore SecretStore `json:"secretStore"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// SecretStoreUpdateResponse returns the fields of a SecretStore after it has been updated by
+// a SecretStoreUpdateRequest.
+type SecretStoreUpdateResponse struct {
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// The updated SecretStore.
+	SecretStore SecretStore `json:"secretStore"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// SecretStoreDeleteResponse returns information about a SecretStore that was deleted.
+type SecretStoreDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // AccountAttachmentIterator provides read access to a list of AccountAttachment.

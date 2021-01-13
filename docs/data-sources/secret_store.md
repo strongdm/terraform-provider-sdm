@@ -24,6 +24,11 @@ In addition to provided arguments above, the following attributes are returned b
 * `id` - a generated id representing this request, unrelated to input id and sdm_secret_store ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `secret_stores` - A single element list containing a map, where each key lists one of the following objects:
+	* aws:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `region` - 
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
@@ -36,9 +41,4 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `server_address` - 
-		* `tags` - Tags is a map of key, value pairs.
-	* aws:
-		* `id` - Unique identifier of the SecretStore.
-		* `name` - Unique human-readable name of the SecretStore.
-		* `region` - 
 		* `tags` - Tags is a map of key, value pairs.

@@ -39,6 +39,15 @@ In addition to provided arguments above, the following attributes are returned b
 		* `output` - 
 		* `port_override` - 
 		* `region` - 
+	* aws:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `access_key` - 
+		* `secret_access_key` - 
+		* `healthcheck_region` - 
+		* `role_arn` - 
 	* big_query:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.

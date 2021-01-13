@@ -822,6 +822,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"tls_required", "true"},
 			},
 		},
+		{
+			resource: "aws",
+			pairs: [][2]string{
+				{"name", `"aws"`},
+				{"healthcheck_region", `"region"`},
+				{"access_key", `"access-key"`},
+				{"secret_access_key", `"secret-access-key"`},
+				{"role_arn", `"role-arn"`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")

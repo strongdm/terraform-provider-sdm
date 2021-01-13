@@ -93,6 +93,79 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"aws": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"access_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_access_key_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_access_key_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_access_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_secret_access_key_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_secret_access_key_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"healthcheck_region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+					},
+				},
+			},
 			"big_query": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -3020,6 +3093,14 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
+						"secret_store_password_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_password_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -3556,6 +3637,55 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
 			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
 			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+		}, nil
+	}
+	if list := d.Get("aws").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"access_key":                          convertStringFromMap(raw, "access_key"),
+			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
+			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
+			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
+			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
+			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"role_arn":                            convertStringFromMap(raw, "role_arn"),
+			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
+			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
 		}, nil
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
@@ -4934,10 +5064,23 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
 		} else {
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
 		}
 
-		return map[string]string{}, nil
+		return map[string]string{
+			"password":                   convertStringFromMap(raw, "password"),
+			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
+			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+		}, nil
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
@@ -5176,6 +5319,32 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		if out.SecretAccessKey == "" {
 			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
+		}
+		return out
+	}
+	if list := d.Get("aws").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWS{}
+		}
+		out := &sdm.AWS{
+			ID:                d.Id(),
+			Name:              convertStringFromMap(raw, "name"),
+			Tags:              convertTagsFromMap(raw, "tags"),
+			SecretStoreID:     convertStringFromMap(raw, "secret_store_id"),
+			AccessKey:         convertStringFromMap(raw, "access_key"),
+			SecretAccessKey:   convertStringFromMap(raw, "secret_access_key"),
+			HealthcheckRegion: convertStringFromMap(raw, "healthcheck_region"),
+			RoleArn:           convertStringFromMap(raw, "role_arn"),
+		}
+		if out.AccessKey == "" {
+			out.AccessKey = fullSecretStorePath(raw, "access_key")
+		}
+		if out.SecretAccessKey == "" {
+			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
+		}
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
 		}
 		return out
 	}
@@ -6269,6 +6438,9 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
+		if out.Password == "" {
+			out.Password = fullSecretStorePath(raw, "password")
+		}
 		return out
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
@@ -6486,6 +6658,26 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"output":                              (v.Output),
 				"port_override":                       (v.PortOverride),
 				"region":                              (v.Region),
+			},
+		})
+	case *sdm.AWS:
+		localV, _ := localVersion.(*sdm.AWS)
+		_ = localV
+		d.Set("aws", []map[string]interface{}{
+			{
+				"name":                                (v.Name),
+				"tags":                                convertTagsToMap(v.Tags),
+				"secret_store_id":                     (v.SecretStoreID),
+				"access_key":                          seValues["access_key"],
+				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
+				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"secret_access_key":                   seValues["secret_access_key"],
+				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
+				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
+				"healthcheck_region":                  (v.HealthcheckRegion),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -7262,14 +7454,16 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"password":        localV.Password,
-				"port":            (v.Port),
-				"tls_required":    (v.TlsRequired),
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"hostname":                   (v.Hostname),
+				"port_override":              (v.PortOverride),
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"port":                       (v.Port),
+				"tls_required":               (v.TlsRequired),
 			},
 		})
 	case *sdm.Snowflake:
@@ -7445,6 +7639,29 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"output":                              (v.Output),
 				"port_override":                       (v.PortOverride),
 				"region":                              (v.Region),
+			},
+		})
+	case *sdm.AWS:
+		localV, ok := localVersion.(*sdm.AWS)
+		if !ok {
+			localV = &sdm.AWS{}
+		}
+		_ = localV
+		d.Set("aws", []map[string]interface{}{
+			{
+				"name":                                (v.Name),
+				"tags":                                convertTagsToMap(v.Tags),
+				"secret_store_id":                     (v.SecretStoreID),
+				"access_key":                          seValues["access_key"],
+				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
+				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"secret_access_key":                   seValues["secret_access_key"],
+				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
+				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
+				"healthcheck_region":                  (v.HealthcheckRegion),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -8341,14 +8558,16 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"password":        localV.Password,
-				"port":            (v.Port),
-				"tls_required":    (v.TlsRequired),
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"hostname":                   (v.Hostname),
+				"port_override":              (v.PortOverride),
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"port":                       (v.Port),
+				"tls_required":               (v.TlsRequired),
 			},
 		})
 	case *sdm.Snowflake:

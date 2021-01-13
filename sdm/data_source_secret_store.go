@@ -59,6 +59,39 @@ func dataSourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"aws": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"vault_tls": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -140,39 +173,6 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
-						"aws": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the SecretStore.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the SecretStore.",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-								},
-							},
-						},
 					},
 				},
 			},
@@ -237,11 +237,18 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"vault_tls": {},
+		"aws": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
+		case *sdm.AWSStore:
+			output[0]["aws"] = append(output[0]["aws"], entity{
+				"id":     (v.ID),
+				"name":   (v.Name),
+				"region": (v.Region),
+				"tags":   convertTagsToMap(v.Tags),
+			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{
 				"id":               (v.ID),
@@ -258,13 +265,6 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":           (v.Name),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToMap(v.Tags),
-			})
-		case *sdm.AWSStore:
-			output[0]["aws"] = append(output[0]["aws"], entity{
-				"id":     (v.ID),
-				"name":   (v.Name),
-				"region": (v.Region),
-				"tags":   convertTagsToMap(v.Tags),
 			})
 		}
 	}

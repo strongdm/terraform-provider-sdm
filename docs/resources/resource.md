@@ -43,6 +43,19 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `output` - (Required) 
 	* `region` - (Optional) 
+* aws:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `access_key` - (Optional) 
+	* `secret_store_access_key_path` - (Optional)
+	* `secret_store_access_key_key` - (Optional)
+	* `secret_access_key` - (Optional) 
+	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_store_secret_access_key_key` - (Optional)
+	* `healthcheck_region` - (Required) 
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
 * big_query:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -516,6 +529,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
 	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `tls_required` - (Optional) 
 * snowflake:

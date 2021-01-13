@@ -110,6 +110,60 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"aws": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"big_query": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -3178,6 +3232,17 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"output":            (v.Output),
 				"port_override":     (v.PortOverride),
 				"region":            (v.Region),
+			})
+		case *sdm.AWS:
+			output[0]["aws"] = append(output[0]["aws"], entity{
+				"id":                 (v.ID),
+				"name":               (v.Name),
+				"tags":               convertTagsToMap(v.Tags),
+				"secret_store_id":    (v.SecretStoreID),
+				"access_key":         (v.AccessKey),
+				"secret_access_key":  (v.SecretAccessKey),
+				"healthcheck_region": (v.HealthcheckRegion),
+				"role_arn":           (v.RoleArn),
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
