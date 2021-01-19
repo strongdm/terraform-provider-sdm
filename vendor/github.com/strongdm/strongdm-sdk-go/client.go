@@ -28,6 +28,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"math/rand"
+	"strings"
 	"sync"
 	"time"
 
@@ -74,6 +75,8 @@ type Client struct {
 
 // New creates a new strongDM API client.
 func New(token, secret string, opts ...ClientOption) (*Client, error) {
+	token = strings.TrimSpace(token)
+	secret = strings.TrimSpace(secret)
 	decodedSecret, err := base64.StdEncoding.DecodeString(secret)
 	if err != nil {
 		return nil, convertErrorToPorcelain(fmt.Errorf("invalid secret: %w", err))
