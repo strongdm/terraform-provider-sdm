@@ -31,6 +31,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ResourcesClient interface {
+	// EnumerateTags gets a list of the filter matching tags.
+	EnumerateTags(ctx context.Context, in *EnumerateTagsRequest, opts ...grpc.CallOption) (*EnumerateTagsResponse, error)
 	// Create registers a new Resource.
 	Create(ctx context.Context, in *ResourceCreateRequest, opts ...grpc.CallOption) (*ResourceCreateResponse, error)
 	// Get reads one Resource by ID.
@@ -49,6 +51,15 @@ type resourcesClient struct {
 
 func NewResourcesClient(cc grpc.ClientConnInterface) ResourcesClient {
 	return &resourcesClient{cc}
+}
+
+func (c *resourcesClient) EnumerateTags(ctx context.Context, in *EnumerateTagsRequest, opts ...grpc.CallOption) (*EnumerateTagsResponse, error) {
+	out := new(EnumerateTagsResponse)
+	err := c.cc.Invoke(ctx, "/v1.Resources/EnumerateTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *resourcesClient) Create(ctx context.Context, in *ResourceCreateRequest, opts ...grpc.CallOption) (*ResourceCreateResponse, error) {
@@ -100,6 +111,8 @@ func (c *resourcesClient) List(ctx context.Context, in *ResourceListRequest, opt
 // All implementations must embed UnimplementedResourcesServer
 // for forward compatibility
 type ResourcesServer interface {
+	// EnumerateTags gets a list of the filter matching tags.
+	EnumerateTags(context.Context, *EnumerateTagsRequest) (*EnumerateTagsResponse, error)
 	// Create registers a new Resource.
 	Create(context.Context, *ResourceCreateRequest) (*ResourceCreateResponse, error)
 	// Get reads one Resource by ID.
@@ -117,6 +130,9 @@ type ResourcesServer interface {
 type UnimplementedResourcesServer struct {
 }
 
+func (UnimplementedResourcesServer) EnumerateTags(context.Context, *EnumerateTagsRequest) (*EnumerateTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnumerateTags not implemented")
+}
 func (UnimplementedResourcesServer) Create(context.Context, *ResourceCreateRequest) (*ResourceCreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
@@ -143,6 +159,24 @@ type UnsafeResourcesServer interface {
 
 func RegisterResourcesServer(s grpc.ServiceRegistrar, srv ResourcesServer) {
 	s.RegisterService(&_Resources_serviceDesc, srv)
+}
+
+func _Resources_EnumerateTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnumerateTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourcesServer).EnumerateTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Resources/EnumerateTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourcesServer).EnumerateTags(ctx, req.(*EnumerateTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Resources_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -239,6 +273,10 @@ var _Resources_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.Resources",
 	HandlerType: (*ResourcesServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "EnumerateTags",
+			Handler:    _Resources_EnumerateTags_Handler,
+		},
 		{
 			MethodName: "Create",
 			Handler:    _Resources_Create_Handler,

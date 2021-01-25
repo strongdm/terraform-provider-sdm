@@ -43,6 +43,12 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `output` - (Required) 
 	* `region` - (Optional) 
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
 * aws:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -56,6 +62,9 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)
 	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
 * big_query:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -123,6 +132,12 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `region` - (Required) 
 	* `endpoint` - (Required) 
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
 * amazon_es:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -134,6 +149,12 @@ The following arguments are supported by the Resource resource:
 	* `access_key` - (Optional) 
 	* `secret_store_access_key_path` - (Optional)
 	* `secret_store_access_key_key` - (Optional)
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
 * elastic:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -233,6 +254,9 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)
 	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
 	* `healthcheck_namespace` - (Optional) 
 * google_gke:
 	* `name` - (Required) Unique human-readable name of the Resource.

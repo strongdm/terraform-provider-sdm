@@ -726,6 +726,53 @@ type Resources struct {
 	parent *Client
 }
 
+// EnumerateTags gets a list of the filter matching tags.
+func (svc *Resources) EnumerateTags(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	TagIterator,
+	error) {
+	req := &plumbing.EnumerateTagsRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if value := svc.parent.testOption("PageLimit"); value != nil {
+		v, ok := value.(int)
+		if ok {
+			req.Meta.Limit = int32(v)
+		}
+	}
+	return newTagIteratorImpl(
+		func() (
+			[]*Tag,
+			bool, error) {
+			var plumbingResponse *plumbing.EnumerateTagsResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.EnumerateTags(svc.parent.wrapContext(ctx, req, "Resources.EnumerateTags"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result := convertRepeatedTagToPorcelain(plumbingResponse.Matches)
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // Create registers a new Resource.
 func (svc *Resources) Create(
 	ctx context.Context,

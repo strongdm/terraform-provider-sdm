@@ -248,6 +248,42 @@ func convertRepeatedRateLimitMetadataToPorcelain(plumbings []*proto.RateLimitMet
 	}
 	return items
 }
+func convertTagToPorcelain(plumbing *proto.Tag) *Tag {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Tag{}
+	porcelain.Name = (plumbing.Name)
+	porcelain.Value = (plumbing.Value)
+	return porcelain
+}
+
+func convertTagToPlumbing(porcelain *Tag) *proto.Tag {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Tag{}
+	plumbing.Name = (porcelain.Name)
+	plumbing.Value = (porcelain.Value)
+	return plumbing
+}
+func convertRepeatedTagToPlumbing(
+	porcelains []*Tag,
+) []*proto.Tag {
+	var items []*proto.Tag
+	for _, porcelain := range porcelains {
+		items = append(items, convertTagToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedTagToPorcelain(plumbings []*proto.Tag) []*Tag {
+	var items []*Tag
+	for _, plumbing := range plumbings {
+		items = append(items, convertTagToPorcelain(plumbing))
+	}
+	return items
+}
 func convertAccountAttachmentCreateResponseToPorcelain(plumbing *proto.AccountAttachmentCreateResponse) *AccountAttachmentCreateResponse {
 	if plumbing == nil {
 		return nil
@@ -1158,6 +1194,8 @@ func convertAthenaToPorcelain(plumbing *proto.Athena) *Athena {
 	porcelain.Output = (plumbing.Output)
 	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.Region = (plumbing.Region)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
 	return porcelain
 }
 
@@ -1176,6 +1214,8 @@ func convertAthenaToPlumbing(porcelain *Athena) *proto.Athena {
 	plumbing.Output = (porcelain.Output)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	return plumbing
 }
 func convertRepeatedAthenaToPlumbing(
@@ -1209,6 +1249,7 @@ func convertAWSToPorcelain(plumbing *proto.AWS) *AWS {
 	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
 	porcelain.HealthcheckRegion = (plumbing.HealthcheckRegion)
 	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
 	return porcelain
 }
 
@@ -1226,6 +1267,7 @@ func convertAWSToPlumbing(porcelain *AWS) *proto.AWS {
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
 	plumbing.HealthcheckRegion = (porcelain.HealthcheckRegion)
 	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	return plumbing
 }
 func convertRepeatedAWSToPlumbing(
@@ -1526,6 +1568,8 @@ func convertDynamoDBToPorcelain(plumbing *proto.DynamoDB) *DynamoDB {
 	porcelain.Region = (plumbing.Region)
 	porcelain.Endpoint = (plumbing.Endpoint)
 	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
 	return porcelain
 }
 
@@ -1544,6 +1588,8 @@ func convertDynamoDBToPlumbing(porcelain *DynamoDB) *proto.DynamoDB {
 	plumbing.Region = (porcelain.Region)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	return plumbing
 }
 func convertRepeatedDynamoDBToPlumbing(
@@ -1578,6 +1624,8 @@ func convertAmazonESToPorcelain(plumbing *proto.AmazonES) *AmazonES {
 	porcelain.Endpoint = (plumbing.Endpoint)
 	porcelain.AccessKey = (plumbing.AccessKey)
 	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
 	return porcelain
 }
 
@@ -1596,6 +1644,8 @@ func convertAmazonESToPlumbing(porcelain *AmazonES) *proto.AmazonES {
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.AccessKey = (porcelain.AccessKey)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	return plumbing
 }
 func convertRepeatedAmazonESToPlumbing(
@@ -2004,6 +2054,7 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) *AmazonEKS {
 	porcelain.Region = (plumbing.Region)
 	porcelain.ClusterName = (plumbing.ClusterName)
 	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
 	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
 	return porcelain
 }
@@ -2025,6 +2076,7 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	plumbing.Region = (porcelain.Region)
 	plumbing.ClusterName = (porcelain.ClusterName)
 	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	return plumbing
 }
@@ -5245,6 +5297,51 @@ func (n *nodeIteratorImpl) Value() Node {
 
 func (n *nodeIteratorImpl) Err() error {
 	return n.err
+}
+
+type tagIteratorImplFetchFunc func() (
+	[]*Tag,
+	bool, error)
+type tagIteratorImpl struct {
+	buffer      []*Tag
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       tagIteratorImplFetchFunc
+}
+
+func newTagIteratorImpl(f tagIteratorImplFetchFunc) *tagIteratorImpl {
+	return &tagIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (t *tagIteratorImpl) Next() bool {
+	if t.index < len(t.buffer)-1 {
+		t.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !t.hasNextPage {
+		return false
+	}
+
+	t.index = 0
+	t.buffer, t.hasNextPage, t.err = t.fetch()
+	return len(t.buffer) > 0
+}
+
+func (t *tagIteratorImpl) Value() *Tag {
+	if t.index >= len(t.buffer) {
+		return nil
+	}
+	return t.buffer[t.index]
+}
+
+func (t *tagIteratorImpl) Err() error {
+	return t.err
 }
 
 type resourceIteratorImplFetchFunc func() (

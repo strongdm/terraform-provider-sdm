@@ -39,6 +39,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `output` - 
 		* `port_override` - 
 		* `region` - 
+		* `role_arn` - 
+		* `role_external_id` - 
 	* aws:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -48,6 +50,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_access_key` - 
 		* `healthcheck_region` - 
 		* `role_arn` - 
+		* `role_external_id` - 
 	* big_query:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -111,6 +114,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `region` - 
 		* `endpoint` - 
 		* `port_override` - 
+		* `role_arn` - 
+		* `role_external_id` - 
 	* amazon_es:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -121,6 +126,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `endpoint` - 
 		* `access_key` - 
 		* `port_override` - 
+		* `role_arn` - 
+		* `role_external_id` - 
 	* elastic:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -207,6 +214,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `region` - 
 		* `cluster_name` - 
 		* `role_arn` - 
+		* `role_external_id` - 
 		* `healthcheck_namespace` - 
 	* google_gke:
 		* `id` - Unique identifier of the Resource.

@@ -90,6 +90,32 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -160,6 +186,19 @@ func resourceResource() *schema.Resource {
 							Optional: true,
 						},
 						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
@@ -590,6 +629,32 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "",
 						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -659,6 +724,32 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Computed:    true,
 							Description: "",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -1241,6 +1332,19 @@ func resourceResource() *schema.Resource {
 							Optional: true,
 						},
 						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
@@ -3615,45 +3719,11 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
 			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
-			}
-		}
-
-		return map[string]string{
-			"access_key":                          convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
-		}, nil
-	}
-	if list := d.Get("aws").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
-			}
-			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
 			}
 		} else {
 			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
@@ -3674,6 +3744,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
 			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
 		}
 
 		return map[string]string{
@@ -3686,6 +3762,70 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"role_arn":                            convertStringFromMap(raw, "role_arn"),
 			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
 			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
+			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
+			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
+			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
+		}, nil
+	}
+	if list := d.Get("aws").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"access_key":                          convertStringFromMap(raw, "access_key"),
+			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
+			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
+			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
+			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
+			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"role_arn":                            convertStringFromMap(raw, "role_arn"),
+			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
+			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
+			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
+			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
+			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
 		}, nil
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
@@ -3874,6 +4014,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
 			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
 		} else {
 			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
@@ -3887,6 +4033,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
 			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
 		}
 
 		return map[string]string{
@@ -3896,6 +4054,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
 			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
 			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"role_arn":                            convertStringFromMap(raw, "role_arn"),
+			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
+			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
+			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
+			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
+			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
 		}, nil
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
@@ -3911,6 +4075,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
 			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
 		} else {
 			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
@@ -3924,6 +4094,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
 			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
 		}
 
 		return map[string]string{
@@ -3933,6 +4115,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"access_key":                          convertStringFromMap(raw, "access_key"),
 			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
 			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
+			"role_arn":                            convertStringFromMap(raw, "role_arn"),
+			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
+			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
+			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
+			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
+			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
 		}, nil
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
@@ -4176,6 +4364,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
 			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
 		} else {
 			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
@@ -4201,6 +4392,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
 			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
 		}
 
 		return map[string]string{
@@ -4216,6 +4413,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"role_arn":                                convertStringFromMap(raw, "role_arn"),
 			"secret_store_role_arn_path":              convertStringFromMap(raw, "secret_store_role_arn_path"),
 			"secret_store_role_arn_key":               convertStringFromMap(raw, "secret_store_role_arn_key"),
+			"role_external_id":                        convertStringFromMap(raw, "role_external_id"),
+			"secret_store_role_external_id_path":      convertStringFromMap(raw, "secret_store_role_external_id_path"),
+			"secret_store_role_external_id_key":       convertStringFromMap(raw, "secret_store_role_external_id_key"),
 		}, nil
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
@@ -5308,6 +5508,8 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
 			Output:          convertStringFromMap(raw, "output"),
 			Region:          convertStringFromMap(raw, "region"),
+			RoleArn:         convertStringFromMap(raw, "role_arn"),
+			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -5319,6 +5521,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		if out.SecretAccessKey == "" {
 			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
+		}
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
 		}
 		return out
 	}
@@ -5336,6 +5544,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			SecretAccessKey:   convertStringFromMap(raw, "secret_access_key"),
 			HealthcheckRegion: convertStringFromMap(raw, "healthcheck_region"),
 			RoleArn:           convertStringFromMap(raw, "role_arn"),
+			RoleExternalID:    convertStringFromMap(raw, "role_external_id"),
 		}
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
@@ -5345,6 +5554,9 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		if out.RoleArn == "" {
 			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
 		}
 		return out
 	}
@@ -5502,6 +5714,8 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
 			Region:          convertStringFromMap(raw, "region"),
 			Endpoint:        convertStringFromMap(raw, "endpoint"),
+			RoleArn:         convertStringFromMap(raw, "role_arn"),
+			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -5513,6 +5727,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		if out.SecretAccessKey == "" {
 			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
+		}
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
 		}
 		return out
 	}
@@ -5530,6 +5750,8 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
 			Endpoint:        convertStringFromMap(raw, "endpoint"),
 			AccessKey:       convertStringFromMap(raw, "access_key"),
+			RoleArn:         convertStringFromMap(raw, "role_arn"),
+			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -5541,6 +5763,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
+		}
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
 		}
 		return out
 	}
@@ -5728,6 +5956,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			Region:               convertStringFromMap(raw, "region"),
 			ClusterName:          convertStringFromMap(raw, "cluster_name"),
 			RoleArn:              convertStringFromMap(raw, "role_arn"),
+			RoleExternalID:       convertStringFromMap(raw, "role_external_id"),
 			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
 		}
 		if out.AccessKey == "" {
@@ -5741,6 +5970,9 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		if out.RoleArn == "" {
 			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
 		}
 		return out
 	}
@@ -6658,6 +6890,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"output":                              (v.Output),
 				"port_override":                       (v.PortOverride),
 				"region":                              (v.Region),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.AWS:
@@ -6678,6 +6916,9 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"role_arn":                            seValues["role_arn"],
 				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -6793,6 +7034,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":                              (v.Region),
 				"endpoint":                            (v.Endpoint),
 				"port_override":                       (v.PortOverride),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.AmazonES:
@@ -6812,6 +7059,12 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
 				"port_override":                       (v.PortOverride),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.Elastic:
@@ -6968,6 +7221,9 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"role_arn":                                seValues["role_arn"],
 				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
+				"role_external_id":                        seValues["role_external_id"],
+				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 			},
 		})
@@ -7639,6 +7895,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"output":                              (v.Output),
 				"port_override":                       (v.PortOverride),
 				"region":                              (v.Region),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.AWS:
@@ -7662,6 +7924,9 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"role_arn":                            seValues["role_arn"],
 				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -7795,6 +8060,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":                              (v.Region),
 				"endpoint":                            (v.Endpoint),
 				"port_override":                       (v.PortOverride),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.AmazonES:
@@ -7817,6 +8088,12 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
 				"port_override":                       (v.PortOverride),
+				"role_arn":                            seValues["role_arn"],
+				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
+				"role_external_id":                    seValues["role_external_id"],
+				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
 			},
 		})
 	case *sdm.Elastic:
@@ -7997,6 +8274,9 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"role_arn":                                seValues["role_arn"],
 				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
+				"role_external_id":                        seValues["role_external_id"],
+				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 			},
 		})

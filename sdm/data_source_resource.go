@@ -107,6 +107,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -157,6 +167,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -530,6 +545,16 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -587,6 +612,16 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Computed:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 								},
@@ -1089,6 +1124,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -3232,6 +3272,8 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"output":            (v.Output),
 				"port_override":     (v.PortOverride),
 				"region":            (v.Region),
+				"role_arn":          (v.RoleArn),
+				"role_external_id":  (v.RoleExternalID),
 			})
 		case *sdm.AWS:
 			output[0]["aws"] = append(output[0]["aws"], entity{
@@ -3243,6 +3285,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_access_key":  (v.SecretAccessKey),
 				"healthcheck_region": (v.HealthcheckRegion),
 				"role_arn":           (v.RoleArn),
+				"role_external_id":   (v.RoleExternalID),
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
@@ -3318,6 +3361,8 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":            (v.Region),
 				"endpoint":          (v.Endpoint),
 				"port_override":     (v.PortOverride),
+				"role_arn":          (v.RoleArn),
+				"role_external_id":  (v.RoleExternalID),
 			})
 		case *sdm.AmazonES:
 			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
@@ -3330,6 +3375,8 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"endpoint":          (v.Endpoint),
 				"access_key":        (v.AccessKey),
 				"port_override":     (v.PortOverride),
+				"role_arn":          (v.RoleArn),
+				"role_external_id":  (v.RoleExternalID),
 			})
 		case *sdm.Elastic:
 			output[0]["elastic"] = append(output[0]["elastic"], entity{
@@ -3432,6 +3479,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"region":                (v.Region),
 				"cluster_name":          (v.ClusterName),
 				"role_arn":              (v.RoleArn),
+				"role_external_id":      (v.RoleExternalID),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 			})
 		case *sdm.GoogleGKE:

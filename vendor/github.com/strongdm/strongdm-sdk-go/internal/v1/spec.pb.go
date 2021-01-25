@@ -866,6 +866,85 @@ func (x *RateLimitMetadata) GetBucket() string {
 	return ""
 }
 
+// GenericRequestMetadata contains common headers for generic requests.
+type GenericRequestMetadata struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GenericRequestMetadata) Reset() {
+	*x = GenericRequestMetadata{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spec_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GenericRequestMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenericRequestMetadata) ProtoMessage() {}
+
+func (x *GenericRequestMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_spec_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenericRequestMetadata.ProtoReflect.Descriptor instead.
+func (*GenericRequestMetadata) Descriptor() ([]byte, []int) {
+	return file_spec_proto_rawDescGZIP(), []int{18}
+}
+
+// GenericResponseMetadata contains common headers for generic request
+// responses.
+type GenericResponseMetadata struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GenericResponseMetadata) Reset() {
+	*x = GenericResponseMetadata{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spec_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GenericResponseMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenericResponseMetadata) ProtoMessage() {}
+
+func (x *GenericResponseMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_spec_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenericResponseMetadata.ProtoReflect.Descriptor instead.
+func (*GenericResponseMetadata) Descriptor() ([]byte, []int) {
+	return file_spec_proto_rawDescGZIP(), []int{19}
+}
+
 var File_spec_proto protoreflect.FileDescriptor
 
 var file_spec_proto_rawDesc = []byte{
@@ -945,13 +1024,16 @@ var file_spec_proto_rawDesc = []byte{
 	0x65, 0x73, 0x65, 0x74, 0x41, 0x74, 0x12, 0x22, 0x0a, 0x06, 0x62, 0x75, 0x63, 0x6b, 0x65, 0x74,
 	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3,
 	0x07, 0x01, 0x52, 0x06, 0x62, 0x75, 0x63, 0x6b, 0x65, 0x74, 0x3a, 0x0a, 0xfa, 0xf8, 0xb3, 0x07,
-	0x05, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0x42, 0x52, 0x0a, 0x1c, 0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x74,
-	0x72, 0x6f, 0x6e, 0x67, 0x64, 0x6d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x6c,
-	0x75, 0x6d, 0x62, 0x69, 0x6e, 0x67, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x73, 0x74, 0x72, 0x6f, 0x6e, 0x67, 0x64, 0x6d, 0x2f, 0x73, 0x74, 0x72, 0x6f,
-	0x6e, 0x67, 0x64, 0x6d, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f, 0x2f, 0x69, 0x6e, 0x74, 0x65,
-	0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x05, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0x22, 0x18, 0x0a, 0x16, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x69,
+	0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0x22, 0x19, 0x0a, 0x17, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x42, 0x52, 0x0a, 0x1c, 0x63,
+	0x6f, 0x6d, 0x2e, 0x73, 0x74, 0x72, 0x6f, 0x6e, 0x67, 0x64, 0x6d, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x76, 0x31, 0x2e, 0x70, 0x6c, 0x75, 0x6d, 0x62, 0x69, 0x6e, 0x67, 0x5a, 0x32, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x74, 0x72, 0x6f, 0x6e, 0x67, 0x64, 0x6d,
+	0x2f, 0x73, 0x74, 0x72, 0x6f, 0x6e, 0x67, 0x64, 0x6d, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f,
+	0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -966,31 +1048,33 @@ func file_spec_proto_rawDescGZIP() []byte {
 	return file_spec_proto_rawDescData
 }
 
-var file_spec_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_spec_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_spec_proto_goTypes = []interface{}{
-	(*AlreadyExistsError)(nil),     // 0: v1.AlreadyExistsError
-	(*NotFoundError)(nil),          // 1: v1.NotFoundError
-	(*BadRequestError)(nil),        // 2: v1.BadRequestError
-	(*AuthenticationError)(nil),    // 3: v1.AuthenticationError
-	(*PermissionError)(nil),        // 4: v1.PermissionError
-	(*InternalError)(nil),          // 5: v1.InternalError
-	(*RateLimitError)(nil),         // 6: v1.RateLimitError
-	(*CreateRequestMetadata)(nil),  // 7: v1.CreateRequestMetadata
-	(*CreateResponseMetadata)(nil), // 8: v1.CreateResponseMetadata
-	(*GetRequestMetadata)(nil),     // 9: v1.GetRequestMetadata
-	(*GetResponseMetadata)(nil),    // 10: v1.GetResponseMetadata
-	(*UpdateRequestMetadata)(nil),  // 11: v1.UpdateRequestMetadata
-	(*UpdateResponseMetadata)(nil), // 12: v1.UpdateResponseMetadata
-	(*DeleteRequestMetadata)(nil),  // 13: v1.DeleteRequestMetadata
-	(*DeleteResponseMetadata)(nil), // 14: v1.DeleteResponseMetadata
-	(*ListRequestMetadata)(nil),    // 15: v1.ListRequestMetadata
-	(*ListResponseMetadata)(nil),   // 16: v1.ListResponseMetadata
-	(*RateLimitMetadata)(nil),      // 17: v1.RateLimitMetadata
-	(*timestamp.Timestamp)(nil),    // 18: google.protobuf.Timestamp
+	(*AlreadyExistsError)(nil),      // 0: v1.AlreadyExistsError
+	(*NotFoundError)(nil),           // 1: v1.NotFoundError
+	(*BadRequestError)(nil),         // 2: v1.BadRequestError
+	(*AuthenticationError)(nil),     // 3: v1.AuthenticationError
+	(*PermissionError)(nil),         // 4: v1.PermissionError
+	(*InternalError)(nil),           // 5: v1.InternalError
+	(*RateLimitError)(nil),          // 6: v1.RateLimitError
+	(*CreateRequestMetadata)(nil),   // 7: v1.CreateRequestMetadata
+	(*CreateResponseMetadata)(nil),  // 8: v1.CreateResponseMetadata
+	(*GetRequestMetadata)(nil),      // 9: v1.GetRequestMetadata
+	(*GetResponseMetadata)(nil),     // 10: v1.GetResponseMetadata
+	(*UpdateRequestMetadata)(nil),   // 11: v1.UpdateRequestMetadata
+	(*UpdateResponseMetadata)(nil),  // 12: v1.UpdateResponseMetadata
+	(*DeleteRequestMetadata)(nil),   // 13: v1.DeleteRequestMetadata
+	(*DeleteResponseMetadata)(nil),  // 14: v1.DeleteResponseMetadata
+	(*ListRequestMetadata)(nil),     // 15: v1.ListRequestMetadata
+	(*ListResponseMetadata)(nil),    // 16: v1.ListResponseMetadata
+	(*RateLimitMetadata)(nil),       // 17: v1.RateLimitMetadata
+	(*GenericRequestMetadata)(nil),  // 18: v1.GenericRequestMetadata
+	(*GenericResponseMetadata)(nil), // 19: v1.GenericResponseMetadata
+	(*timestamp.Timestamp)(nil),     // 20: google.protobuf.Timestamp
 }
 var file_spec_proto_depIdxs = []int32{
 	17, // 0: v1.RateLimitError.rate_limit:type_name -> v1.RateLimitMetadata
-	18, // 1: v1.RateLimitMetadata.reset_at:type_name -> google.protobuf.Timestamp
+	20, // 1: v1.RateLimitMetadata.reset_at:type_name -> google.protobuf.Timestamp
 	2,  // [2:2] is the sub-list for method output_type
 	2,  // [2:2] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
@@ -1221,6 +1305,30 @@ func file_spec_proto_init() {
 				return nil
 			}
 		}
+		file_spec_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GenericRequestMetadata); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spec_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GenericResponseMetadata); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1228,7 +1336,7 @@ func file_spec_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spec_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
