@@ -587,7 +587,9 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
-	* `username` - (Required) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
 	* `allow_deprecated_key_exchanges` - (Optional) 
@@ -595,7 +597,9 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `hostname` - (Required) 
-	* `username` - (Required) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
 	* `allow_deprecated_key_exchanges` - (Optional) 

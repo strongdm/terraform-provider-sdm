@@ -903,6 +903,44 @@ func convertRepeatedControlPanelGetSSHCAPublicKeyResponseToPorcelain(plumbings [
 	}
 	return items
 }
+func convertControlPanelVerifyJWTResponseToPorcelain(plumbing *proto.ControlPanelVerifyJWTResponse) *ControlPanelVerifyJWTResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &ControlPanelVerifyJWTResponse{}
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.ValID = (plumbing.Valid)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertControlPanelVerifyJWTResponseToPlumbing(porcelain *ControlPanelVerifyJWTResponse) *proto.ControlPanelVerifyJWTResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ControlPanelVerifyJWTResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.Valid = (porcelain.ValID)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedControlPanelVerifyJWTResponseToPlumbing(
+	porcelains []*ControlPanelVerifyJWTResponse,
+) []*proto.ControlPanelVerifyJWTResponse {
+	var items []*proto.ControlPanelVerifyJWTResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertControlPanelVerifyJWTResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedControlPanelVerifyJWTResponseToPorcelain(plumbings []*proto.ControlPanelVerifyJWTResponse) []*ControlPanelVerifyJWTResponse {
+	var items []*ControlPanelVerifyJWTResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertControlPanelVerifyJWTResponseToPorcelain(plumbing))
+	}
+	return items
+}
 func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	if porcelain == nil {
 		return nil

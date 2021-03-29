@@ -33,6 +33,8 @@ const _ = grpc.SupportPackageIsVersion7
 type ControlPanelClient interface {
 	// GetSSHCAPublicKey retrieves the SSH CA public key.
 	GetSSHCAPublicKey(ctx context.Context, in *ControlPanelGetSSHCAPublicKeyRequest, opts ...grpc.CallOption) (*ControlPanelGetSSHCAPublicKeyResponse, error)
+	// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
+	VerifyJWT(ctx context.Context, in *ControlPanelVerifyJWTRequest, opts ...grpc.CallOption) (*ControlPanelVerifyJWTResponse, error)
 }
 
 type controlPanelClient struct {
@@ -52,12 +54,23 @@ func (c *controlPanelClient) GetSSHCAPublicKey(ctx context.Context, in *ControlP
 	return out, nil
 }
 
+func (c *controlPanelClient) VerifyJWT(ctx context.Context, in *ControlPanelVerifyJWTRequest, opts ...grpc.CallOption) (*ControlPanelVerifyJWTResponse, error) {
+	out := new(ControlPanelVerifyJWTResponse)
+	err := c.cc.Invoke(ctx, "/v1.ControlPanel/VerifyJWT", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ControlPanelServer is the server API for ControlPanel service.
 // All implementations must embed UnimplementedControlPanelServer
 // for forward compatibility
 type ControlPanelServer interface {
 	// GetSSHCAPublicKey retrieves the SSH CA public key.
 	GetSSHCAPublicKey(context.Context, *ControlPanelGetSSHCAPublicKeyRequest) (*ControlPanelGetSSHCAPublicKeyResponse, error)
+	// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
+	VerifyJWT(context.Context, *ControlPanelVerifyJWTRequest) (*ControlPanelVerifyJWTResponse, error)
 	mustEmbedUnimplementedControlPanelServer()
 }
 
@@ -67,6 +80,9 @@ type UnimplementedControlPanelServer struct {
 
 func (UnimplementedControlPanelServer) GetSSHCAPublicKey(context.Context, *ControlPanelGetSSHCAPublicKeyRequest) (*ControlPanelGetSSHCAPublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSSHCAPublicKey not implemented")
+}
+func (UnimplementedControlPanelServer) VerifyJWT(context.Context, *ControlPanelVerifyJWTRequest) (*ControlPanelVerifyJWTResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyJWT not implemented")
 }
 func (UnimplementedControlPanelServer) mustEmbedUnimplementedControlPanelServer() {}
 
@@ -99,6 +115,24 @@ func _ControlPanel_GetSSHCAPublicKey_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ControlPanel_VerifyJWT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlPanelVerifyJWTRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControlPanelServer).VerifyJWT(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.ControlPanel/VerifyJWT",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControlPanelServer).VerifyJWT(ctx, req.(*ControlPanelVerifyJWTRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ControlPanel_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.ControlPanel",
 	HandlerType: (*ControlPanelServer)(nil),
@@ -106,6 +140,10 @@ var _ControlPanel_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSSHCAPublicKey",
 			Handler:    _ControlPanel_GetSSHCAPublicKey_Handler,
+		},
+		{
+			MethodName: "VerifyJWT",
+			Handler:    _ControlPanel_VerifyJWT_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

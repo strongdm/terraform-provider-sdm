@@ -300,6 +300,16 @@ type ControlPanelGetSSHCAPublicKeyResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// ControlPanelVerifyJWTResponse reports whether x-sdm-token is valid.
+type ControlPanelVerifyJWTResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Reports if the given token is valid.
+	ValID bool `json:"valid"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 // A Resource is a database or server for which strongDM manages access.
 type Resource interface {
 	// GetID returns the unique identifier of the Resource.

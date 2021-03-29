@@ -538,6 +538,38 @@ func (svc *ControlPanel) GetSSHCAPublicKey(
 	return resp, nil
 }
 
+// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
+func (svc *ControlPanel) VerifyJWT(
+	ctx context.Context,
+	token string) (
+	*ControlPanelVerifyJWTResponse,
+	error) {
+	req := &plumbing.ControlPanelVerifyJWTRequest{}
+
+	req.Token = (token)
+	var plumbingResponse *plumbing.ControlPanelVerifyJWTResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.VerifyJWT(svc.parent.wrapContext(ctx, req, "ControlPanel.VerifyJWT"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ControlPanelVerifyJWTResponse{}
+	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
+	resp.ValID = (plumbingResponse.Valid)
+	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	return resp, nil
+}
+
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
 // - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.

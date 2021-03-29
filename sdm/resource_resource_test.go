@@ -313,9 +313,11 @@ func TestAccSDMResource_CreateSSH(t *testing.T) {
 				),
 			},
 			{
-				ResourceName:      "sdm_resource." + name,
-				ImportState:       true,
-				ImportStateVerify: true,
+				ResourceName: "sdm_resource." + name,
+				ImportState:  true,
+				// We can't verify the import state because the username on ssh that gets returned
+				// could either be a secret store path or a raw username
+				//ImportStateVerify: true,
 			},
 		},
 	})
@@ -852,7 +854,645 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				checks[i] = resource.TestCheckResourceAttr("sdm_resource."+name, tc.resource+".0."+p[0], val)
 			}
 
-			resource.ParallelTest(t, resource.TestCase{
+			resource.Test(t, resource.TestCase{
+				Providers:    testAccProviders,
+				CheckDestroy: testCheckDestroy,
+				Steps: []resource.TestStep{
+					{
+						Config: cfg,
+						Check:  resource.ComposeTestCheckFunc(checks...),
+					},
+					{
+						// there should be no change if the resource is updated from the server
+						Taint:  []string{"sdm_resource." + name},
+						Config: cfg,
+						Check:  resource.ComposeTestCheckFunc(checks...),
+					},
+					{
+						ResourceName: "sdm_resource." + name,
+						ImportState:  true,
+					},
+				},
+			})
+		})
+	}
+}
+
+func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
+	t.Parallel()
+
+	client := testClient()
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	resp, err := client.SecretStores().Create(ctx, &sdm.VaultTokenStore{
+		Name:          fmt.Sprintf("all-resources-test-store"),
+		ServerAddress: fmt.Sprintf("allresourcestestaddr"),
+	})
+	if err != nil {
+		t.Fatalf("failed to create secret store: %v", err)
+	}
+
+	seID := resp.SecretStore.(*sdm.VaultTokenStore).ID
+
+	type testCase struct {
+		resource string
+		pairs    [][2]string
+	}
+	tcs := []testCase{
+		{
+			resource: "athena",
+			pairs: [][2]string{
+				{"name", "\"athena_secret_store_secret_store\""},
+				{"secret_store_id", `"` + seID + `"`},
+				{"secret_store_access_key_path", `"/path/to/access_key"`},
+				{"secret_store_access_key_key", `"key"`},
+				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
+				{"secret_store_secret_access_key_key", `"key"`},
+				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
+				{"secret_store_role_arn_key", `"key"`},
+				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
+				{"secret_store_role_external_id_key", `"key"`},
+				{"output", "\"Output\""},
+			},
+		},
+		{
+			resource: "aws",
+			pairs: [][2]string{
+				{"name", `"aws_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"healthcheck_region", `"region"`},
+				{"secret_store_access_key_path", `"/path/to/access_key"`},
+				{"secret_store_access_key_key", `"key"`},
+				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
+				{"secret_store_secret_access_key_key", `"key"`},
+				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
+				{"secret_store_role_arn_key", `"key"`},
+				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
+				{"secret_store_role_external_id_key", `"key"`},
+			},
+		},
+		{
+			resource: "big_query",
+			pairs: [][2]string{
+				{"name", `"big_query_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"endpoint", `"Endpoint"`},
+				{"secret_store_private_key_path", `"/path/to/private_key"`},
+				{"secret_store_private_key_key", `"key"`},
+				{"project", `"Project"`},
+			},
+		},
+		{
+			resource: "cassandra",
+			pairs: [][2]string{
+				{"name", `"cassandra_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "db_2_luw",
+			pairs: [][2]string{
+				{"name", `"db2luw_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"database", `"Database"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"port", `50000`},
+			},
+		},
+		{
+			resource: "db_2_i",
+			pairs: [][2]string{
+				{"name", `"db2i_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"port", `50000`},
+				{"tls_required", "true"},
+			},
+		},
+		{
+			resource: "druid",
+			pairs: [][2]string{
+				{"name", `"druid_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "dynamo_db",
+			pairs: [][2]string{
+				{"name", `"dynamo_db_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"endpoint", `"Endpoint"`},
+				{"secret_store_access_key_path", `"/path/to/access_key"`},
+				{"secret_store_access_key_key", `"key"`},
+				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
+				{"secret_store_secret_access_key_key", `"key"`},
+				{"region", `"Region"`},
+				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
+				{"secret_store_role_arn_key", `"key"`},
+				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
+				{"secret_store_role_external_id_key", `"key"`},
+			},
+		},
+		{
+			resource: "amazon_es",
+			pairs: [][2]string{
+				{"name", `"amazon_es_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"secret_store_access_key_path", `"/path/to/access_key"`},
+				{"secret_store_access_key_key", `"key"`},
+				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
+				{"secret_store_secret_access_key_key", `"key"`},
+				{"region", `"Region"`},
+				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
+				{"secret_store_role_arn_key", `"key"`},
+				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
+				{"secret_store_role_external_id_key", `"key"`},
+			},
+		},
+		{
+			resource: "elastic",
+			pairs: [][2]string{
+				{"name", `"elastic_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "http_basic_auth",
+			pairs: [][2]string{
+				{"name", `"http_basic_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"url", `"http://example.com"`},
+				{"healthcheck_path", `"/"`},
+				{"subdomain", `"basic"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "http_no_auth",
+			pairs: [][2]string{
+				{"name", `"http_no_auth_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"url", `"http://example.com"`},
+				{"healthcheck_path", `"/"`},
+				{"subdomain", `"noauth"`},
+			},
+		},
+		{
+			resource: "http_auth",
+			pairs: [][2]string{
+				{"name", `"http_auth_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"url", `"http://example.com"`},
+				{"healthcheck_path", `"/"`},
+				{"secret_store_auth_header_path", `"/path/to/auth_header"`},
+				{"secret_store_auth_header_key", `"key"`},
+				{"subdomain", `"auth"`},
+			},
+		},
+		{
+			resource: "kubernetes",
+			pairs: [][2]string{
+				{"name", `"kubernetes_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"port", "443"},
+				{"secret_store_certificate_authority_path", `"/path/to/certificate_authority"`},
+				{"secret_store_certificate_authority_key", `"key"`},
+				{"secret_store_client_certificate_path", `"/path/to/client_certificate"`},
+				{"secret_store_client_certificate_key", `"key"`},
+				{"secret_store_client_key_path", `"/path/to/client_key"`},
+				{"secret_store_client_key_key", `"key"`},
+			},
+		},
+		{
+			resource: "kubernetes_basic_auth",
+			pairs: [][2]string{
+				{"name", `"kubernetes_basic_auth_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"port", "443"},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "amazon_eks",
+			pairs: [][2]string{
+				{"name", `"amazon_eks_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"endpoint", `"Endpoint"`},
+				{"secret_store_access_key_path", `"/path/to/access_key"`},
+				{"secret_store_access_key_key", `"key"`},
+				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
+				{"secret_store_secret_access_key_key", `"key"`},
+				{"secret_store_certificate_authority_path", `"/path/to/certificate_authority"`},
+				{"secret_store_certificate_authority_key", `"key"`},
+				{"region", `"Region"`},
+				{"cluster_name", `"ClusterName"`},
+				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
+				{"secret_store_role_arn_key", `"key"`},
+				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
+				{"secret_store_role_external_id_key", `"key"`},
+			},
+		},
+		{
+			resource: "google_gke",
+			pairs: [][2]string{
+				{"name", `"google_gke_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"endpoint", `"Endpoint"`},
+				{"secret_store_certificate_authority_path", `"/path/to/certificate_authority"`},
+				{"secret_store_certificate_authority_key", `"key"`},
+				{"secret_store_service_account_key_path", `"/path/to/service_account_key"`},
+				{"secret_store_service_account_key_key", `"key"`},
+			},
+		},
+		{
+			resource: "memcached",
+			pairs: [][2]string{
+				{"name", `"memcached_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+			},
+		},
+		{
+			resource: "mongo_legacy_host",
+			pairs: [][2]string{
+				{"name", `"mongo_legacy_host_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"auth_database", `"AuthDatabase"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "mongo_legacy_replicaset",
+			pairs: [][2]string{
+				{"name", `"mongo_legacy_replicaset_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"auth_database", `"AuthDatabase"`},
+				{"replica_set", `"ReplicaSet"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "mongo_host",
+			pairs: [][2]string{
+				{"name", `"mongo_host_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"auth_database", `"AuthDatabase"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "mongo_replica_set",
+			pairs: [][2]string{
+				{"name", `"mongo_replica_set_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"auth_database", `"AuthDatabase"`},
+				{"replica_set", `"ReplicaSet"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "mysql",
+			pairs: [][2]string{
+				{"name", `"mysql_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "aurora_mysql",
+			pairs: [][2]string{
+				{"name", `"aurora_mysql_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "clustrix",
+			pairs: [][2]string{
+				{"name", `"clustrix_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "maria",
+			pairs: [][2]string{
+				{"name", `"maria_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "memsql",
+			pairs: [][2]string{
+				{"name", `"memsql_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "oracle",
+			pairs: [][2]string{
+				{"name", `"oracle_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+				{"port", "1521"},
+			},
+		},
+		{
+			resource: "postgres",
+			pairs: [][2]string{
+				{"name", `"postgres_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "aurora_postgres",
+			pairs: [][2]string{
+				{"name", `"aurora-postgres_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "greenplum",
+			pairs: [][2]string{
+				{"name", `"greenplum_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "cockroach",
+			pairs: [][2]string{
+				{"name", `"cockroach_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "redshift",
+			pairs: [][2]string{
+				{"name", `"redshift_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "presto",
+			pairs: [][2]string{
+				{"name", `"presto_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "rdp",
+			pairs: [][2]string{
+				{"name", `"rdp_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"port", "3389"},
+			},
+		},
+		{
+			resource: "redis",
+			pairs: [][2]string{
+				{"name", `"redis_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "elasticache_redis",
+			pairs: [][2]string{
+				{"name", `"elasticache_redis_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "snowflake",
+			pairs: [][2]string{
+				{"name", `"snowflake_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+				{"schema", `"Schema"`},
+			},
+		},
+		{
+			resource: "sql_server",
+			pairs: [][2]string{
+				{"name", `"sql_server_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "ssh",
+			pairs: [][2]string{
+				{"name", `"ssh_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"port", "22"},
+				{"port_forwarding", "true"},
+			},
+		},
+		{
+			resource: "ssh_cert",
+			pairs: [][2]string{
+				{"name", `"ssh_cert_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"port", "22"},
+				{"port_forwarding", "true"},
+			},
+		},
+		{
+			resource: "sybase",
+			pairs: [][2]string{
+				{"name", `"sybase_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "sybase_iq",
+			pairs: [][2]string{
+				{"name", `"sybase_iq_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "teradata",
+			pairs: [][2]string{
+				{"name", `"teradata_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+	}
+
+	resourceNameBase := randomWithPrefix("test")
+
+	for _, tc := range tcs {
+		tc := tc
+		t.Run(tc.resource, func(t *testing.T) {
+			name := resourceNameBase + tc.resource
+			cfg := testAccSDMResourceAnyConfig(name, tc.resource, tc.pairs)
+
+			checks := make([]resource.TestCheckFunc, len(tc.pairs))
+			for i, p := range tc.pairs {
+				val := p[1]
+				// TF removes quotes around strings
+				val = strings.Trim(val, "\"")
+				// ... and converts escaped new lines into real newlines
+				val = strings.Replace(val, "\\n", "\n", -1)
+				checks[i] = resource.TestCheckResourceAttr("sdm_resource."+name, tc.resource+".0."+p[0], val)
+			}
+
+			resource.Test(t, resource.TestCase{
 				Providers:    testAccProviders,
 				CheckDestroy: testCheckDestroy,
 				Steps: []resource.TestStep{
