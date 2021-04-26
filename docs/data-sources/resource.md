@@ -541,6 +541,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_forwarding` - 
 		* `allow_deprecated_key_exchanges` - 
+	* ssh_customer_key:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `hostname` - 
+		* `username` - 
+		* `port` - 
+		* `private_key` - 
+		* `port_forwarding` - 
+		* `allow_deprecated_key_exchanges` - 
 	* sybase:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.

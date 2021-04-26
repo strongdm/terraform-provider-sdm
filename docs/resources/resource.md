@@ -603,6 +603,19 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
 	* `allow_deprecated_key_exchanges` - (Optional) 
+* ssh_customer_key:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `hostname` - (Required) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
+	* `port` - (Required) 
+	* `private_key` - (Optional) 
+	* `secret_store_private_key_path` - (Optional)
+	* `secret_store_private_key_key` - (Optional)
+	* `port_forwarding` - (Optional) 
+	* `allow_deprecated_key_exchanges` - (Optional) 
 * sybase:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.

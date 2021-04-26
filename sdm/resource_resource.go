@@ -3505,6 +3505,81 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"ssh_customer_key": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "",
+						},
+						"private_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_private_key_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_private_key_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"port_forwarding": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"allow_deprecated_key_exchanges": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"sybase": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -5422,6 +5497,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
 		}, nil
 	}
+	if list := d.Get("ssh_customer_key").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["private_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential private_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_private_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_private_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_private_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_private_key_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"username":                      convertStringFromMap(raw, "username"),
+			"secret_store_username_path":    convertStringFromMap(raw, "secret_store_username_path"),
+			"secret_store_username_key":     convertStringFromMap(raw, "secret_store_username_key"),
+			"private_key":                   convertStringFromMap(raw, "private_key"),
+			"secret_store_private_key_path": convertStringFromMap(raw, "secret_store_private_key_path"),
+			"secret_store_private_key_key":  convertStringFromMap(raw, "secret_store_private_key_key"),
+		}, nil
+	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -6819,6 +6931,31 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("ssh_customer_key").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.SSHCustomerKey{}
+		}
+		out := &sdm.SSHCustomerKey{
+			ID:                          d.Id(),
+			Name:                        convertStringFromMap(raw, "name"),
+			Tags:                        convertTagsFromMap(raw, "tags"),
+			SecretStoreID:               convertStringFromMap(raw, "secret_store_id"),
+			Hostname:                    convertStringFromMap(raw, "hostname"),
+			Username:                    convertStringFromMap(raw, "username"),
+			Port:                        convertInt32FromMap(raw, "port"),
+			PrivateKey:                  convertStringFromMap(raw, "private_key"),
+			PortForwarding:              convertBoolFromMap(raw, "port_forwarding"),
+			AllowDeprecatedKeyExchanges: convertBoolFromMap(raw, "allow_deprecated_key_exchanges"),
+		}
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
+		}
+		if out.PrivateKey == "" {
+			out.PrivateKey = fullSecretStorePath(raw, "private_key")
+		}
+		return out
+	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -7843,6 +7980,26 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
 				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+			},
+		})
+	case *sdm.SSHCustomerKey:
+		localV, _ := localVersion.(*sdm.SSHCustomerKey)
+		_ = localV
+		d.Set("ssh_customer_key", []map[string]interface{}{
+			{
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
+				"hostname":                       (v.Hostname),
+				"username":                       seValues["username"],
+				"secret_store_username_path":     seValues["secret_store_username_path"],
+				"secret_store_username_key":      seValues["secret_store_username_key"],
+				"port":                           (v.Port),
+				"private_key":                    seValues["private_key"],
+				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
+				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
 				"port_forwarding":                (v.PortForwarding),
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			},
@@ -8987,6 +9144,29 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
 				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+			},
+		})
+	case *sdm.SSHCustomerKey:
+		localV, ok := localVersion.(*sdm.SSHCustomerKey)
+		if !ok {
+			localV = &sdm.SSHCustomerKey{}
+		}
+		_ = localV
+		d.Set("ssh_customer_key", []map[string]interface{}{
+			{
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
+				"hostname":                       (v.Hostname),
+				"username":                       seValues["username"],
+				"secret_store_username_path":     seValues["secret_store_username_path"],
+				"secret_store_username_key":      seValues["secret_store_username_key"],
+				"port":                           (v.Port),
+				"private_key":                    seValues["private_key"],
+				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
+				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
 				"port_forwarding":                (v.PortForwarding),
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			},

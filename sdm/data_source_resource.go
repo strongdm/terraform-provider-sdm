@@ -3027,6 +3027,70 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"ssh_customer_key": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"private_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port_forwarding": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"allow_deprecated_key_exchanges": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"sybase": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -3862,6 +3926,19 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+			})
+		case *sdm.SSHCustomerKey:
+			output[0]["ssh_customer_key"] = append(output[0]["ssh_customer_key"], entity{
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"tags":                           convertTagsToMap(v.Tags),
+				"secret_store_id":                (v.SecretStoreID),
+				"hostname":                       (v.Hostname),
+				"username":                       (v.Username),
+				"port":                           (v.Port),
+				"private_key":                    (v.PrivateKey),
 				"port_forwarding":                (v.PortForwarding),
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 			})
