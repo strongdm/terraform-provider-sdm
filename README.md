@@ -9,7 +9,7 @@ The strongDM provider is used to configure and manage your strongDM account. It 
 * Manage roles
 
 ## Requirements
-- [Terraform](https://www.terraform.io/downloads.html) 0.12+
+- [Terraform](https://www.terraform.io/downloads.html) 0.13+
 
 ## Authentication
 
@@ -86,7 +86,7 @@ $ export SDM_API_ACCESS_KEY="<access-key>"
 $ export SDM_API_SECRET_KEY="<secret-key>"
 ```
 
-From the cloned repo, run: 
+From the cloned repo, run:
 ```sh
 $ cd terraform-provider-sdm
 $ TF_ACC=yes go test ./sdm -v -count=1 -mod=vendor
