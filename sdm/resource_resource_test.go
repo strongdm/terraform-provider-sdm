@@ -778,6 +778,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "ssh_customer_key",
+			pairs: [][2]string{
+				{"name", `"ssh_customer_key"`},
+				{"hostname", `"Hostname"`},
+				{"username", `"Username"`},
+				{"port", "22"},
+				{"port_forwarding", "true"},
+				{"private_key", `"PrivateKey"`},
+			},
+		},
+		{
 			resource: "sybase",
 			pairs: [][2]string{
 				{"name", `"sybase"`},
@@ -1422,6 +1433,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_username_key", `"key"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+			},
+		},
+		{
+			resource: "ssh_customer_key",
+			pairs: [][2]string{
+				{"name", `"ssh_customer_key_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"port", "22"},
+				{"port_forwarding", "true"},
+				{"secret_store_private_key_path", `"/path/to/private_key"`},
+				{"secret_store_private_key_key", `"key"`},
 			},
 		},
 		{
