@@ -1893,6 +1893,40 @@ func (m *SSHCert) GetSecretStoreID() string {
 func (m *SSHCert) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+func (*SSHCustomerKey) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the SSHCustomerKey.
+func (m *SSHCustomerKey) GetID() string { return m.ID }
+
+// GetName returns the name of the SSHCustomerKey.
+func (m *SSHCustomerKey) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SSHCustomerKey.
+func (m *SSHCustomerKey) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SSHCustomerKey.
+func (m *SSHCustomerKey) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SSHCustomerKey.
+func (m *SSHCustomerKey) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the SSHCustomerKey.
+func (m *SSHCustomerKey) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the SSHCustomerKey.
+func (m *SSHCustomerKey) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
 func (*Sybase) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Sybase.
@@ -3152,6 +3186,31 @@ type SSHCert struct {
 	Username string `json:"username"`
 
 	Port int32 `json:"port"`
+
+	PortForwarding bool `json:"portForwarding"`
+
+	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+}
+
+type SSHCustomerKey struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	Hostname string `json:"hostname"`
+
+	Username string `json:"username"`
+
+	Port int32 `json:"port"`
+
+	PrivateKey string `json:"privateKey"`
 
 	PortForwarding bool `json:"portForwarding"`
 

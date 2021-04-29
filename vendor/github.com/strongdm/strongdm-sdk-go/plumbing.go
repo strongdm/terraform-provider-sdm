@@ -1040,6 +1040,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Ssh{Ssh: convertSSHToPlumbing(v)}
 	case *SSHCert:
 		plumbing.Resource = &proto.Resource_SshCert{SshCert: convertSSHCertToPlumbing(v)}
+	case *SSHCustomerKey:
+		plumbing.Resource = &proto.Resource_SshCustomerKey{SshCustomerKey: convertSSHCustomerKeyToPlumbing(v)}
 	case *Sybase:
 		plumbing.Resource = &proto.Resource_Sybase{Sybase: convertSybaseToPlumbing(v)}
 	case *SybaseIQ:
@@ -1188,6 +1190,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetSshCert() != nil {
 		return convertSSHCertToPorcelain(plumbing.GetSshCert())
+	}
+	if plumbing.GetSshCustomerKey() != nil {
+		return convertSSHCustomerKeyToPorcelain(plumbing.GetSshCustomerKey())
 	}
 	if plumbing.GetSybase() != nil {
 		return convertSybaseToPorcelain(plumbing.GetSybase())
@@ -3710,6 +3715,60 @@ func convertRepeatedSSHCertToPorcelain(plumbings []*proto.SSHCert) []*SSHCert {
 	var items []*SSHCert
 	for _, plumbing := range plumbings {
 		items = append(items, convertSSHCertToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) *SSHCustomerKey {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SSHCustomerKey{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.Username = (plumbing.Username)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PrivateKey = (plumbing.PrivateKey)
+	porcelain.PortForwarding = (plumbing.PortForwarding)
+	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
+	return porcelain
+}
+
+func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustomerKey {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SSHCustomerKey{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Username = (porcelain.Username)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PrivateKey = (porcelain.PrivateKey)
+	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	return plumbing
+}
+func convertRepeatedSSHCustomerKeyToPlumbing(
+	porcelains []*SSHCustomerKey,
+) []*proto.SSHCustomerKey {
+	var items []*proto.SSHCustomerKey
+	for _, porcelain := range porcelains {
+		items = append(items, convertSSHCustomerKeyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSSHCustomerKeyToPorcelain(plumbings []*proto.SSHCustomerKey) []*SSHCustomerKey {
+	var items []*SSHCustomerKey
+	for _, plumbing := range plumbings {
+		items = append(items, convertSSHCustomerKeyToPorcelain(plumbing))
 	}
 	return items
 }
