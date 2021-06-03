@@ -34,6 +34,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `access_key` - 
 		* `secret_access_key` - 
 		* `output` - 
@@ -46,6 +47,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `access_key` - 
 		* `secret_access_key` - 
 		* `healthcheck_region` - 
@@ -56,6 +58,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `private_key` - 
 		* `project` - 
 		* `port_override` - 
@@ -66,6 +69,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -77,6 +81,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -88,6 +93,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -99,6 +105,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port_override` - 
 		* `username` - 
@@ -109,6 +116,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `access_key` - 
 		* `secret_access_key` - 
 		* `region` - 
@@ -121,6 +129,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `region` - 
 		* `secret_access_key` - 
 		* `endpoint` - 
@@ -133,6 +142,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -144,6 +154,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `url` - 
 		* `healthcheck_path` - 
 		* `username` - 
@@ -156,6 +167,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `url` - 
 		* `healthcheck_path` - 
 		* `headers_blacklist` - 
@@ -166,6 +178,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `url` - 
 		* `healthcheck_path` - 
 		* `auth_header` - 
@@ -177,6 +190,19 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port` - 
+		* `certificate_authority` - 
+		* `client_certificate` - 
+		* `client_key` - 
+		* `healthcheck_namespace` - 
+	* kubernetes_user_impersonation:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port` - 
 		* `certificate_authority` - 
@@ -188,6 +214,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port` - 
 		* `username` - 
@@ -198,6 +225,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port` - 
+		* `token` - 
+		* `healthcheck_namespace` - 
+	* kubernetes_service_account_user_impersonation:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
@@ -207,6 +245,22 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `access_key` - 
+		* `secret_access_key` - 
+		* `certificate_authority` - 
+		* `region` - 
+		* `cluster_name` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `healthcheck_namespace` - 
+	* amazon_eks_user_impersonation:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `endpoint` - 
 		* `access_key` - 
 		* `secret_access_key` - 
@@ -221,6 +275,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `certificate_authority` - 
+		* `service_account_key` - 
+		* `healthcheck_namespace` - 
+	* google_gke_user_impersonation:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `endpoint` - 
 		* `certificate_authority` - 
 		* `service_account_key` - 
@@ -230,6 +295,19 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port` - 
+		* `certificate_authority` - 
+		* `client_certificate` - 
+		* `client_key` - 
+		* `healthcheck_namespace` - 
+	* aks_user_impersonation:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port` - 
 		* `certificate_authority` - 
@@ -241,6 +319,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port` - 
 		* `username` - 
@@ -251,6 +330,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port` - 
+		* `token` - 
+		* `healthcheck_namespace` - 
+	* aks_service_account_user_impersonation:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
@@ -260,6 +350,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port_override` - 
 		* `port` - 
@@ -268,6 +359,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -281,6 +373,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -295,6 +388,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -307,6 +401,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `auth_database` - 
 		* `port_override` - 
@@ -321,6 +416,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -332,6 +428,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -343,6 +440,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -354,6 +452,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -365,6 +464,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -376,6 +476,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -388,6 +489,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -400,6 +502,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -412,6 +515,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -424,6 +528,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -436,6 +541,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -448,6 +554,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -460,6 +567,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `password` - 
 		* `database` - 
@@ -472,6 +580,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -482,6 +591,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port_override` - 
 		* `password` - 
@@ -491,6 +601,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `port_override` - 
 		* `password` - 
@@ -501,6 +612,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -512,6 +624,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 
@@ -525,6 +638,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `port` - 
@@ -536,6 +650,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `port` - 
@@ -546,6 +661,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `port` - 
@@ -557,6 +673,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `port_override` - 
@@ -567,6 +684,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `port_override` - 
@@ -577,6 +695,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `username` - 
 		* `password` - 

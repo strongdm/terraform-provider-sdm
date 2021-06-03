@@ -29,6 +29,10 @@ func dataSourceNode() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"gateway_filter": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"id": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -72,6 +76,11 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"gateway_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+									},
 								},
 							},
 						},
@@ -110,6 +119,11 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"gateway_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+									},
 								},
 							},
 						},
@@ -132,6 +146,10 @@ func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interf
 	}
 	if v, ok := d.GetOk("bind_address"); ok {
 		filter += "bindaddress:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("gateway_filter"); ok {
+		filter += "gatewayfilter:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("id"); ok {
@@ -176,9 +194,10 @@ func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 		switch v := resp.Value().(type) {
 		case *sdm.Relay:
 			output[0]["relay"] = append(output[0]["relay"], entity{
-				"id":   (v.ID),
-				"name": (v.Name),
-				"tags": convertTagsToMap(v.Tags),
+				"id":             (v.ID),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
+				"gateway_filter": (v.GatewayFilter),
 			})
 		case *sdm.Gateway:
 			output[0]["gateway"] = append(output[0]["gateway"], entity{
@@ -187,6 +206,7 @@ func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
 				"tags":           convertTagsToMap(v.Tags),
+				"gateway_filter": (v.GatewayFilter),
 			})
 		}
 	}

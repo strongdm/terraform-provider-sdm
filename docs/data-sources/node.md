@@ -23,6 +23,8 @@ The following arguments are supported by a Nodes data source:
 * `type` - (Optional) a filter to query only one subtype. See Attribute Reference for all subtypes.
 * `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to.
  If not provided on create, set to "0.0.0.0:<listen_address_port>".
+* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
+ gateways.
 * `id` - (Optional) Unique identifier of the Gateway.
 * `listen_address` - (Optional) The public hostname/port tuple at which the gateway will be accessible to clients.
 * `name` - (Optional) Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
@@ -35,6 +37,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Relay.
 		* `name` - Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 		* `tags` - Tags is a map of key, value pairs.
+		* `gateway_filter` - GatewayFilter can be used to restrict the peering between relays and
+ gateways.
 	* gateway:
 		* `id` - Unique identifier of the Gateway.
 		* `name` - Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
@@ -42,3 +46,5 @@ In addition to provided arguments above, the following attributes are returned b
 		* `bind_address` - The hostname/port tuple which the gateway daemon will bind to.
  If not provided on create, set to "0.0.0.0:<listen_address_port>".
 		* `tags` - Tags is a map of key, value pairs.
+		* `gateway_filter` - GatewayFilter can be used to restrict the peering between relays and
+ gateways.

@@ -295,7 +295,7 @@ github.com/sergi/go-diff/diffmatchpatch
 # github.com/spf13/afero v1.2.2
 github.com/spf13/afero
 github.com/spf13/afero/mem
-# github.com/strongdm/strongdm-sdk-go v0.9.26
+# github.com/strongdm/strongdm-sdk-go v0.9.29
 github.com/strongdm/strongdm-sdk-go
 github.com/strongdm/strongdm-sdk-go/internal/v1
 # github.com/ulikunitz/xz v0.5.7

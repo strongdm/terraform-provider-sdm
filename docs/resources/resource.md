@@ -35,6 +35,7 @@ The following arguments are supported by the Resource resource:
 * athena:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `access_key` - (Optional) 
 	* `secret_store_access_key_path` - (Optional)
 	* `secret_store_access_key_key` - (Optional)
@@ -52,6 +53,7 @@ The following arguments are supported by the Resource resource:
 * aws:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `access_key` - (Optional) 
 	* `secret_store_access_key_path` - (Optional)
 	* `secret_store_access_key_key` - (Optional)
@@ -68,6 +70,7 @@ The following arguments are supported by the Resource resource:
 * big_query:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `private_key` - (Optional) 
 	* `secret_store_private_key_path` - (Optional)
 	* `secret_store_private_key_key` - (Optional)
@@ -77,6 +80,7 @@ The following arguments are supported by the Resource resource:
 * cassandra:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -89,6 +93,7 @@ The following arguments are supported by the Resource resource:
 * db_2_i:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -101,6 +106,7 @@ The following arguments are supported by the Resource resource:
 * db_2_luw:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -113,6 +119,7 @@ The following arguments are supported by the Resource resource:
 * druid:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -124,6 +131,7 @@ The following arguments are supported by the Resource resource:
 * dynamo_db:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `access_key` - (Optional) 
 	* `secret_store_access_key_path` - (Optional)
 	* `secret_store_access_key_key` - (Optional)
@@ -141,6 +149,7 @@ The following arguments are supported by the Resource resource:
 * amazon_es:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `region` - (Required) 
 	* `secret_access_key` - (Optional) 
 	* `secret_store_secret_access_key_path` - (Optional)
@@ -158,6 +167,7 @@ The following arguments are supported by the Resource resource:
 * elastic:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -170,6 +180,7 @@ The following arguments are supported by the Resource resource:
 * http_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `username` - (Optional) 
@@ -184,6 +195,7 @@ The following arguments are supported by the Resource resource:
 * http_no_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `headers_blacklist` - (Optional) 
@@ -192,6 +204,7 @@ The following arguments are supported by the Resource resource:
 * http_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `url` - (Required) 
 	* `healthcheck_path` - (Required) 
 	* `auth_header` - (Optional) 
@@ -203,6 +216,23 @@ The following arguments are supported by the Resource resource:
 * kubernetes:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Required) 
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
+	* `secret_store_certificate_authority_key` - (Optional)
+	* `client_certificate` - (Optional) 
+	* `secret_store_client_certificate_path` - (Optional)
+	* `secret_store_client_certificate_key` - (Optional)
+	* `client_key` - (Optional) 
+	* `secret_store_client_key_path` - (Optional)
+	* `secret_store_client_key_key` - (Optional)
+	* `healthcheck_namespace` - (Optional) 
+* kubernetes_user_impersonation:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `certificate_authority` - (Optional) 
@@ -218,6 +248,7 @@ The following arguments are supported by the Resource resource:
 * kubernetes_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `username` - (Optional) 
@@ -230,6 +261,17 @@ The following arguments are supported by the Resource resource:
 * kubernetes_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Required) 
+	* `token` - (Optional) 
+	* `secret_store_token_path` - (Optional)
+	* `secret_store_token_key` - (Optional)
+	* `healthcheck_namespace` - (Optional) 
+* kubernetes_service_account_user_impersonation:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `token` - (Optional) 
@@ -239,6 +281,30 @@ The following arguments are supported by the Resource resource:
 * amazon_eks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) 
+	* `access_key` - (Optional) 
+	* `secret_store_access_key_path` - (Optional)
+	* `secret_store_access_key_key` - (Optional)
+	* `secret_access_key` - (Optional) 
+	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_store_secret_access_key_key` - (Optional)
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
+	* `secret_store_certificate_authority_key` - (Optional)
+	* `region` - (Required) 
+	* `cluster_name` - (Required) 
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
+	* `healthcheck_namespace` - (Optional) 
+* amazon_eks_user_impersonation:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
 	* `access_key` - (Optional) 
 	* `secret_store_access_key_path` - (Optional)
@@ -261,6 +327,19 @@ The following arguments are supported by the Resource resource:
 * google_gke:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) 
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
+	* `secret_store_certificate_authority_key` - (Optional)
+	* `service_account_key` - (Optional) 
+	* `secret_store_service_account_key_path` - (Optional)
+	* `secret_store_service_account_key_key` - (Optional)
+	* `healthcheck_namespace` - (Optional) 
+* google_gke_user_impersonation:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
 	* `certificate_authority` - (Optional) 
 	* `secret_store_certificate_authority_path` - (Optional)
@@ -272,6 +351,23 @@ The following arguments are supported by the Resource resource:
 * aks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Required) 
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
+	* `secret_store_certificate_authority_key` - (Optional)
+	* `client_certificate` - (Optional) 
+	* `secret_store_client_certificate_path` - (Optional)
+	* `secret_store_client_certificate_key` - (Optional)
+	* `client_key` - (Optional) 
+	* `secret_store_client_key_path` - (Optional)
+	* `secret_store_client_key_key` - (Optional)
+	* `healthcheck_namespace` - (Optional) 
+* aks_user_impersonation:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `certificate_authority` - (Optional) 
@@ -287,6 +383,7 @@ The following arguments are supported by the Resource resource:
 * aks_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `username` - (Optional) 
@@ -299,6 +396,17 @@ The following arguments are supported by the Resource resource:
 * aks_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Required) 
+	* `token` - (Optional) 
+	* `secret_store_token_path` - (Optional)
+	* `secret_store_token_key` - (Optional)
+	* `healthcheck_namespace` - (Optional) 
+* aks_service_account_user_impersonation:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Required) 
 	* `token` - (Optional) 
@@ -308,11 +416,13 @@ The following arguments are supported by the Resource resource:
 * memcached:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `port` - (Optional) 
 * mongo_legacy_host:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -327,6 +437,7 @@ The following arguments are supported by the Resource resource:
 * mongo_legacy_replicaset:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -342,6 +453,7 @@ The following arguments are supported by the Resource resource:
 * mongo_host:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -355,6 +467,7 @@ The following arguments are supported by the Resource resource:
 * mongo_replica_set:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `auth_database` - (Required) 
 	* `username` - (Optional) 
@@ -370,6 +483,7 @@ The following arguments are supported by the Resource resource:
 * mysql:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -382,6 +496,7 @@ The following arguments are supported by the Resource resource:
 * aurora_mysql:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -394,6 +509,7 @@ The following arguments are supported by the Resource resource:
 * clustrix:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -406,6 +522,7 @@ The following arguments are supported by the Resource resource:
 * maria:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -418,6 +535,7 @@ The following arguments are supported by the Resource resource:
 * memsql:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -430,6 +548,7 @@ The following arguments are supported by the Resource resource:
 * oracle:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -443,6 +562,7 @@ The following arguments are supported by the Resource resource:
 * postgres:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -456,6 +576,7 @@ The following arguments are supported by the Resource resource:
 * aurora_postgres:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -469,6 +590,7 @@ The following arguments are supported by the Resource resource:
 * greenplum:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -482,6 +604,7 @@ The following arguments are supported by the Resource resource:
 * cockroach:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -495,6 +618,7 @@ The following arguments are supported by the Resource resource:
 * redshift:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -508,6 +632,7 @@ The following arguments are supported by the Resource resource:
 * citus:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -521,6 +646,7 @@ The following arguments are supported by the Resource resource:
 * presto:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
@@ -532,6 +658,7 @@ The following arguments are supported by the Resource resource:
 * rdp:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -543,6 +670,7 @@ The following arguments are supported by the Resource resource:
 * redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
@@ -551,6 +679,7 @@ The following arguments are supported by the Resource resource:
 * elasticache_redis:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
@@ -560,6 +689,7 @@ The following arguments are supported by the Resource resource:
 * snowflake:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -572,6 +702,7 @@ The following arguments are supported by the Resource resource:
 * sql_server:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -586,6 +717,7 @@ The following arguments are supported by the Resource resource:
 * ssh:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -596,6 +728,7 @@ The following arguments are supported by the Resource resource:
 * ssh_cert:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -606,6 +739,7 @@ The following arguments are supported by the Resource resource:
 * ssh_customer_key:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -619,6 +753,7 @@ The following arguments are supported by the Resource resource:
 * sybase:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -630,6 +765,7 @@ The following arguments are supported by the Resource resource:
 * sybase_iq:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -641,6 +777,7 @@ The following arguments are supported by the Resource resource:
 * teradata:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)

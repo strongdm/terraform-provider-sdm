@@ -81,6 +81,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -150,6 +155,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -209,6 +219,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"private_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -267,6 +282,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -332,6 +352,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -395,6 +420,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -460,6 +490,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -518,6 +553,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"access_key": {
 										Type:        schema.TypeString,
@@ -588,6 +628,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -657,6 +702,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -720,6 +770,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"url": {
 										Type:        schema.TypeString,
@@ -790,6 +845,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -847,6 +907,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"url": {
 										Type:        schema.TypeString,
@@ -911,6 +976,82 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"kubernetes_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -978,6 +1119,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1037,6 +1183,70 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"token": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"kubernetes_service_account_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1090,6 +1300,96 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"cluster_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"amazon_eks_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
 										Type:        schema.TypeString,
@@ -1171,6 +1471,71 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"service_account_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"google_gke_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1225,6 +1590,82 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1292,6 +1733,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1351,6 +1797,70 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"token": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_service_account_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1405,6 +1915,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1452,6 +1967,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1526,6 +2046,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1606,6 +2131,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1674,6 +2204,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1754,6 +2289,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1817,6 +2357,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -1882,6 +2427,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1945,6 +2495,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2010,6 +2565,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2073,6 +2633,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2143,6 +2708,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2211,6 +2781,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2281,6 +2856,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2349,6 +2929,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2419,6 +3004,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2487,6 +3077,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2557,6 +3152,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2626,6 +3226,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2685,6 +3290,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2738,6 +3348,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2797,6 +3412,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2861,6 +3481,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2936,6 +3561,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2999,6 +3629,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3056,6 +3691,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -3121,6 +3761,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3180,6 +3825,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3238,6 +3888,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -3331,6 +3986,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": (v.SecretAccessKey),
 				"output":            (v.Output),
@@ -3345,6 +4001,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
 				"secret_store_id":    (v.SecretStoreID),
+				"egress_filter":      (v.EgressFilter),
 				"access_key":         (v.AccessKey),
 				"secret_access_key":  (v.SecretAccessKey),
 				"healthcheck_region": (v.HealthcheckRegion),
@@ -3357,6 +4014,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"private_key":     (v.PrivateKey),
 				"project":         (v.Project),
 				"port_override":   (v.PortOverride),
@@ -3369,6 +4027,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3382,6 +4041,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3395,6 +4055,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3408,6 +4069,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"port_override":   (v.PortOverride),
 				"username":        (v.Username),
@@ -3420,6 +4082,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"access_key":        (v.AccessKey),
 				"secret_access_key": (v.SecretAccessKey),
 				"region":            (v.Region),
@@ -3434,6 +4097,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"region":            (v.Region),
 				"secret_access_key": (v.SecretAccessKey),
 				"endpoint":          (v.Endpoint),
@@ -3448,6 +4112,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3461,6 +4126,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"username":          (v.Username),
@@ -3475,6 +4141,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -3487,6 +4154,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"url":               (v.Url),
 				"healthcheck_path":  (v.HealthcheckPath),
 				"auth_header":       (v.AuthHeader),
@@ -3500,6 +4168,21 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+			})
+		case *sdm.KubernetesUserImpersonation:
+			output[0]["kubernetes_user_impersonation"] = append(output[0]["kubernetes_user_impersonation"], entity{
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": (v.CertificateAuthority),
@@ -3513,6 +4196,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -3525,6 +4209,19 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 (v.Token),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+			})
+		case *sdm.KubernetesServiceAccountUserImpersonation:
+			output[0]["kubernetes_service_account_user_impersonation"] = append(output[0]["kubernetes_service_account_user_impersonation"], entity{
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 (v.Token),
@@ -3536,6 +4233,24 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"access_key":            (v.AccessKey),
+				"secret_access_key":     (v.SecretAccessKey),
+				"certificate_authority": (v.CertificateAuthority),
+				"region":                (v.Region),
+				"cluster_name":          (v.ClusterName),
+				"role_arn":              (v.RoleArn),
+				"role_external_id":      (v.RoleExternalID),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+			})
+		case *sdm.AmazonEKSUserImpersonation:
+			output[0]["amazon_eks_user_impersonation"] = append(output[0]["amazon_eks_user_impersonation"], entity{
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"endpoint":              (v.Endpoint),
 				"access_key":            (v.AccessKey),
 				"secret_access_key":     (v.SecretAccessKey),
@@ -3552,6 +4267,19 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"certificate_authority": (v.CertificateAuthority),
+				"service_account_key":   (v.ServiceAccountKey),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+			})
+		case *sdm.GoogleGKEUserImpersonation:
+			output[0]["google_gke_user_impersonation"] = append(output[0]["google_gke_user_impersonation"], entity{
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"endpoint":              (v.Endpoint),
 				"certificate_authority": (v.CertificateAuthority),
 				"service_account_key":   (v.ServiceAccountKey),
@@ -3563,6 +4291,21 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+			})
+		case *sdm.AKSUserImpersonation:
+			output[0]["aks_user_impersonation"] = append(output[0]["aks_user_impersonation"], entity{
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"certificate_authority": (v.CertificateAuthority),
@@ -3576,6 +4319,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"username":              (v.Username),
@@ -3588,6 +4332,19 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                  (v.Name),
 				"tags":                  convertTagsToMap(v.Tags),
 				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"port":                  (v.Port),
+				"token":                 (v.Token),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+			})
+		case *sdm.AKSServiceAccountUserImpersonation:
+			output[0]["aks_service_account_user_impersonation"] = append(output[0]["aks_service_account_user_impersonation"], entity{
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"tags":                  convertTagsToMap(v.Tags),
+				"secret_store_id":       (v.SecretStoreID),
+				"egress_filter":         (v.EgressFilter),
 				"hostname":              (v.Hostname),
 				"port":                  (v.Port),
 				"token":                 (v.Token),
@@ -3599,6 +4356,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"port_override":   (v.PortOverride),
 				"port":            (v.Port),
@@ -3609,6 +4367,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"auth_database":   (v.AuthDatabase),
 				"port_override":   (v.PortOverride),
@@ -3624,6 +4383,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
 				"secret_store_id":    (v.SecretStoreID),
+				"egress_filter":      (v.EgressFilter),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -3640,6 +4400,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"auth_database":   (v.AuthDatabase),
 				"port_override":   (v.PortOverride),
@@ -3654,6 +4415,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":               (v.Name),
 				"tags":               convertTagsToMap(v.Tags),
 				"secret_store_id":    (v.SecretStoreID),
+				"egress_filter":      (v.EgressFilter),
 				"hostname":           (v.Hostname),
 				"auth_database":      (v.AuthDatabase),
 				"port_override":      (v.PortOverride),
@@ -3670,6 +4432,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3683,6 +4446,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3696,6 +4460,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3709,6 +4474,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3722,6 +4488,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3735,6 +4502,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3749,6 +4517,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3763,6 +4532,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3777,6 +4547,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3791,6 +4562,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3805,6 +4577,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3819,6 +4592,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3833,6 +4607,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"password":        (v.Password),
 				"database":        (v.Database),
@@ -3847,6 +4622,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3859,6 +4635,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"port_override":   (v.PortOverride),
 				"password":        (v.Password),
@@ -3870,6 +4647,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"port_override":   (v.PortOverride),
 				"password":        (v.Password),
@@ -3882,6 +4660,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),
@@ -3895,6 +4674,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":              (v.Name),
 				"tags":              convertTagsToMap(v.Tags),
 				"secret_store_id":   (v.SecretStoreID),
+				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
 				"username":          (v.Username),
 				"password":          (v.Password),
@@ -3910,6 +4690,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
 				"secret_store_id":                (v.SecretStoreID),
+				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -3923,6 +4704,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
 				"secret_store_id":                (v.SecretStoreID),
+				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -3935,6 +4717,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":                           (v.Name),
 				"tags":                           convertTagsToMap(v.Tags),
 				"secret_store_id":                (v.SecretStoreID),
+				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"username":                       (v.Username),
 				"port":                           (v.Port),
@@ -3948,6 +4731,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"port_override":   (v.PortOverride),
@@ -3960,6 +4744,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"port_override":   (v.PortOverride),
@@ -3972,6 +4757,7 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":            (v.Name),
 				"tags":            convertTagsToMap(v.Tags),
 				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"username":        (v.Username),
 				"password":        (v.Password),

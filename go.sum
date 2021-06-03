@@ -317,8 +317,8 @@ github.com/strongdm/strongdm-sdk-go v0.9.20 h1:yHKBiKze0Q/NuykL3TLfvk2AR9FG2scZg
 github.com/strongdm/strongdm-sdk-go v0.9.20/go.mod h1:X5SMmakW9iBWArxTXrSh0gmUmkMP3HLaYSTCnu9/WKA=
 github.com/strongdm/strongdm-sdk-go v0.9.21 h1:x09Fd2s0sGP4avjh/aWwk7Wk6jdfhbHHfHrVxtgLmuE=
 github.com/strongdm/strongdm-sdk-go v0.9.21/go.mod h1:rXX9x9j6IgGYyjWjAzMjh2PTMRZsH0/eKCuzUi10xok=
-github.com/strongdm/strongdm-sdk-go v0.9.26 h1:fkfqn8/uvh/pVC1ZpoWve/f8s9/WlHw9qCTqQNBbD3U=
-github.com/strongdm/strongdm-sdk-go v0.9.26/go.mod h1:rXX9x9j6IgGYyjWjAzMjh2PTMRZsH0/eKCuzUi10xok=
+github.com/strongdm/strongdm-sdk-go v0.9.29 h1:fsIbBXvl6+m4l+xebDGLFDhdH0EgckYbxPe2iaHJsTw=
+github.com/strongdm/strongdm-sdk-go v0.9.29/go.mod h1:rXX9x9j6IgGYyjWjAzMjh2PTMRZsH0/eKCuzUi10xok=
 github.com/ulikunitz/xz v0.5.5 h1:pFrO0lVpTBXLpYw+pnLj6TbvHuyjXMfjGeCwSqCVwok=
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
 github.com/ulikunitz/xz v0.5.7 h1:YvTNdFzX6+W5m9msiYg/zpkSURPPtOlzbqYjrFn7Yt4=

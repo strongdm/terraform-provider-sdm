@@ -326,6 +326,10 @@ type Resource interface {
 	GetSecretStoreID() string
 	// SetSecretStoreID sets the secret store id of the Resource.
 	SetSecretStoreID(string)
+	// GetEgressFilter returns the egress filter of the Resource.
+	GetEgressFilter() string
+	// SetEgressFilter sets the egress filter of the Resource.
+	SetEgressFilter(string)
 	isOneOf_Resource()
 }
 
@@ -363,6 +367,16 @@ func (m *Athena) GetSecretStoreID() string {
 func (m *Athena) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Athena.
+func (m *Athena) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Athena.
+func (m *Athena) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*AWS) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AWS.
@@ -396,6 +410,16 @@ func (m *AWS) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the AWS.
 func (m *AWS) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AWS.
+func (m *AWS) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AWS.
+func (m *AWS) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*BigQuery) isOneOf_Resource() {}
 
@@ -431,6 +455,16 @@ func (m *BigQuery) GetSecretStoreID() string {
 func (m *BigQuery) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the BigQuery.
+func (m *BigQuery) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the BigQuery.
+func (m *BigQuery) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Cassandra) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Cassandra.
@@ -464,6 +498,16 @@ func (m *Cassandra) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Cassandra.
 func (m *Cassandra) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Cassandra.
+func (m *Cassandra) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Cassandra.
+func (m *Cassandra) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*DB2I) isOneOf_Resource() {}
 
@@ -499,6 +543,16 @@ func (m *DB2I) GetSecretStoreID() string {
 func (m *DB2I) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the DB2I.
+func (m *DB2I) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DB2I.
+func (m *DB2I) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*DB2LUW) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the DB2LUW.
@@ -532,6 +586,16 @@ func (m *DB2LUW) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the DB2LUW.
 func (m *DB2LUW) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DB2LUW.
+func (m *DB2LUW) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DB2LUW.
+func (m *DB2LUW) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Druid) isOneOf_Resource() {}
 
@@ -567,6 +631,16 @@ func (m *Druid) GetSecretStoreID() string {
 func (m *Druid) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Druid.
+func (m *Druid) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Druid.
+func (m *Druid) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*DynamoDB) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the DynamoDB.
@@ -600,6 +674,16 @@ func (m *DynamoDB) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the DynamoDB.
 func (m *DynamoDB) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DynamoDB.
+func (m *DynamoDB) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DynamoDB.
+func (m *DynamoDB) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*AmazonES) isOneOf_Resource() {}
 
@@ -635,6 +719,16 @@ func (m *AmazonES) GetSecretStoreID() string {
 func (m *AmazonES) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the AmazonES.
+func (m *AmazonES) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonES.
+func (m *AmazonES) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Elastic) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Elastic.
@@ -668,6 +762,16 @@ func (m *Elastic) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Elastic.
 func (m *Elastic) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Elastic.
+func (m *Elastic) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Elastic.
+func (m *Elastic) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*HTTPBasicAuth) isOneOf_Resource() {}
 
@@ -703,6 +807,16 @@ func (m *HTTPBasicAuth) GetSecretStoreID() string {
 func (m *HTTPBasicAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*HTTPNoAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the HTTPNoAuth.
@@ -736,6 +850,16 @@ func (m *HTTPNoAuth) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the HTTPNoAuth.
 func (m *HTTPNoAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the HTTPNoAuth.
+func (m *HTTPNoAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the HTTPNoAuth.
+func (m *HTTPNoAuth) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*HTTPAuth) isOneOf_Resource() {}
 
@@ -771,6 +895,16 @@ func (m *HTTPAuth) GetSecretStoreID() string {
 func (m *HTTPAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the HTTPAuth.
+func (m *HTTPAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the HTTPAuth.
+func (m *HTTPAuth) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Kubernetes) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Kubernetes.
@@ -804,6 +938,60 @@ func (m *Kubernetes) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Kubernetes.
 func (m *Kubernetes) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Kubernetes.
+func (m *Kubernetes) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Kubernetes.
+func (m *Kubernetes) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*KubernetesUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*KubernetesBasicAuth) isOneOf_Resource() {}
 
@@ -839,6 +1027,16 @@ func (m *KubernetesBasicAuth) GetSecretStoreID() string {
 func (m *KubernetesBasicAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*KubernetesServiceAccount) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the KubernetesServiceAccount.
@@ -872,6 +1070,60 @@ func (m *KubernetesServiceAccount) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the KubernetesServiceAccount.
 func (m *KubernetesServiceAccount) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*KubernetesServiceAccountUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*AmazonEKS) isOneOf_Resource() {}
 
@@ -907,6 +1159,60 @@ func (m *AmazonEKS) GetSecretStoreID() string {
 func (m *AmazonEKS) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the AmazonEKS.
+func (m *AmazonEKS) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonEKS.
+func (m *AmazonEKS) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AmazonEKSUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*GoogleGKE) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the GoogleGKE.
@@ -940,6 +1246,60 @@ func (m *GoogleGKE) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the GoogleGKE.
 func (m *GoogleGKE) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GoogleGKE.
+func (m *GoogleGKE) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GoogleGKE.
+func (m *GoogleGKE) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*GoogleGKEUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*AKS) isOneOf_Resource() {}
 
@@ -975,6 +1335,60 @@ func (m *AKS) GetSecretStoreID() string {
 func (m *AKS) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the AKS.
+func (m *AKS) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKS.
+func (m *AKS) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AKSUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*AKSBasicAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKSBasicAuth.
@@ -1008,6 +1422,16 @@ func (m *AKSBasicAuth) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the AKSBasicAuth.
 func (m *AKSBasicAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*AKSServiceAccount) isOneOf_Resource() {}
 
@@ -1043,6 +1467,60 @@ func (m *AKSServiceAccount) GetSecretStoreID() string {
 func (m *AKSServiceAccount) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AKSServiceAccountUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Memcached) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Memcached.
@@ -1076,6 +1554,16 @@ func (m *Memcached) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Memcached.
 func (m *Memcached) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Memcached.
+func (m *Memcached) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Memcached.
+func (m *Memcached) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*MongoLegacyHost) isOneOf_Resource() {}
 
@@ -1111,6 +1599,16 @@ func (m *MongoLegacyHost) GetSecretStoreID() string {
 func (m *MongoLegacyHost) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the MongoLegacyHost.
+func (m *MongoLegacyHost) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MongoLegacyHost.
+func (m *MongoLegacyHost) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*MongoLegacyReplicaset) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoLegacyReplicaset.
@@ -1144,6 +1642,16 @@ func (m *MongoLegacyReplicaset) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the MongoLegacyReplicaset.
 func (m *MongoLegacyReplicaset) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*MongoHost) isOneOf_Resource() {}
 
@@ -1179,6 +1687,16 @@ func (m *MongoHost) GetSecretStoreID() string {
 func (m *MongoHost) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the MongoHost.
+func (m *MongoHost) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MongoHost.
+func (m *MongoHost) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*MongoReplicaSet) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoReplicaSet.
@@ -1212,6 +1730,16 @@ func (m *MongoReplicaSet) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the MongoReplicaSet.
 func (m *MongoReplicaSet) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MongoReplicaSet.
+func (m *MongoReplicaSet) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MongoReplicaSet.
+func (m *MongoReplicaSet) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Mysql) isOneOf_Resource() {}
 
@@ -1247,6 +1775,16 @@ func (m *Mysql) GetSecretStoreID() string {
 func (m *Mysql) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Mysql.
+func (m *Mysql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Mysql.
+func (m *Mysql) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*AuroraMysql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AuroraMysql.
@@ -1280,6 +1818,16 @@ func (m *AuroraMysql) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the AuroraMysql.
 func (m *AuroraMysql) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AuroraMysql.
+func (m *AuroraMysql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AuroraMysql.
+func (m *AuroraMysql) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Clustrix) isOneOf_Resource() {}
 
@@ -1315,6 +1863,16 @@ func (m *Clustrix) GetSecretStoreID() string {
 func (m *Clustrix) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Clustrix.
+func (m *Clustrix) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Clustrix.
+func (m *Clustrix) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Maria) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Maria.
@@ -1348,6 +1906,16 @@ func (m *Maria) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Maria.
 func (m *Maria) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Maria.
+func (m *Maria) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Maria.
+func (m *Maria) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Memsql) isOneOf_Resource() {}
 
@@ -1383,6 +1951,16 @@ func (m *Memsql) GetSecretStoreID() string {
 func (m *Memsql) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Memsql.
+func (m *Memsql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Memsql.
+func (m *Memsql) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Oracle) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Oracle.
@@ -1416,6 +1994,16 @@ func (m *Oracle) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Oracle.
 func (m *Oracle) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Oracle.
+func (m *Oracle) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Oracle.
+func (m *Oracle) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Postgres) isOneOf_Resource() {}
 
@@ -1451,6 +2039,16 @@ func (m *Postgres) GetSecretStoreID() string {
 func (m *Postgres) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Postgres.
+func (m *Postgres) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Postgres.
+func (m *Postgres) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*AuroraPostgres) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AuroraPostgres.
@@ -1484,6 +2082,16 @@ func (m *AuroraPostgres) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the AuroraPostgres.
 func (m *AuroraPostgres) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AuroraPostgres.
+func (m *AuroraPostgres) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AuroraPostgres.
+func (m *AuroraPostgres) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Greenplum) isOneOf_Resource() {}
 
@@ -1519,6 +2127,16 @@ func (m *Greenplum) GetSecretStoreID() string {
 func (m *Greenplum) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Greenplum.
+func (m *Greenplum) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Greenplum.
+func (m *Greenplum) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Cockroach) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Cockroach.
@@ -1552,6 +2170,16 @@ func (m *Cockroach) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Cockroach.
 func (m *Cockroach) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Cockroach.
+func (m *Cockroach) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Cockroach.
+func (m *Cockroach) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Redshift) isOneOf_Resource() {}
 
@@ -1587,6 +2215,16 @@ func (m *Redshift) GetSecretStoreID() string {
 func (m *Redshift) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Redshift.
+func (m *Redshift) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Redshift.
+func (m *Redshift) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Citus) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Citus.
@@ -1620,6 +2258,16 @@ func (m *Citus) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the Citus.
 func (m *Citus) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Citus.
+func (m *Citus) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Citus.
+func (m *Citus) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Presto) isOneOf_Resource() {}
 
@@ -1655,6 +2303,16 @@ func (m *Presto) GetSecretStoreID() string {
 func (m *Presto) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Presto.
+func (m *Presto) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Presto.
+func (m *Presto) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*RDP) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the RDP.
@@ -1688,6 +2346,16 @@ func (m *RDP) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the RDP.
 func (m *RDP) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RDP.
+func (m *RDP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RDP.
+func (m *RDP) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Redis) isOneOf_Resource() {}
 
@@ -1723,6 +2391,16 @@ func (m *Redis) GetSecretStoreID() string {
 func (m *Redis) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Redis.
+func (m *Redis) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Redis.
+func (m *Redis) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*ElasticacheRedis) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the ElasticacheRedis.
@@ -1756,6 +2434,16 @@ func (m *ElasticacheRedis) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the ElasticacheRedis.
 func (m *ElasticacheRedis) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Snowflake) isOneOf_Resource() {}
 
@@ -1791,6 +2479,16 @@ func (m *Snowflake) GetSecretStoreID() string {
 func (m *Snowflake) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Snowflake.
+func (m *Snowflake) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Snowflake.
+func (m *Snowflake) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*SQLServer) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SQLServer.
@@ -1824,6 +2522,16 @@ func (m *SQLServer) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the SQLServer.
 func (m *SQLServer) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SQLServer.
+func (m *SQLServer) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SQLServer.
+func (m *SQLServer) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*SSH) isOneOf_Resource() {}
 
@@ -1859,6 +2567,16 @@ func (m *SSH) GetSecretStoreID() string {
 func (m *SSH) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the SSH.
+func (m *SSH) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SSH.
+func (m *SSH) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*SSHCert) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SSHCert.
@@ -1892,6 +2610,16 @@ func (m *SSHCert) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the SSHCert.
 func (m *SSHCert) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SSHCert.
+func (m *SSHCert) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SSHCert.
+func (m *SSHCert) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*SSHCustomerKey) isOneOf_Resource() {}
 
@@ -1927,6 +2655,16 @@ func (m *SSHCustomerKey) GetSecretStoreID() string {
 func (m *SSHCustomerKey) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the SSHCustomerKey.
+func (m *SSHCustomerKey) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SSHCustomerKey.
+func (m *SSHCustomerKey) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Sybase) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Sybase.
@@ -1961,6 +2699,16 @@ func (m *Sybase) GetSecretStoreID() string {
 func (m *Sybase) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
+
+// GetEgressFilter returns the egress filter of the Sybase.
+func (m *Sybase) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Sybase.
+func (m *Sybase) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*SybaseIQ) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SybaseIQ.
@@ -1994,6 +2742,16 @@ func (m *SybaseIQ) GetSecretStoreID() string {
 // SetSecretStoreID sets the secret store id of the SybaseIQ.
 func (m *SybaseIQ) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SybaseIQ.
+func (m *SybaseIQ) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SybaseIQ.
+func (m *SybaseIQ) SetEgressFilter(v string) {
+	m.EgressFilter = v
 }
 func (*Teradata) isOneOf_Resource() {}
 
@@ -2030,6 +2788,16 @@ func (m *Teradata) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
+// GetEgressFilter returns the egress filter of the Teradata.
+func (m *Teradata) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Teradata.
+func (m *Teradata) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
 type Athena struct {
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -2041,6 +2809,8 @@ type Athena struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	AccessKey string `json:"accessKey"`
 
@@ -2068,6 +2838,8 @@ type AWS struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	AccessKey string `json:"accessKey"`
 
@@ -2091,6 +2863,8 @@ type BigQuery struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	PrivateKey string `json:"privateKey"`
 
@@ -2114,6 +2888,8 @@ type Cassandra struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2139,6 +2915,8 @@ type DB2I struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2164,6 +2942,8 @@ type DB2LUW struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2189,6 +2969,8 @@ type Druid struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2212,6 +2994,8 @@ type DynamoDB struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	AccessKey string `json:"accessKey"`
 
@@ -2239,6 +3023,8 @@ type AmazonES struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Region string `json:"region"`
 
@@ -2266,6 +3052,8 @@ type Elastic struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2291,6 +3079,8 @@ type HTTPBasicAuth struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Url string `json:"url"`
 
@@ -2318,6 +3108,8 @@ type HTTPNoAuth struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Url string `json:"url"`
 
@@ -2341,6 +3133,8 @@ type HTTPAuth struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Url string `json:"url"`
 
@@ -2366,6 +3160,35 @@ type Kubernetes struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	Port int32 `json:"port"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+}
+
+type KubernetesUserImpersonation struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2391,6 +3214,8 @@ type KubernetesBasicAuth struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2414,6 +3239,31 @@ type KubernetesServiceAccount struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	Port int32 `json:"port"`
+
+	Token string `json:"token"`
+
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+}
+
+type KubernetesServiceAccountUserImpersonation struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2435,6 +3285,41 @@ type AmazonEKS struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+
+	AccessKey string `json:"accessKey"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	Region string `json:"region"`
+
+	ClusterName string `json:"clusterName"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+}
+
+type AmazonEKSUserImpersonation struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Endpoint string `json:"endpoint"`
 
@@ -2466,6 +3351,31 @@ type GoogleGKE struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ServiceAccountKey string `json:"serviceAccountKey"`
+
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+}
+
+type GoogleGKEUserImpersonation struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Endpoint string `json:"endpoint"`
 
@@ -2487,6 +3397,35 @@ type AKS struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	Port int32 `json:"port"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+}
+
+type AKSUserImpersonation struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2512,6 +3451,8 @@ type AKSBasicAuth struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2535,6 +3476,31 @@ type AKSServiceAccount struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	Port int32 `json:"port"`
+
+	Token string `json:"token"`
+
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+}
+
+type AKSServiceAccountUserImpersonation struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2556,6 +3522,8 @@ type Memcached struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2575,6 +3543,8 @@ type MongoLegacyHost struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2604,6 +3574,8 @@ type MongoLegacyReplicaset struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2635,6 +3607,8 @@ type MongoHost struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2662,6 +3636,8 @@ type MongoReplicaSet struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2693,6 +3669,8 @@ type Mysql struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2718,6 +3696,8 @@ type AuroraMysql struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2743,6 +3723,8 @@ type Clustrix struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2768,6 +3750,8 @@ type Maria struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2793,6 +3777,8 @@ type Memsql struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2818,6 +3804,8 @@ type Oracle struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2845,6 +3833,8 @@ type Postgres struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2872,6 +3862,8 @@ type AuroraPostgres struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2899,6 +3891,8 @@ type Greenplum struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2926,6 +3920,8 @@ type Cockroach struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2953,6 +3949,8 @@ type Redshift struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -2980,6 +3978,8 @@ type Citus struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3007,6 +4007,8 @@ type Presto struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3034,6 +4036,8 @@ type RDP struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3057,6 +4061,8 @@ type Redis struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3078,6 +4084,8 @@ type ElasticacheRedis struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3101,6 +4109,8 @@ type Snowflake struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3126,6 +4136,8 @@ type SQLServer struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3155,6 +4167,8 @@ type SSH struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3180,6 +4194,8 @@ type SSHCert struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3203,6 +4219,8 @@ type SSHCustomerKey struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3228,6 +4246,8 @@ type Sybase struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3251,6 +4271,8 @@ type SybaseIQ struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3274,6 +4296,8 @@ type Teradata struct {
 	Tags Tags `json:"tags"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
 
 	Hostname string `json:"hostname"`
 
@@ -3383,6 +4407,9 @@ type Relay struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// GatewayFilter can be used to restrict the peering between relays and
+	// gateways.
+	GatewayFilter string `json:"gatewayFilter"`
 }
 
 // Gateway represents a StrongDM CLI installation running in gateway mode.
@@ -3401,6 +4428,9 @@ type Gateway struct {
 	BindAddress string `json:"bindAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// GatewayFilter can be used to restrict the peering between relays and
+	// gateways.
+	GatewayFilter string `json:"gatewayFilter"`
 }
 
 // ResourceCreateResponse reports how the Resources were created in the system.

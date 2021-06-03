@@ -32,11 +32,15 @@ resource "sdm_node" "relay" {
 The following arguments are supported by the Node resource:
 * relay:
 	* `name` - (Optional) Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
+	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
+ gateways.
 * gateway:
 	* `name` - (Optional) Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	* `listen_address` - (Required) The public hostname/port tuple at which the gateway will be accessible to clients.
 	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to.
  If not provided on create, set to "0.0.0.0:<listen_address_port>".
+	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
+ gateways.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Node resource:
 * `id` - A unique identifier for the Node resource.

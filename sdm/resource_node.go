@@ -46,6 +46,11 @@ func resourceNode() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"gateway_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+						},
 						"token": {
 							Type:      schema.TypeString,
 							Computed:  true,
@@ -92,6 +97,11 @@ func resourceNode() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"gateway_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+						},
 						"token": {
 							Type:      schema.TypeString,
 							Computed:  true,
@@ -113,9 +123,10 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 			return &sdm.Relay{}
 		}
 		out := &sdm.Relay{
-			ID:   d.Id(),
-			Name: convertStringFromMap(raw, "name"),
-			Tags: convertTagsFromMap(raw, "tags"),
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
 		}
 		return out
 	}
@@ -130,6 +141,7 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 			ListenAddress: convertStringFromMap(raw, "listen_address"),
 			BindAddress:   convertStringFromMap(raw, "bind_address"),
 			Tags:          convertTagsFromMap(raw, "tags"),
+			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
 		}
 		return out
 	}
@@ -152,9 +164,10 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"name":  (v.Name),
-				"tags":  convertTagsToMap(v.Tags),
-				"token": resp.Token,
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
+				"gateway_filter": (v.GatewayFilter),
+				"token":          resp.Token,
 			},
 		})
 	case *sdm.Gateway:
@@ -166,6 +179,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
 				"tags":           convertTagsToMap(v.Tags),
+				"gateway_filter": (v.GatewayFilter),
 				"token":          resp.Token,
 			},
 		})
@@ -196,9 +210,10 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"name":  (v.Name),
-				"tags":  convertTagsToMap(v.Tags),
-				"token": d.Get("relay.0.token"),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
+				"gateway_filter": (v.GatewayFilter),
+				"token":          d.Get("relay.0.token"),
 			},
 		})
 	case *sdm.Gateway:
@@ -213,6 +228,7 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
 				"tags":           convertTagsToMap(v.Tags),
+				"gateway_filter": (v.GatewayFilter),
 				"token":          d.Get("gateway.0.token"),
 			},
 		})
