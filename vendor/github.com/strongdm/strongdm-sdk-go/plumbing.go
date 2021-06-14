@@ -948,6 +948,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	plumbing := &proto.Resource{}
 
 	switch v := porcelain.(type) {
+	case *RabbitMQAMQP091:
+		plumbing.Resource = &proto.Resource_RabbitMqamqp_091{RabbitMqamqp_091: convertRabbitMQAMQP091ToPlumbing(v)}
+	case *AmazonMQAMQP091:
+		plumbing.Resource = &proto.Resource_AmazonMqamqp_091{AmazonMqamqp_091: convertAmazonMQAMQP091ToPlumbing(v)}
 	case *Athena:
 		plumbing.Resource = &proto.Resource_Athena{Athena: convertAthenaToPlumbing(v)}
 	case *AWS:
@@ -1065,6 +1069,12 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 }
 
 func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
+	if plumbing.GetRabbitMqamqp_091() != nil {
+		return convertRabbitMQAMQP091ToPorcelain(plumbing.GetRabbitMqamqp_091())
+	}
+	if plumbing.GetAmazonMqamqp_091() != nil {
+		return convertAmazonMQAMQP091ToPorcelain(plumbing.GetAmazonMqamqp_091())
+	}
 	if plumbing.GetAthena() != nil {
 		return convertAthenaToPorcelain(plumbing.GetAthena())
 	}
@@ -1249,6 +1259,118 @@ func convertRepeatedResourceToPorcelain(plumbings []*proto.Resource) []Resource 
 	var items []Resource
 	for _, plumbing := range plumbings {
 		items = append(items, convertResourceToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRabbitMQAMQP091ToPorcelain(plumbing *proto.RabbitMQAMQP091) *RabbitMQAMQP091 {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RabbitMQAMQP091{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Port = (plumbing.Port)
+	porcelain.Username = (plumbing.Username)
+	porcelain.Password = (plumbing.Password)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	return porcelain
+}
+
+func convertRabbitMQAMQP091ToPlumbing(porcelain *RabbitMQAMQP091) *proto.RabbitMQAMQP091 {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RabbitMQAMQP091{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Port = (porcelain.Port)
+	plumbing.Username = (porcelain.Username)
+	plumbing.Password = (porcelain.Password)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	return plumbing
+}
+func convertRepeatedRabbitMQAMQP091ToPlumbing(
+	porcelains []*RabbitMQAMQP091,
+) []*proto.RabbitMQAMQP091 {
+	var items []*proto.RabbitMQAMQP091
+	for _, porcelain := range porcelains {
+		items = append(items, convertRabbitMQAMQP091ToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRabbitMQAMQP091ToPorcelain(plumbings []*proto.RabbitMQAMQP091) []*RabbitMQAMQP091 {
+	var items []*RabbitMQAMQP091
+	for _, plumbing := range plumbings {
+		items = append(items, convertRabbitMQAMQP091ToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAmazonMQAMQP091ToPorcelain(plumbing *proto.AmazonMQAMQP091) *AmazonMQAMQP091 {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AmazonMQAMQP091{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Port = (plumbing.Port)
+	porcelain.Username = (plumbing.Username)
+	porcelain.Password = (plumbing.Password)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	return porcelain
+}
+
+func convertAmazonMQAMQP091ToPlumbing(porcelain *AmazonMQAMQP091) *proto.AmazonMQAMQP091 {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonMQAMQP091{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Port = (porcelain.Port)
+	plumbing.Username = (porcelain.Username)
+	plumbing.Password = (porcelain.Password)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	return plumbing
+}
+func convertRepeatedAmazonMQAMQP091ToPlumbing(
+	porcelains []*AmazonMQAMQP091,
+) []*proto.AmazonMQAMQP091 {
+	var items []*proto.AmazonMQAMQP091
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonMQAMQP091ToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonMQAMQP091ToPorcelain(plumbings []*proto.AmazonMQAMQP091) []*AmazonMQAMQP091 {
+	var items []*AmazonMQAMQP091
+	for _, plumbing := range plumbings {
+		items = append(items, convertAmazonMQAMQP091ToPorcelain(plumbing))
 	}
 	return items
 }

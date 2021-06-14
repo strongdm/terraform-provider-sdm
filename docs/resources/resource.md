@@ -32,6 +32,32 @@ resource "sdm_resource" "postgres-test" {
 ```
 ## Argument Reference
 The following arguments are supported by the Resource resource:
+* rabbitmq_amqp_091:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Optional) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `tls_required` - (Optional) 
+* amazonmq_amqp_091:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Optional) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `tls_required` - (Optional) 
 * athena:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -789,6 +815,10 @@ The following arguments are supported by the Resource resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
+* rabbitmq_amqp_091:
+	* `port_override` - 
+* amazonmq_amqp_091:
+	* `port_override` - 
 * athena:
 	* `port_override` - 
 * big_query:

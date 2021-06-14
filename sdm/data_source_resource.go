@@ -51,6 +51,144 @@ func dataSourceResource() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"rabbitmq_amqp_091": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"amazonmq_amqp_091": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"athena": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -3975,11 +4113,39 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"athena": {},
+		"rabbitmq_amqp_091": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
+		case *sdm.RabbitMQAMQP091:
+			output[0]["rabbitmq_amqp_091"] = append(output[0]["rabbitmq_amqp_091"], entity{
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"tls_required":    (v.TlsRequired),
+			})
+		case *sdm.AmazonMQAMQP091:
+			output[0]["amazonmq_amqp_091"] = append(output[0]["amazonmq_amqp_091"], entity{
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"tls_required":    (v.TlsRequired),
+			})
 		case *sdm.Athena:
 			output[0]["athena"] = append(output[0]["athena"], entity{
 				"id":                (v.ID),

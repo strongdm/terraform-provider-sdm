@@ -23,6 +23,166 @@ func resourceResource() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"rabbitmq_amqp_091": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_password_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_password_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"amazonmq_amqp_091": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_password_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_password_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"athena": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -4542,6 +4702,80 @@ func resourceResource() *schema.Resource {
 	}
 }
 func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, error) {
+	if list := d.Get("rabbitmq_amqp_091").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"username":                   convertStringFromMap(raw, "username"),
+			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
+			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringFromMap(raw, "password"),
+			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
+			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+		}, nil
+	}
+	if list := d.Get("amazonmq_amqp_091").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"username":                   convertStringFromMap(raw, "username"),
+			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
+			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringFromMap(raw, "password"),
+			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
+			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+		}, nil
+	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -6651,6 +6885,66 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 	return map[string]string{}, nil
 }
 func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
+	if list := d.Get("rabbitmq_amqp_091").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RabbitMQAMQP091{}
+		}
+		out := &sdm.RabbitMQAMQP091{
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Port:          convertInt32FromMap(raw, "port"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
+		}
+		if out.Password == "" {
+			out.Password = fullSecretStorePath(raw, "password")
+		}
+		return out
+	}
+	if list := d.Get("amazonmq_amqp_091").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AmazonMQAMQP091{}
+		}
+		out := &sdm.AmazonMQAMQP091{
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Port:          convertInt32FromMap(raw, "port"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
+		}
+		if out.Password == "" {
+			out.Password = fullSecretStorePath(raw, "password")
+		}
+		return out
+	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8273,6 +8567,48 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.Resource.GetID())
 	switch v := resp.Resource.(type) {
+	case *sdm.RabbitMQAMQP091:
+		localV, _ := localVersion.(*sdm.RabbitMQAMQP091)
+		_ = localV
+		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
+			{
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"port_override":              (v.PortOverride),
+				"port":                       (v.Port),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"tls_required":               (v.TlsRequired),
+			},
+		})
+	case *sdm.AmazonMQAMQP091:
+		localV, _ := localVersion.(*sdm.AmazonMQAMQP091)
+		_ = localV
+		d.Set("amazonmq_amqp_091", []map[string]interface{}{
+			{
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"port_override":              (v.PortOverride),
+				"port":                       (v.Port),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"tls_required":               (v.TlsRequired),
+			},
+		})
 	case *sdm.Athena:
 		localV, _ := localVersion.(*sdm.Athena)
 		_ = localV
@@ -9478,6 +9814,54 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
 	}
 	switch v := resp.Resource.(type) {
+	case *sdm.RabbitMQAMQP091:
+		localV, ok := localVersion.(*sdm.RabbitMQAMQP091)
+		if !ok {
+			localV = &sdm.RabbitMQAMQP091{}
+		}
+		_ = localV
+		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
+			{
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"port_override":              (v.PortOverride),
+				"port":                       (v.Port),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"tls_required":               (v.TlsRequired),
+			},
+		})
+	case *sdm.AmazonMQAMQP091:
+		localV, ok := localVersion.(*sdm.AmazonMQAMQP091)
+		if !ok {
+			localV = &sdm.AmazonMQAMQP091{}
+		}
+		_ = localV
+		d.Set("amazonmq_amqp_091", []map[string]interface{}{
+			{
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"port_override":              (v.PortOverride),
+				"port":                       (v.Port),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"tls_required":               (v.TlsRequired),
+			},
+		})
 	case *sdm.Athena:
 		localV, ok := localVersion.(*sdm.Athena)
 		if !ok {

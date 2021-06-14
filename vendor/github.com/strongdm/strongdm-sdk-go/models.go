@@ -333,6 +333,94 @@ type Resource interface {
 	isOneOf_Resource()
 }
 
+func (*RabbitMQAMQP091) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetID() string { return m.ID }
+
+// GetName returns the name of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AmazonMQAMQP091) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Athena) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Athena.
@@ -2796,6 +2884,60 @@ func (m *Teradata) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Teradata.
 func (m *Teradata) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+type RabbitMQAMQP091 struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Port int32 `json:"port"`
+
+	Username string `json:"username"`
+
+	Password string `json:"password"`
+
+	TlsRequired bool `json:"tlsRequired"`
+}
+
+type AmazonMQAMQP091 struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Port int32 `json:"port"`
+
+	Username string `json:"username"`
+
+	Password string `json:"password"`
+
+	TlsRequired bool `json:"tlsRequired"`
 }
 
 type Athena struct {

@@ -29,6 +29,30 @@ In addition to provided arguments above, the following attributes are returned b
 * `id` - a generated id representing this request, unrelated to input id and sdm_resource ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `resources` - A single element list containing a map, where each key lists one of the following objects:
+	* rabbitmq_amqp_091:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port_override` - 
+		* `port` - 
+		* `username` - 
+		* `password` - 
+		* `tls_required` - 
+	* amazonmq_amqp_091:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port_override` - 
+		* `port` - 
+		* `username` - 
+		* `password` - 
+		* `tls_required` - 
 	* athena:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
