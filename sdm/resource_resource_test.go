@@ -845,6 +845,24 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"role_arn", `"role-arn"`},
 			},
 		},
+		{
+			resource: "rabbitmq_amqp_091",
+			pairs: [][2]string{
+				{"name", `"rabbitmq_amqp_091"`},
+				{"hostname", `"Hostname"`},
+				{"username", `"Username"`},
+				{"password", `"Password"`},
+			},
+		},
+		{
+			resource: "amazonmq_amqp_091",
+			pairs: [][2]string{
+				{"name", `"amazonmq_amqp_091"`},
+				{"hostname", `"Hostname"`},
+				{"username", `"Username"`},
+				{"password", `"Password"`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")
@@ -1489,6 +1507,30 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			resource: "teradata",
 			pairs: [][2]string{
 				{"name", `"teradata_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "rabbitmq_amqp_091",
+			pairs: [][2]string{
+				{"name", `"rabbitmq_amqp_091_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+			},
+		},
+		{
+			resource: "amazonmq_amqp_091",
+			pairs: [][2]string{
+				{"name", `"amazonmq_amqp_091_secret_store"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"hostname", `"Hostname"`},
 				{"secret_store_username_path", `"/path/to/username"`},
