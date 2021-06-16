@@ -40,8 +40,8 @@ You can also provide your credentials directly to the provider.
 
 ```hcl
 provider "sdm" {
-   	api_access_key = "ACCESS_KEY"
-	api_secret_key = "SECRET_KEY"
+    api_access_key = "ACCESS_KEY"
+    api_secret_key = "SECRET_KEY"
 }
 
 resource "sdm_node" "gateway" {
