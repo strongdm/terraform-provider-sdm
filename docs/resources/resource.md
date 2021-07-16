@@ -571,6 +571,19 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_password_key` - (Optional)
 	* `database` - (Required) 
 	* `port` - (Optional) 
+* single_store:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `database` - (Required) 
+	* `port` - (Optional) 
 * oracle:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -681,6 +694,12 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `username` - (Optional) 
 	* `tls_required` - (Optional) 
+* raw_tcp:
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `port` - (Optional) 
 * rdp:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -857,6 +876,8 @@ In addition to provided arguments above, the following attributes are returned b
 	* `port_override` - 
 * memsql:
 	* `port_override` - 
+* single_store:
+	* `port_override` - 
 * oracle:
 	* `port_override` - 
 * postgres:
@@ -872,6 +893,8 @@ In addition to provided arguments above, the following attributes are returned b
 * citus:
 	* `port_override` - 
 * presto:
+	* `port_override` - 
+* raw_tcp:
 	* `port_override` - 
 * rdp:
 	* `port_override` - 

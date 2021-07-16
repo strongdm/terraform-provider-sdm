@@ -3207,6 +3207,86 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"single_store": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_password_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_password_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"oracle": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -3873,6 +3953,54 @@ func resourceResource() *schema.Resource {
 						},
 						"tls_required": {
 							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"raw_tcp": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
 							Optional:    true,
 							Description: "",
 						},
@@ -6239,6 +6367,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
 		}, nil
 	}
+	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"username":                   convertStringFromMap(raw, "username"),
+			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
+			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringFromMap(raw, "password"),
+			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
+			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+		}, nil
+	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -6522,6 +6687,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
 		}, nil
+	}
+	if list := d.Get("raw_tcp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		} else {
+		}
+
+		return map[string]string{}, nil
 	}
 	if list := d.Get("rdp").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
@@ -8005,6 +8182,36 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.SingleStore{}
+		}
+		out := &sdm.SingleStore{
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Username:      convertStringFromMap(raw, "username"),
+			Password:      convertStringFromMap(raw, "password"),
+			Database:      convertStringFromMap(raw, "database"),
+			Port:          convertInt32FromMap(raw, "port"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
+		}
+		if out.Password == "" {
+			out.Password = fullSecretStorePath(raw, "password")
+		}
+		return out
+	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8248,6 +8455,27 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
 		}
+		return out
+	}
+	if list := d.Get("raw_tcp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RawTCP{}
+		}
+		out := &sdm.RawTCP{
+			ID:            d.Id(),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Port:          convertInt32FromMap(raw, "port"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		return out
 	}
 	if list := d.Get("rdp").([]interface{}); len(list) > 0 {
@@ -9400,6 +9628,27 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":                       (v.Port),
 			},
 		})
+	case *sdm.SingleStore:
+		localV, _ := localVersion.(*sdm.SingleStore)
+		_ = localV
+		d.Set("single_store", []map[string]interface{}{
+			{
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"database":                   (v.Database),
+				"port_override":              (v.PortOverride),
+				"port":                       (v.Port),
+			},
+		})
 	case *sdm.Oracle:
 		localV, _ := localVersion.(*sdm.Oracle)
 		_ = localV
@@ -9572,6 +9821,20 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":                       (v.Port),
 				"username":                   (v.Username),
 				"tls_required":               (v.TlsRequired),
+			},
+		})
+	case *sdm.RawTCP:
+		localV, _ := localVersion.(*sdm.RawTCP)
+		_ = localV
+		d.Set("raw_tcp", []map[string]interface{}{
+			{
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.RDP:
@@ -10764,6 +11027,30 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":                       (v.Port),
 			},
 		})
+	case *sdm.SingleStore:
+		localV, ok := localVersion.(*sdm.SingleStore)
+		if !ok {
+			localV = &sdm.SingleStore{}
+		}
+		_ = localV
+		d.Set("single_store", []map[string]interface{}{
+			{
+				"name":                       (v.Name),
+				"tags":                       convertTagsToMap(v.Tags),
+				"secret_store_id":            (v.SecretStoreID),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"database":                   (v.Database),
+				"port_override":              (v.PortOverride),
+				"port":                       (v.Port),
+			},
+		})
 	case *sdm.Oracle:
 		localV, ok := localVersion.(*sdm.Oracle)
 		if !ok {
@@ -10960,6 +11247,23 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":                       (v.Port),
 				"username":                   (v.Username),
 				"tls_required":               (v.TlsRequired),
+			},
+		})
+	case *sdm.RawTCP:
+		localV, ok := localVersion.(*sdm.RawTCP)
+		if !ok {
+			localV = &sdm.RawTCP{}
+		}
+		_ = localV
+		d.Set("raw_tcp", []map[string]interface{}{
+			{
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			},
 		})
 	case *sdm.RDP:

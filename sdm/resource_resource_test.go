@@ -643,6 +643,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "single_store",
+			pairs: [][2]string{
+				{"name", `"single_store"`},
+				{"hostname", `"Hostname"`},
+				{"username", `"Username"`},
+				{"password", `"Password"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
 			resource: "oracle",
 			pairs: [][2]string{
 				{"name", `"oracle"`},
@@ -861,6 +871,14 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"hostname", `"Hostname"`},
 				{"username", `"Username"`},
 				{"password", `"Password"`},
+			},
+		},
+		{
+			resource: "raw_tcp",
+			pairs: [][2]string{
+				{"name", `"raw_tcp"`},
+				{"hostname", `"Hostname"`},
+				{"port", `50000`},
 			},
 		},
 	}
@@ -1282,6 +1300,19 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			resource: "memsql",
 			pairs: [][2]string{
 				{"name", `"memsql_secret_store"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"hostname", `"Hostname"`},
+				{"secret_store_username_path", `"/path/to/username"`},
+				{"secret_store_username_key", `"key"`},
+				{"secret_store_password_path", `"/path/to/password"`},
+				{"secret_store_password_key", `"key"`},
+				{"database", `"Database"`},
+			},
+		},
+		{
+			resource: "single_store",
+			pairs: [][2]string{
+				{"name", `"single_store_secret_store"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"hostname", `"Hostname"`},
 				{"secret_store_username_path", `"/path/to/username"`},

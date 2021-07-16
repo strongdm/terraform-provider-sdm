@@ -2742,6 +2742,75 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"single_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"oracle": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -3328,6 +3397,59 @@ func dataSourceResource() *schema.Resource {
 									},
 									"tls_required": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"raw_tcp": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -4662,6 +4784,20 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"port_override":   (v.PortOverride),
 				"port":            (v.Port),
 			})
+		case *sdm.SingleStore:
+			output[0]["single_store"] = append(output[0]["single_store"], entity{
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"username":        (v.Username),
+				"password":        (v.Password),
+				"database":        (v.Database),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
+			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{
 				"id":              (v.ID),
@@ -4781,6 +4917,17 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":            (v.Port),
 				"username":        (v.Username),
 				"tls_required":    (v.TlsRequired),
+			})
+		case *sdm.RawTCP:
+			output[0]["raw_tcp"] = append(output[0]["raw_tcp"], entity{
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"tags":            convertTagsToMap(v.Tags),
+				"secret_store_id": (v.SecretStoreID),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"port_override":   (v.PortOverride),
+				"port":            (v.Port),
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{

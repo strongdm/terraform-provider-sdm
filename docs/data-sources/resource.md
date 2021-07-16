@@ -495,6 +495,18 @@ In addition to provided arguments above, the following attributes are returned b
 		* `database` - 
 		* `port_override` - 
 		* `port` - 
+	* single_store:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `username` - 
+		* `password` - 
+		* `database` - 
+		* `port_override` - 
+		* `port` - 
 	* oracle:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -599,6 +611,15 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `username` - 
 		* `tls_required` - 
+	* raw_tcp:
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `tags` - Tags is a map of key, value pairs.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `port_override` - 
+		* `port` - 
 	* rdp:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.

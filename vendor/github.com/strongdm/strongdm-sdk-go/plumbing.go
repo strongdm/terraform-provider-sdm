@@ -1026,6 +1026,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Maria{Maria: convertMariaToPlumbing(v)}
 	case *Memsql:
 		plumbing.Resource = &proto.Resource_Memsql{Memsql: convertMemsqlToPlumbing(v)}
+	case *SingleStore:
+		plumbing.Resource = &proto.Resource_SingleStore{SingleStore: convertSingleStoreToPlumbing(v)}
 	case *Oracle:
 		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
 	case *Postgres:
@@ -1185,6 +1187,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetMemsql() != nil {
 		return convertMemsqlToPorcelain(plumbing.GetMemsql())
+	}
+	if plumbing.GetSingleStore() != nil {
+		return convertSingleStoreToPorcelain(plumbing.GetSingleStore())
 	}
 	if plumbing.GetOracle() != nil {
 		return convertOracleToPorcelain(plumbing.GetOracle())
@@ -3439,6 +3444,62 @@ func convertRepeatedMemsqlToPorcelain(plumbings []*proto.Memsql) []*Memsql {
 	var items []*Memsql
 	for _, plumbing := range plumbings {
 		items = append(items, convertMemsqlToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) *SingleStore {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SingleStore{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.Username = (plumbing.Username)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Database = (plumbing.Database)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Port = (plumbing.Port)
+	return porcelain
+}
+
+func convertSingleStoreToPlumbing(porcelain *SingleStore) *proto.SingleStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SingleStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Username = (porcelain.Username)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Database = (porcelain.Database)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Port = (porcelain.Port)
+	return plumbing
+}
+func convertRepeatedSingleStoreToPlumbing(
+	porcelains []*SingleStore,
+) []*proto.SingleStore {
+	var items []*proto.SingleStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertSingleStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSingleStoreToPorcelain(plumbings []*proto.SingleStore) []*SingleStore {
+	var items []*SingleStore
+	for _, plumbing := range plumbings {
+		items = append(items, convertSingleStoreToPorcelain(plumbing))
 	}
 	return items
 }
