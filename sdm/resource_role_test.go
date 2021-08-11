@@ -3,6 +3,8 @@ package sdm
 import (
 	"context"
 	"fmt"
+	"os"
+	"strconv"
 	"testing"
 	"time"
 
@@ -144,6 +146,9 @@ func TestAccSDMRole_Update(t *testing.T) {
 }
 
 func TestAccSDMRole_UpdateComposite(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	rsName := randomWithPrefix("test-role")
 	roleName := randomWithPrefix("test-role")
 	resource.ParallelTest(t, resource.TestCase{
@@ -279,6 +284,83 @@ func TestAccSDMRole_Tags(t *testing.T) {
 	})
 }
 
+func TestAccSDMRole_AccessRules(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") != "yes" {
+		t.Skip("skipping access overhaul test")
+	}
+	name := randomWithPrefix("test")
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMRoleAccessRulesConfig(name, name, false, `[ { "type": "redis" } ]`),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+name, "access_rules", `[{"type":"redis"}]`),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if resp.Role.AccessRules != `[{"type":"redis"}]` {
+							return fmt.Errorf(`unexpected value '%s' for access_rules, expected '[{"type":"redis"}]'`, resp.Role.AccessRules)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccSDMRoleAccessRulesConfig(name, name, false, `[ { "tags": { "a": "b" } } ]`),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+name, "access_rules", `[{"tags":{"a":"b"}}]`),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if resp.Role.AccessRules != `[{"tags":{"a":"b"}}]` {
+							return fmt.Errorf(`unexpected value '%s' for access_rules, expected '[{"tags":{"a":"b"}}]'`, resp.Role.AccessRules)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func testAccSDMRoleConfig(resourceName, roleName string, composite bool) string {
 	return fmt.Sprintf(`
 	resource "sdm_role" "%s" {
@@ -300,6 +382,16 @@ func testAccSDMRoleTagsConfig(resourceName string, roleName string, composite bo
 	`, resourceName, roleName, composite, tagsToConfigString(tags))
 }
 
+func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, composite bool, accessRules string) string {
+	return fmt.Sprintf(`
+	resource "sdm_role" "%s" {
+		name = "%s"
+		composite = %t
+		access_rules = %s
+	}
+	`, resourceName, roleName, composite, strconv.Quote(accessRules))
+}
+
 func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Role, error) {
 	client, err := preTestClient()
 	if err != nil {
@@ -312,6 +404,28 @@ func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Rol
 		createResp, err := client.Roles().Create(ctx, &sdm.Role{
 			Name:      randomWithPrefix(prefix),
 			Composite: composite,
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create role: %w", err)
+		}
+		roles = append(roles, createResp.Role)
+	}
+	return roles, nil
+}
+
+func createRolesWithAccessRules(prefix string, count int, composite bool, accessRules string) ([]*sdm.Role, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	roles := []*sdm.Role{}
+	for i := 0; i < count; i++ {
+		createResp, err := client.Roles().Create(ctx, &sdm.Role{
+			Name:        randomWithPrefix(prefix),
+			Composite:   composite,
+			AccessRules: accessRules,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to create role: %w", err)

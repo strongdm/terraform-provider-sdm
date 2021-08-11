@@ -2,15 +2,19 @@ package sdm
 
 import (
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 )
 
 func TestAccSDMRoleDataSource_Get(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") != "yes" {
+		t.Skip("skipping access overhaul test")
+	}
 	t.Parallel()
 
-	roles, err := createRolesWithPrefix("test-role", 1, false)
+	roles, err := createRolesWithAccessRules("test-role", 1, false, `[{"type":"redis"}]`)
 	if err != nil {
 		t.Fatal("failed to create role: ", err)
 	}
@@ -27,6 +31,7 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.composite", "false"),
+					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.access_rules", `[{"type":"redis"}]`),
 				),
 			},
 		},

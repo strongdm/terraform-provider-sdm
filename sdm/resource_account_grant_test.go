@@ -3,6 +3,7 @@ package sdm
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -54,6 +55,9 @@ func init() {
 }
 
 func TestAccSDMAccountGrant_Create(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	grantRsName := randomWithPrefix("test-grant")
 	redisRsName := randomWithPrefix("test-redis")
 	accountRsName := randomWithPrefix("test-account")
@@ -126,6 +130,9 @@ func TestAccSDMAccountGrant_Create(t *testing.T) {
 }
 
 func TestAccSDMAccountGrant_Update(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	grantRsName := randomWithPrefix("test-update-grant")
 	redisRsName := randomWithPrefix("test-redis")
 	accountRsName := randomWithPrefix("test-account")

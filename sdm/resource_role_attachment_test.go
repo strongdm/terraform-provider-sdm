@@ -3,6 +3,7 @@ package sdm
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -53,6 +54,9 @@ func init() {
 	})
 }
 func TestAccSDMRoleAttachment_Create(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	rsName := randomWithPrefix("test-create-attachment")
 	compRoleRsName := randomWithPrefix("test-comprole")
 	roleRsName := randomWithPrefix("test-role")
@@ -126,6 +130,9 @@ func TestAccSDMRoleAttachment_Create(t *testing.T) {
 
 // TODO: can we improve the readability of this test? hard to follow what is actually be tested for.
 func TestAccSDMRoleAttachment_Update(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	rsName := randomWithPrefix("test-update-attachment")
 	compRoleRsName := randomWithPrefix("test-comprole")
 	roleRsName := randomWithPrefix("test-role")

@@ -2,12 +2,16 @@ package sdm
 
 import (
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 )
 
 func TestAccSDMAccountGrant_DataSourceGet(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	t.Parallel()
 
 	grants, err := createAccountGrantsWithPrefix("test", 1)
@@ -34,6 +38,9 @@ func TestAccSDMAccountGrant_DataSourceGet(t *testing.T) {
 }
 
 func TestAccSDMAccountGrant_DataSourceGetMultiple(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	t.Parallel()
 
 	// create three redises
@@ -70,6 +77,9 @@ func TestAccSDMAccountGrant_DataSourceGetMultiple(t *testing.T) {
 }
 
 func TestAccSDMAccountGrant_DataSourceGetNone(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	t.Parallel()
 
 	_, err := createAccountGrantsWithPrefix("test", 1)

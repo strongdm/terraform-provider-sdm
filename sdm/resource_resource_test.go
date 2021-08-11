@@ -928,7 +928,10 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	t.Parallel()
 
-	client := testClient()
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	resp, err := client.SecretStores().Create(ctx, &sdm.VaultTokenStore{

@@ -2,12 +2,16 @@ package sdm
 
 import (
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 )
 
 func TestAccSDMRoleAttachmentDataSource_Get(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	t.Parallel()
 
 	roleAttachments, err := createRoleAttachmentsWithPrefix("role", 1)
@@ -32,6 +36,9 @@ func TestAccSDMRoleAttachmentDataSource_Get(t *testing.T) {
 }
 
 func TestAccSDMRoleAttachmentDataSource_GetMultiple(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	t.Parallel()
 
 	// create three roles
@@ -69,6 +76,9 @@ func TestAccSDMRoleAttachmentDataSource_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMRoleAttachmentDataSource_GetNone(t *testing.T) {
+	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
+		t.Skip("skipping legacy test")
+	}
 	t.Parallel()
 	_, err := createRoleAttachmentsWithPrefix("test", 1)
 	if err != nil {
