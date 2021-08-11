@@ -2445,6 +2445,50 @@ func (m *Presto) GetEgressFilter() string {
 func (m *Presto) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+func (*RawTCP) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RawTCP.
+func (m *RawTCP) GetID() string { return m.ID }
+
+// GetName returns the name of the RawTCP.
+func (m *RawTCP) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RawTCP.
+func (m *RawTCP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RawTCP.
+func (m *RawTCP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RawTCP.
+func (m *RawTCP) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RawTCP.
+func (m *RawTCP) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RawTCP.
+func (m *RawTCP) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RawTCP.
+func (m *RawTCP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RawTCP.
+func (m *RawTCP) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*RDP) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the RDP.
@@ -4236,6 +4280,27 @@ type Presto struct {
 	Username string `json:"username"`
 
 	TlsRequired bool `json:"tlsRequired"`
+}
+
+type RawTCP struct {
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Hostname string `json:"hostname"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Port int32 `json:"port"`
 }
 
 type RDP struct {

@@ -23,6 +23,7 @@ resource "sdm_role" "redis-only" {
 ## Argument Reference
 The following arguments are supported by the Role resource:
 * `name` - (Required) Unique human-readable name of the Role.
+* `access_rules` - (Optional) AccessRules JSON encoded access rules data.
 * `composite` - (Optional) True if the Role is a composite role.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Role resource:

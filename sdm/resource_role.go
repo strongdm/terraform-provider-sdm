@@ -28,6 +28,12 @@ func resourceRole() *schema.Resource {
 				Required:    true,
 				Description: "Unique human-readable name of the Role.",
 			},
+			"access_rules": {
+				Type:             schema.TypeString,
+				Optional:         true,
+				DiffSuppressFunc: optionalJSONDiffSuppress,
+				Description:      "AccessRules JSON encoded access rules data.",
+			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
@@ -51,10 +57,11 @@ func resourceRole() *schema.Resource {
 }
 func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
-		ID:        d.Id(),
-		Name:      convertStringFromResourceData(d, "name"),
-		Composite: convertBoolFromResourceData(d, "composite"),
-		Tags:      convertTagsFromResourceData(d, "tags"),
+		ID:          d.Id(),
+		Name:        convertStringFromResourceData(d, "name"),
+		AccessRules: convertStringFromResourceData(d, "access_rules"),
+		Composite:   convertBoolFromResourceData(d, "composite"),
+		Tags:        convertTagsFromResourceData(d, "tags"),
 	}
 }
 
@@ -70,6 +77,7 @@ func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	d.SetId(resp.Role.ID)
 	v := resp.Role
 	d.Set("name", (v.Name))
+	d.Set("access_rules", (v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("tags", convertTagsToMap(v.Tags))
 	return nil
@@ -91,6 +99,7 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	v := resp.Role
 	d.Set("name", (v.Name))
+	d.Set("access_rules", (v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("tags", convertTagsToMap(v.Tags))
 	return nil

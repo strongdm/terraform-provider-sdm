@@ -32,6 +32,11 @@ func dataSourceRole() *schema.Resource {
 				Optional:    true,
 				Description: "Unique human-readable name of the Role.",
 			},
+			"access_rules": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "AccessRules JSON encoded access rules data.",
+			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
@@ -61,6 +66,11 @@ func dataSourceRole() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "Unique human-readable name of the Role.",
+						},
+						"access_rules": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "AccessRules JSON encoded access rules data.",
 						},
 						"composite": {
 							Type:        schema.TypeBool,
@@ -97,6 +107,10 @@ func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interf
 		filter += "name:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOk("access_rules"); ok {
+		filter += "accessrules:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOk("composite"); ok {
 		filter += "composite:? "
 		args = append(args, v)
@@ -124,10 +138,11 @@ func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":        (v.ID),
-				"name":      (v.Name),
-				"composite": (v.Composite),
-				"tags":      convertTagsToMap(v.Tags),
+				"id":           (v.ID),
+				"name":         (v.Name),
+				"access_rules": (v.AccessRules),
+				"composite":    (v.Composite),
+				"tags":         convertTagsToMap(v.Tags),
 			})
 	}
 	if resp.Err() != nil {

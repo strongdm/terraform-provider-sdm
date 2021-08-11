@@ -1044,6 +1044,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Citus{Citus: convertCitusToPlumbing(v)}
 	case *Presto:
 		plumbing.Resource = &proto.Resource_Presto{Presto: convertPrestoToPlumbing(v)}
+	case *RawTCP:
+		plumbing.Resource = &proto.Resource_RawTcp{RawTcp: convertRawTCPToPlumbing(v)}
 	case *RDP:
 		plumbing.Resource = &proto.Resource_Rdp{Rdp: convertRDPToPlumbing(v)}
 	case *Redis:
@@ -1214,6 +1216,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetPresto() != nil {
 		return convertPrestoToPorcelain(plumbing.GetPresto())
+	}
+	if plumbing.GetRawTcp() != nil {
+		return convertRawTCPToPorcelain(plumbing.GetRawTcp())
 	}
 	if plumbing.GetRdp() != nil {
 		return convertRDPToPorcelain(plumbing.GetRdp())
@@ -3964,6 +3969,56 @@ func convertRepeatedPrestoToPorcelain(plumbings []*proto.Presto) []*Presto {
 	var items []*Presto
 	for _, plumbing := range plumbings {
 		items = append(items, convertPrestoToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRawTCPToPorcelain(plumbing *proto.RawTCP) *RawTCP {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RawTCP{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Port = (plumbing.Port)
+	return porcelain
+}
+
+func convertRawTCPToPlumbing(porcelain *RawTCP) *proto.RawTCP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RawTCP{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Port = (porcelain.Port)
+	return plumbing
+}
+func convertRepeatedRawTCPToPlumbing(
+	porcelains []*RawTCP,
+) []*proto.RawTCP {
+	var items []*proto.RawTCP
+	for _, porcelain := range porcelains {
+		items = append(items, convertRawTCPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRawTCPToPorcelain(plumbings []*proto.RawTCP) []*RawTCP {
+	var items []*RawTCP
+	for _, plumbing := range plumbings {
+		items = append(items, convertRawTCPToPorcelain(plumbing))
 	}
 	return items
 }
