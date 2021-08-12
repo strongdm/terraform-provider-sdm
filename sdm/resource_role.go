@@ -31,7 +31,7 @@ func resourceRole() *schema.Resource {
 			"access_rules": {
 				Type:             schema.TypeString,
 				Optional:         true,
-				DiffSuppressFunc: optionalJSONDiffSuppress,
+				DiffSuppressFunc: accessRulesJSONDiffSuppress,
 				Description:      "AccessRules JSON encoded access rules data.",
 			},
 			"composite": {
