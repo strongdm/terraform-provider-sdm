@@ -5514,6 +5514,7 @@ func convertRoleToPorcelain(plumbing *proto.Role) *Role {
 	porcelain := &Role{}
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
+	porcelain.AccessRules = (plumbing.AccessRules)
 	porcelain.Composite = (plumbing.Composite)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
@@ -5526,6 +5527,7 @@ func convertRoleToPlumbing(porcelain *Role) *proto.Role {
 	plumbing := &proto.Role{}
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.AccessRules = (porcelain.AccessRules)
 	plumbing.Composite = (porcelain.Composite)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing

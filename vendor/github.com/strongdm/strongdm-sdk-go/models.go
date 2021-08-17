@@ -4872,6 +4872,8 @@ type Role struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Role.
 	Name string `json:"name"`
+	// AccessRules JSON encoded access rules data.
+	AccessRules string `json:"accessRules"`
 	// True if the Role is a composite role.
 	Composite bool `json:"composite"`
 	// Tags is a map of key, value pairs.
