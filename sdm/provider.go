@@ -11,6 +11,8 @@ import (
 	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
+const userAgent = "terraform-provider-sdm/1.0.26"
+
 // Provider returns a terraform.ResourceProvider.
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
@@ -61,7 +63,10 @@ func Provider() terraform.ResourceProvider {
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			host := d.Get("host").(string)
-			opts := []sdm.ClientOption{sdm.WithHost(host)}
+			opts := []sdm.ClientOption{
+				sdm.WithUserAgentExtra(userAgent),
+				sdm.WithHost(host),
+			}
 			if strings.HasPrefix(host, "localhost:") || strings.HasPrefix(host, "127.0.0.1:") {
 				opts = append(opts, sdm.WithInsecure())
 			}
