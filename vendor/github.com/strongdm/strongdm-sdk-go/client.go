@@ -41,10 +41,13 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var (
-	defaultAPIHost = "api.strongdm.com:443"
-	_              = metadata.Pairs
+const (
+	defaultAPIHost   = "api.strongdm.com:443"
+	apiVersion       = "2021-08-23"
+	defaultUserAgent = "strongdm-sdk-go/0.9.34"
 )
+
+var _ = metadata.Pairs
 
 // Client is the strongDM API client implementation.
 type Client struct {
@@ -55,6 +58,7 @@ type Client struct {
 	apiToken             string
 	apiSecret            []byte
 	apiInsecureTransport bool
+	userAgent            string
 
 	grpcConn *grpc.ClientConn
 
@@ -90,6 +94,7 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		testOptions:    map[string]interface{}{},
 		apiToken:       token,
 		apiSecret:      decodedSecret,
+		userAgent:      defaultUserAgent,
 	}
 
 	for _, opt := range opts {
@@ -164,6 +169,12 @@ func WithHost(host string) ClientOption {
 func WithInsecure() ClientOption {
 	return func(c *Client) {
 		c.apiInsecureTransport = true
+	}
+}
+
+func WithUserAgentExtra(userAgentExtra string) ClientOption {
+	return func(c *Client) {
+		c.userAgent += " " + userAgentExtra
 	}
 }
 
@@ -259,6 +270,8 @@ func (c *Client) wrapContext(ctx context.Context, req proto.Message, methodName 
 	return metadata.NewOutgoingContext(ctx, metadata.New(map[string]string{
 		"x-sdm-authentication": c.apiToken,
 		"x-sdm-signature":      c.Sign(methodName, msg),
+		"x-sdm-api-version":    apiVersion,
+		"x-sdm-user-agent":     c.userAgent,
 	}))
 }
 

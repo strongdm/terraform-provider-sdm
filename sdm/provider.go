@@ -11,7 +11,7 @@ import (
 	sdm "github.com/strongdm/strongdm-sdk-go"
 )
 
-const userAgent = "terraform-provider-sdm/1.0.26"
+const userAgent = "terraform-provider-sdm/1.0.27"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() terraform.ResourceProvider {
