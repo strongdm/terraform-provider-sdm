@@ -518,6 +518,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"name", `"kubernetes"`},
 				{"hostname", `"Hostname"`},
 				{"port", "443"},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -528,6 +529,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"port", "443"},
 				{"username", `"Username"`},
 				{"password", `"Password"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -540,6 +542,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"certificate_authority", certificateAuthority},
 				{"region", `"Region"`},
 				{"cluster_name", `"ClusterName"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -549,6 +552,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"endpoint", `"Endpoint"`},
 				{"certificate_authority", certificateAuthority},
 				{"service_account_key", `"{}"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -935,8 +939,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	resp, err := client.SecretStores().Create(ctx, &sdm.VaultTokenStore{
-		Name:          fmt.Sprintf("all-resources-test-store"),
-		ServerAddress: fmt.Sprintf("allresourcestestaddr"),
+		Name:          "all-resources-test-store",
+		ServerAddress: "allresourcestestaddr",
 	})
 	if err != nil {
 		t.Fatalf("failed to create secret store: %v", err)
@@ -1138,6 +1142,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_client_certificate_key", `"key"`},
 				{"secret_store_client_key_path", `"/path/to/client_key"`},
 				{"secret_store_client_key_key", `"key"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -1151,6 +1156,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_username_key", `"key"`},
 				{"secret_store_password_path", `"/path/to/password"`},
 				{"secret_store_password_key", `"key"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -1171,6 +1177,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_role_arn_key", `"key"`},
 				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
 				{"secret_store_role_external_id_key", `"key"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
@@ -1183,6 +1190,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_certificate_authority_key", `"key"`},
 				{"secret_store_service_account_key_path", `"/path/to/service_account_key"`},
 				{"secret_store_service_account_key_key", `"key"`},
+				{"healthcheck_namespace", `"default"`},
 			},
 		},
 		{
