@@ -254,7 +254,7 @@ The following arguments are supported by the Resource resource:
 	* `client_key` - (Optional) 
 	* `secret_store_client_key_path` - (Optional)
 	* `secret_store_client_key_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * kubernetes_user_impersonation:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -270,7 +270,7 @@ The following arguments are supported by the Resource resource:
 	* `client_key` - (Optional) 
 	* `secret_store_client_key_path` - (Optional)
 	* `secret_store_client_key_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * kubernetes_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -283,7 +283,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
 	* `secret_store_password_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * kubernetes_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -293,7 +293,7 @@ The following arguments are supported by the Resource resource:
 	* `token` - (Optional) 
 	* `secret_store_token_path` - (Optional)
 	* `secret_store_token_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * kubernetes_service_account_user_impersonation:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -303,7 +303,7 @@ The following arguments are supported by the Resource resource:
 	* `token` - (Optional) 
 	* `secret_store_token_path` - (Optional)
 	* `secret_store_token_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * amazon_eks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -326,7 +326,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * amazon_eks_user_impersonation:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -349,7 +349,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * google_gke:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -361,7 +361,7 @@ The following arguments are supported by the Resource resource:
 	* `service_account_key` - (Optional) 
 	* `secret_store_service_account_key_path` - (Optional)
 	* `secret_store_service_account_key_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * google_gke_user_impersonation:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -373,7 +373,7 @@ The following arguments are supported by the Resource resource:
 	* `service_account_key` - (Optional) 
 	* `secret_store_service_account_key_path` - (Optional)
 	* `secret_store_service_account_key_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * aks:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -389,7 +389,7 @@ The following arguments are supported by the Resource resource:
 	* `client_key` - (Optional) 
 	* `secret_store_client_key_path` - (Optional)
 	* `secret_store_client_key_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * aks_user_impersonation:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -405,7 +405,7 @@ The following arguments are supported by the Resource resource:
 	* `client_key` - (Optional) 
 	* `secret_store_client_key_path` - (Optional)
 	* `secret_store_client_key_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * aks_basic_auth:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -418,7 +418,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
 	* `secret_store_password_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * aks_service_account:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -428,7 +428,7 @@ The following arguments are supported by the Resource resource:
 	* `token` - (Optional) 
 	* `secret_store_token_path` - (Optional)
 	* `secret_store_token_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * aks_service_account_user_impersonation:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -438,7 +438,7 @@ The following arguments are supported by the Resource resource:
 	* `token` - (Optional) 
 	* `secret_store_token_path` - (Optional)
 	* `secret_store_token_key` - (Optional)
-	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `healthcheck_namespace` - (Optional) 
 * memcached:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.

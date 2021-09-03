@@ -8,7 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 
-	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
+	sdm "github.com/strongdm/web/pkg/api/v1/generated/go"
 )
 
 func TestAccSDMSecretStore_Get(t *testing.T) {
