@@ -3402,7 +3402,7 @@ type Kubernetes struct {
 	ClientCertificate string `json:"clientCertificate"`
 
 	ClientKey string `json:"clientKey"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3429,7 +3429,7 @@ type KubernetesUserImpersonation struct {
 	ClientCertificate string `json:"clientCertificate"`
 
 	ClientKey string `json:"clientKey"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3454,7 +3454,7 @@ type KubernetesBasicAuth struct {
 	Username string `json:"username"`
 
 	Password string `json:"password"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3477,7 +3477,7 @@ type KubernetesServiceAccount struct {
 	Port int32 `json:"port"`
 
 	Token string `json:"token"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3500,7 +3500,7 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Port int32 `json:"port"`
 
 	Token string `json:"token"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3533,7 +3533,7 @@ type AmazonEKS struct {
 	RoleArn string `json:"roleArn"`
 
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3566,7 +3566,7 @@ type AmazonEKSUserImpersonation struct {
 	RoleArn string `json:"roleArn"`
 
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3589,7 +3589,7 @@ type GoogleGKE struct {
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ServiceAccountKey string `json:"serviceAccountKey"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3612,7 +3612,7 @@ type GoogleGKEUserImpersonation struct {
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ServiceAccountKey string `json:"serviceAccountKey"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3639,7 +3639,7 @@ type AKS struct {
 	ClientCertificate string `json:"clientCertificate"`
 
 	ClientKey string `json:"clientKey"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3666,7 +3666,7 @@ type AKSUserImpersonation struct {
 	ClientCertificate string `json:"clientCertificate"`
 
 	ClientKey string `json:"clientKey"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3691,7 +3691,7 @@ type AKSBasicAuth struct {
 	Username string `json:"username"`
 
 	Password string `json:"password"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3714,7 +3714,7 @@ type AKSServiceAccount struct {
 	Port int32 `json:"port"`
 
 	Token string `json:"token"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
@@ -3737,7 +3737,7 @@ type AKSServiceAccountUserImpersonation struct {
 	Port int32 `json:"port"`
 
 	Token string `json:"token"`
-
+	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 }
 
