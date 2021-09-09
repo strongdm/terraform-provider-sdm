@@ -220,7 +220,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority` - 
 		* `client_certificate` - 
 		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* kubernetes_user_impersonation:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -232,7 +232,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority` - 
 		* `client_certificate` - 
 		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* kubernetes_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -243,7 +243,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `username` - 
 		* `password` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* kubernetes_service_account:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -253,7 +253,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* kubernetes_service_account_user_impersonation:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -263,7 +263,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* amazon_eks:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -278,7 +278,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `cluster_name` - 
 		* `role_arn` - 
 		* `role_external_id` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* amazon_eks_user_impersonation:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -293,7 +293,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `cluster_name` - 
 		* `role_arn` - 
 		* `role_external_id` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* google_gke:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -303,7 +303,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `endpoint` - 
 		* `certificate_authority` - 
 		* `service_account_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* google_gke_user_impersonation:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -313,7 +313,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `endpoint` - 
 		* `certificate_authority` - 
 		* `service_account_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* aks:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -325,7 +325,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority` - 
 		* `client_certificate` - 
 		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* aks_user_impersonation:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -337,7 +337,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority` - 
 		* `client_certificate` - 
 		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* aks_basic_auth:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -348,7 +348,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `username` - 
 		* `password` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* aks_service_account:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -358,7 +358,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* aks_service_account_user_impersonation:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
@@ -368,7 +368,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - 
 		* `port` - 
 		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* memcached:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
