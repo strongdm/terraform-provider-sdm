@@ -20,7 +20,7 @@ package sdm
 import (
 	"encoding/json"
 	"fmt"
-	proto "github.com/strongdm/strongdm-sdk-go/internal/v1"
+	proto "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/internal/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"

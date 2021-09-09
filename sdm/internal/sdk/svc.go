@@ -20,7 +20,7 @@ package sdm
 import (
 	"context"
 
-	plumbing "github.com/strongdm/strongdm-sdk-go/internal/v1"
+	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/internal/v1"
 )
 
 // AccountAttachments assign an account to a role or composite role.
