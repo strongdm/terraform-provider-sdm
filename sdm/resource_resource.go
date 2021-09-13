@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 
-	sdm "github.com/strongdm/web/pkg/api/v1/generated/go"
+	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceResource() *schema.Resource {
@@ -1339,7 +1339,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1429,7 +1429,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1504,7 +1504,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1566,7 +1566,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1628,7 +1628,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1748,7 +1748,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1868,7 +1868,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -1939,7 +1939,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -2010,7 +2010,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -2100,7 +2100,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -2190,7 +2190,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -2265,7 +2265,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -2327,7 +2327,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},
@@ -2389,7 +2389,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The path used to check the health of your connection.  Defaults to `default`.",
 						},
 					},
 				},

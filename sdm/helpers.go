@@ -5,7 +5,7 @@ package sdm
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	sdm "github.com/strongdm/web/pkg/api/v1/generated/go"
+	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 type apiCrudOperation func(d *schema.ResourceData, client *sdm.Client) error

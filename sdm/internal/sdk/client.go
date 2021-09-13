@@ -32,7 +32,7 @@ import (
 	"sync"
 	"time"
 
-	plumbing "github.com/strongdm/strongdm-sdk-go/internal/v1"
+	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/internal/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
@@ -298,7 +298,9 @@ func (c *Client) jitterSleep(iter int) {
 	// this jittering aims to prevent clients that start and conflict
 	// at the same time from retrying at the same intervals
 	dur := rand.Intn(int(durMax))
-	time.Sleep(time.Duration(dur))
+	// TODO: use resource.Retry instead of time.Sleep in Terraform provider
+	// see https://github.com/bflad/tfproviderlint/tree/main/passes/R018
+	time.Sleep(time.Duration(dur)) //lintignore:R018
 }
 
 func (c *Client) shouldRetry(iter int, err error) bool {
