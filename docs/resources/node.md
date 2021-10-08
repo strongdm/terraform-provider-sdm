@@ -19,12 +19,20 @@ resource "sdm_node" "gateway" {
         name = "test-gateway"
         listen_address = "165.23.40.1:21222"
         bind_address = "0.0.0.0:21222"
+        tags = {
+            region = "us-west"
+            env = "dev"
+        }    
     }
 }
 
 resource "sdm_node" "relay" {
     relay {
         name = "test-relay"
+        tags = {
+            region = "us-west"
+            env = "dev"
+        }    
     }
 }
 ```
@@ -32,6 +40,7 @@ resource "sdm_node" "relay" {
 The following arguments are supported by the Node resource:
 * relay:
 	* `name` - (Optional) Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
  gateways.
 * gateway:
@@ -39,6 +48,7 @@ The following arguments are supported by the Node resource:
 	* `listen_address` - (Required) The public hostname/port tuple at which the gateway will be accessible to clients.
 	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to.
  If not provided on create, set to "0.0.0.0:<listen_address_port>".
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
  gateways.
 ## Attribute Reference

@@ -14,10 +14,18 @@ A Role is a collection of access grants, and typically corresponds to a team, Ac
 resource "sdm_role" "all-dbs" {
     name = "all-database-access"
     composite = true
+    tags = {
+        region = "us-west"
+        env = "dev"
+    }    
 }
 
 resource "sdm_role" "redis-only" {
     name = "redis-role"
+    tags = {
+        region = "us-west"
+        env = "dev"
+    }    
 }
 ```
 ## Argument Reference

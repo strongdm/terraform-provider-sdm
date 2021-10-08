@@ -19,6 +19,7 @@ The following arguments are supported by a SecretStores data source:
 * `name` - (Optional) Unique human-readable name of the SecretStore.
 * `region` - (Optional) 
 * `server_address` - (Optional) 
+* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a SecretStores data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_secret_store ids.

@@ -16,6 +16,10 @@ Accounts are users that have access to strongDM. There are two types of accounts
 data "sdm_account" "user-queries" {
     type = "user"
     email = "*@strongdm.com"
+    tags = {
+        region = "us-west"
+        env = "dev"
+    }    
 }
 ```
 ## Argument Reference
@@ -27,6 +31,7 @@ The following arguments are supported by a Accounts data source:
 * `last_name` - (Optional) The User's last name.
 * `name` - (Optional) Unique human-readable name of the Service.
 * `suspended` - (Optional) The Service's suspended state.
+* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Accounts data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_account ids.

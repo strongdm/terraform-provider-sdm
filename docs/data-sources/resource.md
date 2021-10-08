@@ -14,6 +14,10 @@ A Resource is a database or server for which strongDM manages access.
 data "sdm_resource" "aurora_datasources" {
     name = "us-west*"
     type = "aurora_mysql"
+    tags = {
+        region = "us-west"
+        env = "dev"
+    }    
 }
 ```
 ## Argument Reference

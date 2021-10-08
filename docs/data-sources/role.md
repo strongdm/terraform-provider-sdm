@@ -13,6 +13,10 @@ A Role is a collection of access grants, and typically corresponds to a team, Ac
 ```hcl
 data "sdm_role" "composite_role_query" {
     composite = true
+    tags = {
+        region = "us-west"
+        env = "dev"
+    }    
 }
 ```
 ## Argument Reference
@@ -21,6 +25,7 @@ The following arguments are supported by a Roles data source:
 * `name` - (Optional) Unique human-readable name of the Role.
 * `access_rules` - (Optional) AccessRules JSON encoded access rules data.
 * `composite` - (Optional) True if the Role is a composite role.
+* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Roles data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_role ids.

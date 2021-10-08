@@ -16,6 +16,10 @@ Nodes make up the strongDM network, and allow your users to connect securely to 
 ```hcl
 data "sdm_node" "gateway_query" {
     type = "gateway"
+    tags = {
+        region = "us-west"
+        env = "dev"
+    }    
 }
 ```
 ## Argument Reference
@@ -28,6 +32,7 @@ The following arguments are supported by a Nodes data source:
 * `id` - (Optional) Unique identifier of the Gateway.
 * `listen_address` - (Optional) The public hostname/port tuple at which the gateway will be accessible to clients.
 * `name` - (Optional) Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
+* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Nodes data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_node ids.
