@@ -11,9 +11,9 @@ A Resource is a database or server for which strongDM manages access.
 ## Example Usage
 
 ```hcl
-data "sdm_resource" "aurora_datasources" {
+data "sdm_resource" "mysql_datasources" {
     name = "us-west*"
-    type = "aurora_mysql"
+    type = "mysql"
     tags = {
         region = "us-west"
         env = "dev"
@@ -22,7 +22,7 @@ data "sdm_resource" "aurora_datasources" {
 ```
 ## Argument Reference
 The following arguments are supported by a Resources data source:
-* `type` - (Optional) a filter to query only one subtype. See Attribute Reference for all subtypes.
+* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters for more information.
 * `hostname` - (Optional) 
 * `id` - (Optional) Unique identifier of the Resource.
 * `name` - (Optional) Unique human-readable name of the Resource.
@@ -33,720 +33,720 @@ In addition to provided arguments above, the following attributes are returned b
 * `id` - a generated id representing this request, unrelated to input id and sdm_resource ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `resources` - A single element list containing a map, where each key lists one of the following objects:
-	* rabbitmq_amqp_091:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+	* aks:
+		* `certificate_authority` - 
+		* `client_certificate` - 
+		* `client_key` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `hostname` - 
-		* `port_override` - 
-		* `port` - 
-		* `username` - 
-		* `password` - 
-		* `tls_required` - 
-	* amazonmq_amqp_091:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
+		* `port` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* aks_basic_auth:
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `hostname` - 
-		* `port_override` - 
-		* `port` - 
-		* `username` - 
-		* `password` - 
-		* `tls_required` - 
-	* athena:
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
+		* `password` - 
+		* `port` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* aks_service_account:
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `token` - 
+	* aks_service_account_user_impersonation:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `token` - 
+	* aks_user_impersonation:
+		* `certificate_authority` - 
+		* `client_certificate` - 
+		* `client_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* amazon_eks:
 		* `access_key` - 
+		* `certificate_authority` - 
+		* `cluster_name` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `region` - 
+		* `role_arn` - 
+		* `role_external_id` - 
 		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* amazon_eks_user_impersonation:
+		* `access_key` - 
+		* `certificate_authority` - 
+		* `cluster_name` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `region` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* amazon_es:
+		* `access_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
+		* `region` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* amazonmq_amqp_091:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* athena:
+		* `access_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `output` - 
 		* `port_override` - 
 		* `region` - 
 		* `role_arn` - 
 		* `role_external_id` - 
-	* aws:
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* aurora_mysql:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* aurora_postgres:
+		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* aws:
 		* `access_key` - 
-		* `secret_access_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `healthcheck_region` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `role_arn` - 
 		* `role_external_id` - 
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 	* big_query:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `port_override` - 
 		* `private_key` - 
 		* `project` - 
-		* `port_override` - 
-		* `endpoint` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* cassandra:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
-		* `port_override` - 
 		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
-	* db_2_i:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
 		* `username` - 
-		* `password` - 
-		* `port_override` - 
-		* `port` - 
-		* `tls_required` - 
-	* db_2_luw:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* druid:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port_override` - 
-		* `username` - 
-		* `password` - 
-		* `port` - 
-	* dynamo_db:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `access_key` - 
-		* `secret_access_key` - 
-		* `region` - 
-		* `endpoint` - 
-		* `port_override` - 
-		* `role_arn` - 
-		* `role_external_id` - 
-	* amazon_es:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `region` - 
-		* `secret_access_key` - 
-		* `endpoint` - 
-		* `access_key` - 
-		* `port_override` - 
-		* `role_arn` - 
-		* `role_external_id` - 
-	* elastic:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `port_override` - 
-		* `port` - 
-		* `tls_required` - 
-	* http_basic_auth:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `url` - 
-		* `healthcheck_path` - 
-		* `username` - 
-		* `password` - 
-		* `headers_blacklist` - 
-		* `default_path` - 
-		* `subdomain` - 
-	* http_no_auth:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `url` - 
-		* `healthcheck_path` - 
-		* `headers_blacklist` - 
-		* `default_path` - 
-		* `subdomain` - 
-	* http_auth:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `url` - 
-		* `healthcheck_path` - 
-		* `auth_header` - 
-		* `headers_blacklist` - 
-		* `default_path` - 
-		* `subdomain` - 
-	* kubernetes:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `certificate_authority` - 
-		* `client_certificate` - 
-		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* kubernetes_user_impersonation:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `certificate_authority` - 
-		* `client_certificate` - 
-		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* kubernetes_basic_auth:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `username` - 
-		* `password` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* kubernetes_service_account:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* kubernetes_service_account_user_impersonation:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* amazon_eks:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `endpoint` - 
-		* `access_key` - 
-		* `secret_access_key` - 
-		* `certificate_authority` - 
-		* `region` - 
-		* `cluster_name` - 
-		* `role_arn` - 
-		* `role_external_id` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* amazon_eks_user_impersonation:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `endpoint` - 
-		* `access_key` - 
-		* `secret_access_key` - 
-		* `certificate_authority` - 
-		* `region` - 
-		* `cluster_name` - 
-		* `role_arn` - 
-		* `role_external_id` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* google_gke:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `endpoint` - 
-		* `certificate_authority` - 
-		* `service_account_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* google_gke_user_impersonation:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `endpoint` - 
-		* `certificate_authority` - 
-		* `service_account_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* aks:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `certificate_authority` - 
-		* `client_certificate` - 
-		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* aks_user_impersonation:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `certificate_authority` - 
-		* `client_certificate` - 
-		* `client_key` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* aks_basic_auth:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `username` - 
-		* `password` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* aks_service_account:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* aks_service_account_user_impersonation:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port` - 
-		* `token` - 
-		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
-	* memcached:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port_override` - 
-		* `port` - 
-	* mongo_legacy_host:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `auth_database` - 
-		* `port_override` - 
-		* `username` - 
-		* `password` - 
-		* `port` - 
-		* `replica_set` - 
-		* `tls_required` - 
-	* mongo_legacy_replicaset:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `auth_database` - 
-		* `port_override` - 
-		* `username` - 
-		* `password` - 
-		* `port` - 
-		* `replica_set` - 
-		* `connect_to_replica` - 
-		* `tls_required` - 
-	* mongo_host:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `auth_database` - 
-		* `port_override` - 
-		* `username` - 
-		* `password` - 
-		* `port` - 
-		* `tls_required` - 
-	* mongo_replica_set:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `auth_database` - 
-		* `port_override` - 
-		* `username` - 
-		* `password` - 
-		* `port` - 
-		* `replica_set` - 
-		* `connect_to_replica` - 
-		* `tls_required` - 
-	* mysql:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* aurora_mysql:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* clustrix:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* maria:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* memsql:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* single_store:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-	* oracle:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port` - 
-		* `port_override` - 
-		* `tls_required` - 
-	* postgres:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-		* `override_database` - 
-	* aurora_postgres:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-		* `override_database` - 
-	* greenplum:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-		* `override_database` - 
-	* cockroach:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-		* `override_database` - 
-	* redshift:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
-		* `override_database` - 
 	* citus:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `port` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `override_database` - 
-	* presto:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
 		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* clustrix:
 		* `database` - 
-		* `port_override` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
 		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
+	* cockroach:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* db_2_i:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
-	* raw_tcp:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `port_override` - 
-		* `port` - 
-	* rdp:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
 		* `username` - 
-		* `password` - 
-		* `port_override` - 
-		* `port` - 
-	* redis:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+	* db_2_luw:
+		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `port_override` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
 		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* druid:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* dynamo_db:
+		* `access_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
+		* `region` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* elastic:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
 	* elasticache_redis:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `port_override` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
 		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
-	* snowflake:
+	* google_gke:
+		* `certificate_authority` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `service_account_key` - 
+		* `tags` - Tags is a map of key, value pairs.
+	* google_gke_user_impersonation:
+		* `certificate_authority` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `schema` - 
-		* `port_override` - 
-	* sql_server:
+		* `endpoint` - 
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `service_account_key` - 
+		* `tags` - Tags is a map of key, value pairs.
+	* greenplum:
+		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
-		* `password` - 
-		* `database` - 
-		* `port_override` - 
-		* `schema` - 
-		* `port` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* http_auth:
+		* `auth_header` - 
+		* `default_path` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `headers_blacklist` - 
+		* `healthcheck_path` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - 
+		* `tags` - Tags is a map of key, value pairs.
+		* `url` - 
+	* http_basic_auth:
+		* `default_path` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `headers_blacklist` - 
+		* `healthcheck_path` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - 
+		* `tags` - Tags is a map of key, value pairs.
+		* `url` - 
+		* `username` - 
+	* http_no_auth:
+		* `default_path` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `headers_blacklist` - 
+		* `healthcheck_path` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - 
+		* `tags` - Tags is a map of key, value pairs.
+		* `url` - 
+	* kubernetes:
+		* `certificate_authority` - 
+		* `client_certificate` - 
+		* `client_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* kubernetes_basic_auth:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* kubernetes_service_account:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `token` - 
+	* kubernetes_service_account_user_impersonation:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `token` - 
+	* kubernetes_user_impersonation:
+		* `certificate_authority` - 
+		* `client_certificate` - 
+		* `client_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* maria:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* memcached:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* memsql:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* mongo_host:
+		* `auth_database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* mongo_legacy_host:
+		* `auth_database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `replica_set` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* mongo_legacy_replicaset:
+		* `auth_database` - 
+		* `connect_to_replica` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `replica_set` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* mongo_replica_set:
+		* `auth_database` - 
+		* `connect_to_replica` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `replica_set` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* mysql:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* oracle:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* postgres:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* presto:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* rabbitmq_amqp_091:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
+	* raw_tcp:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* rdp:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* redis:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* redshift:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* single_store:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* snowflake:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port_override` - 
+		* `schema` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* sql_server:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `schema` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* ssh:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `allow_deprecated_key_exchanges` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_forwarding` - 
 		* `public_key` - 
-		* `port_forwarding` - 
-		* `allow_deprecated_key_exchanges` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* ssh_cert:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `allow_deprecated_key_exchanges` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
 		* `port_forwarding` - 
-		* `allow_deprecated_key_exchanges` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* ssh_customer_key:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `username` - 
-		* `port` - 
-		* `private_key` - 
-		* `port_forwarding` - 
 		* `allow_deprecated_key_exchanges` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `port_forwarding` - 
+		* `private_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* sybase:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
-		* `port_override` - 
-		* `port` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* sybase_iq:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
-		* `port_override` - 
-		* `port` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* teradata:
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `tags` - Tags is a map of key, value pairs.
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
-		* `username` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
-		* `port_override` - 
 		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 

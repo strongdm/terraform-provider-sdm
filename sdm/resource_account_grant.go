@@ -22,17 +22,17 @@ func resourceAccountGrant() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
-			"resource_id": {
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
-				Description: "The id of the composite role of this AccountGrant.",
-			},
 			"account_id": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "The id of the attached role of this AccountGrant.",
+			},
+			"resource_id": {
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The id of the composite role of this AccountGrant.",
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{
@@ -43,8 +43,8 @@ func resourceAccountGrant() *schema.Resource {
 func convertAccountGrantFromResourceData(d *schema.ResourceData) *sdm.AccountGrant {
 	return &sdm.AccountGrant{
 		ID:         d.Id(),
-		ResourceID: convertStringFromResourceData(d, "resource_id"),
 		AccountID:  convertStringFromResourceData(d, "account_id"),
+		ResourceID: convertStringFromResourceData(d, "resource_id"),
 	}
 }
 
@@ -59,8 +59,8 @@ func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.AccountGrant.ID)
 	v := resp.AccountGrant
-	d.Set("resource_id", (v.ResourceID))
 	d.Set("account_id", (v.AccountID))
+	d.Set("resource_id", (v.ResourceID))
 	return nil
 }
 
@@ -79,8 +79,8 @@ func resourceAccountGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read AccountGrant %s: %w", d.Id(), err)
 	}
 	v := resp.AccountGrant
-	d.Set("resource_id", (v.ResourceID))
 	d.Set("account_id", (v.AccountID))
+	d.Set("resource_id", (v.ResourceID))
 	return nil
 }
 func resourceAccountGrantDelete(d *schema.ResourceData, cc *sdm.Client) error {

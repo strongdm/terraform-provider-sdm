@@ -23,6 +23,39 @@ func resourceAccount() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"service": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "A Service is a service account that can connect to resources they are granted directly, or granted via roles. Services are typically automated jobs.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Service.",
+						},
+						"suspended": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "The Service's suspended state.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"token": {
+							Type:      schema.TypeString,
+							Computed:  true,
+							Sensitive: true,
+						},
+					},
+				},
+			},
 			"user": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -61,39 +94,6 @@ func resourceAccount() *schema.Resource {
 					},
 				},
 			},
-			"service": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "A Service is a service account that can connect to resources they are granted directly, or granted via roles. Services are typically automated jobs.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Service.",
-						},
-						"suspended": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "The Service's suspended state.",
-						},
-						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-						"token": {
-							Type:      schema.TypeString,
-							Computed:  true,
-							Sensitive: true,
-						},
-					},
-				},
-			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -101,6 +101,19 @@ func resourceAccount() *schema.Resource {
 	}
 }
 func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
+	if list := d.Get("service").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.Service{}
+		}
+		out := &sdm.Service{
+			ID:        d.Id(),
+			Name:      convertStringFromMap(raw, "name"),
+			Suspended: convertBoolFromMap(raw, "suspended"),
+			Tags:      convertTagsFromMap(raw, "tags"),
+		}
+		return out
+	}
 	if list := d.Get("user").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -111,19 +124,6 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 			Email:     convertStringFromMap(raw, "email"),
 			FirstName: convertStringFromMap(raw, "first_name"),
 			LastName:  convertStringFromMap(raw, "last_name"),
-			Suspended: convertBoolFromMap(raw, "suspended"),
-			Tags:      convertTagsFromMap(raw, "tags"),
-		}
-		return out
-	}
-	if list := d.Get("service").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.Service{}
-		}
-		out := &sdm.Service{
-			ID:        d.Id(),
-			Name:      convertStringFromMap(raw, "name"),
 			Suspended: convertBoolFromMap(raw, "suspended"),
 			Tags:      convertTagsFromMap(raw, "tags"),
 		}
@@ -143,6 +143,17 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.Account.GetID())
 	switch v := resp.Account.(type) {
+	case *sdm.Service:
+		localV, _ := localVersion.(*sdm.Service)
+		_ = localV
+		d.Set("service", []map[string]interface{}{
+			{
+				"name":      (v.Name),
+				"suspended": (v.Suspended),
+				"tags":      convertTagsToMap(v.Tags),
+				"token":     resp.Token,
+			},
+		})
 	case *sdm.User:
 		localV, _ := localVersion.(*sdm.User)
 		_ = localV
@@ -153,17 +164,6 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
 				"tags":       convertTagsToMap(v.Tags),
-			},
-		})
-	case *sdm.Service:
-		localV, _ := localVersion.(*sdm.Service)
-		_ = localV
-		d.Set("service", []map[string]interface{}{
-			{
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
-				"tags":      convertTagsToMap(v.Tags),
-				"token":     resp.Token,
 			},
 		})
 	}
@@ -185,6 +185,20 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read Account %s: %w", d.Id(), err)
 	}
 	switch v := resp.Account.(type) {
+	case *sdm.Service:
+		localV, ok := localVersion.(*sdm.Service)
+		if !ok {
+			localV = &sdm.Service{}
+		}
+		_ = localV
+		d.Set("service", []map[string]interface{}{
+			{
+				"name":      (v.Name),
+				"suspended": (v.Suspended),
+				"tags":      convertTagsToMap(v.Tags),
+				"token":     d.Get("service.0.token"),
+			},
+		})
 	case *sdm.User:
 		localV, ok := localVersion.(*sdm.User)
 		if !ok {
@@ -198,20 +212,6 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
 				"tags":       convertTagsToMap(v.Tags),
-			},
-		})
-	case *sdm.Service:
-		localV, ok := localVersion.(*sdm.Service)
-		if !ok {
-			localV = &sdm.Service{}
-		}
-		_ = localV
-		d.Set("service", []map[string]interface{}{
-			{
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
-				"tags":      convertTagsToMap(v.Tags),
-				"token":     d.Get("service.0.token"),
 			},
 		})
 	}

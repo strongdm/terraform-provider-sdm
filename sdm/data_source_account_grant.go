@@ -22,6 +22,11 @@ func dataSourceAccountGrant() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
+			"account_id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The id of the attached role of this AccountGrant.",
+			},
 			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -32,17 +37,17 @@ func dataSourceAccountGrant() *schema.Resource {
 				Optional:    true,
 				Description: "The id of the composite role of this AccountGrant.",
 			},
-			"account_id": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "The id of the attached role of this AccountGrant.",
-			},
 			"account_grants": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"account_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The id of the attached role of this AccountGrant.",
+						},
 						"id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -52,11 +57,6 @@ func dataSourceAccountGrant() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "The id of the composite role of this AccountGrant.",
-						},
-						"account_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The id of the attached role of this AccountGrant.",
 						},
 					},
 				},
@@ -71,16 +71,16 @@ func dataSourceAccountGrant() *schema.Resource {
 func convertAccountGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
+	if v, ok := d.GetOk("account_id"); ok {
+		filter += "accountid:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOk("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("resource_id"); ok {
 		filter += "resourceid:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("account_id"); ok {
-		filter += "accountid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("start_from"); ok {
@@ -110,9 +110,9 @@ func dataSourceAccountGrantList(d *schema.ResourceData, cc *sdm.Client) error {
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
+				"account_id":  (v.AccountID),
 				"id":          (v.ID),
 				"resource_id": (v.ResourceID),
-				"account_id":  (v.AccountID),
 			})
 	}
 	if resp.Err() != nil {

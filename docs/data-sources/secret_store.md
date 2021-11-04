@@ -11,7 +11,7 @@ A SecretStore is a server where resource secrets (passwords, keys) are stored.
  Coming soon support for HashiCorp Vault and AWS Secret Store. Contact support@strongdm.com to request access to the beta.
 ## Argument Reference
 The following arguments are supported by a SecretStores data source:
-* `type` - (Optional) a filter to query only one subtype. See Attribute Reference for all subtypes.
+* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters for more information.
 * `ca_cert_path` - (Optional) 
 * `client_cert_path` - (Optional) 
 * `client_key_path` - (Optional) 
@@ -31,12 +31,12 @@ In addition to provided arguments above, the following attributes are returned b
 		* `region` - 
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
-		* `id` - Unique identifier of the SecretStore.
-		* `name` - Unique human-readable name of the SecretStore.
-		* `server_address` - 
 		* `ca_cert_path` - 
 		* `client_cert_path` - 
 		* `client_key_path` - 
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `server_address` - 
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_token:
 		* `id` - Unique identifier of the SecretStore.

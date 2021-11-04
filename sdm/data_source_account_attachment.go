@@ -22,15 +22,15 @@ func dataSourceAccountAttachment() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"id": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "Unique identifier of the AccountAttachment.",
-			},
 			"account_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "The id of the account of this AccountAttachment.",
+			},
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the AccountAttachment.",
 			},
 			"role_id": {
 				Type:        schema.TypeString,
@@ -43,15 +43,15 @@ func dataSourceAccountAttachment() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique identifier of the AccountAttachment.",
-						},
 						"account_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "The id of the account of this AccountAttachment.",
+						},
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the AccountAttachment.",
 						},
 						"role_id": {
 							Type:        schema.TypeString,
@@ -71,12 +71,12 @@ func dataSourceAccountAttachment() *schema.Resource {
 func convertAccountAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("id"); ok {
-		filter += "id:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOk("account_id"); ok {
 		filter += "accountid:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("id"); ok {
+		filter += "id:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("role_id"); ok {
@@ -102,8 +102,8 @@ func dataSourceAccountAttachmentList(d *schema.ResourceData, cc *sdm.Client) err
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":         (v.ID),
 				"account_id": (v.AccountID),
+				"id":         (v.ID),
 				"role_id":    (v.RoleID),
 			})
 	}

@@ -96,4 +96,4 @@ You must set `TF_ACC=yes` in order to run tests. IF `TF_ACC=yes` is not set all 
 
 ## License
 
-[Apache 2](https://github.com/strongdm/strongdm-sdk-python/blob/master/LICENSE)
+[Mozilla Public License 2.0](https://github.com/strongdm/terraform-provider-sdm/blob/master/LICENSE)

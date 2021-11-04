@@ -55,8 +55,8 @@ func (svc *AccountAttachments) Create(
 	}
 
 	resp := &AccountAttachmentCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.AccountAttachment = convertAccountAttachmentToPorcelain(plumbingResponse.AccountAttachment)
+	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
 	return resp, nil
 }
@@ -87,8 +87,8 @@ func (svc *AccountAttachments) Get(
 	}
 
 	resp := &AccountAttachmentGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.AccountAttachment = convertAccountAttachmentToPorcelain(plumbingResponse.AccountAttachment)
+	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
 	return resp, nil
 }
@@ -203,8 +203,8 @@ func (svc *AccountGrants) Create(
 	}
 
 	resp := &AccountGrantCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.AccountGrant = convertAccountGrantToPorcelain(plumbingResponse.AccountGrant)
+	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
 	return resp, nil
 }
@@ -235,8 +235,8 @@ func (svc *AccountGrants) Get(
 	}
 
 	resp := &AccountGrantGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.AccountGrant = convertAccountGrantToPorcelain(plumbingResponse.AccountGrant)
+	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
 	return resp, nil
 }
@@ -353,10 +353,10 @@ func (svc *Accounts) Create(
 	}
 
 	resp := &AccountCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.Account = convertAccountToPorcelain(plumbingResponse.Account)
-	resp.Token = (plumbingResponse.Token)
+	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Token = (plumbingResponse.Token)
 	return resp, nil
 }
 
@@ -386,8 +386,8 @@ func (svc *Accounts) Get(
 	}
 
 	resp := &AccountGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.Account = convertAccountToPorcelain(plumbingResponse.Account)
+	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
 	return resp, nil
 }
@@ -418,8 +418,8 @@ func (svc *Accounts) Update(
 	}
 
 	resp := &AccountUpdateResponse{}
-	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.Account = convertAccountToPorcelain(plumbingResponse.Account)
+	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
 	return resp, nil
 }
@@ -565,8 +565,8 @@ func (svc *ControlPanel) VerifyJWT(
 
 	resp := &ControlPanelVerifyJWTResponse{}
 	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.ValID = (plumbingResponse.Valid)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.ValID = (plumbingResponse.Valid)
 	return resp, nil
 }
 
@@ -606,8 +606,8 @@ func (svc *Nodes) Create(
 	resp := &NodeCreateResponse{}
 	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
 	resp.Node = convertNodeToPorcelain(plumbingResponse.Node)
-	resp.Token = (plumbingResponse.Token)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Token = (plumbingResponse.Token)
 	return resp, nil
 }
 
@@ -832,8 +832,8 @@ func (svc *Resources) Create(
 
 	resp := &ResourceCreateResponse{}
 	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
 	return resp, nil
 }
 
@@ -864,8 +864,8 @@ func (svc *Resources) Get(
 
 	resp := &ResourceGetResponse{}
 	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
 	return resp, nil
 }
 
@@ -896,8 +896,8 @@ func (svc *Resources) Update(
 
 	resp := &ResourceUpdateResponse{}
 	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
 	return resp, nil
 }
 
@@ -1015,8 +1015,8 @@ func (svc *RoleAttachments) Create(
 
 	resp := &RoleAttachmentCreateResponse{}
 	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RoleAttachment = convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.RoleAttachment = convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment)
 	return resp, nil
 }
 
@@ -1047,8 +1047,8 @@ func (svc *RoleAttachments) Get(
 
 	resp := &RoleAttachmentGetResponse{}
 	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RoleAttachment = convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.RoleAttachment = convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment)
 	return resp, nil
 }
 
@@ -1166,8 +1166,8 @@ func (svc *RoleGrants) Create(
 
 	resp := &RoleGrantCreateResponse{}
 	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RoleGrant = convertRoleGrantToPorcelain(plumbingResponse.RoleGrant)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.RoleGrant = convertRoleGrantToPorcelain(plumbingResponse.RoleGrant)
 	return resp, nil
 }
 
@@ -1198,8 +1198,8 @@ func (svc *RoleGrants) Get(
 
 	resp := &RoleGrantGetResponse{}
 	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RoleGrant = convertRoleGrantToPorcelain(plumbingResponse.RoleGrant)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.RoleGrant = convertRoleGrantToPorcelain(plumbingResponse.RoleGrant)
 	return resp, nil
 }
 
@@ -1318,8 +1318,8 @@ func (svc *Roles) Create(
 
 	resp := &RoleCreateResponse{}
 	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
 	return resp, nil
 }
 
@@ -1350,8 +1350,8 @@ func (svc *Roles) Get(
 
 	resp := &RoleGetResponse{}
 	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
 	return resp, nil
 }
 
@@ -1382,8 +1382,8 @@ func (svc *Roles) Update(
 
 	resp := &RoleUpdateResponse{}
 	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
 	return resp, nil
 }
 
@@ -1497,8 +1497,8 @@ func (svc *SecretStores) Create(
 
 	resp := &SecretStoreCreateResponse{}
 	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
 	return resp, nil
 }
 
@@ -1529,8 +1529,8 @@ func (svc *SecretStores) Get(
 
 	resp := &SecretStoreGetResponse{}
 	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
 	return resp, nil
 }
 
@@ -1561,8 +1561,8 @@ func (svc *SecretStores) Update(
 
 	resp := &SecretStoreUpdateResponse{}
 	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
 	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
 	return resp, nil
 }
 

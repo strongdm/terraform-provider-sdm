@@ -55,49 +55,6 @@ func dataSourceAccount() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"user": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "A User can connect to resources they are granted directly, or granted via roles.",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the User.",
-									},
-									"email": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The User's email address. Must be unique.",
-									},
-									"first_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The User's first name.",
-									},
-									"last_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The User's last name.",
-									},
-									"suspended": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "The User's suspended state.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-								},
-							},
-						},
 						"service": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -118,6 +75,49 @@ func dataSourceAccount() *schema.Resource {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "The Service's suspended state.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"user": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "A User can connect to resources they are granted directly, or granted via roles.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"email": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The User's email address. Must be unique.",
+									},
+									"first_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The User's first name.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the User.",
+									},
+									"last_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The User's last name.",
+									},
+									"suspended": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "The User's suspended state.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -191,26 +191,26 @@ func dataSourceAccountList(d *schema.ResourceData, cc *sdm.Client) error {
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"user": {},
+		"service": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
-		case *sdm.User:
-			output[0]["user"] = append(output[0]["user"], entity{
-				"id":         (v.ID),
-				"email":      (v.Email),
-				"first_name": (v.FirstName),
-				"last_name":  (v.LastName),
-				"suspended":  (v.Suspended),
-				"tags":       convertTagsToMap(v.Tags),
-			})
 		case *sdm.Service:
 			output[0]["service"] = append(output[0]["service"], entity{
 				"id":        (v.ID),
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
 				"tags":      convertTagsToMap(v.Tags),
+			})
+		case *sdm.User:
+			output[0]["user"] = append(output[0]["user"], entity{
+				"email":      (v.Email),
+				"first_name": (v.FirstName),
+				"id":         (v.ID),
+				"last_name":  (v.LastName),
+				"suspended":  (v.Suspended),
+				"tags":       convertTagsToMap(v.Tags),
 			})
 		}
 	}

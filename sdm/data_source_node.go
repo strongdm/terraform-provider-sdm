@@ -51,12 +51,60 @@ func dataSourceNode() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"gateway": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
+									},
+									"gateway_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Gateway.",
+									},
+									"listen_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"relay": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"gateway_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -75,54 +123,6 @@ func dataSourceNode() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
-									},
-									"gateway_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
-									},
-								},
-							},
-						},
-						"gateway": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Gateway.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
-									},
-									"listen_address": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
-									},
-									"bind_address": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"gateway_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
 									},
 								},
 							},
@@ -187,26 +187,26 @@ func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"relay": {},
+		"gateway": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
-		case *sdm.Relay:
-			output[0]["relay"] = append(output[0]["relay"], entity{
-				"id":             (v.ID),
-				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
-				"gateway_filter": (v.GatewayFilter),
-			})
 		case *sdm.Gateway:
 			output[0]["gateway"] = append(output[0]["gateway"], entity{
+				"bind_address":   (v.BindAddress),
+				"gateway_filter": (v.GatewayFilter),
+				"id":             (v.ID),
+				"listen_address": (v.ListenAddress),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
+			})
+		case *sdm.Relay:
+			output[0]["relay"] = append(output[0]["relay"], entity{
+				"gateway_filter": (v.GatewayFilter),
 				"id":             (v.ID),
 				"name":           (v.Name),
-				"listen_address": (v.ListenAddress),
-				"bind_address":   (v.BindAddress),
 				"tags":           convertTagsToMap(v.Tags),
-				"gateway_filter": (v.GatewayFilter),
 			})
 		}
 	}

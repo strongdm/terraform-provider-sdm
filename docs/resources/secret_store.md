@@ -16,11 +16,11 @@ The following arguments are supported by the SecretStore resource:
 	* `region` - (Required) 
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_tls:
-	* `name` - (Required) Unique human-readable name of the SecretStore.
-	* `server_address` - (Required) 
 	* `ca_cert_path` - (Optional) 
 	* `client_cert_path` - (Required) 
 	* `client_key_path` - (Required) 
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `server_address` - (Required) 
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_token:
 	* `name` - (Required) Unique human-readable name of the SecretStore.

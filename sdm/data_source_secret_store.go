@@ -98,21 +98,6 @@ func dataSourceSecretStore() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the SecretStore.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the SecretStore.",
-									},
-									"server_address": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
 									"ca_cert_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -124,6 +109,21 @@ func dataSourceSecretStore() *schema.Resource {
 										Description: "",
 									},
 									"client_key_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"server_address": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -251,12 +251,12 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"server_address":   (v.ServerAddress),
 				"ca_cert_path":     (v.CACertPath),
 				"client_cert_path": (v.ClientCertPath),
 				"client_key_path":  (v.ClientKeyPath),
+				"id":               (v.ID),
+				"name":             (v.Name),
+				"server_address":   (v.ServerAddress),
 				"tags":             convertTagsToMap(v.Tags),
 			})
 		case *sdm.VaultTokenStore:

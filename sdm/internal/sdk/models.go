@@ -31,165 +31,162 @@ func (t Tags) clone() Tags {
 	return res
 }
 
-// CreateResponseMetadata is reserved for future use.
-type CreateResponseMetadata struct {
-}
+type AKS struct {
+	CertificateAuthority string `json:"certificateAuthority"`
 
-// GetResponseMetadata is reserved for future use.
-type GetResponseMetadata struct {
-}
+	ClientCertificate string `json:"clientCertificate"`
 
-// UpdateResponseMetadata is reserved for future use.
-type UpdateResponseMetadata struct {
-}
+	ClientKey string `json:"clientKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
 
-// DeleteResponseMetadata is reserved for future use.
-type DeleteResponseMetadata struct {
-}
-
-// RateLimitMetadata contains information about remaining requests avaialable
-// to the user over some timeframe.
-type RateLimitMetadata struct {
-	// How many total requests the user/token is authorized to make before being
-	// rate limited.
-	Limit int64 `json:"limit"`
-	// How many remaining requests out of the limit are still avaialable.
-	Remaining int64 `json:"remaining"`
-	// The time when remaining will be reset to limit.
-	ResetAt time.Time `json:"resetAt"`
-	// The bucket this user/token is associated with, which may be shared between
-	// multiple users/tokens.
-	Bucket string `json:"bucket"`
-}
-
-type Tag struct {
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
-	Value string `json:"value"`
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
-// AccountAttachmentCreateResponse reports how the AccountAttachments were created in the system.
-type AccountAttachmentCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created AccountAttachment.
-	AccountAttachment *AccountAttachment `json:"accountAttachment"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
+type AKSBasicAuth struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
 
-// AccountAttachmentGetResponse returns a requested AccountAttachment.
-type AccountAttachmentGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested AccountAttachment.
-	AccountAttachment *AccountAttachment `json:"accountAttachment"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// AccountAttachmentDeleteResponse returns information about a AccountAttachment that was deleted.
-type AccountAttachmentDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// AccountAttachments assign an account to a role or composite role.
-type AccountAttachment struct {
-	// Unique identifier of the AccountAttachment.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
 	ID string `json:"id"`
-	// The id of the account of this AccountAttachment.
-	AccountID string `json:"accountId"`
-	// The id of the attached role of this AccountAttachment.
-	RoleID string `json:"roleId"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
 }
 
-// AccountGrantCreateResponse reports how the AccountGrants were created in the system.
-type AccountGrantCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created AccountGrant.
-	AccountGrant *AccountGrant `json:"accountGrant"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
+type AKSServiceAccount struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
 
-// AccountGrantGetResponse returns a requested AccountGrant.
-type AccountGrantGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested AccountGrant.
-	AccountGrant *AccountGrant `json:"accountGrant"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// AccountGrantDeleteResponse returns information about a AccountGrant that was deleted.
-type AccountGrantDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// AccountGrants connect a resource directly to an account, giving the account the permission to connect to that resource.
-type AccountGrant struct {
-	// Unique identifier of the AccountGrant.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
 	ID string `json:"id"`
-	// The id of the composite role of this AccountGrant.
-	ResourceID string `json:"resourceId"`
-	// The id of the attached role of this AccountGrant.
-	AccountID string `json:"accountId"`
-	// The timestamp when the resource will be granted. Optional. Both start_at
-	// and end_at must be defined together, or not defined at all.
-	StartFrom time.Time `json:"startFrom"`
-	// The timestamp when the resource grant will expire. Optional. Both
-	// start_at and end_at must be defined together, or not defined at all.
-	ValidUntil time.Time `json:"validUntil"`
-}
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
 
-// AccountCreateResponse reports how the Accounts were created in the system.
-type AccountCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created Account.
-	Account Account `json:"account"`
-	// The auth token generated for the Account. The Account will use this token to
-	// authenticate with the strongDM API.
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
 	Token string `json:"token"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// AccountGetResponse returns a requested Account.
-type AccountGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested Account.
-	Account Account `json:"account"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
+type AKSServiceAccountUserImpersonation struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Token string `json:"token"`
 }
 
-// AccountUpdateResponse returns the fields of a Account after it has been updated by
-// a AccountUpdateRequest.
-type AccountUpdateResponse struct {
-	// Reserved for future use.
-	Meta *UpdateResponseMetadata `json:"meta"`
-	// The updated Account.
-	Account Account `json:"account"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
+type AKSUserImpersonation struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
-// AccountDeleteResponse returns information about a Account that was deleted.
-type AccountDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
+type AWS struct {
+	AccessKey string `json:"accessKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	HealthcheckRegion string `json:"healthcheckRegion"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type AWSStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+
+	Region string `json:"region"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 // Accounts are users that have access to strongDM. There are two types of accounts:
@@ -209,30 +206,6 @@ type Account interface {
 	isOneOf_Account()
 }
 
-func (*User) isOneOf_Account() {}
-
-// GetID returns the unique identifier of the User.
-func (m *User) GetID() string { return m.ID }
-
-// IsSuspended returns whether the User is suspended.
-func (m *User) IsSuspended() bool {
-	return m.Suspended
-}
-
-// SetSuspended sets the suspended of the User.
-func (m *User) SetSuspended(v bool) {
-	m.Suspended = v
-}
-
-// GetTags returns the tags of the User.
-func (m *User) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the User.
-func (m *User) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
 func (*Service) isOneOf_Account() {}
 
 // GetID returns the unique identifier of the Service.
@@ -257,35 +230,488 @@ func (m *Service) GetTags() Tags {
 func (m *Service) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
+func (*User) isOneOf_Account() {}
 
-// A User can connect to resources they are granted directly, or granted
-// via roles.
-type User struct {
-	// Unique identifier of the User.
+// GetID returns the unique identifier of the User.
+func (m *User) GetID() string { return m.ID }
+
+// IsSuspended returns whether the User is suspended.
+func (m *User) IsSuspended() bool {
+	return m.Suspended
+}
+
+// SetSuspended sets the suspended of the User.
+func (m *User) SetSuspended(v bool) {
+	m.Suspended = v
+}
+
+// GetTags returns the tags of the User.
+func (m *User) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the User.
+func (m *User) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// AccountAttachments assign an account to a role or composite role.
+type AccountAttachment struct {
+	// The id of the account of this AccountAttachment.
+	AccountID string `json:"accountId"`
+	// Unique identifier of the AccountAttachment.
 	ID string `json:"id"`
-	// The User's email address. Must be unique.
-	Email string `json:"email"`
-	// The User's first name.
-	FirstName string `json:"firstName"`
-	// The User's last name.
-	LastName string `json:"lastName"`
-	// The User's suspended state.
-	Suspended bool `json:"suspended"`
+	// The id of the attached role of this AccountAttachment.
+	RoleID string `json:"roleId"`
+}
+
+// AccountAttachmentCreateResponse reports how the AccountAttachments were created in the system.
+type AccountAttachmentCreateResponse struct {
+	// The created AccountAttachment.
+	AccountAttachment *AccountAttachment `json:"accountAttachment"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountAttachmentDeleteResponse returns information about a AccountAttachment that was deleted.
+type AccountAttachmentDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountAttachmentGetResponse returns a requested AccountAttachment.
+type AccountAttachmentGetResponse struct {
+	// The requested AccountAttachment.
+	AccountAttachment *AccountAttachment `json:"accountAttachment"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountCreateResponse reports how the Accounts were created in the system.
+type AccountCreateResponse struct {
+	// The created Account.
+	Account Account `json:"account"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The auth token generated for the Account. The Account will use this token to
+	// authenticate with the strongDM API.
+	Token string `json:"token"`
+}
+
+// AccountDeleteResponse returns information about a Account that was deleted.
+type AccountDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountGetResponse returns a requested Account.
+type AccountGetResponse struct {
+	// The requested Account.
+	Account Account `json:"account"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountGrants connect a resource directly to an account, giving the account the permission to connect to that resource.
+type AccountGrant struct {
+	// The id of the attached role of this AccountGrant.
+	AccountID string `json:"accountId"`
+	// Unique identifier of the AccountGrant.
+	ID string `json:"id"`
+	// The id of the composite role of this AccountGrant.
+	ResourceID string `json:"resourceId"`
+	// The timestamp when the resource will be granted. Optional. Both start_at
+	// and end_at must be defined together, or not defined at all.
+	StartFrom time.Time `json:"startFrom"`
+	// The timestamp when the resource grant will expire. Optional. Both
+	// start_at and end_at must be defined together, or not defined at all.
+	ValidUntil time.Time `json:"validUntil"`
+}
+
+// AccountGrantCreateResponse reports how the AccountGrants were created in the system.
+type AccountGrantCreateResponse struct {
+	// The created AccountGrant.
+	AccountGrant *AccountGrant `json:"accountGrant"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountGrantDeleteResponse returns information about a AccountGrant that was deleted.
+type AccountGrantDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountGrantGetResponse returns a requested AccountGrant.
+type AccountGrantGetResponse struct {
+	// The requested AccountGrant.
+	AccountGrant *AccountGrant `json:"accountGrant"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountUpdateResponse returns the fields of a Account after it has been updated by
+// a AccountUpdateRequest.
+type AccountUpdateResponse struct {
+	// The updated Account.
+	Account Account `json:"account"`
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type AmazonEKS struct {
+	AccessKey string `json:"accessKey"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClusterName string `json:"clusterName"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Region string `json:"region"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
 
-// A Service is a service account that can connect to resources they are granted
-// directly, or granted via roles. Services are typically automated jobs.
-type Service struct {
-	// Unique identifier of the Service.
+type AmazonEKSUserImpersonation struct {
+	AccessKey string `json:"accessKey"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClusterName string `json:"clusterName"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
 	ID string `json:"id"`
-	// Unique human-readable name of the Service.
+	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The Service's suspended state.
-	Suspended bool `json:"suspended"`
+
+	Region string `json:"region"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+type AmazonES struct {
+	AccessKey string `json:"accessKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Region string `json:"region"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type AmazonMQAMQP091 struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type Athena struct {
+	AccessKey string `json:"accessKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Output string `json:"output"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Region string `json:"region"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type AuroraMysql struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type AuroraPostgres struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type BigQuery struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	PrivateKey string `json:"privateKey"`
+
+	Project string `json:"project"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Cassandra struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type Citus struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Clustrix struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Cockroach struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
 }
 
 // ControlPanelGetSSHCAPublicKeyResponse represents a request for an
@@ -304,10 +730,1020 @@ type ControlPanelGetSSHCAPublicKeyResponse struct {
 type ControlPanelVerifyJWTResponse struct {
 	// Reserved for future use.
 	Meta *GetResponseMetadata `json:"meta"`
-	// Reports if the given token is valid.
-	ValID bool `json:"valid"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// Reports if the given token is valid.
+	ValID bool `json:"valid"`
+}
+
+// CreateResponseMetadata is reserved for future use.
+type CreateResponseMetadata struct {
+}
+
+type DB2I struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type DB2LUW struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+// DeleteResponseMetadata is reserved for future use.
+type DeleteResponseMetadata struct {
+}
+
+type Druid struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type DynamoDB struct {
+	AccessKey string `json:"accessKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Region string `json:"region"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type Elastic struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type ElasticacheRedis struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+}
+
+// Gateway represents a StrongDM CLI installation running in gateway mode.
+type Gateway struct {
+	// The hostname/port tuple which the gateway daemon will bind to.
+	// If not provided on create, set to "0.0.0.0:<listen_address_port>".
+	BindAddress string `json:"bindAddress"`
+	// GatewayFilter can be used to restrict the peering between relays and
+	// gateways.
+	GatewayFilter string `json:"gatewayFilter"`
+	// Unique identifier of the Gateway.
+	ID string `json:"id"`
+	// The public hostname/port tuple at which the gateway will be accessible to clients.
+	ListenAddress string `json:"listenAddress"`
+	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
+	Name string `json:"name"`
+	// The current state of the gateway. One of: "new", "verifying_restart",
+	// "restarting", "started", "stopped", "dead", "unknown"
+	State string `json:"state"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// GetResponseMetadata is reserved for future use.
+type GetResponseMetadata struct {
+}
+
+type GoogleGKE struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	ServiceAccountKey string `json:"serviceAccountKey"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type GoogleGKEUserImpersonation struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	ServiceAccountKey string `json:"serviceAccountKey"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type Greenplum struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type HTTPAuth struct {
+	AuthHeader string `json:"authHeader"`
+
+	DefaultPath string `json:"defaultPath"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	HeadersBlacklist string `json:"headersBlacklist"`
+
+	HealthcheckPath string `json:"healthcheckPath"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Url string `json:"url"`
+}
+
+type HTTPBasicAuth struct {
+	DefaultPath string `json:"defaultPath"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	HeadersBlacklist string `json:"headersBlacklist"`
+
+	HealthcheckPath string `json:"healthcheckPath"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Url string `json:"url"`
+
+	Username string `json:"username"`
+}
+
+type HTTPNoAuth struct {
+	DefaultPath string `json:"defaultPath"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	HeadersBlacklist string `json:"headersBlacklist"`
+
+	HealthcheckPath string `json:"healthcheckPath"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Url string `json:"url"`
+}
+
+type Kubernetes struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type KubernetesBasicAuth struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type KubernetesServiceAccount struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Token string `json:"token"`
+}
+
+type KubernetesServiceAccountUserImpersonation struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Token string `json:"token"`
+}
+
+type KubernetesUserImpersonation struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type Maria struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Memcached struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type Memsql struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type MongoHost struct {
+	AuthDatabase string `json:"authDatabase"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type MongoLegacyHost struct {
+	AuthDatabase string `json:"authDatabase"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	ReplicaSet string `json:"replicaSet"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type MongoLegacyReplicaset struct {
+	AuthDatabase string `json:"authDatabase"`
+
+	ConnectToReplica bool `json:"connectToReplica"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	ReplicaSet string `json:"replicaSet"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type MongoReplicaSet struct {
+	AuthDatabase string `json:"authDatabase"`
+
+	ConnectToReplica bool `json:"connectToReplica"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	ReplicaSet string `json:"replicaSet"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type Mysql struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+// Nodes make up the strongDM network, and allow your users to connect securely to your resources.
+// There are two types of nodes:
+// 1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
+// 1. **Gateways:** a relay that also listens for connections from strongDM clients
+type Node interface {
+	// GetID returns the unique identifier of the Node.
+	GetID() string
+	// GetTags returns the tags of the Node.
+	GetTags() Tags
+	// SetTags sets the tags of the Node.
+	SetTags(Tags)
+	isOneOf_Node()
+}
+
+func (*Gateway) isOneOf_Node() {}
+
+// GetID returns the unique identifier of the Gateway.
+func (m *Gateway) GetID() string { return m.ID }
+
+// GetTags returns the tags of the Gateway.
+func (m *Gateway) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Gateway.
+func (m *Gateway) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+func (*Relay) isOneOf_Node() {}
+
+// GetID returns the unique identifier of the Relay.
+func (m *Relay) GetID() string { return m.ID }
+
+// GetTags returns the tags of the Relay.
+func (m *Relay) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Relay.
+func (m *Relay) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// NodeCreateResponse reports how the Nodes were created in the system.
+type NodeCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created Node.
+	Node Node `json:"node"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The auth token generated for the Node. The Node will use this token to
+	// authenticate with the strongDM API.
+	Token string `json:"token"`
+}
+
+// NodeDeleteResponse returns information about a Node that was deleted.
+type NodeDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// NodeGetResponse returns a requested Node.
+type NodeGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested Node.
+	Node Node `json:"node"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// NodeUpdateResponse returns the fields of a Node after it has been updated by
+// a NodeUpdateRequest.
+type NodeUpdateResponse struct {
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// The updated Node.
+	Node Node `json:"node"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type Oracle struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type Postgres struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Presto struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+type RDP struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type RabbitMQAMQP091 struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
+}
+
+// RateLimitMetadata contains information about remaining requests avaialable
+// to the user over some timeframe.
+type RateLimitMetadata struct {
+	// The bucket this user/token is associated with, which may be shared between
+	// multiple users/tokens.
+	Bucket string `json:"bucket"`
+	// How many total requests the user/token is authorized to make before being
+	// rate limited.
+	Limit int64 `json:"limit"`
+	// How many remaining requests out of the limit are still avaialable.
+	Remaining int64 `json:"remaining"`
+	// The time when remaining will be reset to limit.
+	ResetAt time.Time `json:"resetAt"`
+}
+
+type RawTCP struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type Redis struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type Redshift struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+// Relay represents a StrongDM CLI installation running in relay mode.
+type Relay struct {
+	// GatewayFilter can be used to restrict the peering between relays and
+	// gateways.
+	GatewayFilter string `json:"gatewayFilter"`
+	// Unique identifier of the Relay.
+	ID string `json:"id"`
+	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
+	Name string `json:"name"`
+	// The current state of the relay. One of: "new", "verifying_restart",
+	// "awaiting_restart", "restarting", "started", "stopped", "dead",
+	// "unknown".
+	State string `json:"state"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 // A Resource is a database or server for which strongDM manages access.
@@ -333,48 +1769,356 @@ type Resource interface {
 	isOneOf_Resource()
 }
 
-func (*RabbitMQAMQP091) isOneOf_Resource() {}
+func (*AKS) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) GetID() string { return m.ID }
+// GetID returns the unique identifier of the AKS.
+func (m *AKS) GetID() string { return m.ID }
 
-// GetName returns the name of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) GetName() string {
+// GetName returns the name of the AKS.
+func (m *AKS) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) SetName(v string) {
+// SetName sets the name of the AKS.
+func (m *AKS) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) GetTags() Tags {
+// GetTags returns the tags of the AKS.
+func (m *AKS) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) SetTags(v Tags) {
+// SetTags sets the tags of the AKS.
+func (m *AKS) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the AKS.
+func (m *AKS) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the AKS.
+func (m *AKS) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the AKS.
+func (m *AKS) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the RabbitMQAMQP091.
-func (m *RabbitMQAMQP091) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the AKS.
+func (m *AKS) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AKSBasicAuth) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetID() string { return m.ID }
+
+// GetName returns the name of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AKSServiceAccount) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetID() string { return m.ID }
+
+// GetName returns the name of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AKSServiceAccountUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AKSUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AmazonEKS) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonEKS.
+func (m *AmazonEKS) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonEKS.
+func (m *AmazonEKS) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonEKS.
+func (m *AmazonEKS) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonEKS.
+func (m *AmazonEKS) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonEKS.
+func (m *AmazonEKS) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonEKS.
+func (m *AmazonEKS) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonEKS.
+func (m *AmazonEKS) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonEKS.
+func (m *AmazonEKS) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonEKS.
+func (m *AmazonEKS) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AmazonEKSUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AmazonES) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonES.
+func (m *AmazonES) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonES.
+func (m *AmazonES) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonES.
+func (m *AmazonES) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonES.
+func (m *AmazonES) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonES.
+func (m *AmazonES) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonES.
+func (m *AmazonES) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonES.
+func (m *AmazonES) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonES.
+func (m *AmazonES) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonES.
+func (m *AmazonES) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*AmazonMQAMQP091) isOneOf_Resource() {}
@@ -463,6 +2207,94 @@ func (m *Athena) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Athena.
 func (m *Athena) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AuroraMysql) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AuroraMysql.
+func (m *AuroraMysql) GetID() string { return m.ID }
+
+// GetName returns the name of the AuroraMysql.
+func (m *AuroraMysql) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AuroraMysql.
+func (m *AuroraMysql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AuroraMysql.
+func (m *AuroraMysql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AuroraMysql.
+func (m *AuroraMysql) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AuroraMysql.
+func (m *AuroraMysql) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AuroraMysql.
+func (m *AuroraMysql) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AuroraMysql.
+func (m *AuroraMysql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AuroraMysql.
+func (m *AuroraMysql) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AuroraPostgres) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AuroraPostgres.
+func (m *AuroraPostgres) GetID() string { return m.ID }
+
+// GetName returns the name of the AuroraPostgres.
+func (m *AuroraPostgres) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AuroraPostgres.
+func (m *AuroraPostgres) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AuroraPostgres.
+func (m *AuroraPostgres) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AuroraPostgres.
+func (m *AuroraPostgres) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AuroraPostgres.
+func (m *AuroraPostgres) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AuroraPostgres.
+func (m *AuroraPostgres) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AuroraPostgres.
+func (m *AuroraPostgres) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AuroraPostgres.
+func (m *AuroraPostgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*AWS) isOneOf_Resource() {}
@@ -595,6 +2427,138 @@ func (m *Cassandra) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Cassandra.
 func (m *Cassandra) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Citus) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Citus.
+func (m *Citus) GetID() string { return m.ID }
+
+// GetName returns the name of the Citus.
+func (m *Citus) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Citus.
+func (m *Citus) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Citus.
+func (m *Citus) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Citus.
+func (m *Citus) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Citus.
+func (m *Citus) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Citus.
+func (m *Citus) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Citus.
+func (m *Citus) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Citus.
+func (m *Citus) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Clustrix) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Clustrix.
+func (m *Clustrix) GetID() string { return m.ID }
+
+// GetName returns the name of the Clustrix.
+func (m *Clustrix) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Clustrix.
+func (m *Clustrix) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Clustrix.
+func (m *Clustrix) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Clustrix.
+func (m *Clustrix) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Clustrix.
+func (m *Clustrix) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Clustrix.
+func (m *Clustrix) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Clustrix.
+func (m *Clustrix) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Clustrix.
+func (m *Clustrix) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Cockroach) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Cockroach.
+func (m *Cockroach) GetID() string { return m.ID }
+
+// GetName returns the name of the Cockroach.
+func (m *Cockroach) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Cockroach.
+func (m *Cockroach) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Cockroach.
+func (m *Cockroach) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Cockroach.
+func (m *Cockroach) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Cockroach.
+func (m *Cockroach) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Cockroach.
+func (m *Cockroach) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Cockroach.
+func (m *Cockroach) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Cockroach.
+func (m *Cockroach) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*DB2I) isOneOf_Resource() {}
@@ -773,50 +2737,6 @@ func (m *DynamoDB) GetEgressFilter() string {
 func (m *DynamoDB) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*AmazonES) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AmazonES.
-func (m *AmazonES) GetID() string { return m.ID }
-
-// GetName returns the name of the AmazonES.
-func (m *AmazonES) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AmazonES.
-func (m *AmazonES) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AmazonES.
-func (m *AmazonES) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AmazonES.
-func (m *AmazonES) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AmazonES.
-func (m *AmazonES) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AmazonES.
-func (m *AmazonES) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AmazonES.
-func (m *AmazonES) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AmazonES.
-func (m *AmazonES) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
 func (*Elastic) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Elastic.
@@ -859,6 +2779,226 @@ func (m *Elastic) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Elastic.
 func (m *Elastic) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*ElasticacheRedis) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetID() string { return m.ID }
+
+// GetName returns the name of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*GoogleGKE) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GoogleGKE.
+func (m *GoogleGKE) GetID() string { return m.ID }
+
+// GetName returns the name of the GoogleGKE.
+func (m *GoogleGKE) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GoogleGKE.
+func (m *GoogleGKE) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GoogleGKE.
+func (m *GoogleGKE) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GoogleGKE.
+func (m *GoogleGKE) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GoogleGKE.
+func (m *GoogleGKE) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GoogleGKE.
+func (m *GoogleGKE) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GoogleGKE.
+func (m *GoogleGKE) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GoogleGKE.
+func (m *GoogleGKE) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*GoogleGKEUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Greenplum) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Greenplum.
+func (m *Greenplum) GetID() string { return m.ID }
+
+// GetName returns the name of the Greenplum.
+func (m *Greenplum) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Greenplum.
+func (m *Greenplum) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Greenplum.
+func (m *Greenplum) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Greenplum.
+func (m *Greenplum) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Greenplum.
+func (m *Greenplum) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Greenplum.
+func (m *Greenplum) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Greenplum.
+func (m *Greenplum) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Greenplum.
+func (m *Greenplum) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*HTTPAuth) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the HTTPAuth.
+func (m *HTTPAuth) GetID() string { return m.ID }
+
+// GetName returns the name of the HTTPAuth.
+func (m *HTTPAuth) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the HTTPAuth.
+func (m *HTTPAuth) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the HTTPAuth.
+func (m *HTTPAuth) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the HTTPAuth.
+func (m *HTTPAuth) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the HTTPAuth.
+func (m *HTTPAuth) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the HTTPAuth.
+func (m *HTTPAuth) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the HTTPAuth.
+func (m *HTTPAuth) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the HTTPAuth.
+func (m *HTTPAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*HTTPBasicAuth) isOneOf_Resource() {}
@@ -949,50 +3089,6 @@ func (m *HTTPNoAuth) GetEgressFilter() string {
 func (m *HTTPNoAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*HTTPAuth) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the HTTPAuth.
-func (m *HTTPAuth) GetID() string { return m.ID }
-
-// GetName returns the name of the HTTPAuth.
-func (m *HTTPAuth) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the HTTPAuth.
-func (m *HTTPAuth) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the HTTPAuth.
-func (m *HTTPAuth) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the HTTPAuth.
-func (m *HTTPAuth) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the HTTPAuth.
-func (m *HTTPAuth) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the HTTPAuth.
-func (m *HTTPAuth) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the HTTPAuth.
-func (m *HTTPAuth) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the HTTPAuth.
-func (m *HTTPAuth) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
 func (*Kubernetes) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Kubernetes.
@@ -1035,50 +3131,6 @@ func (m *Kubernetes) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Kubernetes.
 func (m *Kubernetes) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*KubernetesUserImpersonation) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) GetID() string { return m.ID }
-
-// GetName returns the name of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the KubernetesUserImpersonation.
-func (m *KubernetesUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*KubernetesBasicAuth) isOneOf_Resource() {}
@@ -1213,400 +3265,92 @@ func (m *KubernetesServiceAccountUserImpersonation) GetEgressFilter() string {
 func (m *KubernetesServiceAccountUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*AmazonEKS) isOneOf_Resource() {}
+func (*KubernetesUserImpersonation) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the AmazonEKS.
-func (m *AmazonEKS) GetID() string { return m.ID }
+// GetID returns the unique identifier of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetID() string { return m.ID }
 
-// GetName returns the name of the AmazonEKS.
-func (m *AmazonEKS) GetName() string {
+// GetName returns the name of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the AmazonEKS.
-func (m *AmazonEKS) SetName(v string) {
+// SetName sets the name of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the AmazonEKS.
-func (m *AmazonEKS) GetTags() Tags {
+// GetTags returns the tags of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the AmazonEKS.
-func (m *AmazonEKS) SetTags(v Tags) {
+// SetTags sets the tags of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the AmazonEKS.
-func (m *AmazonEKS) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the AmazonEKS.
-func (m *AmazonEKS) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the AmazonEKS.
-func (m *AmazonEKS) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the AmazonEKS.
-func (m *AmazonEKS) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*AmazonEKSUserImpersonation) isOneOf_Resource() {}
+func (*Maria) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) GetID() string { return m.ID }
+// GetID returns the unique identifier of the Maria.
+func (m *Maria) GetID() string { return m.ID }
 
-// GetName returns the name of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) GetName() string {
+// GetName returns the name of the Maria.
+func (m *Maria) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) SetName(v string) {
+// SetName sets the name of the Maria.
+func (m *Maria) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) GetTags() Tags {
+// GetTags returns the tags of the Maria.
+func (m *Maria) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) SetTags(v Tags) {
+// SetTags sets the tags of the Maria.
+func (m *Maria) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the Maria.
+func (m *Maria) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the Maria.
+func (m *Maria) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the Maria.
+func (m *Maria) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the AmazonEKSUserImpersonation.
-func (m *AmazonEKSUserImpersonation) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*GoogleGKE) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the GoogleGKE.
-func (m *GoogleGKE) GetID() string { return m.ID }
-
-// GetName returns the name of the GoogleGKE.
-func (m *GoogleGKE) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the GoogleGKE.
-func (m *GoogleGKE) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the GoogleGKE.
-func (m *GoogleGKE) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the GoogleGKE.
-func (m *GoogleGKE) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the GoogleGKE.
-func (m *GoogleGKE) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the GoogleGKE.
-func (m *GoogleGKE) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the GoogleGKE.
-func (m *GoogleGKE) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the GoogleGKE.
-func (m *GoogleGKE) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*GoogleGKEUserImpersonation) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) GetID() string { return m.ID }
-
-// GetName returns the name of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the GoogleGKEUserImpersonation.
-func (m *GoogleGKEUserImpersonation) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*AKS) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AKS.
-func (m *AKS) GetID() string { return m.ID }
-
-// GetName returns the name of the AKS.
-func (m *AKS) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AKS.
-func (m *AKS) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AKS.
-func (m *AKS) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AKS.
-func (m *AKS) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AKS.
-func (m *AKS) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AKS.
-func (m *AKS) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AKS.
-func (m *AKS) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AKS.
-func (m *AKS) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*AKSUserImpersonation) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) GetID() string { return m.ID }
-
-// GetName returns the name of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AKSUserImpersonation.
-func (m *AKSUserImpersonation) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*AKSBasicAuth) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AKSBasicAuth.
-func (m *AKSBasicAuth) GetID() string { return m.ID }
-
-// GetName returns the name of the AKSBasicAuth.
-func (m *AKSBasicAuth) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AKSBasicAuth.
-func (m *AKSBasicAuth) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AKSBasicAuth.
-func (m *AKSBasicAuth) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AKSBasicAuth.
-func (m *AKSBasicAuth) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AKSBasicAuth.
-func (m *AKSBasicAuth) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AKSBasicAuth.
-func (m *AKSBasicAuth) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AKSBasicAuth.
-func (m *AKSBasicAuth) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AKSBasicAuth.
-func (m *AKSBasicAuth) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*AKSServiceAccount) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AKSServiceAccount.
-func (m *AKSServiceAccount) GetID() string { return m.ID }
-
-// GetName returns the name of the AKSServiceAccount.
-func (m *AKSServiceAccount) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AKSServiceAccount.
-func (m *AKSServiceAccount) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AKSServiceAccount.
-func (m *AKSServiceAccount) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AKSServiceAccount.
-func (m *AKSServiceAccount) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AKSServiceAccount.
-func (m *AKSServiceAccount) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AKSServiceAccount.
-func (m *AKSServiceAccount) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AKSServiceAccount.
-func (m *AKSServiceAccount) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AKSServiceAccount.
-func (m *AKSServiceAccount) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*AKSServiceAccountUserImpersonation) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) GetID() string { return m.ID }
-
-// GetName returns the name of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AKSServiceAccountUserImpersonation.
-func (m *AKSServiceAccountUserImpersonation) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the Maria.
+func (m *Maria) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*Memcached) isOneOf_Resource() {}
@@ -1651,6 +3395,94 @@ func (m *Memcached) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Memcached.
 func (m *Memcached) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Memsql) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Memsql.
+func (m *Memsql) GetID() string { return m.ID }
+
+// GetName returns the name of the Memsql.
+func (m *Memsql) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Memsql.
+func (m *Memsql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Memsql.
+func (m *Memsql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Memsql.
+func (m *Memsql) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Memsql.
+func (m *Memsql) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Memsql.
+func (m *Memsql) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Memsql.
+func (m *Memsql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Memsql.
+func (m *Memsql) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*MongoHost) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MongoHost.
+func (m *MongoHost) GetID() string { return m.ID }
+
+// GetName returns the name of the MongoHost.
+func (m *MongoHost) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MongoHost.
+func (m *MongoHost) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MongoHost.
+func (m *MongoHost) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MongoHost.
+func (m *MongoHost) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MongoHost.
+func (m *MongoHost) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MongoHost.
+func (m *MongoHost) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MongoHost.
+func (m *MongoHost) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MongoHost.
+func (m *MongoHost) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*MongoLegacyHost) isOneOf_Resource() {}
@@ -1741,50 +3573,6 @@ func (m *MongoLegacyReplicaset) GetEgressFilter() string {
 func (m *MongoLegacyReplicaset) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*MongoHost) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the MongoHost.
-func (m *MongoHost) GetID() string { return m.ID }
-
-// GetName returns the name of the MongoHost.
-func (m *MongoHost) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the MongoHost.
-func (m *MongoHost) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the MongoHost.
-func (m *MongoHost) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the MongoHost.
-func (m *MongoHost) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the MongoHost.
-func (m *MongoHost) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the MongoHost.
-func (m *MongoHost) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the MongoHost.
-func (m *MongoHost) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the MongoHost.
-func (m *MongoHost) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
 func (*MongoReplicaSet) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoReplicaSet.
@@ -1871,226 +3659,6 @@ func (m *Mysql) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Mysql.
 func (m *Mysql) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*AuroraMysql) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AuroraMysql.
-func (m *AuroraMysql) GetID() string { return m.ID }
-
-// GetName returns the name of the AuroraMysql.
-func (m *AuroraMysql) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AuroraMysql.
-func (m *AuroraMysql) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AuroraMysql.
-func (m *AuroraMysql) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AuroraMysql.
-func (m *AuroraMysql) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AuroraMysql.
-func (m *AuroraMysql) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AuroraMysql.
-func (m *AuroraMysql) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AuroraMysql.
-func (m *AuroraMysql) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AuroraMysql.
-func (m *AuroraMysql) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Clustrix) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Clustrix.
-func (m *Clustrix) GetID() string { return m.ID }
-
-// GetName returns the name of the Clustrix.
-func (m *Clustrix) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Clustrix.
-func (m *Clustrix) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Clustrix.
-func (m *Clustrix) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Clustrix.
-func (m *Clustrix) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Clustrix.
-func (m *Clustrix) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Clustrix.
-func (m *Clustrix) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Clustrix.
-func (m *Clustrix) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Clustrix.
-func (m *Clustrix) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Maria) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Maria.
-func (m *Maria) GetID() string { return m.ID }
-
-// GetName returns the name of the Maria.
-func (m *Maria) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Maria.
-func (m *Maria) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Maria.
-func (m *Maria) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Maria.
-func (m *Maria) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Maria.
-func (m *Maria) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Maria.
-func (m *Maria) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Maria.
-func (m *Maria) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Maria.
-func (m *Maria) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Memsql) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Memsql.
-func (m *Memsql) GetID() string { return m.ID }
-
-// GetName returns the name of the Memsql.
-func (m *Memsql) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Memsql.
-func (m *Memsql) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Memsql.
-func (m *Memsql) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Memsql.
-func (m *Memsql) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Memsql.
-func (m *Memsql) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Memsql.
-func (m *Memsql) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Memsql.
-func (m *Memsql) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Memsql.
-func (m *Memsql) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*SingleStore) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the SingleStore.
-func (m *SingleStore) GetID() string { return m.ID }
-
-// GetName returns the name of the SingleStore.
-func (m *SingleStore) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the SingleStore.
-func (m *SingleStore) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the SingleStore.
-func (m *SingleStore) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the SingleStore.
-func (m *SingleStore) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the SingleStore.
-func (m *SingleStore) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the SingleStore.
-func (m *SingleStore) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the SingleStore.
-func (m *SingleStore) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the SingleStore.
-func (m *SingleStore) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*Oracle) isOneOf_Resource() {}
@@ -2181,226 +3749,6 @@ func (m *Postgres) GetEgressFilter() string {
 func (m *Postgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*AuroraPostgres) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AuroraPostgres.
-func (m *AuroraPostgres) GetID() string { return m.ID }
-
-// GetName returns the name of the AuroraPostgres.
-func (m *AuroraPostgres) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AuroraPostgres.
-func (m *AuroraPostgres) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AuroraPostgres.
-func (m *AuroraPostgres) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AuroraPostgres.
-func (m *AuroraPostgres) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AuroraPostgres.
-func (m *AuroraPostgres) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AuroraPostgres.
-func (m *AuroraPostgres) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AuroraPostgres.
-func (m *AuroraPostgres) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AuroraPostgres.
-func (m *AuroraPostgres) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Greenplum) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Greenplum.
-func (m *Greenplum) GetID() string { return m.ID }
-
-// GetName returns the name of the Greenplum.
-func (m *Greenplum) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Greenplum.
-func (m *Greenplum) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Greenplum.
-func (m *Greenplum) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Greenplum.
-func (m *Greenplum) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Greenplum.
-func (m *Greenplum) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Greenplum.
-func (m *Greenplum) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Greenplum.
-func (m *Greenplum) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Greenplum.
-func (m *Greenplum) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Cockroach) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Cockroach.
-func (m *Cockroach) GetID() string { return m.ID }
-
-// GetName returns the name of the Cockroach.
-func (m *Cockroach) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Cockroach.
-func (m *Cockroach) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Cockroach.
-func (m *Cockroach) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Cockroach.
-func (m *Cockroach) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Cockroach.
-func (m *Cockroach) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Cockroach.
-func (m *Cockroach) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Cockroach.
-func (m *Cockroach) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Cockroach.
-func (m *Cockroach) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Redshift) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Redshift.
-func (m *Redshift) GetID() string { return m.ID }
-
-// GetName returns the name of the Redshift.
-func (m *Redshift) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Redshift.
-func (m *Redshift) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Redshift.
-func (m *Redshift) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Redshift.
-func (m *Redshift) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Redshift.
-func (m *Redshift) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Redshift.
-func (m *Redshift) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Redshift.
-func (m *Redshift) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Redshift.
-func (m *Redshift) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*Citus) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Citus.
-func (m *Citus) GetID() string { return m.ID }
-
-// GetName returns the name of the Citus.
-func (m *Citus) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Citus.
-func (m *Citus) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Citus.
-func (m *Citus) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Citus.
-func (m *Citus) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Citus.
-func (m *Citus) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Citus.
-func (m *Citus) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Citus.
-func (m *Citus) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Citus.
-func (m *Citus) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
 func (*Presto) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Presto.
@@ -2443,6 +3791,50 @@ func (m *Presto) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Presto.
 func (m *Presto) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*RabbitMQAMQP091) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetID() string { return m.ID }
+
+// GetName returns the name of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*RawTCP) isOneOf_Resource() {}
@@ -2577,48 +3969,92 @@ func (m *Redis) GetEgressFilter() string {
 func (m *Redis) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
-func (*ElasticacheRedis) isOneOf_Resource() {}
+func (*Redshift) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the ElasticacheRedis.
-func (m *ElasticacheRedis) GetID() string { return m.ID }
+// GetID returns the unique identifier of the Redshift.
+func (m *Redshift) GetID() string { return m.ID }
 
-// GetName returns the name of the ElasticacheRedis.
-func (m *ElasticacheRedis) GetName() string {
+// GetName returns the name of the Redshift.
+func (m *Redshift) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the ElasticacheRedis.
-func (m *ElasticacheRedis) SetName(v string) {
+// SetName sets the name of the Redshift.
+func (m *Redshift) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the ElasticacheRedis.
-func (m *ElasticacheRedis) GetTags() Tags {
+// GetTags returns the tags of the Redshift.
+func (m *Redshift) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the ElasticacheRedis.
-func (m *ElasticacheRedis) SetTags(v Tags) {
+// SetTags sets the tags of the Redshift.
+func (m *Redshift) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the ElasticacheRedis.
-func (m *ElasticacheRedis) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the Redshift.
+func (m *Redshift) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the ElasticacheRedis.
-func (m *ElasticacheRedis) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the Redshift.
+func (m *Redshift) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the ElasticacheRedis.
-func (m *ElasticacheRedis) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the Redshift.
+func (m *Redshift) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the ElasticacheRedis.
-func (m *ElasticacheRedis) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the Redshift.
+func (m *Redshift) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*SingleStore) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the SingleStore.
+func (m *SingleStore) GetID() string { return m.ID }
+
+// GetName returns the name of the SingleStore.
+func (m *SingleStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SingleStore.
+func (m *SingleStore) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SingleStore.
+func (m *SingleStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SingleStore.
+func (m *SingleStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the SingleStore.
+func (m *SingleStore) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the SingleStore.
+func (m *SingleStore) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SingleStore.
+func (m *SingleStore) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SingleStore.
+func (m *SingleStore) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*Snowflake) isOneOf_Resource() {}
@@ -2974,1772 +4410,14 @@ func (m *Teradata) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 
-type RabbitMQAMQP091 struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type AmazonMQAMQP091 struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type Athena struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	AccessKey string `json:"accessKey"`
-
-	SecretAccessKey string `json:"secretAccessKey"`
-
-	Output string `json:"output"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Region string `json:"region"`
-
-	RoleArn string `json:"roleArn"`
-
-	RoleExternalID string `json:"roleExternalId"`
-}
-
-type AWS struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	AccessKey string `json:"accessKey"`
-
-	SecretAccessKey string `json:"secretAccessKey"`
-
-	HealthcheckRegion string `json:"healthcheckRegion"`
-
-	RoleArn string `json:"roleArn"`
-
-	RoleExternalID string `json:"roleExternalId"`
-}
-
-type BigQuery struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	PrivateKey string `json:"privateKey"`
-
-	Project string `json:"project"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Endpoint string `json:"endpoint"`
-
-	Username string `json:"username"`
-}
-
-type Cassandra struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type DB2I struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type DB2LUW struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type Druid struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-}
-
-type DynamoDB struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	AccessKey string `json:"accessKey"`
-
-	SecretAccessKey string `json:"secretAccessKey"`
-
-	Region string `json:"region"`
-
-	Endpoint string `json:"endpoint"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	RoleArn string `json:"roleArn"`
-
-	RoleExternalID string `json:"roleExternalId"`
-}
-
-type AmazonES struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Region string `json:"region"`
-
-	SecretAccessKey string `json:"secretAccessKey"`
-
-	Endpoint string `json:"endpoint"`
-
-	AccessKey string `json:"accessKey"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	RoleArn string `json:"roleArn"`
-
-	RoleExternalID string `json:"roleExternalId"`
-}
-
-type Elastic struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type HTTPBasicAuth struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Url string `json:"url"`
-
-	HealthcheckPath string `json:"healthcheckPath"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	HeadersBlacklist string `json:"headersBlacklist"`
-
-	DefaultPath string `json:"defaultPath"`
-
-	Subdomain string `json:"subdomain"`
-}
-
-type HTTPNoAuth struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Url string `json:"url"`
-
-	HealthcheckPath string `json:"healthcheckPath"`
-
-	HeadersBlacklist string `json:"headersBlacklist"`
-
-	DefaultPath string `json:"defaultPath"`
-
-	Subdomain string `json:"subdomain"`
-}
-
-type HTTPAuth struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Url string `json:"url"`
-
-	HealthcheckPath string `json:"healthcheckPath"`
-
-	AuthHeader string `json:"authHeader"`
-
-	HeadersBlacklist string `json:"headersBlacklist"`
-
-	DefaultPath string `json:"defaultPath"`
-
-	Subdomain string `json:"subdomain"`
-}
-
-type Kubernetes struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	ClientCertificate string `json:"clientCertificate"`
-
-	ClientKey string `json:"clientKey"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type KubernetesUserImpersonation struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	ClientCertificate string `json:"clientCertificate"`
-
-	ClientKey string `json:"clientKey"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type KubernetesBasicAuth struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type KubernetesServiceAccount struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	Token string `json:"token"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type KubernetesServiceAccountUserImpersonation struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	Token string `json:"token"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AmazonEKS struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Endpoint string `json:"endpoint"`
-
-	AccessKey string `json:"accessKey"`
-
-	SecretAccessKey string `json:"secretAccessKey"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	Region string `json:"region"`
-
-	ClusterName string `json:"clusterName"`
-
-	RoleArn string `json:"roleArn"`
-
-	RoleExternalID string `json:"roleExternalId"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AmazonEKSUserImpersonation struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Endpoint string `json:"endpoint"`
-
-	AccessKey string `json:"accessKey"`
-
-	SecretAccessKey string `json:"secretAccessKey"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	Region string `json:"region"`
-
-	ClusterName string `json:"clusterName"`
-
-	RoleArn string `json:"roleArn"`
-
-	RoleExternalID string `json:"roleExternalId"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type GoogleGKE struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Endpoint string `json:"endpoint"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	ServiceAccountKey string `json:"serviceAccountKey"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type GoogleGKEUserImpersonation struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Endpoint string `json:"endpoint"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	ServiceAccountKey string `json:"serviceAccountKey"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AKS struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	ClientCertificate string `json:"clientCertificate"`
-
-	ClientKey string `json:"clientKey"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AKSUserImpersonation struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	CertificateAuthority string `json:"certificateAuthority"`
-
-	ClientCertificate string `json:"clientCertificate"`
-
-	ClientKey string `json:"clientKey"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AKSBasicAuth struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AKSServiceAccount struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	Token string `json:"token"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type AKSServiceAccountUserImpersonation struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Port int32 `json:"port"`
-
-	Token string `json:"token"`
-	// The path used to check the health of your connection.  Defaults to `default`.
-	HealthcheckNamespace string `json:"healthcheckNamespace"`
-}
-
-type Memcached struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type MongoLegacyHost struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	AuthDatabase string `json:"authDatabase"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-
-	ReplicaSet string `json:"replicaSet"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type MongoLegacyReplicaset struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	AuthDatabase string `json:"authDatabase"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-
-	ReplicaSet string `json:"replicaSet"`
-
-	ConnectToReplica bool `json:"connectToReplica"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type MongoHost struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	AuthDatabase string `json:"authDatabase"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type MongoReplicaSet struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	AuthDatabase string `json:"authDatabase"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-
-	ReplicaSet string `json:"replicaSet"`
-
-	ConnectToReplica bool `json:"connectToReplica"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type Mysql struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type AuroraMysql struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type Clustrix struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type Maria struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type Memsql struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type SingleStore struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type Oracle struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type Postgres struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type AuroraPostgres struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type Greenplum struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type Cockroach struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type Redshift struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type Citus struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type Presto struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	Username string `json:"username"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type RawTCP struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type RDP struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-type Redis struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-}
-
-type ElasticacheRedis struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-
-	TlsRequired bool `json:"tlsRequired"`
-}
-
-type Snowflake struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	Schema string `json:"schema"`
-
-	PortOverride int32 `json:"portOverride"`
-}
-
-type SQLServer struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	Database string `json:"database"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Schema string `json:"schema"`
-
-	Port int32 `json:"port"`
-
-	OverrideDatabase bool `json:"overrideDatabase"`
-}
-
-type SSH struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Port int32 `json:"port"`
-
-	PublicKey string `json:"publicKey"`
-
-	PortForwarding bool `json:"portForwarding"`
-
-	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-}
-
-type SSHCert struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Port int32 `json:"port"`
-
-	PortForwarding bool `json:"portForwarding"`
-
-	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-}
-
-type SSHCustomerKey struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Port int32 `json:"port"`
-
-	PrivateKey string `json:"privateKey"`
-
-	PortForwarding bool `json:"portForwarding"`
-
-	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-}
-
-type Sybase struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	Password string `json:"password"`
-}
-
-type SybaseIQ struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-
-	Password string `json:"password"`
-}
-
-type Teradata struct {
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-
-	Hostname string `json:"hostname"`
-
-	Username string `json:"username"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"portOverride"`
-
-	Port int32 `json:"port"`
-}
-
-// NodeCreateResponse reports how the Nodes were created in the system.
-type NodeCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created Node.
-	Node Node `json:"node"`
-	// The auth token generated for the Node. The Node will use this token to
-	// authenticate with the strongDM API.
-	Token string `json:"token"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// NodeGetResponse returns a requested Node.
-type NodeGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested Node.
-	Node Node `json:"node"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// NodeUpdateResponse returns the fields of a Node after it has been updated by
-// a NodeUpdateRequest.
-type NodeUpdateResponse struct {
-	// Reserved for future use.
-	Meta *UpdateResponseMetadata `json:"meta"`
-	// The updated Node.
-	Node Node `json:"node"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// NodeDeleteResponse returns information about a Node that was deleted.
-type NodeDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// Nodes make up the strongDM network, and allow your users to connect securely to your resources.
-// There are two types of nodes:
-// 1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
-// 1. **Gateways:** a relay that also listens for connections from strongDM clients
-type Node interface {
-	// GetID returns the unique identifier of the Node.
-	GetID() string
-	// GetTags returns the tags of the Node.
-	GetTags() Tags
-	// SetTags sets the tags of the Node.
-	SetTags(Tags)
-	isOneOf_Node()
-}
-
-func (*Relay) isOneOf_Node() {}
-
-// GetID returns the unique identifier of the Relay.
-func (m *Relay) GetID() string { return m.ID }
-
-// GetTags returns the tags of the Relay.
-func (m *Relay) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Relay.
-func (m *Relay) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-func (*Gateway) isOneOf_Node() {}
-
-// GetID returns the unique identifier of the Gateway.
-func (m *Gateway) GetID() string { return m.ID }
-
-// GetTags returns the tags of the Gateway.
-func (m *Gateway) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Gateway.
-func (m *Gateway) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// Relay represents a StrongDM CLI installation running in relay mode.
-type Relay struct {
-	// Unique identifier of the Relay.
-	ID string `json:"id"`
-	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
-	Name string `json:"name"`
-	// The current state of the relay. One of: "new", "verifying_restart",
-	// "awaiting_restart", "restarting", "started", "stopped", "dead",
-	// "unknown".
-	State string `json:"state"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// GatewayFilter can be used to restrict the peering between relays and
-	// gateways.
-	GatewayFilter string `json:"gatewayFilter"`
-}
-
-// Gateway represents a StrongDM CLI installation running in gateway mode.
-type Gateway struct {
-	// Unique identifier of the Gateway.
-	ID string `json:"id"`
-	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
-	Name string `json:"name"`
-	// The current state of the gateway. One of: "new", "verifying_restart",
-	// "restarting", "started", "stopped", "dead", "unknown"
-	State string `json:"state"`
-	// The public hostname/port tuple at which the gateway will be accessible to clients.
-	ListenAddress string `json:"listenAddress"`
-	// The hostname/port tuple which the gateway daemon will bind to.
-	// If not provided on create, set to "0.0.0.0:<listen_address_port>".
-	BindAddress string `json:"bindAddress"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// GatewayFilter can be used to restrict the peering between relays and
-	// gateways.
-	GatewayFilter string `json:"gatewayFilter"`
-}
-
 // ResourceCreateResponse reports how the Resources were created in the system.
 type ResourceCreateResponse struct {
 	// Reserved for future use.
 	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 	// The created Resource.
 	Resource Resource `json:"resource"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// ResourceGetResponse returns a requested Resource.
-type ResourceGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested Resource.
-	Resource Resource `json:"resource"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// ResourceUpdateResponse returns the fields of a Resource after it has been updated by
-// a ResourceUpdateRequest.
-type ResourceUpdateResponse struct {
-	// Reserved for future use.
-	Meta *UpdateResponseMetadata `json:"meta"`
-	// The updated Resource.
-	Resource Resource `json:"resource"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // ResourceDeleteResponse returns information about a Resource that was deleted.
@@ -4750,24 +4428,59 @@ type ResourceDeleteResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// ResourceGetResponse returns a requested Resource.
+type ResourceGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested Resource.
+	Resource Resource `json:"resource"`
+}
+
+// ResourceUpdateResponse returns the fields of a Resource after it has been updated by
+// a ResourceUpdateRequest.
+type ResourceUpdateResponse struct {
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The updated Resource.
+	Resource Resource `json:"resource"`
+}
+
+// A Role is a collection of access grants, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
+type Role struct {
+	// AccessRules JSON encoded access rules data.
+	AccessRules string `json:"accessRules"`
+	// True if the Role is a composite role.
+	Composite bool `json:"composite"`
+	// Unique identifier of the Role.
+	ID string `json:"id"`
+	// Unique human-readable name of the Role.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// A RoleAttachment assigns a role to a composite role.
+type RoleAttachment struct {
+	// The id of the attached role of this RoleAttachment.
+	AttachedRoleID string `json:"attachedRoleId"`
+	// The id of the composite role of this RoleAttachment.
+	CompositeRoleID string `json:"compositeRoleId"`
+	// Unique identifier of the RoleAttachment.
+	ID string `json:"id"`
+}
+
 // RoleAttachmentCreateResponse reports how the RoleAttachments were created in the system.
 type RoleAttachmentCreateResponse struct {
 	// Reserved for future use.
 	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 	// The created RoleAttachment.
 	RoleAttachment *RoleAttachment `json:"roleAttachment"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// RoleAttachmentGetResponse returns a requested RoleAttachment.
-type RoleAttachmentGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested RoleAttachment.
-	RoleAttachment *RoleAttachment `json:"roleAttachment"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // RoleAttachmentDeleteResponse returns information about a RoleAttachment that was deleted.
@@ -4778,42 +4491,43 @@ type RoleAttachmentDeleteResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// A RoleAttachment assigns a role to a composite role.
-type RoleAttachment struct {
-	// Unique identifier of the RoleAttachment.
-	ID string `json:"id"`
-	// The id of the composite role of this RoleAttachment.
-	CompositeRoleID string `json:"compositeRoleId"`
-	// The id of the attached role of this RoleAttachment.
-	AttachedRoleID string `json:"attachedRoleId"`
-}
-
-// RoleGrantCreateResponse reports how the RoleGrants were created in the system.
-type RoleGrantCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created RoleGrant.
-	RoleGrant *RoleGrant `json:"roleGrant"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// RoleGrantGetResponse returns a requested RoleGrant.
-type RoleGrantGetResponse struct {
+// RoleAttachmentGetResponse returns a requested RoleAttachment.
+type RoleAttachmentGetResponse struct {
 	// Reserved for future use.
 	Meta *GetResponseMetadata `json:"meta"`
-	// The requested RoleGrant.
-	RoleGrant *RoleGrant `json:"roleGrant"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested RoleAttachment.
+	RoleAttachment *RoleAttachment `json:"roleAttachment"`
 }
 
-// RoleGrantDeleteResponse returns information about a RoleGrant that was deleted.
-type RoleGrantDeleteResponse struct {
+// RoleCreateResponse reports how the Roles were created in the system. It can
+// communicate partial successes or failures.
+type RoleCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created Role.
+	Role *Role `json:"role"`
+}
+
+// RoleDeleteResponse returns information about a Role that was deleted.
+type RoleDeleteResponse struct {
 	// Reserved for future use.
 	Meta *DeleteResponseMetadata `json:"meta"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// RoleGetResponse returns a requested Role.
+type RoleGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested Role.
+	Role *Role `json:"role"`
 }
 
 // A RoleGrant connects a resource to a role, granting members of the role access to that resource.
@@ -4826,25 +4540,32 @@ type RoleGrant struct {
 	RoleID string `json:"roleId"`
 }
 
-// RoleCreateResponse reports how the Roles were created in the system. It can
-// communicate partial successes or failures.
-type RoleCreateResponse struct {
+// RoleGrantCreateResponse reports how the RoleGrants were created in the system.
+type RoleGrantCreateResponse struct {
 	// Reserved for future use.
 	Meta *CreateResponseMetadata `json:"meta"`
-	// The created Role.
-	Role *Role `json:"role"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created RoleGrant.
+	RoleGrant *RoleGrant `json:"roleGrant"`
+}
+
+// RoleGrantDeleteResponse returns information about a RoleGrant that was deleted.
+type RoleGrantDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// RoleGetResponse returns a requested Role.
-type RoleGetResponse struct {
+// RoleGrantGetResponse returns a requested RoleGrant.
+type RoleGrantGetResponse struct {
 	// Reserved for future use.
 	Meta *GetResponseMetadata `json:"meta"`
-	// The requested Role.
-	Role *Role `json:"role"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested RoleGrant.
+	RoleGrant *RoleGrant `json:"roleGrant"`
 }
 
 // RoleUpdateResponse returns the fields of a Role after it has been updated by
@@ -4852,32 +4573,116 @@ type RoleGetResponse struct {
 type RoleUpdateResponse struct {
 	// Reserved for future use.
 	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 	// The updated Role.
 	Role *Role `json:"role"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// RoleDeleteResponse returns information about a Role that was deleted.
-type RoleDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
+type SQLServer struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
 
-// A Role is a collection of access grants, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
-type Role struct {
-	// Unique identifier of the Role.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
 	ID string `json:"id"`
-	// Unique human-readable name of the Role.
+	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// AccessRules JSON encoded access rules data.
-	AccessRules string `json:"accessRules"`
-	// True if the Role is a composite role.
-	Composite bool `json:"composite"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Schema string `json:"schema"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type SSH struct {
+	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortForwarding bool `json:"portForwarding"`
+
+	PublicKey string `json:"publicKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type SSHCert struct {
+	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortForwarding bool `json:"portForwarding"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type SSHCustomerKey struct {
+	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortForwarding bool `json:"portForwarding"`
+
+	PrivateKey string `json:"privateKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
 }
 
 // A SecretStore is a server where resource secrets (passwords, keys) are stored.
@@ -4969,30 +4774,224 @@ func (m *VaultTokenStore) SetName(v string) {
 	m.Name = v
 }
 
-type AWSStore struct {
-	// Unique identifier of the SecretStore.
+// SecretStoreCreateResponse reports how the SecretStores were created in the system.
+type SecretStoreCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created SecretStore.
+	SecretStore SecretStore `json:"secretStore"`
+}
+
+// SecretStoreDeleteResponse returns information about a SecretStore that was deleted.
+type SecretStoreDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// SecretStoreGetResponse returns a requested SecretStore.
+type SecretStoreGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested SecretStore.
+	SecretStore SecretStore `json:"secretStore"`
+}
+
+// SecretStoreUpdateResponse returns the fields of a SecretStore after it has been updated by
+// a SecretStoreUpdateRequest.
+type SecretStoreUpdateResponse struct {
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The updated SecretStore.
+	SecretStore SecretStore `json:"secretStore"`
+}
+
+// A Service is a service account that can connect to resources they are granted
+// directly, or granted via roles. Services are typically automated jobs.
+type Service struct {
+	// Unique identifier of the Service.
 	ID string `json:"id"`
-	// Unique human-readable name of the SecretStore.
+	// Unique human-readable name of the Service.
+	Name string `json:"name"`
+	// The Service's suspended state.
+	Suspended bool `json:"suspended"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type SingleStore struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
-	Region string `json:"region"`
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Snowflake struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Schema string `json:"schema"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Sybase struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type SybaseIQ struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type Tag struct {
+	Name string `json:"name"`
+
+	Value string `json:"value"`
+}
+
+type Teradata struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+// UpdateResponseMetadata is reserved for future use.
+type UpdateResponseMetadata struct {
+}
+
+// A User can connect to resources they are granted directly, or granted
+// via roles.
+type User struct {
+	// The User's email address. Must be unique.
+	Email string `json:"email"`
+	// The User's first name.
+	FirstName string `json:"firstName"`
+	// Unique identifier of the User.
+	ID string `json:"id"`
+	// The User's last name.
+	LastName string `json:"lastName"`
+	// The User's suspended state.
+	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
 
 type VaultTLSStore struct {
+	CACertPath string `json:"caCertPath"`
+
+	ClientCertPath string `json:"clientCertPath"`
+
+	ClientKeyPath string `json:"clientKeyPath"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 
 	ServerAddress string `json:"serverAddress"`
-
-	CACertPath string `json:"caCertPath"`
-
-	ClientCertPath string `json:"clientCertPath"`
-
-	ClientKeyPath string `json:"clientKeyPath"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -5006,45 +5005,6 @@ type VaultTokenStore struct {
 	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-}
-
-// SecretStoreCreateResponse reports how the SecretStores were created in the system.
-type SecretStoreCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// The created SecretStore.
-	SecretStore SecretStore `json:"secretStore"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// SecretStoreGetResponse returns a requested SecretStore.
-type SecretStoreGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// The requested SecretStore.
-	SecretStore SecretStore `json:"secretStore"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// SecretStoreUpdateResponse returns the fields of a SecretStore after it has been updated by
-// a SecretStoreUpdateRequest.
-type SecretStoreUpdateResponse struct {
-	// Reserved for future use.
-	Meta *UpdateResponseMetadata `json:"meta"`
-	// The updated SecretStore.
-	SecretStore SecretStore `json:"secretStore"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// SecretStoreDeleteResponse returns information about a SecretStore that was deleted.
-type SecretStoreDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // AccountAttachmentIterator provides read access to a list of AccountAttachment.

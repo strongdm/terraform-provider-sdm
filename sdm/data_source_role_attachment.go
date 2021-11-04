@@ -22,20 +22,20 @@ func dataSourceRoleAttachment() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"id": {
+			"attached_role_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "Unique identifier of the RoleAttachment.",
+				Description: "The id of the attached role of this RoleAttachment.",
 			},
 			"composite_role_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "The id of the composite role of this RoleAttachment.",
 			},
-			"attached_role_id": {
+			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The id of the attached role of this RoleAttachment.",
+				Description: "Unique identifier of the RoleAttachment.",
 			},
 			"role_attachments": {
 				Type:     schema.TypeList,
@@ -43,20 +43,20 @@ func dataSourceRoleAttachment() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"id": {
+						"attached_role_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "Unique identifier of the RoleAttachment.",
+							Description: "The id of the attached role of this RoleAttachment.",
 						},
 						"composite_role_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "The id of the composite role of this RoleAttachment.",
 						},
-						"attached_role_id": {
+						"id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The id of the attached role of this RoleAttachment.",
+							Description: "Unique identifier of the RoleAttachment.",
 						},
 					},
 				},
@@ -71,16 +71,16 @@ func dataSourceRoleAttachment() *schema.Resource {
 func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("id"); ok {
-		filter += "id:? "
+	if v, ok := d.GetOk("attached_role_id"); ok {
+		filter += "attachedroleid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("composite_role_id"); ok {
 		filter += "compositeroleid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("attached_role_id"); ok {
-		filter += "attachedroleid:? "
+	if v, ok := d.GetOk("id"); ok {
+		filter += "id:? "
 		args = append(args, v)
 	}
 	return filter, args
@@ -102,9 +102,9 @@ func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *sdm.Client) error 
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":                (v.ID),
-				"composite_role_id": (v.CompositeRoleID),
 				"attached_role_id":  (v.AttachedRoleID),
+				"composite_role_id": (v.CompositeRoleID),
+				"id":                (v.ID),
 			})
 	}
 	if resp.Err() != nil {

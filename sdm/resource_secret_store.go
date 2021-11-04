@@ -57,16 +57,6 @@ func resourceSecretStore() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the SecretStore.",
-						},
-						"server_address": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
 						"ca_cert_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -78,6 +68,16 @@ func resourceSecretStore() *schema.Resource {
 							Description: "",
 						},
 						"client_key_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"server_address": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
@@ -149,11 +149,11 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		out := &sdm.VaultTLSStore{
 			ID:             d.Id(),
-			Name:           convertStringFromMap(raw, "name"),
-			ServerAddress:  convertStringFromMap(raw, "server_address"),
 			CACertPath:     convertStringFromMap(raw, "ca_cert_path"),
 			ClientCertPath: convertStringFromMap(raw, "client_cert_path"),
 			ClientKeyPath:  convertStringFromMap(raw, "client_key_path"),
+			Name:           convertStringFromMap(raw, "name"),
+			ServerAddress:  convertStringFromMap(raw, "server_address"),
 			Tags:           convertTagsFromMap(raw, "tags"),
 		}
 		return out
@@ -200,11 +200,11 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("vault_tls", []map[string]interface{}{
 			{
-				"name":             (v.Name),
-				"server_address":   (v.ServerAddress),
 				"ca_cert_path":     (v.CACertPath),
 				"client_cert_path": (v.ClientCertPath),
 				"client_key_path":  (v.ClientKeyPath),
+				"name":             (v.Name),
+				"server_address":   (v.ServerAddress),
 				"tags":             convertTagsToMap(v.Tags),
 			},
 		})
@@ -258,11 +258,11 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("vault_tls", []map[string]interface{}{
 			{
-				"name":             (v.Name),
-				"server_address":   (v.ServerAddress),
 				"ca_cert_path":     (v.CACertPath),
 				"client_cert_path": (v.ClientCertPath),
 				"client_key_path":  (v.ClientKeyPath),
+				"name":             (v.Name),
+				"server_address":   (v.ServerAddress),
 				"tags":             convertTagsToMap(v.Tags),
 			},
 		})

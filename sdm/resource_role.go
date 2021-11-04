@@ -23,11 +23,6 @@ func resourceRole() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
-			"name": {
-				Type:        schema.TypeString,
-				Required:    true,
-				Description: "Unique human-readable name of the Role.",
-			},
 			"access_rules": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -39,6 +34,11 @@ func resourceRole() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 				Description: "True if the Role is a composite role.",
+			},
+			"name": {
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "Unique human-readable name of the Role.",
 			},
 			"tags": {
 				Type: schema.TypeMap,
@@ -58,9 +58,9 @@ func resourceRole() *schema.Resource {
 func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),
-		Name:        convertStringFromResourceData(d, "name"),
 		AccessRules: convertStringFromResourceData(d, "access_rules"),
 		Composite:   convertBoolFromResourceData(d, "composite"),
+		Name:        convertStringFromResourceData(d, "name"),
 		Tags:        convertTagsFromResourceData(d, "tags"),
 	}
 }
@@ -76,9 +76,9 @@ func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.Role.ID)
 	v := resp.Role
-	d.Set("name", (v.Name))
 	d.Set("access_rules", (v.AccessRules))
 	d.Set("composite", (v.Composite))
+	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToMap(v.Tags))
 	return nil
 }
@@ -98,9 +98,9 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read Role %s: %w", d.Id(), err)
 	}
 	v := resp.Role
-	d.Set("name", (v.Name))
 	d.Set("access_rules", (v.AccessRules))
 	d.Set("composite", (v.Composite))
+	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToMap(v.Tags))
 	return nil
 }

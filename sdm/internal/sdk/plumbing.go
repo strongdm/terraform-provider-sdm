@@ -80,207 +80,446 @@ func convertTagsToPlumbing(tags Tags) *proto.Tags {
 	}
 	return &proto.Tags{Pairs: result}
 }
-func convertCreateResponseMetadataToPorcelain(plumbing *proto.CreateResponseMetadata) *CreateResponseMetadata {
+func convertAKSToPorcelain(plumbing *proto.AKS) *AKS {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &CreateResponseMetadata{}
-	return porcelain
-}
-
-func convertCreateResponseMetadataToPlumbing(porcelain *CreateResponseMetadata) *proto.CreateResponseMetadata {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.CreateResponseMetadata{}
-	return plumbing
-}
-func convertRepeatedCreateResponseMetadataToPlumbing(
-	porcelains []*CreateResponseMetadata,
-) []*proto.CreateResponseMetadata {
-	var items []*proto.CreateResponseMetadata
-	for _, porcelain := range porcelains {
-		items = append(items, convertCreateResponseMetadataToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedCreateResponseMetadataToPorcelain(plumbings []*proto.CreateResponseMetadata) []*CreateResponseMetadata {
-	var items []*CreateResponseMetadata
-	for _, plumbing := range plumbings {
-		items = append(items, convertCreateResponseMetadataToPorcelain(plumbing))
-	}
-	return items
-}
-func convertGetResponseMetadataToPorcelain(plumbing *proto.GetResponseMetadata) *GetResponseMetadata {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &GetResponseMetadata{}
-	return porcelain
-}
-
-func convertGetResponseMetadataToPlumbing(porcelain *GetResponseMetadata) *proto.GetResponseMetadata {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.GetResponseMetadata{}
-	return plumbing
-}
-func convertRepeatedGetResponseMetadataToPlumbing(
-	porcelains []*GetResponseMetadata,
-) []*proto.GetResponseMetadata {
-	var items []*proto.GetResponseMetadata
-	for _, porcelain := range porcelains {
-		items = append(items, convertGetResponseMetadataToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedGetResponseMetadataToPorcelain(plumbings []*proto.GetResponseMetadata) []*GetResponseMetadata {
-	var items []*GetResponseMetadata
-	for _, plumbing := range plumbings {
-		items = append(items, convertGetResponseMetadataToPorcelain(plumbing))
-	}
-	return items
-}
-func convertUpdateResponseMetadataToPorcelain(plumbing *proto.UpdateResponseMetadata) *UpdateResponseMetadata {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &UpdateResponseMetadata{}
-	return porcelain
-}
-
-func convertUpdateResponseMetadataToPlumbing(porcelain *UpdateResponseMetadata) *proto.UpdateResponseMetadata {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.UpdateResponseMetadata{}
-	return plumbing
-}
-func convertRepeatedUpdateResponseMetadataToPlumbing(
-	porcelains []*UpdateResponseMetadata,
-) []*proto.UpdateResponseMetadata {
-	var items []*proto.UpdateResponseMetadata
-	for _, porcelain := range porcelains {
-		items = append(items, convertUpdateResponseMetadataToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedUpdateResponseMetadataToPorcelain(plumbings []*proto.UpdateResponseMetadata) []*UpdateResponseMetadata {
-	var items []*UpdateResponseMetadata
-	for _, plumbing := range plumbings {
-		items = append(items, convertUpdateResponseMetadataToPorcelain(plumbing))
-	}
-	return items
-}
-func convertDeleteResponseMetadataToPorcelain(plumbing *proto.DeleteResponseMetadata) *DeleteResponseMetadata {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &DeleteResponseMetadata{}
-	return porcelain
-}
-
-func convertDeleteResponseMetadataToPlumbing(porcelain *DeleteResponseMetadata) *proto.DeleteResponseMetadata {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.DeleteResponseMetadata{}
-	return plumbing
-}
-func convertRepeatedDeleteResponseMetadataToPlumbing(
-	porcelains []*DeleteResponseMetadata,
-) []*proto.DeleteResponseMetadata {
-	var items []*proto.DeleteResponseMetadata
-	for _, porcelain := range porcelains {
-		items = append(items, convertDeleteResponseMetadataToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedDeleteResponseMetadataToPorcelain(plumbings []*proto.DeleteResponseMetadata) []*DeleteResponseMetadata {
-	var items []*DeleteResponseMetadata
-	for _, plumbing := range plumbings {
-		items = append(items, convertDeleteResponseMetadataToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRateLimitMetadataToPorcelain(plumbing *proto.RateLimitMetadata) *RateLimitMetadata {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &RateLimitMetadata{}
-	porcelain.Limit = (plumbing.Limit)
-	porcelain.Remaining = (plumbing.Remaining)
-	porcelain.ResetAt = convertTimestampToPorcelain(plumbing.ResetAt)
-	porcelain.Bucket = (plumbing.Bucket)
-	return porcelain
-}
-
-func convertRateLimitMetadataToPlumbing(porcelain *RateLimitMetadata) *proto.RateLimitMetadata {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RateLimitMetadata{}
-	plumbing.Limit = (porcelain.Limit)
-	plumbing.Remaining = (porcelain.Remaining)
-	plumbing.ResetAt = convertTimestampToPlumbing(porcelain.ResetAt)
-	plumbing.Bucket = (porcelain.Bucket)
-	return plumbing
-}
-func convertRepeatedRateLimitMetadataToPlumbing(
-	porcelains []*RateLimitMetadata,
-) []*proto.RateLimitMetadata {
-	var items []*proto.RateLimitMetadata
-	for _, porcelain := range porcelains {
-		items = append(items, convertRateLimitMetadataToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRateLimitMetadataToPorcelain(plumbings []*proto.RateLimitMetadata) []*RateLimitMetadata {
-	var items []*RateLimitMetadata
-	for _, plumbing := range plumbings {
-		items = append(items, convertRateLimitMetadataToPorcelain(plumbing))
-	}
-	return items
-}
-func convertTagToPorcelain(plumbing *proto.Tag) *Tag {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Tag{}
+	porcelain := &AKS{}
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
+	porcelain.ClientCertificate = (plumbing.ClientCertificate)
+	porcelain.ClientKey = (plumbing.ClientKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Value = (plumbing.Value)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
 
-func convertTagToPlumbing(porcelain *Tag) *proto.Tag {
+func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.Tag{}
+	plumbing := &proto.AKS{}
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClientCertificate = (porcelain.ClientCertificate)
+	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Value = (porcelain.Value)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
-func convertRepeatedTagToPlumbing(
-	porcelains []*Tag,
-) []*proto.Tag {
-	var items []*proto.Tag
+func convertRepeatedAKSToPlumbing(
+	porcelains []*AKS,
+) []*proto.AKS {
+	var items []*proto.AKS
 	for _, porcelain := range porcelains {
-		items = append(items, convertTagToPlumbing(porcelain))
+		items = append(items, convertAKSToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedTagToPorcelain(plumbings []*proto.Tag) []*Tag {
-	var items []*Tag
+func convertRepeatedAKSToPorcelain(plumbings []*proto.AKS) []*AKS {
+	var items []*AKS
 	for _, plumbing := range plumbings {
-		items = append(items, convertTagToPorcelain(plumbing))
+		items = append(items, convertAKSToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAKSBasicAuthToPorcelain(plumbing *proto.AKSBasicAuth) *AKSBasicAuth {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AKSBasicAuth{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertAKSBasicAuthToPlumbing(porcelain *AKSBasicAuth) *proto.AKSBasicAuth {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AKSBasicAuth{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAKSBasicAuthToPlumbing(
+	porcelains []*AKSBasicAuth,
+) []*proto.AKSBasicAuth {
+	var items []*proto.AKSBasicAuth
+	for _, porcelain := range porcelains {
+		items = append(items, convertAKSBasicAuthToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAKSBasicAuthToPorcelain(plumbings []*proto.AKSBasicAuth) []*AKSBasicAuth {
+	var items []*AKSBasicAuth
+	for _, plumbing := range plumbings {
+		items = append(items, convertAKSBasicAuthToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) *AKSServiceAccount {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AKSServiceAccount{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Token = (plumbing.Token)
+	return porcelain
+}
+
+func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKSServiceAccount {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AKSServiceAccount{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Token = (porcelain.Token)
+	return plumbing
+}
+func convertRepeatedAKSServiceAccountToPlumbing(
+	porcelains []*AKSServiceAccount,
+) []*proto.AKSServiceAccount {
+	var items []*proto.AKSServiceAccount
+	for _, porcelain := range porcelains {
+		items = append(items, convertAKSServiceAccountToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAKSServiceAccountToPorcelain(plumbings []*proto.AKSServiceAccount) []*AKSServiceAccount {
+	var items []*AKSServiceAccount
+	for _, plumbing := range plumbings {
+		items = append(items, convertAKSServiceAccountToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAKSServiceAccountUserImpersonationToPorcelain(plumbing *proto.AKSServiceAccountUserImpersonation) *AKSServiceAccountUserImpersonation {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AKSServiceAccountUserImpersonation{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Token = (plumbing.Token)
+	return porcelain
+}
+
+func convertAKSServiceAccountUserImpersonationToPlumbing(porcelain *AKSServiceAccountUserImpersonation) *proto.AKSServiceAccountUserImpersonation {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AKSServiceAccountUserImpersonation{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Token = (porcelain.Token)
+	return plumbing
+}
+func convertRepeatedAKSServiceAccountUserImpersonationToPlumbing(
+	porcelains []*AKSServiceAccountUserImpersonation,
+) []*proto.AKSServiceAccountUserImpersonation {
+	var items []*proto.AKSServiceAccountUserImpersonation
+	for _, porcelain := range porcelains {
+		items = append(items, convertAKSServiceAccountUserImpersonationToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAKSServiceAccountUserImpersonationToPorcelain(plumbings []*proto.AKSServiceAccountUserImpersonation) []*AKSServiceAccountUserImpersonation {
+	var items []*AKSServiceAccountUserImpersonation
+	for _, plumbing := range plumbings {
+		items = append(items, convertAKSServiceAccountUserImpersonationToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAKSUserImpersonationToPorcelain(plumbing *proto.AKSUserImpersonation) *AKSUserImpersonation {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AKSUserImpersonation{}
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
+	porcelain.ClientCertificate = (plumbing.ClientCertificate)
+	porcelain.ClientKey = (plumbing.ClientKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertAKSUserImpersonationToPlumbing(porcelain *AKSUserImpersonation) *proto.AKSUserImpersonation {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AKSUserImpersonation{}
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClientCertificate = (porcelain.ClientCertificate)
+	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAKSUserImpersonationToPlumbing(
+	porcelains []*AKSUserImpersonation,
+) []*proto.AKSUserImpersonation {
+	var items []*proto.AKSUserImpersonation
+	for _, porcelain := range porcelains {
+		items = append(items, convertAKSUserImpersonationToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAKSUserImpersonationToPorcelain(plumbings []*proto.AKSUserImpersonation) []*AKSUserImpersonation {
+	var items []*AKSUserImpersonation
+	for _, plumbing := range plumbings {
+		items = append(items, convertAKSUserImpersonationToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAWSToPorcelain(plumbing *proto.AWS) *AWS {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AWS{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckRegion = (plumbing.HealthcheckRegion)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertAWSToPlumbing(porcelain *AWS) *proto.AWS {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AWS{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckRegion = (porcelain.HealthcheckRegion)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAWSToPlumbing(
+	porcelains []*AWS,
+) []*proto.AWS {
+	var items []*proto.AWS
+	for _, porcelain := range porcelains {
+		items = append(items, convertAWSToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAWSToPorcelain(plumbings []*proto.AWS) []*AWS {
+	var items []*AWS
+	for _, plumbing := range plumbings {
+		items = append(items, convertAWSToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAWSStoreToPorcelain(plumbing *proto.AWSStore) *AWSStore {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AWSStore{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Region = (plumbing.Region)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertAWSStoreToPlumbing(porcelain *AWSStore) *proto.AWSStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AWSStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Region = (porcelain.Region)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAWSStoreToPlumbing(
+	porcelains []*AWSStore,
+) []*proto.AWSStore {
+	var items []*proto.AWSStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertAWSStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAWSStoreToPorcelain(plumbings []*proto.AWSStore) []*AWSStore {
+	var items []*AWSStore
+	for _, plumbing := range plumbings {
+		items = append(items, convertAWSStoreToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAccountToPlumbing(porcelain Account) *proto.Account {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Account{}
+
+	switch v := porcelain.(type) {
+	case *Service:
+		plumbing.Account = &proto.Account_Service{Service: convertServiceToPlumbing(v)}
+	case *User:
+		plumbing.Account = &proto.Account_User{User: convertUserToPlumbing(v)}
+	}
+	return plumbing
+}
+
+func convertAccountToPorcelain(plumbing *proto.Account) Account {
+	if plumbing.GetService() != nil {
+		return convertServiceToPorcelain(plumbing.GetService())
+	}
+	if plumbing.GetUser() != nil {
+		return convertUserToPorcelain(plumbing.GetUser())
+	}
+	return nil
+}
+func convertRepeatedAccountToPlumbing(
+	porcelains []Account,
+) []*proto.Account {
+	var items []*proto.Account
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountToPorcelain(plumbings []*proto.Account) []Account {
+	var items []Account
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAccountAttachmentToPorcelain(plumbing *proto.AccountAttachment) *AccountAttachment {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AccountAttachment{}
+	porcelain.AccountID = (plumbing.AccountId)
+	porcelain.ID = (plumbing.Id)
+	porcelain.RoleID = (plumbing.RoleId)
+	return porcelain
+}
+
+func convertAccountAttachmentToPlumbing(porcelain *AccountAttachment) *proto.AccountAttachment {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountAttachment{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.RoleId = (porcelain.RoleID)
+	return plumbing
+}
+func convertRepeatedAccountAttachmentToPlumbing(
+	porcelains []*AccountAttachment,
+) []*proto.AccountAttachment {
+	var items []*proto.AccountAttachment
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountAttachmentToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountAttachmentToPorcelain(plumbings []*proto.AccountAttachment) []*AccountAttachment {
+	var items []*AccountAttachment
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountAttachmentToPorcelain(plumbing))
 	}
 	return items
 }
@@ -289,8 +528,8 @@ func convertAccountAttachmentCreateResponseToPorcelain(plumbing *proto.AccountAt
 		return nil
 	}
 	porcelain := &AccountAttachmentCreateResponse{}
-	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.AccountAttachment = convertAccountAttachmentToPorcelain(plumbing.AccountAttachment)
+	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
 	return porcelain
 }
@@ -300,8 +539,8 @@ func convertAccountAttachmentCreateResponseToPlumbing(porcelain *AccountAttachme
 		return nil
 	}
 	plumbing := &proto.AccountAttachmentCreateResponse{}
-	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.AccountAttachment = convertAccountAttachmentToPlumbing(porcelain.AccountAttachment)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
 	return plumbing
 }
@@ -319,44 +558,6 @@ func convertRepeatedAccountAttachmentCreateResponseToPorcelain(plumbings []*prot
 	var items []*AccountAttachmentCreateResponse
 	for _, plumbing := range plumbings {
 		items = append(items, convertAccountAttachmentCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountAttachmentGetResponseToPorcelain(plumbing *proto.AccountAttachmentGetResponse) *AccountAttachmentGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountAttachmentGetResponse{}
-	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.AccountAttachment = convertAccountAttachmentToPorcelain(plumbing.AccountAttachment)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertAccountAttachmentGetResponseToPlumbing(porcelain *AccountAttachmentGetResponse) *proto.AccountAttachmentGetResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountAttachmentGetResponse{}
-	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.AccountAttachment = convertAccountAttachmentToPlumbing(porcelain.AccountAttachment)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedAccountAttachmentGetResponseToPlumbing(
-	porcelains []*AccountAttachmentGetResponse,
-) []*proto.AccountAttachmentGetResponse {
-	var items []*proto.AccountAttachmentGetResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountAttachmentGetResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountAttachmentGetResponseToPorcelain(plumbings []*proto.AccountAttachmentGetResponse) []*AccountAttachmentGetResponse {
-	var items []*AccountAttachmentGetResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountAttachmentGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -396,195 +597,41 @@ func convertRepeatedAccountAttachmentDeleteResponseToPorcelain(plumbings []*prot
 	}
 	return items
 }
-func convertAccountAttachmentToPorcelain(plumbing *proto.AccountAttachment) *AccountAttachment {
+func convertAccountAttachmentGetResponseToPorcelain(plumbing *proto.AccountAttachmentGetResponse) *AccountAttachmentGetResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &AccountAttachment{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.AccountID = (plumbing.AccountId)
-	porcelain.RoleID = (plumbing.RoleId)
-	return porcelain
-}
-
-func convertAccountAttachmentToPlumbing(porcelain *AccountAttachment) *proto.AccountAttachment {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountAttachment{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.AccountId = (porcelain.AccountID)
-	plumbing.RoleId = (porcelain.RoleID)
-	return plumbing
-}
-func convertRepeatedAccountAttachmentToPlumbing(
-	porcelains []*AccountAttachment,
-) []*proto.AccountAttachment {
-	var items []*proto.AccountAttachment
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountAttachmentToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountAttachmentToPorcelain(plumbings []*proto.AccountAttachment) []*AccountAttachment {
-	var items []*AccountAttachment
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountAttachmentToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountGrantCreateResponseToPorcelain(plumbing *proto.AccountGrantCreateResponse) *AccountGrantCreateResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountGrantCreateResponse{}
-	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.AccountGrant = convertAccountGrantToPorcelain(plumbing.AccountGrant)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertAccountGrantCreateResponseToPlumbing(porcelain *AccountGrantCreateResponse) *proto.AccountGrantCreateResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountGrantCreateResponse{}
-	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.AccountGrant = convertAccountGrantToPlumbing(porcelain.AccountGrant)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedAccountGrantCreateResponseToPlumbing(
-	porcelains []*AccountGrantCreateResponse,
-) []*proto.AccountGrantCreateResponse {
-	var items []*proto.AccountGrantCreateResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountGrantCreateResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountGrantCreateResponseToPorcelain(plumbings []*proto.AccountGrantCreateResponse) []*AccountGrantCreateResponse {
-	var items []*AccountGrantCreateResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountGrantCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountGrantGetResponseToPorcelain(plumbing *proto.AccountGrantGetResponse) *AccountGrantGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountGrantGetResponse{}
+	porcelain := &AccountAttachmentGetResponse{}
+	porcelain.AccountAttachment = convertAccountAttachmentToPorcelain(plumbing.AccountAttachment)
 	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.AccountGrant = convertAccountGrantToPorcelain(plumbing.AccountGrant)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
 	return porcelain
 }
 
-func convertAccountGrantGetResponseToPlumbing(porcelain *AccountGrantGetResponse) *proto.AccountGrantGetResponse {
+func convertAccountAttachmentGetResponseToPlumbing(porcelain *AccountAttachmentGetResponse) *proto.AccountAttachmentGetResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AccountGrantGetResponse{}
+	plumbing := &proto.AccountAttachmentGetResponse{}
+	plumbing.AccountAttachment = convertAccountAttachmentToPlumbing(porcelain.AccountAttachment)
 	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.AccountGrant = convertAccountGrantToPlumbing(porcelain.AccountGrant)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
 	return plumbing
 }
-func convertRepeatedAccountGrantGetResponseToPlumbing(
-	porcelains []*AccountGrantGetResponse,
-) []*proto.AccountGrantGetResponse {
-	var items []*proto.AccountGrantGetResponse
+func convertRepeatedAccountAttachmentGetResponseToPlumbing(
+	porcelains []*AccountAttachmentGetResponse,
+) []*proto.AccountAttachmentGetResponse {
+	var items []*proto.AccountAttachmentGetResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertAccountGrantGetResponseToPlumbing(porcelain))
+		items = append(items, convertAccountAttachmentGetResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAccountGrantGetResponseToPorcelain(plumbings []*proto.AccountGrantGetResponse) []*AccountGrantGetResponse {
-	var items []*AccountGrantGetResponse
+func convertRepeatedAccountAttachmentGetResponseToPorcelain(plumbings []*proto.AccountAttachmentGetResponse) []*AccountAttachmentGetResponse {
+	var items []*AccountAttachmentGetResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertAccountGrantGetResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountGrantDeleteResponseToPorcelain(plumbing *proto.AccountGrantDeleteResponse) *AccountGrantDeleteResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountGrantDeleteResponse{}
-	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertAccountGrantDeleteResponseToPlumbing(porcelain *AccountGrantDeleteResponse) *proto.AccountGrantDeleteResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountGrantDeleteResponse{}
-	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedAccountGrantDeleteResponseToPlumbing(
-	porcelains []*AccountGrantDeleteResponse,
-) []*proto.AccountGrantDeleteResponse {
-	var items []*proto.AccountGrantDeleteResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountGrantDeleteResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountGrantDeleteResponseToPorcelain(plumbings []*proto.AccountGrantDeleteResponse) []*AccountGrantDeleteResponse {
-	var items []*AccountGrantDeleteResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountGrantDeleteResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountGrantToPorcelain(plumbing *proto.AccountGrant) *AccountGrant {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountGrant{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.ResourceID = (plumbing.ResourceId)
-	porcelain.AccountID = (plumbing.AccountId)
-	porcelain.StartFrom = convertTimestampToPorcelain(plumbing.StartFrom)
-	porcelain.ValidUntil = convertTimestampToPorcelain(plumbing.ValidUntil)
-	return porcelain
-}
-
-func convertAccountGrantToPlumbing(porcelain *AccountGrant) *proto.AccountGrant {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountGrant{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.ResourceId = (porcelain.ResourceID)
-	plumbing.AccountId = (porcelain.AccountID)
-	plumbing.StartFrom = convertTimestampToPlumbing(porcelain.StartFrom)
-	plumbing.ValidUntil = convertTimestampToPlumbing(porcelain.ValidUntil)
-	return plumbing
-}
-func convertRepeatedAccountGrantToPlumbing(
-	porcelains []*AccountGrant,
-) []*proto.AccountGrant {
-	var items []*proto.AccountGrant
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountGrantToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountGrantToPorcelain(plumbings []*proto.AccountGrant) []*AccountGrant {
-	var items []*AccountGrant
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountGrantToPorcelain(plumbing))
+		items = append(items, convertAccountAttachmentGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -593,10 +640,10 @@ func convertAccountCreateResponseToPorcelain(plumbing *proto.AccountCreateRespon
 		return nil
 	}
 	porcelain := &AccountCreateResponse{}
-	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.Account = convertAccountToPorcelain(plumbing.Account)
-	porcelain.Token = (plumbing.Token)
+	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Token = (plumbing.Token)
 	return porcelain
 }
 
@@ -605,10 +652,10 @@ func convertAccountCreateResponseToPlumbing(porcelain *AccountCreateResponse) *p
 		return nil
 	}
 	plumbing := &proto.AccountCreateResponse{}
-	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.Account = convertAccountToPlumbing(porcelain.Account)
-	plumbing.Token = (porcelain.Token)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Token = (porcelain.Token)
 	return plumbing
 }
 func convertRepeatedAccountCreateResponseToPlumbing(
@@ -625,82 +672,6 @@ func convertRepeatedAccountCreateResponseToPorcelain(plumbings []*proto.AccountC
 	var items []*AccountCreateResponse
 	for _, plumbing := range plumbings {
 		items = append(items, convertAccountCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountGetResponseToPorcelain(plumbing *proto.AccountGetResponse) *AccountGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountGetResponse{}
-	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Account = convertAccountToPorcelain(plumbing.Account)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertAccountGetResponseToPlumbing(porcelain *AccountGetResponse) *proto.AccountGetResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountGetResponse{}
-	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Account = convertAccountToPlumbing(porcelain.Account)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedAccountGetResponseToPlumbing(
-	porcelains []*AccountGetResponse,
-) []*proto.AccountGetResponse {
-	var items []*proto.AccountGetResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountGetResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountGetResponseToPorcelain(plumbings []*proto.AccountGetResponse) []*AccountGetResponse {
-	var items []*AccountGetResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountGetResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAccountUpdateResponseToPorcelain(plumbing *proto.AccountUpdateResponse) *AccountUpdateResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AccountUpdateResponse{}
-	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Account = convertAccountToPorcelain(plumbing.Account)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertAccountUpdateResponseToPlumbing(porcelain *AccountUpdateResponse) *proto.AccountUpdateResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AccountUpdateResponse{}
-	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Account = convertAccountToPlumbing(porcelain.Account)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedAccountUpdateResponseToPlumbing(
-	porcelains []*AccountUpdateResponse,
-) []*proto.AccountUpdateResponse {
-	var items []*proto.AccountUpdateResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountUpdateResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountUpdateResponseToPorcelain(plumbings []*proto.AccountUpdateResponse) []*AccountUpdateResponse {
-	var items []*AccountUpdateResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountUpdateResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -740,128 +711,925 @@ func convertRepeatedAccountDeleteResponseToPorcelain(plumbings []*proto.AccountD
 	}
 	return items
 }
-func convertAccountToPlumbing(porcelain Account) *proto.Account {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Account{}
-
-	switch v := porcelain.(type) {
-	case *User:
-		plumbing.Account = &proto.Account_User{User: convertUserToPlumbing(v)}
-	case *Service:
-		plumbing.Account = &proto.Account_Service{Service: convertServiceToPlumbing(v)}
-	}
-	return plumbing
-}
-
-func convertAccountToPorcelain(plumbing *proto.Account) Account {
-	if plumbing.GetUser() != nil {
-		return convertUserToPorcelain(plumbing.GetUser())
-	}
-	if plumbing.GetService() != nil {
-		return convertServiceToPorcelain(plumbing.GetService())
-	}
-	return nil
-}
-func convertRepeatedAccountToPlumbing(
-	porcelains []Account,
-) []*proto.Account {
-	var items []*proto.Account
-	for _, porcelain := range porcelains {
-		items = append(items, convertAccountToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAccountToPorcelain(plumbings []*proto.Account) []Account {
-	var items []Account
-	for _, plumbing := range plumbings {
-		items = append(items, convertAccountToPorcelain(plumbing))
-	}
-	return items
-}
-func convertUserToPorcelain(plumbing *proto.User) *User {
+func convertAccountGetResponseToPorcelain(plumbing *proto.AccountGetResponse) *AccountGetResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &User{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Email = (plumbing.Email)
-	porcelain.FirstName = (plumbing.FirstName)
-	porcelain.LastName = (plumbing.LastName)
-	porcelain.Suspended = (plumbing.Suspended)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain := &AccountGetResponse{}
+	porcelain.Account = convertAccountToPorcelain(plumbing.Account)
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
 	return porcelain
 }
 
-func convertUserToPlumbing(porcelain *User) *proto.User {
+func convertAccountGetResponseToPlumbing(porcelain *AccountGetResponse) *proto.AccountGetResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.User{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Email = (porcelain.Email)
-	plumbing.FirstName = (porcelain.FirstName)
-	plumbing.LastName = (porcelain.LastName)
-	plumbing.Suspended = (porcelain.Suspended)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing := &proto.AccountGetResponse{}
+	plumbing.Account = convertAccountToPlumbing(porcelain.Account)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
 	return plumbing
 }
-func convertRepeatedUserToPlumbing(
-	porcelains []*User,
-) []*proto.User {
-	var items []*proto.User
+func convertRepeatedAccountGetResponseToPlumbing(
+	porcelains []*AccountGetResponse,
+) []*proto.AccountGetResponse {
+	var items []*proto.AccountGetResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertUserToPlumbing(porcelain))
+		items = append(items, convertAccountGetResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedUserToPorcelain(plumbings []*proto.User) []*User {
-	var items []*User
+func convertRepeatedAccountGetResponseToPorcelain(plumbings []*proto.AccountGetResponse) []*AccountGetResponse {
+	var items []*AccountGetResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertUserToPorcelain(plumbing))
+		items = append(items, convertAccountGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
-func convertServiceToPorcelain(plumbing *proto.Service) *Service {
+func convertAccountGrantToPorcelain(plumbing *proto.AccountGrant) *AccountGrant {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &Service{}
+	porcelain := &AccountGrant{}
+	porcelain.AccountID = (plumbing.AccountId)
+	porcelain.ID = (plumbing.Id)
+	porcelain.ResourceID = (plumbing.ResourceId)
+	porcelain.StartFrom = convertTimestampToPorcelain(plumbing.StartFrom)
+	porcelain.ValidUntil = convertTimestampToPorcelain(plumbing.ValidUntil)
+	return porcelain
+}
+
+func convertAccountGrantToPlumbing(porcelain *AccountGrant) *proto.AccountGrant {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGrant{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.ResourceId = (porcelain.ResourceID)
+	plumbing.StartFrom = convertTimestampToPlumbing(porcelain.StartFrom)
+	plumbing.ValidUntil = convertTimestampToPlumbing(porcelain.ValidUntil)
+	return plumbing
+}
+func convertRepeatedAccountGrantToPlumbing(
+	porcelains []*AccountGrant,
+) []*proto.AccountGrant {
+	var items []*proto.AccountGrant
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGrantToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGrantToPorcelain(plumbings []*proto.AccountGrant) []*AccountGrant {
+	var items []*AccountGrant
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountGrantToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAccountGrantCreateResponseToPorcelain(plumbing *proto.AccountGrantCreateResponse) *AccountGrantCreateResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AccountGrantCreateResponse{}
+	porcelain.AccountGrant = convertAccountGrantToPorcelain(plumbing.AccountGrant)
+	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertAccountGrantCreateResponseToPlumbing(porcelain *AccountGrantCreateResponse) *proto.AccountGrantCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGrantCreateResponse{}
+	plumbing.AccountGrant = convertAccountGrantToPlumbing(porcelain.AccountGrant)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGrantCreateResponseToPlumbing(
+	porcelains []*AccountGrantCreateResponse,
+) []*proto.AccountGrantCreateResponse {
+	var items []*proto.AccountGrantCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGrantCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGrantCreateResponseToPorcelain(plumbings []*proto.AccountGrantCreateResponse) []*AccountGrantCreateResponse {
+	var items []*AccountGrantCreateResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountGrantCreateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAccountGrantDeleteResponseToPorcelain(plumbing *proto.AccountGrantDeleteResponse) *AccountGrantDeleteResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AccountGrantDeleteResponse{}
+	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertAccountGrantDeleteResponseToPlumbing(porcelain *AccountGrantDeleteResponse) *proto.AccountGrantDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGrantDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGrantDeleteResponseToPlumbing(
+	porcelains []*AccountGrantDeleteResponse,
+) []*proto.AccountGrantDeleteResponse {
+	var items []*proto.AccountGrantDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGrantDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGrantDeleteResponseToPorcelain(plumbings []*proto.AccountGrantDeleteResponse) []*AccountGrantDeleteResponse {
+	var items []*AccountGrantDeleteResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountGrantDeleteResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAccountGrantGetResponseToPorcelain(plumbing *proto.AccountGrantGetResponse) *AccountGrantGetResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AccountGrantGetResponse{}
+	porcelain.AccountGrant = convertAccountGrantToPorcelain(plumbing.AccountGrant)
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertAccountGrantGetResponseToPlumbing(porcelain *AccountGrantGetResponse) *proto.AccountGrantGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGrantGetResponse{}
+	plumbing.AccountGrant = convertAccountGrantToPlumbing(porcelain.AccountGrant)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGrantGetResponseToPlumbing(
+	porcelains []*AccountGrantGetResponse,
+) []*proto.AccountGrantGetResponse {
+	var items []*proto.AccountGrantGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGrantGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGrantGetResponseToPorcelain(plumbings []*proto.AccountGrantGetResponse) []*AccountGrantGetResponse {
+	var items []*AccountGrantGetResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountGrantGetResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAccountUpdateResponseToPorcelain(plumbing *proto.AccountUpdateResponse) *AccountUpdateResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AccountUpdateResponse{}
+	porcelain.Account = convertAccountToPorcelain(plumbing.Account)
+	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertAccountUpdateResponseToPlumbing(porcelain *AccountUpdateResponse) *proto.AccountUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountUpdateResponse{}
+	plumbing.Account = convertAccountToPlumbing(porcelain.Account)
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountUpdateResponseToPlumbing(
+	porcelains []*AccountUpdateResponse,
+) []*proto.AccountUpdateResponse {
+	var items []*proto.AccountUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountUpdateResponseToPorcelain(plumbings []*proto.AccountUpdateResponse) []*AccountUpdateResponse {
+	var items []*AccountUpdateResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertAccountUpdateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) *AmazonEKS {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AmazonEKS{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
+	porcelain.ClusterName = (plumbing.ClusterName)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Suspended = (plumbing.Suspended)
+	porcelain.Region = (plumbing.Region)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
 
-func convertServiceToPlumbing(porcelain *Service) *proto.Service {
+func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.Service{}
+	plumbing := &proto.AmazonEKS{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClusterName = (porcelain.ClusterName)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Suspended = (porcelain.Suspended)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
-func convertRepeatedServiceToPlumbing(
-	porcelains []*Service,
-) []*proto.Service {
-	var items []*proto.Service
+func convertRepeatedAmazonEKSToPlumbing(
+	porcelains []*AmazonEKS,
+) []*proto.AmazonEKS {
+	var items []*proto.AmazonEKS
 	for _, porcelain := range porcelains {
-		items = append(items, convertServiceToPlumbing(porcelain))
+		items = append(items, convertAmazonEKSToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedServiceToPorcelain(plumbings []*proto.Service) []*Service {
-	var items []*Service
+func convertRepeatedAmazonEKSToPorcelain(plumbings []*proto.AmazonEKS) []*AmazonEKS {
+	var items []*AmazonEKS
 	for _, plumbing := range plumbings {
-		items = append(items, convertServiceToPorcelain(plumbing))
+		items = append(items, convertAmazonEKSToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAmazonEKSUserImpersonationToPorcelain(plumbing *proto.AmazonEKSUserImpersonation) *AmazonEKSUserImpersonation {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AmazonEKSUserImpersonation{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
+	porcelain.ClusterName = (plumbing.ClusterName)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Region = (plumbing.Region)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertAmazonEKSUserImpersonationToPlumbing(porcelain *AmazonEKSUserImpersonation) *proto.AmazonEKSUserImpersonation {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonEKSUserImpersonation{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClusterName = (porcelain.ClusterName)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAmazonEKSUserImpersonationToPlumbing(
+	porcelains []*AmazonEKSUserImpersonation,
+) []*proto.AmazonEKSUserImpersonation {
+	var items []*proto.AmazonEKSUserImpersonation
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonEKSUserImpersonationToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonEKSUserImpersonationToPorcelain(plumbings []*proto.AmazonEKSUserImpersonation) []*AmazonEKSUserImpersonation {
+	var items []*AmazonEKSUserImpersonation
+	for _, plumbing := range plumbings {
+		items = append(items, convertAmazonEKSUserImpersonationToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAmazonESToPorcelain(plumbing *proto.AmazonES) *AmazonES {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AmazonES{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Region = (plumbing.Region)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertAmazonESToPlumbing(porcelain *AmazonES) *proto.AmazonES {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonES{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAmazonESToPlumbing(
+	porcelains []*AmazonES,
+) []*proto.AmazonES {
+	var items []*proto.AmazonES
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonESToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonESToPorcelain(plumbings []*proto.AmazonES) []*AmazonES {
+	var items []*AmazonES
+	for _, plumbing := range plumbings {
+		items = append(items, convertAmazonESToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAmazonMQAMQP091ToPorcelain(plumbing *proto.AmazonMQAMQP091) *AmazonMQAMQP091 {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AmazonMQAMQP091{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertAmazonMQAMQP091ToPlumbing(porcelain *AmazonMQAMQP091) *proto.AmazonMQAMQP091 {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonMQAMQP091{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAmazonMQAMQP091ToPlumbing(
+	porcelains []*AmazonMQAMQP091,
+) []*proto.AmazonMQAMQP091 {
+	var items []*proto.AmazonMQAMQP091
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonMQAMQP091ToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonMQAMQP091ToPorcelain(plumbings []*proto.AmazonMQAMQP091) []*AmazonMQAMQP091 {
+	var items []*AmazonMQAMQP091
+	for _, plumbing := range plumbings {
+		items = append(items, convertAmazonMQAMQP091ToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAthenaToPorcelain(plumbing *proto.Athena) *Athena {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Athena{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Output = (plumbing.Output)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Region = (plumbing.Region)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertAthenaToPlumbing(porcelain *Athena) *proto.Athena {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Athena{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Output = (porcelain.Output)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAthenaToPlumbing(
+	porcelains []*Athena,
+) []*proto.Athena {
+	var items []*proto.Athena
+	for _, porcelain := range porcelains {
+		items = append(items, convertAthenaToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAthenaToPorcelain(plumbings []*proto.Athena) []*Athena {
+	var items []*Athena
+	for _, plumbing := range plumbings {
+		items = append(items, convertAthenaToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) *AuroraMysql {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AuroraMysql{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertAuroraMysqlToPlumbing(porcelain *AuroraMysql) *proto.AuroraMysql {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AuroraMysql{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAuroraMysqlToPlumbing(
+	porcelains []*AuroraMysql,
+) []*proto.AuroraMysql {
+	var items []*proto.AuroraMysql
+	for _, porcelain := range porcelains {
+		items = append(items, convertAuroraMysqlToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAuroraMysqlToPorcelain(plumbings []*proto.AuroraMysql) []*AuroraMysql {
+	var items []*AuroraMysql
+	for _, plumbing := range plumbings {
+		items = append(items, convertAuroraMysqlToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAuroraPostgresToPorcelain(plumbing *proto.AuroraPostgres) *AuroraPostgres {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AuroraPostgres{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertAuroraPostgresToPlumbing(porcelain *AuroraPostgres) *proto.AuroraPostgres {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AuroraPostgres{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAuroraPostgresToPlumbing(
+	porcelains []*AuroraPostgres,
+) []*proto.AuroraPostgres {
+	var items []*proto.AuroraPostgres
+	for _, porcelain := range porcelains {
+		items = append(items, convertAuroraPostgresToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAuroraPostgresToPorcelain(plumbings []*proto.AuroraPostgres) []*AuroraPostgres {
+	var items []*AuroraPostgres
+	for _, plumbing := range plumbings {
+		items = append(items, convertAuroraPostgresToPorcelain(plumbing))
+	}
+	return items
+}
+func convertBigQueryToPorcelain(plumbing *proto.BigQuery) *BigQuery {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &BigQuery{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.PrivateKey = (plumbing.PrivateKey)
+	porcelain.Project = (plumbing.Project)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertBigQueryToPlumbing(porcelain *BigQuery) *proto.BigQuery {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.BigQuery{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.PrivateKey = (porcelain.PrivateKey)
+	plumbing.Project = (porcelain.Project)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedBigQueryToPlumbing(
+	porcelains []*BigQuery,
+) []*proto.BigQuery {
+	var items []*proto.BigQuery
+	for _, porcelain := range porcelains {
+		items = append(items, convertBigQueryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedBigQueryToPorcelain(plumbings []*proto.BigQuery) []*BigQuery {
+	var items []*BigQuery
+	for _, plumbing := range plumbings {
+		items = append(items, convertBigQueryToPorcelain(plumbing))
+	}
+	return items
+}
+func convertCassandraToPorcelain(plumbing *proto.Cassandra) *Cassandra {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Cassandra{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertCassandraToPlumbing(porcelain *Cassandra) *proto.Cassandra {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Cassandra{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedCassandraToPlumbing(
+	porcelains []*Cassandra,
+) []*proto.Cassandra {
+	var items []*proto.Cassandra
+	for _, porcelain := range porcelains {
+		items = append(items, convertCassandraToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCassandraToPorcelain(plumbings []*proto.Cassandra) []*Cassandra {
+	var items []*Cassandra
+	for _, plumbing := range plumbings {
+		items = append(items, convertCassandraToPorcelain(plumbing))
+	}
+	return items
+}
+func convertCitusToPorcelain(plumbing *proto.Citus) *Citus {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Citus{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertCitusToPlumbing(porcelain *Citus) *proto.Citus {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Citus{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedCitusToPlumbing(
+	porcelains []*Citus,
+) []*proto.Citus {
+	var items []*proto.Citus
+	for _, porcelain := range porcelains {
+		items = append(items, convertCitusToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCitusToPorcelain(plumbings []*proto.Citus) []*Citus {
+	var items []*Citus
+	for _, plumbing := range plumbings {
+		items = append(items, convertCitusToPorcelain(plumbing))
+	}
+	return items
+}
+func convertClustrixToPorcelain(plumbing *proto.Clustrix) *Clustrix {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Clustrix{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertClustrixToPlumbing(porcelain *Clustrix) *proto.Clustrix {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Clustrix{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedClustrixToPlumbing(
+	porcelains []*Clustrix,
+) []*proto.Clustrix {
+	var items []*proto.Clustrix
+	for _, porcelain := range porcelains {
+		items = append(items, convertClustrixToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedClustrixToPorcelain(plumbings []*proto.Clustrix) []*Clustrix {
+	var items []*Clustrix
+	for _, plumbing := range plumbings {
+		items = append(items, convertClustrixToPorcelain(plumbing))
+	}
+	return items
+}
+func convertCockroachToPorcelain(plumbing *proto.Cockroach) *Cockroach {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Cockroach{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertCockroachToPlumbing(porcelain *Cockroach) *proto.Cockroach {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Cockroach{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedCockroachToPlumbing(
+	porcelains []*Cockroach,
+) []*proto.Cockroach {
+	var items []*proto.Cockroach
+	for _, porcelain := range porcelains {
+		items = append(items, convertCockroachToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCockroachToPorcelain(plumbings []*proto.Cockroach) []*Cockroach {
+	var items []*Cockroach
+	for _, plumbing := range plumbings {
+		items = append(items, convertCockroachToPorcelain(plumbing))
 	}
 	return items
 }
@@ -909,8 +1677,8 @@ func convertControlPanelVerifyJWTResponseToPorcelain(plumbing *proto.ControlPane
 	}
 	porcelain := &ControlPanelVerifyJWTResponse{}
 	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.ValID = (plumbing.Valid)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.ValID = (plumbing.Valid)
 	return porcelain
 }
 
@@ -920,8 +1688,8 @@ func convertControlPanelVerifyJWTResponseToPlumbing(porcelain *ControlPanelVerif
 	}
 	plumbing := &proto.ControlPanelVerifyJWTResponse{}
 	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Valid = (porcelain.ValID)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Valid = (porcelain.ValID)
 	return plumbing
 }
 func convertRepeatedControlPanelVerifyJWTResponseToPlumbing(
@@ -941,668 +1709,35 @@ func convertRepeatedControlPanelVerifyJWTResponseToPorcelain(plumbings []*proto.
 	}
 	return items
 }
-func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Resource{}
-
-	switch v := porcelain.(type) {
-	case *RabbitMQAMQP091:
-		plumbing.Resource = &proto.Resource_RabbitMqamqp_091{RabbitMqamqp_091: convertRabbitMQAMQP091ToPlumbing(v)}
-	case *AmazonMQAMQP091:
-		plumbing.Resource = &proto.Resource_AmazonMqamqp_091{AmazonMqamqp_091: convertAmazonMQAMQP091ToPlumbing(v)}
-	case *Athena:
-		plumbing.Resource = &proto.Resource_Athena{Athena: convertAthenaToPlumbing(v)}
-	case *AWS:
-		plumbing.Resource = &proto.Resource_Aws{Aws: convertAWSToPlumbing(v)}
-	case *BigQuery:
-		plumbing.Resource = &proto.Resource_BigQuery{BigQuery: convertBigQueryToPlumbing(v)}
-	case *Cassandra:
-		plumbing.Resource = &proto.Resource_Cassandra{Cassandra: convertCassandraToPlumbing(v)}
-	case *DB2I:
-		plumbing.Resource = &proto.Resource_Db_2I{Db_2I: convertDB2IToPlumbing(v)}
-	case *DB2LUW:
-		plumbing.Resource = &proto.Resource_Db_2Luw{Db_2Luw: convertDB2LUWToPlumbing(v)}
-	case *Druid:
-		plumbing.Resource = &proto.Resource_Druid{Druid: convertDruidToPlumbing(v)}
-	case *DynamoDB:
-		plumbing.Resource = &proto.Resource_DynamoDb{DynamoDb: convertDynamoDBToPlumbing(v)}
-	case *AmazonES:
-		plumbing.Resource = &proto.Resource_AmazonEs{AmazonEs: convertAmazonESToPlumbing(v)}
-	case *Elastic:
-		plumbing.Resource = &proto.Resource_Elastic{Elastic: convertElasticToPlumbing(v)}
-	case *HTTPBasicAuth:
-		plumbing.Resource = &proto.Resource_HttpBasicAuth{HttpBasicAuth: convertHTTPBasicAuthToPlumbing(v)}
-	case *HTTPNoAuth:
-		plumbing.Resource = &proto.Resource_HttpNoAuth{HttpNoAuth: convertHTTPNoAuthToPlumbing(v)}
-	case *HTTPAuth:
-		plumbing.Resource = &proto.Resource_HttpAuth{HttpAuth: convertHTTPAuthToPlumbing(v)}
-	case *Kubernetes:
-		plumbing.Resource = &proto.Resource_Kubernetes{Kubernetes: convertKubernetesToPlumbing(v)}
-	case *KubernetesUserImpersonation:
-		plumbing.Resource = &proto.Resource_KubernetesUserImpersonation{KubernetesUserImpersonation: convertKubernetesUserImpersonationToPlumbing(v)}
-	case *KubernetesBasicAuth:
-		plumbing.Resource = &proto.Resource_KubernetesBasicAuth{KubernetesBasicAuth: convertKubernetesBasicAuthToPlumbing(v)}
-	case *KubernetesServiceAccount:
-		plumbing.Resource = &proto.Resource_KubernetesServiceAccount{KubernetesServiceAccount: convertKubernetesServiceAccountToPlumbing(v)}
-	case *KubernetesServiceAccountUserImpersonation:
-		plumbing.Resource = &proto.Resource_KubernetesServiceAccountUserImpersonation{KubernetesServiceAccountUserImpersonation: convertKubernetesServiceAccountUserImpersonationToPlumbing(v)}
-	case *AmazonEKS:
-		plumbing.Resource = &proto.Resource_AmazonEks{AmazonEks: convertAmazonEKSToPlumbing(v)}
-	case *AmazonEKSUserImpersonation:
-		plumbing.Resource = &proto.Resource_AmazonEksUserImpersonation{AmazonEksUserImpersonation: convertAmazonEKSUserImpersonationToPlumbing(v)}
-	case *GoogleGKE:
-		plumbing.Resource = &proto.Resource_GoogleGke{GoogleGke: convertGoogleGKEToPlumbing(v)}
-	case *GoogleGKEUserImpersonation:
-		plumbing.Resource = &proto.Resource_GoogleGkeUserImpersonation{GoogleGkeUserImpersonation: convertGoogleGKEUserImpersonationToPlumbing(v)}
-	case *AKS:
-		plumbing.Resource = &proto.Resource_Aks{Aks: convertAKSToPlumbing(v)}
-	case *AKSUserImpersonation:
-		plumbing.Resource = &proto.Resource_AksUserImpersonation{AksUserImpersonation: convertAKSUserImpersonationToPlumbing(v)}
-	case *AKSBasicAuth:
-		plumbing.Resource = &proto.Resource_AksBasicAuth{AksBasicAuth: convertAKSBasicAuthToPlumbing(v)}
-	case *AKSServiceAccount:
-		plumbing.Resource = &proto.Resource_AksServiceAccount{AksServiceAccount: convertAKSServiceAccountToPlumbing(v)}
-	case *AKSServiceAccountUserImpersonation:
-		plumbing.Resource = &proto.Resource_AksServiceAccountUserImpersonation{AksServiceAccountUserImpersonation: convertAKSServiceAccountUserImpersonationToPlumbing(v)}
-	case *Memcached:
-		plumbing.Resource = &proto.Resource_Memcached{Memcached: convertMemcachedToPlumbing(v)}
-	case *MongoLegacyHost:
-		plumbing.Resource = &proto.Resource_MongoLegacyHost{MongoLegacyHost: convertMongoLegacyHostToPlumbing(v)}
-	case *MongoLegacyReplicaset:
-		plumbing.Resource = &proto.Resource_MongoLegacyReplicaset{MongoLegacyReplicaset: convertMongoLegacyReplicasetToPlumbing(v)}
-	case *MongoHost:
-		plumbing.Resource = &proto.Resource_MongoHost{MongoHost: convertMongoHostToPlumbing(v)}
-	case *MongoReplicaSet:
-		plumbing.Resource = &proto.Resource_MongoReplicaSet{MongoReplicaSet: convertMongoReplicaSetToPlumbing(v)}
-	case *Mysql:
-		plumbing.Resource = &proto.Resource_Mysql{Mysql: convertMysqlToPlumbing(v)}
-	case *AuroraMysql:
-		plumbing.Resource = &proto.Resource_AuroraMysql{AuroraMysql: convertAuroraMysqlToPlumbing(v)}
-	case *Clustrix:
-		plumbing.Resource = &proto.Resource_Clustrix{Clustrix: convertClustrixToPlumbing(v)}
-	case *Maria:
-		plumbing.Resource = &proto.Resource_Maria{Maria: convertMariaToPlumbing(v)}
-	case *Memsql:
-		plumbing.Resource = &proto.Resource_Memsql{Memsql: convertMemsqlToPlumbing(v)}
-	case *SingleStore:
-		plumbing.Resource = &proto.Resource_SingleStore{SingleStore: convertSingleStoreToPlumbing(v)}
-	case *Oracle:
-		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
-	case *Postgres:
-		plumbing.Resource = &proto.Resource_Postgres{Postgres: convertPostgresToPlumbing(v)}
-	case *AuroraPostgres:
-		plumbing.Resource = &proto.Resource_AuroraPostgres{AuroraPostgres: convertAuroraPostgresToPlumbing(v)}
-	case *Greenplum:
-		plumbing.Resource = &proto.Resource_Greenplum{Greenplum: convertGreenplumToPlumbing(v)}
-	case *Cockroach:
-		plumbing.Resource = &proto.Resource_Cockroach{Cockroach: convertCockroachToPlumbing(v)}
-	case *Redshift:
-		plumbing.Resource = &proto.Resource_Redshift{Redshift: convertRedshiftToPlumbing(v)}
-	case *Citus:
-		plumbing.Resource = &proto.Resource_Citus{Citus: convertCitusToPlumbing(v)}
-	case *Presto:
-		plumbing.Resource = &proto.Resource_Presto{Presto: convertPrestoToPlumbing(v)}
-	case *RawTCP:
-		plumbing.Resource = &proto.Resource_RawTcp{RawTcp: convertRawTCPToPlumbing(v)}
-	case *RDP:
-		plumbing.Resource = &proto.Resource_Rdp{Rdp: convertRDPToPlumbing(v)}
-	case *Redis:
-		plumbing.Resource = &proto.Resource_Redis{Redis: convertRedisToPlumbing(v)}
-	case *ElasticacheRedis:
-		plumbing.Resource = &proto.Resource_ElasticacheRedis{ElasticacheRedis: convertElasticacheRedisToPlumbing(v)}
-	case *Snowflake:
-		plumbing.Resource = &proto.Resource_Snowflake{Snowflake: convertSnowflakeToPlumbing(v)}
-	case *SQLServer:
-		plumbing.Resource = &proto.Resource_SqlServer{SqlServer: convertSQLServerToPlumbing(v)}
-	case *SSH:
-		plumbing.Resource = &proto.Resource_Ssh{Ssh: convertSSHToPlumbing(v)}
-	case *SSHCert:
-		plumbing.Resource = &proto.Resource_SshCert{SshCert: convertSSHCertToPlumbing(v)}
-	case *SSHCustomerKey:
-		plumbing.Resource = &proto.Resource_SshCustomerKey{SshCustomerKey: convertSSHCustomerKeyToPlumbing(v)}
-	case *Sybase:
-		plumbing.Resource = &proto.Resource_Sybase{Sybase: convertSybaseToPlumbing(v)}
-	case *SybaseIQ:
-		plumbing.Resource = &proto.Resource_SybaseIq{SybaseIq: convertSybaseIQToPlumbing(v)}
-	case *Teradata:
-		plumbing.Resource = &proto.Resource_Teradata{Teradata: convertTeradataToPlumbing(v)}
-	}
-	return plumbing
-}
-
-func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
-	if plumbing.GetRabbitMqamqp_091() != nil {
-		return convertRabbitMQAMQP091ToPorcelain(plumbing.GetRabbitMqamqp_091())
-	}
-	if plumbing.GetAmazonMqamqp_091() != nil {
-		return convertAmazonMQAMQP091ToPorcelain(plumbing.GetAmazonMqamqp_091())
-	}
-	if plumbing.GetAthena() != nil {
-		return convertAthenaToPorcelain(plumbing.GetAthena())
-	}
-	if plumbing.GetAws() != nil {
-		return convertAWSToPorcelain(plumbing.GetAws())
-	}
-	if plumbing.GetBigQuery() != nil {
-		return convertBigQueryToPorcelain(plumbing.GetBigQuery())
-	}
-	if plumbing.GetCassandra() != nil {
-		return convertCassandraToPorcelain(plumbing.GetCassandra())
-	}
-	if plumbing.GetDb_2I() != nil {
-		return convertDB2IToPorcelain(plumbing.GetDb_2I())
-	}
-	if plumbing.GetDb_2Luw() != nil {
-		return convertDB2LUWToPorcelain(plumbing.GetDb_2Luw())
-	}
-	if plumbing.GetDruid() != nil {
-		return convertDruidToPorcelain(plumbing.GetDruid())
-	}
-	if plumbing.GetDynamoDb() != nil {
-		return convertDynamoDBToPorcelain(plumbing.GetDynamoDb())
-	}
-	if plumbing.GetAmazonEs() != nil {
-		return convertAmazonESToPorcelain(plumbing.GetAmazonEs())
-	}
-	if plumbing.GetElastic() != nil {
-		return convertElasticToPorcelain(plumbing.GetElastic())
-	}
-	if plumbing.GetHttpBasicAuth() != nil {
-		return convertHTTPBasicAuthToPorcelain(plumbing.GetHttpBasicAuth())
-	}
-	if plumbing.GetHttpNoAuth() != nil {
-		return convertHTTPNoAuthToPorcelain(plumbing.GetHttpNoAuth())
-	}
-	if plumbing.GetHttpAuth() != nil {
-		return convertHTTPAuthToPorcelain(plumbing.GetHttpAuth())
-	}
-	if plumbing.GetKubernetes() != nil {
-		return convertKubernetesToPorcelain(plumbing.GetKubernetes())
-	}
-	if plumbing.GetKubernetesUserImpersonation() != nil {
-		return convertKubernetesUserImpersonationToPorcelain(plumbing.GetKubernetesUserImpersonation())
-	}
-	if plumbing.GetKubernetesBasicAuth() != nil {
-		return convertKubernetesBasicAuthToPorcelain(plumbing.GetKubernetesBasicAuth())
-	}
-	if plumbing.GetKubernetesServiceAccount() != nil {
-		return convertKubernetesServiceAccountToPorcelain(plumbing.GetKubernetesServiceAccount())
-	}
-	if plumbing.GetKubernetesServiceAccountUserImpersonation() != nil {
-		return convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing.GetKubernetesServiceAccountUserImpersonation())
-	}
-	if plumbing.GetAmazonEks() != nil {
-		return convertAmazonEKSToPorcelain(plumbing.GetAmazonEks())
-	}
-	if plumbing.GetAmazonEksUserImpersonation() != nil {
-		return convertAmazonEKSUserImpersonationToPorcelain(plumbing.GetAmazonEksUserImpersonation())
-	}
-	if plumbing.GetGoogleGke() != nil {
-		return convertGoogleGKEToPorcelain(plumbing.GetGoogleGke())
-	}
-	if plumbing.GetGoogleGkeUserImpersonation() != nil {
-		return convertGoogleGKEUserImpersonationToPorcelain(plumbing.GetGoogleGkeUserImpersonation())
-	}
-	if plumbing.GetAks() != nil {
-		return convertAKSToPorcelain(plumbing.GetAks())
-	}
-	if plumbing.GetAksUserImpersonation() != nil {
-		return convertAKSUserImpersonationToPorcelain(plumbing.GetAksUserImpersonation())
-	}
-	if plumbing.GetAksBasicAuth() != nil {
-		return convertAKSBasicAuthToPorcelain(plumbing.GetAksBasicAuth())
-	}
-	if plumbing.GetAksServiceAccount() != nil {
-		return convertAKSServiceAccountToPorcelain(plumbing.GetAksServiceAccount())
-	}
-	if plumbing.GetAksServiceAccountUserImpersonation() != nil {
-		return convertAKSServiceAccountUserImpersonationToPorcelain(plumbing.GetAksServiceAccountUserImpersonation())
-	}
-	if plumbing.GetMemcached() != nil {
-		return convertMemcachedToPorcelain(plumbing.GetMemcached())
-	}
-	if plumbing.GetMongoLegacyHost() != nil {
-		return convertMongoLegacyHostToPorcelain(plumbing.GetMongoLegacyHost())
-	}
-	if plumbing.GetMongoLegacyReplicaset() != nil {
-		return convertMongoLegacyReplicasetToPorcelain(plumbing.GetMongoLegacyReplicaset())
-	}
-	if plumbing.GetMongoHost() != nil {
-		return convertMongoHostToPorcelain(plumbing.GetMongoHost())
-	}
-	if plumbing.GetMongoReplicaSet() != nil {
-		return convertMongoReplicaSetToPorcelain(plumbing.GetMongoReplicaSet())
-	}
-	if plumbing.GetMysql() != nil {
-		return convertMysqlToPorcelain(plumbing.GetMysql())
-	}
-	if plumbing.GetAuroraMysql() != nil {
-		return convertAuroraMysqlToPorcelain(plumbing.GetAuroraMysql())
-	}
-	if plumbing.GetClustrix() != nil {
-		return convertClustrixToPorcelain(plumbing.GetClustrix())
-	}
-	if plumbing.GetMaria() != nil {
-		return convertMariaToPorcelain(plumbing.GetMaria())
-	}
-	if plumbing.GetMemsql() != nil {
-		return convertMemsqlToPorcelain(plumbing.GetMemsql())
-	}
-	if plumbing.GetSingleStore() != nil {
-		return convertSingleStoreToPorcelain(plumbing.GetSingleStore())
-	}
-	if plumbing.GetOracle() != nil {
-		return convertOracleToPorcelain(plumbing.GetOracle())
-	}
-	if plumbing.GetPostgres() != nil {
-		return convertPostgresToPorcelain(plumbing.GetPostgres())
-	}
-	if plumbing.GetAuroraPostgres() != nil {
-		return convertAuroraPostgresToPorcelain(plumbing.GetAuroraPostgres())
-	}
-	if plumbing.GetGreenplum() != nil {
-		return convertGreenplumToPorcelain(plumbing.GetGreenplum())
-	}
-	if plumbing.GetCockroach() != nil {
-		return convertCockroachToPorcelain(plumbing.GetCockroach())
-	}
-	if plumbing.GetRedshift() != nil {
-		return convertRedshiftToPorcelain(plumbing.GetRedshift())
-	}
-	if plumbing.GetCitus() != nil {
-		return convertCitusToPorcelain(plumbing.GetCitus())
-	}
-	if plumbing.GetPresto() != nil {
-		return convertPrestoToPorcelain(plumbing.GetPresto())
-	}
-	if plumbing.GetRawTcp() != nil {
-		return convertRawTCPToPorcelain(plumbing.GetRawTcp())
-	}
-	if plumbing.GetRdp() != nil {
-		return convertRDPToPorcelain(plumbing.GetRdp())
-	}
-	if plumbing.GetRedis() != nil {
-		return convertRedisToPorcelain(plumbing.GetRedis())
-	}
-	if plumbing.GetElasticacheRedis() != nil {
-		return convertElasticacheRedisToPorcelain(plumbing.GetElasticacheRedis())
-	}
-	if plumbing.GetSnowflake() != nil {
-		return convertSnowflakeToPorcelain(plumbing.GetSnowflake())
-	}
-	if plumbing.GetSqlServer() != nil {
-		return convertSQLServerToPorcelain(plumbing.GetSqlServer())
-	}
-	if plumbing.GetSsh() != nil {
-		return convertSSHToPorcelain(plumbing.GetSsh())
-	}
-	if plumbing.GetSshCert() != nil {
-		return convertSSHCertToPorcelain(plumbing.GetSshCert())
-	}
-	if plumbing.GetSshCustomerKey() != nil {
-		return convertSSHCustomerKeyToPorcelain(plumbing.GetSshCustomerKey())
-	}
-	if plumbing.GetSybase() != nil {
-		return convertSybaseToPorcelain(plumbing.GetSybase())
-	}
-	if plumbing.GetSybaseIq() != nil {
-		return convertSybaseIQToPorcelain(plumbing.GetSybaseIq())
-	}
-	if plumbing.GetTeradata() != nil {
-		return convertTeradataToPorcelain(plumbing.GetTeradata())
-	}
-	return nil
-}
-func convertRepeatedResourceToPlumbing(
-	porcelains []Resource,
-) []*proto.Resource {
-	var items []*proto.Resource
-	for _, porcelain := range porcelains {
-		items = append(items, convertResourceToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedResourceToPorcelain(plumbings []*proto.Resource) []Resource {
-	var items []Resource
-	for _, plumbing := range plumbings {
-		items = append(items, convertResourceToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRabbitMQAMQP091ToPorcelain(plumbing *proto.RabbitMQAMQP091) *RabbitMQAMQP091 {
+func convertCreateResponseMetadataToPorcelain(plumbing *proto.CreateResponseMetadata) *CreateResponseMetadata {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &RabbitMQAMQP091{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain := &CreateResponseMetadata{}
 	return porcelain
 }
 
-func convertRabbitMQAMQP091ToPlumbing(porcelain *RabbitMQAMQP091) *proto.RabbitMQAMQP091 {
+func convertCreateResponseMetadataToPlumbing(porcelain *CreateResponseMetadata) *proto.CreateResponseMetadata {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.RabbitMQAMQP091{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing := &proto.CreateResponseMetadata{}
 	return plumbing
 }
-func convertRepeatedRabbitMQAMQP091ToPlumbing(
-	porcelains []*RabbitMQAMQP091,
-) []*proto.RabbitMQAMQP091 {
-	var items []*proto.RabbitMQAMQP091
+func convertRepeatedCreateResponseMetadataToPlumbing(
+	porcelains []*CreateResponseMetadata,
+) []*proto.CreateResponseMetadata {
+	var items []*proto.CreateResponseMetadata
 	for _, porcelain := range porcelains {
-		items = append(items, convertRabbitMQAMQP091ToPlumbing(porcelain))
+		items = append(items, convertCreateResponseMetadataToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedRabbitMQAMQP091ToPorcelain(plumbings []*proto.RabbitMQAMQP091) []*RabbitMQAMQP091 {
-	var items []*RabbitMQAMQP091
+func convertRepeatedCreateResponseMetadataToPorcelain(plumbings []*proto.CreateResponseMetadata) []*CreateResponseMetadata {
+	var items []*CreateResponseMetadata
 	for _, plumbing := range plumbings {
-		items = append(items, convertRabbitMQAMQP091ToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAmazonMQAMQP091ToPorcelain(plumbing *proto.AmazonMQAMQP091) *AmazonMQAMQP091 {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AmazonMQAMQP091{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
-	return porcelain
-}
-
-func convertAmazonMQAMQP091ToPlumbing(porcelain *AmazonMQAMQP091) *proto.AmazonMQAMQP091 {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AmazonMQAMQP091{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	return plumbing
-}
-func convertRepeatedAmazonMQAMQP091ToPlumbing(
-	porcelains []*AmazonMQAMQP091,
-) []*proto.AmazonMQAMQP091 {
-	var items []*proto.AmazonMQAMQP091
-	for _, porcelain := range porcelains {
-		items = append(items, convertAmazonMQAMQP091ToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAmazonMQAMQP091ToPorcelain(plumbings []*proto.AmazonMQAMQP091) []*AmazonMQAMQP091 {
-	var items []*AmazonMQAMQP091
-	for _, plumbing := range plumbings {
-		items = append(items, convertAmazonMQAMQP091ToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAthenaToPorcelain(plumbing *proto.Athena) *Athena {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Athena{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.AccessKey = (plumbing.AccessKey)
-	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
-	porcelain.Output = (plumbing.Output)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Region = (plumbing.Region)
-	porcelain.RoleArn = (plumbing.RoleArn)
-	porcelain.RoleExternalID = (plumbing.RoleExternalId)
-	return porcelain
-}
-
-func convertAthenaToPlumbing(porcelain *Athena) *proto.Athena {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Athena{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.AccessKey = (porcelain.AccessKey)
-	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
-	plumbing.Output = (porcelain.Output)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Region = (porcelain.Region)
-	plumbing.RoleArn = (porcelain.RoleArn)
-	plumbing.RoleExternalId = (porcelain.RoleExternalID)
-	return plumbing
-}
-func convertRepeatedAthenaToPlumbing(
-	porcelains []*Athena,
-) []*proto.Athena {
-	var items []*proto.Athena
-	for _, porcelain := range porcelains {
-		items = append(items, convertAthenaToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAthenaToPorcelain(plumbings []*proto.Athena) []*Athena {
-	var items []*Athena
-	for _, plumbing := range plumbings {
-		items = append(items, convertAthenaToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAWSToPorcelain(plumbing *proto.AWS) *AWS {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AWS{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.AccessKey = (plumbing.AccessKey)
-	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
-	porcelain.HealthcheckRegion = (plumbing.HealthcheckRegion)
-	porcelain.RoleArn = (plumbing.RoleArn)
-	porcelain.RoleExternalID = (plumbing.RoleExternalId)
-	return porcelain
-}
-
-func convertAWSToPlumbing(porcelain *AWS) *proto.AWS {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AWS{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.AccessKey = (porcelain.AccessKey)
-	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
-	plumbing.HealthcheckRegion = (porcelain.HealthcheckRegion)
-	plumbing.RoleArn = (porcelain.RoleArn)
-	plumbing.RoleExternalId = (porcelain.RoleExternalID)
-	return plumbing
-}
-func convertRepeatedAWSToPlumbing(
-	porcelains []*AWS,
-) []*proto.AWS {
-	var items []*proto.AWS
-	for _, porcelain := range porcelains {
-		items = append(items, convertAWSToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAWSToPorcelain(plumbings []*proto.AWS) []*AWS {
-	var items []*AWS
-	for _, plumbing := range plumbings {
-		items = append(items, convertAWSToPorcelain(plumbing))
-	}
-	return items
-}
-func convertBigQueryToPorcelain(plumbing *proto.BigQuery) *BigQuery {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &BigQuery{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.PrivateKey = (plumbing.PrivateKey)
-	porcelain.Project = (plumbing.Project)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Endpoint = (plumbing.Endpoint)
-	porcelain.Username = (plumbing.Username)
-	return porcelain
-}
-
-func convertBigQueryToPlumbing(porcelain *BigQuery) *proto.BigQuery {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.BigQuery{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.PrivateKey = (porcelain.PrivateKey)
-	plumbing.Project = (porcelain.Project)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Endpoint = (porcelain.Endpoint)
-	plumbing.Username = (porcelain.Username)
-	return plumbing
-}
-func convertRepeatedBigQueryToPlumbing(
-	porcelains []*BigQuery,
-) []*proto.BigQuery {
-	var items []*proto.BigQuery
-	for _, porcelain := range porcelains {
-		items = append(items, convertBigQueryToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedBigQueryToPorcelain(plumbings []*proto.BigQuery) []*BigQuery {
-	var items []*BigQuery
-	for _, plumbing := range plumbings {
-		items = append(items, convertBigQueryToPorcelain(plumbing))
-	}
-	return items
-}
-func convertCassandraToPorcelain(plumbing *proto.Cassandra) *Cassandra {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Cassandra{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
-	return porcelain
-}
-
-func convertCassandraToPlumbing(porcelain *Cassandra) *proto.Cassandra {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Cassandra{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	return plumbing
-}
-func convertRepeatedCassandraToPlumbing(
-	porcelains []*Cassandra,
-) []*proto.Cassandra {
-	var items []*proto.Cassandra
-	for _, porcelain := range porcelains {
-		items = append(items, convertCassandraToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedCassandraToPorcelain(plumbings []*proto.Cassandra) []*Cassandra {
-	var items []*Cassandra
-	for _, plumbing := range plumbings {
-		items = append(items, convertCassandraToPorcelain(plumbing))
+		items = append(items, convertCreateResponseMetadataToPorcelain(plumbing))
 	}
 	return items
 }
@@ -1611,18 +1746,18 @@ func convertDB2IToPorcelain(plumbing *proto.DB2I) *DB2I {
 		return nil
 	}
 	porcelain := &DB2I{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
-	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -1631,18 +1766,18 @@ func convertDB2IToPlumbing(porcelain *DB2I) *proto.DB2I {
 		return nil
 	}
 	plumbing := &proto.DB2I{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
-	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedDB2IToPlumbing(
@@ -1667,18 +1802,18 @@ func convertDB2LUWToPorcelain(plumbing *proto.DB2LUW) *DB2LUW {
 		return nil
 	}
 	porcelain := &DB2LUW{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -1687,18 +1822,18 @@ func convertDB2LUWToPlumbing(porcelain *DB2LUW) *proto.DB2LUW {
 		return nil
 	}
 	plumbing := &proto.DB2LUW{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedDB2LUWToPlumbing(
@@ -1718,22 +1853,54 @@ func convertRepeatedDB2LUWToPorcelain(plumbings []*proto.DB2LUW) []*DB2LUW {
 	}
 	return items
 }
+func convertDeleteResponseMetadataToPorcelain(plumbing *proto.DeleteResponseMetadata) *DeleteResponseMetadata {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &DeleteResponseMetadata{}
+	return porcelain
+}
+
+func convertDeleteResponseMetadataToPlumbing(porcelain *DeleteResponseMetadata) *proto.DeleteResponseMetadata {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DeleteResponseMetadata{}
+	return plumbing
+}
+func convertRepeatedDeleteResponseMetadataToPlumbing(
+	porcelains []*DeleteResponseMetadata,
+) []*proto.DeleteResponseMetadata {
+	var items []*proto.DeleteResponseMetadata
+	for _, porcelain := range porcelains {
+		items = append(items, convertDeleteResponseMetadataToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDeleteResponseMetadataToPorcelain(plumbings []*proto.DeleteResponseMetadata) []*DeleteResponseMetadata {
+	var items []*DeleteResponseMetadata
+	for _, plumbing := range plumbings {
+		items = append(items, convertDeleteResponseMetadataToPorcelain(plumbing))
+	}
+	return items
+}
 func convertDruidToPorcelain(plumbing *proto.Druid) *Druid {
 	if plumbing == nil {
 		return nil
 	}
 	porcelain := &Druid{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -1742,17 +1909,17 @@ func convertDruidToPlumbing(porcelain *Druid) *proto.Druid {
 		return nil
 	}
 	plumbing := &proto.Druid{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedDruidToPlumbing(
@@ -1777,19 +1944,19 @@ func convertDynamoDBToPorcelain(plumbing *proto.DynamoDB) *DynamoDB {
 		return nil
 	}
 	porcelain := &DynamoDB{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.Healthy = (plumbing.Healthy)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.AccessKey = (plumbing.AccessKey)
-	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
-	porcelain.Region = (plumbing.Region)
-	porcelain.Endpoint = (plumbing.Endpoint)
 	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Region = (plumbing.Region)
 	porcelain.RoleArn = (plumbing.RoleArn)
 	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
 
@@ -1798,19 +1965,19 @@ func convertDynamoDBToPlumbing(porcelain *DynamoDB) *proto.DynamoDB {
 		return nil
 	}
 	plumbing := &proto.DynamoDB{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.AccessKey = (porcelain.AccessKey)
-	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
-	plumbing.Region = (porcelain.Region)
-	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
 func convertRepeatedDynamoDBToPlumbing(
@@ -1830,81 +1997,23 @@ func convertRepeatedDynamoDBToPorcelain(plumbings []*proto.DynamoDB) []*DynamoDB
 	}
 	return items
 }
-func convertAmazonESToPorcelain(plumbing *proto.AmazonES) *AmazonES {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AmazonES{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Region = (plumbing.Region)
-	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
-	porcelain.Endpoint = (plumbing.Endpoint)
-	porcelain.AccessKey = (plumbing.AccessKey)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.RoleArn = (plumbing.RoleArn)
-	porcelain.RoleExternalID = (plumbing.RoleExternalId)
-	return porcelain
-}
-
-func convertAmazonESToPlumbing(porcelain *AmazonES) *proto.AmazonES {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AmazonES{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Region = (porcelain.Region)
-	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
-	plumbing.Endpoint = (porcelain.Endpoint)
-	plumbing.AccessKey = (porcelain.AccessKey)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RoleArn = (porcelain.RoleArn)
-	plumbing.RoleExternalId = (porcelain.RoleExternalID)
-	return plumbing
-}
-func convertRepeatedAmazonESToPlumbing(
-	porcelains []*AmazonES,
-) []*proto.AmazonES {
-	var items []*proto.AmazonES
-	for _, porcelain := range porcelains {
-		items = append(items, convertAmazonESToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAmazonESToPorcelain(plumbings []*proto.AmazonES) []*AmazonES {
-	var items []*AmazonES
-	for _, plumbing := range plumbings {
-		items = append(items, convertAmazonESToPorcelain(plumbing))
-	}
-	return items
-}
 func convertElasticToPorcelain(plumbing *proto.Elastic) *Elastic {
 	if plumbing == nil {
 		return nil
 	}
 	porcelain := &Elastic{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
-	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -1913,18 +2022,18 @@ func convertElasticToPlumbing(porcelain *Elastic) *proto.Elastic {
 		return nil
 	}
 	plumbing := &proto.Elastic{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
-	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedElasticToPlumbing(
@@ -1944,565 +2053,135 @@ func convertRepeatedElasticToPorcelain(plumbings []*proto.Elastic) []*Elastic {
 	}
 	return items
 }
-func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) *HTTPBasicAuth {
+func convertElasticacheRedisToPorcelain(plumbing *proto.ElasticacheRedis) *ElasticacheRedis {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &HTTPBasicAuth{}
+	porcelain := &ElasticacheRedis{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Url = (plumbing.Url)
-	porcelain.HealthcheckPath = (plumbing.HealthcheckPath)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
-	porcelain.HeadersBlacklist = (plumbing.HeadersBlacklist)
-	porcelain.DefaultPath = (plumbing.DefaultPath)
-	porcelain.Subdomain = (plumbing.Subdomain)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
 	return porcelain
 }
 
-func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAuth {
+func convertElasticacheRedisToPlumbing(porcelain *ElasticacheRedis) *proto.ElasticacheRedis {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.HTTPBasicAuth{}
+	plumbing := &proto.ElasticacheRedis{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Url = (porcelain.Url)
-	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
-	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
-	plumbing.DefaultPath = (porcelain.DefaultPath)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	return plumbing
-}
-func convertRepeatedHTTPBasicAuthToPlumbing(
-	porcelains []*HTTPBasicAuth,
-) []*proto.HTTPBasicAuth {
-	var items []*proto.HTTPBasicAuth
-	for _, porcelain := range porcelains {
-		items = append(items, convertHTTPBasicAuthToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedHTTPBasicAuthToPorcelain(plumbings []*proto.HTTPBasicAuth) []*HTTPBasicAuth {
-	var items []*HTTPBasicAuth
-	for _, plumbing := range plumbings {
-		items = append(items, convertHTTPBasicAuthToPorcelain(plumbing))
-	}
-	return items
-}
-func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) *HTTPNoAuth {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &HTTPNoAuth{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Url = (plumbing.Url)
-	porcelain.HealthcheckPath = (plumbing.HealthcheckPath)
-	porcelain.HeadersBlacklist = (plumbing.HeadersBlacklist)
-	porcelain.DefaultPath = (plumbing.DefaultPath)
-	porcelain.Subdomain = (plumbing.Subdomain)
-	return porcelain
-}
-
-func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.HTTPNoAuth{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Url = (porcelain.Url)
-	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
-	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
-	plumbing.DefaultPath = (porcelain.DefaultPath)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	return plumbing
-}
-func convertRepeatedHTTPNoAuthToPlumbing(
-	porcelains []*HTTPNoAuth,
-) []*proto.HTTPNoAuth {
-	var items []*proto.HTTPNoAuth
-	for _, porcelain := range porcelains {
-		items = append(items, convertHTTPNoAuthToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedHTTPNoAuthToPorcelain(plumbings []*proto.HTTPNoAuth) []*HTTPNoAuth {
-	var items []*HTTPNoAuth
-	for _, plumbing := range plumbings {
-		items = append(items, convertHTTPNoAuthToPorcelain(plumbing))
-	}
-	return items
-}
-func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) *HTTPAuth {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &HTTPAuth{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Url = (plumbing.Url)
-	porcelain.HealthcheckPath = (plumbing.HealthcheckPath)
-	porcelain.AuthHeader = (plumbing.AuthHeader)
-	porcelain.HeadersBlacklist = (plumbing.HeadersBlacklist)
-	porcelain.DefaultPath = (plumbing.DefaultPath)
-	porcelain.Subdomain = (plumbing.Subdomain)
-	return porcelain
-}
-
-func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.HTTPAuth{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Url = (porcelain.Url)
-	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
-	plumbing.AuthHeader = (porcelain.AuthHeader)
-	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
-	plumbing.DefaultPath = (porcelain.DefaultPath)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	return plumbing
-}
-func convertRepeatedHTTPAuthToPlumbing(
-	porcelains []*HTTPAuth,
-) []*proto.HTTPAuth {
-	var items []*proto.HTTPAuth
-	for _, porcelain := range porcelains {
-		items = append(items, convertHTTPAuthToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedHTTPAuthToPorcelain(plumbings []*proto.HTTPAuth) []*HTTPAuth {
-	var items []*HTTPAuth
-	for _, plumbing := range plumbings {
-		items = append(items, convertHTTPAuthToPorcelain(plumbing))
-	}
-	return items
-}
-func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) *Kubernetes {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Kubernetes{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.ClientCertificate = (plumbing.ClientCertificate)
-	porcelain.ClientKey = (plumbing.ClientKey)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Kubernetes{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Port = (porcelain.Port)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.ClientCertificate = (porcelain.ClientCertificate)
-	plumbing.ClientKey = (porcelain.ClientKey)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
 	return plumbing
 }
-func convertRepeatedKubernetesToPlumbing(
-	porcelains []*Kubernetes,
-) []*proto.Kubernetes {
-	var items []*proto.Kubernetes
+func convertRepeatedElasticacheRedisToPlumbing(
+	porcelains []*ElasticacheRedis,
+) []*proto.ElasticacheRedis {
+	var items []*proto.ElasticacheRedis
 	for _, porcelain := range porcelains {
-		items = append(items, convertKubernetesToPlumbing(porcelain))
+		items = append(items, convertElasticacheRedisToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedKubernetesToPorcelain(plumbings []*proto.Kubernetes) []*Kubernetes {
-	var items []*Kubernetes
+func convertRepeatedElasticacheRedisToPorcelain(plumbings []*proto.ElasticacheRedis) []*ElasticacheRedis {
+	var items []*ElasticacheRedis
 	for _, plumbing := range plumbings {
-		items = append(items, convertKubernetesToPorcelain(plumbing))
+		items = append(items, convertElasticacheRedisToPorcelain(plumbing))
 	}
 	return items
 }
-func convertKubernetesUserImpersonationToPorcelain(plumbing *proto.KubernetesUserImpersonation) *KubernetesUserImpersonation {
+func convertGatewayToPorcelain(plumbing *proto.Gateway) *Gateway {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &KubernetesUserImpersonation{}
+	porcelain := &Gateway{}
+	porcelain.BindAddress = (plumbing.BindAddress)
+	porcelain.GatewayFilter = (plumbing.GatewayFilter)
 	porcelain.ID = (plumbing.Id)
+	porcelain.ListenAddress = (plumbing.ListenAddress)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.State = (plumbing.State)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.ClientCertificate = (plumbing.ClientCertificate)
-	porcelain.ClientKey = (plumbing.ClientKey)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
 	return porcelain
 }
 
-func convertKubernetesUserImpersonationToPlumbing(porcelain *KubernetesUserImpersonation) *proto.KubernetesUserImpersonation {
+func convertGatewayToPlumbing(porcelain *Gateway) *proto.Gateway {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.KubernetesUserImpersonation{}
+	plumbing := &proto.Gateway{}
+	plumbing.BindAddress = (porcelain.BindAddress)
+	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
+	plumbing.ListenAddress = (porcelain.ListenAddress)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.ClientCertificate = (porcelain.ClientCertificate)
-	plumbing.ClientKey = (porcelain.ClientKey)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	return plumbing
 }
-func convertRepeatedKubernetesUserImpersonationToPlumbing(
-	porcelains []*KubernetesUserImpersonation,
-) []*proto.KubernetesUserImpersonation {
-	var items []*proto.KubernetesUserImpersonation
+func convertRepeatedGatewayToPlumbing(
+	porcelains []*Gateway,
+) []*proto.Gateway {
+	var items []*proto.Gateway
 	for _, porcelain := range porcelains {
-		items = append(items, convertKubernetesUserImpersonationToPlumbing(porcelain))
+		items = append(items, convertGatewayToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedKubernetesUserImpersonationToPorcelain(plumbings []*proto.KubernetesUserImpersonation) []*KubernetesUserImpersonation {
-	var items []*KubernetesUserImpersonation
+func convertRepeatedGatewayToPorcelain(plumbings []*proto.Gateway) []*Gateway {
+	var items []*Gateway
 	for _, plumbing := range plumbings {
-		items = append(items, convertKubernetesUserImpersonationToPorcelain(plumbing))
+		items = append(items, convertGatewayToPorcelain(plumbing))
 	}
 	return items
 }
-func convertKubernetesBasicAuthToPorcelain(plumbing *proto.KubernetesBasicAuth) *KubernetesBasicAuth {
+func convertGetResponseMetadataToPorcelain(plumbing *proto.GetResponseMetadata) *GetResponseMetadata {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &KubernetesBasicAuth{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain := &GetResponseMetadata{}
 	return porcelain
 }
 
-func convertKubernetesBasicAuthToPlumbing(porcelain *KubernetesBasicAuth) *proto.KubernetesBasicAuth {
+func convertGetResponseMetadataToPlumbing(porcelain *GetResponseMetadata) *proto.GetResponseMetadata {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.KubernetesBasicAuth{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing := &proto.GetResponseMetadata{}
 	return plumbing
 }
-func convertRepeatedKubernetesBasicAuthToPlumbing(
-	porcelains []*KubernetesBasicAuth,
-) []*proto.KubernetesBasicAuth {
-	var items []*proto.KubernetesBasicAuth
+func convertRepeatedGetResponseMetadataToPlumbing(
+	porcelains []*GetResponseMetadata,
+) []*proto.GetResponseMetadata {
+	var items []*proto.GetResponseMetadata
 	for _, porcelain := range porcelains {
-		items = append(items, convertKubernetesBasicAuthToPlumbing(porcelain))
+		items = append(items, convertGetResponseMetadataToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedKubernetesBasicAuthToPorcelain(plumbings []*proto.KubernetesBasicAuth) []*KubernetesBasicAuth {
-	var items []*KubernetesBasicAuth
+func convertRepeatedGetResponseMetadataToPorcelain(plumbings []*proto.GetResponseMetadata) []*GetResponseMetadata {
+	var items []*GetResponseMetadata
 	for _, plumbing := range plumbings {
-		items = append(items, convertKubernetesBasicAuthToPorcelain(plumbing))
-	}
-	return items
-}
-func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServiceAccount) *KubernetesServiceAccount {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &KubernetesServiceAccount{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Token = (plumbing.Token)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccount) *proto.KubernetesServiceAccount {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.KubernetesServiceAccount{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Token = (porcelain.Token)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
-	return plumbing
-}
-func convertRepeatedKubernetesServiceAccountToPlumbing(
-	porcelains []*KubernetesServiceAccount,
-) []*proto.KubernetesServiceAccount {
-	var items []*proto.KubernetesServiceAccount
-	for _, porcelain := range porcelains {
-		items = append(items, convertKubernetesServiceAccountToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedKubernetesServiceAccountToPorcelain(plumbings []*proto.KubernetesServiceAccount) []*KubernetesServiceAccount {
-	var items []*KubernetesServiceAccount
-	for _, plumbing := range plumbings {
-		items = append(items, convertKubernetesServiceAccountToPorcelain(plumbing))
-	}
-	return items
-}
-func convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing *proto.KubernetesServiceAccountUserImpersonation) *KubernetesServiceAccountUserImpersonation {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &KubernetesServiceAccountUserImpersonation{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Token = (plumbing.Token)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain *KubernetesServiceAccountUserImpersonation) *proto.KubernetesServiceAccountUserImpersonation {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.KubernetesServiceAccountUserImpersonation{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Token = (porcelain.Token)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
-	return plumbing
-}
-func convertRepeatedKubernetesServiceAccountUserImpersonationToPlumbing(
-	porcelains []*KubernetesServiceAccountUserImpersonation,
-) []*proto.KubernetesServiceAccountUserImpersonation {
-	var items []*proto.KubernetesServiceAccountUserImpersonation
-	for _, porcelain := range porcelains {
-		items = append(items, convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedKubernetesServiceAccountUserImpersonationToPorcelain(plumbings []*proto.KubernetesServiceAccountUserImpersonation) []*KubernetesServiceAccountUserImpersonation {
-	var items []*KubernetesServiceAccountUserImpersonation
-	for _, plumbing := range plumbings {
-		items = append(items, convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) *AmazonEKS {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AmazonEKS{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Endpoint = (plumbing.Endpoint)
-	porcelain.AccessKey = (plumbing.AccessKey)
-	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.Region = (plumbing.Region)
-	porcelain.ClusterName = (plumbing.ClusterName)
-	porcelain.RoleArn = (plumbing.RoleArn)
-	porcelain.RoleExternalID = (plumbing.RoleExternalId)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AmazonEKS{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Endpoint = (porcelain.Endpoint)
-	plumbing.AccessKey = (porcelain.AccessKey)
-	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.Region = (porcelain.Region)
-	plumbing.ClusterName = (porcelain.ClusterName)
-	plumbing.RoleArn = (porcelain.RoleArn)
-	plumbing.RoleExternalId = (porcelain.RoleExternalID)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
-	return plumbing
-}
-func convertRepeatedAmazonEKSToPlumbing(
-	porcelains []*AmazonEKS,
-) []*proto.AmazonEKS {
-	var items []*proto.AmazonEKS
-	for _, porcelain := range porcelains {
-		items = append(items, convertAmazonEKSToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAmazonEKSToPorcelain(plumbings []*proto.AmazonEKS) []*AmazonEKS {
-	var items []*AmazonEKS
-	for _, plumbing := range plumbings {
-		items = append(items, convertAmazonEKSToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAmazonEKSUserImpersonationToPorcelain(plumbing *proto.AmazonEKSUserImpersonation) *AmazonEKSUserImpersonation {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AmazonEKSUserImpersonation{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Endpoint = (plumbing.Endpoint)
-	porcelain.AccessKey = (plumbing.AccessKey)
-	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.Region = (plumbing.Region)
-	porcelain.ClusterName = (plumbing.ClusterName)
-	porcelain.RoleArn = (plumbing.RoleArn)
-	porcelain.RoleExternalID = (plumbing.RoleExternalId)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertAmazonEKSUserImpersonationToPlumbing(porcelain *AmazonEKSUserImpersonation) *proto.AmazonEKSUserImpersonation {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AmazonEKSUserImpersonation{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Endpoint = (porcelain.Endpoint)
-	plumbing.AccessKey = (porcelain.AccessKey)
-	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.Region = (porcelain.Region)
-	plumbing.ClusterName = (porcelain.ClusterName)
-	plumbing.RoleArn = (porcelain.RoleArn)
-	plumbing.RoleExternalId = (porcelain.RoleExternalID)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
-	return plumbing
-}
-func convertRepeatedAmazonEKSUserImpersonationToPlumbing(
-	porcelains []*AmazonEKSUserImpersonation,
-) []*proto.AmazonEKSUserImpersonation {
-	var items []*proto.AmazonEKSUserImpersonation
-	for _, porcelain := range porcelains {
-		items = append(items, convertAmazonEKSUserImpersonationToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAmazonEKSUserImpersonationToPorcelain(plumbings []*proto.AmazonEKSUserImpersonation) []*AmazonEKSUserImpersonation {
-	var items []*AmazonEKSUserImpersonation
-	for _, plumbing := range plumbings {
-		items = append(items, convertAmazonEKSUserImpersonationToPorcelain(plumbing))
+		items = append(items, convertGetResponseMetadataToPorcelain(plumbing))
 	}
 	return items
 }
@@ -2511,16 +2190,16 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) *GoogleGKE {
 		return nil
 	}
 	porcelain := &GoogleGKE{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
 	porcelain.EgressFilter = (plumbing.EgressFilter)
 	porcelain.Endpoint = (plumbing.Endpoint)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.ServiceAccountKey = (plumbing.ServiceAccountKey)
 	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.ServiceAccountKey = (plumbing.ServiceAccountKey)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
 
@@ -2529,16 +2208,16 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 		return nil
 	}
 	plumbing := &proto.GoogleGKE{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
 func convertRepeatedGoogleGKEToPlumbing(
@@ -2563,16 +2242,16 @@ func convertGoogleGKEUserImpersonationToPorcelain(plumbing *proto.GoogleGKEUserI
 		return nil
 	}
 	porcelain := &GoogleGKEUserImpersonation{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
 	porcelain.EgressFilter = (plumbing.EgressFilter)
 	porcelain.Endpoint = (plumbing.Endpoint)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.ServiceAccountKey = (plumbing.ServiceAccountKey)
 	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.ServiceAccountKey = (plumbing.ServiceAccountKey)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
 
@@ -2581,16 +2260,16 @@ func convertGoogleGKEUserImpersonationToPlumbing(porcelain *GoogleGKEUserImperso
 		return nil
 	}
 	plumbing := &proto.GoogleGKEUserImpersonation{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
 func convertRepeatedGoogleGKEUserImpersonationToPlumbing(
@@ -2610,273 +2289,555 @@ func convertRepeatedGoogleGKEUserImpersonationToPorcelain(plumbings []*proto.Goo
 	}
 	return items
 }
-func convertAKSToPorcelain(plumbing *proto.AKS) *AKS {
+func convertGreenplumToPorcelain(plumbing *proto.Greenplum) *Greenplum {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &AKS{}
+	porcelain := &Greenplum{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.ClientCertificate = (plumbing.ClientCertificate)
-	porcelain.ClientKey = (plumbing.ClientKey)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AKS{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.ClientCertificate = (porcelain.ClientCertificate)
-	plumbing.ClientKey = (porcelain.ClientKey)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
-	return plumbing
-}
-func convertRepeatedAKSToPlumbing(
-	porcelains []*AKS,
-) []*proto.AKS {
-	var items []*proto.AKS
-	for _, porcelain := range porcelains {
-		items = append(items, convertAKSToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAKSToPorcelain(plumbings []*proto.AKS) []*AKS {
-	var items []*AKS
-	for _, plumbing := range plumbings {
-		items = append(items, convertAKSToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAKSUserImpersonationToPorcelain(plumbing *proto.AKSUserImpersonation) *AKSUserImpersonation {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AKSUserImpersonation{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
-	porcelain.ClientCertificate = (plumbing.ClientCertificate)
-	porcelain.ClientKey = (plumbing.ClientKey)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
-	return porcelain
-}
-
-func convertAKSUserImpersonationToPlumbing(porcelain *AKSUserImpersonation) *proto.AKSUserImpersonation {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AKSUserImpersonation{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
-	plumbing.ClientCertificate = (porcelain.ClientCertificate)
-	plumbing.ClientKey = (porcelain.ClientKey)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
-	return plumbing
-}
-func convertRepeatedAKSUserImpersonationToPlumbing(
-	porcelains []*AKSUserImpersonation,
-) []*proto.AKSUserImpersonation {
-	var items []*proto.AKSUserImpersonation
-	for _, porcelain := range porcelains {
-		items = append(items, convertAKSUserImpersonationToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAKSUserImpersonationToPorcelain(plumbings []*proto.AKSUserImpersonation) []*AKSUserImpersonation {
-	var items []*AKSUserImpersonation
-	for _, plumbing := range plumbings {
-		items = append(items, convertAKSUserImpersonationToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAKSBasicAuthToPorcelain(plumbing *proto.AKSBasicAuth) *AKSBasicAuth {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AKSBasicAuth{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Username = (plumbing.Username)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
 	porcelain.Password = (plumbing.Password)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
-func convertAKSBasicAuthToPlumbing(porcelain *AKSBasicAuth) *proto.AKSBasicAuth {
+func convertGreenplumToPlumbing(porcelain *Greenplum) *proto.Greenplum {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AKSBasicAuth{}
+	plumbing := &proto.Greenplum{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Username = (porcelain.Username)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
 	plumbing.Password = (porcelain.Password)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
-func convertRepeatedAKSBasicAuthToPlumbing(
-	porcelains []*AKSBasicAuth,
-) []*proto.AKSBasicAuth {
-	var items []*proto.AKSBasicAuth
+func convertRepeatedGreenplumToPlumbing(
+	porcelains []*Greenplum,
+) []*proto.Greenplum {
+	var items []*proto.Greenplum
 	for _, porcelain := range porcelains {
-		items = append(items, convertAKSBasicAuthToPlumbing(porcelain))
+		items = append(items, convertGreenplumToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAKSBasicAuthToPorcelain(plumbings []*proto.AKSBasicAuth) []*AKSBasicAuth {
-	var items []*AKSBasicAuth
+func convertRepeatedGreenplumToPorcelain(plumbings []*proto.Greenplum) []*Greenplum {
+	var items []*Greenplum
 	for _, plumbing := range plumbings {
-		items = append(items, convertAKSBasicAuthToPorcelain(plumbing))
+		items = append(items, convertGreenplumToPorcelain(plumbing))
 	}
 	return items
 }
-func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) *AKSServiceAccount {
+func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) *HTTPAuth {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &AKSServiceAccount{}
+	porcelain := &HTTPAuth{}
+	porcelain.AuthHeader = (plumbing.AuthHeader)
+	porcelain.DefaultPath = (plumbing.DefaultPath)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HeadersBlacklist = (plumbing.HeadersBlacklist)
+	porcelain.HealthcheckPath = (plumbing.HealthcheckPath)
+	porcelain.Healthy = (plumbing.Healthy)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Token = (plumbing.Token)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Subdomain = (plumbing.Subdomain)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Url = (plumbing.Url)
 	return porcelain
 }
 
-func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKSServiceAccount {
+func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AKSServiceAccount{}
+	plumbing := &proto.HTTPAuth{}
+	plumbing.AuthHeader = (porcelain.AuthHeader)
+	plumbing.DefaultPath = (porcelain.DefaultPath)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
+	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
+	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Token = (porcelain.Token)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
-func convertRepeatedAKSServiceAccountToPlumbing(
-	porcelains []*AKSServiceAccount,
-) []*proto.AKSServiceAccount {
-	var items []*proto.AKSServiceAccount
+func convertRepeatedHTTPAuthToPlumbing(
+	porcelains []*HTTPAuth,
+) []*proto.HTTPAuth {
+	var items []*proto.HTTPAuth
 	for _, porcelain := range porcelains {
-		items = append(items, convertAKSServiceAccountToPlumbing(porcelain))
+		items = append(items, convertHTTPAuthToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAKSServiceAccountToPorcelain(plumbings []*proto.AKSServiceAccount) []*AKSServiceAccount {
-	var items []*AKSServiceAccount
+func convertRepeatedHTTPAuthToPorcelain(plumbings []*proto.HTTPAuth) []*HTTPAuth {
+	var items []*HTTPAuth
 	for _, plumbing := range plumbings {
-		items = append(items, convertAKSServiceAccountToPorcelain(plumbing))
+		items = append(items, convertHTTPAuthToPorcelain(plumbing))
 	}
 	return items
 }
-func convertAKSServiceAccountUserImpersonationToPorcelain(plumbing *proto.AKSServiceAccountUserImpersonation) *AKSServiceAccountUserImpersonation {
+func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) *HTTPBasicAuth {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &AKSServiceAccountUserImpersonation{}
+	porcelain := &HTTPBasicAuth{}
+	porcelain.DefaultPath = (plumbing.DefaultPath)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HeadersBlacklist = (plumbing.HeadersBlacklist)
+	porcelain.HealthcheckPath = (plumbing.HealthcheckPath)
+	porcelain.Healthy = (plumbing.Healthy)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Password = (plumbing.Password)
 	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Token = (plumbing.Token)
-	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Subdomain = (plumbing.Subdomain)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Url = (plumbing.Url)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
-func convertAKSServiceAccountUserImpersonationToPlumbing(porcelain *AKSServiceAccountUserImpersonation) *proto.AKSServiceAccountUserImpersonation {
+func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAuth {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AKSServiceAccountUserImpersonation{}
+	plumbing := &proto.HTTPBasicAuth{}
+	plumbing.DefaultPath = (porcelain.DefaultPath)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
+	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
+	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Password = (porcelain.Password)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Token = (porcelain.Token)
-	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
-func convertRepeatedAKSServiceAccountUserImpersonationToPlumbing(
-	porcelains []*AKSServiceAccountUserImpersonation,
-) []*proto.AKSServiceAccountUserImpersonation {
-	var items []*proto.AKSServiceAccountUserImpersonation
+func convertRepeatedHTTPBasicAuthToPlumbing(
+	porcelains []*HTTPBasicAuth,
+) []*proto.HTTPBasicAuth {
+	var items []*proto.HTTPBasicAuth
 	for _, porcelain := range porcelains {
-		items = append(items, convertAKSServiceAccountUserImpersonationToPlumbing(porcelain))
+		items = append(items, convertHTTPBasicAuthToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAKSServiceAccountUserImpersonationToPorcelain(plumbings []*proto.AKSServiceAccountUserImpersonation) []*AKSServiceAccountUserImpersonation {
-	var items []*AKSServiceAccountUserImpersonation
+func convertRepeatedHTTPBasicAuthToPorcelain(plumbings []*proto.HTTPBasicAuth) []*HTTPBasicAuth {
+	var items []*HTTPBasicAuth
 	for _, plumbing := range plumbings {
-		items = append(items, convertAKSServiceAccountUserImpersonationToPorcelain(plumbing))
+		items = append(items, convertHTTPBasicAuthToPorcelain(plumbing))
+	}
+	return items
+}
+func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) *HTTPNoAuth {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &HTTPNoAuth{}
+	porcelain.DefaultPath = (plumbing.DefaultPath)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HeadersBlacklist = (plumbing.HeadersBlacklist)
+	porcelain.HealthcheckPath = (plumbing.HealthcheckPath)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Subdomain = (plumbing.Subdomain)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Url = (plumbing.Url)
+	return porcelain
+}
+
+func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.HTTPNoAuth{}
+	plumbing.DefaultPath = (porcelain.DefaultPath)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
+	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
+	return plumbing
+}
+func convertRepeatedHTTPNoAuthToPlumbing(
+	porcelains []*HTTPNoAuth,
+) []*proto.HTTPNoAuth {
+	var items []*proto.HTTPNoAuth
+	for _, porcelain := range porcelains {
+		items = append(items, convertHTTPNoAuthToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedHTTPNoAuthToPorcelain(plumbings []*proto.HTTPNoAuth) []*HTTPNoAuth {
+	var items []*HTTPNoAuth
+	for _, plumbing := range plumbings {
+		items = append(items, convertHTTPNoAuthToPorcelain(plumbing))
+	}
+	return items
+}
+func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) *Kubernetes {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Kubernetes{}
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
+	porcelain.ClientCertificate = (plumbing.ClientCertificate)
+	porcelain.ClientKey = (plumbing.ClientKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Kubernetes{}
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClientCertificate = (porcelain.ClientCertificate)
+	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedKubernetesToPlumbing(
+	porcelains []*Kubernetes,
+) []*proto.Kubernetes {
+	var items []*proto.Kubernetes
+	for _, porcelain := range porcelains {
+		items = append(items, convertKubernetesToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKubernetesToPorcelain(plumbings []*proto.Kubernetes) []*Kubernetes {
+	var items []*Kubernetes
+	for _, plumbing := range plumbings {
+		items = append(items, convertKubernetesToPorcelain(plumbing))
+	}
+	return items
+}
+func convertKubernetesBasicAuthToPorcelain(plumbing *proto.KubernetesBasicAuth) *KubernetesBasicAuth {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &KubernetesBasicAuth{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertKubernetesBasicAuthToPlumbing(porcelain *KubernetesBasicAuth) *proto.KubernetesBasicAuth {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KubernetesBasicAuth{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedKubernetesBasicAuthToPlumbing(
+	porcelains []*KubernetesBasicAuth,
+) []*proto.KubernetesBasicAuth {
+	var items []*proto.KubernetesBasicAuth
+	for _, porcelain := range porcelains {
+		items = append(items, convertKubernetesBasicAuthToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKubernetesBasicAuthToPorcelain(plumbings []*proto.KubernetesBasicAuth) []*KubernetesBasicAuth {
+	var items []*KubernetesBasicAuth
+	for _, plumbing := range plumbings {
+		items = append(items, convertKubernetesBasicAuthToPorcelain(plumbing))
+	}
+	return items
+}
+func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServiceAccount) *KubernetesServiceAccount {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &KubernetesServiceAccount{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Token = (plumbing.Token)
+	return porcelain
+}
+
+func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccount) *proto.KubernetesServiceAccount {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KubernetesServiceAccount{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Token = (porcelain.Token)
+	return plumbing
+}
+func convertRepeatedKubernetesServiceAccountToPlumbing(
+	porcelains []*KubernetesServiceAccount,
+) []*proto.KubernetesServiceAccount {
+	var items []*proto.KubernetesServiceAccount
+	for _, porcelain := range porcelains {
+		items = append(items, convertKubernetesServiceAccountToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKubernetesServiceAccountToPorcelain(plumbings []*proto.KubernetesServiceAccount) []*KubernetesServiceAccount {
+	var items []*KubernetesServiceAccount
+	for _, plumbing := range plumbings {
+		items = append(items, convertKubernetesServiceAccountToPorcelain(plumbing))
+	}
+	return items
+}
+func convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing *proto.KubernetesServiceAccountUserImpersonation) *KubernetesServiceAccountUserImpersonation {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &KubernetesServiceAccountUserImpersonation{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Token = (plumbing.Token)
+	return porcelain
+}
+
+func convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain *KubernetesServiceAccountUserImpersonation) *proto.KubernetesServiceAccountUserImpersonation {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KubernetesServiceAccountUserImpersonation{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Token = (porcelain.Token)
+	return plumbing
+}
+func convertRepeatedKubernetesServiceAccountUserImpersonationToPlumbing(
+	porcelains []*KubernetesServiceAccountUserImpersonation,
+) []*proto.KubernetesServiceAccountUserImpersonation {
+	var items []*proto.KubernetesServiceAccountUserImpersonation
+	for _, porcelain := range porcelains {
+		items = append(items, convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKubernetesServiceAccountUserImpersonationToPorcelain(plumbings []*proto.KubernetesServiceAccountUserImpersonation) []*KubernetesServiceAccountUserImpersonation {
+	var items []*KubernetesServiceAccountUserImpersonation
+	for _, plumbing := range plumbings {
+		items = append(items, convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing))
+	}
+	return items
+}
+func convertKubernetesUserImpersonationToPorcelain(plumbing *proto.KubernetesUserImpersonation) *KubernetesUserImpersonation {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &KubernetesUserImpersonation{}
+	porcelain.CertificateAuthority = (plumbing.CertificateAuthority)
+	porcelain.ClientCertificate = (plumbing.ClientCertificate)
+	porcelain.ClientKey = (plumbing.ClientKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.HealthcheckNamespace = (plumbing.HealthcheckNamespace)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertKubernetesUserImpersonationToPlumbing(porcelain *KubernetesUserImpersonation) *proto.KubernetesUserImpersonation {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KubernetesUserImpersonation{}
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClientCertificate = (porcelain.ClientCertificate)
+	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedKubernetesUserImpersonationToPlumbing(
+	porcelains []*KubernetesUserImpersonation,
+) []*proto.KubernetesUserImpersonation {
+	var items []*proto.KubernetesUserImpersonation
+	for _, porcelain := range porcelains {
+		items = append(items, convertKubernetesUserImpersonationToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKubernetesUserImpersonationToPorcelain(plumbings []*proto.KubernetesUserImpersonation) []*KubernetesUserImpersonation {
+	var items []*KubernetesUserImpersonation
+	for _, plumbing := range plumbings {
+		items = append(items, convertKubernetesUserImpersonationToPorcelain(plumbing))
+	}
+	return items
+}
+func convertMariaToPorcelain(plumbing *proto.Maria) *Maria {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Maria{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertMariaToPlumbing(porcelain *Maria) *proto.Maria {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Maria{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMariaToPlumbing(
+	porcelains []*Maria,
+) []*proto.Maria {
+	var items []*proto.Maria
+	for _, porcelain := range porcelains {
+		items = append(items, convertMariaToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMariaToPorcelain(plumbings []*proto.Maria) []*Maria {
+	var items []*Maria
+	for _, plumbing := range plumbings {
+		items = append(items, convertMariaToPorcelain(plumbing))
 	}
 	return items
 }
@@ -2885,15 +2846,15 @@ func convertMemcachedToPorcelain(plumbing *proto.Memcached) *Memcached {
 		return nil
 	}
 	porcelain := &Memcached{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
 
@@ -2902,15 +2863,15 @@ func convertMemcachedToPlumbing(porcelain *Memcached) *proto.Memcached {
 		return nil
 	}
 	plumbing := &proto.Memcached{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
 func convertRepeatedMemcachedToPlumbing(
@@ -2930,25 +2891,139 @@ func convertRepeatedMemcachedToPorcelain(plumbings []*proto.Memcached) []*Memcac
 	}
 	return items
 }
+func convertMemsqlToPorcelain(plumbing *proto.Memsql) *Memsql {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Memsql{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertMemsqlToPlumbing(porcelain *Memsql) *proto.Memsql {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Memsql{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMemsqlToPlumbing(
+	porcelains []*Memsql,
+) []*proto.Memsql {
+	var items []*proto.Memsql
+	for _, porcelain := range porcelains {
+		items = append(items, convertMemsqlToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMemsqlToPorcelain(plumbings []*proto.Memsql) []*Memsql {
+	var items []*Memsql
+	for _, plumbing := range plumbings {
+		items = append(items, convertMemsqlToPorcelain(plumbing))
+	}
+	return items
+}
+func convertMongoHostToPorcelain(plumbing *proto.MongoHost) *MongoHost {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &MongoHost{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertMongoHostToPlumbing(porcelain *MongoHost) *proto.MongoHost {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MongoHost{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMongoHostToPlumbing(
+	porcelains []*MongoHost,
+) []*proto.MongoHost {
+	var items []*proto.MongoHost
+	for _, porcelain := range porcelains {
+		items = append(items, convertMongoHostToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMongoHostToPorcelain(plumbings []*proto.MongoHost) []*MongoHost {
+	var items []*MongoHost
+	for _, plumbing := range plumbings {
+		items = append(items, convertMongoHostToPorcelain(plumbing))
+	}
+	return items
+}
 func convertMongoLegacyHostToPorcelain(plumbing *proto.MongoLegacyHost) *MongoLegacyHost {
 	if plumbing == nil {
 		return nil
 	}
 	porcelain := &MongoLegacyHost{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.AuthDatabase = (plumbing.AuthDatabase)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.ReplicaSet = (plumbing.ReplicaSet)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -2957,20 +3032,20 @@ func convertMongoLegacyHostToPlumbing(porcelain *MongoLegacyHost) *proto.MongoLe
 		return nil
 	}
 	plumbing := &proto.MongoLegacyHost{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.AuthDatabase = (porcelain.AuthDatabase)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ReplicaSet = (porcelain.ReplicaSet)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedMongoLegacyHostToPlumbing(
@@ -2995,21 +3070,21 @@ func convertMongoLegacyReplicasetToPorcelain(plumbing *proto.MongoLegacyReplicas
 		return nil
 	}
 	porcelain := &MongoLegacyReplicaset{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.ConnectToReplica = (plumbing.ConnectToReplica)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.AuthDatabase = (plumbing.AuthDatabase)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.ReplicaSet = (plumbing.ReplicaSet)
-	porcelain.ConnectToReplica = (plumbing.ConnectToReplica)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -3018,21 +3093,21 @@ func convertMongoLegacyReplicasetToPlumbing(porcelain *MongoLegacyReplicaset) *p
 		return nil
 	}
 	plumbing := &proto.MongoLegacyReplicaset{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.AuthDatabase = (porcelain.AuthDatabase)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ReplicaSet = (porcelain.ReplicaSet)
-	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedMongoLegacyReplicasetToPlumbing(
@@ -3052,84 +3127,26 @@ func convertRepeatedMongoLegacyReplicasetToPorcelain(plumbings []*proto.MongoLeg
 	}
 	return items
 }
-func convertMongoHostToPorcelain(plumbing *proto.MongoHost) *MongoHost {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &MongoHost{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.AuthDatabase = (plumbing.AuthDatabase)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Port = (plumbing.Port)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
-	return porcelain
-}
-
-func convertMongoHostToPlumbing(porcelain *MongoHost) *proto.MongoHost {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.MongoHost{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.AuthDatabase = (porcelain.AuthDatabase)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	return plumbing
-}
-func convertRepeatedMongoHostToPlumbing(
-	porcelains []*MongoHost,
-) []*proto.MongoHost {
-	var items []*proto.MongoHost
-	for _, porcelain := range porcelains {
-		items = append(items, convertMongoHostToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedMongoHostToPorcelain(plumbings []*proto.MongoHost) []*MongoHost {
-	var items []*MongoHost
-	for _, plumbing := range plumbings {
-		items = append(items, convertMongoHostToPorcelain(plumbing))
-	}
-	return items
-}
 func convertMongoReplicaSetToPorcelain(plumbing *proto.MongoReplicaSet) *MongoReplicaSet {
 	if plumbing == nil {
 		return nil
 	}
 	porcelain := &MongoReplicaSet{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.ConnectToReplica = (plumbing.ConnectToReplica)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.AuthDatabase = (plumbing.AuthDatabase)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.ReplicaSet = (plumbing.ReplicaSet)
-	porcelain.ConnectToReplica = (plumbing.ConnectToReplica)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -3138,21 +3155,21 @@ func convertMongoReplicaSetToPlumbing(porcelain *MongoReplicaSet) *proto.MongoRe
 		return nil
 	}
 	plumbing := &proto.MongoReplicaSet{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.AuthDatabase = (porcelain.AuthDatabase)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ReplicaSet = (porcelain.ReplicaSet)
-	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedMongoReplicaSetToPlumbing(
@@ -3177,18 +3194,18 @@ func convertMysqlToPorcelain(plumbing *proto.Mysql) *Mysql {
 		return nil
 	}
 	porcelain := &Mysql{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
 	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
 	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
@@ -3197,18 +3214,18 @@ func convertMysqlToPlumbing(porcelain *Mysql) *proto.Mysql {
 		return nil
 	}
 	plumbing := &proto.Mysql{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
 	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedMysqlToPlumbing(
@@ -3228,1401 +3245,44 @@ func convertRepeatedMysqlToPorcelain(plumbings []*proto.Mysql) []*Mysql {
 	}
 	return items
 }
-func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) *AuroraMysql {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AuroraMysql{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertAuroraMysqlToPlumbing(porcelain *AuroraMysql) *proto.AuroraMysql {
+func convertNodeToPlumbing(porcelain Node) *proto.Node {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AuroraMysql{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
+	plumbing := &proto.Node{}
+
+	switch v := porcelain.(type) {
+	case *Gateway:
+		plumbing.Node = &proto.Node_Gateway{Gateway: convertGatewayToPlumbing(v)}
+	case *Relay:
+		plumbing.Node = &proto.Node_Relay{Relay: convertRelayToPlumbing(v)}
+	}
 	return plumbing
 }
-func convertRepeatedAuroraMysqlToPlumbing(
-	porcelains []*AuroraMysql,
-) []*proto.AuroraMysql {
-	var items []*proto.AuroraMysql
+
+func convertNodeToPorcelain(plumbing *proto.Node) Node {
+	if plumbing.GetGateway() != nil {
+		return convertGatewayToPorcelain(plumbing.GetGateway())
+	}
+	if plumbing.GetRelay() != nil {
+		return convertRelayToPorcelain(plumbing.GetRelay())
+	}
+	return nil
+}
+func convertRepeatedNodeToPlumbing(
+	porcelains []Node,
+) []*proto.Node {
+	var items []*proto.Node
 	for _, porcelain := range porcelains {
-		items = append(items, convertAuroraMysqlToPlumbing(porcelain))
+		items = append(items, convertNodeToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAuroraMysqlToPorcelain(plumbings []*proto.AuroraMysql) []*AuroraMysql {
-	var items []*AuroraMysql
+func convertRepeatedNodeToPorcelain(plumbings []*proto.Node) []Node {
+	var items []Node
 	for _, plumbing := range plumbings {
-		items = append(items, convertAuroraMysqlToPorcelain(plumbing))
-	}
-	return items
-}
-func convertClustrixToPorcelain(plumbing *proto.Clustrix) *Clustrix {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Clustrix{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertClustrixToPlumbing(porcelain *Clustrix) *proto.Clustrix {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Clustrix{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedClustrixToPlumbing(
-	porcelains []*Clustrix,
-) []*proto.Clustrix {
-	var items []*proto.Clustrix
-	for _, porcelain := range porcelains {
-		items = append(items, convertClustrixToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedClustrixToPorcelain(plumbings []*proto.Clustrix) []*Clustrix {
-	var items []*Clustrix
-	for _, plumbing := range plumbings {
-		items = append(items, convertClustrixToPorcelain(plumbing))
-	}
-	return items
-}
-func convertMariaToPorcelain(plumbing *proto.Maria) *Maria {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Maria{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertMariaToPlumbing(porcelain *Maria) *proto.Maria {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Maria{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedMariaToPlumbing(
-	porcelains []*Maria,
-) []*proto.Maria {
-	var items []*proto.Maria
-	for _, porcelain := range porcelains {
-		items = append(items, convertMariaToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedMariaToPorcelain(plumbings []*proto.Maria) []*Maria {
-	var items []*Maria
-	for _, plumbing := range plumbings {
-		items = append(items, convertMariaToPorcelain(plumbing))
-	}
-	return items
-}
-func convertMemsqlToPorcelain(plumbing *proto.Memsql) *Memsql {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Memsql{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertMemsqlToPlumbing(porcelain *Memsql) *proto.Memsql {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Memsql{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedMemsqlToPlumbing(
-	porcelains []*Memsql,
-) []*proto.Memsql {
-	var items []*proto.Memsql
-	for _, porcelain := range porcelains {
-		items = append(items, convertMemsqlToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedMemsqlToPorcelain(plumbings []*proto.Memsql) []*Memsql {
-	var items []*Memsql
-	for _, plumbing := range plumbings {
-		items = append(items, convertMemsqlToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) *SingleStore {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SingleStore{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertSingleStoreToPlumbing(porcelain *SingleStore) *proto.SingleStore {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SingleStore{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedSingleStoreToPlumbing(
-	porcelains []*SingleStore,
-) []*proto.SingleStore {
-	var items []*proto.SingleStore
-	for _, porcelain := range porcelains {
-		items = append(items, convertSingleStoreToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSingleStoreToPorcelain(plumbings []*proto.SingleStore) []*SingleStore {
-	var items []*SingleStore
-	for _, plumbing := range plumbings {
-		items = append(items, convertSingleStoreToPorcelain(plumbing))
-	}
-	return items
-}
-func convertOracleToPorcelain(plumbing *proto.Oracle) *Oracle {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Oracle{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.Port = (plumbing.Port)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
-	return porcelain
-}
-
-func convertOracleToPlumbing(porcelain *Oracle) *proto.Oracle {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Oracle{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	return plumbing
-}
-func convertRepeatedOracleToPlumbing(
-	porcelains []*Oracle,
-) []*proto.Oracle {
-	var items []*proto.Oracle
-	for _, porcelain := range porcelains {
-		items = append(items, convertOracleToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedOracleToPorcelain(plumbings []*proto.Oracle) []*Oracle {
-	var items []*Oracle
-	for _, plumbing := range plumbings {
-		items = append(items, convertOracleToPorcelain(plumbing))
-	}
-	return items
-}
-func convertPostgresToPorcelain(plumbing *proto.Postgres) *Postgres {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Postgres{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertPostgresToPlumbing(porcelain *Postgres) *proto.Postgres {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Postgres{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedPostgresToPlumbing(
-	porcelains []*Postgres,
-) []*proto.Postgres {
-	var items []*proto.Postgres
-	for _, porcelain := range porcelains {
-		items = append(items, convertPostgresToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedPostgresToPorcelain(plumbings []*proto.Postgres) []*Postgres {
-	var items []*Postgres
-	for _, plumbing := range plumbings {
-		items = append(items, convertPostgresToPorcelain(plumbing))
-	}
-	return items
-}
-func convertAuroraPostgresToPorcelain(plumbing *proto.AuroraPostgres) *AuroraPostgres {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &AuroraPostgres{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertAuroraPostgresToPlumbing(porcelain *AuroraPostgres) *proto.AuroraPostgres {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AuroraPostgres{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedAuroraPostgresToPlumbing(
-	porcelains []*AuroraPostgres,
-) []*proto.AuroraPostgres {
-	var items []*proto.AuroraPostgres
-	for _, porcelain := range porcelains {
-		items = append(items, convertAuroraPostgresToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAuroraPostgresToPorcelain(plumbings []*proto.AuroraPostgres) []*AuroraPostgres {
-	var items []*AuroraPostgres
-	for _, plumbing := range plumbings {
-		items = append(items, convertAuroraPostgresToPorcelain(plumbing))
-	}
-	return items
-}
-func convertGreenplumToPorcelain(plumbing *proto.Greenplum) *Greenplum {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Greenplum{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertGreenplumToPlumbing(porcelain *Greenplum) *proto.Greenplum {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Greenplum{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedGreenplumToPlumbing(
-	porcelains []*Greenplum,
-) []*proto.Greenplum {
-	var items []*proto.Greenplum
-	for _, porcelain := range porcelains {
-		items = append(items, convertGreenplumToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedGreenplumToPorcelain(plumbings []*proto.Greenplum) []*Greenplum {
-	var items []*Greenplum
-	for _, plumbing := range plumbings {
-		items = append(items, convertGreenplumToPorcelain(plumbing))
-	}
-	return items
-}
-func convertCockroachToPorcelain(plumbing *proto.Cockroach) *Cockroach {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Cockroach{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertCockroachToPlumbing(porcelain *Cockroach) *proto.Cockroach {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Cockroach{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedCockroachToPlumbing(
-	porcelains []*Cockroach,
-) []*proto.Cockroach {
-	var items []*proto.Cockroach
-	for _, porcelain := range porcelains {
-		items = append(items, convertCockroachToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedCockroachToPorcelain(plumbings []*proto.Cockroach) []*Cockroach {
-	var items []*Cockroach
-	for _, plumbing := range plumbings {
-		items = append(items, convertCockroachToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRedshiftToPorcelain(plumbing *proto.Redshift) *Redshift {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Redshift{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertRedshiftToPlumbing(porcelain *Redshift) *proto.Redshift {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Redshift{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedRedshiftToPlumbing(
-	porcelains []*Redshift,
-) []*proto.Redshift {
-	var items []*proto.Redshift
-	for _, porcelain := range porcelains {
-		items = append(items, convertRedshiftToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRedshiftToPorcelain(plumbings []*proto.Redshift) []*Redshift {
-	var items []*Redshift
-	for _, plumbing := range plumbings {
-		items = append(items, convertRedshiftToPorcelain(plumbing))
-	}
-	return items
-}
-func convertCitusToPorcelain(plumbing *proto.Citus) *Citus {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Citus{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertCitusToPlumbing(porcelain *Citus) *proto.Citus {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Citus{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedCitusToPlumbing(
-	porcelains []*Citus,
-) []*proto.Citus {
-	var items []*proto.Citus
-	for _, porcelain := range porcelains {
-		items = append(items, convertCitusToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedCitusToPorcelain(plumbings []*proto.Citus) []*Citus {
-	var items []*Citus
-	for _, plumbing := range plumbings {
-		items = append(items, convertCitusToPorcelain(plumbing))
-	}
-	return items
-}
-func convertPrestoToPorcelain(plumbing *proto.Presto) *Presto {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Presto{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Username = (plumbing.Username)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
-	return porcelain
-}
-
-func convertPrestoToPlumbing(porcelain *Presto) *proto.Presto {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Presto{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Username = (porcelain.Username)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	return plumbing
-}
-func convertRepeatedPrestoToPlumbing(
-	porcelains []*Presto,
-) []*proto.Presto {
-	var items []*proto.Presto
-	for _, porcelain := range porcelains {
-		items = append(items, convertPrestoToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedPrestoToPorcelain(plumbings []*proto.Presto) []*Presto {
-	var items []*Presto
-	for _, plumbing := range plumbings {
-		items = append(items, convertPrestoToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRawTCPToPorcelain(plumbing *proto.RawTCP) *RawTCP {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &RawTCP{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertRawTCPToPlumbing(porcelain *RawTCP) *proto.RawTCP {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RawTCP{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedRawTCPToPlumbing(
-	porcelains []*RawTCP,
-) []*proto.RawTCP {
-	var items []*proto.RawTCP
-	for _, porcelain := range porcelains {
-		items = append(items, convertRawTCPToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRawTCPToPorcelain(plumbings []*proto.RawTCP) []*RawTCP {
-	var items []*RawTCP
-	for _, plumbing := range plumbings {
-		items = append(items, convertRawTCPToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRDPToPorcelain(plumbing *proto.RDP) *RDP {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &RDP{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RDP{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedRDPToPlumbing(
-	porcelains []*RDP,
-) []*proto.RDP {
-	var items []*proto.RDP
-	for _, porcelain := range porcelains {
-		items = append(items, convertRDPToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRDPToPorcelain(plumbings []*proto.RDP) []*RDP {
-	var items []*RDP
-	for _, plumbing := range plumbings {
-		items = append(items, convertRDPToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRedisToPorcelain(plumbing *proto.Redis) *Redis {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Redis{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertRedisToPlumbing(porcelain *Redis) *proto.Redis {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Redis{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedRedisToPlumbing(
-	porcelains []*Redis,
-) []*proto.Redis {
-	var items []*proto.Redis
-	for _, porcelain := range porcelains {
-		items = append(items, convertRedisToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRedisToPorcelain(plumbings []*proto.Redis) []*Redis {
-	var items []*Redis
-	for _, plumbing := range plumbings {
-		items = append(items, convertRedisToPorcelain(plumbing))
-	}
-	return items
-}
-func convertElasticacheRedisToPorcelain(plumbing *proto.ElasticacheRedis) *ElasticacheRedis {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &ElasticacheRedis{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Port = (plumbing.Port)
-	porcelain.TlsRequired = (plumbing.TlsRequired)
-	return porcelain
-}
-
-func convertElasticacheRedisToPlumbing(porcelain *ElasticacheRedis) *proto.ElasticacheRedis {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.ElasticacheRedis{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	return plumbing
-}
-func convertRepeatedElasticacheRedisToPlumbing(
-	porcelains []*ElasticacheRedis,
-) []*proto.ElasticacheRedis {
-	var items []*proto.ElasticacheRedis
-	for _, porcelain := range porcelains {
-		items = append(items, convertElasticacheRedisToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedElasticacheRedisToPorcelain(plumbings []*proto.ElasticacheRedis) []*ElasticacheRedis {
-	var items []*ElasticacheRedis
-	for _, plumbing := range plumbings {
-		items = append(items, convertElasticacheRedisToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSnowflakeToPorcelain(plumbing *proto.Snowflake) *Snowflake {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Snowflake{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.Schema = (plumbing.Schema)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	return porcelain
-}
-
-func convertSnowflakeToPlumbing(porcelain *Snowflake) *proto.Snowflake {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Snowflake{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.Schema = (porcelain.Schema)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	return plumbing
-}
-func convertRepeatedSnowflakeToPlumbing(
-	porcelains []*Snowflake,
-) []*proto.Snowflake {
-	var items []*proto.Snowflake
-	for _, porcelain := range porcelains {
-		items = append(items, convertSnowflakeToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSnowflakeToPorcelain(plumbings []*proto.Snowflake) []*Snowflake {
-	var items []*Snowflake
-	for _, plumbing := range plumbings {
-		items = append(items, convertSnowflakeToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSQLServerToPorcelain(plumbing *proto.SQLServer) *SQLServer {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SQLServer{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.Database = (plumbing.Database)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Schema = (plumbing.Schema)
-	porcelain.Port = (plumbing.Port)
-	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
-	return porcelain
-}
-
-func convertSQLServerToPlumbing(porcelain *SQLServer) *proto.SQLServer {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SQLServer{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Database = (porcelain.Database)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Schema = (porcelain.Schema)
-	plumbing.Port = (porcelain.Port)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	return plumbing
-}
-func convertRepeatedSQLServerToPlumbing(
-	porcelains []*SQLServer,
-) []*proto.SQLServer {
-	var items []*proto.SQLServer
-	for _, porcelain := range porcelains {
-		items = append(items, convertSQLServerToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSQLServerToPorcelain(plumbings []*proto.SQLServer) []*SQLServer {
-	var items []*SQLServer
-	for _, plumbing := range plumbings {
-		items = append(items, convertSQLServerToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSSHToPorcelain(plumbing *proto.SSH) *SSH {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SSH{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Port = (plumbing.Port)
-	porcelain.PublicKey = (plumbing.PublicKey)
-	porcelain.PortForwarding = (plumbing.PortForwarding)
-	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
-	return porcelain
-}
-
-func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SSH{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PublicKey = (porcelain.PublicKey)
-	plumbing.PortForwarding = (porcelain.PortForwarding)
-	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
-	return plumbing
-}
-func convertRepeatedSSHToPlumbing(
-	porcelains []*SSH,
-) []*proto.SSH {
-	var items []*proto.SSH
-	for _, porcelain := range porcelains {
-		items = append(items, convertSSHToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSSHToPorcelain(plumbings []*proto.SSH) []*SSH {
-	var items []*SSH
-	for _, plumbing := range plumbings {
-		items = append(items, convertSSHToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSSHCertToPorcelain(plumbing *proto.SSHCert) *SSHCert {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SSHCert{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Port = (plumbing.Port)
-	porcelain.PortForwarding = (plumbing.PortForwarding)
-	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
-	return porcelain
-}
-
-func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SSHCert{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PortForwarding = (porcelain.PortForwarding)
-	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
-	return plumbing
-}
-func convertRepeatedSSHCertToPlumbing(
-	porcelains []*SSHCert,
-) []*proto.SSHCert {
-	var items []*proto.SSHCert
-	for _, porcelain := range porcelains {
-		items = append(items, convertSSHCertToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSSHCertToPorcelain(plumbings []*proto.SSHCert) []*SSHCert {
-	var items []*SSHCert
-	for _, plumbing := range plumbings {
-		items = append(items, convertSSHCertToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) *SSHCustomerKey {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SSHCustomerKey{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Port = (plumbing.Port)
-	porcelain.PrivateKey = (plumbing.PrivateKey)
-	porcelain.PortForwarding = (plumbing.PortForwarding)
-	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
-	return porcelain
-}
-
-func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustomerKey {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SSHCustomerKey{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PrivateKey = (porcelain.PrivateKey)
-	plumbing.PortForwarding = (porcelain.PortForwarding)
-	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
-	return plumbing
-}
-func convertRepeatedSSHCustomerKeyToPlumbing(
-	porcelains []*SSHCustomerKey,
-) []*proto.SSHCustomerKey {
-	var items []*proto.SSHCustomerKey
-	for _, porcelain := range porcelains {
-		items = append(items, convertSSHCustomerKeyToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSSHCustomerKeyToPorcelain(plumbings []*proto.SSHCustomerKey) []*SSHCustomerKey {
-	var items []*SSHCustomerKey
-	for _, plumbing := range plumbings {
-		items = append(items, convertSSHCustomerKeyToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSybaseToPorcelain(plumbing *proto.Sybase) *Sybase {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Sybase{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Password = (plumbing.Password)
-	return porcelain
-}
-
-func convertSybaseToPlumbing(porcelain *Sybase) *proto.Sybase {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Sybase{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Password = (porcelain.Password)
-	return plumbing
-}
-func convertRepeatedSybaseToPlumbing(
-	porcelains []*Sybase,
-) []*proto.Sybase {
-	var items []*proto.Sybase
-	for _, porcelain := range porcelains {
-		items = append(items, convertSybaseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSybaseToPorcelain(plumbings []*proto.Sybase) []*Sybase {
-	var items []*Sybase
-	for _, plumbing := range plumbings {
-		items = append(items, convertSybaseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSybaseIQToPorcelain(plumbing *proto.SybaseIQ) *SybaseIQ {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SybaseIQ{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	porcelain.Password = (plumbing.Password)
-	return porcelain
-}
-
-func convertSybaseIQToPlumbing(porcelain *SybaseIQ) *proto.SybaseIQ {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SybaseIQ{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	plumbing.Password = (porcelain.Password)
-	return plumbing
-}
-func convertRepeatedSybaseIQToPlumbing(
-	porcelains []*SybaseIQ,
-) []*proto.SybaseIQ {
-	var items []*proto.SybaseIQ
-	for _, porcelain := range porcelains {
-		items = append(items, convertSybaseIQToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSybaseIQToPorcelain(plumbings []*proto.SybaseIQ) []*SybaseIQ {
-	var items []*SybaseIQ
-	for _, plumbing := range plumbings {
-		items = append(items, convertSybaseIQToPorcelain(plumbing))
-	}
-	return items
-}
-func convertTeradataToPorcelain(plumbing *proto.Teradata) *Teradata {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Teradata{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Healthy = (plumbing.Healthy)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.SecretStoreID = (plumbing.SecretStoreId)
-	porcelain.EgressFilter = (plumbing.EgressFilter)
-	porcelain.Hostname = (plumbing.Hostname)
-	porcelain.Username = (plumbing.Username)
-	porcelain.Password = (plumbing.Password)
-	porcelain.PortOverride = (plumbing.PortOverride)
-	porcelain.Port = (plumbing.Port)
-	return porcelain
-}
-
-func convertTeradataToPlumbing(porcelain *Teradata) *proto.Teradata {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Teradata{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Username = (porcelain.Username)
-	plumbing.Password = (porcelain.Password)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.Port = (porcelain.Port)
-	return plumbing
-}
-func convertRepeatedTeradataToPlumbing(
-	porcelains []*Teradata,
-) []*proto.Teradata {
-	var items []*proto.Teradata
-	for _, porcelain := range porcelains {
-		items = append(items, convertTeradataToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedTeradataToPorcelain(plumbings []*proto.Teradata) []*Teradata {
-	var items []*Teradata
-	for _, plumbing := range plumbings {
-		items = append(items, convertTeradataToPorcelain(plumbing))
+		items = append(items, convertNodeToPorcelain(plumbing))
 	}
 	return items
 }
@@ -4633,8 +3293,8 @@ func convertNodeCreateResponseToPorcelain(plumbing *proto.NodeCreateResponse) *N
 	porcelain := &NodeCreateResponse{}
 	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.Node = convertNodeToPorcelain(plumbing.Node)
-	porcelain.Token = (plumbing.Token)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Token = (plumbing.Token)
 	return porcelain
 }
 
@@ -4645,8 +3305,8 @@ func convertNodeCreateResponseToPlumbing(porcelain *NodeCreateResponse) *proto.N
 	plumbing := &proto.NodeCreateResponse{}
 	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.Node = convertNodeToPlumbing(porcelain.Node)
-	plumbing.Token = (porcelain.Token)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Token = (porcelain.Token)
 	return plumbing
 }
 func convertRepeatedNodeCreateResponseToPlumbing(
@@ -4663,6 +3323,42 @@ func convertRepeatedNodeCreateResponseToPorcelain(plumbings []*proto.NodeCreateR
 	var items []*NodeCreateResponse
 	for _, plumbing := range plumbings {
 		items = append(items, convertNodeCreateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertNodeDeleteResponseToPorcelain(plumbing *proto.NodeDeleteResponse) *NodeDeleteResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &NodeDeleteResponse{}
+	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertNodeDeleteResponseToPlumbing(porcelain *NodeDeleteResponse) *proto.NodeDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.NodeDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedNodeDeleteResponseToPlumbing(
+	porcelains []*NodeDeleteResponse,
+) []*proto.NodeDeleteResponse {
+	var items []*proto.NodeDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertNodeDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedNodeDeleteResponseToPorcelain(plumbings []*proto.NodeDeleteResponse) []*NodeDeleteResponse {
+	var items []*NodeDeleteResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertNodeDeleteResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -4742,80 +3438,487 @@ func convertRepeatedNodeUpdateResponseToPorcelain(plumbings []*proto.NodeUpdateR
 	}
 	return items
 }
-func convertNodeDeleteResponseToPorcelain(plumbing *proto.NodeDeleteResponse) *NodeDeleteResponse {
+func convertOracleToPorcelain(plumbing *proto.Oracle) *Oracle {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &NodeDeleteResponse{}
-	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain := &Oracle{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
-func convertNodeDeleteResponseToPlumbing(porcelain *NodeDeleteResponse) *proto.NodeDeleteResponse {
+func convertOracleToPlumbing(porcelain *Oracle) *proto.Oracle {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.NodeDeleteResponse{}
-	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing := &proto.Oracle{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
-func convertRepeatedNodeDeleteResponseToPlumbing(
-	porcelains []*NodeDeleteResponse,
-) []*proto.NodeDeleteResponse {
-	var items []*proto.NodeDeleteResponse
+func convertRepeatedOracleToPlumbing(
+	porcelains []*Oracle,
+) []*proto.Oracle {
+	var items []*proto.Oracle
 	for _, porcelain := range porcelains {
-		items = append(items, convertNodeDeleteResponseToPlumbing(porcelain))
+		items = append(items, convertOracleToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedNodeDeleteResponseToPorcelain(plumbings []*proto.NodeDeleteResponse) []*NodeDeleteResponse {
-	var items []*NodeDeleteResponse
+func convertRepeatedOracleToPorcelain(plumbings []*proto.Oracle) []*Oracle {
+	var items []*Oracle
 	for _, plumbing := range plumbings {
-		items = append(items, convertNodeDeleteResponseToPorcelain(plumbing))
+		items = append(items, convertOracleToPorcelain(plumbing))
 	}
 	return items
 }
-func convertNodeToPlumbing(porcelain Node) *proto.Node {
+func convertPostgresToPorcelain(plumbing *proto.Postgres) *Postgres {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Postgres{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertPostgresToPlumbing(porcelain *Postgres) *proto.Postgres {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.Node{}
-
-	switch v := porcelain.(type) {
-	case *Relay:
-		plumbing.Node = &proto.Node_Relay{Relay: convertRelayToPlumbing(v)}
-	case *Gateway:
-		plumbing.Node = &proto.Node_Gateway{Gateway: convertGatewayToPlumbing(v)}
-	}
+	plumbing := &proto.Postgres{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
-
-func convertNodeToPorcelain(plumbing *proto.Node) Node {
-	if plumbing.GetRelay() != nil {
-		return convertRelayToPorcelain(plumbing.GetRelay())
-	}
-	if plumbing.GetGateway() != nil {
-		return convertGatewayToPorcelain(plumbing.GetGateway())
-	}
-	return nil
-}
-func convertRepeatedNodeToPlumbing(
-	porcelains []Node,
-) []*proto.Node {
-	var items []*proto.Node
+func convertRepeatedPostgresToPlumbing(
+	porcelains []*Postgres,
+) []*proto.Postgres {
+	var items []*proto.Postgres
 	for _, porcelain := range porcelains {
-		items = append(items, convertNodeToPlumbing(porcelain))
+		items = append(items, convertPostgresToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedNodeToPorcelain(plumbings []*proto.Node) []Node {
-	var items []Node
+func convertRepeatedPostgresToPorcelain(plumbings []*proto.Postgres) []*Postgres {
+	var items []*Postgres
 	for _, plumbing := range plumbings {
-		items = append(items, convertNodeToPorcelain(plumbing))
+		items = append(items, convertPostgresToPorcelain(plumbing))
+	}
+	return items
+}
+func convertPrestoToPorcelain(plumbing *proto.Presto) *Presto {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Presto{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertPrestoToPlumbing(porcelain *Presto) *proto.Presto {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Presto{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedPrestoToPlumbing(
+	porcelains []*Presto,
+) []*proto.Presto {
+	var items []*proto.Presto
+	for _, porcelain := range porcelains {
+		items = append(items, convertPrestoToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPrestoToPorcelain(plumbings []*proto.Presto) []*Presto {
+	var items []*Presto
+	for _, plumbing := range plumbings {
+		items = append(items, convertPrestoToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRDPToPorcelain(plumbing *proto.RDP) *RDP {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RDP{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RDP{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedRDPToPlumbing(
+	porcelains []*RDP,
+) []*proto.RDP {
+	var items []*proto.RDP
+	for _, porcelain := range porcelains {
+		items = append(items, convertRDPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRDPToPorcelain(plumbings []*proto.RDP) []*RDP {
+	var items []*RDP
+	for _, plumbing := range plumbings {
+		items = append(items, convertRDPToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRabbitMQAMQP091ToPorcelain(plumbing *proto.RabbitMQAMQP091) *RabbitMQAMQP091 {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RabbitMQAMQP091{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertRabbitMQAMQP091ToPlumbing(porcelain *RabbitMQAMQP091) *proto.RabbitMQAMQP091 {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RabbitMQAMQP091{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedRabbitMQAMQP091ToPlumbing(
+	porcelains []*RabbitMQAMQP091,
+) []*proto.RabbitMQAMQP091 {
+	var items []*proto.RabbitMQAMQP091
+	for _, porcelain := range porcelains {
+		items = append(items, convertRabbitMQAMQP091ToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRabbitMQAMQP091ToPorcelain(plumbings []*proto.RabbitMQAMQP091) []*RabbitMQAMQP091 {
+	var items []*RabbitMQAMQP091
+	for _, plumbing := range plumbings {
+		items = append(items, convertRabbitMQAMQP091ToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRateLimitMetadataToPorcelain(plumbing *proto.RateLimitMetadata) *RateLimitMetadata {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RateLimitMetadata{}
+	porcelain.Bucket = (plumbing.Bucket)
+	porcelain.Limit = (plumbing.Limit)
+	porcelain.Remaining = (plumbing.Remaining)
+	porcelain.ResetAt = convertTimestampToPorcelain(plumbing.ResetAt)
+	return porcelain
+}
+
+func convertRateLimitMetadataToPlumbing(porcelain *RateLimitMetadata) *proto.RateLimitMetadata {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RateLimitMetadata{}
+	plumbing.Bucket = (porcelain.Bucket)
+	plumbing.Limit = (porcelain.Limit)
+	plumbing.Remaining = (porcelain.Remaining)
+	plumbing.ResetAt = convertTimestampToPlumbing(porcelain.ResetAt)
+	return plumbing
+}
+func convertRepeatedRateLimitMetadataToPlumbing(
+	porcelains []*RateLimitMetadata,
+) []*proto.RateLimitMetadata {
+	var items []*proto.RateLimitMetadata
+	for _, porcelain := range porcelains {
+		items = append(items, convertRateLimitMetadataToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRateLimitMetadataToPorcelain(plumbings []*proto.RateLimitMetadata) []*RateLimitMetadata {
+	var items []*RateLimitMetadata
+	for _, plumbing := range plumbings {
+		items = append(items, convertRateLimitMetadataToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRawTCPToPorcelain(plumbing *proto.RawTCP) *RawTCP {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RawTCP{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertRawTCPToPlumbing(porcelain *RawTCP) *proto.RawTCP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RawTCP{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedRawTCPToPlumbing(
+	porcelains []*RawTCP,
+) []*proto.RawTCP {
+	var items []*proto.RawTCP
+	for _, porcelain := range porcelains {
+		items = append(items, convertRawTCPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRawTCPToPorcelain(plumbings []*proto.RawTCP) []*RawTCP {
+	var items []*RawTCP
+	for _, plumbing := range plumbings {
+		items = append(items, convertRawTCPToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRedisToPorcelain(plumbing *proto.Redis) *Redis {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Redis{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertRedisToPlumbing(porcelain *Redis) *proto.Redis {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Redis{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedRedisToPlumbing(
+	porcelains []*Redis,
+) []*proto.Redis {
+	var items []*proto.Redis
+	for _, porcelain := range porcelains {
+		items = append(items, convertRedisToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRedisToPorcelain(plumbings []*proto.Redis) []*Redis {
+	var items []*Redis
+	for _, plumbing := range plumbings {
+		items = append(items, convertRedisToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRedshiftToPorcelain(plumbing *proto.Redshift) *Redshift {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Redshift{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertRedshiftToPlumbing(porcelain *Redshift) *proto.Redshift {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Redshift{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedRedshiftToPlumbing(
+	porcelains []*Redshift,
+) []*proto.Redshift {
+	var items []*proto.Redshift
+	for _, porcelain := range porcelains {
+		items = append(items, convertRedshiftToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRedshiftToPorcelain(plumbings []*proto.Redshift) []*Redshift {
+	var items []*Redshift
+	for _, plumbing := range plumbings {
+		items = append(items, convertRedshiftToPorcelain(plumbing))
 	}
 	return items
 }
@@ -4824,11 +3927,11 @@ func convertRelayToPorcelain(plumbing *proto.Relay) *Relay {
 		return nil
 	}
 	porcelain := &Relay{}
+	porcelain.GatewayFilter = (plumbing.GatewayFilter)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
 	porcelain.State = (plumbing.State)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.GatewayFilter = (plumbing.GatewayFilter)
 	return porcelain
 }
 
@@ -4837,11 +3940,11 @@ func convertRelayToPlumbing(porcelain *Relay) *proto.Relay {
 		return nil
 	}
 	plumbing := &proto.Relay{}
+	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	return plumbing
 }
 func convertRepeatedRelayToPlumbing(
@@ -4861,49 +3964,334 @@ func convertRepeatedRelayToPorcelain(plumbings []*proto.Relay) []*Relay {
 	}
 	return items
 }
-func convertGatewayToPorcelain(plumbing *proto.Gateway) *Gateway {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Gateway{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.State = (plumbing.State)
-	porcelain.ListenAddress = (plumbing.ListenAddress)
-	porcelain.BindAddress = (plumbing.BindAddress)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.GatewayFilter = (plumbing.GatewayFilter)
-	return porcelain
-}
-
-func convertGatewayToPlumbing(porcelain *Gateway) *proto.Gateway {
+func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.Gateway{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.State = (porcelain.State)
-	plumbing.ListenAddress = (porcelain.ListenAddress)
-	plumbing.BindAddress = (porcelain.BindAddress)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.GatewayFilter = (porcelain.GatewayFilter)
+	plumbing := &proto.Resource{}
+
+	switch v := porcelain.(type) {
+	case *AKS:
+		plumbing.Resource = &proto.Resource_Aks{Aks: convertAKSToPlumbing(v)}
+	case *AKSBasicAuth:
+		plumbing.Resource = &proto.Resource_AksBasicAuth{AksBasicAuth: convertAKSBasicAuthToPlumbing(v)}
+	case *AKSServiceAccount:
+		plumbing.Resource = &proto.Resource_AksServiceAccount{AksServiceAccount: convertAKSServiceAccountToPlumbing(v)}
+	case *AKSServiceAccountUserImpersonation:
+		plumbing.Resource = &proto.Resource_AksServiceAccountUserImpersonation{AksServiceAccountUserImpersonation: convertAKSServiceAccountUserImpersonationToPlumbing(v)}
+	case *AKSUserImpersonation:
+		plumbing.Resource = &proto.Resource_AksUserImpersonation{AksUserImpersonation: convertAKSUserImpersonationToPlumbing(v)}
+	case *AmazonEKS:
+		plumbing.Resource = &proto.Resource_AmazonEks{AmazonEks: convertAmazonEKSToPlumbing(v)}
+	case *AmazonEKSUserImpersonation:
+		plumbing.Resource = &proto.Resource_AmazonEksUserImpersonation{AmazonEksUserImpersonation: convertAmazonEKSUserImpersonationToPlumbing(v)}
+	case *AmazonES:
+		plumbing.Resource = &proto.Resource_AmazonEs{AmazonEs: convertAmazonESToPlumbing(v)}
+	case *AmazonMQAMQP091:
+		plumbing.Resource = &proto.Resource_AmazonMqamqp_091{AmazonMqamqp_091: convertAmazonMQAMQP091ToPlumbing(v)}
+	case *Athena:
+		plumbing.Resource = &proto.Resource_Athena{Athena: convertAthenaToPlumbing(v)}
+	case *AuroraMysql:
+		plumbing.Resource = &proto.Resource_AuroraMysql{AuroraMysql: convertAuroraMysqlToPlumbing(v)}
+	case *AuroraPostgres:
+		plumbing.Resource = &proto.Resource_AuroraPostgres{AuroraPostgres: convertAuroraPostgresToPlumbing(v)}
+	case *AWS:
+		plumbing.Resource = &proto.Resource_Aws{Aws: convertAWSToPlumbing(v)}
+	case *BigQuery:
+		plumbing.Resource = &proto.Resource_BigQuery{BigQuery: convertBigQueryToPlumbing(v)}
+	case *Cassandra:
+		plumbing.Resource = &proto.Resource_Cassandra{Cassandra: convertCassandraToPlumbing(v)}
+	case *Citus:
+		plumbing.Resource = &proto.Resource_Citus{Citus: convertCitusToPlumbing(v)}
+	case *Clustrix:
+		plumbing.Resource = &proto.Resource_Clustrix{Clustrix: convertClustrixToPlumbing(v)}
+	case *Cockroach:
+		plumbing.Resource = &proto.Resource_Cockroach{Cockroach: convertCockroachToPlumbing(v)}
+	case *DB2I:
+		plumbing.Resource = &proto.Resource_Db_2I{Db_2I: convertDB2IToPlumbing(v)}
+	case *DB2LUW:
+		plumbing.Resource = &proto.Resource_Db_2Luw{Db_2Luw: convertDB2LUWToPlumbing(v)}
+	case *Druid:
+		plumbing.Resource = &proto.Resource_Druid{Druid: convertDruidToPlumbing(v)}
+	case *DynamoDB:
+		plumbing.Resource = &proto.Resource_DynamoDb{DynamoDb: convertDynamoDBToPlumbing(v)}
+	case *Elastic:
+		plumbing.Resource = &proto.Resource_Elastic{Elastic: convertElasticToPlumbing(v)}
+	case *ElasticacheRedis:
+		plumbing.Resource = &proto.Resource_ElasticacheRedis{ElasticacheRedis: convertElasticacheRedisToPlumbing(v)}
+	case *GoogleGKE:
+		plumbing.Resource = &proto.Resource_GoogleGke{GoogleGke: convertGoogleGKEToPlumbing(v)}
+	case *GoogleGKEUserImpersonation:
+		plumbing.Resource = &proto.Resource_GoogleGkeUserImpersonation{GoogleGkeUserImpersonation: convertGoogleGKEUserImpersonationToPlumbing(v)}
+	case *Greenplum:
+		plumbing.Resource = &proto.Resource_Greenplum{Greenplum: convertGreenplumToPlumbing(v)}
+	case *HTTPAuth:
+		plumbing.Resource = &proto.Resource_HttpAuth{HttpAuth: convertHTTPAuthToPlumbing(v)}
+	case *HTTPBasicAuth:
+		plumbing.Resource = &proto.Resource_HttpBasicAuth{HttpBasicAuth: convertHTTPBasicAuthToPlumbing(v)}
+	case *HTTPNoAuth:
+		plumbing.Resource = &proto.Resource_HttpNoAuth{HttpNoAuth: convertHTTPNoAuthToPlumbing(v)}
+	case *Kubernetes:
+		plumbing.Resource = &proto.Resource_Kubernetes{Kubernetes: convertKubernetesToPlumbing(v)}
+	case *KubernetesBasicAuth:
+		plumbing.Resource = &proto.Resource_KubernetesBasicAuth{KubernetesBasicAuth: convertKubernetesBasicAuthToPlumbing(v)}
+	case *KubernetesServiceAccount:
+		plumbing.Resource = &proto.Resource_KubernetesServiceAccount{KubernetesServiceAccount: convertKubernetesServiceAccountToPlumbing(v)}
+	case *KubernetesServiceAccountUserImpersonation:
+		plumbing.Resource = &proto.Resource_KubernetesServiceAccountUserImpersonation{KubernetesServiceAccountUserImpersonation: convertKubernetesServiceAccountUserImpersonationToPlumbing(v)}
+	case *KubernetesUserImpersonation:
+		plumbing.Resource = &proto.Resource_KubernetesUserImpersonation{KubernetesUserImpersonation: convertKubernetesUserImpersonationToPlumbing(v)}
+	case *Maria:
+		plumbing.Resource = &proto.Resource_Maria{Maria: convertMariaToPlumbing(v)}
+	case *Memcached:
+		plumbing.Resource = &proto.Resource_Memcached{Memcached: convertMemcachedToPlumbing(v)}
+	case *Memsql:
+		plumbing.Resource = &proto.Resource_Memsql{Memsql: convertMemsqlToPlumbing(v)}
+	case *MongoHost:
+		plumbing.Resource = &proto.Resource_MongoHost{MongoHost: convertMongoHostToPlumbing(v)}
+	case *MongoLegacyHost:
+		plumbing.Resource = &proto.Resource_MongoLegacyHost{MongoLegacyHost: convertMongoLegacyHostToPlumbing(v)}
+	case *MongoLegacyReplicaset:
+		plumbing.Resource = &proto.Resource_MongoLegacyReplicaset{MongoLegacyReplicaset: convertMongoLegacyReplicasetToPlumbing(v)}
+	case *MongoReplicaSet:
+		plumbing.Resource = &proto.Resource_MongoReplicaSet{MongoReplicaSet: convertMongoReplicaSetToPlumbing(v)}
+	case *Mysql:
+		plumbing.Resource = &proto.Resource_Mysql{Mysql: convertMysqlToPlumbing(v)}
+	case *Oracle:
+		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
+	case *Postgres:
+		plumbing.Resource = &proto.Resource_Postgres{Postgres: convertPostgresToPlumbing(v)}
+	case *Presto:
+		plumbing.Resource = &proto.Resource_Presto{Presto: convertPrestoToPlumbing(v)}
+	case *RabbitMQAMQP091:
+		plumbing.Resource = &proto.Resource_RabbitMqamqp_091{RabbitMqamqp_091: convertRabbitMQAMQP091ToPlumbing(v)}
+	case *RawTCP:
+		plumbing.Resource = &proto.Resource_RawTcp{RawTcp: convertRawTCPToPlumbing(v)}
+	case *RDP:
+		plumbing.Resource = &proto.Resource_Rdp{Rdp: convertRDPToPlumbing(v)}
+	case *Redis:
+		plumbing.Resource = &proto.Resource_Redis{Redis: convertRedisToPlumbing(v)}
+	case *Redshift:
+		plumbing.Resource = &proto.Resource_Redshift{Redshift: convertRedshiftToPlumbing(v)}
+	case *SingleStore:
+		plumbing.Resource = &proto.Resource_SingleStore{SingleStore: convertSingleStoreToPlumbing(v)}
+	case *Snowflake:
+		plumbing.Resource = &proto.Resource_Snowflake{Snowflake: convertSnowflakeToPlumbing(v)}
+	case *SQLServer:
+		plumbing.Resource = &proto.Resource_SqlServer{SqlServer: convertSQLServerToPlumbing(v)}
+	case *SSH:
+		plumbing.Resource = &proto.Resource_Ssh{Ssh: convertSSHToPlumbing(v)}
+	case *SSHCert:
+		plumbing.Resource = &proto.Resource_SshCert{SshCert: convertSSHCertToPlumbing(v)}
+	case *SSHCustomerKey:
+		plumbing.Resource = &proto.Resource_SshCustomerKey{SshCustomerKey: convertSSHCustomerKeyToPlumbing(v)}
+	case *Sybase:
+		plumbing.Resource = &proto.Resource_Sybase{Sybase: convertSybaseToPlumbing(v)}
+	case *SybaseIQ:
+		plumbing.Resource = &proto.Resource_SybaseIq{SybaseIq: convertSybaseIQToPlumbing(v)}
+	case *Teradata:
+		plumbing.Resource = &proto.Resource_Teradata{Teradata: convertTeradataToPlumbing(v)}
+	}
 	return plumbing
 }
-func convertRepeatedGatewayToPlumbing(
-	porcelains []*Gateway,
-) []*proto.Gateway {
-	var items []*proto.Gateway
+
+func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
+	if plumbing.GetAks() != nil {
+		return convertAKSToPorcelain(plumbing.GetAks())
+	}
+	if plumbing.GetAksBasicAuth() != nil {
+		return convertAKSBasicAuthToPorcelain(plumbing.GetAksBasicAuth())
+	}
+	if plumbing.GetAksServiceAccount() != nil {
+		return convertAKSServiceAccountToPorcelain(plumbing.GetAksServiceAccount())
+	}
+	if plumbing.GetAksServiceAccountUserImpersonation() != nil {
+		return convertAKSServiceAccountUserImpersonationToPorcelain(plumbing.GetAksServiceAccountUserImpersonation())
+	}
+	if plumbing.GetAksUserImpersonation() != nil {
+		return convertAKSUserImpersonationToPorcelain(plumbing.GetAksUserImpersonation())
+	}
+	if plumbing.GetAmazonEks() != nil {
+		return convertAmazonEKSToPorcelain(plumbing.GetAmazonEks())
+	}
+	if plumbing.GetAmazonEksUserImpersonation() != nil {
+		return convertAmazonEKSUserImpersonationToPorcelain(plumbing.GetAmazonEksUserImpersonation())
+	}
+	if plumbing.GetAmazonEs() != nil {
+		return convertAmazonESToPorcelain(plumbing.GetAmazonEs())
+	}
+	if plumbing.GetAmazonMqamqp_091() != nil {
+		return convertAmazonMQAMQP091ToPorcelain(plumbing.GetAmazonMqamqp_091())
+	}
+	if plumbing.GetAthena() != nil {
+		return convertAthenaToPorcelain(plumbing.GetAthena())
+	}
+	if plumbing.GetAuroraMysql() != nil {
+		return convertAuroraMysqlToPorcelain(plumbing.GetAuroraMysql())
+	}
+	if plumbing.GetAuroraPostgres() != nil {
+		return convertAuroraPostgresToPorcelain(plumbing.GetAuroraPostgres())
+	}
+	if plumbing.GetAws() != nil {
+		return convertAWSToPorcelain(plumbing.GetAws())
+	}
+	if plumbing.GetBigQuery() != nil {
+		return convertBigQueryToPorcelain(plumbing.GetBigQuery())
+	}
+	if plumbing.GetCassandra() != nil {
+		return convertCassandraToPorcelain(plumbing.GetCassandra())
+	}
+	if plumbing.GetCitus() != nil {
+		return convertCitusToPorcelain(plumbing.GetCitus())
+	}
+	if plumbing.GetClustrix() != nil {
+		return convertClustrixToPorcelain(plumbing.GetClustrix())
+	}
+	if plumbing.GetCockroach() != nil {
+		return convertCockroachToPorcelain(plumbing.GetCockroach())
+	}
+	if plumbing.GetDb_2I() != nil {
+		return convertDB2IToPorcelain(plumbing.GetDb_2I())
+	}
+	if plumbing.GetDb_2Luw() != nil {
+		return convertDB2LUWToPorcelain(plumbing.GetDb_2Luw())
+	}
+	if plumbing.GetDruid() != nil {
+		return convertDruidToPorcelain(plumbing.GetDruid())
+	}
+	if plumbing.GetDynamoDb() != nil {
+		return convertDynamoDBToPorcelain(plumbing.GetDynamoDb())
+	}
+	if plumbing.GetElastic() != nil {
+		return convertElasticToPorcelain(plumbing.GetElastic())
+	}
+	if plumbing.GetElasticacheRedis() != nil {
+		return convertElasticacheRedisToPorcelain(plumbing.GetElasticacheRedis())
+	}
+	if plumbing.GetGoogleGke() != nil {
+		return convertGoogleGKEToPorcelain(plumbing.GetGoogleGke())
+	}
+	if plumbing.GetGoogleGkeUserImpersonation() != nil {
+		return convertGoogleGKEUserImpersonationToPorcelain(plumbing.GetGoogleGkeUserImpersonation())
+	}
+	if plumbing.GetGreenplum() != nil {
+		return convertGreenplumToPorcelain(plumbing.GetGreenplum())
+	}
+	if plumbing.GetHttpAuth() != nil {
+		return convertHTTPAuthToPorcelain(plumbing.GetHttpAuth())
+	}
+	if plumbing.GetHttpBasicAuth() != nil {
+		return convertHTTPBasicAuthToPorcelain(plumbing.GetHttpBasicAuth())
+	}
+	if plumbing.GetHttpNoAuth() != nil {
+		return convertHTTPNoAuthToPorcelain(plumbing.GetHttpNoAuth())
+	}
+	if plumbing.GetKubernetes() != nil {
+		return convertKubernetesToPorcelain(plumbing.GetKubernetes())
+	}
+	if plumbing.GetKubernetesBasicAuth() != nil {
+		return convertKubernetesBasicAuthToPorcelain(plumbing.GetKubernetesBasicAuth())
+	}
+	if plumbing.GetKubernetesServiceAccount() != nil {
+		return convertKubernetesServiceAccountToPorcelain(plumbing.GetKubernetesServiceAccount())
+	}
+	if plumbing.GetKubernetesServiceAccountUserImpersonation() != nil {
+		return convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing.GetKubernetesServiceAccountUserImpersonation())
+	}
+	if plumbing.GetKubernetesUserImpersonation() != nil {
+		return convertKubernetesUserImpersonationToPorcelain(plumbing.GetKubernetesUserImpersonation())
+	}
+	if plumbing.GetMaria() != nil {
+		return convertMariaToPorcelain(plumbing.GetMaria())
+	}
+	if plumbing.GetMemcached() != nil {
+		return convertMemcachedToPorcelain(plumbing.GetMemcached())
+	}
+	if plumbing.GetMemsql() != nil {
+		return convertMemsqlToPorcelain(plumbing.GetMemsql())
+	}
+	if plumbing.GetMongoHost() != nil {
+		return convertMongoHostToPorcelain(plumbing.GetMongoHost())
+	}
+	if plumbing.GetMongoLegacyHost() != nil {
+		return convertMongoLegacyHostToPorcelain(plumbing.GetMongoLegacyHost())
+	}
+	if plumbing.GetMongoLegacyReplicaset() != nil {
+		return convertMongoLegacyReplicasetToPorcelain(plumbing.GetMongoLegacyReplicaset())
+	}
+	if plumbing.GetMongoReplicaSet() != nil {
+		return convertMongoReplicaSetToPorcelain(plumbing.GetMongoReplicaSet())
+	}
+	if plumbing.GetMysql() != nil {
+		return convertMysqlToPorcelain(plumbing.GetMysql())
+	}
+	if plumbing.GetOracle() != nil {
+		return convertOracleToPorcelain(plumbing.GetOracle())
+	}
+	if plumbing.GetPostgres() != nil {
+		return convertPostgresToPorcelain(plumbing.GetPostgres())
+	}
+	if plumbing.GetPresto() != nil {
+		return convertPrestoToPorcelain(plumbing.GetPresto())
+	}
+	if plumbing.GetRabbitMqamqp_091() != nil {
+		return convertRabbitMQAMQP091ToPorcelain(plumbing.GetRabbitMqamqp_091())
+	}
+	if plumbing.GetRawTcp() != nil {
+		return convertRawTCPToPorcelain(plumbing.GetRawTcp())
+	}
+	if plumbing.GetRdp() != nil {
+		return convertRDPToPorcelain(plumbing.GetRdp())
+	}
+	if plumbing.GetRedis() != nil {
+		return convertRedisToPorcelain(plumbing.GetRedis())
+	}
+	if plumbing.GetRedshift() != nil {
+		return convertRedshiftToPorcelain(plumbing.GetRedshift())
+	}
+	if plumbing.GetSingleStore() != nil {
+		return convertSingleStoreToPorcelain(plumbing.GetSingleStore())
+	}
+	if plumbing.GetSnowflake() != nil {
+		return convertSnowflakeToPorcelain(plumbing.GetSnowflake())
+	}
+	if plumbing.GetSqlServer() != nil {
+		return convertSQLServerToPorcelain(plumbing.GetSqlServer())
+	}
+	if plumbing.GetSsh() != nil {
+		return convertSSHToPorcelain(plumbing.GetSsh())
+	}
+	if plumbing.GetSshCert() != nil {
+		return convertSSHCertToPorcelain(plumbing.GetSshCert())
+	}
+	if plumbing.GetSshCustomerKey() != nil {
+		return convertSSHCustomerKeyToPorcelain(plumbing.GetSshCustomerKey())
+	}
+	if plumbing.GetSybase() != nil {
+		return convertSybaseToPorcelain(plumbing.GetSybase())
+	}
+	if plumbing.GetSybaseIq() != nil {
+		return convertSybaseIQToPorcelain(plumbing.GetSybaseIq())
+	}
+	if plumbing.GetTeradata() != nil {
+		return convertTeradataToPorcelain(plumbing.GetTeradata())
+	}
+	return nil
+}
+func convertRepeatedResourceToPlumbing(
+	porcelains []Resource,
+) []*proto.Resource {
+	var items []*proto.Resource
 	for _, porcelain := range porcelains {
-		items = append(items, convertGatewayToPlumbing(porcelain))
+		items = append(items, convertResourceToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedGatewayToPorcelain(plumbings []*proto.Gateway) []*Gateway {
-	var items []*Gateway
+func convertRepeatedResourceToPorcelain(plumbings []*proto.Resource) []Resource {
+	var items []Resource
 	for _, plumbing := range plumbings {
-		items = append(items, convertGatewayToPorcelain(plumbing))
+		items = append(items, convertResourceToPorcelain(plumbing))
 	}
 	return items
 }
@@ -4913,8 +4301,8 @@ func convertResourceCreateResponseToPorcelain(plumbing *proto.ResourceCreateResp
 	}
 	porcelain := &ResourceCreateResponse{}
 	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Resource = convertResourceToPorcelain(plumbing.Resource)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Resource = convertResourceToPorcelain(plumbing.Resource)
 	return porcelain
 }
 
@@ -4924,8 +4312,8 @@ func convertResourceCreateResponseToPlumbing(porcelain *ResourceCreateResponse) 
 	}
 	plumbing := &proto.ResourceCreateResponse{}
 	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Resource = convertResourceToPlumbing(porcelain.Resource)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Resource = convertResourceToPlumbing(porcelain.Resource)
 	return plumbing
 }
 func convertRepeatedResourceCreateResponseToPlumbing(
@@ -4942,82 +4330,6 @@ func convertRepeatedResourceCreateResponseToPorcelain(plumbings []*proto.Resourc
 	var items []*ResourceCreateResponse
 	for _, plumbing := range plumbings {
 		items = append(items, convertResourceCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertResourceGetResponseToPorcelain(plumbing *proto.ResourceGetResponse) *ResourceGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &ResourceGetResponse{}
-	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Resource = convertResourceToPorcelain(plumbing.Resource)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertResourceGetResponseToPlumbing(porcelain *ResourceGetResponse) *proto.ResourceGetResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.ResourceGetResponse{}
-	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Resource = convertResourceToPlumbing(porcelain.Resource)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedResourceGetResponseToPlumbing(
-	porcelains []*ResourceGetResponse,
-) []*proto.ResourceGetResponse {
-	var items []*proto.ResourceGetResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertResourceGetResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedResourceGetResponseToPorcelain(plumbings []*proto.ResourceGetResponse) []*ResourceGetResponse {
-	var items []*ResourceGetResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertResourceGetResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertResourceUpdateResponseToPorcelain(plumbing *proto.ResourceUpdateResponse) *ResourceUpdateResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &ResourceUpdateResponse{}
-	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Resource = convertResourceToPorcelain(plumbing.Resource)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertResourceUpdateResponseToPlumbing(porcelain *ResourceUpdateResponse) *proto.ResourceUpdateResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.ResourceUpdateResponse{}
-	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Resource = convertResourceToPlumbing(porcelain.Resource)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedResourceUpdateResponseToPlumbing(
-	porcelains []*ResourceUpdateResponse,
-) []*proto.ResourceUpdateResponse {
-	var items []*proto.ResourceUpdateResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertResourceUpdateResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedResourceUpdateResponseToPorcelain(plumbings []*proto.ResourceUpdateResponse) []*ResourceUpdateResponse {
-	var items []*ResourceUpdateResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertResourceUpdateResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -5057,14 +4369,170 @@ func convertRepeatedResourceDeleteResponseToPorcelain(plumbings []*proto.Resourc
 	}
 	return items
 }
+func convertResourceGetResponseToPorcelain(plumbing *proto.ResourceGetResponse) *ResourceGetResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &ResourceGetResponse{}
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Resource = convertResourceToPorcelain(plumbing.Resource)
+	return porcelain
+}
+
+func convertResourceGetResponseToPlumbing(porcelain *ResourceGetResponse) *proto.ResourceGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ResourceGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Resource = convertResourceToPlumbing(porcelain.Resource)
+	return plumbing
+}
+func convertRepeatedResourceGetResponseToPlumbing(
+	porcelains []*ResourceGetResponse,
+) []*proto.ResourceGetResponse {
+	var items []*proto.ResourceGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertResourceGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedResourceGetResponseToPorcelain(plumbings []*proto.ResourceGetResponse) []*ResourceGetResponse {
+	var items []*ResourceGetResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertResourceGetResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertResourceUpdateResponseToPorcelain(plumbing *proto.ResourceUpdateResponse) *ResourceUpdateResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &ResourceUpdateResponse{}
+	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Resource = convertResourceToPorcelain(plumbing.Resource)
+	return porcelain
+}
+
+func convertResourceUpdateResponseToPlumbing(porcelain *ResourceUpdateResponse) *proto.ResourceUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ResourceUpdateResponse{}
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Resource = convertResourceToPlumbing(porcelain.Resource)
+	return plumbing
+}
+func convertRepeatedResourceUpdateResponseToPlumbing(
+	porcelains []*ResourceUpdateResponse,
+) []*proto.ResourceUpdateResponse {
+	var items []*proto.ResourceUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertResourceUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedResourceUpdateResponseToPorcelain(plumbings []*proto.ResourceUpdateResponse) []*ResourceUpdateResponse {
+	var items []*ResourceUpdateResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertResourceUpdateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRoleToPorcelain(plumbing *proto.Role) *Role {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Role{}
+	porcelain.AccessRules = (plumbing.AccessRules)
+	porcelain.Composite = (plumbing.Composite)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertRoleToPlumbing(porcelain *Role) *proto.Role {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Role{}
+	plumbing.AccessRules = (porcelain.AccessRules)
+	plumbing.Composite = (porcelain.Composite)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedRoleToPlumbing(
+	porcelains []*Role,
+) []*proto.Role {
+	var items []*proto.Role
+	for _, porcelain := range porcelains {
+		items = append(items, convertRoleToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRoleToPorcelain(plumbings []*proto.Role) []*Role {
+	var items []*Role
+	for _, plumbing := range plumbings {
+		items = append(items, convertRoleToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRoleAttachmentToPorcelain(plumbing *proto.RoleAttachment) *RoleAttachment {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RoleAttachment{}
+	porcelain.AttachedRoleID = (plumbing.AttachedRoleId)
+	porcelain.CompositeRoleID = (plumbing.CompositeRoleId)
+	porcelain.ID = (plumbing.Id)
+	return porcelain
+}
+
+func convertRoleAttachmentToPlumbing(porcelain *RoleAttachment) *proto.RoleAttachment {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RoleAttachment{}
+	plumbing.AttachedRoleId = (porcelain.AttachedRoleID)
+	plumbing.CompositeRoleId = (porcelain.CompositeRoleID)
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedRoleAttachmentToPlumbing(
+	porcelains []*RoleAttachment,
+) []*proto.RoleAttachment {
+	var items []*proto.RoleAttachment
+	for _, porcelain := range porcelains {
+		items = append(items, convertRoleAttachmentToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRoleAttachmentToPorcelain(plumbings []*proto.RoleAttachment) []*RoleAttachment {
+	var items []*RoleAttachment
+	for _, plumbing := range plumbings {
+		items = append(items, convertRoleAttachmentToPorcelain(plumbing))
+	}
+	return items
+}
 func convertRoleAttachmentCreateResponseToPorcelain(plumbing *proto.RoleAttachmentCreateResponse) *RoleAttachmentCreateResponse {
 	if plumbing == nil {
 		return nil
 	}
 	porcelain := &RoleAttachmentCreateResponse{}
 	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RoleAttachment = convertRoleAttachmentToPorcelain(plumbing.RoleAttachment)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.RoleAttachment = convertRoleAttachmentToPorcelain(plumbing.RoleAttachment)
 	return porcelain
 }
 
@@ -5074,8 +4542,8 @@ func convertRoleAttachmentCreateResponseToPlumbing(porcelain *RoleAttachmentCrea
 	}
 	plumbing := &proto.RoleAttachmentCreateResponse{}
 	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RoleAttachment = convertRoleAttachmentToPlumbing(porcelain.RoleAttachment)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RoleAttachment = convertRoleAttachmentToPlumbing(porcelain.RoleAttachment)
 	return plumbing
 }
 func convertRepeatedRoleAttachmentCreateResponseToPlumbing(
@@ -5092,44 +4560,6 @@ func convertRepeatedRoleAttachmentCreateResponseToPorcelain(plumbings []*proto.R
 	var items []*RoleAttachmentCreateResponse
 	for _, plumbing := range plumbings {
 		items = append(items, convertRoleAttachmentCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRoleAttachmentGetResponseToPorcelain(plumbing *proto.RoleAttachmentGetResponse) *RoleAttachmentGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &RoleAttachmentGetResponse{}
-	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RoleAttachment = convertRoleAttachmentToPorcelain(plumbing.RoleAttachment)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertRoleAttachmentGetResponseToPlumbing(porcelain *RoleAttachmentGetResponse) *proto.RoleAttachmentGetResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RoleAttachmentGetResponse{}
-	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RoleAttachment = convertRoleAttachmentToPlumbing(porcelain.RoleAttachment)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedRoleAttachmentGetResponseToPlumbing(
-	porcelains []*RoleAttachmentGetResponse,
-) []*proto.RoleAttachmentGetResponse {
-	var items []*proto.RoleAttachmentGetResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertRoleAttachmentGetResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRoleAttachmentGetResponseToPorcelain(plumbings []*proto.RoleAttachmentGetResponse) []*RoleAttachmentGetResponse {
-	var items []*RoleAttachmentGetResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertRoleAttachmentGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -5169,153 +4599,153 @@ func convertRepeatedRoleAttachmentDeleteResponseToPorcelain(plumbings []*proto.R
 	}
 	return items
 }
-func convertRoleAttachmentToPorcelain(plumbing *proto.RoleAttachment) *RoleAttachment {
+func convertRoleAttachmentGetResponseToPorcelain(plumbing *proto.RoleAttachmentGetResponse) *RoleAttachmentGetResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &RoleAttachment{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.CompositeRoleID = (plumbing.CompositeRoleId)
-	porcelain.AttachedRoleID = (plumbing.AttachedRoleId)
-	return porcelain
-}
-
-func convertRoleAttachmentToPlumbing(porcelain *RoleAttachment) *proto.RoleAttachment {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RoleAttachment{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.CompositeRoleId = (porcelain.CompositeRoleID)
-	plumbing.AttachedRoleId = (porcelain.AttachedRoleID)
-	return plumbing
-}
-func convertRepeatedRoleAttachmentToPlumbing(
-	porcelains []*RoleAttachment,
-) []*proto.RoleAttachment {
-	var items []*proto.RoleAttachment
-	for _, porcelain := range porcelains {
-		items = append(items, convertRoleAttachmentToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRoleAttachmentToPorcelain(plumbings []*proto.RoleAttachment) []*RoleAttachment {
-	var items []*RoleAttachment
-	for _, plumbing := range plumbings {
-		items = append(items, convertRoleAttachmentToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRoleGrantCreateResponseToPorcelain(plumbing *proto.RoleGrantCreateResponse) *RoleGrantCreateResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &RoleGrantCreateResponse{}
-	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RoleGrant = convertRoleGrantToPorcelain(plumbing.RoleGrant)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertRoleGrantCreateResponseToPlumbing(porcelain *RoleGrantCreateResponse) *proto.RoleGrantCreateResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RoleGrantCreateResponse{}
-	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RoleGrant = convertRoleGrantToPlumbing(porcelain.RoleGrant)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedRoleGrantCreateResponseToPlumbing(
-	porcelains []*RoleGrantCreateResponse,
-) []*proto.RoleGrantCreateResponse {
-	var items []*proto.RoleGrantCreateResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertRoleGrantCreateResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRoleGrantCreateResponseToPorcelain(plumbings []*proto.RoleGrantCreateResponse) []*RoleGrantCreateResponse {
-	var items []*RoleGrantCreateResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertRoleGrantCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRoleGrantGetResponseToPorcelain(plumbing *proto.RoleGrantGetResponse) *RoleGrantGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &RoleGrantGetResponse{}
+	porcelain := &RoleAttachmentGetResponse{}
 	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RoleGrant = convertRoleGrantToPorcelain(plumbing.RoleGrant)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.RoleAttachment = convertRoleAttachmentToPorcelain(plumbing.RoleAttachment)
 	return porcelain
 }
 
-func convertRoleGrantGetResponseToPlumbing(porcelain *RoleGrantGetResponse) *proto.RoleGrantGetResponse {
+func convertRoleAttachmentGetResponseToPlumbing(porcelain *RoleAttachmentGetResponse) *proto.RoleAttachmentGetResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.RoleGrantGetResponse{}
+	plumbing := &proto.RoleAttachmentGetResponse{}
 	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RoleGrant = convertRoleGrantToPlumbing(porcelain.RoleGrant)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RoleAttachment = convertRoleAttachmentToPlumbing(porcelain.RoleAttachment)
 	return plumbing
 }
-func convertRepeatedRoleGrantGetResponseToPlumbing(
-	porcelains []*RoleGrantGetResponse,
-) []*proto.RoleGrantGetResponse {
-	var items []*proto.RoleGrantGetResponse
+func convertRepeatedRoleAttachmentGetResponseToPlumbing(
+	porcelains []*RoleAttachmentGetResponse,
+) []*proto.RoleAttachmentGetResponse {
+	var items []*proto.RoleAttachmentGetResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertRoleGrantGetResponseToPlumbing(porcelain))
+		items = append(items, convertRoleAttachmentGetResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedRoleGrantGetResponseToPorcelain(plumbings []*proto.RoleGrantGetResponse) []*RoleGrantGetResponse {
-	var items []*RoleGrantGetResponse
+func convertRepeatedRoleAttachmentGetResponseToPorcelain(plumbings []*proto.RoleAttachmentGetResponse) []*RoleAttachmentGetResponse {
+	var items []*RoleAttachmentGetResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertRoleGrantGetResponseToPorcelain(plumbing))
+		items = append(items, convertRoleAttachmentGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
-func convertRoleGrantDeleteResponseToPorcelain(plumbing *proto.RoleGrantDeleteResponse) *RoleGrantDeleteResponse {
+func convertRoleCreateResponseToPorcelain(plumbing *proto.RoleCreateResponse) *RoleCreateResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &RoleGrantDeleteResponse{}
+	porcelain := &RoleCreateResponse{}
+	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Role = convertRoleToPorcelain(plumbing.Role)
+	return porcelain
+}
+
+func convertRoleCreateResponseToPlumbing(porcelain *RoleCreateResponse) *proto.RoleCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RoleCreateResponse{}
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
+	return plumbing
+}
+func convertRepeatedRoleCreateResponseToPlumbing(
+	porcelains []*RoleCreateResponse,
+) []*proto.RoleCreateResponse {
+	var items []*proto.RoleCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRoleCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRoleCreateResponseToPorcelain(plumbings []*proto.RoleCreateResponse) []*RoleCreateResponse {
+	var items []*RoleCreateResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertRoleCreateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRoleDeleteResponseToPorcelain(plumbing *proto.RoleDeleteResponse) *RoleDeleteResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RoleDeleteResponse{}
 	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
 	return porcelain
 }
 
-func convertRoleGrantDeleteResponseToPlumbing(porcelain *RoleGrantDeleteResponse) *proto.RoleGrantDeleteResponse {
+func convertRoleDeleteResponseToPlumbing(porcelain *RoleDeleteResponse) *proto.RoleDeleteResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.RoleGrantDeleteResponse{}
+	plumbing := &proto.RoleDeleteResponse{}
 	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
 	return plumbing
 }
-func convertRepeatedRoleGrantDeleteResponseToPlumbing(
-	porcelains []*RoleGrantDeleteResponse,
-) []*proto.RoleGrantDeleteResponse {
-	var items []*proto.RoleGrantDeleteResponse
+func convertRepeatedRoleDeleteResponseToPlumbing(
+	porcelains []*RoleDeleteResponse,
+) []*proto.RoleDeleteResponse {
+	var items []*proto.RoleDeleteResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertRoleGrantDeleteResponseToPlumbing(porcelain))
+		items = append(items, convertRoleDeleteResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedRoleGrantDeleteResponseToPorcelain(plumbings []*proto.RoleGrantDeleteResponse) []*RoleGrantDeleteResponse {
-	var items []*RoleGrantDeleteResponse
+func convertRepeatedRoleDeleteResponseToPorcelain(plumbings []*proto.RoleDeleteResponse) []*RoleDeleteResponse {
+	var items []*RoleDeleteResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertRoleGrantDeleteResponseToPorcelain(plumbing))
+		items = append(items, convertRoleDeleteResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRoleGetResponseToPorcelain(plumbing *proto.RoleGetResponse) *RoleGetResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RoleGetResponse{}
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Role = convertRoleToPorcelain(plumbing.Role)
+	return porcelain
+}
+
+func convertRoleGetResponseToPlumbing(porcelain *RoleGetResponse) *proto.RoleGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RoleGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
+	return plumbing
+}
+func convertRepeatedRoleGetResponseToPlumbing(
+	porcelains []*RoleGetResponse,
+) []*proto.RoleGetResponse {
+	var items []*proto.RoleGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRoleGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRoleGetResponseToPorcelain(plumbings []*proto.RoleGetResponse) []*RoleGetResponse {
+	var items []*RoleGetResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertRoleGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -5357,79 +4787,115 @@ func convertRepeatedRoleGrantToPorcelain(plumbings []*proto.RoleGrant) []*RoleGr
 	}
 	return items
 }
-func convertRoleCreateResponseToPorcelain(plumbing *proto.RoleCreateResponse) *RoleCreateResponse {
+func convertRoleGrantCreateResponseToPorcelain(plumbing *proto.RoleGrantCreateResponse) *RoleGrantCreateResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &RoleCreateResponse{}
+	porcelain := &RoleGrantCreateResponse{}
 	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Role = convertRoleToPorcelain(plumbing.Role)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.RoleGrant = convertRoleGrantToPorcelain(plumbing.RoleGrant)
 	return porcelain
 }
 
-func convertRoleCreateResponseToPlumbing(porcelain *RoleCreateResponse) *proto.RoleCreateResponse {
+func convertRoleGrantCreateResponseToPlumbing(porcelain *RoleGrantCreateResponse) *proto.RoleGrantCreateResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.RoleCreateResponse{}
+	plumbing := &proto.RoleGrantCreateResponse{}
 	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RoleGrant = convertRoleGrantToPlumbing(porcelain.RoleGrant)
 	return plumbing
 }
-func convertRepeatedRoleCreateResponseToPlumbing(
-	porcelains []*RoleCreateResponse,
-) []*proto.RoleCreateResponse {
-	var items []*proto.RoleCreateResponse
+func convertRepeatedRoleGrantCreateResponseToPlumbing(
+	porcelains []*RoleGrantCreateResponse,
+) []*proto.RoleGrantCreateResponse {
+	var items []*proto.RoleGrantCreateResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertRoleCreateResponseToPlumbing(porcelain))
+		items = append(items, convertRoleGrantCreateResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedRoleCreateResponseToPorcelain(plumbings []*proto.RoleCreateResponse) []*RoleCreateResponse {
-	var items []*RoleCreateResponse
+func convertRepeatedRoleGrantCreateResponseToPorcelain(plumbings []*proto.RoleGrantCreateResponse) []*RoleGrantCreateResponse {
+	var items []*RoleGrantCreateResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertRoleCreateResponseToPorcelain(plumbing))
+		items = append(items, convertRoleGrantCreateResponseToPorcelain(plumbing))
 	}
 	return items
 }
-func convertRoleGetResponseToPorcelain(plumbing *proto.RoleGetResponse) *RoleGetResponse {
+func convertRoleGrantDeleteResponseToPorcelain(plumbing *proto.RoleGrantDeleteResponse) *RoleGrantDeleteResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &RoleGetResponse{}
-	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Role = convertRoleToPorcelain(plumbing.Role)
+	porcelain := &RoleGrantDeleteResponse{}
+	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
 	return porcelain
 }
 
-func convertRoleGetResponseToPlumbing(porcelain *RoleGetResponse) *proto.RoleGetResponse {
+func convertRoleGrantDeleteResponseToPlumbing(porcelain *RoleGrantDeleteResponse) *proto.RoleGrantDeleteResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.RoleGetResponse{}
-	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
+	plumbing := &proto.RoleGrantDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
 	return plumbing
 }
-func convertRepeatedRoleGetResponseToPlumbing(
-	porcelains []*RoleGetResponse,
-) []*proto.RoleGetResponse {
-	var items []*proto.RoleGetResponse
+func convertRepeatedRoleGrantDeleteResponseToPlumbing(
+	porcelains []*RoleGrantDeleteResponse,
+) []*proto.RoleGrantDeleteResponse {
+	var items []*proto.RoleGrantDeleteResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertRoleGetResponseToPlumbing(porcelain))
+		items = append(items, convertRoleGrantDeleteResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedRoleGetResponseToPorcelain(plumbings []*proto.RoleGetResponse) []*RoleGetResponse {
-	var items []*RoleGetResponse
+func convertRepeatedRoleGrantDeleteResponseToPorcelain(plumbings []*proto.RoleGrantDeleteResponse) []*RoleGrantDeleteResponse {
+	var items []*RoleGrantDeleteResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertRoleGetResponseToPorcelain(plumbing))
+		items = append(items, convertRoleGrantDeleteResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertRoleGrantGetResponseToPorcelain(plumbing *proto.RoleGrantGetResponse) *RoleGrantGetResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &RoleGrantGetResponse{}
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.RoleGrant = convertRoleGrantToPorcelain(plumbing.RoleGrant)
+	return porcelain
+}
+
+func convertRoleGrantGetResponseToPlumbing(porcelain *RoleGrantGetResponse) *proto.RoleGrantGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RoleGrantGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RoleGrant = convertRoleGrantToPlumbing(porcelain.RoleGrant)
+	return plumbing
+}
+func convertRepeatedRoleGrantGetResponseToPlumbing(
+	porcelains []*RoleGrantGetResponse,
+) []*proto.RoleGrantGetResponse {
+	var items []*proto.RoleGrantGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRoleGrantGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRoleGrantGetResponseToPorcelain(plumbings []*proto.RoleGrantGetResponse) []*RoleGrantGetResponse {
+	var items []*RoleGrantGetResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertRoleGrantGetResponseToPorcelain(plumbing))
 	}
 	return items
 }
@@ -5439,8 +4905,8 @@ func convertRoleUpdateResponseToPorcelain(plumbing *proto.RoleUpdateResponse) *R
 	}
 	porcelain := &RoleUpdateResponse{}
 	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.Role = convertRoleToPorcelain(plumbing.Role)
 	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.Role = convertRoleToPorcelain(plumbing.Role)
 	return porcelain
 }
 
@@ -5450,8 +4916,8 @@ func convertRoleUpdateResponseToPlumbing(porcelain *RoleUpdateResponse) *proto.R
 	}
 	plumbing := &proto.RoleUpdateResponse{}
 	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
 	return plumbing
 }
 func convertRepeatedRoleUpdateResponseToPlumbing(
@@ -5471,81 +4937,229 @@ func convertRepeatedRoleUpdateResponseToPorcelain(plumbings []*proto.RoleUpdateR
 	}
 	return items
 }
-func convertRoleDeleteResponseToPorcelain(plumbing *proto.RoleDeleteResponse) *RoleDeleteResponse {
+func convertSQLServerToPorcelain(plumbing *proto.SQLServer) *SQLServer {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &RoleDeleteResponse{}
-	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertRoleDeleteResponseToPlumbing(porcelain *RoleDeleteResponse) *proto.RoleDeleteResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.RoleDeleteResponse{}
-	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedRoleDeleteResponseToPlumbing(
-	porcelains []*RoleDeleteResponse,
-) []*proto.RoleDeleteResponse {
-	var items []*proto.RoleDeleteResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertRoleDeleteResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedRoleDeleteResponseToPorcelain(plumbings []*proto.RoleDeleteResponse) []*RoleDeleteResponse {
-	var items []*RoleDeleteResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertRoleDeleteResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertRoleToPorcelain(plumbing *proto.Role) *Role {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &Role{}
+	porcelain := &SQLServer{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
-	porcelain.AccessRules = (plumbing.AccessRules)
-	porcelain.Composite = (plumbing.Composite)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Schema = (plumbing.Schema)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
 	return porcelain
 }
 
-func convertRoleToPlumbing(porcelain *Role) *proto.Role {
+func convertSQLServerToPlumbing(porcelain *SQLServer) *proto.SQLServer {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.Role{}
+	plumbing := &proto.SQLServer{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.AccessRules = (porcelain.AccessRules)
-	plumbing.Composite = (porcelain.Composite)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Schema = (porcelain.Schema)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
-func convertRepeatedRoleToPlumbing(
-	porcelains []*Role,
-) []*proto.Role {
-	var items []*proto.Role
+func convertRepeatedSQLServerToPlumbing(
+	porcelains []*SQLServer,
+) []*proto.SQLServer {
+	var items []*proto.SQLServer
 	for _, porcelain := range porcelains {
-		items = append(items, convertRoleToPlumbing(porcelain))
+		items = append(items, convertSQLServerToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedRoleToPorcelain(plumbings []*proto.Role) []*Role {
-	var items []*Role
+func convertRepeatedSQLServerToPorcelain(plumbings []*proto.SQLServer) []*SQLServer {
+	var items []*SQLServer
 	for _, plumbing := range plumbings {
-		items = append(items, convertRoleToPorcelain(plumbing))
+		items = append(items, convertSQLServerToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSSHToPorcelain(plumbing *proto.SSH) *SSH {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SSH{}
+	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortForwarding = (plumbing.PortForwarding)
+	porcelain.PublicKey = (plumbing.PublicKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SSH{}
+	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSSHToPlumbing(
+	porcelains []*SSH,
+) []*proto.SSH {
+	var items []*proto.SSH
+	for _, porcelain := range porcelains {
+		items = append(items, convertSSHToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSSHToPorcelain(plumbings []*proto.SSH) []*SSH {
+	var items []*SSH
+	for _, plumbing := range plumbings {
+		items = append(items, convertSSHToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSSHCertToPorcelain(plumbing *proto.SSHCert) *SSHCert {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SSHCert{}
+	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortForwarding = (plumbing.PortForwarding)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SSHCert{}
+	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSSHCertToPlumbing(
+	porcelains []*SSHCert,
+) []*proto.SSHCert {
+	var items []*proto.SSHCert
+	for _, porcelain := range porcelains {
+		items = append(items, convertSSHCertToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSSHCertToPorcelain(plumbings []*proto.SSHCert) []*SSHCert {
+	var items []*SSHCert
+	for _, plumbing := range plumbings {
+		items = append(items, convertSSHCertToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) *SSHCustomerKey {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SSHCustomerKey{}
+	porcelain.AllowDeprecatedKeyExchanges = (plumbing.AllowDeprecatedKeyExchanges)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortForwarding = (plumbing.PortForwarding)
+	porcelain.PrivateKey = (plumbing.PrivateKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustomerKey {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SSHCustomerKey{}
+	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.PrivateKey = (porcelain.PrivateKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSSHCustomerKeyToPlumbing(
+	porcelains []*SSHCustomerKey,
+) []*proto.SSHCustomerKey {
+	var items []*proto.SSHCustomerKey
+	for _, porcelain := range porcelains {
+		items = append(items, convertSSHCustomerKeyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSSHCustomerKeyToPorcelain(plumbings []*proto.SSHCustomerKey) []*SSHCustomerKey {
+	var items []*SSHCustomerKey
+	for _, plumbing := range plumbings {
+		items = append(items, convertSSHCustomerKeyToPorcelain(plumbing))
 	}
 	return items
 }
@@ -5595,43 +5209,579 @@ func convertRepeatedSecretStoreToPorcelain(plumbings []*proto.SecretStore) []Sec
 	}
 	return items
 }
-func convertAWSStoreToPorcelain(plumbing *proto.AWSStore) *AWSStore {
+func convertSecretStoreCreateResponseToPorcelain(plumbing *proto.SecretStoreCreateResponse) *SecretStoreCreateResponse {
 	if plumbing == nil {
 		return nil
 	}
-	porcelain := &AWSStore{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.Region = (plumbing.Region)
-	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain := &SecretStoreCreateResponse{}
+	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.SecretStore = convertSecretStoreToPorcelain(plumbing.SecretStore)
 	return porcelain
 }
 
-func convertAWSStoreToPlumbing(porcelain *AWSStore) *proto.AWSStore {
+func convertSecretStoreCreateResponseToPlumbing(porcelain *SecretStoreCreateResponse) *proto.SecretStoreCreateResponse {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AWSStore{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Region = (porcelain.Region)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing := &proto.SecretStoreCreateResponse{}
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretStore = convertSecretStoreToPlumbing(porcelain.SecretStore)
 	return plumbing
 }
-func convertRepeatedAWSStoreToPlumbing(
-	porcelains []*AWSStore,
-) []*proto.AWSStore {
-	var items []*proto.AWSStore
+func convertRepeatedSecretStoreCreateResponseToPlumbing(
+	porcelains []*SecretStoreCreateResponse,
+) []*proto.SecretStoreCreateResponse {
+	var items []*proto.SecretStoreCreateResponse
 	for _, porcelain := range porcelains {
-		items = append(items, convertAWSStoreToPlumbing(porcelain))
+		items = append(items, convertSecretStoreCreateResponseToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAWSStoreToPorcelain(plumbings []*proto.AWSStore) []*AWSStore {
-	var items []*AWSStore
+func convertRepeatedSecretStoreCreateResponseToPorcelain(plumbings []*proto.SecretStoreCreateResponse) []*SecretStoreCreateResponse {
+	var items []*SecretStoreCreateResponse
 	for _, plumbing := range plumbings {
-		items = append(items, convertAWSStoreToPorcelain(plumbing))
+		items = append(items, convertSecretStoreCreateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSecretStoreDeleteResponseToPorcelain(plumbing *proto.SecretStoreDeleteResponse) *SecretStoreDeleteResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SecretStoreDeleteResponse{}
+	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	return porcelain
+}
+
+func convertSecretStoreDeleteResponseToPlumbing(porcelain *SecretStoreDeleteResponse) *proto.SecretStoreDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretStoreDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedSecretStoreDeleteResponseToPlumbing(
+	porcelains []*SecretStoreDeleteResponse,
+) []*proto.SecretStoreDeleteResponse {
+	var items []*proto.SecretStoreDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretStoreDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretStoreDeleteResponseToPorcelain(plumbings []*proto.SecretStoreDeleteResponse) []*SecretStoreDeleteResponse {
+	var items []*SecretStoreDeleteResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertSecretStoreDeleteResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSecretStoreGetResponseToPorcelain(plumbing *proto.SecretStoreGetResponse) *SecretStoreGetResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SecretStoreGetResponse{}
+	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.SecretStore = convertSecretStoreToPorcelain(plumbing.SecretStore)
+	return porcelain
+}
+
+func convertSecretStoreGetResponseToPlumbing(porcelain *SecretStoreGetResponse) *proto.SecretStoreGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretStoreGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretStore = convertSecretStoreToPlumbing(porcelain.SecretStore)
+	return plumbing
+}
+func convertRepeatedSecretStoreGetResponseToPlumbing(
+	porcelains []*SecretStoreGetResponse,
+) []*proto.SecretStoreGetResponse {
+	var items []*proto.SecretStoreGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretStoreGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretStoreGetResponseToPorcelain(plumbings []*proto.SecretStoreGetResponse) []*SecretStoreGetResponse {
+	var items []*SecretStoreGetResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertSecretStoreGetResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSecretStoreUpdateResponseToPorcelain(plumbing *proto.SecretStoreUpdateResponse) *SecretStoreUpdateResponse {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SecretStoreUpdateResponse{}
+	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
+	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
+	porcelain.SecretStore = convertSecretStoreToPorcelain(plumbing.SecretStore)
+	return porcelain
+}
+
+func convertSecretStoreUpdateResponseToPlumbing(porcelain *SecretStoreUpdateResponse) *proto.SecretStoreUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretStoreUpdateResponse{}
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretStore = convertSecretStoreToPlumbing(porcelain.SecretStore)
+	return plumbing
+}
+func convertRepeatedSecretStoreUpdateResponseToPlumbing(
+	porcelains []*SecretStoreUpdateResponse,
+) []*proto.SecretStoreUpdateResponse {
+	var items []*proto.SecretStoreUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretStoreUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretStoreUpdateResponseToPorcelain(plumbings []*proto.SecretStoreUpdateResponse) []*SecretStoreUpdateResponse {
+	var items []*SecretStoreUpdateResponse
+	for _, plumbing := range plumbings {
+		items = append(items, convertSecretStoreUpdateResponseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertServiceToPorcelain(plumbing *proto.Service) *Service {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Service{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Suspended = (plumbing.Suspended)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertServiceToPlumbing(porcelain *Service) *proto.Service {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Service{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Suspended = (porcelain.Suspended)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedServiceToPlumbing(
+	porcelains []*Service,
+) []*proto.Service {
+	var items []*proto.Service
+	for _, porcelain := range porcelains {
+		items = append(items, convertServiceToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedServiceToPorcelain(plumbings []*proto.Service) []*Service {
+	var items []*Service
+	for _, plumbing := range plumbings {
+		items = append(items, convertServiceToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) *SingleStore {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SingleStore{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSingleStoreToPlumbing(porcelain *SingleStore) *proto.SingleStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SingleStore{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSingleStoreToPlumbing(
+	porcelains []*SingleStore,
+) []*proto.SingleStore {
+	var items []*proto.SingleStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertSingleStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSingleStoreToPorcelain(plumbings []*proto.SingleStore) []*SingleStore {
+	var items []*SingleStore
+	for _, plumbing := range plumbings {
+		items = append(items, convertSingleStoreToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSnowflakeToPorcelain(plumbing *proto.Snowflake) *Snowflake {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Snowflake{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Schema = (plumbing.Schema)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSnowflakeToPlumbing(porcelain *Snowflake) *proto.Snowflake {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Snowflake{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Schema = (porcelain.Schema)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSnowflakeToPlumbing(
+	porcelains []*Snowflake,
+) []*proto.Snowflake {
+	var items []*proto.Snowflake
+	for _, porcelain := range porcelains {
+		items = append(items, convertSnowflakeToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSnowflakeToPorcelain(plumbings []*proto.Snowflake) []*Snowflake {
+	var items []*Snowflake
+	for _, plumbing := range plumbings {
+		items = append(items, convertSnowflakeToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSybaseToPorcelain(plumbing *proto.Sybase) *Sybase {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Sybase{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSybaseToPlumbing(porcelain *Sybase) *proto.Sybase {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Sybase{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSybaseToPlumbing(
+	porcelains []*Sybase,
+) []*proto.Sybase {
+	var items []*proto.Sybase
+	for _, porcelain := range porcelains {
+		items = append(items, convertSybaseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSybaseToPorcelain(plumbings []*proto.Sybase) []*Sybase {
+	var items []*Sybase
+	for _, plumbing := range plumbings {
+		items = append(items, convertSybaseToPorcelain(plumbing))
+	}
+	return items
+}
+func convertSybaseIQToPorcelain(plumbing *proto.SybaseIQ) *SybaseIQ {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &SybaseIQ{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertSybaseIQToPlumbing(porcelain *SybaseIQ) *proto.SybaseIQ {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SybaseIQ{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSybaseIQToPlumbing(
+	porcelains []*SybaseIQ,
+) []*proto.SybaseIQ {
+	var items []*proto.SybaseIQ
+	for _, porcelain := range porcelains {
+		items = append(items, convertSybaseIQToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSybaseIQToPorcelain(plumbings []*proto.SybaseIQ) []*SybaseIQ {
+	var items []*SybaseIQ
+	for _, plumbing := range plumbings {
+		items = append(items, convertSybaseIQToPorcelain(plumbing))
+	}
+	return items
+}
+func convertTagToPorcelain(plumbing *proto.Tag) *Tag {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Tag{}
+	porcelain.Name = (plumbing.Name)
+	porcelain.Value = (plumbing.Value)
+	return porcelain
+}
+
+func convertTagToPlumbing(porcelain *Tag) *proto.Tag {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Tag{}
+	plumbing.Name = (porcelain.Name)
+	plumbing.Value = (porcelain.Value)
+	return plumbing
+}
+func convertRepeatedTagToPlumbing(
+	porcelains []*Tag,
+) []*proto.Tag {
+	var items []*proto.Tag
+	for _, porcelain := range porcelains {
+		items = append(items, convertTagToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedTagToPorcelain(plumbings []*proto.Tag) []*Tag {
+	var items []*Tag
+	for _, plumbing := range plumbings {
+		items = append(items, convertTagToPorcelain(plumbing))
+	}
+	return items
+}
+func convertTeradataToPorcelain(plumbing *proto.Teradata) *Teradata {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Teradata{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertTeradataToPlumbing(porcelain *Teradata) *proto.Teradata {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Teradata{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedTeradataToPlumbing(
+	porcelains []*Teradata,
+) []*proto.Teradata {
+	var items []*proto.Teradata
+	for _, porcelain := range porcelains {
+		items = append(items, convertTeradataToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedTeradataToPorcelain(plumbings []*proto.Teradata) []*Teradata {
+	var items []*Teradata
+	for _, plumbing := range plumbings {
+		items = append(items, convertTeradataToPorcelain(plumbing))
+	}
+	return items
+}
+func convertUpdateResponseMetadataToPorcelain(plumbing *proto.UpdateResponseMetadata) *UpdateResponseMetadata {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &UpdateResponseMetadata{}
+	return porcelain
+}
+
+func convertUpdateResponseMetadataToPlumbing(porcelain *UpdateResponseMetadata) *proto.UpdateResponseMetadata {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.UpdateResponseMetadata{}
+	return plumbing
+}
+func convertRepeatedUpdateResponseMetadataToPlumbing(
+	porcelains []*UpdateResponseMetadata,
+) []*proto.UpdateResponseMetadata {
+	var items []*proto.UpdateResponseMetadata
+	for _, porcelain := range porcelains {
+		items = append(items, convertUpdateResponseMetadataToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedUpdateResponseMetadataToPorcelain(plumbings []*proto.UpdateResponseMetadata) []*UpdateResponseMetadata {
+	var items []*UpdateResponseMetadata
+	for _, plumbing := range plumbings {
+		items = append(items, convertUpdateResponseMetadataToPorcelain(plumbing))
+	}
+	return items
+}
+func convertUserToPorcelain(plumbing *proto.User) *User {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &User{}
+	porcelain.Email = (plumbing.Email)
+	porcelain.FirstName = (plumbing.FirstName)
+	porcelain.ID = (plumbing.Id)
+	porcelain.LastName = (plumbing.LastName)
+	porcelain.Suspended = (plumbing.Suspended)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertUserToPlumbing(porcelain *User) *proto.User {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.User{}
+	plumbing.Email = (porcelain.Email)
+	plumbing.FirstName = (porcelain.FirstName)
+	plumbing.Id = (porcelain.ID)
+	plumbing.LastName = (porcelain.LastName)
+	plumbing.Suspended = (porcelain.Suspended)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedUserToPlumbing(
+	porcelains []*User,
+) []*proto.User {
+	var items []*proto.User
+	for _, porcelain := range porcelains {
+		items = append(items, convertUserToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedUserToPorcelain(plumbings []*proto.User) []*User {
+	var items []*User
+	for _, plumbing := range plumbings {
+		items = append(items, convertUserToPorcelain(plumbing))
 	}
 	return items
 }
@@ -5640,12 +5790,12 @@ func convertVaultTLSStoreToPorcelain(plumbing *proto.VaultTLSStore) *VaultTLSSto
 		return nil
 	}
 	porcelain := &VaultTLSStore{}
-	porcelain.ID = (plumbing.Id)
-	porcelain.Name = (plumbing.Name)
-	porcelain.ServerAddress = (plumbing.ServerAddress)
 	porcelain.CACertPath = (plumbing.CACertPath)
 	porcelain.ClientCertPath = (plumbing.ClientCertPath)
 	porcelain.ClientKeyPath = (plumbing.ClientKeyPath)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.ServerAddress = (plumbing.ServerAddress)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
 }
@@ -5655,12 +5805,12 @@ func convertVaultTLSStoreToPlumbing(porcelain *VaultTLSStore) *proto.VaultTLSSto
 		return nil
 	}
 	plumbing := &proto.VaultTLSStore{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.ServerAddress = (porcelain.ServerAddress)
 	plumbing.CACertPath = (porcelain.CACertPath)
 	plumbing.ClientCertPath = (porcelain.ClientCertPath)
 	plumbing.ClientKeyPath = (porcelain.ClientKeyPath)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
@@ -5718,156 +5868,6 @@ func convertRepeatedVaultTokenStoreToPorcelain(plumbings []*proto.VaultTokenStor
 	var items []*VaultTokenStore
 	for _, plumbing := range plumbings {
 		items = append(items, convertVaultTokenStoreToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSecretStoreCreateResponseToPorcelain(plumbing *proto.SecretStoreCreateResponse) *SecretStoreCreateResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SecretStoreCreateResponse{}
-	porcelain.Meta = convertCreateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.SecretStore = convertSecretStoreToPorcelain(plumbing.SecretStore)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertSecretStoreCreateResponseToPlumbing(porcelain *SecretStoreCreateResponse) *proto.SecretStoreCreateResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SecretStoreCreateResponse{}
-	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.SecretStore = convertSecretStoreToPlumbing(porcelain.SecretStore)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedSecretStoreCreateResponseToPlumbing(
-	porcelains []*SecretStoreCreateResponse,
-) []*proto.SecretStoreCreateResponse {
-	var items []*proto.SecretStoreCreateResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertSecretStoreCreateResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSecretStoreCreateResponseToPorcelain(plumbings []*proto.SecretStoreCreateResponse) []*SecretStoreCreateResponse {
-	var items []*SecretStoreCreateResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertSecretStoreCreateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSecretStoreGetResponseToPorcelain(plumbing *proto.SecretStoreGetResponse) *SecretStoreGetResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SecretStoreGetResponse{}
-	porcelain.Meta = convertGetResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.SecretStore = convertSecretStoreToPorcelain(plumbing.SecretStore)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertSecretStoreGetResponseToPlumbing(porcelain *SecretStoreGetResponse) *proto.SecretStoreGetResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SecretStoreGetResponse{}
-	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.SecretStore = convertSecretStoreToPlumbing(porcelain.SecretStore)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedSecretStoreGetResponseToPlumbing(
-	porcelains []*SecretStoreGetResponse,
-) []*proto.SecretStoreGetResponse {
-	var items []*proto.SecretStoreGetResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertSecretStoreGetResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSecretStoreGetResponseToPorcelain(plumbings []*proto.SecretStoreGetResponse) []*SecretStoreGetResponse {
-	var items []*SecretStoreGetResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertSecretStoreGetResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSecretStoreUpdateResponseToPorcelain(plumbing *proto.SecretStoreUpdateResponse) *SecretStoreUpdateResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SecretStoreUpdateResponse{}
-	porcelain.Meta = convertUpdateResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.SecretStore = convertSecretStoreToPorcelain(plumbing.SecretStore)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertSecretStoreUpdateResponseToPlumbing(porcelain *SecretStoreUpdateResponse) *proto.SecretStoreUpdateResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SecretStoreUpdateResponse{}
-	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.SecretStore = convertSecretStoreToPlumbing(porcelain.SecretStore)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedSecretStoreUpdateResponseToPlumbing(
-	porcelains []*SecretStoreUpdateResponse,
-) []*proto.SecretStoreUpdateResponse {
-	var items []*proto.SecretStoreUpdateResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertSecretStoreUpdateResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSecretStoreUpdateResponseToPorcelain(plumbings []*proto.SecretStoreUpdateResponse) []*SecretStoreUpdateResponse {
-	var items []*SecretStoreUpdateResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertSecretStoreUpdateResponseToPorcelain(plumbing))
-	}
-	return items
-}
-func convertSecretStoreDeleteResponseToPorcelain(plumbing *proto.SecretStoreDeleteResponse) *SecretStoreDeleteResponse {
-	if plumbing == nil {
-		return nil
-	}
-	porcelain := &SecretStoreDeleteResponse{}
-	porcelain.Meta = convertDeleteResponseMetadataToPorcelain(plumbing.Meta)
-	porcelain.RateLimit = convertRateLimitMetadataToPorcelain(plumbing.RateLimit)
-	return porcelain
-}
-
-func convertSecretStoreDeleteResponseToPlumbing(porcelain *SecretStoreDeleteResponse) *proto.SecretStoreDeleteResponse {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.SecretStoreDeleteResponse{}
-	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
-	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
-	return plumbing
-}
-func convertRepeatedSecretStoreDeleteResponseToPlumbing(
-	porcelains []*SecretStoreDeleteResponse,
-) []*proto.SecretStoreDeleteResponse {
-	var items []*proto.SecretStoreDeleteResponse
-	for _, porcelain := range porcelains {
-		items = append(items, convertSecretStoreDeleteResponseToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedSecretStoreDeleteResponseToPorcelain(plumbings []*proto.SecretStoreDeleteResponse) []*SecretStoreDeleteResponse {
-	var items []*SecretStoreDeleteResponse
-	for _, plumbing := range plumbings {
-		items = append(items, convertSecretStoreDeleteResponseToPorcelain(plumbing))
 	}
 	return items
 }

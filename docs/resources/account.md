@@ -37,15 +37,15 @@ resource "sdm_account" "test-service" {
 ```
 ## Argument Reference
 The following arguments are supported by the Account resource:
+* service:
+	* `name` - (Required) Unique human-readable name of the Service.
+	* `suspended` - (Optional) The Service's suspended state.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * user:
 	* `email` - (Required) The User's email address. Must be unique.
 	* `first_name` - (Required) The User's first name.
 	* `last_name` - (Required) The User's last name.
 	* `suspended` - (Optional) The User's suspended state.
-	* `tags` - (Optional) Tags is a map of key, value pairs.
-* service:
-	* `name` - (Required) Unique human-readable name of the Service.
-	* `suspended` - (Optional) The Service's suspended state.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Account resource:

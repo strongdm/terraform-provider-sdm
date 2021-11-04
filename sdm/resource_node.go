@@ -23,12 +23,68 @@ func resourceNode() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"gateway": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_address": {
+							Type:     schema.TypeString,
+							Optional: true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								return new == ""
+							},
+							ForceNew:    true,
+							Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
+						},
+						"gateway_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+						},
+						"listen_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							ForceNew:    true,
+							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
+						},
+						"name": {
+							Type:     schema.TypeString,
+							Optional: true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								return new == ""
+							},
+							Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"token": {
+							Type:      schema.TypeString,
+							Computed:  true,
+							Sensitive: true,
+						},
+					},
+				},
+			},
 			"relay": {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"gateway_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+						},
 						"name": {
 							Type:     schema.TypeString,
 							Optional: true,
@@ -46,62 +102,6 @@ func resourceNode() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
-						"gateway_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
-						},
-						"token": {
-							Type:      schema.TypeString,
-							Computed:  true,
-							Sensitive: true,
-						},
-					},
-				},
-			},
-			"gateway": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:     schema.TypeString,
-							Optional: true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								return new == ""
-							},
-							Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
-						},
-						"listen_address": {
-							Type:        schema.TypeString,
-							Required:    true,
-							ForceNew:    true,
-							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
-						},
-						"bind_address": {
-							Type:     schema.TypeString,
-							Optional: true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								return new == ""
-							},
-							ForceNew:    true,
-							Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
-						},
-						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-						"gateway_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
-						},
 						"token": {
 							Type:      schema.TypeString,
 							Computed:  true,
@@ -117,19 +117,6 @@ func resourceNode() *schema.Resource {
 	}
 }
 func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
-	if list := d.Get("relay").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.Relay{}
-		}
-		out := &sdm.Relay{
-			ID:            d.Id(),
-			Name:          convertStringFromMap(raw, "name"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
-		}
-		return out
-	}
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -137,11 +124,24 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		}
 		out := &sdm.Gateway{
 			ID:            d.Id(),
-			Name:          convertStringFromMap(raw, "name"),
-			ListenAddress: convertStringFromMap(raw, "listen_address"),
 			BindAddress:   convertStringFromMap(raw, "bind_address"),
-			Tags:          convertTagsFromMap(raw, "tags"),
 			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
+			ListenAddress: convertStringFromMap(raw, "listen_address"),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+		}
+		return out
+	}
+	if list := d.Get("relay").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.Relay{}
+		}
+		out := &sdm.Relay{
+			ID:            d.Id(),
+			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
+			Name:          convertStringFromMap(raw, "name"),
+			Tags:          convertTagsFromMap(raw, "tags"),
 		}
 		return out
 	}
@@ -159,27 +159,27 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.Node.GetID())
 	switch v := resp.Node.(type) {
-	case *sdm.Relay:
-		localV, _ := localVersion.(*sdm.Relay)
-		_ = localV
-		d.Set("relay", []map[string]interface{}{
-			{
-				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
-				"gateway_filter": (v.GatewayFilter),
-				"token":          resp.Token,
-			},
-		})
 	case *sdm.Gateway:
 		localV, _ := localVersion.(*sdm.Gateway)
 		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"name":           (v.Name),
-				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
-				"tags":           convertTagsToMap(v.Tags),
 				"gateway_filter": (v.GatewayFilter),
+				"listen_address": (v.ListenAddress),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
+				"token":          resp.Token,
+			},
+		})
+	case *sdm.Relay:
+		localV, _ := localVersion.(*sdm.Relay)
+		_ = localV
+		d.Set("relay", []map[string]interface{}{
+			{
+				"gateway_filter": (v.GatewayFilter),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
 				"token":          resp.Token,
 			},
 		})
@@ -202,20 +202,6 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read Node %s: %w", d.Id(), err)
 	}
 	switch v := resp.Node.(type) {
-	case *sdm.Relay:
-		localV, ok := localVersion.(*sdm.Relay)
-		if !ok {
-			localV = &sdm.Relay{}
-		}
-		_ = localV
-		d.Set("relay", []map[string]interface{}{
-			{
-				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
-				"gateway_filter": (v.GatewayFilter),
-				"token":          d.Get("relay.0.token"),
-			},
-		})
 	case *sdm.Gateway:
 		localV, ok := localVersion.(*sdm.Gateway)
 		if !ok {
@@ -224,12 +210,26 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"name":           (v.Name),
-				"listen_address": (v.ListenAddress),
 				"bind_address":   (v.BindAddress),
-				"tags":           convertTagsToMap(v.Tags),
 				"gateway_filter": (v.GatewayFilter),
+				"listen_address": (v.ListenAddress),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
 				"token":          d.Get("gateway.0.token"),
+			},
+		})
+	case *sdm.Relay:
+		localV, ok := localVersion.(*sdm.Relay)
+		if !ok {
+			localV = &sdm.Relay{}
+		}
+		_ = localV
+		d.Set("relay", []map[string]interface{}{
+			{
+				"gateway_filter": (v.GatewayFilter),
+				"name":           (v.Name),
+				"tags":           convertTagsToMap(v.Tags),
+				"token":          d.Get("relay.0.token"),
 			},
 		})
 	}

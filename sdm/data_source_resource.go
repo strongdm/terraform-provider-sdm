@@ -51,12 +51,45 @@ func dataSourceResource() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"rabbitmq_amqp_091": {
+						"aks": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -67,6 +100,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -76,35 +119,39 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
+								},
+							},
+						},
+						"aks_basic_auth": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -112,10 +159,462 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"tls_required": {
-										Type:        schema.TypeBool,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_service_account": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"token": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_service_account_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"token": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aks_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"amazon_eks": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"cluster_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"amazon_eks_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"cluster_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"amazon_es": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 								},
 							},
@@ -126,30 +625,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -160,20 +635,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -181,8 +651,37 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"tls_required": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -195,6 +694,16 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -204,36 +713,6 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
 									},
 									"output": {
 										Type:        schema.TypeString,
@@ -260,24 +739,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-								},
-							},
-						},
-						"aws": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
+										Sensitive:   true,
+										Description: "",
 									},
-									"name": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -288,31 +759,182 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
+								},
+							},
+						},
+						"aurora_mysql": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
-									"access_key": {
+									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
-									"secret_access_key": {
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aurora_postgres": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"aws": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"healthcheck_region": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
@@ -324,24 +946,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-								},
-							},
-						},
-						"big_query": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
+										Sensitive:   true,
+										Description: "",
 									},
-									"name": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -352,15 +966,39 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
+								},
+							},
+						},
+						"big_query": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
 									},
 									"private_key": {
 										Type:        schema.TypeString,
@@ -373,15 +1011,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"endpoint": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -397,6 +1039,16 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -407,6 +1059,27 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -416,10 +1089,29 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
+									},
+								},
+							},
+						},
+						"citus": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -431,8 +1123,18 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -442,9 +1144,73 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"clustrix": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
 										Description: "",
 									},
 									"port": {
@@ -452,8 +1218,101 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"tls_required": {
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"cockroach": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -466,30 +1325,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -500,10 +1335,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -511,18 +1351,37 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"tls_required": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -535,29 +1394,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -569,10 +1409,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -580,8 +1425,8 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -590,8 +1435,22 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -604,30 +1463,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -638,15 +1473,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -656,6 +1491,30 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port": {
 										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -668,6 +1527,21 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"access_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -678,49 +1552,14 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"role_arn": {
@@ -733,24 +1572,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-								},
-							},
-						},
-						"amazon_es": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
+										Sensitive:   true,
+										Description: "",
 									},
-									"name": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -760,52 +1591,6 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"role_arn": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"role_external_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
 									},
 								},
 							},
@@ -816,6 +1601,16 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -826,6 +1621,27 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -835,10 +1651,213 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"elasticache_redis": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"google_gke": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"service_account_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"google_gke_user_impersonation": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"service_account_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"greenplum": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -850,8 +1869,18 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -859,11 +1888,6 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"port": {
@@ -871,29 +1895,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
-								},
-							},
-						},
-						"http_basic_auth": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -903,112 +1913,8 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"url": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
 									},
 									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"headers_blacklist": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"default_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"subdomain": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"http_no_auth": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"url": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"headers_blacklist": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"default_path": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -1022,6 +1928,32 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"auth_header": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"default_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"headers_blacklist": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1032,6 +1964,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -1041,17 +1983,31 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
+									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
+									},
+								},
+							},
+						},
+						"http_basic_auth": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"default_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
-									"url": {
+									"headers_blacklist": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -1061,23 +2017,110 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"auth_header": {
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"url": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"http_no_auth": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"default_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"headers_blacklist": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
-									"default_path": {
+									"healthcheck_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -1091,45 +2134,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1148,20 +2152,21 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
-								},
-							},
-						},
-						"kubernetes_user_impersonation": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1172,6 +2177,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -1180,49 +2195,6 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"client_certificate": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"client_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
 								},
 							},
@@ -1233,6 +2205,21 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1243,6 +2230,22 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -1252,41 +2255,10 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
 								},
 							},
@@ -1297,6 +2269,21 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1307,6 +2294,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -1316,36 +2313,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
 									"token": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
 								},
 							},
@@ -1356,6 +2328,21 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1366,6 +2353,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -1374,26 +2371,6 @@ func dataSourceResource() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
 									},
 									"token": {
 										Type:        schema.TypeString,
@@ -1401,349 +2378,15 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
 								},
 							},
 						},
-						"amazon_eks": {
+						"kubernetes_user_impersonation": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"cluster_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"role_arn": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"role_external_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
-								},
-							},
-						},
-						"amazon_eks_user_impersonation": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_access_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"cluster_name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"role_arn": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"role_external_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
-								},
-							},
-						},
-						"google_gke": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"service_account_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
-								},
-							},
-						},
-						"google_gke_user_impersonation": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"endpoint": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"service_account_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
-								},
-							},
-						},
-						"aks": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1762,20 +2405,21 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
-								},
-							},
-						},
-						"aks_user_impersonation": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1786,6 +2430,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -1795,10 +2449,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
+								},
+							},
+						},
+						"maria": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1810,43 +2473,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"certificate_authority": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"client_certificate": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"client_key": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
-								},
-							},
-						},
-						"aks_basic_auth": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1856,40 +2482,6 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -1897,29 +2489,20 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "",
 									},
-								},
-							},
-						},
-						"aks_service_account": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
 									},
-									"name": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -1930,95 +2513,10 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
+									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"token": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
-									},
-								},
-							},
-						},
-						"aks_service_account_user_impersonation": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"token": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"healthcheck_namespace": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
 									},
 								},
 							},
@@ -2029,30 +2527,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2063,34 +2537,30 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
-								},
-							},
-						},
-						"mongo_legacy_host": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
 									},
-									"name": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -2101,10 +2571,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
+								},
+							},
+						},
+						"memsql": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2116,20 +2595,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"auth_database": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"username": {
+									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -2142,34 +2616,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"replica_set": {
-										Type:        schema.TypeString,
-										Optional:    true,
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"mongo_legacy_replicaset": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -2180,59 +2635,8 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"auth_database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
 									"username": {
 										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"replica_set": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"connect_to_replica": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -2245,29 +2649,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2279,20 +2664,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"auth_database": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"username": {
+									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -2305,8 +2685,195 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"tls_required": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"mongo_legacy_host": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"auth_database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"replica_set": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
+						"mongo_legacy_replicaset": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"auth_database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"connect_to_replica": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"replica_set": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -2319,29 +2886,15 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
+										Description: "",
 									},
-									"name": {
-										Type:        schema.TypeString,
+									"connect_to_replica": {
+										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2353,20 +2906,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"auth_database": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"username": {
+									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -2379,18 +2927,37 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
 									"replica_set": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
-									"connect_to_replica": {
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
-									"tls_required": {
-										Type:        schema.TypeBool,
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -2403,29 +2970,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2437,41 +2985,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"aurora_mysql": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2482,43 +2995,14 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -2527,29 +3011,10 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"clustrix": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -2560,251 +3025,8 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
 									"username": {
 										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"maria": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"memsql": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"single_store": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -2817,29 +3039,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2851,20 +3054,20 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
 										Description: "",
 									},
 									"port": {
@@ -2877,8 +3080,27 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"tls_required": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -2891,29 +3113,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2925,46 +3128,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"aurora_postgres": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2975,32 +3138,8 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
+									"override_database": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -3010,8 +3149,8 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -3020,34 +3159,10 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"greenplum": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
 										Type: schema.TypeMap,
@@ -3058,271 +3173,8 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
 									"username": {
 										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"cockroach": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"redshift": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
-						"citus": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"override_database": {
-										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -3335,29 +3187,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3369,14 +3202,24 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -3385,8 +3228,22 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -3395,8 +3252,72 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+								},
+							},
+						},
+						"rabbitmq_amqp_091": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
 									"tls_required": {
 										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3409,30 +3330,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3443,15 +3340,39 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 								},
 							},
@@ -3462,30 +3383,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3496,10 +3393,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -3507,13 +3409,32 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3526,6 +3447,16 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3536,6 +3467,27 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
 									"tags": {
 										Type: schema.TypeMap,
 
@@ -3545,10 +3497,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"secret_store_id": {
+								},
+							},
+						},
+						"redshift": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3560,9 +3521,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
 										Description: "",
 									},
 									"password": {
@@ -3573,41 +3544,46 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port": {
 										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
 								},
 							},
 						},
-						"elasticache_redis": {
+						"single_store": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3619,10 +3595,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -3635,8 +3616,27 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"tls_required": {
-										Type:        schema.TypeBool,
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3649,29 +3649,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3683,10 +3664,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -3694,9 +3680,9 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
 									"schema": {
@@ -3704,9 +3690,23 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 								},
@@ -3718,29 +3718,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
+									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3752,8 +3733,18 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -3763,8 +3754,8 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"database": {
-										Type:        schema.TypeString,
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -3778,13 +3769,22 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
+									"secret_store_id": {
+										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
-									"override_database": {
-										Type:        schema.TypeBool,
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3797,29 +3797,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
+									"allow_deprecated_key_exchanges": {
+										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3831,13 +3812,23 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_forwarding": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -3846,13 +3837,22 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port_forwarding": {
-										Type:        schema.TypeBool,
+									"secret_store_id": {
+										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
-									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3865,29 +3865,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
+									"allow_deprecated_key_exchanges": {
+										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3899,10 +3880,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
@@ -3914,8 +3900,22 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3928,29 +3928,10 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
+									"allow_deprecated_key_exchanges": {
+										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
+										Description: "",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3962,13 +3943,23 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_forwarding": {
+										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "",
 									},
@@ -3978,13 +3969,22 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
-									"port_forwarding": {
-										Type:        schema.TypeBool,
+									"secret_store_id": {
+										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
-									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -3997,30 +3997,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4031,8 +4007,24 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -4041,15 +4033,23 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Sensitive:   true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 								},
@@ -4061,30 +4061,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4095,8 +4071,24 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -4105,15 +4097,23 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"password": {
+									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Sensitive:   true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
 										Description: "",
 									},
 								},
@@ -4125,30 +4125,6 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4159,10 +4135,15 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"username": {
+									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
 										Type:        schema.TypeString,
@@ -4170,13 +4151,32 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Computed:    true,
 										Description: "",
 									},
-									"port": {
-										Type:        schema.TypeInt,
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -4235,847 +4235,847 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"rabbitmq_amqp_091": {},
+		"aks": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
-		case *sdm.RabbitMQAMQP091:
-			output[0]["rabbitmq_amqp_091"] = append(output[0]["rabbitmq_amqp_091"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"tls_required":    (v.TlsRequired),
+		case *sdm.AKS:
+			output[0]["aks"] = append(output[0]["aks"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.AKSBasicAuth:
+			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"password":              (v.Password),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+				"username":              (v.Username),
+			})
+		case *sdm.AKSServiceAccount:
+			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+				"token":                 (v.Token),
+			})
+		case *sdm.AKSServiceAccountUserImpersonation:
+			output[0]["aks_service_account_user_impersonation"] = append(output[0]["aks_service_account_user_impersonation"], entity{
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+				"token":                 (v.Token),
+			})
+		case *sdm.AKSUserImpersonation:
+			output[0]["aks_user_impersonation"] = append(output[0]["aks_user_impersonation"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.AmazonEKS:
+			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
+				"access_key":            (v.AccessKey),
+				"certificate_authority": (v.CertificateAuthority),
+				"cluster_name":          (v.ClusterName),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"region":                (v.Region),
+				"role_arn":              (v.RoleArn),
+				"role_external_id":      (v.RoleExternalID),
+				"secret_access_key":     (v.SecretAccessKey),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.AmazonEKSUserImpersonation:
+			output[0]["amazon_eks_user_impersonation"] = append(output[0]["amazon_eks_user_impersonation"], entity{
+				"access_key":            (v.AccessKey),
+				"certificate_authority": (v.CertificateAuthority),
+				"cluster_name":          (v.ClusterName),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"region":                (v.Region),
+				"role_arn":              (v.RoleArn),
+				"role_external_id":      (v.RoleExternalID),
+				"secret_access_key":     (v.SecretAccessKey),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.AmazonES:
+			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
+				"access_key":        (v.AccessKey),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          (v.RoleArn),
+				"role_external_id":  (v.RoleExternalID),
+				"secret_access_key": (v.SecretAccessKey),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
 			})
 		case *sdm.AmazonMQAMQP091:
 			output[0]["amazonmq_amqp_091"] = append(output[0]["amazonmq_amqp_091"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-				"username":        (v.Username),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
 			})
 		case *sdm.Athena:
 			output[0]["athena"] = append(output[0]["athena"], entity{
+				"access_key":        (v.AccessKey),
+				"egress_filter":     (v.EgressFilter),
 				"id":                (v.ID),
 				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"access_key":        (v.AccessKey),
-				"secret_access_key": (v.SecretAccessKey),
 				"output":            (v.Output),
 				"port_override":     (v.PortOverride),
 				"region":            (v.Region),
 				"role_arn":          (v.RoleArn),
 				"role_external_id":  (v.RoleExternalID),
+				"secret_access_key": (v.SecretAccessKey),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+			})
+		case *sdm.AuroraMysql:
+			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.AuroraPostgres:
+			output[0]["aurora_postgres"] = append(output[0]["aurora_postgres"], entity{
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
 			})
 		case *sdm.AWS:
 			output[0]["aws"] = append(output[0]["aws"], entity{
+				"access_key":         (v.AccessKey),
+				"egress_filter":      (v.EgressFilter),
+				"healthcheck_region": (v.HealthcheckRegion),
 				"id":                 (v.ID),
 				"name":               (v.Name),
-				"tags":               convertTagsToMap(v.Tags),
-				"secret_store_id":    (v.SecretStoreID),
-				"egress_filter":      (v.EgressFilter),
-				"access_key":         (v.AccessKey),
-				"secret_access_key":  (v.SecretAccessKey),
-				"healthcheck_region": (v.HealthcheckRegion),
 				"role_arn":           (v.RoleArn),
 				"role_external_id":   (v.RoleExternalID),
+				"secret_access_key":  (v.SecretAccessKey),
+				"secret_store_id":    (v.SecretStoreID),
+				"tags":               convertTagsToMap(v.Tags),
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"endpoint":        (v.Endpoint),
 				"id":              (v.ID),
 				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
+				"port_override":   (v.PortOverride),
 				"private_key":     (v.PrivateKey),
 				"project":         (v.Project),
-				"port_override":   (v.PortOverride),
-				"endpoint":        (v.Endpoint),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Cassandra:
 			output[0]["cassandra"] = append(output[0]["cassandra"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"username":        (v.Username),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
-				"port_override":   (v.PortOverride),
 				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.DB2I:
-			output[0]["db_2_i"] = append(output[0]["db_2_i"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
 				"username":        (v.Username),
-				"password":        (v.Password),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.DB2LUW:
-			output[0]["db_2_luw"] = append(output[0]["db_2_luw"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.Druid:
-			output[0]["druid"] = append(output[0]["druid"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"port":            (v.Port),
-			})
-		case *sdm.DynamoDB:
-			output[0]["dynamo_db"] = append(output[0]["dynamo_db"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"access_key":        (v.AccessKey),
-				"secret_access_key": (v.SecretAccessKey),
-				"region":            (v.Region),
-				"endpoint":          (v.Endpoint),
-				"port_override":     (v.PortOverride),
-				"role_arn":          (v.RoleArn),
-				"role_external_id":  (v.RoleExternalID),
-			})
-		case *sdm.AmazonES:
-			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"region":            (v.Region),
-				"secret_access_key": (v.SecretAccessKey),
-				"endpoint":          (v.Endpoint),
-				"access_key":        (v.AccessKey),
-				"port_override":     (v.PortOverride),
-				"role_arn":          (v.RoleArn),
-				"role_external_id":  (v.RoleExternalID),
-			})
-		case *sdm.Elastic:
-			output[0]["elastic"] = append(output[0]["elastic"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.HTTPBasicAuth:
-			output[0]["http_basic_auth"] = append(output[0]["http_basic_auth"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"url":               (v.Url),
-				"healthcheck_path":  (v.HealthcheckPath),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"headers_blacklist": (v.HeadersBlacklist),
-				"default_path":      (v.DefaultPath),
-				"subdomain":         (v.Subdomain),
-			})
-		case *sdm.HTTPNoAuth:
-			output[0]["http_no_auth"] = append(output[0]["http_no_auth"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"url":               (v.Url),
-				"healthcheck_path":  (v.HealthcheckPath),
-				"headers_blacklist": (v.HeadersBlacklist),
-				"default_path":      (v.DefaultPath),
-				"subdomain":         (v.Subdomain),
-			})
-		case *sdm.HTTPAuth:
-			output[0]["http_auth"] = append(output[0]["http_auth"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"url":               (v.Url),
-				"healthcheck_path":  (v.HealthcheckPath),
-				"auth_header":       (v.AuthHeader),
-				"headers_blacklist": (v.HeadersBlacklist),
-				"default_path":      (v.DefaultPath),
-				"subdomain":         (v.Subdomain),
-			})
-		case *sdm.Kubernetes:
-			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.KubernetesUserImpersonation:
-			output[0]["kubernetes_user_impersonation"] = append(output[0]["kubernetes_user_impersonation"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.KubernetesBasicAuth:
-			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"username":              (v.Username),
-				"password":              (v.Password),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.KubernetesServiceAccount:
-			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"token":                 (v.Token),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.KubernetesServiceAccountUserImpersonation:
-			output[0]["kubernetes_service_account_user_impersonation"] = append(output[0]["kubernetes_service_account_user_impersonation"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"token":                 (v.Token),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AmazonEKS:
-			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"endpoint":              (v.Endpoint),
-				"access_key":            (v.AccessKey),
-				"secret_access_key":     (v.SecretAccessKey),
-				"certificate_authority": (v.CertificateAuthority),
-				"region":                (v.Region),
-				"cluster_name":          (v.ClusterName),
-				"role_arn":              (v.RoleArn),
-				"role_external_id":      (v.RoleExternalID),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AmazonEKSUserImpersonation:
-			output[0]["amazon_eks_user_impersonation"] = append(output[0]["amazon_eks_user_impersonation"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"endpoint":              (v.Endpoint),
-				"access_key":            (v.AccessKey),
-				"secret_access_key":     (v.SecretAccessKey),
-				"certificate_authority": (v.CertificateAuthority),
-				"region":                (v.Region),
-				"cluster_name":          (v.ClusterName),
-				"role_arn":              (v.RoleArn),
-				"role_external_id":      (v.RoleExternalID),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.GoogleGKE:
-			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"endpoint":              (v.Endpoint),
-				"certificate_authority": (v.CertificateAuthority),
-				"service_account_key":   (v.ServiceAccountKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.GoogleGKEUserImpersonation:
-			output[0]["google_gke_user_impersonation"] = append(output[0]["google_gke_user_impersonation"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"endpoint":              (v.Endpoint),
-				"certificate_authority": (v.CertificateAuthority),
-				"service_account_key":   (v.ServiceAccountKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AKS:
-			output[0]["aks"] = append(output[0]["aks"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AKSUserImpersonation:
-			output[0]["aks_user_impersonation"] = append(output[0]["aks_user_impersonation"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AKSBasicAuth:
-			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"username":              (v.Username),
-				"password":              (v.Password),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AKSServiceAccount:
-			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"token":                 (v.Token),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.AKSServiceAccountUserImpersonation:
-			output[0]["aks_service_account_user_impersonation"] = append(output[0]["aks_service_account_user_impersonation"], entity{
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"tags":                  convertTagsToMap(v.Tags),
-				"secret_store_id":       (v.SecretStoreID),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"port":                  (v.Port),
-				"token":                 (v.Token),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-			})
-		case *sdm.Memcached:
-			output[0]["memcached"] = append(output[0]["memcached"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.MongoLegacyHost:
-			output[0]["mongo_legacy_host"] = append(output[0]["mongo_legacy_host"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"auth_database":   (v.AuthDatabase),
-				"port_override":   (v.PortOverride),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"replica_set":     (v.ReplicaSet),
-				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.MongoLegacyReplicaset:
-			output[0]["mongo_legacy_replicaset"] = append(output[0]["mongo_legacy_replicaset"], entity{
-				"id":                 (v.ID),
-				"name":               (v.Name),
-				"tags":               convertTagsToMap(v.Tags),
-				"secret_store_id":    (v.SecretStoreID),
-				"egress_filter":      (v.EgressFilter),
-				"hostname":           (v.Hostname),
-				"auth_database":      (v.AuthDatabase),
-				"port_override":      (v.PortOverride),
-				"username":           (v.Username),
-				"password":           (v.Password),
-				"port":               (v.Port),
-				"replica_set":        (v.ReplicaSet),
-				"connect_to_replica": (v.ConnectToReplica),
-				"tls_required":       (v.TlsRequired),
-			})
-		case *sdm.MongoHost:
-			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"auth_database":   (v.AuthDatabase),
-				"port_override":   (v.PortOverride),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.MongoReplicaSet:
-			output[0]["mongo_replica_set"] = append(output[0]["mongo_replica_set"], entity{
-				"id":                 (v.ID),
-				"name":               (v.Name),
-				"tags":               convertTagsToMap(v.Tags),
-				"secret_store_id":    (v.SecretStoreID),
-				"egress_filter":      (v.EgressFilter),
-				"hostname":           (v.Hostname),
-				"auth_database":      (v.AuthDatabase),
-				"port_override":      (v.PortOverride),
-				"username":           (v.Username),
-				"password":           (v.Password),
-				"port":               (v.Port),
-				"replica_set":        (v.ReplicaSet),
-				"connect_to_replica": (v.ConnectToReplica),
-				"tls_required":       (v.TlsRequired),
-			})
-		case *sdm.Mysql:
-			output[0]["mysql"] = append(output[0]["mysql"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.AuroraMysql:
-			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.Clustrix:
-			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.Maria:
-			output[0]["maria"] = append(output[0]["maria"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.Memsql:
-			output[0]["memsql"] = append(output[0]["memsql"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.SingleStore:
-			output[0]["single_store"] = append(output[0]["single_store"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.Oracle:
-			output[0]["oracle"] = append(output[0]["oracle"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"password":        (v.Password),
-				"database":        (v.Database),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.Postgres:
-			output[0]["postgres"] = append(output[0]["postgres"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"database":          (v.Database),
-				"port_override":     (v.PortOverride),
-				"port":              (v.Port),
-				"override_database": (v.OverrideDatabase),
-			})
-		case *sdm.AuroraPostgres:
-			output[0]["aurora_postgres"] = append(output[0]["aurora_postgres"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"database":          (v.Database),
-				"port_override":     (v.PortOverride),
-				"port":              (v.Port),
-				"override_database": (v.OverrideDatabase),
-			})
-		case *sdm.Greenplum:
-			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"database":          (v.Database),
-				"port_override":     (v.PortOverride),
-				"port":              (v.Port),
-				"override_database": (v.OverrideDatabase),
-			})
-		case *sdm.Cockroach:
-			output[0]["cockroach"] = append(output[0]["cockroach"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"database":          (v.Database),
-				"port_override":     (v.PortOverride),
-				"port":              (v.Port),
-				"override_database": (v.OverrideDatabase),
-			})
-		case *sdm.Redshift:
-			output[0]["redshift"] = append(output[0]["redshift"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"database":          (v.Database),
-				"port_override":     (v.PortOverride),
-				"port":              (v.Port),
-				"override_database": (v.OverrideDatabase),
 			})
 		case *sdm.Citus:
 			output[0]["citus"] = append(output[0]["citus"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
+				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
-				"username":          (v.Username),
-				"password":          (v.Password),
-				"database":          (v.Database),
-				"port_override":     (v.PortOverride),
-				"port":              (v.Port),
+				"id":                (v.ID),
+				"name":              (v.Name),
 				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
 			})
-		case *sdm.Presto:
-			output[0]["presto"] = append(output[0]["presto"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"password":        (v.Password),
+		case *sdm.Clustrix:
+			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
 				"database":        (v.Database),
-				"port_override":   (v.PortOverride),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
 				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 				"username":        (v.Username),
+			})
+		case *sdm.Cockroach:
+			output[0]["cockroach"] = append(output[0]["cockroach"], entity{
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
+			})
+		case *sdm.DB2I:
+			output[0]["db_2_i"] = append(output[0]["db_2_i"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 				"tls_required":    (v.TlsRequired),
-			})
-		case *sdm.RawTCP:
-			output[0]["raw_tcp"] = append(output[0]["raw_tcp"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
-			})
-		case *sdm.RDP:
-			output[0]["rdp"] = append(output[0]["rdp"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
 				"username":        (v.Username),
-				"password":        (v.Password),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
 			})
-		case *sdm.Redis:
-			output[0]["redis"] = append(output[0]["redis"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
+		case *sdm.DB2LUW:
+			output[0]["db_2_luw"] = append(output[0]["db_2_luw"], entity{
+				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
 				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.Druid:
+			output[0]["druid"] = append(output[0]["druid"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.DynamoDB:
+			output[0]["dynamo_db"] = append(output[0]["dynamo_db"], entity{
+				"access_key":        (v.AccessKey),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          (v.RoleArn),
+				"role_external_id":  (v.RoleExternalID),
+				"secret_access_key": (v.SecretAccessKey),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+			})
+		case *sdm.Elastic:
+			output[0]["elastic"] = append(output[0]["elastic"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
 			})
 		case *sdm.ElasticacheRedis:
 			output[0]["elasticache_redis"] = append(output[0]["elasticache_redis"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"port_override":   (v.PortOverride),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
 				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 				"tls_required":    (v.TlsRequired),
+			})
+		case *sdm.GoogleGKE:
+			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"secret_store_id":       (v.SecretStoreID),
+				"service_account_key":   (v.ServiceAccountKey),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.GoogleGKEUserImpersonation:
+			output[0]["google_gke_user_impersonation"] = append(output[0]["google_gke_user_impersonation"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"secret_store_id":       (v.SecretStoreID),
+				"service_account_key":   (v.ServiceAccountKey),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.Greenplum:
+			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
+			})
+		case *sdm.HTTPAuth:
+			output[0]["http_auth"] = append(output[0]["http_auth"], entity{
+				"auth_header":       (v.AuthHeader),
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+			})
+		case *sdm.HTTPBasicAuth:
+			output[0]["http_basic_auth"] = append(output[0]["http_basic_auth"], entity{
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"password":          (v.Password),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+				"username":          (v.Username),
+			})
+		case *sdm.HTTPNoAuth:
+			output[0]["http_no_auth"] = append(output[0]["http_no_auth"], entity{
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToMap(v.Tags),
+				"url":               (v.Url),
+			})
+		case *sdm.Kubernetes:
+			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.KubernetesBasicAuth:
+			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"password":              (v.Password),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+				"username":              (v.Username),
+			})
+		case *sdm.KubernetesServiceAccount:
+			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+				"token":                 (v.Token),
+			})
+		case *sdm.KubernetesServiceAccountUserImpersonation:
+			output[0]["kubernetes_service_account_user_impersonation"] = append(output[0]["kubernetes_service_account_user_impersonation"], entity{
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+				"token":                 (v.Token),
+			})
+		case *sdm.KubernetesUserImpersonation:
+			output[0]["kubernetes_user_impersonation"] = append(output[0]["kubernetes_user_impersonation"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"secret_store_id":       (v.SecretStoreID),
+				"tags":                  convertTagsToMap(v.Tags),
+			})
+		case *sdm.Maria:
+			output[0]["maria"] = append(output[0]["maria"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.Memcached:
+			output[0]["memcached"] = append(output[0]["memcached"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+			})
+		case *sdm.Memsql:
+			output[0]["memsql"] = append(output[0]["memsql"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.MongoHost:
+			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
+				"auth_database":   (v.AuthDatabase),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
+			})
+		case *sdm.MongoLegacyHost:
+			output[0]["mongo_legacy_host"] = append(output[0]["mongo_legacy_host"], entity{
+				"auth_database":   (v.AuthDatabase),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"replica_set":     (v.ReplicaSet),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
+			})
+		case *sdm.MongoLegacyReplicaset:
+			output[0]["mongo_legacy_replicaset"] = append(output[0]["mongo_legacy_replicaset"], entity{
+				"auth_database":      (v.AuthDatabase),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"id":                 (v.ID),
+				"name":               (v.Name),
+				"password":           (v.Password),
+				"port":               (v.Port),
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"tags":               convertTagsToMap(v.Tags),
+				"tls_required":       (v.TlsRequired),
+				"username":           (v.Username),
+			})
+		case *sdm.MongoReplicaSet:
+			output[0]["mongo_replica_set"] = append(output[0]["mongo_replica_set"], entity{
+				"auth_database":      (v.AuthDatabase),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"id":                 (v.ID),
+				"name":               (v.Name),
+				"password":           (v.Password),
+				"port":               (v.Port),
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"tags":               convertTagsToMap(v.Tags),
+				"tls_required":       (v.TlsRequired),
+				"username":           (v.Username),
+			})
+		case *sdm.Mysql:
+			output[0]["mysql"] = append(output[0]["mysql"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.Oracle:
+			output[0]["oracle"] = append(output[0]["oracle"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
+			})
+		case *sdm.Postgres:
+			output[0]["postgres"] = append(output[0]["postgres"], entity{
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
+			})
+		case *sdm.Presto:
+			output[0]["presto"] = append(output[0]["presto"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
+			})
+		case *sdm.RabbitMQAMQP091:
+			output[0]["rabbitmq_amqp_091"] = append(output[0]["rabbitmq_amqp_091"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
+			})
+		case *sdm.RawTCP:
+			output[0]["raw_tcp"] = append(output[0]["raw_tcp"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+			})
+		case *sdm.RDP:
+			output[0]["rdp"] = append(output[0]["rdp"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
+			})
+		case *sdm.Redis:
+			output[0]["redis"] = append(output[0]["redis"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+			})
+		case *sdm.Redshift:
+			output[0]["redshift"] = append(output[0]["redshift"], entity{
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
+			})
+		case *sdm.SingleStore:
+			output[0]["single_store"] = append(output[0]["single_store"], entity{
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
 			})
 		case *sdm.Snowflake:
 			output[0]["snowflake"] = append(output[0]["snowflake"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
+				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"username":        (v.Username),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
-				"database":        (v.Database),
-				"schema":          (v.Schema),
 				"port_override":   (v.PortOverride),
+				"schema":          (v.Schema),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
 			})
 		case *sdm.SQLServer:
 			output[0]["sql_server"] = append(output[0]["sql_server"], entity{
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"tags":              convertTagsToMap(v.Tags),
-				"secret_store_id":   (v.SecretStoreID),
+				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
-				"username":          (v.Username),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
 				"password":          (v.Password),
-				"database":          (v.Database),
+				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"schema":            (v.Schema),
-				"port":              (v.Port),
-				"override_database": (v.OverrideDatabase),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
 			})
 		case *sdm.SSH:
 			output[0]["ssh"] = append(output[0]["ssh"], entity{
-				"id":                             (v.ID),
-				"name":                           (v.Name),
-				"tags":                           convertTagsToMap(v.Tags),
-				"secret_store_id":                (v.SecretStoreID),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
-				"username":                       (v.Username),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
 				"port":                           (v.Port),
-				"public_key":                     (v.PublicKey),
 				"port_forwarding":                (v.PortForwarding),
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"public_key":                     (v.PublicKey),
+				"secret_store_id":                (v.SecretStoreID),
+				"tags":                           convertTagsToMap(v.Tags),
+				"username":                       (v.Username),
 			})
 		case *sdm.SSHCert:
 			output[0]["ssh_cert"] = append(output[0]["ssh_cert"], entity{
-				"id":                             (v.ID),
-				"name":                           (v.Name),
-				"tags":                           convertTagsToMap(v.Tags),
-				"secret_store_id":                (v.SecretStoreID),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
-				"username":                       (v.Username),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"secret_store_id":                (v.SecretStoreID),
+				"tags":                           convertTagsToMap(v.Tags),
+				"username":                       (v.Username),
 			})
 		case *sdm.SSHCustomerKey:
 			output[0]["ssh_customer_key"] = append(output[0]["ssh_customer_key"], entity{
-				"id":                             (v.ID),
-				"name":                           (v.Name),
-				"tags":                           convertTagsToMap(v.Tags),
-				"secret_store_id":                (v.SecretStoreID),
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
-				"username":                       (v.Username),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
 				"port":                           (v.Port),
-				"private_key":                    (v.PrivateKey),
 				"port_forwarding":                (v.PortForwarding),
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"private_key":                    (v.PrivateKey),
+				"secret_store_id":                (v.SecretStoreID),
+				"tags":                           convertTagsToMap(v.Tags),
+				"username":                       (v.Username),
 			})
 		case *sdm.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
 			})
 		case *sdm.SybaseIQ:
 			output[0]["sybase_iq"] = append(output[0]["sybase_iq"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"username":        (v.Username),
-				"port_override":   (v.PortOverride),
-				"port":            (v.Port),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
 			})
 		case *sdm.Teradata:
 			output[0]["teradata"] = append(output[0]["teradata"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"tags":            convertTagsToMap(v.Tags),
-				"secret_store_id": (v.SecretStoreID),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
-				"username":        (v.Username),
+				"id":              (v.ID),
+				"name":            (v.Name),
 				"password":        (v.Password),
-				"port_override":   (v.PortOverride),
 				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
+				"username":        (v.Username),
 			})
 		}
 	}

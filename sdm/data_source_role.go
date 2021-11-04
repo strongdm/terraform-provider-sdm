@@ -22,16 +22,6 @@ func dataSourceRole() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"id": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "Unique identifier of the Role.",
-			},
-			"name": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "Unique human-readable name of the Role.",
-			},
 			"access_rules": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -41,6 +31,16 @@ func dataSourceRole() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Description: "True if the Role is a composite role.",
+			},
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the Role.",
+			},
+			"name": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique human-readable name of the Role.",
 			},
 			"tags": {
 				Type: schema.TypeMap,
@@ -57,16 +57,6 @@ func dataSourceRole() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique identifier of the Role.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "Unique human-readable name of the Role.",
-						},
 						"access_rules": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -76,6 +66,16 @@ func dataSourceRole() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "True if the Role is a composite role.",
+						},
+						"id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique identifier of the Role.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Unique human-readable name of the Role.",
 						},
 						"tags": {
 							Type: schema.TypeMap,
@@ -99,20 +99,20 @@ func dataSourceRole() *schema.Resource {
 func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("id"); ok {
-		filter += "id:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		filter += "name:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOk("access_rules"); ok {
 		filter += "accessrules:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("composite"); ok {
 		filter += "composite:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("id"); ok {
+		filter += "id:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOk("name"); ok {
+		filter += "name:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOk("tags"); ok {
@@ -138,10 +138,10 @@ func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"id":           (v.ID),
-				"name":         (v.Name),
 				"access_rules": (v.AccessRules),
 				"composite":    (v.Composite),
+				"id":           (v.ID),
+				"name":         (v.Name),
 				"tags":         convertTagsToMap(v.Tags),
 			})
 	}

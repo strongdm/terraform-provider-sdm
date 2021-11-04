@@ -17,14 +17,14 @@ data "sdm_role_attachment" "role_attachment_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a RoleAttachments data source:
-* `id` - (Optional) Unique identifier of the RoleAttachment.
-* `composite_role_id` - (Optional) The id of the composite role of this RoleAttachment.
 * `attached_role_id` - (Optional) The id of the attached role of this RoleAttachment.
+* `composite_role_id` - (Optional) The id of the composite role of this RoleAttachment.
+* `id` - (Optional) Unique identifier of the RoleAttachment.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a RoleAttachments data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_role_attachment ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `role_attachments` - A list where each element has the following attributes:
-	* `id` - Unique identifier of the RoleAttachment.
-	* `composite_role_id` - The id of the composite role of this RoleAttachment.
 	* `attached_role_id` - The id of the attached role of this RoleAttachment.
+	* `composite_role_id` - The id of the composite role of this RoleAttachment.
+	* `id` - Unique identifier of the RoleAttachment.

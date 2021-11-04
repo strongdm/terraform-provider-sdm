@@ -17,14 +17,14 @@ data "sdm_account_attachment" "account_attachment_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a AccountAttachments data source:
-* `id` - (Optional) Unique identifier of the AccountAttachment.
 * `account_id` - (Optional) The id of the account of this AccountAttachment.
+* `id` - (Optional) Unique identifier of the AccountAttachment.
 * `role_id` - (Optional) The id of the attached role of this AccountAttachment.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a AccountAttachments data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_account_attachment ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `account_attachments` - A list where each element has the following attributes:
-	* `id` - Unique identifier of the AccountAttachment.
 	* `account_id` - The id of the account of this AccountAttachment.
+	* `id` - Unique identifier of the AccountAttachment.
 	* `role_id` - The id of the attached role of this AccountAttachment.

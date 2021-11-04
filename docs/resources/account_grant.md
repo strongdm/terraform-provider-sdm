@@ -18,8 +18,8 @@ resource "sdm_account_grant" "test_account_grant" {
 ```
 ## Argument Reference
 The following arguments are supported by the AccountGrant resource:
-* `resource_id` - (Required) The id of the composite role of this AccountGrant.
 * `account_id` - (Required) The id of the attached role of this AccountGrant.
+* `resource_id` - (Required) The id of the composite role of this AccountGrant.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the AccountGrant resource:
 * `id` - A unique identifier for the AccountGrant resource.
