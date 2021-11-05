@@ -45,6 +45,10 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"namespace": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"region": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -123,6 +127,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the SecretStore.",
 									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"server_address": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -155,6 +164,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
 									},
 									"server_address": {
 										Type:        schema.TypeString,
@@ -210,6 +224,10 @@ func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, [
 		filter += "name:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOk("namespace"); ok {
+		filter += "namespace:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOk("region"); ok {
 		filter += "region:? "
 		args = append(args, v)
@@ -256,6 +274,7 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_key_path":  (v.ClientKeyPath),
 				"id":               (v.ID),
 				"name":             (v.Name),
+				"namespace":        (v.Namespace),
 				"server_address":   (v.ServerAddress),
 				"tags":             convertTagsToMap(v.Tags),
 			})
@@ -263,6 +282,7 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 			output[0]["vault_token"] = append(output[0]["vault_token"], entity{
 				"id":             (v.ID),
 				"name":           (v.Name),
+				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToMap(v.Tags),
 			})

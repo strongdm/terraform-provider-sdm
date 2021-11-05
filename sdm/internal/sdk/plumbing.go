@@ -5795,6 +5795,7 @@ func convertVaultTLSStoreToPorcelain(plumbing *proto.VaultTLSStore) *VaultTLSSto
 	porcelain.ClientKeyPath = (plumbing.ClientKeyPath)
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
+	porcelain.Namespace = (plumbing.Namespace)
 	porcelain.ServerAddress = (plumbing.ServerAddress)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
@@ -5810,6 +5811,7 @@ func convertVaultTLSStoreToPlumbing(porcelain *VaultTLSStore) *proto.VaultTLSSto
 	plumbing.ClientKeyPath = (porcelain.ClientKeyPath)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.ServerAddress = (porcelain.ServerAddress)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
@@ -5838,6 +5840,7 @@ func convertVaultTokenStoreToPorcelain(plumbing *proto.VaultTokenStore) *VaultTo
 	porcelain := &VaultTokenStore{}
 	porcelain.ID = (plumbing.Id)
 	porcelain.Name = (plumbing.Name)
+	porcelain.Namespace = (plumbing.Namespace)
 	porcelain.ServerAddress = (plumbing.ServerAddress)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
 	return porcelain
@@ -5850,6 +5853,7 @@ func convertVaultTokenStoreToPlumbing(porcelain *VaultTokenStore) *proto.VaultTo
 	plumbing := &proto.VaultTokenStore{}
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.ServerAddress = (porcelain.ServerAddress)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing

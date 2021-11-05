@@ -4991,6 +4991,8 @@ type VaultTLSStore struct {
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 
+	Namespace string `json:"namespace"`
+
 	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -5001,6 +5003,8 @@ type VaultTokenStore struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
+
+	Namespace string `json:"namespace"`
 
 	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.

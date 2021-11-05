@@ -77,6 +77,11 @@ func resourceSecretStore() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"server_address": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -104,6 +109,11 @@ func resourceSecretStore() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
 						},
 						"server_address": {
 							Type:        schema.TypeString,
@@ -153,6 +163,7 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 			ClientCertPath: convertStringFromMap(raw, "client_cert_path"),
 			ClientKeyPath:  convertStringFromMap(raw, "client_key_path"),
 			Name:           convertStringFromMap(raw, "name"),
+			Namespace:      convertStringFromMap(raw, "namespace"),
 			ServerAddress:  convertStringFromMap(raw, "server_address"),
 			Tags:           convertTagsFromMap(raw, "tags"),
 		}
@@ -166,6 +177,7 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		out := &sdm.VaultTokenStore{
 			ID:            d.Id(),
 			Name:          convertStringFromMap(raw, "name"),
+			Namespace:     convertStringFromMap(raw, "namespace"),
 			ServerAddress: convertStringFromMap(raw, "server_address"),
 			Tags:          convertTagsFromMap(raw, "tags"),
 		}
@@ -204,6 +216,7 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_cert_path": (v.ClientCertPath),
 				"client_key_path":  (v.ClientKeyPath),
 				"name":             (v.Name),
+				"namespace":        (v.Namespace),
 				"server_address":   (v.ServerAddress),
 				"tags":             convertTagsToMap(v.Tags),
 			},
@@ -214,6 +227,7 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		d.Set("vault_token", []map[string]interface{}{
 			{
 				"name":           (v.Name),
+				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToMap(v.Tags),
 			},
@@ -262,6 +276,7 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"client_cert_path": (v.ClientCertPath),
 				"client_key_path":  (v.ClientKeyPath),
 				"name":             (v.Name),
+				"namespace":        (v.Namespace),
 				"server_address":   (v.ServerAddress),
 				"tags":             convertTagsToMap(v.Tags),
 			},
@@ -275,6 +290,7 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 		d.Set("vault_token", []map[string]interface{}{
 			{
 				"name":           (v.Name),
+				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToMap(v.Tags),
 			},

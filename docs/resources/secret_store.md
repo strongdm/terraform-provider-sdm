@@ -20,10 +20,12 @@ The following arguments are supported by the SecretStore resource:
 	* `client_cert_path` - (Required) 
 	* `client_key_path` - (Required) 
 	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) 
 	* `server_address` - (Required) 
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_token:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) 
 	* `server_address` - (Required) 
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference

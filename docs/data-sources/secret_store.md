@@ -17,6 +17,7 @@ The following arguments are supported by a SecretStores data source:
 * `client_key_path` - (Optional) 
 * `id` - (Optional) Unique identifier of the SecretStore.
 * `name` - (Optional) Unique human-readable name of the SecretStore.
+* `namespace` - (Optional) 
 * `region` - (Optional) 
 * `server_address` - (Optional) 
 * `tags` - (Optional) Tags is a map of key, value pairs.
@@ -36,10 +37,12 @@ In addition to provided arguments above, the following attributes are returned b
 		* `client_key_path` - 
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - 
 		* `server_address` - 
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_token:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - 
 		* `server_address` - 
 		* `tags` - Tags is a map of key, value pairs.
