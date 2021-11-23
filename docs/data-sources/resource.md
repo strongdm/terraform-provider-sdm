@@ -277,6 +277,31 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
+	* document_db_host:
+		* `auth_database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
+	* document_db_replica_set:
+		* `auth_database` - 
+		* `connect_to_replica` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port_override` - 
+		* `replica_set` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* druid:
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
@@ -550,6 +575,29 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
+	* neptune:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+	* neptune_iam:
+		* `access_key` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
+		* `port_override` - 
+		* `region` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 	* oracle:
 		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.

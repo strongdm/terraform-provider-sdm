@@ -1885,6 +1885,120 @@ func convertRepeatedDeleteResponseMetadataToPorcelain(plumbings []*proto.DeleteR
 	}
 	return items
 }
+func convertDocumentDBHostToPorcelain(plumbing *proto.DocumentDBHost) *DocumentDBHost {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &DocumentDBHost{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertDocumentDBHostToPlumbing(porcelain *DocumentDBHost) *proto.DocumentDBHost {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DocumentDBHost{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedDocumentDBHostToPlumbing(
+	porcelains []*DocumentDBHost,
+) []*proto.DocumentDBHost {
+	var items []*proto.DocumentDBHost
+	for _, porcelain := range porcelains {
+		items = append(items, convertDocumentDBHostToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDocumentDBHostToPorcelain(plumbings []*proto.DocumentDBHost) []*DocumentDBHost {
+	var items []*DocumentDBHost
+	for _, plumbing := range plumbings {
+		items = append(items, convertDocumentDBHostToPorcelain(plumbing))
+	}
+	return items
+}
+func convertDocumentDBReplicaSetToPorcelain(plumbing *proto.DocumentDBReplicaSet) *DocumentDBReplicaSet {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &DocumentDBReplicaSet{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.ConnectToReplica = (plumbing.ConnectToReplica)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.ReplicaSet = (plumbing.ReplicaSet)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertDocumentDBReplicaSetToPlumbing(porcelain *DocumentDBReplicaSet) *proto.DocumentDBReplicaSet {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DocumentDBReplicaSet{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ReplicaSet = (porcelain.ReplicaSet)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedDocumentDBReplicaSetToPlumbing(
+	porcelains []*DocumentDBReplicaSet,
+) []*proto.DocumentDBReplicaSet {
+	var items []*proto.DocumentDBReplicaSet
+	for _, porcelain := range porcelains {
+		items = append(items, convertDocumentDBReplicaSetToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDocumentDBReplicaSetToPorcelain(plumbings []*proto.DocumentDBReplicaSet) []*DocumentDBReplicaSet {
+	var items []*DocumentDBReplicaSet
+	for _, plumbing := range plumbings {
+		items = append(items, convertDocumentDBReplicaSetToPorcelain(plumbing))
+	}
+	return items
+}
 func convertDruidToPorcelain(plumbing *proto.Druid) *Druid {
 	if plumbing == nil {
 		return nil
@@ -3245,6 +3359,116 @@ func convertRepeatedMysqlToPorcelain(plumbings []*proto.Mysql) []*Mysql {
 	}
 	return items
 }
+func convertNeptuneToPorcelain(plumbing *proto.Neptune) *Neptune {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Neptune{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertNeptuneToPlumbing(porcelain *Neptune) *proto.Neptune {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Neptune{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedNeptuneToPlumbing(
+	porcelains []*Neptune,
+) []*proto.Neptune {
+	var items []*proto.Neptune
+	for _, porcelain := range porcelains {
+		items = append(items, convertNeptuneToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedNeptuneToPorcelain(plumbings []*proto.Neptune) []*Neptune {
+	var items []*Neptune
+	for _, plumbing := range plumbings {
+		items = append(items, convertNeptuneToPorcelain(plumbing))
+	}
+	return items
+}
+func convertNeptuneIAMToPorcelain(plumbing *proto.NeptuneIAM) *NeptuneIAM {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &NeptuneIAM{}
+	porcelain.AccessKey = (plumbing.AccessKey)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Endpoint = (plumbing.Endpoint)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.Region = (plumbing.Region)
+	porcelain.RoleArn = (plumbing.RoleArn)
+	porcelain.RoleExternalID = (plumbing.RoleExternalId)
+	porcelain.SecretAccessKey = (plumbing.SecretAccessKey)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertNeptuneIAMToPlumbing(porcelain *NeptuneIAM) *proto.NeptuneIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.NeptuneIAM{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedNeptuneIAMToPlumbing(
+	porcelains []*NeptuneIAM,
+) []*proto.NeptuneIAM {
+	var items []*proto.NeptuneIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertNeptuneIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedNeptuneIAMToPorcelain(plumbings []*proto.NeptuneIAM) []*NeptuneIAM {
+	var items []*NeptuneIAM
+	for _, plumbing := range plumbings {
+		items = append(items, convertNeptuneIAMToPorcelain(plumbing))
+	}
+	return items
+}
 func convertNodeToPlumbing(porcelain Node) *proto.Node {
 	if porcelain == nil {
 		return nil
@@ -4011,6 +4235,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Db_2I{Db_2I: convertDB2IToPlumbing(v)}
 	case *DB2LUW:
 		plumbing.Resource = &proto.Resource_Db_2Luw{Db_2Luw: convertDB2LUWToPlumbing(v)}
+	case *DocumentDBHost:
+		plumbing.Resource = &proto.Resource_DocumentDbHost{DocumentDbHost: convertDocumentDBHostToPlumbing(v)}
+	case *DocumentDBReplicaSet:
+		plumbing.Resource = &proto.Resource_DocumentDbReplicaSet{DocumentDbReplicaSet: convertDocumentDBReplicaSetToPlumbing(v)}
 	case *Druid:
 		plumbing.Resource = &proto.Resource_Druid{Druid: convertDruidToPlumbing(v)}
 	case *DynamoDB:
@@ -4057,6 +4285,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_MongoReplicaSet{MongoReplicaSet: convertMongoReplicaSetToPlumbing(v)}
 	case *Mysql:
 		plumbing.Resource = &proto.Resource_Mysql{Mysql: convertMysqlToPlumbing(v)}
+	case *Neptune:
+		plumbing.Resource = &proto.Resource_Neptune{Neptune: convertNeptuneToPlumbing(v)}
+	case *NeptuneIAM:
+		plumbing.Resource = &proto.Resource_NeptuneIam{NeptuneIam: convertNeptuneIAMToPlumbing(v)}
 	case *Oracle:
 		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
 	case *Postgres:
@@ -4156,6 +4388,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	if plumbing.GetDb_2Luw() != nil {
 		return convertDB2LUWToPorcelain(plumbing.GetDb_2Luw())
 	}
+	if plumbing.GetDocumentDbHost() != nil {
+		return convertDocumentDBHostToPorcelain(plumbing.GetDocumentDbHost())
+	}
+	if plumbing.GetDocumentDbReplicaSet() != nil {
+		return convertDocumentDBReplicaSetToPorcelain(plumbing.GetDocumentDbReplicaSet())
+	}
 	if plumbing.GetDruid() != nil {
 		return convertDruidToPorcelain(plumbing.GetDruid())
 	}
@@ -4224,6 +4462,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetMysql() != nil {
 		return convertMysqlToPorcelain(plumbing.GetMysql())
+	}
+	if plumbing.GetNeptune() != nil {
+		return convertNeptuneToPorcelain(plumbing.GetNeptune())
+	}
+	if plumbing.GetNeptuneIam() != nil {
+		return convertNeptuneIAMToPorcelain(plumbing.GetNeptuneIam())
 	}
 	if plumbing.GetOracle() != nil {
 		return convertOracleToPorcelain(plumbing.GetOracle())

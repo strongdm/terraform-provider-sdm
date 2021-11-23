@@ -354,6 +354,35 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
+* document_db_host:
+	* `auth_database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `port` - (Optional) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
+* document_db_replica_set:
+	* `auth_database` - (Required) 
+	* `connect_to_replica` - (Optional) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `replica_set` - (Required) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
 * druid:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
@@ -675,6 +704,33 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
+* neptune:
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port` - (Optional) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* neptune_iam:
+	* `access_key` - (Optional) 
+	* `secret_store_access_key_path` - (Optional)
+	* `secret_store_access_key_key` - (Optional)
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port` - (Optional) 
+	* `region` - (Required) 
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
+	* `secret_access_key` - (Optional) 
+	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_store_secret_access_key_key` - (Optional)
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * oracle:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -926,6 +982,10 @@ In addition to provided arguments above, the following attributes are returned b
 	* `port_override` - 
 * db_2_luw:
 	* `port_override` - 
+* document_db_host:
+	* `port_override` - 
+* document_db_replica_set:
+	* `port_override` - 
 * druid:
 	* `port_override` - 
 * dynamo_db:
@@ -951,6 +1011,10 @@ In addition to provided arguments above, the following attributes are returned b
 * mongo_replica_set:
 	* `port_override` - 
 * mysql:
+	* `port_override` - 
+* neptune:
+	* `port_override` - 
+* neptune_iam:
 	* `port_override` - 
 * oracle:
 	* `port_override` - 

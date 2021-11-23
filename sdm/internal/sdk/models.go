@@ -797,6 +797,60 @@ type DB2LUW struct {
 type DeleteResponseMetadata struct {
 }
 
+type DocumentDBHost struct {
+	AuthDatabase string `json:"authDatabase"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type DocumentDBReplicaSet struct {
+	AuthDatabase string `json:"authDatabase"`
+
+	ConnectToReplica bool `json:"connectToReplica"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	ReplicaSet string `json:"replicaSet"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
 type Druid struct {
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1419,6 +1473,57 @@ type Mysql struct {
 	Tags Tags `json:"tags"`
 
 	Username string `json:"username"`
+}
+
+type Neptune struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type NeptuneIAM struct {
+	AccessKey string `json:"accessKey"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Region string `json:"region"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources.
@@ -2649,6 +2754,94 @@ func (m *DB2LUW) GetEgressFilter() string {
 func (m *DB2LUW) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+func (*DocumentDBHost) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the DocumentDBHost.
+func (m *DocumentDBHost) GetID() string { return m.ID }
+
+// GetName returns the name of the DocumentDBHost.
+func (m *DocumentDBHost) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DocumentDBHost.
+func (m *DocumentDBHost) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the DocumentDBHost.
+func (m *DocumentDBHost) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DocumentDBHost.
+func (m *DocumentDBHost) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the DocumentDBHost.
+func (m *DocumentDBHost) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the DocumentDBHost.
+func (m *DocumentDBHost) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DocumentDBHost.
+func (m *DocumentDBHost) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DocumentDBHost.
+func (m *DocumentDBHost) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*DocumentDBReplicaSet) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) GetID() string { return m.ID }
+
+// GetName returns the name of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
 func (*Druid) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Druid.
@@ -3659,6 +3852,94 @@ func (m *Mysql) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Mysql.
 func (m *Mysql) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Neptune) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Neptune.
+func (m *Neptune) GetID() string { return m.ID }
+
+// GetName returns the name of the Neptune.
+func (m *Neptune) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Neptune.
+func (m *Neptune) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Neptune.
+func (m *Neptune) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Neptune.
+func (m *Neptune) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Neptune.
+func (m *Neptune) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Neptune.
+func (m *Neptune) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Neptune.
+func (m *Neptune) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Neptune.
+func (m *Neptune) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*NeptuneIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the NeptuneIAM.
+func (m *NeptuneIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the NeptuneIAM.
+func (m *NeptuneIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the NeptuneIAM.
+func (m *NeptuneIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the NeptuneIAM.
+func (m *NeptuneIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the NeptuneIAM.
+func (m *NeptuneIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the NeptuneIAM.
+func (m *NeptuneIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the NeptuneIAM.
+func (m *NeptuneIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the NeptuneIAM.
+func (m *NeptuneIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the NeptuneIAM.
+func (m *NeptuneIAM) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*Oracle) isOneOf_Resource() {}
