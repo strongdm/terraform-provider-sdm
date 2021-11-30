@@ -956,6 +956,25 @@ type ElasticacheRedis struct {
 	TlsRequired bool `json:"tlsRequired"`
 }
 
+type GCP struct {
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+
+	Keyfile string `json:"keyfile"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Scopes string `json:"scopes"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 // Gateway represents a StrongDM CLI installation running in gateway mode.
 type Gateway struct {
 	// The hostname/port tuple which the gateway daemon will bind to.
@@ -3016,6 +3035,50 @@ func (m *ElasticacheRedis) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the ElasticacheRedis.
 func (m *ElasticacheRedis) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*GCP) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GCP.
+func (m *GCP) GetID() string { return m.ID }
+
+// GetName returns the name of the GCP.
+func (m *GCP) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GCP.
+func (m *GCP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GCP.
+func (m *GCP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GCP.
+func (m *GCP) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GCP.
+func (m *GCP) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GCP.
+func (m *GCP) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GCP.
+func (m *GCP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GCP.
+func (m *GCP) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*GoogleGKE) isOneOf_Resource() {}

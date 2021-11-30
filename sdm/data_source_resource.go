@@ -1871,6 +1871,55 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"gcp": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"keyfile": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"scopes": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"google_gke": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -4882,6 +4931,16 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_id": (v.SecretStoreID),
 				"tags":            convertTagsToMap(v.Tags),
 				"tls_required":    (v.TlsRequired),
+			})
+		case *sdm.GCP:
+			output[0]["gcp"] = append(output[0]["gcp"], entity{
+				"egress_filter":   (v.EgressFilter),
+				"id":              (v.ID),
+				"keyfile":         (v.Keyfile),
+				"name":            (v.Name),
+				"scopes":          (v.Scopes),
+				"secret_store_id": (v.SecretStoreID),
+				"tags":            convertTagsToMap(v.Tags),
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{

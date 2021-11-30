@@ -349,6 +349,14 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
+	* gcp:
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `keyfile` - 
+		* `name` - Unique human-readable name of the Resource.
+		* `scopes` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 	* google_gke:
 		* `certificate_authority` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.

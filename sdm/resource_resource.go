@@ -2225,6 +2225,58 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"gcp": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"keyfile": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_keyfile_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_keyfile_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"scopes": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"google_gke": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -6255,6 +6307,31 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
 		}, nil
 	}
+	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["keyfile"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential keyfile cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_keyfile_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_keyfile_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_keyfile_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_keyfile_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"keyfile":                   convertStringFromMap(raw, "keyfile"),
+			"secret_store_keyfile_path": convertStringFromMap(raw, "secret_store_keyfile_path"),
+			"secret_store_keyfile_key":  convertStringFromMap(raw, "secret_store_keyfile_key"),
+		}, nil
+	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8316,6 +8393,25 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.GCP{}
+		}
+		out := &sdm.GCP{
+			ID:            d.Id(),
+			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
+			Keyfile:       convertStringFromMap(raw, "keyfile"),
+			Name:          convertStringFromMap(raw, "name"),
+			Scopes:        convertStringFromMap(raw, "scopes"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+		}
+		if out.Keyfile == "" {
+			out.Keyfile = fullSecretStorePath(raw, "keyfile")
+		}
+		return out
+	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9955,6 +10051,21 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"tls_required":               (v.TlsRequired),
 			},
 		})
+	case *sdm.GCP:
+		localV, _ := localVersion.(*sdm.GCP)
+		_ = localV
+		d.Set("gcp", []map[string]interface{}{
+			{
+				"egress_filter":             (v.EgressFilter),
+				"keyfile":                   seValues["keyfile"],
+				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
+				"secret_store_keyfile_key":  seValues["secret_store_keyfile_key"],
+				"name":                      (v.Name),
+				"scopes":                    (v.Scopes),
+				"secret_store_id":           (v.SecretStoreID),
+				"tags":                      convertTagsToMap(v.Tags),
+			},
+		})
 	case *sdm.GoogleGKE:
 		localV, _ := localVersion.(*sdm.GoogleGKE)
 		_ = localV
@@ -11397,6 +11508,24 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToMap(v.Tags),
 				"tls_required":               (v.TlsRequired),
+			},
+		})
+	case *sdm.GCP:
+		localV, ok := localVersion.(*sdm.GCP)
+		if !ok {
+			localV = &sdm.GCP{}
+		}
+		_ = localV
+		d.Set("gcp", []map[string]interface{}{
+			{
+				"egress_filter":             (v.EgressFilter),
+				"keyfile":                   seValues["keyfile"],
+				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
+				"secret_store_keyfile_key":  seValues["secret_store_keyfile_key"],
+				"name":                      (v.Name),
+				"scopes":                    (v.Scopes),
+				"secret_store_id":           (v.SecretStoreID),
+				"tags":                      convertTagsToMap(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKE:

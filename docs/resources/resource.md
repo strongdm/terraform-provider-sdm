@@ -440,6 +440,15 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
+* gcp:
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `keyfile` - (Optional) 
+	* `secret_store_keyfile_path` - (Optional)
+	* `secret_store_keyfile_key` - (Optional)
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `scopes` - (Required) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke:
 	* `certificate_authority` - (Optional) 
 	* `secret_store_certificate_authority_path` - (Optional)

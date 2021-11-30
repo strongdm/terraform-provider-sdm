@@ -2221,6 +2221,54 @@ func convertRepeatedElasticacheRedisToPorcelain(plumbings []*proto.ElasticacheRe
 	}
 	return items
 }
+func convertGCPToPorcelain(plumbing *proto.GCP) *GCP {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &GCP{}
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Keyfile = (plumbing.Keyfile)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Scopes = (plumbing.Scopes)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	return porcelain
+}
+
+func convertGCPToPlumbing(porcelain *GCP) *proto.GCP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GCP{}
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Keyfile = (porcelain.Keyfile)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Scopes = (porcelain.Scopes)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedGCPToPlumbing(
+	porcelains []*GCP,
+) []*proto.GCP {
+	var items []*proto.GCP
+	for _, porcelain := range porcelains {
+		items = append(items, convertGCPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGCPToPorcelain(plumbings []*proto.GCP) []*GCP {
+	var items []*GCP
+	for _, plumbing := range plumbings {
+		items = append(items, convertGCPToPorcelain(plumbing))
+	}
+	return items
+}
 func convertGatewayToPorcelain(plumbing *proto.Gateway) *Gateway {
 	if plumbing == nil {
 		return nil
@@ -4247,6 +4295,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Elastic{Elastic: convertElasticToPlumbing(v)}
 	case *ElasticacheRedis:
 		plumbing.Resource = &proto.Resource_ElasticacheRedis{ElasticacheRedis: convertElasticacheRedisToPlumbing(v)}
+	case *GCP:
+		plumbing.Resource = &proto.Resource_Gcp{Gcp: convertGCPToPlumbing(v)}
 	case *GoogleGKE:
 		plumbing.Resource = &proto.Resource_GoogleGke{GoogleGke: convertGoogleGKEToPlumbing(v)}
 	case *GoogleGKEUserImpersonation:
@@ -4405,6 +4455,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetElasticacheRedis() != nil {
 		return convertElasticacheRedisToPorcelain(plumbing.GetElasticacheRedis())
+	}
+	if plumbing.GetGcp() != nil {
+		return convertGCPToPorcelain(plumbing.GetGcp())
 	}
 	if plumbing.GetGoogleGke() != nil {
 		return convertGoogleGKEToPorcelain(plumbing.GetGoogleGke())
