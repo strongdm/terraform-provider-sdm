@@ -1180,91 +1180,6 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"azure_postgres": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"egress_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"override_database": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Sensitive:   true,
-							Description: "",
-						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Computed:    true,
-							Description: "",
-						},
-						"secret_store_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ID of the secret store containing credentials for this resource, if any.",
-						},
-						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-					},
-				},
-			},
 			"big_query": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -5859,43 +5774,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
 		}, nil
 	}
-	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
-			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
-			}
-		}
-
-		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
-		}, nil
-	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8047,37 +7925,6 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
-	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.AzurePostgres{}
-		}
-		out := &sdm.AzurePostgres{
-			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
-		}
-		override, ok := raw["port_override"].(int)
-		if !ok || override == 0 {
-			override = -1
-		}
-		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
-		return out
-	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9834,28 +9681,6 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"tags":                                convertTagsToMap(v.Tags),
 			},
 		})
-	case *sdm.AzurePostgres:
-		localV, _ := localVersion.(*sdm.AzurePostgres)
-		_ = localV
-		d.Set("azure_postgres", []map[string]interface{}{
-			{
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
-			},
-		})
 	case *sdm.BigQuery:
 		localV, _ := localVersion.(*sdm.BigQuery)
 		_ = localV
@@ -11259,31 +11084,6 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
 				"tags":                                convertTagsToMap(v.Tags),
-			},
-		})
-	case *sdm.AzurePostgres:
-		localV, ok := localVersion.(*sdm.AzurePostgres)
-		if !ok {
-			localV = &sdm.AzurePostgres{}
-		}
-		_ = localV
-		d.Set("azure_postgres", []map[string]interface{}{
-			{
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.BigQuery:
