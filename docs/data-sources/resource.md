@@ -192,6 +192,19 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
+	* azure_postgres:
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `password` - 
+		* `port` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* big_query:
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `endpoint` - 

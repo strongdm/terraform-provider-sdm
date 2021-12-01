@@ -257,6 +257,21 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* azure_postgres:
+	* `database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `override_database` - (Optional) 
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `port` - (Optional) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
 * big_query:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
@@ -967,6 +982,8 @@ In addition to provided arguments above, the following attributes are returned b
 * aurora_mysql:
 	* `port_override` - 
 * aurora_postgres:
+	* `port_override` - 
+* azure_postgres:
 	* `port_override` - 
 * big_query:
 	* `port_override` - 

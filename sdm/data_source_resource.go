@@ -969,6 +969,80 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"azure_postgres": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"big_query": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -4699,6 +4773,21 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_access_key":  (v.SecretAccessKey),
 				"secret_store_id":    (v.SecretStoreID),
 				"tags":               convertTagsToMap(v.Tags),
+			})
+		case *sdm.AzurePostgres:
+			output[0]["azure_postgres"] = append(output[0]["azure_postgres"], entity{
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"tags":              convertTagsToMap(v.Tags),
+				"username":          (v.Username),
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
