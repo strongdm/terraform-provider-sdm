@@ -580,6 +580,54 @@ type AuroraPostgres struct {
 	Username string `json:"username"`
 }
 
+type Azure struct {
+	AppID string `json:"appId"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TenantID string `json:"tenantId"`
+}
+
+type AzurePostgres struct {
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
 type BigQuery struct {
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2463,6 +2511,94 @@ func (m *AWS) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the AWS.
 func (m *AWS) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*Azure) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Azure.
+func (m *Azure) GetID() string { return m.ID }
+
+// GetName returns the name of the Azure.
+func (m *Azure) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Azure.
+func (m *Azure) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Azure.
+func (m *Azure) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Azure.
+func (m *Azure) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Azure.
+func (m *Azure) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Azure.
+func (m *Azure) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Azure.
+func (m *Azure) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Azure.
+func (m *Azure) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AzurePostgres) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AzurePostgres.
+func (m *AzurePostgres) GetID() string { return m.ID }
+
+// GetName returns the name of the AzurePostgres.
+func (m *AzurePostgres) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzurePostgres.
+func (m *AzurePostgres) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AzurePostgres.
+func (m *AzurePostgres) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzurePostgres.
+func (m *AzurePostgres) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AzurePostgres.
+func (m *AzurePostgres) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AzurePostgres.
+func (m *AzurePostgres) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AzurePostgres.
+func (m *AzurePostgres) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AzurePostgres.
+func (m *AzurePostgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*BigQuery) isOneOf_Resource() {}

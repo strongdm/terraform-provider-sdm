@@ -1351,6 +1351,114 @@ func convertRepeatedAuroraPostgresToPorcelain(plumbings []*proto.AuroraPostgres)
 	}
 	return items
 }
+func convertAzureToPorcelain(plumbing *proto.Azure) *Azure {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &Azure{}
+	porcelain.AppID = (plumbing.AppID)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TenantID = (plumbing.TenantID)
+	return porcelain
+}
+
+func convertAzureToPlumbing(porcelain *Azure) *proto.Azure {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Azure{}
+	plumbing.AppID = (porcelain.AppID)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TenantID = (porcelain.TenantID)
+	return plumbing
+}
+func convertRepeatedAzureToPlumbing(
+	porcelains []*Azure,
+) []*proto.Azure {
+	var items []*proto.Azure
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureToPorcelain(plumbings []*proto.Azure) []*Azure {
+	var items []*Azure
+	for _, plumbing := range plumbings {
+		items = append(items, convertAzureToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAzurePostgresToPorcelain(plumbing *proto.AzurePostgres) *AzurePostgres {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AzurePostgres{}
+	porcelain.Database = (plumbing.Database)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.OverrideDatabase = (plumbing.OverrideDatabase)
+	porcelain.Password = (plumbing.Password)
+	porcelain.Port = (plumbing.Port)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertAzurePostgresToPlumbing(porcelain *AzurePostgres) *proto.AzurePostgres {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzurePostgres{}
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAzurePostgresToPlumbing(
+	porcelains []*AzurePostgres,
+) []*proto.AzurePostgres {
+	var items []*proto.AzurePostgres
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzurePostgresToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzurePostgresToPorcelain(plumbings []*proto.AzurePostgres) []*AzurePostgres {
+	var items []*AzurePostgres
+	for _, plumbing := range plumbings {
+		items = append(items, convertAzurePostgresToPorcelain(plumbing))
+	}
+	return items
+}
 func convertBigQueryToPorcelain(plumbing *proto.BigQuery) *BigQuery {
 	if plumbing == nil {
 		return nil
@@ -4269,6 +4377,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AuroraPostgres{AuroraPostgres: convertAuroraPostgresToPlumbing(v)}
 	case *AWS:
 		plumbing.Resource = &proto.Resource_Aws{Aws: convertAWSToPlumbing(v)}
+	case *Azure:
+		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
+	case *AzurePostgres:
+		plumbing.Resource = &proto.Resource_AzurePostgres{AzurePostgres: convertAzurePostgresToPlumbing(v)}
 	case *BigQuery:
 		plumbing.Resource = &proto.Resource_BigQuery{BigQuery: convertBigQueryToPlumbing(v)}
 	case *Cassandra:
@@ -4416,6 +4528,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetAws() != nil {
 		return convertAWSToPorcelain(plumbing.GetAws())
+	}
+	if plumbing.GetAzure() != nil {
+		return convertAzureToPorcelain(plumbing.GetAzure())
+	}
+	if plumbing.GetAzurePostgres() != nil {
+		return convertAzurePostgresToPorcelain(plumbing.GetAzurePostgres())
 	}
 	if plumbing.GetBigQuery() != nil {
 		return convertBigQueryToPorcelain(plumbing.GetBigQuery())
