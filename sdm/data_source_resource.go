@@ -1023,6 +1023,60 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"azure_certificate": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"app_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tenant_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"azure_postgres": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -4887,6 +4941,17 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_id": (v.SecretStoreID),
 				"tags":            convertTagsToMap(v.Tags),
 				"tenant_id":       (v.TenantID),
+			})
+		case *sdm.AzureCertificate:
+			output[0]["azure_certificate"] = append(output[0]["azure_certificate"], entity{
+				"app_id":             (v.AppID),
+				"client_certificate": (v.ClientCertificate),
+				"egress_filter":      (v.EgressFilter),
+				"id":                 (v.ID),
+				"name":               (v.Name),
+				"secret_store_id":    (v.SecretStoreID),
+				"tags":               convertTagsToMap(v.Tags),
+				"tenant_id":          (v.TenantID),
 			})
 		case *sdm.AzurePostgres:
 			output[0]["azure_postgres"] = append(output[0]["azure_postgres"], entity{

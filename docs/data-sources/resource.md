@@ -201,6 +201,15 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `tenant_id` - 
+	* azure_certificate:
+		* `app_id` - 
+		* `client_certificate` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tenant_id` - 
 	* azure_postgres:
 		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.

@@ -600,6 +600,26 @@ type Azure struct {
 	TenantID string `json:"tenantId"`
 }
 
+type AzureCertificate struct {
+	AppID string `json:"appId"`
+
+	ClientCertificate string `json:"clientCertificate"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TenantID string `json:"tenantId"`
+}
+
 type AzurePostgres struct {
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -2555,6 +2575,50 @@ func (m *Azure) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the Azure.
 func (m *Azure) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*AzureCertificate) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AzureCertificate.
+func (m *AzureCertificate) GetID() string { return m.ID }
+
+// GetName returns the name of the AzureCertificate.
+func (m *AzureCertificate) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzureCertificate.
+func (m *AzureCertificate) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AzureCertificate.
+func (m *AzureCertificate) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzureCertificate.
+func (m *AzureCertificate) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AzureCertificate.
+func (m *AzureCertificate) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AzureCertificate.
+func (m *AzureCertificate) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AzureCertificate.
+func (m *AzureCertificate) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AzureCertificate.
+func (m *AzureCertificate) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*AzurePostgres) isOneOf_Resource() {}

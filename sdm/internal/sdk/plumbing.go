@@ -1356,7 +1356,7 @@ func convertAzureToPorcelain(plumbing *proto.Azure) *Azure {
 		return nil
 	}
 	porcelain := &Azure{}
-	porcelain.AppID = (plumbing.AppID)
+	porcelain.AppID = (plumbing.AppId)
 	porcelain.EgressFilter = (plumbing.EgressFilter)
 	porcelain.Healthy = (plumbing.Healthy)
 	porcelain.ID = (plumbing.Id)
@@ -1364,7 +1364,7 @@ func convertAzureToPorcelain(plumbing *proto.Azure) *Azure {
 	porcelain.Password = (plumbing.Password)
 	porcelain.SecretStoreID = (plumbing.SecretStoreId)
 	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
-	porcelain.TenantID = (plumbing.TenantID)
+	porcelain.TenantID = (plumbing.TenantId)
 	return porcelain
 }
 
@@ -1373,7 +1373,7 @@ func convertAzureToPlumbing(porcelain *Azure) *proto.Azure {
 		return nil
 	}
 	plumbing := &proto.Azure{}
-	plumbing.AppID = (porcelain.AppID)
+	plumbing.AppId = (porcelain.AppID)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
@@ -1381,7 +1381,7 @@ func convertAzureToPlumbing(porcelain *Azure) *proto.Azure {
 	plumbing.Password = (porcelain.Password)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.TenantID = (porcelain.TenantID)
+	plumbing.TenantId = (porcelain.TenantID)
 	return plumbing
 }
 func convertRepeatedAzureToPlumbing(
@@ -1398,6 +1398,56 @@ func convertRepeatedAzureToPorcelain(plumbings []*proto.Azure) []*Azure {
 	var items []*Azure
 	for _, plumbing := range plumbings {
 		items = append(items, convertAzureToPorcelain(plumbing))
+	}
+	return items
+}
+func convertAzureCertificateToPorcelain(plumbing *proto.AzureCertificate) *AzureCertificate {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AzureCertificate{}
+	porcelain.AppID = (plumbing.AppId)
+	porcelain.ClientCertificate = (plumbing.ClientCertificate)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TenantID = (plumbing.TenantId)
+	return porcelain
+}
+
+func convertAzureCertificateToPlumbing(porcelain *AzureCertificate) *proto.AzureCertificate {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzureCertificate{}
+	plumbing.AppId = (porcelain.AppID)
+	plumbing.ClientCertificate = (porcelain.ClientCertificate)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TenantId = (porcelain.TenantID)
+	return plumbing
+}
+func convertRepeatedAzureCertificateToPlumbing(
+	porcelains []*AzureCertificate,
+) []*proto.AzureCertificate {
+	var items []*proto.AzureCertificate
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureCertificateToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureCertificateToPorcelain(plumbings []*proto.AzureCertificate) []*AzureCertificate {
+	var items []*AzureCertificate
+	for _, plumbing := range plumbings {
+		items = append(items, convertAzureCertificateToPorcelain(plumbing))
 	}
 	return items
 }
@@ -4379,6 +4429,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Aws{Aws: convertAWSToPlumbing(v)}
 	case *Azure:
 		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
+	case *AzureCertificate:
+		plumbing.Resource = &proto.Resource_AzureCertificate{AzureCertificate: convertAzureCertificateToPlumbing(v)}
 	case *AzurePostgres:
 		plumbing.Resource = &proto.Resource_AzurePostgres{AzurePostgres: convertAzurePostgresToPlumbing(v)}
 	case *BigQuery:
@@ -4531,6 +4583,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetAzure() != nil {
 		return convertAzureToPorcelain(plumbing.GetAzure())
+	}
+	if plumbing.GetAzureCertificate() != nil {
+		return convertAzureCertificateToPorcelain(plumbing.GetAzureCertificate())
 	}
 	if plumbing.GetAzurePostgres() != nil {
 		return convertAzurePostgresToPorcelain(plumbing.GetAzurePostgres())

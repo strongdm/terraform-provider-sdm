@@ -271,6 +271,20 @@ The following arguments are supported by the Resource resource:
 	* `tenant_id` - (Optional) 
 	* `secret_store_tenant_id_path` - (Optional)
 	* `secret_store_tenant_id_key` - (Optional)
+* azure_certificate:
+	* `app_id` - (Optional) 
+	* `secret_store_app_id_path` - (Optional)
+	* `secret_store_app_id_key` - (Optional)
+	* `client_certificate` - (Optional) 
+	* `secret_store_client_certificate_path` - (Optional)
+	* `secret_store_client_certificate_key` - (Optional)
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tenant_id` - (Optional) 
+	* `secret_store_tenant_id_path` - (Optional)
+	* `secret_store_tenant_id_key` - (Optional)
 * azure_postgres:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.

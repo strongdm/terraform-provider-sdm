@@ -1253,6 +1253,79 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"azure_certificate": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"app_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_app_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_app_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"client_certificate": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_client_certificate_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_client_certificate_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tenant_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_tenant_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_tenant_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+					},
+				},
+			},
 			"azure_postgres": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -6033,6 +6106,55 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_tenant_id_key":  convertStringFromMap(raw, "secret_store_tenant_id_key"),
 		}, nil
 	}
+	if list := d.Get("azure_certificate").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["app_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential app_id cannot be combined with secret_store_id")
+			}
+			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+			}
+			if v := raw["tenant_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential tenant_id cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_app_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_app_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_app_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_app_id_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_tenant_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_tenant_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_tenant_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_tenant_id_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"app_id":                               convertStringFromMap(raw, "app_id"),
+			"secret_store_app_id_path":             convertStringFromMap(raw, "secret_store_app_id_path"),
+			"secret_store_app_id_key":              convertStringFromMap(raw, "secret_store_app_id_key"),
+			"client_certificate":                   convertStringFromMap(raw, "client_certificate"),
+			"secret_store_client_certificate_path": convertStringFromMap(raw, "secret_store_client_certificate_path"),
+			"secret_store_client_certificate_key":  convertStringFromMap(raw, "secret_store_client_certificate_key"),
+			"tenant_id":                            convertStringFromMap(raw, "tenant_id"),
+			"secret_store_tenant_id_path":          convertStringFromMap(raw, "secret_store_tenant_id_path"),
+			"secret_store_tenant_id_key":           convertStringFromMap(raw, "secret_store_tenant_id_key"),
+		}, nil
+	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8272,6 +8394,32 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("azure_certificate").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AzureCertificate{}
+		}
+		out := &sdm.AzureCertificate{
+			ID:                d.Id(),
+			AppID:             convertStringFromMap(raw, "app_id"),
+			ClientCertificate: convertStringFromMap(raw, "client_certificate"),
+			EgressFilter:      convertStringFromMap(raw, "egress_filter"),
+			Name:              convertStringFromMap(raw, "name"),
+			SecretStoreID:     convertStringFromMap(raw, "secret_store_id"),
+			Tags:              convertTagsFromMap(raw, "tags"),
+			TenantID:          convertStringFromMap(raw, "tenant_id"),
+		}
+		if out.AppID == "" {
+			out.AppID = fullSecretStorePath(raw, "app_id")
+		}
+		if out.ClientCertificate == "" {
+			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
+		}
+		if out.TenantID == "" {
+			out.TenantID = fullSecretStorePath(raw, "tenant_id")
+		}
+		return out
+	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10098,6 +10246,26 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_tenant_id_key":  seValues["secret_store_tenant_id_key"],
 			},
 		})
+	case *sdm.AzureCertificate:
+		localV, _ := localVersion.(*sdm.AzureCertificate)
+		_ = localV
+		d.Set("azure_certificate", []map[string]interface{}{
+			{
+				"app_id":                               seValues["app_id"],
+				"secret_store_app_id_path":             seValues["secret_store_app_id_path"],
+				"secret_store_app_id_key":              seValues["secret_store_app_id_key"],
+				"client_certificate":                   seValues["client_certificate"],
+				"secret_store_client_certificate_path": seValues["secret_store_client_certificate_path"],
+				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
+				"egress_filter":                        (v.EgressFilter),
+				"name":                                 (v.Name),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToMap(v.Tags),
+				"tenant_id":                            seValues["tenant_id"],
+				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
+				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
+			},
+		})
 	case *sdm.AzurePostgres:
 		localV, _ := localVersion.(*sdm.AzurePostgres)
 		_ = localV
@@ -11561,6 +11729,29 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"tenant_id":                   seValues["tenant_id"],
 				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
 				"secret_store_tenant_id_key":  seValues["secret_store_tenant_id_key"],
+			},
+		})
+	case *sdm.AzureCertificate:
+		localV, ok := localVersion.(*sdm.AzureCertificate)
+		if !ok {
+			localV = &sdm.AzureCertificate{}
+		}
+		_ = localV
+		d.Set("azure_certificate", []map[string]interface{}{
+			{
+				"app_id":                               seValues["app_id"],
+				"secret_store_app_id_path":             seValues["secret_store_app_id_path"],
+				"secret_store_app_id_key":              seValues["secret_store_app_id_key"],
+				"client_certificate":                   seValues["client_certificate"],
+				"secret_store_client_certificate_path": seValues["secret_store_client_certificate_path"],
+				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
+				"egress_filter":                        (v.EgressFilter),
+				"name":                                 (v.Name),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToMap(v.Tags),
+				"tenant_id":                            seValues["tenant_id"],
+				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
+				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
 			},
 		})
 	case *sdm.AzurePostgres:
