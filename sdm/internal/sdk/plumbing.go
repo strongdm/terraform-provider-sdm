@@ -3509,6 +3509,62 @@ func convertRepeatedMongoReplicaSetToPorcelain(plumbings []*proto.MongoReplicaSe
 	}
 	return items
 }
+func convertMongoShardedClusterToPorcelain(plumbing *proto.MongoShardedCluster) *MongoShardedCluster {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &MongoShardedCluster{}
+	porcelain.AuthDatabase = (plumbing.AuthDatabase)
+	porcelain.EgressFilter = (plumbing.EgressFilter)
+	porcelain.Healthy = (plumbing.Healthy)
+	porcelain.Hostname = (plumbing.Hostname)
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Password = (plumbing.Password)
+	porcelain.PortOverride = (plumbing.PortOverride)
+	porcelain.SecretStoreID = (plumbing.SecretStoreId)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.TlsRequired = (plumbing.TlsRequired)
+	porcelain.Username = (plumbing.Username)
+	return porcelain
+}
+
+func convertMongoShardedClusterToPlumbing(porcelain *MongoShardedCluster) *proto.MongoShardedCluster {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MongoShardedCluster{}
+	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMongoShardedClusterToPlumbing(
+	porcelains []*MongoShardedCluster,
+) []*proto.MongoShardedCluster {
+	var items []*proto.MongoShardedCluster
+	for _, porcelain := range porcelains {
+		items = append(items, convertMongoShardedClusterToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMongoShardedClusterToPorcelain(plumbings []*proto.MongoShardedCluster) []*MongoShardedCluster {
+	var items []*MongoShardedCluster
+	for _, plumbing := range plumbings {
+		items = append(items, convertMongoShardedClusterToPorcelain(plumbing))
+	}
+	return items
+}
 func convertMysqlToPorcelain(plumbing *proto.Mysql) *Mysql {
 	if plumbing == nil {
 		return nil
@@ -4497,6 +4553,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_MongoLegacyReplicaset{MongoLegacyReplicaset: convertMongoLegacyReplicasetToPlumbing(v)}
 	case *MongoReplicaSet:
 		plumbing.Resource = &proto.Resource_MongoReplicaSet{MongoReplicaSet: convertMongoReplicaSetToPlumbing(v)}
+	case *MongoShardedCluster:
+		plumbing.Resource = &proto.Resource_MongoShardedCluster{MongoShardedCluster: convertMongoShardedClusterToPlumbing(v)}
 	case *Mysql:
 		plumbing.Resource = &proto.Resource_Mysql{Mysql: convertMysqlToPlumbing(v)}
 	case *Neptune:
@@ -4685,6 +4743,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) Resource {
 	}
 	if plumbing.GetMongoReplicaSet() != nil {
 		return convertMongoReplicaSetToPorcelain(plumbing.GetMongoReplicaSet())
+	}
+	if plumbing.GetMongoShardedCluster() != nil {
+		return convertMongoShardedClusterToPorcelain(plumbing.GetMongoShardedCluster())
 	}
 	if plumbing.GetMysql() != nil {
 		return convertMysqlToPorcelain(plumbing.GetMysql())

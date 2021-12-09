@@ -742,6 +742,20 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
+* mongo_sharded_cluster:
+	* `auth_database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
 * mysql:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1063,6 +1077,8 @@ In addition to provided arguments above, the following attributes are returned b
 * mongo_legacy_replicaset:
 	* `port_override` - 
 * mongo_replica_set:
+	* `port_override` - 
+* mongo_sharded_cluster:
 	* `port_override` - 
 * mysql:
 	* `port_override` - 

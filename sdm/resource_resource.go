@@ -3902,6 +3902,86 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"mongo_sharded_cluster": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"auth_database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_password_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_password_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+					},
+				},
+			},
 			"mysql": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -7302,6 +7382,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
 		}, nil
 	}
+	if list := d.Get("mongo_sharded_cluster").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"password":                   convertStringFromMap(raw, "password"),
+			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
+			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+			"username":                   convertStringFromMap(raw, "username"),
+			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
+			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+		}, nil
+	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9344,6 +9461,36 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("mongo_sharded_cluster").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.MongoShardedCluster{}
+		}
+		out := &sdm.MongoShardedCluster{
+			ID:            d.Id(),
+			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
+			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
+			Hostname:      convertStringFromMap(raw, "hostname"),
+			Name:          convertStringFromMap(raw, "name"),
+			Password:      convertStringFromMap(raw, "password"),
+			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
+			Tags:          convertTagsFromMap(raw, "tags"),
+			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
+			Username:      convertStringFromMap(raw, "username"),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.Password == "" {
+			out.Password = fullSecretStorePath(raw, "password")
+		}
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
+		}
+		return out
+	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10943,6 +11090,27 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
+	case *sdm.MongoShardedCluster:
+		localV, _ := localVersion.(*sdm.MongoShardedCluster)
+		_ = localV
+		d.Set("mongo_sharded_cluster", []map[string]interface{}{
+			{
+				"auth_database":              (v.AuthDatabase),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"name":                       (v.Name),
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"port_override":              (v.PortOverride),
+				"secret_store_id":            (v.SecretStoreID),
+				"tags":                       convertTagsToMap(v.Tags),
+				"tls_required":               (v.TlsRequired),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+			},
+		})
 	case *sdm.Mysql:
 		localV, _ := localVersion.(*sdm.Mysql)
 		_ = localV
@@ -12522,6 +12690,30 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
+				"secret_store_id":            (v.SecretStoreID),
+				"tags":                       convertTagsToMap(v.Tags),
+				"tls_required":               (v.TlsRequired),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
+			},
+		})
+	case *sdm.MongoShardedCluster:
+		localV, ok := localVersion.(*sdm.MongoShardedCluster)
+		if !ok {
+			localV = &sdm.MongoShardedCluster{}
+		}
+		_ = localV
+		d.Set("mongo_sharded_cluster", []map[string]interface{}{
+			{
+				"auth_database":              (v.AuthDatabase),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"name":                       (v.Name),
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToMap(v.Tags),
 				"tls_required":               (v.TlsRequired),

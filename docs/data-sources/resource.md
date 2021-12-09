@@ -602,6 +602,18 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
+	* mongo_sharded_cluster:
+		* `auth_database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - 
+		* `port_override` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - 
+		* `username` - 
 	* mysql:
 		* `database` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
