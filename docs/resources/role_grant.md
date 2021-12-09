@@ -16,9 +16,6 @@ resource "sdm_role_grant" "test_role_grant" {
     resource_id = "rs-21522"
 }
 ```
-
-This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the RoleGrant resource:
 * `resource_id` - (Required) The id of the resource of this RoleGrant.

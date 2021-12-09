@@ -28,9 +28,6 @@ resource "sdm_role" "redis-only" {
     }    
 }
 ```
-
-This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the Role resource:
 * `access_rules` - (Optional) AccessRules JSON encoded access rules data.

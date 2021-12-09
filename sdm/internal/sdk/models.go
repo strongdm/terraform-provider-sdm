@@ -1536,32 +1536,6 @@ type MongoReplicaSet struct {
 	Username string `json:"username"`
 }
 
-type MongoShardedCluster struct {
-	AuthDatabase string `json:"authDatabase"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-
-	Hostname string `json:"hostname"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-
-	Password string `json:"password"`
-
-	PortOverride int32 `json:"portOverride"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-
-	TlsRequired bool `json:"tlsRequired"`
-
-	Username string `json:"username"`
-}
-
 type Mysql struct {
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -4097,50 +4071,6 @@ func (m *MongoReplicaSet) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the MongoReplicaSet.
 func (m *MongoReplicaSet) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-func (*MongoShardedCluster) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the MongoShardedCluster.
-func (m *MongoShardedCluster) GetID() string { return m.ID }
-
-// GetName returns the name of the MongoShardedCluster.
-func (m *MongoShardedCluster) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the MongoShardedCluster.
-func (m *MongoShardedCluster) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the MongoShardedCluster.
-func (m *MongoShardedCluster) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the MongoShardedCluster.
-func (m *MongoShardedCluster) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the MongoShardedCluster.
-func (m *MongoShardedCluster) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the MongoShardedCluster.
-func (m *MongoShardedCluster) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the MongoShardedCluster.
-func (m *MongoShardedCluster) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the MongoShardedCluster.
-func (m *MongoShardedCluster) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*Mysql) isOneOf_Resource() {}

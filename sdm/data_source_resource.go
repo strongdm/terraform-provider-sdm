@@ -3338,75 +3338,6 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"mongo_sharded_cluster": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"auth_database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"tls_required": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
 						"mysql": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -5479,20 +5410,6 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 				"tags":               convertTagsToMap(v.Tags),
 				"tls_required":       (v.TlsRequired),
 				"username":           (v.Username),
-			})
-		case *sdm.MongoShardedCluster:
-			output[0]["mongo_sharded_cluster"] = append(output[0]["mongo_sharded_cluster"], entity{
-				"auth_database":   (v.AuthDatabase),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
-				"tls_required":    (v.TlsRequired),
-				"username":        (v.Username),
 			})
 		case *sdm.Mysql:
 			output[0]["mysql"] = append(output[0]["mysql"], entity{

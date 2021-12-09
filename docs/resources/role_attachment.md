@@ -16,9 +16,6 @@ resource "sdm_role_attachment" "test_role_attachment" {
     attached_role_id = "r-3453433"
 }
 ```
-
-This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the RoleAttachment resource:
 * `attached_role_id` - (Required) The id of the attached role of this RoleAttachment.
