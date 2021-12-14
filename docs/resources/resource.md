@@ -38,9 +38,6 @@ resource "sdm_resource" "postgres-test" {
     }
 }
 ```
-
-This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the Resource resource:
 * aks:
