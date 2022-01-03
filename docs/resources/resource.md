@@ -38,6 +38,9 @@ resource "sdm_resource" "postgres-test" {
     }
 }
 ```
+
+This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
+
 ## Argument Reference
 The following arguments are supported by the Resource resource:
 * aks:
@@ -62,14 +65,14 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * aks_service_account:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -79,8 +82,8 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `token` - (Optional) 
-	* `secret_store_token_path` - (Optional)
+	* `token` - (Required if storing credentials directly strongDM) 
+	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_token_key` - (Optional)
 * aks_service_account_user_impersonation:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -90,8 +93,8 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `token` - (Optional) 
-	* `secret_store_token_path` - (Optional)
+	* `token` - (Required if storing credentials directly strongDM) 
+	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_token_key` - (Optional)
 * aks_user_impersonation:
 	* `certificate_authority` - (Optional) 
@@ -111,11 +114,11 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks:
-	* `access_key` - (Optional) 
-	* `secret_store_access_key_path` - (Optional)
+	* `access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
-	* `certificate_authority` - (Optional) 
-	* `secret_store_certificate_authority_path` - (Optional)
+	* `certificate_authority` - (Required if storing credentials directly strongDM) 
+	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `cluster_name` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -129,17 +132,17 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `secret_access_key` - (Optional) 
-	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_user_impersonation:
-	* `access_key` - (Optional) 
-	* `secret_store_access_key_path` - (Optional)
+	* `access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
-	* `certificate_authority` - (Optional) 
-	* `secret_store_certificate_authority_path` - (Optional)
+	* `certificate_authority` - (Required if storing credentials directly strongDM) 
+	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `cluster_name` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -153,8 +156,8 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `secret_access_key` - (Optional) 
-	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -181,19 +184,19 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * athena:
-	* `access_key` - (Optional) 
-	* `secret_store_access_key_path` - (Optional)
+	* `access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -205,8 +208,8 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `secret_access_key` - (Optional) 
-	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -215,14 +218,14 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * aurora_postgres:
 	* `database` - (Required) 
@@ -230,18 +233,18 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * aws:
-	* `access_key` - (Optional) 
-	* `secret_store_access_key_path` - (Optional)
+	* `access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_region` - (Required) 
@@ -252,28 +255,28 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `secret_access_key` - (Optional) 
-	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * azure:
-	* `app_id` - (Optional) 
-	* `secret_store_app_id_path` - (Optional)
+	* `app_id` - (Required if storing credentials directly strongDM) 
+	* `secret_store_app_id_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_app_id_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `tenant_id` - (Optional) 
-	* `secret_store_tenant_id_path` - (Optional)
+	* `tenant_id` - (Required if storing credentials directly strongDM) 
+	* `secret_store_tenant_id_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_tenant_id_key` - (Optional)
 * azure_certificate:
-	* `app_id` - (Optional) 
-	* `secret_store_app_id_path` - (Optional)
+	* `app_id` - (Required if storing credentials directly strongDM) 
+	* `secret_store_app_id_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_app_id_key` - (Optional)
 	* `client_certificate` - (Optional) 
 	* `secret_store_client_certificate_path` - (Optional)
@@ -282,8 +285,8 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `tenant_id` - (Optional) 
-	* `secret_store_tenant_id_path` - (Optional)
+	* `tenant_id` - (Required if storing credentials directly strongDM) 
+	* `secret_store_tenant_id_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_tenant_id_key` - (Optional)
 * azure_postgres:
 	* `database` - (Required) 
@@ -291,21 +294,21 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * big_query:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `private_key` - (Optional) 
-	* `secret_store_private_key_path` - (Optional)
+	* `private_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_private_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_private_key_key` - (Optional)
 	* `project` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -315,15 +318,15 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * citus:
 	* `database` - (Required) 
@@ -331,28 +334,28 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * clustrix:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * cockroach:
 	* `database` - (Required) 
@@ -360,42 +363,42 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * db_2_i:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * db_2_luw:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * document_db_host:
 	* `auth_database` - (Required) 
@@ -440,8 +443,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
 * dynamo_db:
-	* `access_key` - (Optional) 
-	* `secret_store_access_key_path` - (Optional)
+	* `access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
@@ -453,8 +456,8 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `secret_access_key` - (Optional) 
-	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -462,15 +465,15 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * elasticache_redis:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -485,37 +488,37 @@ The following arguments are supported by the Resource resource:
 	* `tls_required` - (Optional) 
 * gcp:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `keyfile` - (Optional) 
-	* `secret_store_keyfile_path` - (Optional)
+	* `keyfile` - (Required if storing credentials directly strongDM) 
+	* `secret_store_keyfile_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_keyfile_key` - (Optional)
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `scopes` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke:
-	* `certificate_authority` - (Optional) 
-	* `secret_store_certificate_authority_path` - (Optional)
+	* `certificate_authority` - (Required if storing credentials directly strongDM) 
+	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `service_account_key` - (Optional) 
-	* `secret_store_service_account_key_path` - (Optional)
+	* `service_account_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_service_account_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_service_account_key_key` - (Optional)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke_user_impersonation:
-	* `certificate_authority` - (Optional) 
-	* `secret_store_certificate_authority_path` - (Optional)
+	* `certificate_authority` - (Required if storing credentials directly strongDM) 
+	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `service_account_key` - (Optional) 
-	* `secret_store_service_account_key_path` - (Optional)
+	* `service_account_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_service_account_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_service_account_key_key` - (Optional)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * greenplum:
@@ -524,18 +527,18 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * http_auth:
-	* `auth_header` - (Optional) 
-	* `secret_store_auth_header_path` - (Optional)
+	* `auth_header` - (Required if storing credentials directly strongDM) 
+	* `secret_store_auth_header_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_auth_header_key` - (Optional)
 	* `default_path` - (Optional) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -594,14 +597,14 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * kubernetes_service_account:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -611,8 +614,8 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `token` - (Optional) 
-	* `secret_store_token_path` - (Optional)
+	* `token` - (Required if storing credentials directly strongDM) 
+	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_token_key` - (Optional)
 * kubernetes_service_account_user_impersonation:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -622,8 +625,8 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `token` - (Optional) 
-	* `secret_store_token_path` - (Optional)
+	* `token` - (Required if storing credentials directly strongDM) 
+	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_token_key` - (Optional)
 * kubernetes_user_impersonation:
 	* `certificate_authority` - (Optional) 
@@ -647,14 +650,14 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * memcached:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -668,14 +671,14 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * mongo_host:
 	* `auth_database` - (Required) 
@@ -742,19 +745,33 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
-* mysql:
-	* `database` - (Required) 
+* mongo_sharded_cluster:
+	* `auth_database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
 	* `secret_store_password_key` - (Optional)
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) 
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
+	* `secret_store_username_key` - (Optional)
+* mysql:
+	* `database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * neptune:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -764,8 +781,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * neptune_iam:
-	* `access_key` - (Optional) 
-	* `secret_store_access_key_path` - (Optional)
+	* `access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
@@ -778,8 +795,8 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) 
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
-	* `secret_access_key` - (Optional) 
-	* `secret_store_secret_access_key_path` - (Optional)
+	* `secret_access_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -788,15 +805,15 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * postgres:
 	* `database` - (Required) 
@@ -804,14 +821,14 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * presto:
 	* `database` - (Required) 
@@ -830,15 +847,15 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * raw_tcp:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -851,14 +868,14 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * redis:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -876,42 +893,42 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * single_store:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * snowflake:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `schema` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * sql_server:
 	* `database` - (Required) 
@@ -919,15 +936,15 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `override_database` - (Optional) 
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `schema` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * ssh:
 	* `allow_deprecated_key_exchanges` - (Optional) 
@@ -938,8 +955,8 @@ The following arguments are supported by the Resource resource:
 	* `port_forwarding` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * ssh_cert:
 	* `allow_deprecated_key_exchanges` - (Optional) 
@@ -950,8 +967,8 @@ The following arguments are supported by the Resource resource:
 	* `port_forwarding` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * ssh_customer_key:
 	* `allow_deprecated_key_exchanges` - (Optional) 
@@ -965,8 +982,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_private_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * sybase:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -978,8 +995,8 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * sybase_iq:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -991,21 +1008,21 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 * teradata:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) 
-	* `secret_store_password_path` - (Optional)
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Optional) 
-	* `secret_store_username_path` - (Optional)
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
@@ -1063,6 +1080,8 @@ In addition to provided arguments above, the following attributes are returned b
 * mongo_legacy_replicaset:
 	* `port_override` - 
 * mongo_replica_set:
+	* `port_override` - 
+* mongo_sharded_cluster:
 	* `port_override` - 
 * mysql:
 	* `port_override` - 
