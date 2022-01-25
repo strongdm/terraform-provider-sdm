@@ -4597,6 +4597,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"downgrade_nla_connections": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -9727,15 +9732,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 			return &sdm.RDP{}
 		}
 		out := &sdm.RDP{
-			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			ID:                      d.Id(),
+			DowngradeNlaConnections: convertBoolFromMap(raw, "downgrade_nla_connections"),
+			EgressFilter:            convertStringFromMap(raw, "egress_filter"),
+			Hostname:                convertStringFromMap(raw, "hostname"),
+			Name:                    convertStringFromMap(raw, "name"),
+			Password:                convertStringFromMap(raw, "password"),
+			Port:                    convertInt32FromMap(raw, "port"),
+			SecretStoreID:           convertStringFromMap(raw, "secret_store_id"),
+			Tags:                    convertTagsFromMap(raw, "tags"),
+			Username:                convertStringFromMap(raw, "username"),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -11277,6 +11283,7 @@ func resourceResourceCreate(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
+				"downgrade_nla_connections":  (v.DowngradeNlaConnections),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12915,6 +12922,7 @@ func resourceResourceRead(d *schema.ResourceData, cc *sdm.Client) error {
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
+				"downgrade_nla_connections":  (v.DowngradeNlaConnections),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),

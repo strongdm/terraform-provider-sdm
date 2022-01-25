@@ -35,7 +35,6 @@ resource "sdm_account" "test-service" {
     }
 }
 ```
-
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 
 ## Argument Reference

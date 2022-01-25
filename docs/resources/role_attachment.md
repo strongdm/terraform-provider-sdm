@@ -16,7 +16,6 @@ resource "sdm_role_attachment" "test_role_attachment" {
     attached_role_id = "r-3453433"
 }
 ```
-
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 
 ## Argument Reference

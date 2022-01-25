@@ -3958,6 +3958,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"downgrade_nla_connections": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -5607,16 +5612,17 @@ func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
-				"username":        (v.Username),
+				"downgrade_nla_connections": (v.DowngradeNlaConnections),
+				"egress_filter":             (v.EgressFilter),
+				"hostname":                  (v.Hostname),
+				"id":                        (v.ID),
+				"name":                      (v.Name),
+				"password":                  (v.Password),
+				"port":                      (v.Port),
+				"port_override":             (v.PortOverride),
+				"secret_store_id":           (v.SecretStoreID),
+				"tags":                      convertTagsToMap(v.Tags),
+				"username":                  (v.Username),
 			})
 		case *sdm.Redis:
 			output[0]["redis"] = append(output[0]["redis"], entity{

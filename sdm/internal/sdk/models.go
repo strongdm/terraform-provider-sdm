@@ -648,6 +648,17 @@ type AzurePostgres struct {
 	Username string `json:"username"`
 }
 
+type AzureStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	VaultUri string `json:"vaultUri"`
+}
+
 type BigQuery struct {
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1809,6 +1820,7 @@ type Presto struct {
 }
 
 type RDP struct {
+	DowngradeNlaConnections bool `json:"downgradeNlaConnections"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -5337,6 +5349,30 @@ func (m *AWSStore) GetName() string {
 
 // SetName sets the name of the AWSStore.
 func (m *AWSStore) SetName(v string) {
+	m.Name = v
+}
+func (*AzureStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the AzureStore.
+func (m *AzureStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the AzureStore.
+func (m *AzureStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzureStore.
+func (m *AzureStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the AzureStore.
+func (m *AzureStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzureStore.
+func (m *AzureStore) SetName(v string) {
 	m.Name = v
 }
 func (*VaultTLSStore) isOneOf_SecretStore() {}

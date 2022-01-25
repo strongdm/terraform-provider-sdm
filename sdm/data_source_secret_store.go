@@ -57,6 +57,10 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"vault_uri": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"secret_stores": {
 				Type:     schema.TypeList,
 				Computed: true,
@@ -92,6 +96,39 @@ func dataSourceSecretStore() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"azure_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"vault_uri": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
 									},
 								},
 							},
@@ -240,6 +277,10 @@ func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, [
 		filter += "tags:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOk("vault_uri"); ok {
+		filter += "vaulturi:? "
+		args = append(args, v)
+	}
 	return filter, args
 }
 
@@ -266,6 +307,13 @@ func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":   (v.Name),
 				"region": (v.Region),
 				"tags":   convertTagsToMap(v.Tags),
+			})
+		case *sdm.AzureStore:
+			output[0]["azure_store"] = append(output[0]["azure_store"], entity{
+				"id":        (v.ID),
+				"name":      (v.Name),
+				"tags":      convertTagsToMap(v.Tags),
+				"vault_uri": (v.VaultUri),
 			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{

@@ -262,6 +262,20 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 				{"client_key_path", `"ClientKeyPath"`},
 			},
 		},
+		{
+			resource: "aws",
+			pairs: [][2]string{
+				{"name", `"awsStore"`},
+				{"region", `"us-west"`},
+			},
+		},
+		{
+			resource: "azure_store",
+			pairs: [][2]string{
+				{"name", `"azureStore"`},
+				{"vault_uri", `"https://azure.secrets/secret"`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")

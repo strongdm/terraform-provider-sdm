@@ -3,7 +3,6 @@ module github.com/strongdm/terraform-provider-sdm
 go 1.13
 
 require (
-	github.com/golang/protobuf v1.4.2
 	github.com/google/uuid v1.1.2 // indirect
 	github.com/hashicorp/terraform-plugin-sdk v1.16.0
 	github.com/hashicorp/terraform-plugin-test v1.2.0 // indirect

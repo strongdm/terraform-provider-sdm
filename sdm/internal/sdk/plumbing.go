@@ -1509,6 +1509,46 @@ func convertRepeatedAzurePostgresToPorcelain(plumbings []*proto.AzurePostgres) [
 	}
 	return items
 }
+func convertAzureStoreToPorcelain(plumbing *proto.AzureStore) *AzureStore {
+	if plumbing == nil {
+		return nil
+	}
+	porcelain := &AzureStore{}
+	porcelain.ID = (plumbing.Id)
+	porcelain.Name = (plumbing.Name)
+	porcelain.Tags = convertTagsToPorcelain(plumbing.Tags)
+	porcelain.VaultUri = (plumbing.VaultUri)
+	return porcelain
+}
+
+func convertAzureStoreToPlumbing(porcelain *AzureStore) *proto.AzureStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzureStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.VaultUri = (porcelain.VaultUri)
+	return plumbing
+}
+func convertRepeatedAzureStoreToPlumbing(
+	porcelains []*AzureStore,
+) []*proto.AzureStore {
+	var items []*proto.AzureStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureStoreToPorcelain(plumbings []*proto.AzureStore) []*AzureStore {
+	var items []*AzureStore
+	for _, plumbing := range plumbings {
+		items = append(items, convertAzureStoreToPorcelain(plumbing))
+	}
+	return items
+}
 func convertBigQueryToPorcelain(plumbing *proto.BigQuery) *BigQuery {
 	if plumbing == nil {
 		return nil
@@ -4103,6 +4143,7 @@ func convertRDPToPorcelain(plumbing *proto.RDP) *RDP {
 		return nil
 	}
 	porcelain := &RDP{}
+	porcelain.DowngradeNlaConnections = (plumbing.DowngradeNlaConnections)
 	porcelain.EgressFilter = (plumbing.EgressFilter)
 	porcelain.Healthy = (plumbing.Healthy)
 	porcelain.Hostname = (plumbing.Hostname)
@@ -4122,6 +4163,7 @@ func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
 		return nil
 	}
 	plumbing := &proto.RDP{}
+	plumbing.DowngradeNlaConnections = (porcelain.DowngradeNlaConnections)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -5703,6 +5745,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 	switch v := porcelain.(type) {
 	case *AWSStore:
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
+	case *AzureStore:
+		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
 	case *VaultTLSStore:
 		plumbing.SecretStore = &proto.SecretStore_VaultTls{VaultTls: convertVaultTLSStoreToPlumbing(v)}
 	case *VaultTokenStore:
@@ -5714,6 +5758,9 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) SecretStore {
 	if plumbing.GetAws() != nil {
 		return convertAWSStoreToPorcelain(plumbing.GetAws())
+	}
+	if plumbing.GetAzure() != nil {
+		return convertAzureStoreToPorcelain(plumbing.GetAzure())
 	}
 	if plumbing.GetVaultTls() != nil {
 		return convertVaultTLSStoreToPorcelain(plumbing.GetVaultTls())

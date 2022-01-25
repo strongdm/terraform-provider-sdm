@@ -21,6 +21,7 @@ The following arguments are supported by a SecretStores data source:
 * `region` - (Optional) 
 * `server_address` - (Optional) 
 * `tags` - (Optional) Tags is a map of key, value pairs.
+* `vault_uri` - (Optional) 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a SecretStores data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_secret_store ids.
@@ -31,6 +32,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `region` - 
 		* `tags` - Tags is a map of key, value pairs.
+	* azure_store:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `tags` - Tags is a map of key, value pairs.
+		* `vault_uri` - 
 	* vault_tls:
 		* `ca_cert_path` - 
 		* `client_cert_path` - 

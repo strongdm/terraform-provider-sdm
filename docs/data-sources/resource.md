@@ -710,6 +710,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 	* rdp:
+		* `downgrade_nla_connections` - 
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `id` - Unique identifier of the Resource.

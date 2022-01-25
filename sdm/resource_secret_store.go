@@ -51,6 +51,34 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"azure_store": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"vault_uri": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"vault_tls": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -152,6 +180,19 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		return out
 	}
+	if list := d.Get("azure_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AzureStore{}
+		}
+		out := &sdm.AzureStore{
+			ID:       d.Id(),
+			Name:     convertStringFromMap(raw, "name"),
+			Tags:     convertTagsFromMap(raw, "tags"),
+			VaultUri: convertStringFromMap(raw, "vault_uri"),
+		}
+		return out
+	}
 	if list := d.Get("vault_tls").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -205,6 +246,16 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":   (v.Name),
 				"region": (v.Region),
 				"tags":   convertTagsToMap(v.Tags),
+			},
+		})
+	case *sdm.AzureStore:
+		localV, _ := localVersion.(*sdm.AzureStore)
+		_ = localV
+		d.Set("azure_store", []map[string]interface{}{
+			{
+				"name":      (v.Name),
+				"tags":      convertTagsToMap(v.Tags),
+				"vault_uri": (v.VaultUri),
 			},
 		})
 	case *sdm.VaultTLSStore:
@@ -262,6 +313,19 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 				"name":   (v.Name),
 				"region": (v.Region),
 				"tags":   convertTagsToMap(v.Tags),
+			},
+		})
+	case *sdm.AzureStore:
+		localV, ok := localVersion.(*sdm.AzureStore)
+		if !ok {
+			localV = &sdm.AzureStore{}
+		}
+		_ = localV
+		d.Set("azure_store", []map[string]interface{}{
+			{
+				"name":      (v.Name),
+				"tags":      convertTagsToMap(v.Tags),
+				"vault_uri": (v.VaultUri),
 			},
 		})
 	case *sdm.VaultTLSStore:

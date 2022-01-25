@@ -38,7 +38,6 @@ resource "sdm_resource" "postgres-test" {
     }
 }
 ```
-
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 
 ## Argument Reference
@@ -865,6 +864,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * rdp:
+	* `downgrade_nla_connections` - (Optional) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
