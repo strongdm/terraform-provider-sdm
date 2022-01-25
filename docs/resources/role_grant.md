@@ -25,3 +25,9 @@ The following arguments are supported by the RoleGrant resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the RoleGrant resource:
 * `id` - A unique identifier for the RoleGrant resource.
+## Import
+RoleGrant can be imported using the id, e.g.,
+
+```
+$ terraform import RoleGrant.example rg-12345678
+```

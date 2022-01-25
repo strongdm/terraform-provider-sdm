@@ -25,3 +25,9 @@ The following arguments are supported by the RoleAttachment resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the RoleAttachment resource:
 * `id` - A unique identifier for the RoleAttachment resource.
+## Import
+RoleAttachment can be imported using the id, e.g.,
+
+```
+$ terraform import RoleAttachment.example ra-12345678
+```

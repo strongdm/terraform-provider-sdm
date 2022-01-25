@@ -25,3 +25,9 @@ The following arguments are supported by the AccountAttachment resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the AccountAttachment resource:
 * `id` - A unique identifier for the AccountAttachment resource.
+## Import
+AccountAttachment can be imported using the id, e.g.,
+
+```
+$ terraform import AccountAttachment.example aa-12345678
+```

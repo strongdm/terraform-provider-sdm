@@ -25,3 +25,9 @@ The following arguments are supported by the AccountGrant resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the AccountGrant resource:
 * `id` - A unique identifier for the AccountGrant resource.
+## Import
+AccountGrant can be imported using the id, e.g.,
+
+```
+$ terraform import AccountGrant.example ag-12345678
+```

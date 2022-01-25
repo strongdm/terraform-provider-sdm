@@ -37,3 +37,9 @@ The following arguments are supported by the SecretStore resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the SecretStore resource:
 * `id` - A unique identifier for the SecretStore resource.
+## Import
+SecretStore can be imported using the id, e.g.,
+
+```
+$ terraform import SecretStore.example se-12345678
+```

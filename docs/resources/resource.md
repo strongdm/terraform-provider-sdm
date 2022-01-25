@@ -1119,3 +1119,9 @@ In addition to provided arguments above, the following attributes are returned b
 	* `port_override` - 
 * teradata:
 	* `port_override` - 
+## Import
+Resource can be imported using the id, e.g.,
+
+```
+$ terraform import Resource.example rs-12345678
+```

@@ -56,3 +56,9 @@ The following arguments are supported by the Node resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Node resource:
 * `id` - A unique identifier for the Node resource.
+## Import
+Node can be imported using the id, e.g.,
+
+```
+$ terraform import Node.example n-12345678
+```

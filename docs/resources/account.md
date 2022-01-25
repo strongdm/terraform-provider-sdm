@@ -52,3 +52,9 @@ The following arguments are supported by the Account resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Account resource:
 * `id` - A unique identifier for the Account resource.
+## Import
+Account can be imported using the id, e.g.,
+
+```
+$ terraform import Account.example a-12345678
+```
