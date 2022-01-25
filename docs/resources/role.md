@@ -17,15 +17,26 @@ resource "sdm_role" "all-dbs" {
     tags = {
         region = "us-west"
         env = "dev"
-    }    
+    }
 }
 
 resource "sdm_role" "redis-only" {
     name = "redis-role"
+    access_rule {
+        ids = ["rs-093e6f3061eb4dad"]
+    }
+    access_rule {
+        tags = {
+            env = "staging"
+        }
+    }
+    access_rule {
+        type = "postgres"
+    }
     tags = {
         region = "us-west"
         env = "dev"
-    }    
+    }
 }
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
