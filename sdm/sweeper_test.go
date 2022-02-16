@@ -62,7 +62,9 @@ func preTestClient() (*sdm.Client, error) {
 		id := os.Getenv("SDM_API_ACCESS_KEY")
 		secretID := os.Getenv("SDM_API_SECRET_KEY")
 		opts := []sdm.ClientOption{sdm.WithHost(host)}
-		if strings.HasPrefix(host, "localhost:") || strings.HasPrefix(host, "127.0.0.1:") {
+		if strings.HasPrefix(host, "localhost:") ||
+			strings.HasPrefix(host, "127.0.0.1:") ||
+			strings.HasPrefix(host, "host.docker.internal:") {
 			opts = append(opts, sdm.WithInsecure())
 		}
 		defaultPreTestClient, err = sdm.New(id, secretID, opts...)

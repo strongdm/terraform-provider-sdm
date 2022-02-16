@@ -66,7 +66,9 @@ func Provider() *schema.Provider {
 				sdm.WithUserAgentExtra(userAgent),
 				sdm.WithHost(host),
 			}
-			if strings.HasPrefix(host, "localhost:") || strings.HasPrefix(host, "127.0.0.1:") {
+			if strings.HasPrefix(host, "localhost:") ||
+				strings.HasPrefix(host, "127.0.0.1:") ||
+				strings.HasPrefix(host, "host.docker.internal:") {
 				opts = append(opts, sdm.WithInsecure())
 			}
 			client, err := sdm.New(d.Get("api_access_key").(string), d.Get("api_secret_key").(string), opts...)
