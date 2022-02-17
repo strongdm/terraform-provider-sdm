@@ -3,11 +3,18 @@
 To increase flexibility when managing thousands of Resources, Role Grants have
 been deprecated in favor of Access Rules, which allow you to grant access based
 on Resource Tags and Type. Role Grants will be removed from the Terraform
-provider by March 15, 2022.
+provider by March 31, 2022.
 
 The following examples demonstrate the deprecated Role Grants, Dynamic Access
 Rules with Tags and Resource Types, and Static Access Rules for backwards
 compatibility with Role Grants.
+
+
+## Important Versioning Caveat
+This guide only applies to version 1.0.40 and up of the Terraform Provider.
+Prior to 1.0.40, the provider includes only rudimentary beta support for access
+rules. Prior to 1.0.27, it does not support access rules at all. We strongly
+recommend upgrading to 1.0.40 when it is available.
 
 ## Role Grants (deprecated)
 
@@ -79,7 +86,7 @@ resource "sdm_role" "engineering" {
     type = "postgres"
   }
 
-  # grant access to all redis datasources in us-east
+  # grant access to all redis resources in us-east
   access_rule {
     type = "redis"
     tags = {

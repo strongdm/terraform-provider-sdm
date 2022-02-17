@@ -1682,6 +1682,10 @@ type Node interface {
 	GetTags() Tags
 	// SetTags sets the tags of the Node.
 	SetTags(Tags)
+	// GetName returns the name of the Node.
+	GetName() string
+	// SetName sets the name of the Node.
+	SetName(string)
 	isOneOf_Node()
 }
 
@@ -1699,6 +1703,16 @@ func (m *Gateway) GetTags() Tags {
 func (m *Gateway) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
+
+// GetName returns the name of the Gateway.
+func (m *Gateway) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Gateway.
+func (m *Gateway) SetName(v string) {
+	m.Name = v
+}
 func (*Relay) isOneOf_Node() {}
 
 // GetID returns the unique identifier of the Relay.
@@ -1712,6 +1726,16 @@ func (m *Relay) GetTags() Tags {
 // SetTags sets the tags of the Relay.
 func (m *Relay) SetTags(v Tags) {
 	m.Tags = v.clone()
+}
+
+// GetName returns the name of the Relay.
+func (m *Relay) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Relay.
+func (m *Relay) SetName(v string) {
+	m.Name = v
 }
 
 // NodeCreateResponse reports how the Nodes were created in the system.
