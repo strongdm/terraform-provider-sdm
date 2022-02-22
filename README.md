@@ -63,6 +63,7 @@ $ terraform apply
 ## Useful Links
 
 * Documentation: [terraform strongDM provider](https://registry.terraform.io/providers/strongdm/sdm/latest/docs)
+* [Migrating from Role Grants to Access Rules](https://registry.terraform.io/providers/strongdm/sdm/2.0.0/docs/guides/migrating_from_role_grants_to_access_rules)
 * Examples: [GitHub - strongdm/terraform-provider-sdm-examples](https://github.com/strongdm/terraform-provider-sdm-examples)
 	1. [Managing Resources](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/1_managing_resources)
 	2. [Managing Gateways](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/4_managing_gateways)
