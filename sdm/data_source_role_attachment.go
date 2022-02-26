@@ -7,14 +7,15 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceRoleAttachment() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceRoleAttachmentList),
+		ReadContext:        wrapCrudOperation(dataSourceRoleAttachmentList),
+		DeprecationMessage: "sdm_role_attachment is deprecated, see docs for more info",
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -86,9 +87,7 @@ func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string
 	return filter, args
 }
 
-func dataSourceRoleAttachmentList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceRoleAttachmentList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertRoleAttachmentFilterFromResourceData(d)
 	resp, err := cc.RoleAttachments().List(ctx, filter, args...)
 	if err != nil {

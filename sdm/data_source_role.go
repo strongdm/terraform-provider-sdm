@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceRole() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceRoleList),
+		ReadContext: wrapCrudOperation(dataSourceRoleList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -22,15 +22,11 @@ func dataSourceRole() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"access_rules": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "AccessRules JSON encoded access rules data.",
-			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Description: "True if the Role is a composite role.",
+				Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role instead.",
+				Deprecated:  "composite is deprecated, see docs for more info",
 			},
 			"id": {
 				Type:        schema.TypeString,
@@ -43,29 +39,23 @@ func dataSourceRole() *schema.Resource {
 				Description: "Unique human-readable name of the Role.",
 			},
 			"tags": {
-				Type: schema.TypeMap,
-
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type:        schema.TypeMap,
+				Elem:        tagsElemType,
 				Optional:    true,
 				Description: "Tags is a map of key, value pairs.",
 			},
+			"access_rule": accessRuleSchema,
 			"roles": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"access_rules": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "AccessRules JSON encoded access rules data.",
-						},
 						"composite": {
 							Type:        schema.TypeBool,
 							Optional:    true,
-							Description: "True if the Role is a composite role.",
+							Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role instead.",
+							Deprecated:  "composite is deprecated, see docs for more info",
 						},
 						"id": {
 							Type:        schema.TypeString,
@@ -78,14 +68,12 @@ func dataSourceRole() *schema.Resource {
 							Description: "Unique human-readable name of the Role.",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"access_rule": accessRuleSchema,
 					},
 				},
 			},
@@ -99,10 +87,6 @@ func dataSourceRole() *schema.Resource {
 func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("access_rules"); ok {
-		filter += "accessrules:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOk("composite"); ok {
 		filter += "composite:? "
 		args = append(args, v)
@@ -122,9 +106,7 @@ func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interf
 	return filter, args
 }
 
-func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceRoleList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertRoleFilterFromResourceData(d)
 	resp, err := cc.Roles().List(ctx, filter, args...)
 	if err != nil {
@@ -138,11 +120,11 @@ func dataSourceRoleList(d *schema.ResourceData, cc *sdm.Client) error {
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"access_rules": (v.AccessRules),
-				"composite":    (v.Composite),
-				"id":           (v.ID),
-				"name":         (v.Name),
-				"tags":         convertTagsToMap(v.Tags),
+				"composite":   (v.Composite),
+				"id":          (v.ID),
+				"name":        (v.Name),
+				"tags":        convertTagsToMap(v.Tags),
+				"access_rule": convertAccessRulesToMap(v.AccessRules),
 			})
 	}
 	if resp.Err() != nil {

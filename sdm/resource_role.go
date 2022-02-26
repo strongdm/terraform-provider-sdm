@@ -8,32 +8,27 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceRole() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceRoleCreate),
-		Read:   wrapCrudOperation(resourceRoleRead),
-		Update: wrapCrudOperation(resourceRoleUpdate),
-		Delete: wrapCrudOperation(resourceRoleDelete),
+		CreateContext: wrapCrudOperation(resourceRoleCreate),
+		ReadContext:   wrapCrudOperation(resourceRoleRead),
+		UpdateContext: wrapCrudOperation(resourceRoleUpdate),
+		DeleteContext: wrapCrudOperation(resourceRoleDelete),
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
-			"access_rules": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: accessRulesJSONDiffSuppress,
-				Description:      "AccessRules JSON encoded access rules data.",
-			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				ForceNew:    true,
-				Description: "True if the Role is a composite role.",
+				Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role instead.",
+				Deprecated:  "composite is deprecated, see docs for more info",
 			},
 			"name": {
 				Type:        schema.TypeString,
@@ -41,14 +36,12 @@ func resourceRole() *schema.Resource {
 				Description: "Unique human-readable name of the Role.",
 			},
 			"tags": {
-				Type: schema.TypeMap,
-
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type:        schema.TypeMap,
+				Elem:        tagsElemType,
 				Optional:    true,
 				Description: "Tags is a map of key, value pairs.",
 			},
+			"access_rule": accessRuleSchema,
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -58,16 +51,14 @@ func resourceRole() *schema.Resource {
 func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),
-		AccessRules: convertStringFromResourceData(d, "access_rules"),
 		Composite:   convertBoolFromResourceData(d, "composite"),
 		Name:        convertStringFromResourceData(d, "name"),
 		Tags:        convertTagsFromResourceData(d, "tags"),
+		AccessRules: convertAccessRulesFromResourceData(d, "access_rule"),
 	}
 }
 
-func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleFromResourceData(d)
 
 	resp, err := cc.Roles().Create(ctx, localVersion)
@@ -76,16 +67,14 @@ func resourceRoleCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	d.SetId(resp.Role.ID)
 	v := resp.Role
-	d.Set("access_rules", (v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToMap(v.Tags))
+	d.Set("access_rule", convertAccessRulesToMap(v.AccessRules))
 	return nil
 }
 
-func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleFromResourceData(d)
 	_ = localVersion
 
@@ -98,26 +87,22 @@ func resourceRoleRead(d *schema.ResourceData, cc *sdm.Client) error {
 		return fmt.Errorf("cannot read Role %s: %w", d.Id(), err)
 	}
 	v := resp.Role
-	d.Set("access_rules", (v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToMap(v.Tags))
+	d.Set("access_rule", convertAccessRulesToMap(v.AccessRules))
 	return nil
 }
-func resourceRoleUpdate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
-	defer cancel()
+func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
 	resp, err := cc.Roles().Update(ctx, convertRoleFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Role %s: %w", d.Id(), err)
 	}
 	d.SetId(resp.Role.ID)
-	return resourceRoleRead(d, cc)
+	return resourceRoleRead(ctx, d, cc)
 }
-func resourceRoleDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceRoleDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Roles().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

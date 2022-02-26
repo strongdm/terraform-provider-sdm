@@ -18,6 +18,8 @@
 package sdm
 
 import (
+	"encoding/json"
+	"strings"
 	"time"
 )
 
@@ -29,6 +31,25 @@ func (t Tags) clone() Tags {
 		res[k] = v
 	}
 	return res
+}
+
+type AccessRule struct {
+	IDs  []string `json:"ids,omitempty"`
+	Type string   `json:"type,omitempty"`
+	Tags Tags     `json:"tags,omitempty"`
+}
+
+type AccessRules []AccessRule
+
+// ParseAccessRulesJSON parses the given access rules JSON string.
+func ParseAccessRulesJSON(data string) (AccessRules, error) {
+	result := AccessRules{}
+	decoder := json.NewDecoder(strings.NewReader(data))
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 type AKS struct {
@@ -5077,9 +5098,11 @@ type ResourceUpdateResponse struct {
 
 // A Role is a collection of access grants, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
 type Role struct {
-	// AccessRules JSON encoded access rules data.
-	AccessRules string `json:"accessRules"`
-	// True if the Role is a composite role.
+	// AccessRules is a list of access rules defining the resources this Role has access to.
+	AccessRules AccessRules `json:"accessRules"`
+	// Composite is true if the Role is a composite role.
+	//
+	// Deprecated: composite roles are deprecated, use multi-role instead.
 	Composite bool `json:"composite"`
 	// Unique identifier of the Role.
 	ID string `json:"id"`
@@ -5090,6 +5113,8 @@ type Role struct {
 }
 
 // A RoleAttachment assigns a role to a composite role.
+//
+// Deprecated: use multi-role instead.
 type RoleAttachment struct {
 	// The id of the attached role of this RoleAttachment.
 	AttachedRoleID string `json:"attachedRoleId"`
@@ -5100,6 +5125,8 @@ type RoleAttachment struct {
 }
 
 // RoleAttachmentCreateResponse reports how the RoleAttachments were created in the system.
+//
+// Deprecated: use multi-role instead.
 type RoleAttachmentCreateResponse struct {
 	// Reserved for future use.
 	Meta *CreateResponseMetadata `json:"meta"`
@@ -5110,6 +5137,8 @@ type RoleAttachmentCreateResponse struct {
 }
 
 // RoleAttachmentDeleteResponse returns information about a RoleAttachment that was deleted.
+//
+// Deprecated: use multi-role instead.
 type RoleAttachmentDeleteResponse struct {
 	// Reserved for future use.
 	Meta *DeleteResponseMetadata `json:"meta"`
@@ -5118,6 +5147,8 @@ type RoleAttachmentDeleteResponse struct {
 }
 
 // RoleAttachmentGetResponse returns a requested RoleAttachment.
+//
+// Deprecated: use multi-role instead.
 type RoleAttachmentGetResponse struct {
 	// Reserved for future use.
 	Meta *GetResponseMetadata `json:"meta"`
@@ -5157,6 +5188,8 @@ type RoleGetResponse struct {
 }
 
 // A RoleGrant connects a resource to a role, granting members of the role access to that resource.
+//
+// Deprecated: use access rules instead.
 type RoleGrant struct {
 	// Unique identifier of the RoleGrant.
 	ID string `json:"id"`
@@ -5167,6 +5200,8 @@ type RoleGrant struct {
 }
 
 // RoleGrantCreateResponse reports how the RoleGrants were created in the system.
+//
+// Deprecated: use access rules instead.
 type RoleGrantCreateResponse struct {
 	// Reserved for future use.
 	Meta *CreateResponseMetadata `json:"meta"`
@@ -5177,6 +5212,8 @@ type RoleGrantCreateResponse struct {
 }
 
 // RoleGrantDeleteResponse returns information about a RoleGrant that was deleted.
+//
+// Deprecated: use access rules instead.
 type RoleGrantDeleteResponse struct {
 	// Reserved for future use.
 	Meta *DeleteResponseMetadata `json:"meta"`
@@ -5185,6 +5222,8 @@ type RoleGrantDeleteResponse struct {
 }
 
 // RoleGrantGetResponse returns a requested RoleGrant.
+//
+// Deprecated: use access rules instead.
 type RoleGrantGetResponse struct {
 	// Reserved for future use.
 	Meta *GetResponseMetadata `json:"meta"`

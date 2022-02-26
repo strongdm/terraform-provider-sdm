@@ -9,18 +9,18 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-var testAccProviders map[string]terraform.ResourceProvider
-var testAccProvider terraform.ResourceProvider
+var testAccProviders map[string]*schema.Provider
+var testAccProvider *schema.Provider
 
 func TestMain(m *testing.M) {
 	testAccProvider = Provider()
-	testAccProviders = map[string]terraform.ResourceProvider{
+	testAccProviders = map[string]*schema.Provider{
 		"sdm": testAccProvider,
 	}
 	resource.TestMain(m)
@@ -49,7 +49,7 @@ func testCreatedID(s *terraform.State, resourceType, resourceName string) (strin
 }
 
 func testClient() *sdm.Client {
-	return testAccProvider.(*schema.Provider).Meta().(*sdm.Client)
+	return testAccProvider.Meta().(*sdm.Client)
 }
 
 var preTestClientOnce sync.Once

@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceControlPanelSSHCAPublicKey() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceControlPanelSSHCAPublicKeyGet),
+		ReadContext: wrapCrudOperation(dataSourceControlPanelSSHCAPublicKeyGet),
 		Schema: map[string]*schema.Schema{
 			"id": {
 				Type:        schema.TypeString,
@@ -33,10 +33,7 @@ func dataSourceControlPanelSSHCAPublicKey() *schema.Resource {
 	}
 }
 
-func dataSourceControlPanelSSHCAPublicKeyGet(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
-
+func dataSourceControlPanelSSHCAPublicKeyGet(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	resp, err := cc.ControlPanel().GetSSHCAPublicKey(ctx)
 	if err != nil {
 		return fmt.Errorf("cannot get SSH CA Public Key %s: %w", d.Id(), err)

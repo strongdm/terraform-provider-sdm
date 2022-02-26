@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceAccountAttachment() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceAccountAttachmentList),
+		ReadContext: wrapCrudOperation(dataSourceAccountAttachmentList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -86,9 +86,7 @@ func convertAccountAttachmentFilterFromResourceData(d *schema.ResourceData) (str
 	return filter, args
 }
 
-func dataSourceAccountAttachmentList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceAccountAttachmentList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertAccountAttachmentFilterFromResourceData(d)
 	resp, err := cc.AccountAttachments().List(ctx, filter, args...)
 	if err != nil {

@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceAccount() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceAccountList),
+		ReadContext: wrapCrudOperation(dataSourceAccountList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -77,11 +77,8 @@ func dataSourceAccount() *schema.Resource {
 										Description: "The Service's suspended state.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -120,11 +117,8 @@ func dataSourceAccount() *schema.Resource {
 										Description: "The User's suspended state.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -179,9 +173,7 @@ func convertAccountFilterFromResourceData(d *schema.ResourceData) (string, []int
 	return filter, args
 }
 
-func dataSourceAccountList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertAccountFilterFromResourceData(d)
 	resp, err := cc.Accounts().List(ctx, filter, args...)
 	if err != nil {

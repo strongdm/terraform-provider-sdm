@@ -34,6 +34,15 @@ func BackendConfig(backendConfig string) *BackendConfigOption {
 	return &BackendConfigOption{backendConfig}
 }
 
+type BackupOutOption struct {
+	path string
+}
+
+// BackupOutOption represents the -backup-out flag.
+func BackupOut(path string) *BackupOutOption {
+	return &BackupOutOption{path}
+}
+
 // BackupOption represents the -backup flag.
 type BackupOption struct {
 	path string
@@ -99,6 +108,32 @@ func Destroy(destroy bool) *DestroyFlagOption {
 	return &DestroyFlagOption{destroy}
 }
 
+type DryRunOption struct {
+	dryRun bool
+}
+
+// DryRun represents the -dry-run flag.
+func DryRun(dryRun bool) *DryRunOption {
+	return &DryRunOption{dryRun}
+}
+
+type FSMirrorOption struct {
+	fsMirror string
+}
+
+// FSMirror represents the -fs-mirror option (path to filesystem mirror directory)
+func FSMirror(fsMirror string) *FSMirrorOption {
+	return &FSMirrorOption{fsMirror}
+}
+
+type ForceOption struct {
+	force bool
+}
+
+func Force(force bool) *ForceOption {
+	return &ForceOption{force}
+}
+
 type ForceCopyOption struct {
 	forceCopy bool
 }
@@ -152,6 +187,15 @@ func LockTimeout(lockTimeout string) *LockTimeoutOption {
 	return &LockTimeoutOption{lockTimeout}
 }
 
+type NetMirrorOption struct {
+	netMirror string
+}
+
+// NetMirror represents the -net-mirror option (base URL of a network mirror)
+func NetMirror(netMirror string) *NetMirrorOption {
+	return &NetMirrorOption{netMirror}
+}
+
 type OutOption struct {
 	path string
 }
@@ -168,6 +212,15 @@ func Parallelism(n int) *ParallelismOption {
 	return &ParallelismOption{n}
 }
 
+type PlatformOption struct {
+	platform string
+}
+
+// Platform represents the -platform flag which is an os_arch string
+func Platform(platform string) *PlatformOption {
+	return &PlatformOption{platform}
+}
+
 type PluginDirOption struct {
 	pluginDir string
 }
@@ -176,15 +229,25 @@ func PluginDir(pluginDir string) *PluginDirOption {
 	return &PluginDirOption{pluginDir}
 }
 
+type ProviderOption struct {
+	provider string
+}
+
+// Provider represents the positional argument (provider source address)
+func Provider(providers string) *ProviderOption {
+	return &ProviderOption{providers}
+}
+
 type ReattachInfo map[string]ReattachConfig
 
 // ReattachConfig holds the information Terraform needs to be able to attach
 // itself to a provider process, so it can drive the process.
 type ReattachConfig struct {
-	Protocol string
-	Pid      int
-	Test     bool
-	Addr     ReattachConfigAddr
+	Protocol        string
+	ProtocolVersion int
+	Pid             int
+	Test            bool
+	Addr            ReattachConfigAddr
 }
 
 // ReattachConfigAddr is a JSON-encoding friendly version of net.Addr.
@@ -217,12 +280,28 @@ func Reconfigure(reconfigure bool) *ReconfigureOption {
 	return &ReconfigureOption{reconfigure}
 }
 
+type RecursiveOption struct {
+	recursive bool
+}
+
+func Recursive(r bool) *RecursiveOption {
+	return &RecursiveOption{r}
+}
+
 type RefreshOption struct {
 	refresh bool
 }
 
 func Refresh(refresh bool) *RefreshOption {
 	return &RefreshOption{refresh}
+}
+
+type ReplaceOption struct {
+	address string
+}
+
+func Replace(address string) *ReplaceOption {
+	return &ReplaceOption{address}
 }
 
 type StateOption struct {
@@ -255,6 +334,14 @@ func Target(resource string) *TargetOption {
 	return &TargetOption{resource}
 }
 
+type UpdateOption struct {
+	update bool
+}
+
+func Update(update bool) *UpdateOption {
+	return &UpdateOption{update}
+}
+
 type UpgradeOption struct {
 	upgrade bool
 }
@@ -285,4 +372,22 @@ type VerifyPluginsOption struct {
 
 func VerifyPlugins(verifyPlugins bool) *VerifyPluginsOption {
 	return &VerifyPluginsOption{verifyPlugins}
+}
+
+// FromStateOption represents the -from-state option of the "terraform add" command.
+type FromStateOption struct {
+	fromState bool
+}
+
+func FromState(fromState bool) *FromStateOption {
+	return &FromStateOption{fromState}
+}
+
+// IncludeOptionalOption represents the -optional option of the "terraform add" command.
+type IncludeOptionalOption struct {
+	includeOptional bool
+}
+
+func IncludeOptional(includeOptional bool) *IncludeOptionalOption {
+	return &IncludeOptionalOption{includeOptional}
 }

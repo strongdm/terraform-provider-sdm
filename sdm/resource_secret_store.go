@@ -8,23 +8,24 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceSecretStore() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceSecretStoreCreate),
-		Read:   wrapCrudOperation(resourceSecretStoreRead),
-		Update: wrapCrudOperation(resourceSecretStoreUpdate),
-		Delete: wrapCrudOperation(resourceSecretStoreDelete),
+		CreateContext: wrapCrudOperation(resourceSecretStoreCreate),
+		ReadContext:   wrapCrudOperation(resourceSecretStoreRead),
+		UpdateContext: wrapCrudOperation(resourceSecretStoreUpdate),
+		DeleteContext: wrapCrudOperation(resourceSecretStoreDelete),
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
 			"aws": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "",
 				Elem: &schema.Resource{
@@ -40,11 +41,8 @@ func resourceSecretStore() *schema.Resource {
 							Description: "",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -53,6 +51,7 @@ func resourceSecretStore() *schema.Resource {
 			},
 			"azure_store": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "",
 				Elem: &schema.Resource{
@@ -63,11 +62,8 @@ func resourceSecretStore() *schema.Resource {
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -81,6 +77,7 @@ func resourceSecretStore() *schema.Resource {
 			},
 			"vault_tls": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "",
 				Elem: &schema.Resource{
@@ -116,11 +113,8 @@ func resourceSecretStore() *schema.Resource {
 							Description: "",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -129,6 +123,7 @@ func resourceSecretStore() *schema.Resource {
 			},
 			"vault_token": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "",
 				Elem: &schema.Resource{
@@ -149,11 +144,8 @@ func resourceSecretStore() *schema.Resource {
 							Description: "",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -227,9 +219,7 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 	return nil
 }
 
-func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertSecretStoreFromResourceData(d)
 
 	resp, err := cc.SecretStores().Create(ctx, localVersion)
@@ -287,9 +277,7 @@ func resourceSecretStoreCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	return nil
 }
 
-func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertSecretStoreFromResourceData(d)
 	_ = localVersion
 
@@ -362,20 +350,16 @@ func resourceSecretStoreRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	return nil
 }
-func resourceSecretStoreUpdate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
-	defer cancel()
+func resourceSecretStoreUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
 	resp, err := cc.SecretStores().Update(ctx, convertSecretStoreFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update SecretStore %s: %w", d.Id(), err)
 	}
 	d.SetId(resp.SecretStore.GetID())
-	return resourceSecretStoreRead(d, cc)
+	return resourceSecretStoreRead(ctx, d, cc)
 }
-func resourceSecretStoreDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceSecretStoreDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.SecretStores().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

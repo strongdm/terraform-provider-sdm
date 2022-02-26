@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceResource() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceResourceList),
+		ReadContext: wrapCrudOperation(dataSourceResourceList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -111,11 +111,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -170,11 +167,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -228,11 +222,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -287,11 +278,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -364,11 +352,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -449,11 +434,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -534,11 +516,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -608,11 +587,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -667,11 +643,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -751,11 +724,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -815,11 +785,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -889,11 +856,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -958,11 +922,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1007,11 +968,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1061,11 +1019,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1135,11 +1090,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1199,11 +1151,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1263,11 +1212,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1342,11 +1288,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1411,11 +1354,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1485,11 +1425,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1549,11 +1486,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1623,11 +1557,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1692,11 +1623,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1766,11 +1694,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1830,11 +1755,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1909,11 +1831,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1968,11 +1887,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2037,11 +1953,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2091,11 +2004,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2151,11 +2061,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2211,11 +2118,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2280,11 +2184,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2349,11 +2250,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2418,11 +2316,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2486,11 +2381,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2562,11 +2454,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2621,11 +2510,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2679,11 +2565,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2738,11 +2621,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2815,11 +2695,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2879,11 +2756,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2937,11 +2811,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3001,11 +2872,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3070,11 +2938,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3149,11 +3014,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3233,11 +3095,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3317,11 +3176,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3386,11 +3242,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3460,11 +3313,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3518,11 +3368,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3597,11 +3444,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3661,11 +3505,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3740,11 +3581,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3809,11 +3647,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3878,11 +3713,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3941,11 +3773,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4005,11 +3834,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4069,11 +3895,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4138,11 +3961,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4207,11 +4027,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4276,11 +4093,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4355,11 +4169,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4423,11 +4234,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4486,11 +4294,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4555,11 +4360,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4619,11 +4421,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4683,11 +4482,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4747,11 +4543,8 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4803,9 +4596,7 @@ func convertResourceFilterFromResourceData(d *schema.ResourceData) (string, []in
 	return filter, args
 }
 
-func dataSourceResourceList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertResourceFilterFromResourceData(d)
 	resp, err := cc.Resources().List(ctx, filter, args...)
 	if err != nil {

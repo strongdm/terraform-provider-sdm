@@ -30,14 +30,28 @@ const _ = grpc.SupportPackageIsVersion7
 // RoleGrantsClient is the client API for RoleGrants service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type RoleGrantsClient interface {
+	// Deprecated: Do not use.
 	// Create registers a new RoleGrant.
+	//
+	// Deprecated: use access rules instead.
 	Create(ctx context.Context, in *RoleGrantCreateRequest, opts ...grpc.CallOption) (*RoleGrantCreateResponse, error)
+	// Deprecated: Do not use.
 	// Get reads one RoleGrant by ID.
+	//
+	// Deprecated: use access rules instead.
 	Get(ctx context.Context, in *RoleGrantGetRequest, opts ...grpc.CallOption) (*RoleGrantGetResponse, error)
+	// Deprecated: Do not use.
 	// Delete removes a RoleGrant by ID.
+	//
+	// Deprecated: use access rules instead.
 	Delete(ctx context.Context, in *RoleGrantDeleteRequest, opts ...grpc.CallOption) (*RoleGrantDeleteResponse, error)
+	// Deprecated: Do not use.
 	// List gets a list of RoleGrants matching a given set of criteria.
+	//
+	// Deprecated: use access rules instead.
 	List(ctx context.Context, in *RoleGrantListRequest, opts ...grpc.CallOption) (*RoleGrantListResponse, error)
 }
 
@@ -45,10 +59,12 @@ type roleGrantsClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewRoleGrantsClient(cc grpc.ClientConnInterface) RoleGrantsClient {
 	return &roleGrantsClient{cc}
 }
 
+// Deprecated: Do not use.
 func (c *roleGrantsClient) Create(ctx context.Context, in *RoleGrantCreateRequest, opts ...grpc.CallOption) (*RoleGrantCreateResponse, error) {
 	out := new(RoleGrantCreateResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleGrants/Create", in, out, opts...)
@@ -58,6 +74,7 @@ func (c *roleGrantsClient) Create(ctx context.Context, in *RoleGrantCreateReques
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *roleGrantsClient) Get(ctx context.Context, in *RoleGrantGetRequest, opts ...grpc.CallOption) (*RoleGrantGetResponse, error) {
 	out := new(RoleGrantGetResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleGrants/Get", in, out, opts...)
@@ -67,6 +84,7 @@ func (c *roleGrantsClient) Get(ctx context.Context, in *RoleGrantGetRequest, opt
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *roleGrantsClient) Delete(ctx context.Context, in *RoleGrantDeleteRequest, opts ...grpc.CallOption) (*RoleGrantDeleteResponse, error) {
 	out := new(RoleGrantDeleteResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleGrants/Delete", in, out, opts...)
@@ -76,6 +94,7 @@ func (c *roleGrantsClient) Delete(ctx context.Context, in *RoleGrantDeleteReques
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *roleGrantsClient) List(ctx context.Context, in *RoleGrantListRequest, opts ...grpc.CallOption) (*RoleGrantListResponse, error) {
 	out := new(RoleGrantListResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleGrants/List", in, out, opts...)
@@ -88,14 +107,28 @@ func (c *roleGrantsClient) List(ctx context.Context, in *RoleGrantListRequest, o
 // RoleGrantsServer is the server API for RoleGrants service.
 // All implementations must embed UnimplementedRoleGrantsServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type RoleGrantsServer interface {
+	// Deprecated: Do not use.
 	// Create registers a new RoleGrant.
+	//
+	// Deprecated: use access rules instead.
 	Create(context.Context, *RoleGrantCreateRequest) (*RoleGrantCreateResponse, error)
+	// Deprecated: Do not use.
 	// Get reads one RoleGrant by ID.
+	//
+	// Deprecated: use access rules instead.
 	Get(context.Context, *RoleGrantGetRequest) (*RoleGrantGetResponse, error)
+	// Deprecated: Do not use.
 	// Delete removes a RoleGrant by ID.
+	//
+	// Deprecated: use access rules instead.
 	Delete(context.Context, *RoleGrantDeleteRequest) (*RoleGrantDeleteResponse, error)
+	// Deprecated: Do not use.
 	// List gets a list of RoleGrants matching a given set of criteria.
+	//
+	// Deprecated: use access rules instead.
 	List(context.Context, *RoleGrantListRequest) (*RoleGrantListResponse, error)
 	mustEmbedUnimplementedRoleGrantsServer()
 }
@@ -125,6 +158,7 @@ type UnsafeRoleGrantsServer interface {
 	mustEmbedUnimplementedRoleGrantsServer()
 }
 
+// Deprecated: Do not use.
 func RegisterRoleGrantsServer(s grpc.ServiceRegistrar, srv RoleGrantsServer) {
 	s.RegisterService(&_RoleGrants_serviceDesc, srv)
 }

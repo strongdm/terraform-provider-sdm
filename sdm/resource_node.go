@@ -8,23 +8,24 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceNode() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceNodeCreate),
-		Read:   wrapCrudOperation(resourceNodeRead),
-		Update: wrapCrudOperation(resourceNodeUpdate),
-		Delete: wrapCrudOperation(resourceNodeDelete),
+		CreateContext: wrapCrudOperation(resourceNodeCreate),
+		ReadContext:   wrapCrudOperation(resourceNodeRead),
+		UpdateContext: wrapCrudOperation(resourceNodeUpdate),
+		DeleteContext: wrapCrudOperation(resourceNodeDelete),
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
 			"gateway": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "Gateway represents a StrongDM CLI installation running in gateway mode.",
 				Elem: &schema.Resource{
@@ -58,11 +59,8 @@ func resourceNode() *schema.Resource {
 							Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -76,6 +74,7 @@ func resourceNode() *schema.Resource {
 			},
 			"relay": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
@@ -94,11 +93,8 @@ func resourceNode() *schema.Resource {
 							Description: "Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -148,9 +144,7 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 	return nil
 }
 
-func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertNodeFromResourceData(d)
 
 	resp, err := cc.Nodes().Create(ctx, localVersion)
@@ -187,9 +181,7 @@ func resourceNodeCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	return nil
 }
 
-func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertNodeFromResourceData(d)
 	_ = localVersion
 
@@ -235,20 +227,16 @@ func resourceNodeRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	return nil
 }
-func resourceNodeUpdate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
-	defer cancel()
+func resourceNodeUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
 	resp, err := cc.Nodes().Update(ctx, convertNodeFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)
 	}
 	d.SetId(resp.Node.GetID())
-	return resourceNodeRead(d, cc)
+	return resourceNodeRead(ctx, d, cc)
 }
-func resourceNodeDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceNodeDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Nodes().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

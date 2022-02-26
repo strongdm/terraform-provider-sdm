@@ -8,16 +8,16 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceAccountAttachment() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceAccountAttachmentCreate),
-		Read:   wrapCrudOperation(resourceAccountAttachmentRead),
-		Delete: wrapCrudOperation(resourceAccountAttachmentDelete),
+		CreateContext: wrapCrudOperation(resourceAccountAttachmentCreate),
+		ReadContext:   wrapCrudOperation(resourceAccountAttachmentRead),
+		DeleteContext: wrapCrudOperation(resourceAccountAttachmentDelete),
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
@@ -48,9 +48,7 @@ func convertAccountAttachmentFromResourceData(d *schema.ResourceData) *sdm.Accou
 	}
 }
 
-func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountAttachmentFromResourceData(d)
 
 	resp, err := cc.AccountAttachments().Create(ctx, localVersion)
@@ -64,9 +62,7 @@ func resourceAccountAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) err
 	return nil
 }
 
-func resourceAccountAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceAccountAttachmentRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountAttachmentFromResourceData(d)
 	_ = localVersion
 
@@ -83,9 +79,7 @@ func resourceAccountAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error
 	d.Set("role_id", (v.RoleID))
 	return nil
 }
-func resourceAccountAttachmentDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceAccountAttachmentDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.AccountAttachments().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

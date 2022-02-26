@@ -55,9 +55,21 @@ func (svc *AccountAttachments) Create(
 	}
 
 	resp := &AccountAttachmentCreateResponse{}
-	resp.AccountAttachment = convertAccountAttachmentToPorcelain(plumbingResponse.AccountAttachment)
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountAttachmentToPorcelain(plumbingResponse.AccountAttachment); err != nil {
+		return nil, err
+	} else {
+		resp.AccountAttachment = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -87,9 +99,21 @@ func (svc *AccountAttachments) Get(
 	}
 
 	resp := &AccountAttachmentGetResponse{}
-	resp.AccountAttachment = convertAccountAttachmentToPorcelain(plumbingResponse.AccountAttachment)
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountAttachmentToPorcelain(plumbingResponse.AccountAttachment); err != nil {
+		return nil, err
+	} else {
+		resp.AccountAttachment = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -119,8 +143,16 @@ func (svc *AccountAttachments) Delete(
 	}
 
 	resp := &AccountAttachmentDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -164,7 +196,10 @@ func (svc *AccountAttachments) List(
 				}
 				break
 			}
-			result := convertRepeatedAccountAttachmentToPorcelain(plumbingResponse.AccountAttachments)
+			result, err := convertRepeatedAccountAttachmentToPorcelain(plumbingResponse.AccountAttachments)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -203,9 +238,21 @@ func (svc *AccountGrants) Create(
 	}
 
 	resp := &AccountGrantCreateResponse{}
-	resp.AccountGrant = convertAccountGrantToPorcelain(plumbingResponse.AccountGrant)
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountGrantToPorcelain(plumbingResponse.AccountGrant); err != nil {
+		return nil, err
+	} else {
+		resp.AccountGrant = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -235,9 +282,21 @@ func (svc *AccountGrants) Get(
 	}
 
 	resp := &AccountGrantGetResponse{}
-	resp.AccountGrant = convertAccountGrantToPorcelain(plumbingResponse.AccountGrant)
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountGrantToPorcelain(plumbingResponse.AccountGrant); err != nil {
+		return nil, err
+	} else {
+		resp.AccountGrant = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -267,8 +326,16 @@ func (svc *AccountGrants) Delete(
 	}
 
 	resp := &AccountGrantDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -312,7 +379,10 @@ func (svc *AccountGrants) List(
 				}
 				break
 			}
-			result := convertRepeatedAccountGrantToPorcelain(plumbingResponse.AccountGrants)
+			result, err := convertRepeatedAccountGrantToPorcelain(plumbingResponse.AccountGrants)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -353,9 +423,21 @@ func (svc *Accounts) Create(
 	}
 
 	resp := &AccountCreateResponse{}
-	resp.Account = convertAccountToPorcelain(plumbingResponse.Account)
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountToPorcelain(plumbingResponse.Account); err != nil {
+		return nil, err
+	} else {
+		resp.Account = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	resp.Token = (plumbingResponse.Token)
 	return resp, nil
 }
@@ -386,9 +468,21 @@ func (svc *Accounts) Get(
 	}
 
 	resp := &AccountGetResponse{}
-	resp.Account = convertAccountToPorcelain(plumbingResponse.Account)
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountToPorcelain(plumbingResponse.Account); err != nil {
+		return nil, err
+	} else {
+		resp.Account = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -418,9 +512,21 @@ func (svc *Accounts) Update(
 	}
 
 	resp := &AccountUpdateResponse{}
-	resp.Account = convertAccountToPorcelain(plumbingResponse.Account)
-	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertAccountToPorcelain(plumbingResponse.Account); err != nil {
+		return nil, err
+	} else {
+		resp.Account = v
+	}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -450,8 +556,16 @@ func (svc *Accounts) Delete(
 	}
 
 	resp := &AccountDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -495,7 +609,10 @@ func (svc *Accounts) List(
 				}
 				break
 			}
-			result := convertRepeatedAccountToPorcelain(plumbingResponse.Accounts)
+			result, err := convertRepeatedAccountToPorcelain(plumbingResponse.Accounts)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -532,9 +649,17 @@ func (svc *ControlPanel) GetSSHCAPublicKey(
 	}
 
 	resp := &ControlPanelGetSSHCAPublicKeyResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
 	resp.PublicKey = (plumbingResponse.PublicKey)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -564,8 +689,16 @@ func (svc *ControlPanel) VerifyJWT(
 	}
 
 	resp := &ControlPanelVerifyJWTResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	resp.ValID = (plumbingResponse.Valid)
 	return resp, nil
 }
@@ -604,9 +737,21 @@ func (svc *Nodes) Create(
 	}
 
 	resp := &NodeCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Node = convertNodeToPorcelain(plumbingResponse.Node)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertNodeToPorcelain(plumbingResponse.Node); err != nil {
+		return nil, err
+	} else {
+		resp.Node = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	resp.Token = (plumbingResponse.Token)
 	return resp, nil
 }
@@ -637,9 +782,21 @@ func (svc *Nodes) Get(
 	}
 
 	resp := &NodeGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Node = convertNodeToPorcelain(plumbingResponse.Node)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertNodeToPorcelain(plumbingResponse.Node); err != nil {
+		return nil, err
+	} else {
+		resp.Node = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -669,9 +826,21 @@ func (svc *Nodes) Update(
 	}
 
 	resp := &NodeUpdateResponse{}
-	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.Node = convertNodeToPorcelain(plumbingResponse.Node)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertNodeToPorcelain(plumbingResponse.Node); err != nil {
+		return nil, err
+	} else {
+		resp.Node = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -701,8 +870,16 @@ func (svc *Nodes) Delete(
 	}
 
 	resp := &NodeDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -746,7 +923,10 @@ func (svc *Nodes) List(
 				}
 				break
 			}
-			result := convertRepeatedNodeToPorcelain(plumbingResponse.Nodes)
+			result, err := convertRepeatedNodeToPorcelain(plumbingResponse.Nodes)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -798,7 +978,10 @@ func (svc *Resources) EnumerateTags(
 				}
 				break
 			}
-			result := convertRepeatedTagToPorcelain(plumbingResponse.Matches)
+			result, err := convertRepeatedTagToPorcelain(plumbingResponse.Matches)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -831,9 +1014,21 @@ func (svc *Resources) Create(
 	}
 
 	resp := &ResourceCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertResourceToPorcelain(plumbingResponse.Resource); err != nil {
+		return nil, err
+	} else {
+		resp.Resource = v
+	}
 	return resp, nil
 }
 
@@ -863,9 +1058,21 @@ func (svc *Resources) Get(
 	}
 
 	resp := &ResourceGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertResourceToPorcelain(plumbingResponse.Resource); err != nil {
+		return nil, err
+	} else {
+		resp.Resource = v
+	}
 	return resp, nil
 }
 
@@ -895,9 +1102,21 @@ func (svc *Resources) Update(
 	}
 
 	resp := &ResourceUpdateResponse{}
-	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.Resource = convertResourceToPorcelain(plumbingResponse.Resource)
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertResourceToPorcelain(plumbingResponse.Resource); err != nil {
+		return nil, err
+	} else {
+		resp.Resource = v
+	}
 	return resp, nil
 }
 
@@ -927,8 +1146,16 @@ func (svc *Resources) Delete(
 	}
 
 	resp := &ResourceDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -972,7 +1199,10 @@ func (svc *Resources) List(
 				}
 				break
 			}
-			result := convertRepeatedResourceToPorcelain(plumbingResponse.Resources)
+			result, err := convertRepeatedResourceToPorcelain(plumbingResponse.Resources)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -983,12 +1213,16 @@ func (svc *Resources) List(
 // that make up those composite roles. When a composite role is attached to another
 // role, the permissions granted to members of the composite role are augmented to
 // include the permissions granted to members of the attached role.
+//
+// Deprecated: use multi-role instead.
 type RoleAttachments struct {
 	client plumbing.RoleAttachmentsClient
 	parent *Client
 }
 
 // Create registers a new RoleAttachment.
+//
+// Deprecated: use multi-role instead.
 func (svc *RoleAttachments) Create(
 	ctx context.Context,
 	roleAttachment *RoleAttachment) (
@@ -1014,13 +1248,27 @@ func (svc *RoleAttachments) Create(
 	}
 
 	resp := &RoleAttachmentCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.RoleAttachment = convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment); err != nil {
+		return nil, err
+	} else {
+		resp.RoleAttachment = v
+	}
 	return resp, nil
 }
 
 // Get reads one RoleAttachment by ID.
+//
+// Deprecated: use multi-role instead.
 func (svc *RoleAttachments) Get(
 	ctx context.Context,
 	id string) (
@@ -1046,13 +1294,27 @@ func (svc *RoleAttachments) Get(
 	}
 
 	resp := &RoleAttachmentGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.RoleAttachment = convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleAttachmentToPorcelain(plumbingResponse.RoleAttachment); err != nil {
+		return nil, err
+	} else {
+		resp.RoleAttachment = v
+	}
 	return resp, nil
 }
 
 // Delete removes a RoleAttachment by ID.
+//
+// Deprecated: use multi-role instead.
 func (svc *RoleAttachments) Delete(
 	ctx context.Context,
 	id string) (
@@ -1078,12 +1340,22 @@ func (svc *RoleAttachments) Delete(
 	}
 
 	resp := &RoleAttachmentDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
 // List gets a list of RoleAttachments matching a given set of criteria.
+//
+// Deprecated: use multi-role instead.
 func (svc *RoleAttachments) List(
 	ctx context.Context,
 	filter string,
@@ -1123,7 +1395,10 @@ func (svc *RoleAttachments) List(
 				}
 				break
 			}
-			result := convertRepeatedRoleAttachmentToPorcelain(plumbingResponse.RoleAttachments)
+			result, err := convertRepeatedRoleAttachmentToPorcelain(plumbingResponse.RoleAttachments)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -1134,12 +1409,16 @@ func (svc *RoleAttachments) List(
 // that make up those composite roles. When a composite role is attached to another
 // role, the permissions granted to members of the composite role are augmented to
 // include the permissions granted to members of the attached role.
+//
+// Deprecated: use access rules instead.
 type RoleGrants struct {
 	client plumbing.RoleGrantsClient
 	parent *Client
 }
 
 // Create registers a new RoleGrant.
+//
+// Deprecated: use access rules instead.
 func (svc *RoleGrants) Create(
 	ctx context.Context,
 	roleGrant *RoleGrant) (
@@ -1165,13 +1444,27 @@ func (svc *RoleGrants) Create(
 	}
 
 	resp := &RoleGrantCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.RoleGrant = convertRoleGrantToPorcelain(plumbingResponse.RoleGrant)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleGrantToPorcelain(plumbingResponse.RoleGrant); err != nil {
+		return nil, err
+	} else {
+		resp.RoleGrant = v
+	}
 	return resp, nil
 }
 
 // Get reads one RoleGrant by ID.
+//
+// Deprecated: use access rules instead.
 func (svc *RoleGrants) Get(
 	ctx context.Context,
 	id string) (
@@ -1197,13 +1490,27 @@ func (svc *RoleGrants) Get(
 	}
 
 	resp := &RoleGrantGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.RoleGrant = convertRoleGrantToPorcelain(plumbingResponse.RoleGrant)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleGrantToPorcelain(plumbingResponse.RoleGrant); err != nil {
+		return nil, err
+	} else {
+		resp.RoleGrant = v
+	}
 	return resp, nil
 }
 
 // Delete removes a RoleGrant by ID.
+//
+// Deprecated: use access rules instead.
 func (svc *RoleGrants) Delete(
 	ctx context.Context,
 	id string) (
@@ -1229,12 +1536,22 @@ func (svc *RoleGrants) Delete(
 	}
 
 	resp := &RoleGrantDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
 // List gets a list of RoleGrants matching a given set of criteria.
+//
+// Deprecated: use access rules instead.
 func (svc *RoleGrants) List(
 	ctx context.Context,
 	filter string,
@@ -1274,7 +1591,10 @@ func (svc *RoleGrants) List(
 				}
 				break
 			}
-			result := convertRepeatedRoleGrantToPorcelain(plumbingResponse.RoleGrants)
+			result, err := convertRepeatedRoleGrantToPorcelain(plumbingResponse.RoleGrants)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -1317,9 +1637,21 @@ func (svc *Roles) Create(
 	}
 
 	resp := &RoleCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
+		return nil, err
+	} else {
+		resp.Role = v
+	}
 	return resp, nil
 }
 
@@ -1349,9 +1681,21 @@ func (svc *Roles) Get(
 	}
 
 	resp := &RoleGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
+		return nil, err
+	} else {
+		resp.Role = v
+	}
 	return resp, nil
 }
 
@@ -1381,9 +1725,21 @@ func (svc *Roles) Update(
 	}
 
 	resp := &RoleUpdateResponse{}
-	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.Role = convertRoleToPorcelain(plumbingResponse.Role)
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
+		return nil, err
+	} else {
+		resp.Role = v
+	}
 	return resp, nil
 }
 
@@ -1413,8 +1769,16 @@ func (svc *Roles) Delete(
 	}
 
 	resp := &RoleDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -1458,7 +1822,10 @@ func (svc *Roles) List(
 				}
 				break
 			}
-			result := convertRepeatedRoleToPorcelain(plumbingResponse.Roles)
+			result, err := convertRepeatedRoleToPorcelain(plumbingResponse.Roles)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},
@@ -1496,9 +1863,21 @@ func (svc *SecretStores) Create(
 	}
 
 	resp := &SecretStoreCreateResponse{}
-	resp.Meta = convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertSecretStoreToPorcelain(plumbingResponse.SecretStore); err != nil {
+		return nil, err
+	} else {
+		resp.SecretStore = v
+	}
 	return resp, nil
 }
 
@@ -1528,9 +1907,21 @@ func (svc *SecretStores) Get(
 	}
 
 	resp := &SecretStoreGetResponse{}
-	resp.Meta = convertGetResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertSecretStoreToPorcelain(plumbingResponse.SecretStore); err != nil {
+		return nil, err
+	} else {
+		resp.SecretStore = v
+	}
 	return resp, nil
 }
 
@@ -1560,9 +1951,21 @@ func (svc *SecretStores) Update(
 	}
 
 	resp := &SecretStoreUpdateResponse{}
-	resp.Meta = convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
-	resp.SecretStore = convertSecretStoreToPorcelain(plumbingResponse.SecretStore)
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertSecretStoreToPorcelain(plumbingResponse.SecretStore); err != nil {
+		return nil, err
+	} else {
+		resp.SecretStore = v
+	}
 	return resp, nil
 }
 
@@ -1592,8 +1995,16 @@ func (svc *SecretStores) Delete(
 	}
 
 	resp := &SecretStoreDeleteResponse{}
-	resp.Meta = convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta)
-	resp.RateLimit = convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit)
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
 	return resp, nil
 }
 
@@ -1637,7 +2048,10 @@ func (svc *SecretStores) List(
 				}
 				break
 			}
-			result := convertRepeatedSecretStoreToPorcelain(plumbingResponse.SecretStores)
+			result, err := convertRepeatedSecretStoreToPorcelain(plumbingResponse.SecretStores)
+			if err != nil {
+				return nil, false, err
+			}
 			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
 			return result, req.Meta.Cursor != "", nil
 		},

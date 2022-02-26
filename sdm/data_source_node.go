@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceNode() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceNodeList),
+		ReadContext: wrapCrudOperation(dataSourceNodeList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -83,11 +83,8 @@ func dataSourceNode() *schema.Resource {
 										Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -116,11 +113,8 @@ func dataSourceNode() *schema.Resource {
 										Description: "Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -175,9 +169,7 @@ func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interf
 	return filter, args
 }
 
-func dataSourceNodeList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertNodeFilterFromResourceData(d)
 	resp, err := cc.Nodes().List(ctx, filter, args...)
 	if err != nil {

@@ -7,14 +7,15 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceRoleGrant() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceRoleGrantList),
+		ReadContext:        wrapCrudOperation(dataSourceRoleGrantList),
+		DeprecationMessage: "sdm_role_grant is deprecated, see docs for more info",
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -86,9 +87,7 @@ func convertRoleGrantFilterFromResourceData(d *schema.ResourceData) (string, []i
 	return filter, args
 }
 
-func dataSourceRoleGrantList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceRoleGrantList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertRoleGrantFilterFromResourceData(d)
 	resp, err := cc.RoleGrants().List(ctx, filter, args...)
 	if err != nil {

@@ -4,16 +4,20 @@
 package sdm
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-type apiCrudOperation func(d *schema.ResourceData, client *sdm.Client) error
+type apiCrudOperation func(ctx context.Context, d *schema.ResourceData, client *sdm.Client) error
 
-func wrapCrudOperation(op apiCrudOperation) func(d *schema.ResourceData, m interface{}) error {
-	return func(d *schema.ResourceData, meta interface{}) error {
+func wrapCrudOperation(op apiCrudOperation) func(context.Context, *schema.ResourceData, interface{}) diag.Diagnostics {
+	return func(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 		client := meta.(*sdm.Client)
-		return op(d, client)
+		err := op(ctx, d, client)
+		return diag.FromErr(err)
 	}
 }
 
@@ -26,15 +30,7 @@ func convertTagsFromMap(m map[string]interface{}, key string) sdm.Tags {
 	if !ok {
 		return nil
 	}
-	res := sdm.Tags{}
-	for key, value := range tags {
-		str, ok := value.(string)
-		if !ok {
-			continue
-		}
-		res[key] = str
-	}
-	return res
+	return tagsFromMap(tags)
 }
 
 func convertTagsFromResourceData(d *schema.ResourceData, key string) sdm.Tags {
@@ -46,8 +42,20 @@ func convertTagsFromResourceData(d *schema.ResourceData, key string) sdm.Tags {
 	if !ok {
 		return nil
 	}
-	res := sdm.Tags{}
+	return tagsFromMap(tags)
+}
+
+func convertTagsToMap(tags sdm.Tags) map[string]interface{} {
+	res := map[string]interface{}{}
 	for key, value := range tags {
+		res[key] = value
+	}
+	return res
+}
+
+func tagsFromMap(m map[string]interface{}) sdm.Tags {
+	res := sdm.Tags{}
+	for key, value := range m {
 		str, ok := value.(string)
 		if !ok {
 			continue
@@ -57,12 +65,117 @@ func convertTagsFromResourceData(d *schema.ResourceData, key string) sdm.Tags {
 	return res
 }
 
-func convertTagsToMap(tags sdm.Tags) map[string]interface{} {
-	res := map[string]interface{}{}
-	for key, value := range tags {
-		res[key] = value
+func convertAccessRulesFromMap(m map[string]interface{}, key string) sdm.AccessRules {
+	value := m[key]
+	if value == nil {
+		return nil
+	}
+	list, ok := value.([]interface{})
+	if !ok {
+		return nil
+	}
+	return accessRulesFromList(list)
+}
+
+func convertAccessRulesToMap(policy sdm.AccessRules) []map[string]interface{} {
+	res := make([]map[string]interface{}, 0, len(policy))
+	for _, rule := range policy {
+		res = append(res, map[string]interface{}{
+			"ids":  rule.IDs,
+			"tags": convertTagsToMap(rule.Tags),
+			"type": rule.Type,
+		})
 	}
 	return res
+}
+
+var tagsElemType = &schema.Schema{
+	Type: schema.TypeString,
+}
+
+var accessRuleSchema = &schema.Schema{
+	Type:        schema.TypeList,
+	Optional:    true,
+	Computed:    true,
+	Description: "One or more access rules define the resources this Role has access to.",
+	Elem: &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"ids": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+			},
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"tags": {
+				Optional: true,
+				Type:     schema.TypeMap,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+			},
+		},
+	},
+}
+
+func convertAccessRulesFromResourceData(d *schema.ResourceData, key string) sdm.AccessRules {
+	value := d.Get(key)
+	if value == nil {
+		return nil
+	}
+	list, ok := value.([]interface{})
+	if !ok {
+		return nil
+	}
+	return accessRulesFromList(list)
+}
+
+func accessRulesFromList(list []interface{}) sdm.AccessRules {
+	result := sdm.AccessRules{}
+	for _, item := range list {
+		mapItem, ok := item.(map[string]interface{})
+		if !ok {
+			return nil
+		}
+		rule := sdm.AccessRule{}
+		for k, v := range mapItem {
+			switch k {
+			case "ids":
+				ids, ok := v.([]interface{})
+				if !ok {
+					return nil
+				}
+				for _, id := range ids {
+					str, ok := id.(string)
+					if !ok {
+						return nil
+					}
+					rule.IDs = append(rule.IDs, str)
+				}
+			case "type":
+				var ok bool
+				rule.Type, ok = v.(string)
+				if !ok {
+					return nil
+				}
+			case "tags":
+				var ok bool
+				tags, ok := v.(map[string]interface{})
+				if !ok {
+					return nil
+				}
+				rule.Tags = tagsFromMap(tags)
+			default:
+				return nil
+			}
+		}
+		result = append(result, rule)
+	}
+	return result
 }
 
 func convertStringFromMap(m map[string]interface{}, key string) string {

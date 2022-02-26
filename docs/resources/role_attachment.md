@@ -8,6 +8,8 @@ sidebar_current: “docs-sdm-resource-role-attachment"
 # Resource: sdm_role_attachment
 
 A RoleAttachment assigns a role to a composite role.
+ 
+ Deprecated: use multi-role instead.
 ## Example Usage
 
 ```hcl

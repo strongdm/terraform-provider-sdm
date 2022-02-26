@@ -8,23 +8,24 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceAccount() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceAccountCreate),
-		Read:   wrapCrudOperation(resourceAccountRead),
-		Update: wrapCrudOperation(resourceAccountUpdate),
-		Delete: wrapCrudOperation(resourceAccountDelete),
+		CreateContext: wrapCrudOperation(resourceAccountCreate),
+		ReadContext:   wrapCrudOperation(resourceAccountRead),
+		UpdateContext: wrapCrudOperation(resourceAccountUpdate),
+		DeleteContext: wrapCrudOperation(resourceAccountDelete),
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
 			"service": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "A Service is a service account that can connect to resources they are granted directly, or granted via roles. Services are typically automated jobs.",
 				Elem: &schema.Resource{
@@ -40,11 +41,8 @@ func resourceAccount() *schema.Resource {
 							Description: "The Service's suspended state.",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -58,6 +56,7 @@ func resourceAccount() *schema.Resource {
 			},
 			"user": {
 				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Description: "A User can connect to resources they are granted directly, or granted via roles.",
 				Elem: &schema.Resource{
@@ -83,11 +82,8 @@ func resourceAccount() *schema.Resource {
 							Description: "The User's suspended state.",
 						},
 						"tags": {
-							Type: schema.TypeMap,
-
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -132,9 +128,7 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 	return nil
 }
 
-func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountFromResourceData(d)
 
 	resp, err := cc.Accounts().Create(ctx, localVersion)
@@ -170,9 +164,7 @@ func resourceAccountCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	return nil
 }
 
-func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountFromResourceData(d)
 	_ = localVersion
 
@@ -217,20 +209,16 @@ func resourceAccountRead(d *schema.ResourceData, cc *sdm.Client) error {
 	}
 	return nil
 }
-func resourceAccountUpdate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutUpdate))
-	defer cancel()
+func resourceAccountUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
 	resp, err := cc.Accounts().Update(ctx, convertAccountFromResourceData(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Account %s: %w", d.Id(), err)
 	}
 	d.SetId(resp.Account.GetID())
-	return resourceAccountRead(d, cc)
+	return resourceAccountRead(ctx, d, cc)
 }
-func resourceAccountDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceAccountDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Accounts().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

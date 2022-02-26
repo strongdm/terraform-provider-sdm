@@ -8,16 +8,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceRoleGrant() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceRoleGrantCreate),
-		Read:   wrapCrudOperation(resourceRoleGrantRead),
-		Delete: wrapCrudOperation(resourceRoleGrantDelete),
+		CreateContext:      wrapCrudOperation(resourceRoleGrantCreate),
+		ReadContext:        wrapCrudOperation(resourceRoleGrantRead),
+		DeleteContext:      wrapCrudOperation(resourceRoleGrantDelete),
+		DeprecationMessage: "sdm_role_grant is deprecated, see docs for more info",
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
@@ -48,9 +49,7 @@ func convertRoleGrantFromResourceData(d *schema.ResourceData) *sdm.RoleGrant {
 	}
 }
 
-func resourceRoleGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceRoleGrantCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleGrantFromResourceData(d)
 
 	resp, err := cc.RoleGrants().Create(ctx, localVersion)
@@ -64,9 +63,7 @@ func resourceRoleGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	return nil
 }
 
-func resourceRoleGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceRoleGrantRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleGrantFromResourceData(d)
 	_ = localVersion
 
@@ -83,9 +80,7 @@ func resourceRoleGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 	d.Set("role_id", (v.RoleID))
 	return nil
 }
-func resourceRoleGrantDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceRoleGrantDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.RoleGrants().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

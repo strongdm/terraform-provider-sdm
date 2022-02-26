@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func dataSourceSecretStore() *schema.Resource {
 	return &schema.Resource{
-		Read: wrapCrudOperation(dataSourceSecretStoreList),
+		ReadContext: wrapCrudOperation(dataSourceSecretStoreList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -89,11 +89,8 @@ func dataSourceSecretStore() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -117,11 +114,8 @@ func dataSourceSecretStore() *schema.Resource {
 										Description: "Unique human-readable name of the SecretStore.",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -175,11 +169,8 @@ func dataSourceSecretStore() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -213,11 +204,8 @@ func dataSourceSecretStore() *schema.Resource {
 										Description: "",
 									},
 									"tags": {
-										Type: schema.TypeMap,
-
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										},
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -284,9 +272,7 @@ func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, [
 	return filter, args
 }
 
-func dataSourceSecretStoreList(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertSecretStoreFilterFromResourceData(d)
 	resp, err := cc.SecretStores().List(ctx, filter, args...)
 	if err != nil {

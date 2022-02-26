@@ -8,16 +8,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceRoleAttachment() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceRoleAttachmentCreate),
-		Read:   wrapCrudOperation(resourceRoleAttachmentRead),
-		Delete: wrapCrudOperation(resourceRoleAttachmentDelete),
+		CreateContext:      wrapCrudOperation(resourceRoleAttachmentCreate),
+		ReadContext:        wrapCrudOperation(resourceRoleAttachmentRead),
+		DeleteContext:      wrapCrudOperation(resourceRoleAttachmentDelete),
+		DeprecationMessage: "sdm_role_attachment is deprecated, see docs for more info",
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
@@ -48,9 +49,7 @@ func convertRoleAttachmentFromResourceData(d *schema.ResourceData) *sdm.RoleAtta
 	}
 }
 
-func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceRoleAttachmentCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleAttachmentFromResourceData(d)
 
 	resp, err := cc.RoleAttachments().Create(ctx, localVersion)
@@ -64,9 +63,7 @@ func resourceRoleAttachmentCreate(d *schema.ResourceData, cc *sdm.Client) error 
 	return nil
 }
 
-func resourceRoleAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceRoleAttachmentRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRoleAttachmentFromResourceData(d)
 	_ = localVersion
 
@@ -83,9 +80,7 @@ func resourceRoleAttachmentRead(d *schema.ResourceData, cc *sdm.Client) error {
 	d.Set("composite_role_id", (v.CompositeRoleID))
 	return nil
 }
-func resourceRoleAttachmentDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceRoleAttachmentDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.RoleAttachments().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

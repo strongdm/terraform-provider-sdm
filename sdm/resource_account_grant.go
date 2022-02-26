@@ -8,16 +8,16 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func resourceAccountGrant() *schema.Resource {
 	return &schema.Resource{
-		Create: wrapCrudOperation(resourceAccountGrantCreate),
-		Read:   wrapCrudOperation(resourceAccountGrantRead),
-		Delete: wrapCrudOperation(resourceAccountGrantDelete),
+		CreateContext: wrapCrudOperation(resourceAccountGrantCreate),
+		ReadContext:   wrapCrudOperation(resourceAccountGrantRead),
+		DeleteContext: wrapCrudOperation(resourceAccountGrantDelete),
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
@@ -48,9 +48,7 @@ func convertAccountGrantFromResourceData(d *schema.ResourceData) *sdm.AccountGra
 	}
 }
 
-func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutCreate))
-	defer cancel()
+func resourceAccountGrantCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountGrantFromResourceData(d)
 
 	resp, err := cc.AccountGrants().Create(ctx, localVersion)
@@ -64,9 +62,7 @@ func resourceAccountGrantCreate(d *schema.ResourceData, cc *sdm.Client) error {
 	return nil
 }
 
-func resourceAccountGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutRead))
-	defer cancel()
+func resourceAccountGrantRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountGrantFromResourceData(d)
 	_ = localVersion
 
@@ -83,9 +79,7 @@ func resourceAccountGrantRead(d *schema.ResourceData, cc *sdm.Client) error {
 	d.Set("resource_id", (v.ResourceID))
 	return nil
 }
-func resourceAccountGrantDelete(d *schema.ResourceData, cc *sdm.Client) error {
-	ctx, cancel := context.WithTimeout(context.Background(), d.Timeout(schema.TimeoutDelete))
-	defer cancel()
+func resourceAccountGrantDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.AccountGrants().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

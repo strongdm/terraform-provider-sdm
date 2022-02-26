@@ -30,14 +30,28 @@ const _ = grpc.SupportPackageIsVersion7
 // RoleAttachmentsClient is the client API for RoleAttachments service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type RoleAttachmentsClient interface {
+	// Deprecated: Do not use.
 	// Create registers a new RoleAttachment.
+	//
+	// Deprecated: use multi-role instead.
 	Create(ctx context.Context, in *RoleAttachmentCreateRequest, opts ...grpc.CallOption) (*RoleAttachmentCreateResponse, error)
+	// Deprecated: Do not use.
 	// Get reads one RoleAttachment by ID.
+	//
+	// Deprecated: use multi-role instead.
 	Get(ctx context.Context, in *RoleAttachmentGetRequest, opts ...grpc.CallOption) (*RoleAttachmentGetResponse, error)
+	// Deprecated: Do not use.
 	// Delete removes a RoleAttachment by ID.
+	//
+	// Deprecated: use multi-role instead.
 	Delete(ctx context.Context, in *RoleAttachmentDeleteRequest, opts ...grpc.CallOption) (*RoleAttachmentDeleteResponse, error)
+	// Deprecated: Do not use.
 	// List gets a list of RoleAttachments matching a given set of criteria.
+	//
+	// Deprecated: use multi-role instead.
 	List(ctx context.Context, in *RoleAttachmentListRequest, opts ...grpc.CallOption) (*RoleAttachmentListResponse, error)
 }
 
@@ -45,10 +59,12 @@ type roleAttachmentsClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewRoleAttachmentsClient(cc grpc.ClientConnInterface) RoleAttachmentsClient {
 	return &roleAttachmentsClient{cc}
 }
 
+// Deprecated: Do not use.
 func (c *roleAttachmentsClient) Create(ctx context.Context, in *RoleAttachmentCreateRequest, opts ...grpc.CallOption) (*RoleAttachmentCreateResponse, error) {
 	out := new(RoleAttachmentCreateResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleAttachments/Create", in, out, opts...)
@@ -58,6 +74,7 @@ func (c *roleAttachmentsClient) Create(ctx context.Context, in *RoleAttachmentCr
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *roleAttachmentsClient) Get(ctx context.Context, in *RoleAttachmentGetRequest, opts ...grpc.CallOption) (*RoleAttachmentGetResponse, error) {
 	out := new(RoleAttachmentGetResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleAttachments/Get", in, out, opts...)
@@ -67,6 +84,7 @@ func (c *roleAttachmentsClient) Get(ctx context.Context, in *RoleAttachmentGetRe
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *roleAttachmentsClient) Delete(ctx context.Context, in *RoleAttachmentDeleteRequest, opts ...grpc.CallOption) (*RoleAttachmentDeleteResponse, error) {
 	out := new(RoleAttachmentDeleteResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleAttachments/Delete", in, out, opts...)
@@ -76,6 +94,7 @@ func (c *roleAttachmentsClient) Delete(ctx context.Context, in *RoleAttachmentDe
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *roleAttachmentsClient) List(ctx context.Context, in *RoleAttachmentListRequest, opts ...grpc.CallOption) (*RoleAttachmentListResponse, error) {
 	out := new(RoleAttachmentListResponse)
 	err := c.cc.Invoke(ctx, "/v1.RoleAttachments/List", in, out, opts...)
@@ -88,14 +107,28 @@ func (c *roleAttachmentsClient) List(ctx context.Context, in *RoleAttachmentList
 // RoleAttachmentsServer is the server API for RoleAttachments service.
 // All implementations must embed UnimplementedRoleAttachmentsServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type RoleAttachmentsServer interface {
+	// Deprecated: Do not use.
 	// Create registers a new RoleAttachment.
+	//
+	// Deprecated: use multi-role instead.
 	Create(context.Context, *RoleAttachmentCreateRequest) (*RoleAttachmentCreateResponse, error)
+	// Deprecated: Do not use.
 	// Get reads one RoleAttachment by ID.
+	//
+	// Deprecated: use multi-role instead.
 	Get(context.Context, *RoleAttachmentGetRequest) (*RoleAttachmentGetResponse, error)
+	// Deprecated: Do not use.
 	// Delete removes a RoleAttachment by ID.
+	//
+	// Deprecated: use multi-role instead.
 	Delete(context.Context, *RoleAttachmentDeleteRequest) (*RoleAttachmentDeleteResponse, error)
+	// Deprecated: Do not use.
 	// List gets a list of RoleAttachments matching a given set of criteria.
+	//
+	// Deprecated: use multi-role instead.
 	List(context.Context, *RoleAttachmentListRequest) (*RoleAttachmentListResponse, error)
 	mustEmbedUnimplementedRoleAttachmentsServer()
 }
@@ -125,6 +158,7 @@ type UnsafeRoleAttachmentsServer interface {
 	mustEmbedUnimplementedRoleAttachmentsServer()
 }
 
+// Deprecated: Do not use.
 func RegisterRoleAttachmentsServer(s grpc.ServiceRegistrar, srv RoleAttachmentsServer) {
 	s.RegisterService(&_RoleAttachments_serviceDesc, srv)
 }
