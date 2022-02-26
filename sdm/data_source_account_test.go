@@ -1,8 +1,10 @@
 package sdm
 
 import (
+	"context"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 
@@ -35,6 +37,57 @@ func TestAccSDMAccount_Get(t *testing.T) {
 			},
 		},
 	})
+}
+
+func TestAccSDMAccount_GetSuspended(t *testing.T) {
+	t.Parallel()
+
+	dsName := randomWithPrefix("ac_suspended_query")
+	dsNameSuspended := randomWithPrefix("ac_suspended_query")
+	_ = createUserWithSuspension(t, dsNameSuspended, true)
+
+	dsNameNotSuspended := randomWithPrefix("ac_suspended_query")
+	notSuspended := createUserWithSuspension(t, dsNameNotSuspended, false)
+
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMAccountGetFilterSuspenedConfig(dsName, "ac_suspend_query*", false),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "ids.#", "1"), // only one user returned
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.#", "1"),
+
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.first_name", notSuspended.FirstName),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.last_name", notSuspended.LastName),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.email", notSuspended.Email),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "ids.0", notSuspended.GetID()),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.suspended", "false"),
+				),
+			},
+		},
+	})
+}
+
+func createUserWithSuspension(t *testing.T, dsName string, suspended bool) *sdm.User {
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	createResp, err := client.Accounts().Create(ctx, &sdm.User{
+		Suspended: suspended,
+		FirstName: dsName,
+		LastName:  dsName,
+		Email:     dsName,
+	})
+	if err != nil {
+		t.Fatalf("failed to create account: %v", err)
+	}
+
+	return createResp.Account.(*sdm.User)
 }
 
 func TestAccSDMAccount_GetMultiple(t *testing.T) {
@@ -89,4 +142,12 @@ func testAccSDMAccountGetFilterConfig(accountDataSourceName, firstNameFilter str
 	data "sdm_account" "%s" {
 		first_name = "%s"
 	}`, accountDataSourceName, firstNameFilter)
+}
+
+func testAccSDMAccountGetFilterSuspenedConfig(dsName, firstNameFilter string, suspendedFilter bool) string {
+	return fmt.Sprintf(`
+	data "sdm_account" "%s" {
+		suspended = %v
+		first_name = "%s"
+	}`, dsName, firstNameFilter, suspendedFilter)
 }

@@ -3260,6 +3260,100 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"mtls_postgres": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_certificate": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"client_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"server_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"mysql": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -4569,27 +4663,27 @@ func dataSourceResource() *schema.Resource {
 func convertResourceFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("type"); ok {
+	if v, ok := d.GetOkExists("type"); ok {
 		filter += "type:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("hostname"); ok {
+	if v, ok := d.GetOkExists("hostname"); ok {
 		filter += "hostname:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("port"); ok {
+	if v, ok := d.GetOkExists("port"); ok {
 		filter += "port:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("username"); ok {
+	if v, ok := d.GetOkExists("username"); ok {
 		filter += "username:? "
 		args = append(args, v)
 	}
@@ -5289,6 +5383,25 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":            convertTagsToMap(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
+			})
+		case *sdm.MTLSPostgres:
+			output[0]["mtls_postgres"] = append(output[0]["mtls_postgres"], entity{
+				"certificate_authority": (v.CertificateAuthority),
+				"client_certificate":    (v.ClientCertificate),
+				"client_key":            (v.ClientKey),
+				"database":              (v.Database),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"id":                    (v.ID),
+				"name":                  (v.Name),
+				"override_database":     (v.OverrideDatabase),
+				"password":              (v.Password),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"server_name":           (v.ServerName),
+				"tags":                  convertTagsToMap(v.Tags),
+				"username":              (v.Username),
 			})
 		case *sdm.Mysql:
 			output[0]["mysql"] = append(output[0]["mysql"], entity{

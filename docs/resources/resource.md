@@ -758,6 +758,31 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
+* mtls_postgres:
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
+	* `secret_store_certificate_authority_key` - (Optional)
+	* `client_certificate` - (Required if storing credentials directly strongDM) 
+	* `secret_store_client_certificate_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_client_certificate_key` - (Optional)
+	* `client_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_client_key_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_client_key_key` - (Optional)
+	* `database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `override_database` - (Optional) 
+	* `password` - (Required if storing credentials directly strongDM) 
+	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_password_key` - (Optional)
+	* `port` - (Optional) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `server_name` - (Optional) 
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Required if storing credentials directly strongDM) 
+	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_username_key` - (Optional)
 * mysql:
 	* `database` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1082,6 +1107,8 @@ In addition to provided arguments above, the following attributes are returned b
 * mongo_replica_set:
 	* `port_override` - 
 * mongo_sharded_cluster:
+	* `port_override` - 
+* mtls_postgres:
 	* `port_override` - 
 * mysql:
 	* `port_override` - 

@@ -138,35 +138,35 @@ func dataSourceAccount() *schema.Resource {
 func convertAccountFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("type"); ok {
+	if v, ok := d.GetOkExists("type"); ok {
 		filter += "type:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("email"); ok {
+	if v, ok := d.GetOkExists("email"); ok {
 		filter += "email:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("first_name"); ok {
+	if v, ok := d.GetOkExists("first_name"); ok {
 		filter += "firstname:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("last_name"); ok {
+	if v, ok := d.GetOkExists("last_name"); ok {
 		filter += "lastname:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("suspended"); ok {
+	if v, ok := d.GetOkExists("suspended"); ok {
 		filter += "suspended:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("tags"); ok {
+	if v, ok := d.GetOkExists("tags"); ok {
 		filter += "tags:? "
 		args = append(args, v)
 	}

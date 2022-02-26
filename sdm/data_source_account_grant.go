@@ -71,23 +71,23 @@ func dataSourceAccountGrant() *schema.Resource {
 func convertAccountGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("account_id"); ok {
+	if v, ok := d.GetOkExists("account_id"); ok {
 		filter += "accountid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("resource_id"); ok {
+	if v, ok := d.GetOkExists("resource_id"); ok {
 		filter += "resourceid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("start_from"); ok {
+	if v, ok := d.GetOkExists("start_from"); ok {
 		filter += "startfrom:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("valid_until"); ok {
+	if v, ok := d.GetOkExists("valid_until"); ok {
 		filter += "validuntil:? "
 		args = append(args, v)
 	}

@@ -87,19 +87,19 @@ func dataSourceRole() *schema.Resource {
 func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("composite"); ok {
+	if v, ok := d.GetOkExists("composite"); ok {
 		filter += "composite:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("tags"); ok {
+	if v, ok := d.GetOkExists("tags"); ok {
 		filter += "tags:? "
 		args = append(args, v)
 	}

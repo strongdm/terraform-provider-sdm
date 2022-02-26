@@ -225,47 +225,47 @@ func dataSourceSecretStore() *schema.Resource {
 func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("type"); ok {
+	if v, ok := d.GetOkExists("type"); ok {
 		filter += "type:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("CA_cert_path"); ok {
+	if v, ok := d.GetOkExists("CA_cert_path"); ok {
 		filter += "cacertpath:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("client_cert_path"); ok {
+	if v, ok := d.GetOkExists("client_cert_path"); ok {
 		filter += "clientcertpath:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("client_key_path"); ok {
+	if v, ok := d.GetOkExists("client_key_path"); ok {
 		filter += "clientkeypath:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("namespace"); ok {
+	if v, ok := d.GetOkExists("namespace"); ok {
 		filter += "namespace:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("region"); ok {
+	if v, ok := d.GetOkExists("region"); ok {
 		filter += "region:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("server_address"); ok {
+	if v, ok := d.GetOkExists("server_address"); ok {
 		filter += "serveraddress:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("tags"); ok {
+	if v, ok := d.GetOkExists("tags"); ok {
 		filter += "tags:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("vault_uri"); ok {
+	if v, ok := d.GetOkExists("vault_uri"); ok {
 		filter += "vaulturi:? "
 		args = append(args, v)
 	}

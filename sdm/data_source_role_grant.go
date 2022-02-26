@@ -72,15 +72,15 @@ func dataSourceRoleGrant() *schema.Resource {
 func convertRoleGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("resource_id"); ok {
+	if v, ok := d.GetOkExists("resource_id"); ok {
 		filter += "resourceid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("role_id"); ok {
+	if v, ok := d.GetOkExists("role_id"); ok {
 		filter += "roleid:? "
 		args = append(args, v)
 	}

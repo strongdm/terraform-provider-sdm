@@ -72,15 +72,15 @@ func dataSourceRoleAttachment() *schema.Resource {
 func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("attached_role_id"); ok {
+	if v, ok := d.GetOkExists("attached_role_id"); ok {
 		filter += "attachedroleid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("composite_role_id"); ok {
+	if v, ok := d.GetOkExists("composite_role_id"); ok {
 		filter += "compositeroleid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}

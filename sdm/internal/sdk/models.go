@@ -1373,6 +1373,42 @@ type KubernetesUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
+type MTLSPostgres struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	ServerName string `json:"serverName"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
 type Maria struct {
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -4198,6 +4234,50 @@ func (m *MongoShardedCluster) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the MongoShardedCluster.
 func (m *MongoShardedCluster) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*MTLSPostgres) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MTLSPostgres.
+func (m *MTLSPostgres) GetID() string { return m.ID }
+
+// GetName returns the name of the MTLSPostgres.
+func (m *MTLSPostgres) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MTLSPostgres.
+func (m *MTLSPostgres) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MTLSPostgres.
+func (m *MTLSPostgres) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MTLSPostgres.
+func (m *MTLSPostgres) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MTLSPostgres.
+func (m *MTLSPostgres) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MTLSPostgres.
+func (m *MTLSPostgres) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MTLSPostgres.
+func (m *MTLSPostgres) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MTLSPostgres.
+func (m *MTLSPostgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*Mysql) isOneOf_Resource() {}

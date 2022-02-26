@@ -3908,6 +3908,83 @@ func convertRepeatedKubernetesUserImpersonationToPorcelain(plumbings []*proto.Ku
 	}
 	return items, nil
 }
+func convertMTLSPostgresToPorcelain(plumbing *proto.MTLSPostgres) (*MTLSPostgres, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &MTLSPostgres{}
+	porcelain.CertificateAuthority = plumbing.CertificateAuthority
+	porcelain.ClientCertificate = plumbing.ClientCertificate
+	porcelain.ClientKey = plumbing.ClientKey
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.OverrideDatabase = plumbing.OverrideDatabase
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.ServerName = plumbing.ServerName
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertMTLSPostgresToPlumbing(porcelain *MTLSPostgres) *proto.MTLSPostgres {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MTLSPostgres{}
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClientCertificate = (porcelain.ClientCertificate)
+	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.ServerName = (porcelain.ServerName)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMTLSPostgresToPlumbing(
+	porcelains []*MTLSPostgres,
+) []*proto.MTLSPostgres {
+	var items []*proto.MTLSPostgres
+	for _, porcelain := range porcelains {
+		items = append(items, convertMTLSPostgresToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMTLSPostgresToPorcelain(plumbings []*proto.MTLSPostgres) (
+	[]*MTLSPostgres,
+	error,
+) {
+	var items []*MTLSPostgres
+	for _, plumbing := range plumbings {
+		if v, err := convertMTLSPostgresToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertMariaToPorcelain(plumbing *proto.Maria) (*Maria, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -5670,6 +5747,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_MongoReplicaSet{MongoReplicaSet: convertMongoReplicaSetToPlumbing(v)}
 	case *MongoShardedCluster:
 		plumbing.Resource = &proto.Resource_MongoShardedCluster{MongoShardedCluster: convertMongoShardedClusterToPlumbing(v)}
+	case *MTLSPostgres:
+		plumbing.Resource = &proto.Resource_MtlsPostgres{MtlsPostgres: convertMTLSPostgresToPlumbing(v)}
 	case *Mysql:
 		plumbing.Resource = &proto.Resource_Mysql{Mysql: convertMysqlToPlumbing(v)}
 	case *Neptune:
@@ -5861,6 +5940,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetMongoShardedCluster() != nil {
 		return convertMongoShardedClusterToPorcelain(plumbing.GetMongoShardedCluster())
+	}
+	if plumbing.GetMtlsPostgres() != nil {
+		return convertMTLSPostgresToPorcelain(plumbing.GetMtlsPostgres())
 	}
 	if plumbing.GetMysql() != nil {
 		return convertMysqlToPorcelain(plumbing.GetMysql())

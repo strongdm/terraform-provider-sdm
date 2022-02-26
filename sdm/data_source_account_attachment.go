@@ -71,15 +71,15 @@ func dataSourceAccountAttachment() *schema.Resource {
 func convertAccountAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("account_id"); ok {
+	if v, ok := d.GetOkExists("account_id"); ok {
 		filter += "accountid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("role_id"); ok {
+	if v, ok := d.GetOkExists("role_id"); ok {
 		filter += "roleid:? "
 		args = append(args, v)
 	}

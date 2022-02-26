@@ -134,35 +134,35 @@ func dataSourceNode() *schema.Resource {
 func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOk("type"); ok {
+	if v, ok := d.GetOkExists("type"); ok {
 		filter += "type:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("bind_address"); ok {
+	if v, ok := d.GetOkExists("bind_address"); ok {
 		filter += "bindaddress:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("gateway_filter"); ok {
+	if v, ok := d.GetOkExists("gateway_filter"); ok {
 		filter += "gatewayfilter:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("id"); ok {
+	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("listen_address"); ok {
+	if v, ok := d.GetOkExists("listen_address"); ok {
 		filter += "listenaddress:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("state"); ok {
+	if v, ok := d.GetOkExists("state"); ok {
 		filter += "state:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOk("tags"); ok {
+	if v, ok := d.GetOkExists("tags"); ok {
 		filter += "tags:? "
 		args = append(args, v)
 	}
