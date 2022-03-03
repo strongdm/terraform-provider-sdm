@@ -31,11 +31,9 @@ func resourceNode() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_address": {
-							Type:     schema.TypeString,
-							Optional: true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								return new == ""
-							},
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 							ForceNew:    true,
 							Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:<listen_address_port>\".",
 						},
@@ -51,11 +49,9 @@ func resourceNode() *schema.Resource {
 							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
 						},
 						"name": {
-							Type:     schema.TypeString,
-							Optional: true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								return new == ""
-							},
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 							Description: "Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 						},
 						"tags": {
@@ -85,11 +81,9 @@ func resourceNode() *schema.Resource {
 							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
 						},
 						"name": {
-							Type:     schema.TypeString,
-							Optional: true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								return new == ""
-							},
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 							Description: "Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
 						},
 						"tags": {
