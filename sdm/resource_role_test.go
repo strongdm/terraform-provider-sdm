@@ -294,8 +294,13 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
+			// ID-based access rule
 			{
-				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName, false, fmt.Sprintf(`access_rule { ids = [sdm_resource.%s.id] }`, resourceName)),
+				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName,
+					fmt.Sprintf(`access_rules = jsonencode([
+						{ ids = [sdm_resource.%s.id] }
+					])`, resourceName),
+				),
 				Check: resource.ComposeTestCheckFunc(
 					func(s *terraform.State) error {
 						id, err := testCreatedID(s, "sdm_role", roleName)
@@ -331,19 +336,18 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 				ImportState:       true,
 				ImportStateVerify: true,
 			},
+			// dbtype-based access rules
 			{
 				Config: testAccSDMRoleAccessRulesConfig(
 					resourceName,
 					roleName,
-					false,
-					`
-					access_rule { type = "redis" }
-					access_rule { type = "postgres" }
-					`,
+					`access_rules = jsonencode([
+						{ type = "redis" },
+						{ type = "postgres" }
+					])`,
 				),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rule.0.type", "redis"),
-					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rule.1.type", "postgres"),
+					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rules", `[{"type":"redis"},{"type":"postgres"}]`),
 					func(s *terraform.State) error {
 						id, err := testCreatedID(s, "sdm_role", roleName)
 						if err != nil {
@@ -372,10 +376,55 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 				ImportState:       true,
 				ImportStateVerify: true,
 			},
+			// change order of access rules
 			{
-				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName, false, `access_rule { tags = { a = "b" } }`),
+				Config: testAccSDMRoleAccessRulesConfig(
+					resourceName,
+					roleName,
+					`access_rules = jsonencode([
+						{ type = "postgres" },
+						{ type = "redis" },
+					])`,
+				),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rule.0.tags.a", "b"),
+					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rules", `[{"type":"postgres"},{"type":"redis"}]`),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", roleName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Type: "postgres"}, sdm.AccessRule{Type: "redis"}}) {
+							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"type":"postgres"},{"type":"redis"}]'`, resp.Role.AccessRules)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + roleName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			// tag-based access rule
+			{
+				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName,
+					`access_rules = jsonencode([
+						{ tags = { a = "b" } }
+					])`,
+				),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rules", `[{"tags":{"a":"b"}}]`),
 					func(s *terraform.State) error {
 						id, err := testCreatedID(s, "sdm_role", roleName)
 						if err != nil {
@@ -393,6 +442,72 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 
 						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Tags: sdm.Tags{"a": "b"}}}) {
 							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"tags":{"a":"b"}}]'`, resp.Role.AccessRules)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + roleName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			// elide access rules field; access rules should stay the same (it's an optional computed field)
+			{
+				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName, ``),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rules", `[{"tags":{"a":"b"}}]`),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", roleName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Tags: sdm.Tags{"a": "b"}}}) {
+							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"tags":{"a":"b"}}]'`, resp.Role.AccessRules)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + roleName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			// now clear out access rules
+			{
+				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName, `access_rules = jsonencode([])`),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rules", `[]`),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", roleName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						if len(resp.Role.AccessRules) != 0 {
+							return fmt.Errorf(`expected no access rules, got %v`, len(resp.Role.AccessRules))
 						}
 
 						return nil
@@ -429,7 +544,7 @@ func testAccSDMRoleTagsConfig(resourceName string, roleName string, composite bo
 	`, resourceName, roleName, composite, tagsToConfigString(tags))
 }
 
-func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, composite bool, accessRules string) string {
+func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, accessRules string) string {
 	return fmt.Sprintf(`
 	resource "sdm_resource" "%[1]s" {
 		redis {
@@ -440,10 +555,9 @@ func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, compo
 
 	resource "sdm_role" "%[2]s" {
 		name = "%[2]s"
-		composite = %[3]t
-		%[4]s
+		%[3]s
 	}
-	`, resourceName, roleName, composite, accessRules)
+	`, resourceName, roleName, accessRules)
 }
 
 func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Role, error) {

@@ -23,6 +23,13 @@ func resourceRole() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"access_rules": {
+				Type:             schema.TypeString,
+				Optional:         true,
+				Computed:         true,
+				DiffSuppressFunc: accessRulesDiffSuppress,
+				Description:      "AccessRules is a list of access rules defining the resources this Role has access to.",
+			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
@@ -41,7 +48,6 @@ func resourceRole() *schema.Resource {
 				Optional:    true,
 				Description: "Tags is a map of key, value pairs.",
 			},
-			"access_rule": accessRuleSchema,
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -51,10 +57,10 @@ func resourceRole() *schema.Resource {
 func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),
+		AccessRules: convertAccessRulesFromResourceData(d, "access_rules"),
 		Composite:   convertBoolFromResourceData(d, "composite"),
 		Name:        convertStringFromResourceData(d, "name"),
 		Tags:        convertTagsFromResourceData(d, "tags"),
-		AccessRules: convertAccessRulesFromResourceData(d, "access_rule"),
 	}
 }
 
@@ -67,10 +73,10 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 	}
 	d.SetId(resp.Role.ID)
 	v := resp.Role
+	d.Set("access_rules", convertAccessRulesToMap(v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToMap(v.Tags))
-	d.Set("access_rule", convertAccessRulesToMap(v.AccessRules))
 	return nil
 }
 
@@ -87,10 +93,10 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		return fmt.Errorf("cannot read Role %s: %w", d.Id(), err)
 	}
 	v := resp.Role
+	d.Set("access_rules", convertAccessRulesToMap(v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToMap(v.Tags))
-	d.Set("access_rule", convertAccessRulesToMap(v.AccessRules))
 	return nil
 }
 func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {

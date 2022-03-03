@@ -4,7 +4,9 @@
 package sdm
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -19,6 +21,20 @@ func wrapCrudOperation(op apiCrudOperation) func(context.Context, *schema.Resour
 		err := op(ctx, d, client)
 		return diag.FromErr(err)
 	}
+}
+
+func convertAccessRulesToMap(accessRules sdm.AccessRules) string {
+	value, _ := json.Marshal(accessRules)
+	return string(value)
+}
+
+func convertAccessRulesFromResourceData(d *schema.ResourceData, key string) sdm.AccessRules {
+	value := d.Get(key)
+	if value == nil {
+		return nil
+	}
+	accessRules, _ := sdm.ParseAccessRulesJSON(value.(string))
+	return accessRules
 }
 
 func convertTagsFromMap(m map[string]interface{}, key string) sdm.Tags {
@@ -65,117 +81,31 @@ func tagsFromMap(m map[string]interface{}) sdm.Tags {
 	return res
 }
 
-func convertAccessRulesFromMap(m map[string]interface{}, key string) sdm.AccessRules {
-	value := m[key]
-	if value == nil {
-		return nil
-	}
-	list, ok := value.([]interface{})
-	if !ok {
-		return nil
-	}
-	return accessRulesFromList(list)
-}
-
-func convertAccessRulesToMap(policy sdm.AccessRules) []map[string]interface{} {
-	res := make([]map[string]interface{}, 0, len(policy))
-	for _, rule := range policy {
-		res = append(res, map[string]interface{}{
-			"ids":  rule.IDs,
-			"tags": convertTagsToMap(rule.Tags),
-			"type": rule.Type,
-		})
-	}
-	return res
-}
-
 var tagsElemType = &schema.Schema{
 	Type: schema.TypeString,
 }
 
-var accessRuleSchema = &schema.Schema{
-	Type:        schema.TypeList,
-	Optional:    true,
-	Computed:    true,
-	Description: "One or more access rules define the resources this Role has access to.",
-	Elem: &schema.Resource{
-		Schema: map[string]*schema.Schema{
-			"ids": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-			"type": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"tags": {
-				Optional: true,
-				Type:     schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-		},
-	},
-}
-
-func convertAccessRulesFromResourceData(d *schema.ResourceData, key string) sdm.AccessRules {
-	value := d.Get(key)
-	if value == nil {
-		return nil
+func accessRulesDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
+	oldRules, err := sdm.ParseAccessRulesJSON(old)
+	if err != nil {
+		return false
 	}
-	list, ok := value.([]interface{})
-	if !ok {
-		return nil
+	newRules, err := sdm.ParseAccessRulesJSON(new)
+	if err != nil {
+		return false
 	}
-	return accessRulesFromList(list)
-}
-
-func accessRulesFromList(list []interface{}) sdm.AccessRules {
-	result := sdm.AccessRules{}
-	for _, item := range list {
-		mapItem, ok := item.(map[string]interface{})
-		if !ok {
-			return nil
-		}
-		rule := sdm.AccessRule{}
-		for k, v := range mapItem {
-			switch k {
-			case "ids":
-				ids, ok := v.([]interface{})
-				if !ok {
-					return nil
-				}
-				for _, id := range ids {
-					str, ok := id.(string)
-					if !ok {
-						return nil
-					}
-					rule.IDs = append(rule.IDs, str)
-				}
-			case "type":
-				var ok bool
-				rule.Type, ok = v.(string)
-				if !ok {
-					return nil
-				}
-			case "tags":
-				var ok bool
-				tags, ok := v.(map[string]interface{})
-				if !ok {
-					return nil
-				}
-				rule.Tags = tagsFromMap(tags)
-			default:
-				return nil
-			}
-		}
-		result = append(result, rule)
+	oldNormalized, err := json.Marshal(oldRules)
+	if err != nil {
+		return false
 	}
-	return result
+	newNormalized, err := json.Marshal(newRules)
+	if err != nil {
+		return false
+	}
+	if !bytes.Equal(oldNormalized, newNormalized) {
+		return false
+	}
+	return true
 }
 
 func convertStringFromMap(m map[string]interface{}, key string) string {

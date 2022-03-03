@@ -22,6 +22,11 @@ func dataSourceRole() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
+			"access_rules": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "AccessRules is a list of access rules defining the resources this Role has access to.",
+			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
@@ -44,13 +49,17 @@ func dataSourceRole() *schema.Resource {
 				Optional:    true,
 				Description: "Tags is a map of key, value pairs.",
 			},
-			"access_rule": accessRuleSchema,
 			"roles": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"access_rules": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "AccessRules is a list of access rules defining the resources this Role has access to.",
+						},
 						"composite": {
 							Type:        schema.TypeBool,
 							Optional:    true,
@@ -73,7 +82,6 @@ func dataSourceRole() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
-						"access_rule": accessRuleSchema,
 					},
 				},
 			},
@@ -87,6 +95,10 @@ func dataSourceRole() *schema.Resource {
 func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
+	if v, ok := d.GetOkExists("access_rules"); ok {
+		filter += "accessrules:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("composite"); ok {
 		filter += "composite:? "
 		args = append(args, v)
@@ -120,11 +132,11 @@ func dataSourceRoleList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"composite":   (v.Composite),
-				"id":          (v.ID),
-				"name":        (v.Name),
-				"tags":        convertTagsToMap(v.Tags),
-				"access_rule": convertAccessRulesToMap(v.AccessRules),
+				"access_rules": convertAccessRulesToMap(v.AccessRules),
+				"composite":    (v.Composite),
+				"id":           (v.ID),
+				"name":         (v.Name),
+				"tags":         convertTagsToMap(v.Tags),
 			})
 	}
 	if resp.Err() != nil {
