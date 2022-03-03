@@ -40,16 +40,16 @@ func resourceAccountGrant() *schema.Resource {
 		},
 	}
 }
-func convertAccountGrantFromResourceData(d *schema.ResourceData) *sdm.AccountGrant {
+func convertAccountGrantToPlumbing(d *schema.ResourceData) *sdm.AccountGrant {
 	return &sdm.AccountGrant{
 		ID:         d.Id(),
-		AccountID:  convertStringFromResourceData(d, "account_id"),
-		ResourceID: convertStringFromResourceData(d, "resource_id"),
+		AccountID:  convertStringToPlumbing(d.Get("account_id")),
+		ResourceID: convertStringToPlumbing(d.Get("resource_id")),
 	}
 }
 
 func resourceAccountGrantCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertAccountGrantFromResourceData(d)
+	localVersion := convertAccountGrantToPlumbing(d)
 
 	resp, err := cc.AccountGrants().Create(ctx, localVersion)
 	if err != nil {
@@ -63,7 +63,7 @@ func resourceAccountGrantCreate(ctx context.Context, d *schema.ResourceData, cc 
 }
 
 func resourceAccountGrantRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertAccountGrantFromResourceData(d)
+	localVersion := convertAccountGrantToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.AccountGrants().Get(ctx, d.Id())

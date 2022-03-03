@@ -222,7 +222,7 @@ func dataSourceSecretStore() *schema.Resource {
 	}
 }
 
-func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertSecretStoreFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("type"); ok {
@@ -273,7 +273,7 @@ func convertSecretStoreFilterFromResourceData(d *schema.ResourceData) (string, [
 }
 
 func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertSecretStoreFilterFromResourceData(d)
+	filter, args := convertSecretStoreFilterToPlumbing(d)
 	resp, err := cc.SecretStores().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list SecretStores %s: %w", d.Id(), err)
@@ -292,13 +292,13 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"id":     (v.ID),
 				"name":   (v.Name),
 				"region": (v.Region),
-				"tags":   convertTagsToMap(v.Tags),
+				"tags":   convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AzureStore:
 			output[0]["azure_store"] = append(output[0]["azure_store"], entity{
 				"id":        (v.ID),
 				"name":      (v.Name),
-				"tags":      convertTagsToMap(v.Tags),
+				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
 			})
 		case *sdm.VaultTLSStore:
@@ -310,7 +310,7 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"name":             (v.Name),
 				"namespace":        (v.Namespace),
 				"server_address":   (v.ServerAddress),
-				"tags":             convertTagsToMap(v.Tags),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTokenStore:
 			output[0]["vault_token"] = append(output[0]["vault_token"], entity{
@@ -318,7 +318,7 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"name":           (v.Name),
 				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			})
 		}
 	}

@@ -106,7 +106,7 @@ func resourceNode() *schema.Resource {
 		},
 	}
 }
-func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
+func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -114,11 +114,11 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		}
 		out := &sdm.Gateway{
 			ID:            d.Id(),
-			BindAddress:   convertStringFromMap(raw, "bind_address"),
-			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
-			ListenAddress: convertStringFromMap(raw, "listen_address"),
-			Name:          convertStringFromMap(raw, "name"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			BindAddress:   convertStringToPlumbing(raw["bind_address"]),
+			GatewayFilter: convertStringToPlumbing(raw["gateway_filter"]),
+			ListenAddress: convertStringToPlumbing(raw["listen_address"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -129,9 +129,9 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 		}
 		out := &sdm.Relay{
 			ID:            d.Id(),
-			GatewayFilter: convertStringFromMap(raw, "gateway_filter"),
-			Name:          convertStringFromMap(raw, "name"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			GatewayFilter: convertStringToPlumbing(raw["gateway_filter"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -139,7 +139,7 @@ func convertNodeFromResourceData(d *schema.ResourceData) sdm.Node {
 }
 
 func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertNodeFromResourceData(d)
+	localVersion := convertNodeToPlumbing(d)
 
 	resp, err := cc.Nodes().Create(ctx, localVersion)
 	if err != nil {
@@ -156,7 +156,7 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 				"gateway_filter": (v.GatewayFilter),
 				"listen_address": (v.ListenAddress),
 				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 				"token":          resp.Token,
 			},
 		})
@@ -167,7 +167,7 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 			{
 				"gateway_filter": (v.GatewayFilter),
 				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 				"token":          resp.Token,
 			},
 		})
@@ -176,7 +176,7 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 }
 
 func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertNodeFromResourceData(d)
+	localVersion := convertNodeToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.Nodes().Get(ctx, d.Id())
@@ -200,7 +200,7 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 				"gateway_filter": (v.GatewayFilter),
 				"listen_address": (v.ListenAddress),
 				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 				"token":          d.Get("gateway.0.token"),
 			},
 		})
@@ -214,7 +214,7 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 			{
 				"gateway_filter": (v.GatewayFilter),
 				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 				"token":          d.Get("relay.0.token"),
 			},
 		})
@@ -223,7 +223,7 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 }
 func resourceNodeUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
-	resp, err := cc.Nodes().Update(ctx, convertNodeFromResourceData(d))
+	resp, err := cc.Nodes().Update(ctx, convertNodeToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)
 	}

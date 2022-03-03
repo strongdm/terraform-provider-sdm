@@ -158,7 +158,7 @@ func resourceSecretStore() *schema.Resource {
 		},
 	}
 }
-func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore {
+func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -166,9 +166,9 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		out := &sdm.AWSStore{
 			ID:     d.Id(),
-			Name:   convertStringFromMap(raw, "name"),
-			Region: convertStringFromMap(raw, "region"),
-			Tags:   convertTagsFromMap(raw, "tags"),
+			Name:   convertStringToPlumbing(raw["name"]),
+			Region: convertStringToPlumbing(raw["region"]),
+			Tags:   convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -179,9 +179,9 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		out := &sdm.AzureStore{
 			ID:       d.Id(),
-			Name:     convertStringFromMap(raw, "name"),
-			Tags:     convertTagsFromMap(raw, "tags"),
-			VaultUri: convertStringFromMap(raw, "vault_uri"),
+			Name:     convertStringToPlumbing(raw["name"]),
+			Tags:     convertTagsToPlumbing(raw["tags"]),
+			VaultUri: convertStringToPlumbing(raw["vault_uri"]),
 		}
 		return out
 	}
@@ -192,13 +192,13 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		out := &sdm.VaultTLSStore{
 			ID:             d.Id(),
-			CACertPath:     convertStringFromMap(raw, "ca_cert_path"),
-			ClientCertPath: convertStringFromMap(raw, "client_cert_path"),
-			ClientKeyPath:  convertStringFromMap(raw, "client_key_path"),
-			Name:           convertStringFromMap(raw, "name"),
-			Namespace:      convertStringFromMap(raw, "namespace"),
-			ServerAddress:  convertStringFromMap(raw, "server_address"),
-			Tags:           convertTagsFromMap(raw, "tags"),
+			CACertPath:     convertStringToPlumbing(raw["ca_cert_path"]),
+			ClientCertPath: convertStringToPlumbing(raw["client_cert_path"]),
+			ClientKeyPath:  convertStringToPlumbing(raw["client_key_path"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Namespace:      convertStringToPlumbing(raw["namespace"]),
+			ServerAddress:  convertStringToPlumbing(raw["server_address"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -209,10 +209,10 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 		}
 		out := &sdm.VaultTokenStore{
 			ID:            d.Id(),
-			Name:          convertStringFromMap(raw, "name"),
-			Namespace:     convertStringFromMap(raw, "namespace"),
-			ServerAddress: convertStringFromMap(raw, "server_address"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Namespace:     convertStringToPlumbing(raw["namespace"]),
+			ServerAddress: convertStringToPlumbing(raw["server_address"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -220,7 +220,7 @@ func convertSecretStoreFromResourceData(d *schema.ResourceData) sdm.SecretStore 
 }
 
 func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertSecretStoreFromResourceData(d)
+	localVersion := convertSecretStoreToPlumbing(d)
 
 	resp, err := cc.SecretStores().Create(ctx, localVersion)
 	if err != nil {
@@ -235,7 +235,7 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 			{
 				"name":   (v.Name),
 				"region": (v.Region),
-				"tags":   convertTagsToMap(v.Tags),
+				"tags":   convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AzureStore:
@@ -244,7 +244,7 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 		d.Set("azure_store", []map[string]interface{}{
 			{
 				"name":      (v.Name),
-				"tags":      convertTagsToMap(v.Tags),
+				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
 			},
 		})
@@ -259,7 +259,7 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"name":             (v.Name),
 				"namespace":        (v.Namespace),
 				"server_address":   (v.ServerAddress),
-				"tags":             convertTagsToMap(v.Tags),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTokenStore:
@@ -270,7 +270,7 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"name":           (v.Name),
 				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	}
@@ -278,7 +278,7 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 }
 
 func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertSecretStoreFromResourceData(d)
+	localVersion := convertSecretStoreToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.SecretStores().Get(ctx, d.Id())
@@ -300,7 +300,7 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 			{
 				"name":   (v.Name),
 				"region": (v.Region),
-				"tags":   convertTagsToMap(v.Tags),
+				"tags":   convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AzureStore:
@@ -312,7 +312,7 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 		d.Set("azure_store", []map[string]interface{}{
 			{
 				"name":      (v.Name),
-				"tags":      convertTagsToMap(v.Tags),
+				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
 			},
 		})
@@ -330,7 +330,7 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"name":             (v.Name),
 				"namespace":        (v.Namespace),
 				"server_address":   (v.ServerAddress),
-				"tags":             convertTagsToMap(v.Tags),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTokenStore:
@@ -344,7 +344,7 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"name":           (v.Name),
 				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	}
@@ -352,7 +352,7 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 }
 func resourceSecretStoreUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
-	resp, err := cc.SecretStores().Update(ctx, convertSecretStoreFromResourceData(d))
+	resp, err := cc.SecretStores().Update(ctx, convertSecretStoreToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update SecretStore %s: %w", d.Id(), err)
 	}

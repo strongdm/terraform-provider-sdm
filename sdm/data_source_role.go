@@ -92,7 +92,7 @@ func dataSourceRole() *schema.Resource {
 	}
 }
 
-func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertRoleFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("access_rules"); ok {
@@ -119,7 +119,7 @@ func convertRoleFilterFromResourceData(d *schema.ResourceData) (string, []interf
 }
 
 func dataSourceRoleList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertRoleFilterFromResourceData(d)
+	filter, args := convertRoleFilterToPlumbing(d)
 	resp, err := cc.Roles().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Roles %s: %w", d.Id(), err)
@@ -132,11 +132,11 @@ func dataSourceRoleList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"access_rules": convertAccessRulesToMap(v.AccessRules),
+				"access_rules": convertAccessRulesToPorcelain(v.AccessRules),
 				"composite":    (v.Composite),
 				"id":           (v.ID),
 				"name":         (v.Name),
-				"tags":         convertTagsToMap(v.Tags),
+				"tags":         convertTagsToPorcelain(v.Tags),
 			})
 	}
 	if resp.Err() != nil {

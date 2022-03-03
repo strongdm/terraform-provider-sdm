@@ -68,7 +68,7 @@ func dataSourceAccountAttachment() *schema.Resource {
 	}
 }
 
-func convertAccountAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertAccountAttachmentFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("account_id"); ok {
@@ -87,7 +87,7 @@ func convertAccountAttachmentFilterFromResourceData(d *schema.ResourceData) (str
 }
 
 func dataSourceAccountAttachmentList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertAccountAttachmentFilterFromResourceData(d)
+	filter, args := convertAccountAttachmentFilterToPlumbing(d)
 	resp, err := cc.AccountAttachments().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list AccountAttachments %s: %w", d.Id(), err)

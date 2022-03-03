@@ -41,16 +41,16 @@ func resourceRoleAttachment() *schema.Resource {
 		},
 	}
 }
-func convertRoleAttachmentFromResourceData(d *schema.ResourceData) *sdm.RoleAttachment {
+func convertRoleAttachmentToPlumbing(d *schema.ResourceData) *sdm.RoleAttachment {
 	return &sdm.RoleAttachment{
 		ID:              d.Id(),
-		AttachedRoleID:  convertStringFromResourceData(d, "attached_role_id"),
-		CompositeRoleID: convertStringFromResourceData(d, "composite_role_id"),
+		AttachedRoleID:  convertStringToPlumbing(d.Get("attached_role_id")),
+		CompositeRoleID: convertStringToPlumbing(d.Get("composite_role_id")),
 	}
 }
 
 func resourceRoleAttachmentCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertRoleAttachmentFromResourceData(d)
+	localVersion := convertRoleAttachmentToPlumbing(d)
 
 	resp, err := cc.RoleAttachments().Create(ctx, localVersion)
 	if err != nil {
@@ -64,7 +64,7 @@ func resourceRoleAttachmentCreate(ctx context.Context, d *schema.ResourceData, c
 }
 
 func resourceRoleAttachmentRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertRoleAttachmentFromResourceData(d)
+	localVersion := convertRoleAttachmentToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.RoleAttachments().Get(ctx, d.Id())

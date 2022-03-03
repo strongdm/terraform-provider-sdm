@@ -68,7 +68,7 @@ func dataSourceAccountGrant() *schema.Resource {
 	}
 }
 
-func convertAccountGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertAccountGrantFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("account_id"); ok {
@@ -95,7 +95,7 @@ func convertAccountGrantFilterFromResourceData(d *schema.ResourceData) (string, 
 }
 
 func dataSourceAccountGrantList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertAccountGrantFilterFromResourceData(d)
+	filter, args := convertAccountGrantFilterToPlumbing(d)
 	resp, err := cc.AccountGrants().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list AccountGrants %s: %w", d.Id(), err)

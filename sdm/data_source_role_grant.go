@@ -69,7 +69,7 @@ func dataSourceRoleGrant() *schema.Resource {
 	}
 }
 
-func convertRoleGrantFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertRoleGrantFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("id"); ok {
@@ -88,7 +88,7 @@ func convertRoleGrantFilterFromResourceData(d *schema.ResourceData) (string, []i
 }
 
 func dataSourceRoleGrantList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertRoleGrantFilterFromResourceData(d)
+	filter, args := convertRoleGrantFilterToPlumbing(d)
 	resp, err := cc.RoleGrants().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list RoleGrants %s: %w", d.Id(), err)

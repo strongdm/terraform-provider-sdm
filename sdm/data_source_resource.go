@@ -4660,7 +4660,7 @@ func dataSourceResource() *schema.Resource {
 	}
 }
 
-func convertResourceFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertResourceFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("type"); ok {
@@ -4691,7 +4691,7 @@ func convertResourceFilterFromResourceData(d *schema.ResourceData) (string, []in
 }
 
 func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertResourceFilterFromResourceData(d)
+	filter, args := convertResourceFilterToPlumbing(d)
 	resp, err := cc.Resources().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Resources %s: %w", d.Id(), err)
@@ -4717,7 +4717,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AKSBasicAuth:
 			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
@@ -4729,7 +4729,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":              (v.Password),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
 			})
 		case *sdm.AKSServiceAccount:
@@ -4741,7 +4741,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"token":                 (v.Token),
 			})
 		case *sdm.AKSServiceAccountUserImpersonation:
@@ -4753,7 +4753,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"token":                 (v.Token),
 			})
 		case *sdm.AKSUserImpersonation:
@@ -4768,7 +4768,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
@@ -4785,7 +4785,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":      (v.RoleExternalID),
 				"secret_access_key":     (v.SecretAccessKey),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AmazonEKSUserImpersonation:
 			output[0]["amazon_eks_user_impersonation"] = append(output[0]["amazon_eks_user_impersonation"], entity{
@@ -4802,7 +4802,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":      (v.RoleExternalID),
 				"secret_access_key":     (v.SecretAccessKey),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AmazonES:
 			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
@@ -4817,7 +4817,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":  (v.RoleExternalID),
 				"secret_access_key": (v.SecretAccessKey),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AmazonMQAMQP091:
 			output[0]["amazonmq_amqp_091"] = append(output[0]["amazonmq_amqp_091"], entity{
@@ -4829,7 +4829,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -4846,7 +4846,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":  (v.RoleExternalID),
 				"secret_access_key": (v.SecretAccessKey),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AuroraMysql:
 			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
@@ -4859,7 +4859,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.AuroraPostgres:
@@ -4874,7 +4874,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.AWS:
@@ -4888,7 +4888,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":   (v.RoleExternalID),
 				"secret_access_key":  (v.SecretAccessKey),
 				"secret_store_id":    (v.SecretStoreID),
-				"tags":               convertTagsToMap(v.Tags),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Azure:
 			output[0]["azure"] = append(output[0]["azure"], entity{
@@ -4898,7 +4898,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":            (v.Name),
 				"password":        (v.Password),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tenant_id":       (v.TenantID),
 			})
 		case *sdm.AzureCertificate:
@@ -4909,7 +4909,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                 (v.ID),
 				"name":               (v.Name),
 				"secret_store_id":    (v.SecretStoreID),
-				"tags":               convertTagsToMap(v.Tags),
+				"tags":               convertTagsToPorcelain(v.Tags),
 				"tenant_id":          (v.TenantID),
 			})
 		case *sdm.AzurePostgres:
@@ -4924,7 +4924,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.BigQuery:
@@ -4937,7 +4937,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"private_key":     (v.PrivateKey),
 				"project":         (v.Project),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Cassandra:
@@ -4950,7 +4950,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -4966,7 +4966,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.Clustrix:
@@ -4980,7 +4980,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Cockroach:
@@ -4995,7 +4995,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.DB2I:
@@ -5008,7 +5008,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5023,7 +5023,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.DocumentDBHost:
@@ -5037,7 +5037,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.DocumentDBReplicaSet:
@@ -5052,7 +5052,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":      (v.PortOverride),
 				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
-				"tags":               convertTagsToMap(v.Tags),
+				"tags":               convertTagsToPorcelain(v.Tags),
 				"username":           (v.Username),
 			})
 		case *sdm.Druid:
@@ -5065,7 +5065,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.DynamoDB:
@@ -5081,7 +5081,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":  (v.RoleExternalID),
 				"secret_access_key": (v.SecretAccessKey),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Elastic:
 			output[0]["elastic"] = append(output[0]["elastic"], entity{
@@ -5093,7 +5093,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5107,7 +5107,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 			})
 		case *sdm.GCP:
@@ -5118,7 +5118,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":            (v.Name),
 				"scopes":          (v.Scopes),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
@@ -5130,7 +5130,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"secret_store_id":       (v.SecretStoreID),
 				"service_account_key":   (v.ServiceAccountKey),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.GoogleGKEUserImpersonation:
 			output[0]["google_gke_user_impersonation"] = append(output[0]["google_gke_user_impersonation"], entity{
@@ -5142,7 +5142,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"secret_store_id":       (v.SecretStoreID),
 				"service_account_key":   (v.ServiceAccountKey),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Greenplum:
 			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
@@ -5156,7 +5156,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.HTTPAuth:
@@ -5170,7 +5170,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":              (v.Name),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"url":               (v.Url),
 			})
 		case *sdm.HTTPBasicAuth:
@@ -5184,7 +5184,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":          (v.Password),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"url":               (v.Url),
 				"username":          (v.Username),
 			})
@@ -5198,7 +5198,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":              (v.Name),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"url":               (v.Url),
 			})
 		case *sdm.Kubernetes:
@@ -5213,7 +5213,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.KubernetesBasicAuth:
 			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
@@ -5225,7 +5225,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":              (v.Password),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
 			})
 		case *sdm.KubernetesServiceAccount:
@@ -5237,7 +5237,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"token":                 (v.Token),
 			})
 		case *sdm.KubernetesServiceAccountUserImpersonation:
@@ -5249,7 +5249,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"token":                 (v.Token),
 			})
 		case *sdm.KubernetesUserImpersonation:
@@ -5264,7 +5264,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"port":                  (v.Port),
 				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Maria:
 			output[0]["maria"] = append(output[0]["maria"], entity{
@@ -5277,7 +5277,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Memcached:
@@ -5289,7 +5289,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Memsql:
 			output[0]["memsql"] = append(output[0]["memsql"], entity{
@@ -5302,7 +5302,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.MongoHost:
@@ -5316,7 +5316,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5332,7 +5332,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":   (v.PortOverride),
 				"replica_set":     (v.ReplicaSet),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5349,7 +5349,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":      (v.PortOverride),
 				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
-				"tags":               convertTagsToMap(v.Tags),
+				"tags":               convertTagsToPorcelain(v.Tags),
 				"tls_required":       (v.TlsRequired),
 				"username":           (v.Username),
 			})
@@ -5366,7 +5366,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":      (v.PortOverride),
 				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
-				"tags":               convertTagsToMap(v.Tags),
+				"tags":               convertTagsToPorcelain(v.Tags),
 				"tls_required":       (v.TlsRequired),
 				"username":           (v.Username),
 			})
@@ -5380,7 +5380,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":        (v.Password),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5400,7 +5400,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"server_name":           (v.ServerName),
-				"tags":                  convertTagsToMap(v.Tags),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
 			})
 		case *sdm.Mysql:
@@ -5414,7 +5414,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Neptune:
@@ -5426,7 +5426,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.NeptuneIAM:
 			output[0]["neptune_iam"] = append(output[0]["neptune_iam"], entity{
@@ -5442,7 +5442,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_external_id":  (v.RoleExternalID),
 				"secret_access_key": (v.SecretAccessKey),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{
@@ -5455,7 +5455,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5471,7 +5471,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.Presto:
@@ -5485,7 +5485,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5499,7 +5499,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
@@ -5512,7 +5512,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{
@@ -5525,7 +5525,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                      (v.Port),
 				"port_override":             (v.PortOverride),
 				"secret_store_id":           (v.SecretStoreID),
-				"tags":                      convertTagsToMap(v.Tags),
+				"tags":                      convertTagsToPorcelain(v.Tags),
 				"username":                  (v.Username),
 			})
 		case *sdm.Redis:
@@ -5538,7 +5538,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Redshift:
 			output[0]["redshift"] = append(output[0]["redshift"], entity{
@@ -5552,7 +5552,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.SingleStore:
@@ -5566,7 +5566,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Snowflake:
@@ -5580,7 +5580,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":   (v.PortOverride),
 				"schema":          (v.Schema),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.SQLServer:
@@ -5596,7 +5596,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":     (v.PortOverride),
 				"schema":            (v.Schema),
 				"secret_store_id":   (v.SecretStoreID),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
 		case *sdm.SSH:
@@ -5610,7 +5610,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_forwarding":                (v.PortForwarding),
 				"public_key":                     (v.PublicKey),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       (v.Username),
 			})
 		case *sdm.SSHCert:
@@ -5623,7 +5623,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       (v.Username),
 			})
 		case *sdm.SSHCustomerKey:
@@ -5637,7 +5637,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_forwarding":                (v.PortForwarding),
 				"private_key":                    (v.PrivateKey),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       (v.Username),
 			})
 		case *sdm.Sybase:
@@ -5650,7 +5650,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.SybaseIQ:
@@ -5663,7 +5663,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		case *sdm.Teradata:
@@ -5676,7 +5676,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
 			})
 		}

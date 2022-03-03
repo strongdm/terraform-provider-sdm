@@ -131,7 +131,7 @@ func dataSourceNode() *schema.Resource {
 	}
 }
 
-func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertNodeFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("type"); ok {
@@ -170,7 +170,7 @@ func convertNodeFilterFromResourceData(d *schema.ResourceData) (string, []interf
 }
 
 func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertNodeFilterFromResourceData(d)
+	filter, args := convertNodeFilterToPlumbing(d)
 	resp, err := cc.Nodes().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Nodes %s: %w", d.Id(), err)
@@ -191,14 +191,14 @@ func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 				"id":             (v.ID),
 				"listen_address": (v.ListenAddress),
 				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Relay:
 			output[0]["relay"] = append(output[0]["relay"], entity{
 				"gateway_filter": (v.GatewayFilter),
 				"id":             (v.ID),
 				"name":           (v.Name),
-				"tags":           convertTagsToMap(v.Tags),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			})
 		}
 	}

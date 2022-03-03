@@ -96,7 +96,7 @@ func resourceAccount() *schema.Resource {
 		},
 	}
 }
-func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
+func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 	if list := d.Get("service").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -104,9 +104,9 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 		}
 		out := &sdm.Service{
 			ID:        d.Id(),
-			Name:      convertStringFromMap(raw, "name"),
-			Suspended: convertBoolFromMap(raw, "suspended"),
-			Tags:      convertTagsFromMap(raw, "tags"),
+			Name:      convertStringToPlumbing(raw["name"]),
+			Suspended: convertBoolToPlumbing(raw["suspended"]),
+			Tags:      convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -117,11 +117,11 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 		}
 		out := &sdm.User{
 			ID:        d.Id(),
-			Email:     convertStringFromMap(raw, "email"),
-			FirstName: convertStringFromMap(raw, "first_name"),
-			LastName:  convertStringFromMap(raw, "last_name"),
-			Suspended: convertBoolFromMap(raw, "suspended"),
-			Tags:      convertTagsFromMap(raw, "tags"),
+			Email:     convertStringToPlumbing(raw["email"]),
+			FirstName: convertStringToPlumbing(raw["first_name"]),
+			LastName:  convertStringToPlumbing(raw["last_name"]),
+			Suspended: convertBoolToPlumbing(raw["suspended"]),
+			Tags:      convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -129,7 +129,7 @@ func convertAccountFromResourceData(d *schema.ResourceData) sdm.Account {
 }
 
 func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertAccountFromResourceData(d)
+	localVersion := convertAccountToPlumbing(d)
 
 	resp, err := cc.Accounts().Create(ctx, localVersion)
 	if err != nil {
@@ -144,7 +144,7 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 			{
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
-				"tags":      convertTagsToMap(v.Tags),
+				"tags":      convertTagsToPorcelain(v.Tags),
 				"token":     resp.Token,
 			},
 		})
@@ -157,7 +157,7 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"first_name": (v.FirstName),
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
-				"tags":       convertTagsToMap(v.Tags),
+				"tags":       convertTagsToPorcelain(v.Tags),
 			},
 		})
 	}
@@ -165,7 +165,7 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 }
 
 func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertAccountFromResourceData(d)
+	localVersion := convertAccountToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.Accounts().Get(ctx, d.Id())
@@ -187,7 +187,7 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 			{
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
-				"tags":      convertTagsToMap(v.Tags),
+				"tags":      convertTagsToPorcelain(v.Tags),
 				"token":     d.Get("service.0.token"),
 			},
 		})
@@ -203,7 +203,7 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 				"first_name": (v.FirstName),
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
-				"tags":       convertTagsToMap(v.Tags),
+				"tags":       convertTagsToPorcelain(v.Tags),
 			},
 		})
 	}
@@ -211,7 +211,7 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 }
 func resourceAccountUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
-	resp, err := cc.Accounts().Update(ctx, convertAccountFromResourceData(d))
+	resp, err := cc.Accounts().Update(ctx, convertAccountToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Account %s: %w", d.Id(), err)
 	}

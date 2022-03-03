@@ -40,16 +40,16 @@ func resourceAccountAttachment() *schema.Resource {
 		},
 	}
 }
-func convertAccountAttachmentFromResourceData(d *schema.ResourceData) *sdm.AccountAttachment {
+func convertAccountAttachmentToPlumbing(d *schema.ResourceData) *sdm.AccountAttachment {
 	return &sdm.AccountAttachment{
 		ID:        d.Id(),
-		AccountID: convertStringFromResourceData(d, "account_id"),
-		RoleID:    convertStringFromResourceData(d, "role_id"),
+		AccountID: convertStringToPlumbing(d.Get("account_id")),
+		RoleID:    convertStringToPlumbing(d.Get("role_id")),
 	}
 }
 
 func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertAccountAttachmentFromResourceData(d)
+	localVersion := convertAccountAttachmentToPlumbing(d)
 
 	resp, err := cc.AccountAttachments().Create(ctx, localVersion)
 	if err != nil {
@@ -63,7 +63,7 @@ func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData
 }
 
 func resourceAccountAttachmentRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertAccountAttachmentFromResourceData(d)
+	localVersion := convertAccountAttachmentToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.AccountAttachments().Get(ctx, d.Id())

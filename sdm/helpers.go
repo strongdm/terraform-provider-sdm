@@ -23,58 +23,40 @@ func wrapCrudOperation(op apiCrudOperation) func(context.Context, *schema.Resour
 	}
 }
 
-func convertAccessRulesToMap(accessRules sdm.AccessRules) string {
-	return string(accessRules)
+func convertAccessRulesToPorcelain(plumbing sdm.AccessRules) string {
+	return string(plumbing)
 }
 
-func convertAccessRulesFromResourceData(d *schema.ResourceData, key string) sdm.AccessRules {
-	value := d.Get(key)
-	if value == nil {
+func convertAccessRulesToPlumbing(porcelain interface{}) sdm.AccessRules {
+	if porcelain == nil {
 		return sdm.AccessRules("")
 	}
-	return sdm.AccessRules(value.(string))
+	return sdm.AccessRules(porcelain.(string))
 }
 
-func convertTagsFromMap(m map[string]interface{}, key string) sdm.Tags {
-	value := m[key]
-	if value == nil {
+func convertTagsToPlumbing(porcelain interface{}) sdm.Tags {
+	if porcelain == nil {
 		return nil
 	}
-	tags, ok := value.(map[string]interface{})
+	tags, ok := porcelain.(map[string]interface{})
 	if !ok {
 		return nil
 	}
-	return tagsFromMap(tags)
-}
-
-func convertTagsFromResourceData(d *schema.ResourceData, key string) sdm.Tags {
-	value := d.Get(key)
-	if value == nil {
-		return nil
-	}
-	tags, ok := value.(map[string]interface{})
-	if !ok {
-		return nil
-	}
-	return tagsFromMap(tags)
-}
-
-func convertTagsToMap(tags sdm.Tags) map[string]interface{} {
-	res := map[string]interface{}{}
-	for key, value := range tags {
-		res[key] = value
-	}
-	return res
-}
-
-func tagsFromMap(m map[string]interface{}) sdm.Tags {
 	res := sdm.Tags{}
-	for key, value := range m {
-		str, ok := value.(string)
+	for key, porcelain := range tags {
+		str, ok := porcelain.(string)
 		if !ok {
 			continue
 		}
 		res[key] = str
+	}
+	return res
+}
+
+func convertTagsToPorcelain(tags sdm.Tags) map[string]interface{} {
+	res := map[string]interface{}{}
+	for key, value := range tags {
+		res[key] = value
 	}
 	return res
 }
@@ -106,57 +88,30 @@ func accessRulesDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
 	return true
 }
 
-func convertStringFromMap(m map[string]interface{}, key string) string {
-	value := m[key]
-	if value == nil {
+func convertStringToPlumbing(porcelain interface{}) string {
+	if porcelain == nil {
 		return ""
 	}
-	return value.(string)
+	return porcelain.(string)
 }
 
-func convertStringFromResourceData(d *schema.ResourceData, key string) string {
-	value := d.Get(key)
-	if value == nil {
-		return ""
-	}
-	return value.(string)
-}
-
-func convertInt32FromMap(m map[string]interface{}, key string) int32 {
-	value := m[key]
-	if value == nil {
+func convertInt32ToPlumbing(porcelain interface{}) int32 {
+	if porcelain == nil {
 		return 0
 	}
-	return int32(value.(int))
+	return int32(porcelain.(int))
 }
 
-func convertInt32FromResourceData(d *schema.ResourceData, key string) int32 {
-	value := d.Get(key)
-	if value == nil {
-		return 0
-	}
-	return int32(value.(int))
-}
-
-func convertBoolFromMap(m map[string]interface{}, key string) bool {
-	value := m[key]
-	if value == nil {
+func convertBoolToPlumbing(porcelain interface{}) bool {
+	if porcelain == nil {
 		return false
 	}
-	return value.(bool)
-}
-
-func convertBoolFromResourceData(d *schema.ResourceData, key string) bool {
-	value := d.Get(key)
-	if value == nil {
-		return false
-	}
-	return value.(bool)
+	return porcelain.(bool)
 }
 
 func fullSecretStorePath(raw map[string]interface{}, cred string) string {
-	path := convertStringFromMap(raw, "secret_store_"+cred+"_path")
-	key := convertStringFromMap(raw, "secret_store_"+cred+"_key")
+	path := convertStringToPlumbing(raw["secret_store_"+cred+"_path"])
+	key := convertStringToPlumbing(raw["secret_store_"+cred+"_key"])
 	if key != "" {
 		return path + "?key=" + key
 	}

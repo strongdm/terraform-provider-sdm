@@ -69,7 +69,7 @@ func dataSourceRoleAttachment() *schema.Resource {
 	}
 }
 
-func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertRoleAttachmentFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("attached_role_id"); ok {
@@ -88,7 +88,7 @@ func convertRoleAttachmentFilterFromResourceData(d *schema.ResourceData) (string
 }
 
 func dataSourceRoleAttachmentList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertRoleAttachmentFilterFromResourceData(d)
+	filter, args := convertRoleAttachmentFilterToPlumbing(d)
 	resp, err := cc.RoleAttachments().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list RoleAttachments %s: %w", d.Id(), err)

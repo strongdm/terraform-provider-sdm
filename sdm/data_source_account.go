@@ -135,7 +135,7 @@ func dataSourceAccount() *schema.Resource {
 	}
 }
 
-func convertAccountFilterFromResourceData(d *schema.ResourceData) (string, []interface{}) {
+func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("type"); ok {
@@ -174,7 +174,7 @@ func convertAccountFilterFromResourceData(d *schema.ResourceData) (string, []int
 }
 
 func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertAccountFilterFromResourceData(d)
+	filter, args := convertAccountFilterToPlumbing(d)
 	resp, err := cc.Accounts().List(ctx, filter, args...)
 	if err != nil {
 		return fmt.Errorf("cannot list Accounts %s: %w", d.Id(), err)
@@ -193,7 +193,7 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"id":        (v.ID),
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
-				"tags":      convertTagsToMap(v.Tags),
+				"tags":      convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.User:
 			output[0]["user"] = append(output[0]["user"], entity{
@@ -202,7 +202,7 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"id":         (v.ID),
 				"last_name":  (v.LastName),
 				"suspended":  (v.Suspended),
-				"tags":       convertTagsToMap(v.Tags),
+				"tags":       convertTagsToPorcelain(v.Tags),
 			})
 		}
 	}

@@ -54,18 +54,18 @@ func resourceRole() *schema.Resource {
 		},
 	}
 }
-func convertRoleFromResourceData(d *schema.ResourceData) *sdm.Role {
+func convertRoleToPlumbing(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),
-		AccessRules: convertAccessRulesFromResourceData(d, "access_rules"),
-		Composite:   convertBoolFromResourceData(d, "composite"),
-		Name:        convertStringFromResourceData(d, "name"),
-		Tags:        convertTagsFromResourceData(d, "tags"),
+		AccessRules: convertAccessRulesToPlumbing(d.Get("access_rules")),
+		Composite:   convertBoolToPlumbing(d.Get("composite")),
+		Name:        convertStringToPlumbing(d.Get("name")),
+		Tags:        convertTagsToPlumbing(d.Get("tags")),
 	}
 }
 
 func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertRoleFromResourceData(d)
+	localVersion := convertRoleToPlumbing(d)
 
 	resp, err := cc.Roles().Create(ctx, localVersion)
 	if err != nil {
@@ -73,15 +73,15 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 	}
 	d.SetId(resp.Role.ID)
 	v := resp.Role
-	d.Set("access_rules", convertAccessRulesToMap(v.AccessRules))
+	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
-	d.Set("tags", convertTagsToMap(v.Tags))
+	d.Set("tags", convertTagsToPorcelain(v.Tags))
 	return nil
 }
 
 func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertRoleFromResourceData(d)
+	localVersion := convertRoleToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.Roles().Get(ctx, d.Id())
@@ -93,15 +93,15 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		return fmt.Errorf("cannot read Role %s: %w", d.Id(), err)
 	}
 	v := resp.Role
-	d.Set("access_rules", convertAccessRulesToMap(v.AccessRules))
+	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
 	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
-	d.Set("tags", convertTagsToMap(v.Tags))
+	d.Set("tags", convertTagsToPorcelain(v.Tags))
 	return nil
 }
 func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 
-	resp, err := cc.Roles().Update(ctx, convertRoleFromResourceData(d))
+	resp, err := cc.Roles().Update(ctx, convertRoleToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Role %s: %w", d.Id(), err)
 	}

@@ -5547,15 +5547,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"client_certificate":                      convertStringFromMap(raw, "client_certificate"),
-			"secret_store_client_certificate_path":    convertStringFromMap(raw, "secret_store_client_certificate_path"),
-			"secret_store_client_certificate_key":     convertStringFromMap(raw, "secret_store_client_certificate_key"),
-			"client_key":                              convertStringFromMap(raw, "client_key"),
-			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
-			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
+			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
+			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
+			"client_key":                              convertStringToPlumbing(raw["client_key"]),
+			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
+			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
 		}, nil
 	}
 	if list := d.Get("aks_basic_auth").([]interface{}); len(list) > 0 {
@@ -5587,12 +5587,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("aks_service_account").([]interface{}); len(list) > 0 {
@@ -5615,9 +5615,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"token":                   convertStringFromMap(raw, "token"),
-			"secret_store_token_path": convertStringFromMap(raw, "secret_store_token_path"),
-			"secret_store_token_key":  convertStringFromMap(raw, "secret_store_token_key"),
+			"token":                   convertStringToPlumbing(raw["token"]),
+			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
+			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
 		}, nil
 	}
 	if list := d.Get("aks_service_account_user_impersonation").([]interface{}); len(list) > 0 {
@@ -5640,9 +5640,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"token":                   convertStringFromMap(raw, "token"),
-			"secret_store_token_path": convertStringFromMap(raw, "secret_store_token_path"),
-			"secret_store_token_key":  convertStringFromMap(raw, "secret_store_token_key"),
+			"token":                   convertStringToPlumbing(raw["token"]),
+			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
+			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
 		}, nil
 	}
 	if list := d.Get("aks_user_impersonation").([]interface{}); len(list) > 0 {
@@ -5683,15 +5683,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"client_certificate":                      convertStringFromMap(raw, "client_certificate"),
-			"secret_store_client_certificate_path":    convertStringFromMap(raw, "secret_store_client_certificate_path"),
-			"secret_store_client_certificate_key":     convertStringFromMap(raw, "secret_store_client_certificate_key"),
-			"client_key":                              convertStringFromMap(raw, "client_key"),
-			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
-			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
+			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
+			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
+			"client_key":                              convertStringToPlumbing(raw["client_key"]),
+			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
+			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
 		}, nil
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
@@ -5750,21 +5750,21 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                              convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":            convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":             convertStringFromMap(raw, "secret_store_access_key_key"),
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"role_arn":                                convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":              convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":               convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                        convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":      convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":       convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                       convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path":     convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":      convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                              convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":            convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":             convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                       convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path":     convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":      convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("amazon_eks_user_impersonation").([]interface{}); len(list) > 0 {
@@ -5823,21 +5823,21 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                              convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":            convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":             convertStringFromMap(raw, "secret_store_access_key_key"),
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"role_arn":                                convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":              convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":               convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                        convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":      convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":       convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                       convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path":     convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":      convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                              convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":            convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":             convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                       convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path":     convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":      convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
@@ -5887,18 +5887,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-			"role_arn":                            convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                          convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("amazonmq_amqp_091").([]interface{}); len(list) > 0 {
@@ -5930,12 +5930,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
@@ -5985,18 +5985,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-			"role_arn":                            convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                          convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
@@ -6028,12 +6028,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("aurora_postgres").([]interface{}); len(list) > 0 {
@@ -6065,12 +6065,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
@@ -6120,18 +6120,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-			"role_arn":                            convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                          convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("azure").([]interface{}); len(list) > 0 {
@@ -6172,15 +6172,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"app_id":                      convertStringFromMap(raw, "app_id"),
-			"secret_store_app_id_path":    convertStringFromMap(raw, "secret_store_app_id_path"),
-			"secret_store_app_id_key":     convertStringFromMap(raw, "secret_store_app_id_key"),
-			"password":                    convertStringFromMap(raw, "password"),
-			"secret_store_password_path":  convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":   convertStringFromMap(raw, "secret_store_password_key"),
-			"tenant_id":                   convertStringFromMap(raw, "tenant_id"),
-			"secret_store_tenant_id_path": convertStringFromMap(raw, "secret_store_tenant_id_path"),
-			"secret_store_tenant_id_key":  convertStringFromMap(raw, "secret_store_tenant_id_key"),
+			"app_id":                      convertStringToPlumbing(raw["app_id"]),
+			"secret_store_app_id_path":    convertStringToPlumbing(raw["secret_store_app_id_path"]),
+			"secret_store_app_id_key":     convertStringToPlumbing(raw["secret_store_app_id_key"]),
+			"password":                    convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path":  convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":   convertStringToPlumbing(raw["secret_store_password_key"]),
+			"tenant_id":                   convertStringToPlumbing(raw["tenant_id"]),
+			"secret_store_tenant_id_path": convertStringToPlumbing(raw["secret_store_tenant_id_path"]),
+			"secret_store_tenant_id_key":  convertStringToPlumbing(raw["secret_store_tenant_id_key"]),
 		}, nil
 	}
 	if list := d.Get("azure_certificate").([]interface{}); len(list) > 0 {
@@ -6221,15 +6221,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"app_id":                               convertStringFromMap(raw, "app_id"),
-			"secret_store_app_id_path":             convertStringFromMap(raw, "secret_store_app_id_path"),
-			"secret_store_app_id_key":              convertStringFromMap(raw, "secret_store_app_id_key"),
-			"client_certificate":                   convertStringFromMap(raw, "client_certificate"),
-			"secret_store_client_certificate_path": convertStringFromMap(raw, "secret_store_client_certificate_path"),
-			"secret_store_client_certificate_key":  convertStringFromMap(raw, "secret_store_client_certificate_key"),
-			"tenant_id":                            convertStringFromMap(raw, "tenant_id"),
-			"secret_store_tenant_id_path":          convertStringFromMap(raw, "secret_store_tenant_id_path"),
-			"secret_store_tenant_id_key":           convertStringFromMap(raw, "secret_store_tenant_id_key"),
+			"app_id":                               convertStringToPlumbing(raw["app_id"]),
+			"secret_store_app_id_path":             convertStringToPlumbing(raw["secret_store_app_id_path"]),
+			"secret_store_app_id_key":              convertStringToPlumbing(raw["secret_store_app_id_key"]),
+			"client_certificate":                   convertStringToPlumbing(raw["client_certificate"]),
+			"secret_store_client_certificate_path": convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
+			"secret_store_client_certificate_key":  convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
+			"tenant_id":                            convertStringToPlumbing(raw["tenant_id"]),
+			"secret_store_tenant_id_path":          convertStringToPlumbing(raw["secret_store_tenant_id_path"]),
+			"secret_store_tenant_id_key":           convertStringToPlumbing(raw["secret_store_tenant_id_key"]),
 		}, nil
 	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
@@ -6261,12 +6261,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
@@ -6289,9 +6289,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"private_key":                   convertStringFromMap(raw, "private_key"),
-			"secret_store_private_key_path": convertStringFromMap(raw, "secret_store_private_key_path"),
-			"secret_store_private_key_key":  convertStringFromMap(raw, "secret_store_private_key_key"),
+			"private_key":                   convertStringToPlumbing(raw["private_key"]),
+			"secret_store_private_key_path": convertStringToPlumbing(raw["secret_store_private_key_path"]),
+			"secret_store_private_key_key":  convertStringToPlumbing(raw["secret_store_private_key_key"]),
 		}, nil
 	}
 	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
@@ -6323,12 +6323,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("citus").([]interface{}); len(list) > 0 {
@@ -6360,12 +6360,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
@@ -6397,12 +6397,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("cockroach").([]interface{}); len(list) > 0 {
@@ -6434,12 +6434,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
@@ -6471,12 +6471,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("db_2_luw").([]interface{}); len(list) > 0 {
@@ -6508,12 +6508,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("document_db_host").([]interface{}); len(list) > 0 {
@@ -6545,12 +6545,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("document_db_replica_set").([]interface{}); len(list) > 0 {
@@ -6582,12 +6582,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
@@ -6619,12 +6619,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
@@ -6674,18 +6674,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-			"role_arn":                            convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                          convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
@@ -6717,12 +6717,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
@@ -6745,9 +6745,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
 		}, nil
 	}
 	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
@@ -6770,9 +6770,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"keyfile":                   convertStringFromMap(raw, "keyfile"),
-			"secret_store_keyfile_path": convertStringFromMap(raw, "secret_store_keyfile_path"),
-			"secret_store_keyfile_key":  convertStringFromMap(raw, "secret_store_keyfile_key"),
+			"keyfile":                   convertStringToPlumbing(raw["keyfile"]),
+			"secret_store_keyfile_path": convertStringToPlumbing(raw["secret_store_keyfile_path"]),
+			"secret_store_keyfile_key":  convertStringToPlumbing(raw["secret_store_keyfile_key"]),
 		}, nil
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
@@ -6804,12 +6804,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"service_account_key":                     convertStringFromMap(raw, "service_account_key"),
-			"secret_store_service_account_key_path":   convertStringFromMap(raw, "secret_store_service_account_key_path"),
-			"secret_store_service_account_key_key":    convertStringFromMap(raw, "secret_store_service_account_key_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"service_account_key":                     convertStringToPlumbing(raw["service_account_key"]),
+			"secret_store_service_account_key_path":   convertStringToPlumbing(raw["secret_store_service_account_key_path"]),
+			"secret_store_service_account_key_key":    convertStringToPlumbing(raw["secret_store_service_account_key_key"]),
 		}, nil
 	}
 	if list := d.Get("google_gke_user_impersonation").([]interface{}); len(list) > 0 {
@@ -6841,12 +6841,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"service_account_key":                     convertStringFromMap(raw, "service_account_key"),
-			"secret_store_service_account_key_path":   convertStringFromMap(raw, "secret_store_service_account_key_path"),
-			"secret_store_service_account_key_key":    convertStringFromMap(raw, "secret_store_service_account_key_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"service_account_key":                     convertStringToPlumbing(raw["service_account_key"]),
+			"secret_store_service_account_key_path":   convertStringToPlumbing(raw["secret_store_service_account_key_path"]),
+			"secret_store_service_account_key_key":    convertStringToPlumbing(raw["secret_store_service_account_key_key"]),
 		}, nil
 	}
 	if list := d.Get("greenplum").([]interface{}); len(list) > 0 {
@@ -6878,12 +6878,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
@@ -6906,9 +6906,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"auth_header":                   convertStringFromMap(raw, "auth_header"),
-			"secret_store_auth_header_path": convertStringFromMap(raw, "secret_store_auth_header_path"),
-			"secret_store_auth_header_key":  convertStringFromMap(raw, "secret_store_auth_header_key"),
+			"auth_header":                   convertStringToPlumbing(raw["auth_header"]),
+			"secret_store_auth_header_path": convertStringToPlumbing(raw["secret_store_auth_header_path"]),
+			"secret_store_auth_header_key":  convertStringToPlumbing(raw["secret_store_auth_header_key"]),
 		}, nil
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
@@ -6940,12 +6940,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
@@ -6998,15 +6998,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"client_certificate":                      convertStringFromMap(raw, "client_certificate"),
-			"secret_store_client_certificate_path":    convertStringFromMap(raw, "secret_store_client_certificate_path"),
-			"secret_store_client_certificate_key":     convertStringFromMap(raw, "secret_store_client_certificate_key"),
-			"client_key":                              convertStringFromMap(raw, "client_key"),
-			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
-			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
+			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
+			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
+			"client_key":                              convertStringToPlumbing(raw["client_key"]),
+			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
+			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
@@ -7038,12 +7038,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
@@ -7066,9 +7066,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"token":                   convertStringFromMap(raw, "token"),
-			"secret_store_token_path": convertStringFromMap(raw, "secret_store_token_path"),
-			"secret_store_token_key":  convertStringFromMap(raw, "secret_store_token_key"),
+			"token":                   convertStringToPlumbing(raw["token"]),
+			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
+			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_service_account_user_impersonation").([]interface{}); len(list) > 0 {
@@ -7091,9 +7091,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"token":                   convertStringFromMap(raw, "token"),
-			"secret_store_token_path": convertStringFromMap(raw, "secret_store_token_path"),
-			"secret_store_token_key":  convertStringFromMap(raw, "secret_store_token_key"),
+			"token":                   convertStringToPlumbing(raw["token"]),
+			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
+			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_user_impersonation").([]interface{}); len(list) > 0 {
@@ -7134,15 +7134,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"client_certificate":                      convertStringFromMap(raw, "client_certificate"),
-			"secret_store_client_certificate_path":    convertStringFromMap(raw, "secret_store_client_certificate_path"),
-			"secret_store_client_certificate_key":     convertStringFromMap(raw, "secret_store_client_certificate_key"),
-			"client_key":                              convertStringFromMap(raw, "client_key"),
-			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
-			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
+			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
+			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
+			"client_key":                              convertStringToPlumbing(raw["client_key"]),
+			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
+			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
 		}, nil
 	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
@@ -7174,12 +7174,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
@@ -7223,12 +7223,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
@@ -7260,12 +7260,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
@@ -7297,12 +7297,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
@@ -7334,12 +7334,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
@@ -7371,12 +7371,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mongo_sharded_cluster").([]interface{}); len(list) > 0 {
@@ -7408,12 +7408,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mtls_postgres").([]interface{}); len(list) > 0 {
@@ -7472,21 +7472,21 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringFromMap(raw, "certificate_authority"),
-			"secret_store_certificate_authority_path": convertStringFromMap(raw, "secret_store_certificate_authority_path"),
-			"secret_store_certificate_authority_key":  convertStringFromMap(raw, "secret_store_certificate_authority_key"),
-			"client_certificate":                      convertStringFromMap(raw, "client_certificate"),
-			"secret_store_client_certificate_path":    convertStringFromMap(raw, "secret_store_client_certificate_path"),
-			"secret_store_client_certificate_key":     convertStringFromMap(raw, "secret_store_client_certificate_key"),
-			"client_key":                              convertStringFromMap(raw, "client_key"),
-			"secret_store_client_key_path":            convertStringFromMap(raw, "secret_store_client_key_path"),
-			"secret_store_client_key_key":             convertStringFromMap(raw, "secret_store_client_key_key"),
-			"password":                                convertStringFromMap(raw, "password"),
-			"secret_store_password_path":              convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":               convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                                convertStringFromMap(raw, "username"),
-			"secret_store_username_path":              convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":               convertStringFromMap(raw, "secret_store_username_key"),
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
+			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
+			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
+			"client_key":                              convertStringToPlumbing(raw["client_key"]),
+			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
+			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
+			"password":                                convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path":              convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":               convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                                convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path":              convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":               convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
@@ -7518,12 +7518,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("neptune").([]interface{}); len(list) > 0 {
@@ -7585,18 +7585,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringFromMap(raw, "access_key"),
-			"secret_store_access_key_path":        convertStringFromMap(raw, "secret_store_access_key_path"),
-			"secret_store_access_key_key":         convertStringFromMap(raw, "secret_store_access_key_key"),
-			"role_arn":                            convertStringFromMap(raw, "role_arn"),
-			"secret_store_role_arn_path":          convertStringFromMap(raw, "secret_store_role_arn_path"),
-			"secret_store_role_arn_key":           convertStringFromMap(raw, "secret_store_role_arn_key"),
-			"role_external_id":                    convertStringFromMap(raw, "role_external_id"),
-			"secret_store_role_external_id_path":  convertStringFromMap(raw, "secret_store_role_external_id_path"),
-			"secret_store_role_external_id_key":   convertStringFromMap(raw, "secret_store_role_external_id_key"),
-			"secret_access_key":                   convertStringFromMap(raw, "secret_access_key"),
-			"secret_store_secret_access_key_path": convertStringFromMap(raw, "secret_store_secret_access_key_path"),
-			"secret_store_secret_access_key_key":  convertStringFromMap(raw, "secret_store_secret_access_key_key"),
+			"access_key":                          convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
@@ -7628,12 +7628,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
@@ -7665,12 +7665,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("presto").([]interface{}); len(list) > 0 {
@@ -7693,9 +7693,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
 		}, nil
 	}
 	if list := d.Get("rabbitmq_amqp_091").([]interface{}); len(list) > 0 {
@@ -7727,12 +7727,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("raw_tcp").([]interface{}); len(list) > 0 {
@@ -7776,12 +7776,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
@@ -7804,9 +7804,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
 		}, nil
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
@@ -7838,12 +7838,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
@@ -7875,12 +7875,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
@@ -7912,12 +7912,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
@@ -7949,12 +7949,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
@@ -7977,9 +7977,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("ssh_cert").([]interface{}); len(list) > 0 {
@@ -8002,9 +8002,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("ssh_customer_key").([]interface{}); len(list) > 0 {
@@ -8036,12 +8036,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"private_key":                   convertStringFromMap(raw, "private_key"),
-			"secret_store_private_key_path": convertStringFromMap(raw, "secret_store_private_key_path"),
-			"secret_store_private_key_key":  convertStringFromMap(raw, "secret_store_private_key_key"),
-			"username":                      convertStringFromMap(raw, "username"),
-			"secret_store_username_path":    convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":     convertStringFromMap(raw, "secret_store_username_key"),
+			"private_key":                   convertStringToPlumbing(raw["private_key"]),
+			"secret_store_private_key_path": convertStringToPlumbing(raw["secret_store_private_key_path"]),
+			"secret_store_private_key_key":  convertStringToPlumbing(raw["secret_store_private_key_key"]),
+			"username":                      convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path":    convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":     convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
@@ -8073,12 +8073,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("sybase_iq").([]interface{}); len(list) > 0 {
@@ -8110,12 +8110,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
@@ -8147,17 +8147,17 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password":                   convertStringFromMap(raw, "password"),
-			"secret_store_password_path": convertStringFromMap(raw, "secret_store_password_path"),
-			"secret_store_password_key":  convertStringFromMap(raw, "secret_store_password_key"),
-			"username":                   convertStringFromMap(raw, "username"),
-			"secret_store_username_path": convertStringFromMap(raw, "secret_store_username_path"),
-			"secret_store_username_key":  convertStringFromMap(raw, "secret_store_username_key"),
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	return map[string]string{}, nil
 }
-func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
+func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 	if list := d.Get("aks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8165,16 +8165,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKS{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:            convertStringToPlumbing(raw["client_key"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -8194,15 +8194,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSBasicAuth{
 			ID:                   d.Id(),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Password:             convertStringFromMap(raw, "password"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Username:             convertStringFromMap(raw, "username"),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Password:             convertStringToPlumbing(raw["password"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Username:             convertStringToPlumbing(raw["username"]),
 		}
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
@@ -8219,14 +8219,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSServiceAccount{
 			ID:                   d.Id(),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Token:                convertStringFromMap(raw, "token"),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Token:                convertStringToPlumbing(raw["token"]),
 		}
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
@@ -8240,14 +8240,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSServiceAccountUserImpersonation{
 			ID:                   d.Id(),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Token:                convertStringFromMap(raw, "token"),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Token:                convertStringToPlumbing(raw["token"]),
 		}
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
@@ -8261,16 +8261,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSUserImpersonation{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:            convertStringToPlumbing(raw["client_key"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -8290,19 +8290,19 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AmazonEKS{
 			ID:                   d.Id(),
-			AccessKey:            convertStringFromMap(raw, "access_key"),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClusterName:          convertStringFromMap(raw, "cluster_name"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			Endpoint:             convertStringFromMap(raw, "endpoint"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Region:               convertStringFromMap(raw, "region"),
-			RoleArn:              convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:       convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey:      convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			AccessKey:            convertStringToPlumbing(raw["access_key"]),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClusterName:          convertStringToPlumbing(raw["cluster_name"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Region:               convertStringToPlumbing(raw["region"]),
+			RoleArn:              convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:       convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey:      convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
@@ -8328,19 +8328,19 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AmazonEKSUserImpersonation{
 			ID:                   d.Id(),
-			AccessKey:            convertStringFromMap(raw, "access_key"),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClusterName:          convertStringFromMap(raw, "cluster_name"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			Endpoint:             convertStringFromMap(raw, "endpoint"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Region:               convertStringFromMap(raw, "region"),
-			RoleArn:              convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:       convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey:      convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			AccessKey:            convertStringToPlumbing(raw["access_key"]),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClusterName:          convertStringToPlumbing(raw["cluster_name"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Region:               convertStringToPlumbing(raw["region"]),
+			RoleArn:              convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:       convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey:      convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
@@ -8366,16 +8366,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AmazonES{
 			ID:              d.Id(),
-			AccessKey:       convertStringFromMap(raw, "access_key"),
-			EgressFilter:    convertStringFromMap(raw, "egress_filter"),
-			Endpoint:        convertStringFromMap(raw, "endpoint"),
-			Name:            convertStringFromMap(raw, "name"),
-			Region:          convertStringFromMap(raw, "region"),
-			RoleArn:         convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
-			Tags:            convertTagsFromMap(raw, "tags"),
+			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
+			Name:            convertStringToPlumbing(raw["name"]),
+			Region:          convertStringToPlumbing(raw["region"]),
+			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey: convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:            convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8403,15 +8403,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AmazonMQAMQP091{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8433,16 +8433,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Athena{
 			ID:              d.Id(),
-			AccessKey:       convertStringFromMap(raw, "access_key"),
-			EgressFilter:    convertStringFromMap(raw, "egress_filter"),
-			Name:            convertStringFromMap(raw, "name"),
-			Output:          convertStringFromMap(raw, "output"),
-			Region:          convertStringFromMap(raw, "region"),
-			RoleArn:         convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
-			Tags:            convertTagsFromMap(raw, "tags"),
+			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
+			Name:            convertStringToPlumbing(raw["name"]),
+			Output:          convertStringToPlumbing(raw["output"]),
+			Region:          convertStringToPlumbing(raw["region"]),
+			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey: convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:            convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8470,15 +8470,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AuroraMysql{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8500,16 +8500,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AuroraPostgres{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8531,15 +8531,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AWS{
 			ID:                d.Id(),
-			AccessKey:         convertStringFromMap(raw, "access_key"),
-			EgressFilter:      convertStringFromMap(raw, "egress_filter"),
-			HealthcheckRegion: convertStringFromMap(raw, "healthcheck_region"),
-			Name:              convertStringFromMap(raw, "name"),
-			RoleArn:           convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:    convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey:   convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:     convertStringFromMap(raw, "secret_store_id"),
-			Tags:              convertTagsFromMap(raw, "tags"),
+			AccessKey:         convertStringToPlumbing(raw["access_key"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckRegion: convertStringToPlumbing(raw["healthcheck_region"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			RoleArn:           convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:    convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey:   convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
@@ -8562,13 +8562,13 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Azure{
 			ID:            d.Id(),
-			AppID:         convertStringFromMap(raw, "app_id"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TenantID:      convertStringFromMap(raw, "tenant_id"),
+			AppID:         convertStringToPlumbing(raw["app_id"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TenantID:      convertStringToPlumbing(raw["tenant_id"]),
 		}
 		if out.AppID == "" {
 			out.AppID = fullSecretStorePath(raw, "app_id")
@@ -8588,13 +8588,13 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AzureCertificate{
 			ID:                d.Id(),
-			AppID:             convertStringFromMap(raw, "app_id"),
-			ClientCertificate: convertStringFromMap(raw, "client_certificate"),
-			EgressFilter:      convertStringFromMap(raw, "egress_filter"),
-			Name:              convertStringFromMap(raw, "name"),
-			SecretStoreID:     convertStringFromMap(raw, "secret_store_id"),
-			Tags:              convertTagsFromMap(raw, "tags"),
-			TenantID:          convertStringFromMap(raw, "tenant_id"),
+			AppID:             convertStringToPlumbing(raw["app_id"]),
+			ClientCertificate: convertStringToPlumbing(raw["client_certificate"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
+			TenantID:          convertStringToPlumbing(raw["tenant_id"]),
 		}
 		if out.AppID == "" {
 			out.AppID = fullSecretStorePath(raw, "app_id")
@@ -8614,16 +8614,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AzurePostgres{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8645,14 +8645,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.BigQuery{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Endpoint:      convertStringFromMap(raw, "endpoint"),
-			Name:          convertStringFromMap(raw, "name"),
-			PrivateKey:    convertStringFromMap(raw, "private_key"),
-			Project:       convertStringFromMap(raw, "project"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			PrivateKey:    convertStringToPlumbing(raw["private_key"]),
+			Project:       convertStringToPlumbing(raw["project"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8671,15 +8671,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Cassandra{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8701,16 +8701,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Citus{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8732,15 +8732,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Clustrix{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8762,16 +8762,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Cockroach{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8793,15 +8793,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DB2I{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8823,15 +8823,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DB2LUW{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8853,15 +8853,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DocumentDBHost{
 			ID:            d.Id(),
-			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8883,16 +8883,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DocumentDBReplicaSet{
 			ID:               d.Id(),
-			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
-			ConnectToReplica: convertBoolFromMap(raw, "connect_to_replica"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			Password:         convertStringFromMap(raw, "password"),
-			ReplicaSet:       convertStringFromMap(raw, "replica_set"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			AuthDatabase:     convertStringToPlumbing(raw["auth_database"]),
+			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8914,14 +8914,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Druid{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8943,16 +8943,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DynamoDB{
 			ID:              d.Id(),
-			AccessKey:       convertStringFromMap(raw, "access_key"),
-			EgressFilter:    convertStringFromMap(raw, "egress_filter"),
-			Endpoint:        convertStringFromMap(raw, "endpoint"),
-			Name:            convertStringFromMap(raw, "name"),
-			Region:          convertStringFromMap(raw, "region"),
-			RoleArn:         convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
-			Tags:            convertTagsFromMap(raw, "tags"),
+			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
+			Name:            convertStringToPlumbing(raw["name"]),
+			Region:          convertStringToPlumbing(raw["region"]),
+			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey: convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:            convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -8980,15 +8980,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Elastic{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9010,14 +9010,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.ElasticacheRedis{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9036,12 +9036,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GCP{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Keyfile:       convertStringFromMap(raw, "keyfile"),
-			Name:          convertStringFromMap(raw, "name"),
-			Scopes:        convertStringFromMap(raw, "scopes"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Keyfile:       convertStringToPlumbing(raw["keyfile"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Scopes:        convertStringToPlumbing(raw["scopes"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.Keyfile == "" {
 			out.Keyfile = fullSecretStorePath(raw, "keyfile")
@@ -9055,14 +9055,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GoogleGKE{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			Endpoint:             convertStringFromMap(raw, "endpoint"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Name:                 convertStringFromMap(raw, "name"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			ServiceAccountKey:    convertStringFromMap(raw, "service_account_key"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			ServiceAccountKey:    convertStringToPlumbing(raw["service_account_key"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -9079,14 +9079,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GoogleGKEUserImpersonation{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			Endpoint:             convertStringFromMap(raw, "endpoint"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Name:                 convertStringFromMap(raw, "name"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			ServiceAccountKey:    convertStringFromMap(raw, "service_account_key"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			ServiceAccountKey:    convertStringToPlumbing(raw["service_account_key"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -9103,16 +9103,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Greenplum{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9134,16 +9134,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.HTTPAuth{
 			ID:               d.Id(),
-			AuthHeader:       convertStringFromMap(raw, "auth_header"),
-			DefaultPath:      convertStringFromMap(raw, "default_path"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
-			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
-			Name:             convertStringFromMap(raw, "name"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Subdomain:        convertStringFromMap(raw, "subdomain"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Url:              convertStringFromMap(raw, "url"),
+			AuthHeader:       convertStringToPlumbing(raw["auth_header"]),
+			DefaultPath:      convertStringToPlumbing(raw["default_path"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			HeadersBlacklist: convertStringToPlumbing(raw["headers_blacklist"]),
+			HealthcheckPath:  convertStringToPlumbing(raw["healthcheck_path"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Url:              convertStringToPlumbing(raw["url"]),
 		}
 		if out.AuthHeader == "" {
 			out.AuthHeader = fullSecretStorePath(raw, "auth_header")
@@ -9157,17 +9157,17 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.HTTPBasicAuth{
 			ID:               d.Id(),
-			DefaultPath:      convertStringFromMap(raw, "default_path"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
-			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
-			Name:             convertStringFromMap(raw, "name"),
-			Password:         convertStringFromMap(raw, "password"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Subdomain:        convertStringFromMap(raw, "subdomain"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Url:              convertStringFromMap(raw, "url"),
-			Username:         convertStringFromMap(raw, "username"),
+			DefaultPath:      convertStringToPlumbing(raw["default_path"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			HeadersBlacklist: convertStringToPlumbing(raw["headers_blacklist"]),
+			HealthcheckPath:  convertStringToPlumbing(raw["healthcheck_path"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Url:              convertStringToPlumbing(raw["url"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
@@ -9184,15 +9184,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.HTTPNoAuth{
 			ID:               d.Id(),
-			DefaultPath:      convertStringFromMap(raw, "default_path"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			HeadersBlacklist: convertStringFromMap(raw, "headers_blacklist"),
-			HealthcheckPath:  convertStringFromMap(raw, "healthcheck_path"),
-			Name:             convertStringFromMap(raw, "name"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Subdomain:        convertStringFromMap(raw, "subdomain"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Url:              convertStringFromMap(raw, "url"),
+			DefaultPath:      convertStringToPlumbing(raw["default_path"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			HeadersBlacklist: convertStringToPlumbing(raw["headers_blacklist"]),
+			HealthcheckPath:  convertStringToPlumbing(raw["healthcheck_path"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Url:              convertStringToPlumbing(raw["url"]),
 		}
 		return out
 	}
@@ -9203,16 +9203,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Kubernetes{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:            convertStringToPlumbing(raw["client_key"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -9232,15 +9232,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesBasicAuth{
 			ID:                   d.Id(),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Password:             convertStringFromMap(raw, "password"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Username:             convertStringFromMap(raw, "username"),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Password:             convertStringToPlumbing(raw["password"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Username:             convertStringToPlumbing(raw["username"]),
 		}
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
@@ -9257,14 +9257,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesServiceAccount{
 			ID:                   d.Id(),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Token:                convertStringFromMap(raw, "token"),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Token:                convertStringToPlumbing(raw["token"]),
 		}
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
@@ -9278,14 +9278,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesServiceAccountUserImpersonation{
 			ID:                   d.Id(),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Token:                convertStringFromMap(raw, "token"),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Token:                convertStringToPlumbing(raw["token"]),
 		}
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
@@ -9299,16 +9299,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesUserImpersonation{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			HealthcheckNamespace: convertStringFromMap(raw, "healthcheck_namespace"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:            convertStringToPlumbing(raw["client_key"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -9328,15 +9328,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Maria{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9358,12 +9358,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Memcached{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9379,15 +9379,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Memsql{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9409,16 +9409,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MongoHost{
 			ID:            d.Id(),
-			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9440,17 +9440,17 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MongoLegacyHost{
 			ID:            d.Id(),
-			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			ReplicaSet:    convertStringFromMap(raw, "replica_set"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			ReplicaSet:    convertStringToPlumbing(raw["replica_set"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9472,18 +9472,18 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MongoLegacyReplicaset{
 			ID:               d.Id(),
-			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
-			ConnectToReplica: convertBoolFromMap(raw, "connect_to_replica"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			ReplicaSet:       convertStringFromMap(raw, "replica_set"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			TlsRequired:      convertBoolFromMap(raw, "tls_required"),
-			Username:         convertStringFromMap(raw, "username"),
+			AuthDatabase:     convertStringToPlumbing(raw["auth_database"]),
+			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9505,18 +9505,18 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MongoReplicaSet{
 			ID:               d.Id(),
-			AuthDatabase:     convertStringFromMap(raw, "auth_database"),
-			ConnectToReplica: convertBoolFromMap(raw, "connect_to_replica"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			ReplicaSet:       convertStringFromMap(raw, "replica_set"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			TlsRequired:      convertBoolFromMap(raw, "tls_required"),
-			Username:         convertStringFromMap(raw, "username"),
+			AuthDatabase:     convertStringToPlumbing(raw["auth_database"]),
+			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9538,15 +9538,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MongoShardedCluster{
 			ID:            d.Id(),
-			AuthDatabase:  convertStringFromMap(raw, "auth_database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9568,20 +9568,20 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MTLSPostgres{
 			ID:                   d.Id(),
-			CertificateAuthority: convertStringFromMap(raw, "certificate_authority"),
-			ClientCertificate:    convertStringFromMap(raw, "client_certificate"),
-			ClientKey:            convertStringFromMap(raw, "client_key"),
-			Database:             convertStringFromMap(raw, "database"),
-			EgressFilter:         convertStringFromMap(raw, "egress_filter"),
-			Hostname:             convertStringFromMap(raw, "hostname"),
-			Name:                 convertStringFromMap(raw, "name"),
-			OverrideDatabase:     convertBoolFromMap(raw, "override_database"),
-			Password:             convertStringFromMap(raw, "password"),
-			Port:                 convertInt32FromMap(raw, "port"),
-			SecretStoreID:        convertStringFromMap(raw, "secret_store_id"),
-			ServerName:           convertStringFromMap(raw, "server_name"),
-			Tags:                 convertTagsFromMap(raw, "tags"),
-			Username:             convertStringFromMap(raw, "username"),
+			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:            convertStringToPlumbing(raw["client_key"]),
+			Database:             convertStringToPlumbing(raw["database"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			OverrideDatabase:     convertBoolToPlumbing(raw["override_database"]),
+			Password:             convertStringToPlumbing(raw["password"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			ServerName:           convertStringToPlumbing(raw["server_name"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			Username:             convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9612,15 +9612,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Mysql{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9642,12 +9642,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Neptune{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Endpoint:      convertStringFromMap(raw, "endpoint"),
-			Name:          convertStringFromMap(raw, "name"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9663,17 +9663,17 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.NeptuneIAM{
 			ID:              d.Id(),
-			AccessKey:       convertStringFromMap(raw, "access_key"),
-			EgressFilter:    convertStringFromMap(raw, "egress_filter"),
-			Endpoint:        convertStringFromMap(raw, "endpoint"),
-			Name:            convertStringFromMap(raw, "name"),
-			Port:            convertInt32FromMap(raw, "port"),
-			Region:          convertStringFromMap(raw, "region"),
-			RoleArn:         convertStringFromMap(raw, "role_arn"),
-			RoleExternalID:  convertStringFromMap(raw, "role_external_id"),
-			SecretAccessKey: convertStringFromMap(raw, "secret_access_key"),
-			SecretStoreID:   convertStringFromMap(raw, "secret_store_id"),
-			Tags:            convertTagsFromMap(raw, "tags"),
+			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
+			Name:            convertStringToPlumbing(raw["name"]),
+			Port:            convertInt32ToPlumbing(raw["port"]),
+			Region:          convertStringToPlumbing(raw["region"]),
+			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey: convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:            convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9701,16 +9701,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Oracle{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9732,16 +9732,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Postgres{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9763,16 +9763,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Presto{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9791,15 +9791,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.RabbitMQAMQP091{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			TlsRequired:   convertBoolFromMap(raw, "tls_required"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9821,12 +9821,12 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.RawTCP{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9842,15 +9842,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.RDP{
 			ID:                      d.Id(),
-			DowngradeNlaConnections: convertBoolFromMap(raw, "downgrade_nla_connections"),
-			EgressFilter:            convertStringFromMap(raw, "egress_filter"),
-			Hostname:                convertStringFromMap(raw, "hostname"),
-			Name:                    convertStringFromMap(raw, "name"),
-			Password:                convertStringFromMap(raw, "password"),
-			Port:                    convertInt32FromMap(raw, "port"),
-			SecretStoreID:           convertStringFromMap(raw, "secret_store_id"),
-			Tags:                    convertTagsFromMap(raw, "tags"),
-			Username:                convertStringFromMap(raw, "username"),
+			DowngradeNlaConnections: convertBoolToPlumbing(raw["downgrade_nla_connections"]),
+			EgressFilter:            convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                convertStringToPlumbing(raw["hostname"]),
+			Name:                    convertStringToPlumbing(raw["name"]),
+			Password:                convertStringToPlumbing(raw["password"]),
+			Port:                    convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                    convertTagsToPlumbing(raw["tags"]),
+			Username:                convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9872,13 +9872,13 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Redis{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9897,16 +9897,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Redshift{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9928,15 +9928,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SingleStore{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9958,15 +9958,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Snowflake{
 			ID:            d.Id(),
-			Database:      convertStringFromMap(raw, "database"),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Schema:        convertStringFromMap(raw, "schema"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Schema:        convertStringToPlumbing(raw["schema"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -9988,17 +9988,17 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SQLServer{
 			ID:               d.Id(),
-			Database:         convertStringFromMap(raw, "database"),
-			EgressFilter:     convertStringFromMap(raw, "egress_filter"),
-			Hostname:         convertStringFromMap(raw, "hostname"),
-			Name:             convertStringFromMap(raw, "name"),
-			OverrideDatabase: convertBoolFromMap(raw, "override_database"),
-			Password:         convertStringFromMap(raw, "password"),
-			Port:             convertInt32FromMap(raw, "port"),
-			Schema:           convertStringFromMap(raw, "schema"),
-			SecretStoreID:    convertStringFromMap(raw, "secret_store_id"),
-			Tags:             convertTagsFromMap(raw, "tags"),
-			Username:         convertStringFromMap(raw, "username"),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Password:         convertStringToPlumbing(raw["password"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			Schema:           convertStringToPlumbing(raw["schema"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10020,15 +10020,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SSH{
 			ID:                          d.Id(),
-			AllowDeprecatedKeyExchanges: convertBoolFromMap(raw, "allow_deprecated_key_exchanges"),
-			EgressFilter:                convertStringFromMap(raw, "egress_filter"),
-			Hostname:                    convertStringFromMap(raw, "hostname"),
-			Name:                        convertStringFromMap(raw, "name"),
-			Port:                        convertInt32FromMap(raw, "port"),
-			PortForwarding:              convertBoolFromMap(raw, "port_forwarding"),
-			SecretStoreID:               convertStringFromMap(raw, "secret_store_id"),
-			Tags:                        convertTagsFromMap(raw, "tags"),
-			Username:                    convertStringFromMap(raw, "username"),
+			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                    convertStringToPlumbing(raw["hostname"]),
+			Name:                        convertStringToPlumbing(raw["name"]),
+			Port:                        convertInt32ToPlumbing(raw["port"]),
+			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
+			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                        convertTagsToPlumbing(raw["tags"]),
+			Username:                    convertStringToPlumbing(raw["username"]),
 		}
 		if out.Username == "" {
 			out.Username = fullSecretStorePath(raw, "username")
@@ -10042,15 +10042,15 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SSHCert{
 			ID:                          d.Id(),
-			AllowDeprecatedKeyExchanges: convertBoolFromMap(raw, "allow_deprecated_key_exchanges"),
-			EgressFilter:                convertStringFromMap(raw, "egress_filter"),
-			Hostname:                    convertStringFromMap(raw, "hostname"),
-			Name:                        convertStringFromMap(raw, "name"),
-			Port:                        convertInt32FromMap(raw, "port"),
-			PortForwarding:              convertBoolFromMap(raw, "port_forwarding"),
-			SecretStoreID:               convertStringFromMap(raw, "secret_store_id"),
-			Tags:                        convertTagsFromMap(raw, "tags"),
-			Username:                    convertStringFromMap(raw, "username"),
+			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                    convertStringToPlumbing(raw["hostname"]),
+			Name:                        convertStringToPlumbing(raw["name"]),
+			Port:                        convertInt32ToPlumbing(raw["port"]),
+			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
+			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                        convertTagsToPlumbing(raw["tags"]),
+			Username:                    convertStringToPlumbing(raw["username"]),
 		}
 		if out.Username == "" {
 			out.Username = fullSecretStorePath(raw, "username")
@@ -10064,16 +10064,16 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SSHCustomerKey{
 			ID:                          d.Id(),
-			AllowDeprecatedKeyExchanges: convertBoolFromMap(raw, "allow_deprecated_key_exchanges"),
-			EgressFilter:                convertStringFromMap(raw, "egress_filter"),
-			Hostname:                    convertStringFromMap(raw, "hostname"),
-			Name:                        convertStringFromMap(raw, "name"),
-			Port:                        convertInt32FromMap(raw, "port"),
-			PortForwarding:              convertBoolFromMap(raw, "port_forwarding"),
-			PrivateKey:                  convertStringFromMap(raw, "private_key"),
-			SecretStoreID:               convertStringFromMap(raw, "secret_store_id"),
-			Tags:                        convertTagsFromMap(raw, "tags"),
-			Username:                    convertStringFromMap(raw, "username"),
+			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                    convertStringToPlumbing(raw["hostname"]),
+			Name:                        convertStringToPlumbing(raw["name"]),
+			Port:                        convertInt32ToPlumbing(raw["port"]),
+			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
+			PrivateKey:                  convertStringToPlumbing(raw["private_key"]),
+			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                        convertTagsToPlumbing(raw["tags"]),
+			Username:                    convertStringToPlumbing(raw["username"]),
 		}
 		if out.PrivateKey == "" {
 			out.PrivateKey = fullSecretStorePath(raw, "private_key")
@@ -10090,14 +10090,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Sybase{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10119,14 +10119,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SybaseIQ{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10148,14 +10148,14 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Teradata{
 			ID:            d.Id(),
-			EgressFilter:  convertStringFromMap(raw, "egress_filter"),
-			Hostname:      convertStringFromMap(raw, "hostname"),
-			Name:          convertStringFromMap(raw, "name"),
-			Password:      convertStringFromMap(raw, "password"),
-			Port:          convertInt32FromMap(raw, "port"),
-			SecretStoreID: convertStringFromMap(raw, "secret_store_id"),
-			Tags:          convertTagsFromMap(raw, "tags"),
-			Username:      convertStringFromMap(raw, "username"),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10174,7 +10174,7 @@ func convertResourceFromResourceData(d *schema.ResourceData) sdm.Resource {
 }
 
 func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertResourceFromResourceData(d)
+	localVersion := convertResourceToPlumbing(d)
 	seValues, err := secretStoreValuesForResource(d)
 	if err != nil {
 		return fmt.Errorf("cannot create Resource: %w", err)
@@ -10206,7 +10206,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -10223,7 +10223,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10240,7 +10240,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -10257,7 +10257,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -10283,7 +10283,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKS:
@@ -10313,7 +10313,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSUserImpersonation:
@@ -10343,7 +10343,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonES:
@@ -10369,7 +10369,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonMQAMQP091:
@@ -10386,7 +10386,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -10416,7 +10416,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AuroraMysql:
@@ -10434,7 +10434,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10456,7 +10456,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10483,7 +10483,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Azure:
@@ -10500,7 +10500,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_path":  seValues["secret_store_password_path"],
 				"secret_store_password_key":   seValues["secret_store_password_key"],
 				"secret_store_id":             (v.SecretStoreID),
-				"tags":                        convertTagsToMap(v.Tags),
+				"tags":                        convertTagsToPorcelain(v.Tags),
 				"tenant_id":                   seValues["tenant_id"],
 				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
 				"secret_store_tenant_id_key":  seValues["secret_store_tenant_id_key"],
@@ -10520,7 +10520,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                        (v.EgressFilter),
 				"name":                                 (v.Name),
 				"secret_store_id":                      (v.SecretStoreID),
-				"tags":                                 convertTagsToMap(v.Tags),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"tenant_id":                            seValues["tenant_id"],
 				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
 				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
@@ -10542,7 +10542,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10562,7 +10562,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_private_key_key":  seValues["secret_store_private_key_key"],
 				"project":                       (v.Project),
 				"secret_store_id":               (v.SecretStoreID),
-				"tags":                          convertTagsToMap(v.Tags),
+				"tags":                          convertTagsToPorcelain(v.Tags),
 				"username":                      (v.Username),
 			},
 		})
@@ -10580,7 +10580,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -10603,7 +10603,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10624,7 +10624,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10646,7 +10646,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10666,7 +10666,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -10688,7 +10688,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10709,7 +10709,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10731,7 +10731,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10751,7 +10751,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10780,7 +10780,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Elastic:
@@ -10797,7 +10797,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -10818,7 +10818,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 			},
 		})
@@ -10834,7 +10834,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                      (v.Name),
 				"scopes":                    (v.Scopes),
 				"secret_store_id":           (v.SecretStoreID),
-				"tags":                      convertTagsToMap(v.Tags),
+				"tags":                      convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -10853,7 +10853,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"service_account_key":                     seValues["service_account_key"],
 				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
 				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKEUserImpersonation:
@@ -10872,7 +10872,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"service_account_key":                     seValues["service_account_key"],
 				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
 				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Greenplum:
@@ -10891,7 +10891,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -10912,7 +10912,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                          (v.Name),
 				"secret_store_id":               (v.SecretStoreID),
 				"subdomain":                     (v.Subdomain),
-				"tags":                          convertTagsToMap(v.Tags),
+				"tags":                          convertTagsToPorcelain(v.Tags),
 				"url":                           (v.Url),
 			},
 		})
@@ -10931,7 +10931,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"secret_store_id":            (v.SecretStoreID),
 				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"url":                        (v.Url),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -10950,7 +10950,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":              (v.Name),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"url":               (v.Url),
 			},
 		})
@@ -10974,7 +10974,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -10991,7 +10991,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11008,7 +11008,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -11025,7 +11025,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -11051,7 +11051,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Maria:
@@ -11069,7 +11069,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11086,7 +11086,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Memsql:
@@ -11104,7 +11104,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11125,7 +11125,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11148,7 +11148,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11172,7 +11172,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11196,7 +11196,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11217,7 +11217,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11250,7 +11250,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":                           (v.PortOverride),
 				"secret_store_id":                         (v.SecretStoreID),
 				"server_name":                             (v.ServerName),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 				"username":                                seValues["username"],
 				"secret_store_username_path":              seValues["secret_store_username_path"],
 				"secret_store_username_key":               seValues["secret_store_username_key"],
@@ -11271,7 +11271,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11288,7 +11288,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.NeptuneIAM:
@@ -11315,7 +11315,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Oracle:
@@ -11333,7 +11333,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11356,7 +11356,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11377,7 +11377,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   (v.Username),
 			},
@@ -11396,7 +11396,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11414,7 +11414,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.RDP:
@@ -11432,7 +11432,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11452,7 +11452,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Redshift:
@@ -11471,7 +11471,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11492,7 +11492,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11513,7 +11513,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"schema":                     (v.Schema),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11536,7 +11536,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"schema":                     (v.Schema),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11555,7 +11555,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_forwarding":                (v.PortForwarding),
 				"public_key":                     (v.PublicKey),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
@@ -11573,7 +11573,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
@@ -11594,7 +11594,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
 				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
@@ -11614,7 +11614,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11634,7 +11634,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11654,7 +11654,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11665,7 +11665,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 }
 
 func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertResourceFromResourceData(d)
+	localVersion := convertResourceToPlumbing(d)
 	_ = localVersion
 	seValues, err := secretStoreValuesForResource(d)
 	if err != nil {
@@ -11704,7 +11704,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -11724,7 +11724,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11744,7 +11744,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -11764,7 +11764,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -11793,7 +11793,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKS:
@@ -11826,7 +11826,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSUserImpersonation:
@@ -11859,7 +11859,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonES:
@@ -11888,7 +11888,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonMQAMQP091:
@@ -11908,7 +11908,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -11941,7 +11941,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AuroraMysql:
@@ -11962,7 +11962,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -11987,7 +11987,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12017,7 +12017,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Azure:
@@ -12037,7 +12037,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_path":  seValues["secret_store_password_path"],
 				"secret_store_password_key":   seValues["secret_store_password_key"],
 				"secret_store_id":             (v.SecretStoreID),
-				"tags":                        convertTagsToMap(v.Tags),
+				"tags":                        convertTagsToPorcelain(v.Tags),
 				"tenant_id":                   seValues["tenant_id"],
 				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
 				"secret_store_tenant_id_key":  seValues["secret_store_tenant_id_key"],
@@ -12060,7 +12060,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"egress_filter":                        (v.EgressFilter),
 				"name":                                 (v.Name),
 				"secret_store_id":                      (v.SecretStoreID),
-				"tags":                                 convertTagsToMap(v.Tags),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"tenant_id":                            seValues["tenant_id"],
 				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
 				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
@@ -12085,7 +12085,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12108,7 +12108,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_private_key_key":  seValues["secret_store_private_key_key"],
 				"project":                       (v.Project),
 				"secret_store_id":               (v.SecretStoreID),
-				"tags":                          convertTagsToMap(v.Tags),
+				"tags":                          convertTagsToPorcelain(v.Tags),
 				"username":                      (v.Username),
 			},
 		})
@@ -12129,7 +12129,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12155,7 +12155,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12179,7 +12179,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12204,7 +12204,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12227,7 +12227,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12252,7 +12252,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12276,7 +12276,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12301,7 +12301,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12324,7 +12324,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12356,7 +12356,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Elastic:
@@ -12376,7 +12376,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12400,7 +12400,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 			},
 		})
@@ -12419,7 +12419,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                      (v.Name),
 				"scopes":                    (v.Scopes),
 				"secret_store_id":           (v.SecretStoreID),
-				"tags":                      convertTagsToMap(v.Tags),
+				"tags":                      convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -12441,7 +12441,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"service_account_key":                     seValues["service_account_key"],
 				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
 				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKEUserImpersonation:
@@ -12463,7 +12463,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"service_account_key":                     seValues["service_account_key"],
 				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
 				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Greenplum:
@@ -12485,7 +12485,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12509,7 +12509,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                          (v.Name),
 				"secret_store_id":               (v.SecretStoreID),
 				"subdomain":                     (v.Subdomain),
-				"tags":                          convertTagsToMap(v.Tags),
+				"tags":                          convertTagsToPorcelain(v.Tags),
 				"url":                           (v.Url),
 			},
 		})
@@ -12531,7 +12531,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"secret_store_id":            (v.SecretStoreID),
 				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"url":                        (v.Url),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12553,7 +12553,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":              (v.Name),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToMap(v.Tags),
+				"tags":              convertTagsToPorcelain(v.Tags),
 				"url":               (v.Url),
 			},
 		})
@@ -12580,7 +12580,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -12600,7 +12600,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12620,7 +12620,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -12640,7 +12640,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                    (v.Name),
 				"port":                    (v.Port),
 				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToMap(v.Tags),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
 				"secret_store_token_path": seValues["secret_store_token_path"],
 				"secret_store_token_key":  seValues["secret_store_token_key"],
@@ -12669,7 +12669,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
 				"secret_store_id":                         (v.SecretStoreID),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Maria:
@@ -12690,7 +12690,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12710,7 +12710,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Memsql:
@@ -12731,7 +12731,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12755,7 +12755,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12781,7 +12781,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12808,7 +12808,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12835,7 +12835,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"replica_set":                (v.ReplicaSet),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12859,7 +12859,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -12895,7 +12895,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":                           (v.PortOverride),
 				"secret_store_id":                         (v.SecretStoreID),
 				"server_name":                             (v.ServerName),
-				"tags":                                    convertTagsToMap(v.Tags),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
 				"username":                                seValues["username"],
 				"secret_store_username_path":              seValues["secret_store_username_path"],
 				"secret_store_username_key":               seValues["secret_store_username_key"],
@@ -12919,7 +12919,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -12939,7 +12939,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.NeptuneIAM:
@@ -12969,7 +12969,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
-				"tags":                                convertTagsToMap(v.Tags),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Oracle:
@@ -12990,7 +12990,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -13016,7 +13016,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13040,7 +13040,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   (v.Username),
 			},
@@ -13062,7 +13062,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
@@ -13083,7 +13083,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToMap(v.Tags),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.RDP:
@@ -13104,7 +13104,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13127,7 +13127,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Redshift:
@@ -13149,7 +13149,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13173,7 +13173,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13197,7 +13197,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"schema":                     (v.Schema),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13223,7 +13223,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"schema":                     (v.Schema),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13245,7 +13245,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_forwarding":                (v.PortForwarding),
 				"public_key":                     (v.PublicKey),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
@@ -13266,7 +13266,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
@@ -13290,7 +13290,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
 				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
 				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToMap(v.Tags),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
 				"secret_store_username_path":     seValues["secret_store_username_path"],
 				"secret_store_username_key":      seValues["secret_store_username_key"],
@@ -13313,7 +13313,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13336,7 +13336,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13359,7 +13359,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":                       (v.Port),
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToMap(v.Tags),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -13374,7 +13374,7 @@ func resourceResourceUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
 	}
 
-	resp, err := cc.Resources().Update(ctx, convertResourceFromResourceData(d))
+	resp, err := cc.Resources().Update(ctx, convertResourceToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
 	}

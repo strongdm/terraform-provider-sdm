@@ -41,16 +41,16 @@ func resourceRoleGrant() *schema.Resource {
 		},
 	}
 }
-func convertRoleGrantFromResourceData(d *schema.ResourceData) *sdm.RoleGrant {
+func convertRoleGrantToPlumbing(d *schema.ResourceData) *sdm.RoleGrant {
 	return &sdm.RoleGrant{
 		ID:         d.Id(),
-		ResourceID: convertStringFromResourceData(d, "resource_id"),
-		RoleID:     convertStringFromResourceData(d, "role_id"),
+		ResourceID: convertStringToPlumbing(d.Get("resource_id")),
+		RoleID:     convertStringToPlumbing(d.Get("role_id")),
 	}
 }
 
 func resourceRoleGrantCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertRoleGrantFromResourceData(d)
+	localVersion := convertRoleGrantToPlumbing(d)
 
 	resp, err := cc.RoleGrants().Create(ctx, localVersion)
 	if err != nil {
@@ -64,7 +64,7 @@ func resourceRoleGrantCreate(ctx context.Context, d *schema.ResourceData, cc *sd
 }
 
 func resourceRoleGrantRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	localVersion := convertRoleGrantFromResourceData(d)
+	localVersion := convertRoleGrantToPlumbing(d)
 	_ = localVersion
 
 	resp, err := cc.RoleGrants().Get(ctx, d.Id())
