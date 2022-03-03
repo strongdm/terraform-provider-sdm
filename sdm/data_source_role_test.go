@@ -31,7 +31,7 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.composite", "false"),
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.access_rule.0.type", "redis"),
+					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.access_rules", `[{"type":"redis"}]`),
 				),
 			},
 		},
