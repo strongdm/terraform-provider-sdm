@@ -18,8 +18,6 @@
 package sdm
 
 import (
-	"encoding/json"
-	"strings"
 	"time"
 )
 
@@ -31,25 +29,6 @@ func (t Tags) clone() Tags {
 		res[k] = v
 	}
 	return res
-}
-
-type AccessRule struct {
-	IDs  []string `json:"ids,omitempty"`
-	Type string   `json:"type,omitempty"`
-	Tags Tags     `json:"tags,omitempty"`
-}
-
-type AccessRules []AccessRule
-
-// ParseAccessRulesJSON parses the given access rules JSON string.
-func ParseAccessRulesJSON(data string) (AccessRules, error) {
-	result := AccessRules{}
-	decoder := json.NewDecoder(strings.NewReader(data))
-	decoder.DisallowUnknownFields()
-	if err := decoder.Decode(&result); err != nil {
-		return nil, err
-	}
-	return result, nil
 }
 
 type AKS struct {

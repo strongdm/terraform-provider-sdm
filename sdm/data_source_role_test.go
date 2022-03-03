@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func TestAccSDMRoleDataSource_Get(t *testing.T) {
@@ -15,7 +14,7 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 	}
 	t.Parallel()
 
-	roles, err := createRolesWithAccessRules("test-role", 1, false, sdm.AccessRules{sdm.AccessRule{Type: "redis"}})
+	roles, err := createRolesWithAccessRules("test-role", 1, false, `[{"type":"redis"}]`)
 	if err != nil {
 		t.Fatal("failed to create role: ", err)
 	}

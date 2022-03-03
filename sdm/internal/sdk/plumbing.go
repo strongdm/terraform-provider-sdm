@@ -80,27 +80,6 @@ func convertTagsToPlumbing(tags Tags) *proto.Tags {
 	}
 	return &proto.Tags{Pairs: result}
 }
-
-func convertAccessRulesToPorcelain(rules string) (AccessRules, error) {
-	if rules == "" {
-		return nil, nil
-	}
-	result := AccessRules{}
-	decoder := json.NewDecoder(strings.NewReader(rules))
-	decoder.DisallowUnknownFields()
-	if err := decoder.Decode(&result); err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-func convertAccessRulesToPlumbing(rules AccessRules) string {
-	if rules == nil {
-		rules = AccessRules{}
-	}
-	result, _ := json.Marshal(rules)
-	return string(result)
-}
 func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	if plumbing == nil {
 		return nil, nil

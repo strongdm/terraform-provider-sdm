@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"reflect"
 	"testing"
 	"time"
 
@@ -322,8 +321,8 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 							return fmt.Errorf("failed to get created role: %w", err)
 						}
 
-						expectedPolicy := sdm.AccessRules{sdm.AccessRule{IDs: []string{resourceID}}}
-						if !reflect.DeepEqual(resp.Role.AccessRules, expectedPolicy) {
+						expectedPolicy := sdm.AccessRules(fmt.Sprintf(`[{"ids":["%s"]}]`, resourceID))
+						if resp.Role.AccessRules != expectedPolicy {
 							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected %+v`, resp.Role.AccessRules, expectedPolicy)
 						}
 
@@ -363,7 +362,7 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 							return fmt.Errorf("failed to get created role: %w", err)
 						}
 
-						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Type: "redis"}, sdm.AccessRule{Type: "postgres"}}) {
+						if resp.Role.AccessRules != `[{"type":"redis"},{"type":"postgres"}]` {
 							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"type":"redis"},{"type":"postgres"}]'`, resp.Role.AccessRules)
 						}
 
@@ -403,7 +402,7 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 							return fmt.Errorf("failed to get created role: %w", err)
 						}
 
-						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Type: "postgres"}, sdm.AccessRule{Type: "redis"}}) {
+						if resp.Role.AccessRules != `[{"type":"postgres"},{"type":"redis"}]` {
 							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"type":"postgres"},{"type":"redis"}]'`, resp.Role.AccessRules)
 						}
 
@@ -440,7 +439,7 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 							return fmt.Errorf("failed to get created role: %w", err)
 						}
 
-						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Tags: sdm.Tags{"a": "b"}}}) {
+						if resp.Role.AccessRules != `[{"tags":{"a":"b"}}]` {
 							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"tags":{"a":"b"}}]'`, resp.Role.AccessRules)
 						}
 
@@ -473,7 +472,7 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 							return fmt.Errorf("failed to get created role: %w", err)
 						}
 
-						if !reflect.DeepEqual(resp.Role.AccessRules, sdm.AccessRules{sdm.AccessRule{Tags: sdm.Tags{"a": "b"}}}) {
+						if resp.Role.AccessRules != `[{"tags":{"a":"b"}}]` {
 							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected '[{"tags":{"a":"b"}}]'`, resp.Role.AccessRules)
 						}
 
@@ -506,8 +505,8 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 							return fmt.Errorf("failed to get created role: %w", err)
 						}
 
-						if len(resp.Role.AccessRules) != 0 {
-							return fmt.Errorf(`expected no access rules, got %v`, len(resp.Role.AccessRules))
+						if resp.Role.AccessRules != "[]" {
+							return fmt.Errorf(`expected no access rules, got %v`, resp.Role.AccessRules)
 						}
 
 						return nil

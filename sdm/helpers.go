@@ -24,17 +24,15 @@ func wrapCrudOperation(op apiCrudOperation) func(context.Context, *schema.Resour
 }
 
 func convertAccessRulesToMap(accessRules sdm.AccessRules) string {
-	value, _ := json.Marshal(accessRules)
-	return string(value)
+	return string(accessRules)
 }
 
 func convertAccessRulesFromResourceData(d *schema.ResourceData, key string) sdm.AccessRules {
 	value := d.Get(key)
 	if value == nil {
-		return nil
+		return sdm.AccessRules("")
 	}
-	accessRules, _ := sdm.ParseAccessRulesJSON(value.(string))
-	return accessRules
+	return sdm.AccessRules(value.(string))
 }
 
 func convertTagsFromMap(m map[string]interface{}, key string) sdm.Tags {
@@ -86,12 +84,12 @@ var tagsElemType = &schema.Schema{
 }
 
 func accessRulesDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
-	oldRules, err := sdm.ParseAccessRulesJSON(old)
-	if err != nil {
+	var oldRules []interface{}
+	if err := json.Unmarshal([]byte(old), &oldRules); err != nil {
 		return false
 	}
-	newRules, err := sdm.ParseAccessRulesJSON(new)
-	if err != nil {
+	var newRules []interface{}
+	if err := json.Unmarshal([]byte(new), &newRules); err != nil {
 		return false
 	}
 	oldNormalized, err := json.Marshal(oldRules)
