@@ -1108,16 +1108,6 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			},
 		},
 		{
-			resource: "http_no_auth",
-			pairs: [][2]string{
-				{"name", `"http_no_auth_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"url", `"http://example.com"`},
-				{"healthcheck_path", `"/"`},
-				{"subdomain", `"noauth"`},
-			},
-		},
-		{
 			resource: "http_auth",
 			pairs: [][2]string{
 				{"name", `"http_auth_secret_store"`},
@@ -1191,14 +1181,6 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_service_account_key_path", `"/path/to/service_account_key"`},
 				{"secret_store_service_account_key_key", `"key"`},
 				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "memcached",
-			pairs: [][2]string{
-				{"name", `"memcached_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
 			},
 		},
 		{
