@@ -43,17 +43,17 @@ func TestAccSDMAccount_GetSuspended(t *testing.T) {
 	t.Parallel()
 
 	dsName := randomWithPrefix("ac_suspended_query")
-	dsNameSuspended := randomWithPrefix("ac_suspended_query")
-	_ = createUserWithSuspension(t, dsNameSuspended, true)
+	userName := randomWithPrefix("ac_suspended_query")
+	_ = createUserWithSuspension(t, userName, true)
 
-	dsNameNotSuspended := randomWithPrefix("ac_suspended_query")
-	notSuspended := createUserWithSuspension(t, dsNameNotSuspended, false)
+	userNameNotSuspended := randomWithPrefix("ac_suspended_query")
+	notSuspended := createUserWithSuspension(t, userNameNotSuspended, false)
 
 	resource.Test(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMAccountGetFilterSuspenedConfig(dsName, "ac_suspend_query*", false),
+				Config: testAccSDMAccountGetFilterSuspendedConfig(dsName, "ac_suspended_query*", false),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "ids.#", "1"), // only one user returned
 					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.#", "1"),
@@ -69,7 +69,7 @@ func TestAccSDMAccount_GetSuspended(t *testing.T) {
 	})
 }
 
-func createUserWithSuspension(t *testing.T, dsName string, suspended bool) *sdm.User {
+func createUserWithSuspension(t *testing.T, name string, suspended bool) *sdm.User {
 	client, err := preTestClient()
 	if err != nil {
 		t.Fatalf("failed to create test client: %v", err)
@@ -79,9 +79,9 @@ func createUserWithSuspension(t *testing.T, dsName string, suspended bool) *sdm.
 	defer cancel()
 	createResp, err := client.Accounts().Create(ctx, &sdm.User{
 		Suspended: suspended,
-		FirstName: dsName,
-		LastName:  dsName,
-		Email:     dsName,
+		FirstName: name,
+		LastName:  name,
+		Email:     name,
 	})
 	if err != nil {
 		t.Fatalf("failed to create account: %v", err)
@@ -144,10 +144,10 @@ func testAccSDMAccountGetFilterConfig(accountDataSourceName, firstNameFilter str
 	}`, accountDataSourceName, firstNameFilter)
 }
 
-func testAccSDMAccountGetFilterSuspenedConfig(dsName, firstNameFilter string, suspendedFilter bool) string {
+func testAccSDMAccountGetFilterSuspendedConfig(dsName, firstNameFilter string, suspendedFilter bool) string {
 	return fmt.Sprintf(`
 	data "sdm_account" "%s" {
-		suspended = %v
 		first_name = "%s"
+		suspended = %t
 	}`, dsName, firstNameFilter, suspendedFilter)
 }
