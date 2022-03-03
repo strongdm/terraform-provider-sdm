@@ -53,7 +53,7 @@ func TestAccSDMNode_GatewayCreate(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMNodeGatewayConfig(rsName, gwName, listenAddr),
+				Config: testAccSDMNodeGatewayConfig(rsName, gwName, listenAddr, "0.0.0.0:21222"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.name", gwName),
 					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.#", "1"),
@@ -103,21 +103,72 @@ func TestAccSDMNode_GatewayCreate(t *testing.T) {
 	})
 }
 
-func TestAccSDMNode_GatewayCreateNoBindAddress(t *testing.T) {
+func TestAccSDMNode_GatewayCreateNoNameOrBindAddress(t *testing.T) {
 	rsName := randomWithPrefix("test")
 	gwName := randomWithPrefix("test")
 	ip, _ := acctest.RandIpAddress("192.0.2.0/24")
 	listenAddr := fmt.Sprintf("%s:21222", ip)
+	gwBindAddr1 := "0.0.0.0:21222"
+	gwBindAddr2 := "0.0.0.0:5000"
 	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
+			// no name or bind address; strongDM should generate them
 			{
-				Config: testAccSDMNodeGatewayConfigNoBindAddress(rsName, gwName, listenAddr),
+				Config: testAccSDMNodeGatewayConfigNoNameOrBindAddress(rsName, listenAddr),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.name", gwName),
 					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.#", "1"),
-					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.bind_address", "0.0.0.0:21222"),
+					resource.TestCheckResourceAttrSet("sdm_node."+rsName, "gateway.0.name"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.bind_address", gwBindAddr1),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.listen_address", listenAddr),
+					resource.TestCheckResourceAttrSet("sdm_node."+rsName, "gateway.0.token"),
+					func(s *terraform.State) error {
+						// retrieve the resource by name from state
+						id, err := testCreatedID(s, "sdm_node", rsName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						gateway, ok := resp.Node.(*sdm.Gateway)
+						if !ok {
+							return fmt.Errorf("expected gateway, got relay")
+						}
+						if gateway.Name == "" {
+							return fmt.Errorf("expected gateway name to be non-empty")
+						}
+						if gateway.ListenAddress != listenAddr {
+							return fmt.Errorf("unexpected listen address '%s', expected '%s'", gateway.ListenAddress, listenAddr)
+						}
+						if gateway.BindAddress != gwBindAddr1 {
+							return fmt.Errorf("unexpected bind address '%s', expected '%s'", gateway.BindAddress, gwBindAddr1)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + rsName,
+				ImportState:       true,
+				ImportStateVerify: false, // can't verify because token cannot be recovered
+			},
+			// now specify a name and bind address, it should update properly
+			{
+				Config: testAccSDMNodeGatewayConfig(rsName, gwName, listenAddr, "0.0.0.0:5000"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.#", "1"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.name", gwName),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.bind_address", gwBindAddr2),
 					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.listen_address", listenAddr),
 					resource.TestCheckResourceAttrSet("sdm_node."+rsName, "gateway.0.token"),
 					func(s *terraform.State) error {
@@ -146,8 +197,56 @@ func TestAccSDMNode_GatewayCreateNoBindAddress(t *testing.T) {
 						if gateway.ListenAddress != listenAddr {
 							return fmt.Errorf("unexpected listen address '%s', expected '%s'", gateway.ListenAddress, listenAddr)
 						}
-						if gateway.BindAddress != "0.0.0.0:21222" {
-							return fmt.Errorf("unexpected bind address '%s', expected '%s'", gateway.BindAddress, "0.0.0.0:21222")
+						if gateway.BindAddress != gwBindAddr2 {
+							return fmt.Errorf("unexpected bind address '%s', expected '%s'", gateway.BindAddress, gwBindAddr2)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + rsName,
+				ImportState:       true,
+				ImportStateVerify: false, // can't verify because token cannot be recovered
+			},
+			// now elide the name and bind address again; it should stay the same
+			{
+				Config: testAccSDMNodeGatewayConfigNoNameOrBindAddress(rsName, listenAddr),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.#", "1"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.name", gwName),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.bind_address", gwBindAddr2),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.listen_address", listenAddr),
+					resource.TestCheckResourceAttrSet("sdm_node."+rsName, "gateway.0.token"),
+					func(s *terraform.State) error {
+						// retrieve the resource by name from state
+						id, err := testCreatedID(s, "sdm_node", rsName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						gateway, ok := resp.Node.(*sdm.Gateway)
+						if !ok {
+							return fmt.Errorf("expected gateway, got relay")
+						}
+						if gateway.Name != gwName {
+							return fmt.Errorf("unexpected name '%s', expected '%s'", gateway.Name, gwName)
+						}
+						if gateway.ListenAddress != listenAddr {
+							return fmt.Errorf("unexpected listen address '%s', expected '%s'", gateway.ListenAddress, listenAddr)
+						}
+						if gateway.BindAddress != gwBindAddr2 {
+							return fmt.Errorf("unexpected bind address '%s', expected '%s'", gateway.BindAddress, gwBindAddr2)
 						}
 
 						return nil
@@ -215,10 +314,12 @@ func TestAccSDMNode_RelayCreate(t *testing.T) {
 
 func TestAccSDMNode_RelayCreateGeneratedName(t *testing.T) {
 	rsName := randomWithPrefix("test")
+	relayName := randomWithPrefix("test")
 	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
+			// don't provide a name; strongDM should generate one
 			{
 				Config: testAccSDMNodeRelayConfigNoName(rsName),
 				Check: resource.ComposeTestCheckFunc(
@@ -246,6 +347,84 @@ func TestAccSDMNode_RelayCreateGeneratedName(t *testing.T) {
 						}
 						if relay.Name == "" {
 							return fmt.Errorf("expected generated relay name")
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + rsName,
+				ImportState:       true,
+				ImportStateVerify: false, // can't verify because token cannot be recovered
+			},
+			// specify a name, it should be updated
+			{
+				Config: testAccSDMNodeRelayConfig(rsName, relayName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "relay.#", "1"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "relay.0.name", relayName),
+					func(s *terraform.State) error {
+						// retrieve the resource by name from state
+						id, err := testCreatedID(s, "sdm_node", rsName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						relay, ok := resp.Node.(*sdm.Relay)
+						if !ok {
+							return fmt.Errorf("expected relay, got gateway")
+						}
+						if relay.Name != relayName {
+							return fmt.Errorf("expected relay name to be '%v', got '%v'", relayName, relay.Name)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + rsName,
+				ImportState:       true,
+				ImportStateVerify: false, // can't verify because token cannot be recovered
+			},
+			// elide name field again; it should stay the same
+			{
+				Config: testAccSDMNodeRelayConfigNoName(rsName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "relay.#", "1"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "relay.0.name", relayName),
+					func(s *terraform.State) error {
+						// retrieve the resource by name from state
+						id, err := testCreatedID(s, "sdm_node", rsName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						relay, ok := resp.Node.(*sdm.Relay)
+						if !ok {
+							return fmt.Errorf("expected relay, got gateway")
+						}
+						if relay.Name != relayName {
+							return fmt.Errorf("expected relay name to be '%v', got '%v'", relayName, relay.Name)
 						}
 
 						return nil
@@ -471,27 +650,26 @@ func testAccSDMNodeTagsConfig(resourceName string, nodeName string, tags sdm.Tag
 	`, resourceName, nodeName, tagsToConfigString(tags))
 }
 
-func testAccSDMNodeGatewayConfig(resourceName, gatewayName, listenAddr string) string {
+func testAccSDMNodeGatewayConfig(resourceName, gatewayName, listenAddr string, bindAddr string) string {
 	return fmt.Sprintf(`
 	resource "sdm_node" "%s" {
 		gateway {
 			name = "%s"
 			listen_address = "%s"
-			bind_address = "0.0.0.0:21222"
+			bind_address = "%s"
 		}
 	}
-	`, resourceName, gatewayName, listenAddr)
+	`, resourceName, gatewayName, listenAddr, bindAddr)
 }
 
-func testAccSDMNodeGatewayConfigNoBindAddress(resourceName, gatewayName, listenAddr string) string {
+func testAccSDMNodeGatewayConfigNoNameOrBindAddress(resourceName, listenAddr string) string {
 	return fmt.Sprintf(`
 	resource "sdm_node" "%s" {
 		gateway {
-			name = "%s"
 			listen_address = "%s"
 		}
 	}
-	`, resourceName, gatewayName, listenAddr)
+	`, resourceName, listenAddr)
 }
 
 func testAccSDMNodeRelayConfig(resourceName, relayName string) string {
