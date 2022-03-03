@@ -116,6 +116,38 @@ resource "sdm_role" "engineering" {
 }
 ```
 
+## Note on Deleting Access Rules
+
+The `sdm_role.access_rules` field is an Optional Computed field. That means if you specify access rules like this:
+
+```hcl
+resource "sdm_role" "test" {
+  name = "test"
+  access_rules = jsonencode([
+    {
+      type = "postgres"
+    }
+  ])
+}
+```
+
+And then eliminate the field entirely:
+
+```hcl
+resource "sdm_role" "test" {
+  name = "test"
+}
+```
+
+Terraform will not delete the access rules. It will tolerate whatever rules are currently set in strongDM. To delete the access rules, you must explicitly set the field:
+
+```hcl
+resource "sdm_role" "test" {
+  name = "test"
+  access_rules = jsonencode([])
+}
+```
+
 ## Raw JSON
 
 If you want, you can also write access rules in raw JSON.
