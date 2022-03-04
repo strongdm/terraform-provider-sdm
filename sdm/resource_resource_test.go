@@ -1100,7 +1100,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"url", `"http://example.com"`},
 				{"healthcheck_path", `"/"`},
-				{"subdomain", `"basic_secret_store"`},
+				{"subdomain", `"basicsecretstore"`},
 				{"secret_store_username_path", `"/path/to/username"`},
 				{"secret_store_username_key", `"key"`},
 				{"secret_store_password_path", `"/path/to/password"`},
@@ -1116,7 +1116,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"healthcheck_path", `"/"`},
 				{"secret_store_auth_header_path", `"/path/to/auth_header"`},
 				{"secret_store_auth_header_key", `"key"`},
-				{"subdomain", `"auth_secret_store"`},
+				{"subdomain", `"authsecretstore"`},
 			},
 		},
 		{
