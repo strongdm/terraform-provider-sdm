@@ -863,7 +863,7 @@ type Gateway struct {
 	// The public hostname/port tuple at which the gateway will be accessible to clients.
 	ListenAddress string `protobuf:"bytes,4,opt,name=listen_address,json=listenAddress,proto3" json:"listen_address,omitempty"`
 	// The hostname/port tuple which the gateway daemon will bind to.
-	// If not provided on create, set to "0.0.0.0:<listen_address_port>".
+	// If not provided on create, set to "0.0.0.0:listen_address_port".
 	BindAddress string `protobuf:"bytes,5,opt,name=bind_address,json=bindAddress,proto3" json:"bind_address,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,6,opt,name=tags,proto3" json:"tags,omitempty"`

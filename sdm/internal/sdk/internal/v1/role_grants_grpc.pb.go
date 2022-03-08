@@ -36,22 +36,22 @@ type RoleGrantsClient interface {
 	// Deprecated: Do not use.
 	// Create registers a new RoleGrant.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	Create(ctx context.Context, in *RoleGrantCreateRequest, opts ...grpc.CallOption) (*RoleGrantCreateResponse, error)
 	// Deprecated: Do not use.
 	// Get reads one RoleGrant by ID.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	Get(ctx context.Context, in *RoleGrantGetRequest, opts ...grpc.CallOption) (*RoleGrantGetResponse, error)
 	// Deprecated: Do not use.
 	// Delete removes a RoleGrant by ID.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	Delete(ctx context.Context, in *RoleGrantDeleteRequest, opts ...grpc.CallOption) (*RoleGrantDeleteResponse, error)
 	// Deprecated: Do not use.
 	// List gets a list of RoleGrants matching a given set of criteria.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	List(ctx context.Context, in *RoleGrantListRequest, opts ...grpc.CallOption) (*RoleGrantListResponse, error)
 }
 
@@ -113,22 +113,22 @@ type RoleGrantsServer interface {
 	// Deprecated: Do not use.
 	// Create registers a new RoleGrant.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	Create(context.Context, *RoleGrantCreateRequest) (*RoleGrantCreateResponse, error)
 	// Deprecated: Do not use.
 	// Get reads one RoleGrant by ID.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	Get(context.Context, *RoleGrantGetRequest) (*RoleGrantGetResponse, error)
 	// Deprecated: Do not use.
 	// Delete removes a RoleGrant by ID.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	Delete(context.Context, *RoleGrantDeleteRequest) (*RoleGrantDeleteResponse, error)
 	// Deprecated: Do not use.
 	// List gets a list of RoleGrants matching a given set of criteria.
 	//
-	// Deprecated: use access rules instead.
+	// Deprecated: use Role access rules instead.
 	List(context.Context, *RoleGrantListRequest) (*RoleGrantListResponse, error)
 	mustEmbedUnimplementedRoleGrantsServer()
 }

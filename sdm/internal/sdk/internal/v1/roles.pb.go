@@ -666,7 +666,9 @@ func (x *RoleListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// A Role is a collection of access grants, and typically corresponds to a team, Active Directory OU, or other organizational unit. Users are granted access to resources by assigning them to roles.
+// A Role has a list of access rules which determine which Resources the members
+// of the Role have access to. An Account can be a member of multiple Roles via
+// AccountAttachments.
 type Role struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -680,7 +682,8 @@ type Role struct {
 	AccessRules string `protobuf:"bytes,5,opt,name=access_rules,json=accessRules,proto3" json:"access_rules,omitempty"`
 	// Composite is true if the Role is a composite role.
 	//
-	// Deprecated: composite roles are deprecated, use multi-role instead.
+	// Deprecated: composite roles are deprecated, use multi-role via
+	// AccountAttachments instead.
 	//
 	// Deprecated: Do not use.
 	Composite bool `protobuf:"varint,3,opt,name=composite,proto3" json:"composite,omitempty"`

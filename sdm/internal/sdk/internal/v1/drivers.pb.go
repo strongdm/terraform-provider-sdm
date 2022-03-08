@@ -36,7 +36,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A Resource is a database or server for which strongDM manages access.
+// A Resource is a database, server, cluster, website, or cloud that strongDM
+// delegates access to.
 type Resource struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

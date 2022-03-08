@@ -35,7 +35,7 @@ type RolesClient interface {
 	Create(ctx context.Context, in *RoleCreateRequest, opts ...grpc.CallOption) (*RoleCreateResponse, error)
 	// Get reads one Role by ID.
 	Get(ctx context.Context, in *RoleGetRequest, opts ...grpc.CallOption) (*RoleGetResponse, error)
-	// Update patches a Role by ID.
+	// Update replaces all the fields of a Role by ID.
 	Update(ctx context.Context, in *RoleUpdateRequest, opts ...grpc.CallOption) (*RoleUpdateResponse, error)
 	// Delete removes a Role by ID.
 	Delete(ctx context.Context, in *RoleDeleteRequest, opts ...grpc.CallOption) (*RoleDeleteResponse, error)
@@ -104,7 +104,7 @@ type RolesServer interface {
 	Create(context.Context, *RoleCreateRequest) (*RoleCreateResponse, error)
 	// Get reads one Role by ID.
 	Get(context.Context, *RoleGetRequest) (*RoleGetResponse, error)
-	// Update patches a Role by ID.
+	// Update replaces all the fields of a Role by ID.
 	Update(context.Context, *RoleUpdateRequest) (*RoleUpdateResponse, error)
 	// Delete removes a Role by ID.
 	Delete(context.Context, *RoleDeleteRequest) (*RoleDeleteResponse, error)

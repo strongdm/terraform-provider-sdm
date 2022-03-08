@@ -9,7 +9,7 @@ sidebar_current: “docs-sdm-datasource-role-grant"
 
 A RoleGrant connects a resource to a role, granting members of the role access to that resource.
 
- Deprecated: use access rules instead.
+ Deprecated: use Role access rules instead.
 ## Example Usage
 
 ```hcl

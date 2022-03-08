@@ -34,7 +34,7 @@ func resourceRole() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				ForceNew:    true,
-				Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role instead.",
+				Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.",
 				Deprecated:  "composite is deprecated, see docs for more info",
 			},
 			"name": {

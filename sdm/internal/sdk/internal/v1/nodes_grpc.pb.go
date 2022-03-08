@@ -35,7 +35,7 @@ type NodesClient interface {
 	Create(ctx context.Context, in *NodeCreateRequest, opts ...grpc.CallOption) (*NodeCreateResponse, error)
 	// Get reads one Node by ID.
 	Get(ctx context.Context, in *NodeGetRequest, opts ...grpc.CallOption) (*NodeGetResponse, error)
-	// Update patches a Node by ID.
+	// Update replaces all the fields of a Node by ID.
 	Update(ctx context.Context, in *NodeUpdateRequest, opts ...grpc.CallOption) (*NodeUpdateResponse, error)
 	// Delete removes a Node by ID.
 	Delete(ctx context.Context, in *NodeDeleteRequest, opts ...grpc.CallOption) (*NodeDeleteResponse, error)
@@ -104,7 +104,7 @@ type NodesServer interface {
 	Create(context.Context, *NodeCreateRequest) (*NodeCreateResponse, error)
 	// Get reads one Node by ID.
 	Get(context.Context, *NodeGetRequest) (*NodeGetResponse, error)
-	// Update patches a Node by ID.
+	// Update replaces all the fields of a Node by ID.
 	Update(context.Context, *NodeUpdateRequest) (*NodeUpdateResponse, error)
 	// Delete removes a Node by ID.
 	Delete(context.Context, *NodeDeleteRequest) (*NodeDeleteResponse, error)

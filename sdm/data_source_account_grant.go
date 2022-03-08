@@ -14,7 +14,8 @@ import (
 
 func dataSourceAccountGrant() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: wrapCrudOperation(dataSourceAccountGrantList),
+		ReadContext:        wrapCrudOperation(dataSourceAccountGrantList),
+		DeprecationMessage: "sdm_account_grant is deprecated, see docs for more info",
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,

@@ -23,7 +23,7 @@ import (
 	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/internal/v1"
 )
 
-// AccountAttachments assign an account to a role or composite role.
+// AccountAttachments assign an account to a role.
 type AccountAttachments struct {
 	client plumbing.AccountAttachmentsClient
 	parent *Client
@@ -486,7 +486,7 @@ func (svc *Accounts) Get(
 	return resp, nil
 }
 
-// Update patches a Account by ID.
+// Update replaces all the fields of an Account by ID.
 func (svc *Accounts) Update(
 	ctx context.Context,
 	account Account) (
@@ -530,7 +530,7 @@ func (svc *Accounts) Update(
 	return resp, nil
 }
 
-// Delete removes a Account by ID.
+// Delete removes an Account by ID.
 func (svc *Accounts) Delete(
 	ctx context.Context,
 	id string) (
@@ -800,7 +800,7 @@ func (svc *Nodes) Get(
 	return resp, nil
 }
 
-// Update patches a Node by ID.
+// Update replaces all the fields of a Node by ID.
 func (svc *Nodes) Update(
 	ctx context.Context,
 	node Node) (
@@ -933,6 +933,8 @@ func (svc *Nodes) List(
 	), nil
 }
 
+// Resources are databases, servers, clusters, websites, or clouds that strongDM
+// delegates access to.
 type Resources struct {
 	client plumbing.ResourcesClient
 	parent *Client
@@ -1076,7 +1078,7 @@ func (svc *Resources) Get(
 	return resp, nil
 }
 
-// Update patches a Resource by ID.
+// Update replaces all the fields of a Resource by ID.
 func (svc *Resources) Update(
 	ctx context.Context,
 	resource Resource) (
@@ -1214,7 +1216,7 @@ func (svc *Resources) List(
 // role, the permissions granted to members of the composite role are augmented to
 // include the permissions granted to members of the attached role.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 type RoleAttachments struct {
 	client plumbing.RoleAttachmentsClient
 	parent *Client
@@ -1222,7 +1224,7 @@ type RoleAttachments struct {
 
 // Create registers a new RoleAttachment.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 func (svc *RoleAttachments) Create(
 	ctx context.Context,
 	roleAttachment *RoleAttachment) (
@@ -1268,7 +1270,7 @@ func (svc *RoleAttachments) Create(
 
 // Get reads one RoleAttachment by ID.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 func (svc *RoleAttachments) Get(
 	ctx context.Context,
 	id string) (
@@ -1314,7 +1316,7 @@ func (svc *RoleAttachments) Get(
 
 // Delete removes a RoleAttachment by ID.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 func (svc *RoleAttachments) Delete(
 	ctx context.Context,
 	id string) (
@@ -1355,7 +1357,7 @@ func (svc *RoleAttachments) Delete(
 
 // List gets a list of RoleAttachments matching a given set of criteria.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 func (svc *RoleAttachments) List(
 	ctx context.Context,
 	filter string,
@@ -1410,7 +1412,7 @@ func (svc *RoleAttachments) List(
 // role, the permissions granted to members of the composite role are augmented to
 // include the permissions granted to members of the attached role.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 type RoleGrants struct {
 	client plumbing.RoleGrantsClient
 	parent *Client
@@ -1418,7 +1420,7 @@ type RoleGrants struct {
 
 // Create registers a new RoleGrant.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 func (svc *RoleGrants) Create(
 	ctx context.Context,
 	roleGrant *RoleGrant) (
@@ -1464,7 +1466,7 @@ func (svc *RoleGrants) Create(
 
 // Get reads one RoleGrant by ID.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 func (svc *RoleGrants) Get(
 	ctx context.Context,
 	id string) (
@@ -1510,7 +1512,7 @@ func (svc *RoleGrants) Get(
 
 // Delete removes a RoleGrant by ID.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 func (svc *RoleGrants) Delete(
 	ctx context.Context,
 	id string) (
@@ -1551,7 +1553,7 @@ func (svc *RoleGrants) Delete(
 
 // List gets a list of RoleGrants matching a given set of criteria.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 func (svc *RoleGrants) List(
 	ctx context.Context,
 	filter string,
@@ -1601,11 +1603,9 @@ func (svc *RoleGrants) List(
 	), nil
 }
 
-// Roles are tools for controlling user access to resources. Each Role holds a
-// list of resources which they grant access to. Composite roles are a special
-// type of Role which have no resource associations of their own, but instead
-// grant access to the combined resources associated with a set of child roles.
-// Each user can be a member of one Role or composite role.
+// A Role has a list of access rules which determine which Resources the members
+// of the Role have access to. An Account can be a member of multiple Roles via
+// AccountAttachments.
 type Roles struct {
 	client plumbing.RolesClient
 	parent *Client
@@ -1699,7 +1699,7 @@ func (svc *Roles) Get(
 	return resp, nil
 }
 
-// Update patches a Role by ID.
+// Update replaces all the fields of a Role by ID.
 func (svc *Roles) Update(
 	ctx context.Context,
 	role *Role) (
@@ -1925,7 +1925,7 @@ func (svc *SecretStores) Get(
 	return resp, nil
 }
 
-// Update patches a SecretStore by ID.
+// Update replaces all the fields of a SecretStore by ID.
 func (svc *SecretStores) Update(
 	ctx context.Context,
 	secretStore SecretStore) (

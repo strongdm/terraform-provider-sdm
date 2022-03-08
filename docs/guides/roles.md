@@ -1,12 +1,12 @@
 # Managing Roles
 
-Roles in strongDM are the primary method of providing access to datasources and servers. A role is a collection of permissions that are then granted to the users that are assigned to that role.
+Roles in strongDM are the primary method of providing access to datasources and
+servers. A role is a collection of permissions that are then granted to the
+users that are assigned to that role.
 
 [Users and Roles](https://www.strongdm.com/docs/architecture/users-and-roles/)
 
 ## Creating Roles
-
-### Regular Role
 
 ```hcl
 resource "sdm_role" "IT_team" {
@@ -14,72 +14,101 @@ resource "sdm_role" "IT_team" {
 }
 ```
 
-### Composite Role
+## Adding Access Rules to Roles
+
+When using Access Rules the best practice is to grant Resources access based on
+Type and Tags.
 
 ```hcl
-resource "sdm_role" "DevOps" {
-  name      = "DevOps"
-  composite = true
-}
-resource "sdm_role" "Dev" {
-  name      = "Devs"
-  composite = false
-}
-resource "sdm_role" "Ops" {
-  name      = "Ops"
-  composite = false
-}
-resource "sdm_role_attachment" "Dev" {
-  composite_role_id = sdm_role.DevOps.id
-  attached_role_id  = sdm_role.Dev.id
-}
-resource "sdm_role_attachment" "Ops" {
-  composite_role_id = sdm_role.DevOps.id
-  attached_role_id  = sdm_role.Ops.id
+resource "sdm_role" "engineering" {
+  name = "engineering"
+
+  access_rules = jsonencode([
+    # grant access to all dev environment resources in us-west
+    {
+      tags = {
+        env = "dev"
+        region = "us-west"
+      }
+    },
+
+    # grant access to all postgres resources
+    {
+      type = "postgres"
+    },
+
+    # grant access to all redis resources in us-east
+    {
+      type = "redis"
+      tags = {
+        region = "us-east"
+      }
+    },
+  ])
 }
 ```
 
-## Assigning Resources to Roles
+## Static Access Rules
+
+You can also use Resource IDs directly in Access Rules.
 
 ```hcl
-resource "sdm_role" "ops" {
-  name      = "Network Operations"
-}
-
-data "sdm_resource" "prod_db" {
-  name = "Prod DB"
-  type = "postgres"
-}
-
-data "sdm_resource" "bastion" {
-  name = "Bastion Host"
-  type = "ssh"
-}
-
-resource "sdm_role_grant" "prod_db" {
-  role_id = sdm_role.ops.id
-  resource_id = data.sdm_resource.prod_db.ids[0]
-}
-
-resource "sdm_role_grant" "bastion" {
-  role_id = sdm_role.ops.id
-  resource_id = data.sdm_resource.bastion.ids[0]
+resource "sdm_role" "engineering" {
+  name = "engineering"
+  access_rules = jsonencode([
+    {
+      ids = [sdm_resource.prod_db.id, sdm_resource.bastion.id]
+    }
+  ])
 }
 ```
 
-## Assigning Users to a Roles
+## Note on Deleting Access Rules
+
+The `sdm_role.access_rules` field is an Optional Computed field. For example,
+let's say you specify access rules like this:
 
 ```hcl
-resource "sdm_role" "ops" {
-  name      = "Network Operations"
+resource "sdm_role" "test" {
+  name = "test"
+  access_rules = jsonencode([
+    {
+      type = "postgres"
+    }
+  ])
 }
+```
 
-data "sdm_account" "dave" {
-  email = "davefromops@example.com"
+If you then remove the field, the access rules will be preserved in strongDM:
+
+```hcl
+resource "sdm_role" "test" {
+  name = "test"
 }
+```
 
-resource "sdm_role_attachment" "dave_ops" {
-  role_id = sdm_role.ops.id
-  account_id = data.sdm_accounts.dave.ids[0]
+To delete the access rules from the role, you must explicitly set the field:
+
+```hcl
+resource "sdm_role" "test" {
+  name = "test"
+  access_rules = jsonencode([])
+}
+```
+
+## Raw JSON
+
+If you want, you can also write access rules in raw JSON.
+
+```hcl
+resource "sdm_role" "engineering" {
+  name = "engineering"
+  access_rules = <<-EOF
+  [
+    {
+      "type": "redis"
+    }
+  ]
+  EOF
 }
 ```

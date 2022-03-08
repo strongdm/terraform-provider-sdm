@@ -15,9 +15,10 @@ import (
 
 func resourceAccountGrant() *schema.Resource {
 	return &schema.Resource{
-		CreateContext: wrapCrudOperation(resourceAccountGrantCreate),
-		ReadContext:   wrapCrudOperation(resourceAccountGrantRead),
-		DeleteContext: wrapCrudOperation(resourceAccountGrantDelete),
+		CreateContext:      wrapCrudOperation(resourceAccountGrantCreate),
+		ReadContext:        wrapCrudOperation(resourceAccountGrantRead),
+		DeleteContext:      wrapCrudOperation(resourceAccountGrantDelete),
+		DeprecationMessage: "sdm_account_grant is deprecated, see docs for more info",
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},

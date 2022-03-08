@@ -36,22 +36,22 @@ type RoleAttachmentsClient interface {
 	// Deprecated: Do not use.
 	// Create registers a new RoleAttachment.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	Create(ctx context.Context, in *RoleAttachmentCreateRequest, opts ...grpc.CallOption) (*RoleAttachmentCreateResponse, error)
 	// Deprecated: Do not use.
 	// Get reads one RoleAttachment by ID.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	Get(ctx context.Context, in *RoleAttachmentGetRequest, opts ...grpc.CallOption) (*RoleAttachmentGetResponse, error)
 	// Deprecated: Do not use.
 	// Delete removes a RoleAttachment by ID.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	Delete(ctx context.Context, in *RoleAttachmentDeleteRequest, opts ...grpc.CallOption) (*RoleAttachmentDeleteResponse, error)
 	// Deprecated: Do not use.
 	// List gets a list of RoleAttachments matching a given set of criteria.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	List(ctx context.Context, in *RoleAttachmentListRequest, opts ...grpc.CallOption) (*RoleAttachmentListResponse, error)
 }
 
@@ -113,22 +113,22 @@ type RoleAttachmentsServer interface {
 	// Deprecated: Do not use.
 	// Create registers a new RoleAttachment.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	Create(context.Context, *RoleAttachmentCreateRequest) (*RoleAttachmentCreateResponse, error)
 	// Deprecated: Do not use.
 	// Get reads one RoleAttachment by ID.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	Get(context.Context, *RoleAttachmentGetRequest) (*RoleAttachmentGetResponse, error)
 	// Deprecated: Do not use.
 	// Delete removes a RoleAttachment by ID.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	Delete(context.Context, *RoleAttachmentDeleteRequest) (*RoleAttachmentDeleteResponse, error)
 	// Deprecated: Do not use.
 	// List gets a list of RoleAttachments matching a given set of criteria.
 	//
-	// Deprecated: use multi-role instead.
+	// Deprecated: use multi-role via AccountAttachments instead.
 	List(context.Context, *RoleAttachmentListRequest) (*RoleAttachmentListResponse, error)
 	mustEmbedUnimplementedRoleAttachmentsServer()
 }

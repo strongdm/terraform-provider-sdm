@@ -118,7 +118,8 @@ resource "sdm_role" "engineering" {
 
 ## Note on Deleting Access Rules
 
-The `sdm_role.access_rules` field is an Optional Computed field. That means if you specify access rules like this:
+The `sdm_role.access_rules` field is an Optional Computed field. For example,
+let's say you specify access rules like this:
 
 ```hcl
 resource "sdm_role" "test" {
@@ -131,7 +132,7 @@ resource "sdm_role" "test" {
 }
 ```
 
-And then eliminate the field entirely:
+If you then remove the field, the access rules will be preserved in strongDM:
 
 ```hcl
 resource "sdm_role" "test" {
@@ -139,7 +140,7 @@ resource "sdm_role" "test" {
 }
 ```
 
-Terraform will not delete the access rules. It will tolerate whatever rules are currently set in strongDM. To delete the access rules, you must explicitly set the field:
+To delete the access rules from the role, you must explicitly set the field:
 
 ```hcl
 resource "sdm_role" "test" {

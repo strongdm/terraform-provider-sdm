@@ -37,7 +37,7 @@ const (
 // RoleGrantCreateRequest specifies what kind of RoleGrants should be registered in
 // the organizations fleet.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantCreateRequest struct {
@@ -99,7 +99,7 @@ func (x *RoleGrantCreateRequest) GetRoleGrant() *RoleGrant {
 
 // RoleGrantCreateResponse reports how the RoleGrants were created in the system.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantCreateResponse struct {
@@ -170,7 +170,7 @@ func (x *RoleGrantCreateResponse) GetRateLimit() *RateLimitMetadata {
 
 // RoleGrantGetRequest specifies which RoleGrant to retrieve.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantGetRequest struct {
@@ -232,7 +232,7 @@ func (x *RoleGrantGetRequest) GetId() string {
 
 // RoleGrantGetResponse returns a requested RoleGrant.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantGetResponse struct {
@@ -303,7 +303,7 @@ func (x *RoleGrantGetResponse) GetRateLimit() *RateLimitMetadata {
 
 // RoleGrantDeleteRequest identifies a RoleGrant by ID to delete.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantDeleteRequest struct {
@@ -365,7 +365,7 @@ func (x *RoleGrantDeleteRequest) GetId() string {
 
 // RoleGrantDeleteResponse returns information about a RoleGrant that was deleted.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantDeleteResponse struct {
@@ -427,7 +427,7 @@ func (x *RoleGrantDeleteResponse) GetRateLimit() *RateLimitMetadata {
 
 // RoleGrantListRequest specifies criteria for retrieving a list of RoleGrants.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantListRequest struct {
@@ -490,7 +490,7 @@ func (x *RoleGrantListRequest) GetFilter() string {
 // RoleGrantListResponse returns a list of RoleGrants that meet the criteria of a
 // RoleGrantListRequest.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrantListResponse struct {
@@ -561,7 +561,7 @@ func (x *RoleGrantListResponse) GetRateLimit() *RateLimitMetadata {
 
 // A RoleGrant connects a resource to a role, granting members of the role access to that resource.
 //
-// Deprecated: use access rules instead.
+// Deprecated: use Role access rules instead.
 //
 // Deprecated: Do not use.
 type RoleGrant struct {

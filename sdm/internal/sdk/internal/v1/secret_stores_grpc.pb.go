@@ -34,7 +34,7 @@ type SecretStoresClient interface {
 	Create(ctx context.Context, in *SecretStoreCreateRequest, opts ...grpc.CallOption) (*SecretStoreCreateResponse, error)
 	// Get reads one SecretStore by ID.
 	Get(ctx context.Context, in *SecretStoreGetRequest, opts ...grpc.CallOption) (*SecretStoreGetResponse, error)
-	// Update patches a SecretStore by ID.
+	// Update replaces all the fields of a SecretStore by ID.
 	Update(ctx context.Context, in *SecretStoreUpdateRequest, opts ...grpc.CallOption) (*SecretStoreUpdateResponse, error)
 	// Delete removes a SecretStore by ID.
 	Delete(ctx context.Context, in *SecretStoreDeleteRequest, opts ...grpc.CallOption) (*SecretStoreDeleteResponse, error)
@@ -102,7 +102,7 @@ type SecretStoresServer interface {
 	Create(context.Context, *SecretStoreCreateRequest) (*SecretStoreCreateResponse, error)
 	// Get reads one SecretStore by ID.
 	Get(context.Context, *SecretStoreGetRequest) (*SecretStoreGetResponse, error)
-	// Update patches a SecretStore by ID.
+	// Update replaces all the fields of a SecretStore by ID.
 	Update(context.Context, *SecretStoreUpdateRequest) (*SecretStoreUpdateResponse, error)
 	// Delete removes a SecretStore by ID.
 	Delete(context.Context, *SecretStoreDeleteRequest) (*SecretStoreDeleteResponse, error)

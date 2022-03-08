@@ -41,16 +41,13 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 ## Argument Reference
 The following arguments are supported by the Node resource:
 * gateway:
-	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to.
- If not provided on create, set to "0.0.0.0:<listen_address_port>".
-	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
- gateways.
+	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to "0.0.0.0:listen_address_port".
+	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways.
 	* `listen_address` - (Required) The public hostname/port tuple at which the gateway will be accessible to clients.
 	* `name` - (Optional) Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * relay:
-	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and
- gateways.
+	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways.
 	* `name` - (Optional) Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference

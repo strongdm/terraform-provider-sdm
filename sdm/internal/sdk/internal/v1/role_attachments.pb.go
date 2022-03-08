@@ -37,7 +37,7 @@ const (
 // RoleAttachmentCreateRequest specifies what kind of RoleAttachments should be registered in
 // the organizations fleet.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentCreateRequest struct {
@@ -99,7 +99,7 @@ func (x *RoleAttachmentCreateRequest) GetRoleAttachment() *RoleAttachment {
 
 // RoleAttachmentCreateResponse reports how the RoleAttachments were created in the system.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentCreateResponse struct {
@@ -170,7 +170,7 @@ func (x *RoleAttachmentCreateResponse) GetRateLimit() *RateLimitMetadata {
 
 // RoleAttachmentGetRequest specifies which RoleAttachment to retrieve.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentGetRequest struct {
@@ -232,7 +232,7 @@ func (x *RoleAttachmentGetRequest) GetId() string {
 
 // RoleAttachmentGetResponse returns a requested RoleAttachment.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentGetResponse struct {
@@ -303,7 +303,7 @@ func (x *RoleAttachmentGetResponse) GetRateLimit() *RateLimitMetadata {
 
 // RoleAttachmentDeleteRequest identifies a RoleAttachment by ID to delete.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentDeleteRequest struct {
@@ -365,7 +365,7 @@ func (x *RoleAttachmentDeleteRequest) GetId() string {
 
 // RoleAttachmentDeleteResponse returns information about a RoleAttachment that was deleted.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentDeleteResponse struct {
@@ -427,7 +427,7 @@ func (x *RoleAttachmentDeleteResponse) GetRateLimit() *RateLimitMetadata {
 
 // RoleAttachmentListRequest specifies criteria for retrieving a list of RoleAttachments.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentListRequest struct {
@@ -490,7 +490,7 @@ func (x *RoleAttachmentListRequest) GetFilter() string {
 // RoleAttachmentListResponse returns a list of RoleAttachments that meet the criteria of a
 // RoleAttachmentListRequest.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachmentListResponse struct {
@@ -561,7 +561,7 @@ func (x *RoleAttachmentListResponse) GetRateLimit() *RateLimitMetadata {
 
 // A RoleAttachment assigns a role to a composite role.
 //
-// Deprecated: use multi-role instead.
+// Deprecated: use multi-role via AccountAttachments instead.
 //
 // Deprecated: Do not use.
 type RoleAttachment struct {

@@ -35,9 +35,9 @@ type AccountsClient interface {
 	Create(ctx context.Context, in *AccountCreateRequest, opts ...grpc.CallOption) (*AccountCreateResponse, error)
 	// Get reads one Account by ID.
 	Get(ctx context.Context, in *AccountGetRequest, opts ...grpc.CallOption) (*AccountGetResponse, error)
-	// Update patches a Account by ID.
+	// Update replaces all the fields of an Account by ID.
 	Update(ctx context.Context, in *AccountUpdateRequest, opts ...grpc.CallOption) (*AccountUpdateResponse, error)
-	// Delete removes a Account by ID.
+	// Delete removes an Account by ID.
 	Delete(ctx context.Context, in *AccountDeleteRequest, opts ...grpc.CallOption) (*AccountDeleteResponse, error)
 	// List gets a list of Accounts matching a given set of criteria.
 	List(ctx context.Context, in *AccountListRequest, opts ...grpc.CallOption) (*AccountListResponse, error)
@@ -104,9 +104,9 @@ type AccountsServer interface {
 	Create(context.Context, *AccountCreateRequest) (*AccountCreateResponse, error)
 	// Get reads one Account by ID.
 	Get(context.Context, *AccountGetRequest) (*AccountGetResponse, error)
-	// Update patches a Account by ID.
+	// Update replaces all the fields of an Account by ID.
 	Update(context.Context, *AccountUpdateRequest) (*AccountUpdateResponse, error)
-	// Delete removes a Account by ID.
+	// Delete removes an Account by ID.
 	Delete(context.Context, *AccountDeleteRequest) (*AccountDeleteResponse, error)
 	// List gets a list of Accounts matching a given set of criteria.
 	List(context.Context, *AccountListRequest) (*AccountListResponse, error)

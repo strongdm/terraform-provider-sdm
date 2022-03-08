@@ -37,7 +37,7 @@ type ResourcesClient interface {
 	Create(ctx context.Context, in *ResourceCreateRequest, opts ...grpc.CallOption) (*ResourceCreateResponse, error)
 	// Get reads one Resource by ID.
 	Get(ctx context.Context, in *ResourceGetRequest, opts ...grpc.CallOption) (*ResourceGetResponse, error)
-	// Update patches a Resource by ID.
+	// Update replaces all the fields of a Resource by ID.
 	Update(ctx context.Context, in *ResourceUpdateRequest, opts ...grpc.CallOption) (*ResourceUpdateResponse, error)
 	// Delete removes a Resource by ID.
 	Delete(ctx context.Context, in *ResourceDeleteRequest, opts ...grpc.CallOption) (*ResourceDeleteResponse, error)
@@ -117,7 +117,7 @@ type ResourcesServer interface {
 	Create(context.Context, *ResourceCreateRequest) (*ResourceCreateResponse, error)
 	// Get reads one Resource by ID.
 	Get(context.Context, *ResourceGetRequest) (*ResourceGetResponse, error)
-	// Update patches a Resource by ID.
+	// Update replaces all the fields of a Resource by ID.
 	Update(context.Context, *ResourceUpdateRequest) (*ResourceUpdateResponse, error)
 	// Delete removes a Resource by ID.
 	Delete(context.Context, *ResourceDeleteRequest) (*ResourceDeleteResponse, error)

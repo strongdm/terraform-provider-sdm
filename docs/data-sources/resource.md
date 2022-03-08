@@ -7,7 +7,8 @@ sidebar_current: “docs-sdm-datasource-resource"
 ---
 # Data Source: sdm_resource
 
-A Resource is a database or server for which strongDM manages access.
+A Resource is a database, server, cluster, website, or cloud that strongDM
+ delegates access to.
 ## Example Usage
 
 ```hcl

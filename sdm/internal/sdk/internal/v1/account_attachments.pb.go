@@ -527,7 +527,7 @@ func (x *AccountAttachmentListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// AccountAttachments assign an account to a role or composite role.
+// AccountAttachments assign an account to a role.
 type AccountAttachment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

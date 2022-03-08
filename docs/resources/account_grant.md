@@ -8,6 +8,7 @@ sidebar_current: “docs-sdm-resource-account-grant"
 # Resource: sdm_account_grant
 
 AccountGrants connect a resource directly to an account, giving the account the permission to connect to that resource.
+This resource is deprecated.
 ## Example Usage
 
 ```hcl

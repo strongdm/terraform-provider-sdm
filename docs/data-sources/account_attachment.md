@@ -7,7 +7,7 @@ sidebar_current: “docs-sdm-datasource-account-attachment"
 ---
 # Data Source: sdm_account_attachment
 
-AccountAttachments assign an account to a role or composite role.
+AccountAttachments assign an account to a role.
 ## Example Usage
 
 ```hcl
