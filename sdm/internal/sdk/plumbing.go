@@ -3070,6 +3070,57 @@ func convertRepeatedGCPToPorcelain(plumbings []*proto.GCP) (
 	}
 	return items, nil
 }
+func convertGCPStoreToPorcelain(plumbing *proto.GCPStore) (*GCPStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GCPStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.ProjectID = plumbing.ProjectID
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertGCPStoreToPlumbing(porcelain *GCPStore) *proto.GCPStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GCPStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ProjectID = (porcelain.ProjectID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedGCPStoreToPlumbing(
+	porcelains []*GCPStore,
+) []*proto.GCPStore {
+	var items []*proto.GCPStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertGCPStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGCPStoreToPorcelain(plumbings []*proto.GCPStore) (
+	[]*GCPStore,
+	error,
+) {
+	var items []*GCPStore
+	for _, plumbing := range plumbings {
+		if v, err := convertGCPStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7211,6 +7262,10 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
 	case *AzureStore:
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
+	case *GCPStore:
+		plumbing.SecretStore = &proto.SecretStore_Gcp{Gcp: convertGCPStoreToPlumbing(v)}
+	case *VaultAppRoleStore:
+		plumbing.SecretStore = &proto.SecretStore_VaultAppRole{VaultAppRole: convertVaultAppRoleStoreToPlumbing(v)}
 	case *VaultTLSStore:
 		plumbing.SecretStore = &proto.SecretStore_VaultTls{VaultTls: convertVaultTLSStoreToPlumbing(v)}
 	case *VaultTokenStore:
@@ -7225,6 +7280,12 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetAzure() != nil {
 		return convertAzureStoreToPorcelain(plumbing.GetAzure())
+	}
+	if plumbing.GetGcp() != nil {
+		return convertGCPStoreToPorcelain(plumbing.GetGcp())
+	}
+	if plumbing.GetVaultAppRole() != nil {
+		return convertVaultAppRoleStoreToPorcelain(plumbing.GetVaultAppRole())
 	}
 	if plumbing.GetVaultTls() != nil {
 		return convertVaultTLSStoreToPorcelain(plumbing.GetVaultTls())
@@ -7990,6 +8051,59 @@ func convertRepeatedUserToPorcelain(plumbings []*proto.User) (
 	var items []*User
 	for _, plumbing := range plumbings {
 		if v, err := convertUserToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertVaultAppRoleStoreToPorcelain(plumbing *proto.VaultAppRoleStore) (*VaultAppRoleStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &VaultAppRoleStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Namespace = plumbing.Namespace
+	porcelain.ServerAddress = plumbing.ServerAddress
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertVaultAppRoleStoreToPlumbing(porcelain *VaultAppRoleStore) *proto.VaultAppRoleStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.VaultAppRoleStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Namespace = (porcelain.Namespace)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedVaultAppRoleStoreToPlumbing(
+	porcelains []*VaultAppRoleStore,
+) []*proto.VaultAppRoleStore {
+	var items []*proto.VaultAppRoleStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertVaultAppRoleStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedVaultAppRoleStoreToPorcelain(plumbings []*proto.VaultAppRoleStore) (
+	[]*VaultAppRoleStore,
+	error,
+) {
+	var items []*VaultAppRoleStore
+	for _, plumbing := range plumbings {
+		if v, err := convertVaultAppRoleStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

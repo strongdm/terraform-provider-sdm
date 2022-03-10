@@ -78,24 +78,24 @@ resource "sdm_role" "engineering" {
   access_rules = jsonencode([
     # grant access to all dev environment resources in us-west
     {
-      tags = {
-        env = "dev"
-        region = "us-west"
+      "tags": {
+        "env": "dev",
+        "region": "us-west"
       }
     },
 
     # grant access to all postgres resources
     {
-      type = "postgres"
+      "type": "postgres"
     },
 
     # grant access to all redis resources in us-east
     {
-      type = "redis"
-      tags = {
-        region = "us-east"
+      "type": "redis",
+      "tags": {
+        "region": "us-east"
       }
-    },
+    }
   ])
 }
 ```
@@ -110,7 +110,7 @@ resource "sdm_role" "engineering" {
   name = "engineering"
   access_rules = jsonencode([
     {
-      ids = [sdm_resource.redis-test.id, sdm_resource.postgres-test.id]
+      "ids": [sdm_resource.redis-test.id, sdm_resource.postgres-test.id]
     }
   ])
 }
@@ -126,7 +126,7 @@ resource "sdm_role" "test" {
   name = "test"
   access_rules = jsonencode([
     {
-      type = "postgres"
+      "type": "postgres"
     }
   ])
 }

@@ -49,6 +49,10 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"project_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"region": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -123,6 +127,71 @@ func dataSourceSecretStore() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+								},
+							},
+						},
+						"gcp_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"project_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"vault_approle": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
 									},
 								},
 							},
@@ -253,6 +322,10 @@ func convertSecretStoreFilterToPlumbing(d *schema.ResourceData) (string, []inter
 		filter += "namespace:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("projectID"); ok {
+		filter += "projectid:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("region"); ok {
 		filter += "region:? "
 		args = append(args, v)
@@ -300,6 +373,21 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"name":      (v.Name),
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
+			})
+		case *sdm.GCPStore:
+			output[0]["gcp_store"] = append(output[0]["gcp_store"], entity{
+				"id":         (v.ID),
+				"name":       (v.Name),
+				"project_id": (v.ProjectID),
+				"tags":       convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.VaultAppRoleStore:
+			output[0]["vault_approle"] = append(output[0]["vault_approle"], entity{
+				"id":             (v.ID),
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{

@@ -75,6 +75,63 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"gcp_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"project_id": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"vault_approle": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"vault_tls": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -185,6 +242,33 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("gcp_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.GCPStore{}
+		}
+		out := &sdm.GCPStore{
+			ID:        d.Id(),
+			Name:      convertStringToPlumbing(raw["name"]),
+			ProjectID: convertStringToPlumbing(raw["project_id"]),
+			Tags:      convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("vault_approle").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAppRoleStore{}
+		}
+		out := &sdm.VaultAppRoleStore{
+			ID:            d.Id(),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Namespace:     convertStringToPlumbing(raw["namespace"]),
+			ServerAddress: convertStringToPlumbing(raw["server_address"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("vault_tls").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -246,6 +330,27 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"name":      (v.Name),
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
+			},
+		})
+	case *sdm.GCPStore:
+		localV, _ := localVersion.(*sdm.GCPStore)
+		_ = localV
+		d.Set("gcp_store", []map[string]interface{}{
+			{
+				"name":       (v.Name),
+				"project_id": (v.ProjectID),
+				"tags":       convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAppRoleStore:
+		localV, _ := localVersion.(*sdm.VaultAppRoleStore)
+		_ = localV
+		d.Set("vault_approle", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTLSStore:
@@ -314,6 +419,33 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"name":      (v.Name),
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
+			},
+		})
+	case *sdm.GCPStore:
+		localV, ok := localVersion.(*sdm.GCPStore)
+		if !ok {
+			localV = &sdm.GCPStore{}
+		}
+		_ = localV
+		d.Set("gcp_store", []map[string]interface{}{
+			{
+				"name":       (v.Name),
+				"project_id": (v.ProjectID),
+				"tags":       convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAppRoleStore:
+		localV, ok := localVersion.(*sdm.VaultAppRoleStore)
+		if !ok {
+			localV = &sdm.VaultAppRoleStore{}
+		}
+		_ = localV
+		d.Set("vault_approle", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTLSStore:

@@ -59,7 +59,7 @@ resource "sdm_role" "developers" {
   name = "developers"
   access_rules = jsonencode([
     {
-      tags = { env = "dev" }
+      "tags": { "env": "dev" }
     }
   ])
 }

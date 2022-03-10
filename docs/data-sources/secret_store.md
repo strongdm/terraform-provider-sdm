@@ -18,6 +18,7 @@ The following arguments are supported by a SecretStores data source:
 * `id` - (Optional) Unique identifier of the SecretStore.
 * `name` - (Optional) Unique human-readable name of the SecretStore.
 * `namespace` - (Optional) 
+* `project_id` - (Optional) 
 * `region` - (Optional) 
 * `server_address` - (Optional) 
 * `tags` - (Optional) Tags is a map of key, value pairs.
@@ -37,6 +38,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
 		* `vault_uri` - 
+	* gcp_store:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `project_id` - 
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_approle:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - 
+		* `server_address` - 
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
 		* `ca_cert_path` - 
 		* `client_cert_path` - 

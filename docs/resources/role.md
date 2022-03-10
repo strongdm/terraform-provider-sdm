@@ -24,20 +24,20 @@ resource "sdm_role" "example-role" {
     name = "example-role"
     access_rules = jsonencode([
         {
-            tags = {
-                env = "staging"
+            "tags": {
+                "env": "staging"
             }
         },
         {
-            type = "postgres"
-            tags = {
-                region = "us-west"
-                env = "dev"
+            "type": "postgres",
+            "tags": {
+                "region": "us-west",
+                "env": "dev"
             }
         },
         {
-            ids = ["rs-093e6f3061eb4dad"]
-        },
+            "ids": ["rs-093e6f3061eb4dad"]
+        }
     ])
 }
 ```

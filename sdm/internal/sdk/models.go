@@ -1054,6 +1054,17 @@ type GCP struct {
 	Tags Tags `json:"tags"`
 }
 
+type GCPStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+
+	ProjectID string `json:"projectId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 // Gateway represents a StrongDM CLI installation running in gateway mode.
 type Gateway struct {
 	// The hostname/port tuple which the gateway daemon will bind to.
@@ -5501,6 +5512,54 @@ func (m *AzureStore) GetName() string {
 func (m *AzureStore) SetName(v string) {
 	m.Name = v
 }
+func (*GCPStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the GCPStore.
+func (m *GCPStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the GCPStore.
+func (m *GCPStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GCPStore.
+func (m *GCPStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the GCPStore.
+func (m *GCPStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GCPStore.
+func (m *GCPStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultAppRoleStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAppRoleStore.
+func (m *VaultAppRoleStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAppRoleStore.
+func (m *VaultAppRoleStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAppRoleStore.
+func (m *VaultAppRoleStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAppRoleStore.
+func (m *VaultAppRoleStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAppRoleStore.
+func (m *VaultAppRoleStore) SetName(v string) {
+	m.Name = v
+}
 func (*VaultTLSStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultTLSStore.
@@ -5752,6 +5811,19 @@ type User struct {
 	LastName string `json:"lastName"`
 	// The User's suspended state.
 	Suspended bool `json:"suspended"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type VaultAppRoleStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+
+	Namespace string `json:"namespace"`
+
+	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }

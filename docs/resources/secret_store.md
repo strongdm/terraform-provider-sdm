@@ -21,6 +21,15 @@ The following arguments are supported by the SecretStore resource:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `vault_uri` - (Required) 
+* gcp_store:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `project_id` - (Required) 
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_approle:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) 
+	* `server_address` - (Required) 
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_tls:
 	* `ca_cert_path` - (Optional) 
 	* `client_cert_path` - (Required) 
