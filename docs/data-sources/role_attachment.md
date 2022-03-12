@@ -10,6 +10,7 @@ sidebar_current: “docs-sdm-datasource-role-attachment"
 A RoleAttachment assigns a role to a composite role.
  
  Deprecated: use multi-role via AccountAttachments instead.
+This data source is deprecated.
 ## Example Usage
 
 ```hcl

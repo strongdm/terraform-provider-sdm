@@ -158,10 +158,6 @@ func convertNodeFilterToPlumbing(d *schema.ResourceData) (string, []interface{})
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("state"); ok {
-		filter += "state:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOkExists("tags"); ok {
 		filter += "tags:? "
 		args = append(args, v)

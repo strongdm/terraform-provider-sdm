@@ -83,7 +83,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -133,7 +133,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -194,7 +194,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -250,7 +250,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -324,7 +324,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -395,7 +395,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -477,7 +477,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2037,7 +2037,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2094,7 +2094,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2426,7 +2426,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2476,7 +2476,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2537,7 +2537,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2593,7 +2593,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,
@@ -2667,7 +2667,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The path used to check the health of your connection.  Defaults to `default`.",
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
 										Type:        schema.TypeString,

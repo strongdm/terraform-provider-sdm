@@ -7,7 +7,7 @@ sidebar_current: “docs-sdm-resource-secret-store"
 ---
 # Resource: sdm_secret_store
 
-A SecretStore is a server where resource secrets (passwords, keys) are stored. 
+A SecretStore is a server where resource secrets (passwords, keys) are stored.
  Coming soon support for HashiCorp Vault and AWS Secret Store. Contact support@strongdm.com to request access to the beta.
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 
