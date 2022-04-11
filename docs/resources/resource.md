@@ -472,8 +472,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
-	* `username` - (Required if storing credentials directly strongDM) 
-	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
+	* `username` - (Optional) 
+	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)
 * elasticache_redis:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
