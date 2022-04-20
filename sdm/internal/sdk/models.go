@@ -1363,6 +1363,40 @@ type KubernetesUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
+type MTLSMysql struct {
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClientCertificate string `json:"clientCertificate"`
+
+	ClientKey string `json:"clientKey"`
+
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	ServerName string `json:"serverName"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
 type MTLSPostgres struct {
 	CertificateAuthority string `json:"certificateAuthority"`
 
@@ -4225,6 +4259,50 @@ func (m *MongoShardedCluster) GetEgressFilter() string {
 
 // SetEgressFilter sets the egress filter of the MongoShardedCluster.
 func (m *MongoShardedCluster) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+func (*MTLSMysql) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MTLSMysql.
+func (m *MTLSMysql) GetID() string { return m.ID }
+
+// GetName returns the name of the MTLSMysql.
+func (m *MTLSMysql) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MTLSMysql.
+func (m *MTLSMysql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MTLSMysql.
+func (m *MTLSMysql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MTLSMysql.
+func (m *MTLSMysql) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MTLSMysql.
+func (m *MTLSMysql) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MTLSMysql.
+func (m *MTLSMysql) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MTLSMysql.
+func (m *MTLSMysql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MTLSMysql.
+func (m *MTLSMysql) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 func (*MTLSPostgres) isOneOf_Resource() {}
