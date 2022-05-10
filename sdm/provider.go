@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/2.0.0"
+const userAgent = "terraform-provider-sdm/2.2.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -35,6 +35,12 @@ func Provider() *schema.Provider {
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("SDM_API_HOST", "api.strongdm.com:443"),
 				Description: "The host and port of the StrongDM API endpoint.",
+			},
+			"retry_rate_limit_errors": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("SDM_RETRY_RATE_LIMITS", "true"),
+				Description: "Whether experienced rate limits should cause the client to sleep instead of erroring out",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
@@ -70,6 +76,9 @@ func Provider() *schema.Provider {
 				strings.HasPrefix(host, "127.0.0.1:") ||
 				strings.HasPrefix(host, "host.docker.internal:") {
 				opts = append(opts, sdm.WithInsecure())
+			}
+			if retry, ok := d.Get("retry_rate_limit_errors").(bool); ok {
+				opts = append(opts, sdm.WithRateLimitRetries(retry))
 			}
 			client, err := sdm.New(d.Get("api_access_key").(string), d.Get("api_secret_key").(string), opts...)
 			if err != nil {

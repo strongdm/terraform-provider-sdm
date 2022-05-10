@@ -5079,7 +5079,7 @@ func resourceResource() *schema.Resource {
 						},
 						"schema": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_store_id": {

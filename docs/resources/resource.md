@@ -974,7 +974,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required if storing credentials directly strongDM) 
 	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
-	* `schema` - (Required) 
+	* `schema` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 

@@ -26,6 +26,7 @@ import (
 	"crypto/sha256"
 	"crypto/tls"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"math/rand"
 	"strings"
@@ -44,7 +45,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/2.0.0"
+	defaultUserAgent = "strongdm-sdk-go/2.2.0"
 )
 
 var _ = metadata.Pairs
@@ -54,11 +55,12 @@ type Client struct {
 	testOptionsMu sync.RWMutex
 	testOptions   map[string]interface{}
 
-	apiHost              string
-	apiToken             string
-	apiSecret            []byte
-	apiInsecureTransport bool
-	userAgent            string
+	apiHost               string
+	apiToken              string
+	apiSecret             []byte
+	apiInsecureTransport  bool
+	exposeRateLimitErrors bool
+	userAgent             string
 
 	grpcConn *grpc.ClientConn
 
@@ -175,6 +177,12 @@ func WithInsecure() ClientOption {
 func WithUserAgentExtra(userAgentExtra string) ClientOption {
 	return func(c *Client) {
 		c.userAgent += " " + userAgentExtra
+	}
+}
+
+func WithRateLimitRetries(enabled bool) ClientOption {
+	return func(c *Client) {
+		c.exposeRateLimitErrors = !enabled
 	}
 }
 
@@ -314,6 +322,13 @@ func (c *Client) shouldRetry(iter int, err error) bool {
 	// Internal and unknown errors should be retried
 	// Other error types are likely not brief temporary errors
 	if s, ok := status.FromError(err); ok {
+		if !c.exposeRateLimitErrors && s.Code() == codes.ResourceExhausted {
+			var rateLimitError *RateLimitError
+			if err != nil && errors.As(convertErrorToPorcelain(err), &rateLimitError) {
+				time.Sleep(time.Until(rateLimitError.RateLimit.ResetAt))
+			}
+			return true
+		}
 		return s.Code() == codes.Internal
 	}
 	return true
