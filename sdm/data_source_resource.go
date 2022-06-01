@@ -57,6 +57,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -125,6 +130,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -186,6 +196,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -242,6 +257,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -298,6 +318,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -370,6 +395,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
@@ -453,6 +483,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -535,6 +570,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -601,6 +641,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -672,6 +717,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -738,6 +788,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -804,6 +859,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -880,6 +940,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -941,6 +1006,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -992,6 +1062,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1038,6 +1113,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1109,6 +1189,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1170,6 +1255,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1236,6 +1326,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1307,6 +1402,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1373,6 +1473,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1444,6 +1549,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1510,6 +1620,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1581,6 +1696,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1646,6 +1766,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
 									},
 									"connect_to_replica": {
 										Type:        schema.TypeBool,
@@ -1713,6 +1838,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1778,6 +1908,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1845,6 +1980,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1911,6 +2051,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1972,6 +2117,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2018,6 +2168,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2075,6 +2230,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2132,6 +2292,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2209,6 +2374,11 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"default_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2269,6 +2439,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"default_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2340,6 +2515,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"default_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2400,6 +2580,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2468,6 +2653,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2529,6 +2719,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2585,6 +2780,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2641,6 +2841,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2709,6 +2914,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2775,6 +2985,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2825,6 +3040,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2896,6 +3116,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2966,6 +3191,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3042,6 +3272,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
 									},
 									"connect_to_replica": {
 										Type:        schema.TypeBool,
@@ -3124,6 +3359,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"connect_to_replica": {
 										Type:        schema.TypeBool,
 										Optional:    true,
@@ -3205,6 +3445,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3266,6 +3511,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3355,6 +3605,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3449,6 +3704,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3515,6 +3775,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3569,6 +3834,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3641,6 +3911,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3712,6 +3987,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3783,6 +4063,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3854,6 +4139,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3920,6 +4210,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3970,6 +4265,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"downgrade_nla_connections": {
 										Type:        schema.TypeBool,
 										Optional:    true,
@@ -4036,6 +4336,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4092,6 +4397,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4163,6 +4473,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4229,6 +4544,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4295,6 +4615,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4376,6 +4701,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4404,6 +4734,11 @@ func dataSourceResource() *schema.Resource {
 									"port_forwarding": {
 										Type:        schema.TypeBool,
 										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
 									"public_key": {
@@ -4441,6 +4776,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4469,6 +4809,11 @@ func dataSourceResource() *schema.Resource {
 									"port_forwarding": {
 										Type:        schema.TypeBool,
 										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4501,6 +4846,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4529,6 +4879,11 @@ func dataSourceResource() *schema.Resource {
 									"port_forwarding": {
 										Type:        schema.TypeBool,
 										Optional:    true,
+										Description: "",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
 										Description: "",
 									},
 									"private_key": {
@@ -4562,6 +4917,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4623,6 +4983,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4684,6 +5049,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4796,6 +5166,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		switch v := resp.Value().(type) {
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"client_certificate":    (v.ClientCertificate),
 				"client_key":            (v.ClientKey),
@@ -4810,6 +5181,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AKSBasicAuth:
 			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
+				"bind_interface":        (v.BindInterface),
 				"egress_filter":         (v.EgressFilter),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"hostname":              (v.Hostname),
@@ -4823,6 +5195,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AKSServiceAccount:
 			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
+				"bind_interface":        (v.BindInterface),
 				"egress_filter":         (v.EgressFilter),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"hostname":              (v.Hostname),
@@ -4835,6 +5208,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AKSServiceAccountUserImpersonation:
 			output[0]["aks_service_account_user_impersonation"] = append(output[0]["aks_service_account_user_impersonation"], entity{
+				"bind_interface":        (v.BindInterface),
 				"egress_filter":         (v.EgressFilter),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"hostname":              (v.Hostname),
@@ -4847,6 +5221,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AKSUserImpersonation:
 			output[0]["aks_user_impersonation"] = append(output[0]["aks_user_impersonation"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"client_certificate":    (v.ClientCertificate),
 				"client_key":            (v.ClientKey),
@@ -4862,6 +5237,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
 				"access_key":            (v.AccessKey),
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"cluster_name":          (v.ClusterName),
 				"egress_filter":         (v.EgressFilter),
@@ -4879,6 +5255,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AmazonEKSUserImpersonation:
 			output[0]["amazon_eks_user_impersonation"] = append(output[0]["amazon_eks_user_impersonation"], entity{
 				"access_key":            (v.AccessKey),
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"cluster_name":          (v.ClusterName),
 				"egress_filter":         (v.EgressFilter),
@@ -4896,6 +5273,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AmazonES:
 			output[0]["amazon_es"] = append(output[0]["amazon_es"], entity{
 				"access_key":        (v.AccessKey),
+				"bind_interface":    (v.BindInterface),
 				"egress_filter":     (v.EgressFilter),
 				"endpoint":          (v.Endpoint),
 				"id":                (v.ID),
@@ -4910,6 +5288,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AmazonMQAMQP091:
 			output[0]["amazonmq_amqp_091"] = append(output[0]["amazonmq_amqp_091"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -4925,6 +5304,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.Athena:
 			output[0]["athena"] = append(output[0]["athena"], entity{
 				"access_key":        (v.AccessKey),
+				"bind_interface":    (v.BindInterface),
 				"egress_filter":     (v.EgressFilter),
 				"id":                (v.ID),
 				"name":              (v.Name),
@@ -4939,6 +5319,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AuroraMysql:
 			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -4953,6 +5334,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AuroraPostgres:
 			output[0]["aurora_postgres"] = append(output[0]["aurora_postgres"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -4969,6 +5351,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AWS:
 			output[0]["aws"] = append(output[0]["aws"], entity{
 				"access_key":         (v.AccessKey),
+				"bind_interface":     (v.BindInterface),
 				"egress_filter":      (v.EgressFilter),
 				"healthcheck_region": (v.HealthcheckRegion),
 				"id":                 (v.ID),
@@ -4982,6 +5365,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.Azure:
 			output[0]["azure"] = append(output[0]["azure"], entity{
 				"app_id":          (v.AppID),
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"id":              (v.ID),
 				"name":            (v.Name),
@@ -4993,6 +5377,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AzureCertificate:
 			output[0]["azure_certificate"] = append(output[0]["azure_certificate"], entity{
 				"app_id":             (v.AppID),
+				"bind_interface":     (v.BindInterface),
 				"client_certificate": (v.ClientCertificate),
 				"egress_filter":      (v.EgressFilter),
 				"id":                 (v.ID),
@@ -5003,6 +5388,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AzurePostgres:
 			output[0]["azure_postgres"] = append(output[0]["azure_postgres"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5018,6 +5404,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"endpoint":        (v.Endpoint),
 				"id":              (v.ID),
@@ -5031,6 +5418,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Cassandra:
 			output[0]["cassandra"] = append(output[0]["cassandra"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5045,6 +5433,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Citus:
 			output[0]["citus"] = append(output[0]["citus"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5060,6 +5449,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Clustrix:
 			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5074,6 +5464,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Cockroach:
 			output[0]["cockroach"] = append(output[0]["cockroach"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5089,6 +5480,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.DB2I:
 			output[0]["db_2_i"] = append(output[0]["db_2_i"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5103,6 +5495,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.DB2LUW:
 			output[0]["db_2_luw"] = append(output[0]["db_2_luw"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5118,6 +5511,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.DocumentDBHost:
 			output[0]["document_db_host"] = append(output[0]["document_db_host"], entity{
 				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5132,6 +5526,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.DocumentDBReplicaSet:
 			output[0]["document_db_replica_set"] = append(output[0]["document_db_replica_set"], entity{
 				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
 				"connect_to_replica": (v.ConnectToReplica),
 				"egress_filter":      (v.EgressFilter),
 				"hostname":           (v.Hostname),
@@ -5146,6 +5541,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Druid:
 			output[0]["druid"] = append(output[0]["druid"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5160,6 +5556,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.DynamoDB:
 			output[0]["dynamo_db"] = append(output[0]["dynamo_db"], entity{
 				"access_key":        (v.AccessKey),
+				"bind_interface":    (v.BindInterface),
 				"egress_filter":     (v.EgressFilter),
 				"endpoint":          (v.Endpoint),
 				"id":                (v.ID),
@@ -5174,6 +5571,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Elastic:
 			output[0]["elastic"] = append(output[0]["elastic"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5188,6 +5586,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.ElasticacheRedis:
 			output[0]["elasticache_redis"] = append(output[0]["elasticache_redis"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5201,6 +5600,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.GCP:
 			output[0]["gcp"] = append(output[0]["gcp"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"id":              (v.ID),
 				"keyfile":         (v.Keyfile),
@@ -5211,6 +5611,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"egress_filter":         (v.EgressFilter),
 				"endpoint":              (v.Endpoint),
@@ -5223,6 +5624,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.GoogleGKEUserImpersonation:
 			output[0]["google_gke_user_impersonation"] = append(output[0]["google_gke_user_impersonation"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"egress_filter":         (v.EgressFilter),
 				"endpoint":              (v.Endpoint),
@@ -5235,6 +5637,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Greenplum:
 			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5251,6 +5654,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.HTTPAuth:
 			output[0]["http_auth"] = append(output[0]["http_auth"], entity{
 				"auth_header":       (v.AuthHeader),
+				"bind_interface":    (v.BindInterface),
 				"default_path":      (v.DefaultPath),
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -5264,6 +5668,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.HTTPBasicAuth:
 			output[0]["http_basic_auth"] = append(output[0]["http_basic_auth"], entity{
+				"bind_interface":    (v.BindInterface),
 				"default_path":      (v.DefaultPath),
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -5279,6 +5684,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.HTTPNoAuth:
 			output[0]["http_no_auth"] = append(output[0]["http_no_auth"], entity{
+				"bind_interface":    (v.BindInterface),
 				"default_path":      (v.DefaultPath),
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -5292,6 +5698,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Kubernetes:
 			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"client_certificate":    (v.ClientCertificate),
 				"client_key":            (v.ClientKey),
@@ -5306,6 +5713,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesBasicAuth:
 			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
+				"bind_interface":        (v.BindInterface),
 				"egress_filter":         (v.EgressFilter),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"hostname":              (v.Hostname),
@@ -5319,6 +5727,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
+				"bind_interface":        (v.BindInterface),
 				"egress_filter":         (v.EgressFilter),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"hostname":              (v.Hostname),
@@ -5331,6 +5740,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesServiceAccountUserImpersonation:
 			output[0]["kubernetes_service_account_user_impersonation"] = append(output[0]["kubernetes_service_account_user_impersonation"], entity{
+				"bind_interface":        (v.BindInterface),
 				"egress_filter":         (v.EgressFilter),
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"hostname":              (v.Hostname),
@@ -5343,6 +5753,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesUserImpersonation:
 			output[0]["kubernetes_user_impersonation"] = append(output[0]["kubernetes_user_impersonation"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"client_certificate":    (v.ClientCertificate),
 				"client_key":            (v.ClientKey),
@@ -5357,6 +5768,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Maria:
 			output[0]["maria"] = append(output[0]["maria"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5371,6 +5783,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5382,6 +5795,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Memsql:
 			output[0]["memsql"] = append(output[0]["memsql"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5397,6 +5811,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.MongoHost:
 			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
 				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5412,6 +5827,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.MongoLegacyHost:
 			output[0]["mongo_legacy_host"] = append(output[0]["mongo_legacy_host"], entity{
 				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5428,6 +5844,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.MongoLegacyReplicaset:
 			output[0]["mongo_legacy_replicaset"] = append(output[0]["mongo_legacy_replicaset"], entity{
 				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
 				"connect_to_replica": (v.ConnectToReplica),
 				"egress_filter":      (v.EgressFilter),
 				"hostname":           (v.Hostname),
@@ -5445,6 +5862,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.MongoReplicaSet:
 			output[0]["mongo_replica_set"] = append(output[0]["mongo_replica_set"], entity{
 				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
 				"connect_to_replica": (v.ConnectToReplica),
 				"egress_filter":      (v.EgressFilter),
 				"hostname":           (v.Hostname),
@@ -5462,6 +5880,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.MongoShardedCluster:
 			output[0]["mongo_sharded_cluster"] = append(output[0]["mongo_sharded_cluster"], entity{
 				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5475,6 +5894,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.MTLSMysql:
 			output[0]["mtls_mysql"] = append(output[0]["mtls_mysql"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"client_certificate":    (v.ClientCertificate),
 				"client_key":            (v.ClientKey),
@@ -5493,6 +5913,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.MTLSPostgres:
 			output[0]["mtls_postgres"] = append(output[0]["mtls_postgres"], entity{
+				"bind_interface":        (v.BindInterface),
 				"certificate_authority": (v.CertificateAuthority),
 				"client_certificate":    (v.ClientCertificate),
 				"client_key":            (v.ClientKey),
@@ -5512,6 +5933,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Mysql:
 			output[0]["mysql"] = append(output[0]["mysql"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5526,6 +5948,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Neptune:
 			output[0]["neptune"] = append(output[0]["neptune"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"endpoint":        (v.Endpoint),
 				"id":              (v.ID),
@@ -5538,6 +5961,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.NeptuneIAM:
 			output[0]["neptune_iam"] = append(output[0]["neptune_iam"], entity{
 				"access_key":        (v.AccessKey),
+				"bind_interface":    (v.BindInterface),
 				"egress_filter":     (v.EgressFilter),
 				"endpoint":          (v.Endpoint),
 				"id":                (v.ID),
@@ -5553,6 +5977,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5568,6 +5993,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Postgres:
 			output[0]["postgres"] = append(output[0]["postgres"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5583,6 +6009,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Presto:
 			output[0]["presto"] = append(output[0]["presto"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5598,6 +6025,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.RabbitMQAMQP091:
 			output[0]["rabbitmq_amqp_091"] = append(output[0]["rabbitmq_amqp_091"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5612,6 +6040,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.RawTCP:
 			output[0]["raw_tcp"] = append(output[0]["raw_tcp"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5623,6 +6052,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{
+				"bind_interface":            (v.BindInterface),
 				"downgrade_nla_connections": (v.DowngradeNlaConnections),
 				"egress_filter":             (v.EgressFilter),
 				"hostname":                  (v.Hostname),
@@ -5637,6 +6067,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Redis:
 			output[0]["redis"] = append(output[0]["redis"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5649,6 +6080,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Redshift:
 			output[0]["redshift"] = append(output[0]["redshift"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5664,6 +6096,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SingleStore:
 			output[0]["single_store"] = append(output[0]["single_store"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5678,6 +6111,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Snowflake:
 			output[0]["snowflake"] = append(output[0]["snowflake"], entity{
+				"bind_interface":  (v.BindInterface),
 				"database":        (v.Database),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
@@ -5692,6 +6126,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SQLServer:
 			output[0]["sql_server"] = append(output[0]["sql_server"], entity{
+				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
 				"hostname":          (v.Hostname),
@@ -5709,12 +6144,14 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.SSH:
 			output[0]["ssh"] = append(output[0]["ssh"], entity{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"id":                             (v.ID),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"public_key":                     (v.PublicKey),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
@@ -5723,12 +6160,14 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.SSHCert:
 			output[0]["ssh_cert"] = append(output[0]["ssh_cert"], entity{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"id":                             (v.ID),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       (v.Username),
@@ -5736,12 +6175,14 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.SSHCustomerKey:
 			output[0]["ssh_customer_key"] = append(output[0]["ssh_customer_key"], entity{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"id":                             (v.ID),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"private_key":                    (v.PrivateKey),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
@@ -5749,6 +6190,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Sybase:
 			output[0]["sybase"] = append(output[0]["sybase"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5762,6 +6204,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SybaseIQ:
 			output[0]["sybase_iq"] = append(output[0]["sybase_iq"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),
@@ -5775,6 +6218,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Teradata:
 			output[0]["teradata"] = append(output[0]["teradata"], entity{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"id":              (v.ID),

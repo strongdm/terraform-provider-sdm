@@ -45,7 +45,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/2.2.0"
+	defaultUserAgent = "strongdm-sdk-go/2.4.0"
 )
 
 var _ = metadata.Pairs
@@ -160,26 +160,39 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	return client, nil
 }
 
+// A ClientOption is an optional argument to New that can override the created
+// client's default behavior.
 type ClientOption func(c *Client)
 
+// WithHost causes a Client to make it's calls against the provided host instead
+// of against api.strongdm.com.
 func WithHost(host string) ClientOption {
 	return func(c *Client) {
 		c.apiHost = host
 	}
 }
 
+// WithInsecure enables a Client to talk to an http server instead of an https
+// server. This is potentially useful when communicating through a proxy, but
+// should be used with care.
 func WithInsecure() ClientOption {
 	return func(c *Client) {
 		c.apiInsecureTransport = true
 	}
 }
 
+// WithUserAgentExtra modifies the user agent string to include additional identifying
+// information for server-side analytics. The intended use is by extension libraries,
+// like a terraform provider wrapping this client.
 func WithUserAgentExtra(userAgentExtra string) ClientOption {
 	return func(c *Client) {
 		c.userAgent += " " + userAgentExtra
 	}
 }
 
+// WithRateLimitRetries configures whether encountered rate limit errors should
+// cause this client to sleep and retry (if enabled), or whether those errors should be
+// exposed to the code using this client (if disabled). By default, it is enabled.
 func WithRateLimitRetries(enabled bool) ClientOption {
 	return func(c *Client) {
 		c.exposeRateLimitErrors = !enabled
@@ -325,7 +338,13 @@ func (c *Client) shouldRetry(iter int, err error) bool {
 		if !c.exposeRateLimitErrors && s.Code() == codes.ResourceExhausted {
 			var rateLimitError *RateLimitError
 			if err != nil && errors.As(convertErrorToPorcelain(err), &rateLimitError) {
-				time.Sleep(time.Until(rateLimitError.RateLimit.ResetAt))
+				waitFor := time.Until(rateLimitError.RateLimit.ResetAt)
+				// If timezones or clock drift causes this calculation to fail,
+				// wait at most one minute.
+				if waitFor < 0 || waitFor > time.Minute {
+					waitFor = time.Minute
+				}
+				time.Sleep(waitFor)
 			}
 			return true
 		}

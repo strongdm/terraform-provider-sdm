@@ -85,6 +85,7 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 		return nil, nil
 	}
 	porcelain := &AKS{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
@@ -109,6 +110,7 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 		return nil
 	}
 	plumbing := &proto.AKS{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
@@ -152,6 +154,7 @@ func convertAKSBasicAuthToPorcelain(plumbing *proto.AKSBasicAuth) (*AKSBasicAuth
 		return nil, nil
 	}
 	porcelain := &AKSBasicAuth{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -175,6 +178,7 @@ func convertAKSBasicAuthToPlumbing(porcelain *AKSBasicAuth) *proto.AKSBasicAuth 
 		return nil
 	}
 	plumbing := &proto.AKSBasicAuth{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -217,6 +221,7 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 		return nil, nil
 	}
 	porcelain := &AKSServiceAccount{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -239,6 +244,7 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 		return nil
 	}
 	plumbing := &proto.AKSServiceAccount{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -280,6 +286,7 @@ func convertAKSServiceAccountUserImpersonationToPorcelain(plumbing *proto.AKSSer
 		return nil, nil
 	}
 	porcelain := &AKSServiceAccountUserImpersonation{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -302,6 +309,7 @@ func convertAKSServiceAccountUserImpersonationToPlumbing(porcelain *AKSServiceAc
 		return nil
 	}
 	plumbing := &proto.AKSServiceAccountUserImpersonation{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -343,6 +351,7 @@ func convertAKSUserImpersonationToPorcelain(plumbing *proto.AKSUserImpersonation
 		return nil, nil
 	}
 	porcelain := &AKSUserImpersonation{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
@@ -367,6 +376,7 @@ func convertAKSUserImpersonationToPlumbing(porcelain *AKSUserImpersonation) *pro
 		return nil
 	}
 	plumbing := &proto.AKSUserImpersonation{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
@@ -411,6 +421,7 @@ func convertAWSToPorcelain(plumbing *proto.AWS) (*AWS, error) {
 	}
 	porcelain := &AWS{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckRegion = plumbing.HealthcheckRegion
 	porcelain.Healthy = plumbing.Healthy
@@ -434,6 +445,7 @@ func convertAWSToPlumbing(porcelain *AWS) *proto.AWS {
 	}
 	plumbing := &proto.AWS{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckRegion = (porcelain.HealthcheckRegion)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -1231,6 +1243,7 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) 
 	}
 	porcelain := &AmazonEKS{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClusterName = plumbing.ClusterName
 	porcelain.EgressFilter = plumbing.EgressFilter
@@ -1258,6 +1271,7 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	}
 	plumbing := &proto.AmazonEKS{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClusterName = (porcelain.ClusterName)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
@@ -1304,6 +1318,7 @@ func convertAmazonEKSUserImpersonationToPorcelain(plumbing *proto.AmazonEKSUserI
 	}
 	porcelain := &AmazonEKSUserImpersonation{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClusterName = plumbing.ClusterName
 	porcelain.EgressFilter = plumbing.EgressFilter
@@ -1331,6 +1346,7 @@ func convertAmazonEKSUserImpersonationToPlumbing(porcelain *AmazonEKSUserImperso
 	}
 	plumbing := &proto.AmazonEKSUserImpersonation{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClusterName = (porcelain.ClusterName)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
@@ -1377,6 +1393,7 @@ func convertAmazonESToPorcelain(plumbing *proto.AmazonES) (*AmazonES, error) {
 	}
 	porcelain := &AmazonES{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.Healthy = plumbing.Healthy
@@ -1402,6 +1419,7 @@ func convertAmazonESToPlumbing(porcelain *AmazonES) *proto.AmazonES {
 	}
 	plumbing := &proto.AmazonES{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -1445,6 +1463,7 @@ func convertAmazonMQAMQP091ToPorcelain(plumbing *proto.AmazonMQAMQP091) (*Amazon
 		return nil, nil
 	}
 	porcelain := &AmazonMQAMQP091{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -1469,6 +1488,7 @@ func convertAmazonMQAMQP091ToPlumbing(porcelain *AmazonMQAMQP091) *proto.AmazonM
 		return nil
 	}
 	plumbing := &proto.AmazonMQAMQP091{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -1513,6 +1533,7 @@ func convertAthenaToPorcelain(plumbing *proto.Athena) (*Athena, error) {
 	}
 	porcelain := &Athena{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
@@ -1538,6 +1559,7 @@ func convertAthenaToPlumbing(porcelain *Athena) *proto.Athena {
 	}
 	plumbing := &proto.Athena{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
@@ -1581,6 +1603,7 @@ func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) (*AuroraMysql, e
 		return nil, nil
 	}
 	porcelain := &AuroraMysql{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -1605,6 +1628,7 @@ func convertAuroraMysqlToPlumbing(porcelain *AuroraMysql) *proto.AuroraMysql {
 		return nil
 	}
 	plumbing := &proto.AuroraMysql{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -1648,6 +1672,7 @@ func convertAuroraPostgresToPorcelain(plumbing *proto.AuroraPostgres) (*AuroraPo
 		return nil, nil
 	}
 	porcelain := &AuroraPostgres{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -1673,6 +1698,7 @@ func convertAuroraPostgresToPlumbing(porcelain *AuroraPostgres) *proto.AuroraPos
 		return nil
 	}
 	plumbing := &proto.AuroraPostgres{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -1718,6 +1744,7 @@ func convertAzureToPorcelain(plumbing *proto.Azure) (*Azure, error) {
 	}
 	porcelain := &Azure{}
 	porcelain.AppID = plumbing.AppId
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
@@ -1739,6 +1766,7 @@ func convertAzureToPlumbing(porcelain *Azure) *proto.Azure {
 	}
 	plumbing := &proto.Azure{}
 	plumbing.AppId = (porcelain.AppID)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
@@ -1779,6 +1807,7 @@ func convertAzureCertificateToPorcelain(plumbing *proto.AzureCertificate) (*Azur
 	}
 	porcelain := &AzureCertificate{}
 	porcelain.AppID = plumbing.AppId
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -1800,6 +1829,7 @@ func convertAzureCertificateToPlumbing(porcelain *AzureCertificate) *proto.Azure
 	}
 	plumbing := &proto.AzureCertificate{}
 	plumbing.AppId = (porcelain.AppID)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -1839,6 +1869,7 @@ func convertAzurePostgresToPorcelain(plumbing *proto.AzurePostgres) (*AzurePostg
 		return nil, nil
 	}
 	porcelain := &AzurePostgres{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -1864,6 +1895,7 @@ func convertAzurePostgresToPlumbing(porcelain *AzurePostgres) *proto.AzurePostgr
 		return nil
 	}
 	plumbing := &proto.AzurePostgres{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -1959,6 +1991,7 @@ func convertBigQueryToPorcelain(plumbing *proto.BigQuery) (*BigQuery, error) {
 		return nil, nil
 	}
 	porcelain := &BigQuery{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.Healthy = plumbing.Healthy
@@ -1982,6 +2015,7 @@ func convertBigQueryToPlumbing(porcelain *BigQuery) *proto.BigQuery {
 		return nil
 	}
 	plumbing := &proto.BigQuery{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2024,6 +2058,7 @@ func convertCassandraToPorcelain(plumbing *proto.Cassandra) (*Cassandra, error) 
 		return nil, nil
 	}
 	porcelain := &Cassandra{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -2048,6 +2083,7 @@ func convertCassandraToPlumbing(porcelain *Cassandra) *proto.Cassandra {
 		return nil
 	}
 	plumbing := &proto.Cassandra{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -2091,6 +2127,7 @@ func convertCitusToPorcelain(plumbing *proto.Citus) (*Citus, error) {
 		return nil, nil
 	}
 	porcelain := &Citus{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -2116,6 +2153,7 @@ func convertCitusToPlumbing(porcelain *Citus) *proto.Citus {
 		return nil
 	}
 	plumbing := &proto.Citus{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2160,6 +2198,7 @@ func convertClustrixToPorcelain(plumbing *proto.Clustrix) (*Clustrix, error) {
 		return nil, nil
 	}
 	porcelain := &Clustrix{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -2184,6 +2223,7 @@ func convertClustrixToPlumbing(porcelain *Clustrix) *proto.Clustrix {
 		return nil
 	}
 	plumbing := &proto.Clustrix{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2227,6 +2267,7 @@ func convertCockroachToPorcelain(plumbing *proto.Cockroach) (*Cockroach, error) 
 		return nil, nil
 	}
 	porcelain := &Cockroach{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -2252,6 +2293,7 @@ func convertCockroachToPlumbing(porcelain *Cockroach) *proto.Cockroach {
 		return nil
 	}
 	plumbing := &proto.Cockroach{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2441,6 +2483,7 @@ func convertDB2IToPorcelain(plumbing *proto.DB2I) (*DB2I, error) {
 		return nil, nil
 	}
 	porcelain := &DB2I{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -2465,6 +2508,7 @@ func convertDB2IToPlumbing(porcelain *DB2I) *proto.DB2I {
 		return nil
 	}
 	plumbing := &proto.DB2I{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -2508,6 +2552,7 @@ func convertDB2LUWToPorcelain(plumbing *proto.DB2LUW) (*DB2LUW, error) {
 		return nil, nil
 	}
 	porcelain := &DB2LUW{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -2532,6 +2577,7 @@ func convertDB2LUWToPlumbing(porcelain *DB2LUW) *proto.DB2LUW {
 		return nil
 	}
 	plumbing := &proto.DB2LUW{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2615,6 +2661,7 @@ func convertDocumentDBHostToPorcelain(plumbing *proto.DocumentDBHost) (*Document
 	}
 	porcelain := &DocumentDBHost{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -2639,6 +2686,7 @@ func convertDocumentDBHostToPlumbing(porcelain *DocumentDBHost) *proto.DocumentD
 	}
 	plumbing := &proto.DocumentDBHost{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -2682,6 +2730,7 @@ func convertDocumentDBReplicaSetToPorcelain(plumbing *proto.DocumentDBReplicaSet
 	}
 	porcelain := &DocumentDBReplicaSet{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.ConnectToReplica = plumbing.ConnectToReplica
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -2707,6 +2756,7 @@ func convertDocumentDBReplicaSetToPlumbing(porcelain *DocumentDBReplicaSet) *pro
 	}
 	plumbing := &proto.DocumentDBReplicaSet{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2750,6 +2800,7 @@ func convertDruidToPorcelain(plumbing *proto.Druid) (*Druid, error) {
 		return nil, nil
 	}
 	porcelain := &Druid{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -2773,6 +2824,7 @@ func convertDruidToPlumbing(porcelain *Druid) *proto.Druid {
 		return nil
 	}
 	plumbing := &proto.Druid{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -2816,6 +2868,7 @@ func convertDynamoDBToPorcelain(plumbing *proto.DynamoDB) (*DynamoDB, error) {
 	}
 	porcelain := &DynamoDB{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.Healthy = plumbing.Healthy
@@ -2841,6 +2894,7 @@ func convertDynamoDBToPlumbing(porcelain *DynamoDB) *proto.DynamoDB {
 	}
 	plumbing := &proto.DynamoDB{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2884,6 +2938,7 @@ func convertElasticToPorcelain(plumbing *proto.Elastic) (*Elastic, error) {
 		return nil, nil
 	}
 	porcelain := &Elastic{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -2908,6 +2963,7 @@ func convertElasticToPlumbing(porcelain *Elastic) *proto.Elastic {
 		return nil
 	}
 	plumbing := &proto.Elastic{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -2951,6 +3007,7 @@ func convertElasticacheRedisToPorcelain(plumbing *proto.ElasticacheRedis) (*Elas
 		return nil, nil
 	}
 	porcelain := &ElasticacheRedis{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -2974,6 +3031,7 @@ func convertElasticacheRedisToPlumbing(porcelain *ElasticacheRedis) *proto.Elast
 		return nil
 	}
 	plumbing := &proto.ElasticacheRedis{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -3016,6 +3074,7 @@ func convertGCPToPorcelain(plumbing *proto.GCP) (*GCP, error) {
 		return nil, nil
 	}
 	porcelain := &GCP{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
@@ -3036,6 +3095,7 @@ func convertGCPToPlumbing(porcelain *GCP) *proto.GCP {
 		return nil
 	}
 	plumbing := &proto.GCP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
@@ -3222,6 +3282,7 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 		return nil, nil
 	}
 	porcelain := &GoogleGKE{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
@@ -3244,6 +3305,7 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 		return nil
 	}
 	plumbing := &proto.GoogleGKE{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
@@ -3285,6 +3347,7 @@ func convertGoogleGKEUserImpersonationToPorcelain(plumbing *proto.GoogleGKEUserI
 		return nil, nil
 	}
 	porcelain := &GoogleGKEUserImpersonation{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
@@ -3307,6 +3370,7 @@ func convertGoogleGKEUserImpersonationToPlumbing(porcelain *GoogleGKEUserImperso
 		return nil
 	}
 	plumbing := &proto.GoogleGKEUserImpersonation{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
@@ -3348,6 +3412,7 @@ func convertGreenplumToPorcelain(plumbing *proto.Greenplum) (*Greenplum, error) 
 		return nil, nil
 	}
 	porcelain := &Greenplum{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -3373,6 +3438,7 @@ func convertGreenplumToPlumbing(porcelain *Greenplum) *proto.Greenplum {
 		return nil
 	}
 	plumbing := &proto.Greenplum{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -3418,6 +3484,7 @@ func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	}
 	porcelain := &HTTPAuth{}
 	porcelain.AuthHeader = plumbing.AuthHeader
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.DefaultPath = plumbing.DefaultPath
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
@@ -3442,6 +3509,7 @@ func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	}
 	plumbing := &proto.HTTPAuth{}
 	plumbing.AuthHeader = (porcelain.AuthHeader)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.DefaultPath = (porcelain.DefaultPath)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
@@ -3484,6 +3552,7 @@ func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) (*HTTPBasicA
 		return nil, nil
 	}
 	porcelain := &HTTPBasicAuth{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.DefaultPath = plumbing.DefaultPath
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
@@ -3509,6 +3578,7 @@ func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAu
 		return nil
 	}
 	plumbing := &proto.HTTPBasicAuth{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.DefaultPath = (porcelain.DefaultPath)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
@@ -3553,6 +3623,7 @@ func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) (*HTTPNoAuth, erro
 		return nil, nil
 	}
 	porcelain := &HTTPNoAuth{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.DefaultPath = plumbing.DefaultPath
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
@@ -3576,6 +3647,7 @@ func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
 		return nil
 	}
 	plumbing := &proto.HTTPNoAuth{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.DefaultPath = (porcelain.DefaultPath)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
@@ -3618,6 +3690,7 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 		return nil, nil
 	}
 	porcelain := &Kubernetes{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
@@ -3642,6 +3715,7 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 		return nil
 	}
 	plumbing := &proto.Kubernetes{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
@@ -3685,6 +3759,7 @@ func convertKubernetesBasicAuthToPorcelain(plumbing *proto.KubernetesBasicAuth) 
 		return nil, nil
 	}
 	porcelain := &KubernetesBasicAuth{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -3708,6 +3783,7 @@ func convertKubernetesBasicAuthToPlumbing(porcelain *KubernetesBasicAuth) *proto
 		return nil
 	}
 	plumbing := &proto.KubernetesBasicAuth{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -3750,6 +3826,7 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 		return nil, nil
 	}
 	porcelain := &KubernetesServiceAccount{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -3772,6 +3849,7 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 		return nil
 	}
 	plumbing := &proto.KubernetesServiceAccount{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -3813,6 +3891,7 @@ func convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing *proto
 		return nil, nil
 	}
 	porcelain := &KubernetesServiceAccountUserImpersonation{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -3835,6 +3914,7 @@ func convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain *Kuber
 		return nil
 	}
 	plumbing := &proto.KubernetesServiceAccountUserImpersonation{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -3876,6 +3956,7 @@ func convertKubernetesUserImpersonationToPorcelain(plumbing *proto.KubernetesUse
 		return nil, nil
 	}
 	porcelain := &KubernetesUserImpersonation{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
@@ -3900,6 +3981,7 @@ func convertKubernetesUserImpersonationToPlumbing(porcelain *KubernetesUserImper
 		return nil
 	}
 	plumbing := &proto.KubernetesUserImpersonation{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
@@ -3943,6 +4025,7 @@ func convertMTLSMysqlToPorcelain(plumbing *proto.MTLSMysql) (*MTLSMysql, error) 
 		return nil, nil
 	}
 	porcelain := &MTLSMysql{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
@@ -3971,6 +4054,7 @@ func convertMTLSMysqlToPlumbing(porcelain *MTLSMysql) *proto.MTLSMysql {
 		return nil
 	}
 	plumbing := &proto.MTLSMysql{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
@@ -4018,6 +4102,7 @@ func convertMTLSPostgresToPorcelain(plumbing *proto.MTLSPostgres) (*MTLSPostgres
 		return nil, nil
 	}
 	porcelain := &MTLSPostgres{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
@@ -4047,6 +4132,7 @@ func convertMTLSPostgresToPlumbing(porcelain *MTLSPostgres) *proto.MTLSPostgres 
 		return nil
 	}
 	plumbing := &proto.MTLSPostgres{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
@@ -4095,6 +4181,7 @@ func convertMariaToPorcelain(plumbing *proto.Maria) (*Maria, error) {
 		return nil, nil
 	}
 	porcelain := &Maria{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -4119,6 +4206,7 @@ func convertMariaToPlumbing(porcelain *Maria) *proto.Maria {
 		return nil
 	}
 	plumbing := &proto.Maria{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -4162,6 +4250,7 @@ func convertMemcachedToPorcelain(plumbing *proto.Memcached) (*Memcached, error) 
 		return nil, nil
 	}
 	porcelain := &Memcached{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -4183,6 +4272,7 @@ func convertMemcachedToPlumbing(porcelain *Memcached) *proto.Memcached {
 		return nil
 	}
 	plumbing := &proto.Memcached{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -4223,6 +4313,7 @@ func convertMemsqlToPorcelain(plumbing *proto.Memsql) (*Memsql, error) {
 		return nil, nil
 	}
 	porcelain := &Memsql{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -4247,6 +4338,7 @@ func convertMemsqlToPlumbing(porcelain *Memsql) *proto.Memsql {
 		return nil
 	}
 	plumbing := &proto.Memsql{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -4291,6 +4383,7 @@ func convertMongoHostToPorcelain(plumbing *proto.MongoHost) (*MongoHost, error) 
 	}
 	porcelain := &MongoHost{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -4316,6 +4409,7 @@ func convertMongoHostToPlumbing(porcelain *MongoHost) *proto.MongoHost {
 	}
 	plumbing := &proto.MongoHost{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -4360,6 +4454,7 @@ func convertMongoLegacyHostToPorcelain(plumbing *proto.MongoLegacyHost) (*MongoL
 	}
 	porcelain := &MongoLegacyHost{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -4386,6 +4481,7 @@ func convertMongoLegacyHostToPlumbing(porcelain *MongoLegacyHost) *proto.MongoLe
 	}
 	plumbing := &proto.MongoLegacyHost{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -4431,6 +4527,7 @@ func convertMongoLegacyReplicasetToPorcelain(plumbing *proto.MongoLegacyReplicas
 	}
 	porcelain := &MongoLegacyReplicaset{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.ConnectToReplica = plumbing.ConnectToReplica
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -4458,6 +4555,7 @@ func convertMongoLegacyReplicasetToPlumbing(porcelain *MongoLegacyReplicaset) *p
 	}
 	plumbing := &proto.MongoLegacyReplicaset{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -4504,6 +4602,7 @@ func convertMongoReplicaSetToPorcelain(plumbing *proto.MongoReplicaSet) (*MongoR
 	}
 	porcelain := &MongoReplicaSet{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.ConnectToReplica = plumbing.ConnectToReplica
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -4531,6 +4630,7 @@ func convertMongoReplicaSetToPlumbing(porcelain *MongoReplicaSet) *proto.MongoRe
 	}
 	plumbing := &proto.MongoReplicaSet{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -4577,6 +4677,7 @@ func convertMongoShardedClusterToPorcelain(plumbing *proto.MongoShardedCluster) 
 	}
 	porcelain := &MongoShardedCluster{}
 	porcelain.AuthDatabase = plumbing.AuthDatabase
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -4601,6 +4702,7 @@ func convertMongoShardedClusterToPlumbing(porcelain *MongoShardedCluster) *proto
 	}
 	plumbing := &proto.MongoShardedCluster{}
 	plumbing.AuthDatabase = (porcelain.AuthDatabase)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -4643,6 +4745,7 @@ func convertMysqlToPorcelain(plumbing *proto.Mysql) (*Mysql, error) {
 		return nil, nil
 	}
 	porcelain := &Mysql{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -4667,6 +4770,7 @@ func convertMysqlToPlumbing(porcelain *Mysql) *proto.Mysql {
 		return nil
 	}
 	plumbing := &proto.Mysql{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -4710,6 +4814,7 @@ func convertNeptuneToPorcelain(plumbing *proto.Neptune) (*Neptune, error) {
 		return nil, nil
 	}
 	porcelain := &Neptune{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.Healthy = plumbing.Healthy
@@ -4731,6 +4836,7 @@ func convertNeptuneToPlumbing(porcelain *Neptune) *proto.Neptune {
 		return nil
 	}
 	plumbing := &proto.Neptune{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -4772,6 +4878,7 @@ func convertNeptuneIAMToPorcelain(plumbing *proto.NeptuneIAM) (*NeptuneIAM, erro
 	}
 	porcelain := &NeptuneIAM{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.Healthy = plumbing.Healthy
@@ -4798,6 +4905,7 @@ func convertNeptuneIAMToPlumbing(porcelain *NeptuneIAM) *proto.NeptuneIAM {
 	}
 	plumbing := &proto.NeptuneIAM{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -5114,6 +5222,7 @@ func convertOracleToPorcelain(plumbing *proto.Oracle) (*Oracle, error) {
 		return nil, nil
 	}
 	porcelain := &Oracle{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -5139,6 +5248,7 @@ func convertOracleToPlumbing(porcelain *Oracle) *proto.Oracle {
 		return nil
 	}
 	plumbing := &proto.Oracle{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -5183,6 +5293,7 @@ func convertPostgresToPorcelain(plumbing *proto.Postgres) (*Postgres, error) {
 		return nil, nil
 	}
 	porcelain := &Postgres{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -5208,6 +5319,7 @@ func convertPostgresToPlumbing(porcelain *Postgres) *proto.Postgres {
 		return nil
 	}
 	plumbing := &proto.Postgres{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -5252,6 +5364,7 @@ func convertPrestoToPorcelain(plumbing *proto.Presto) (*Presto, error) {
 		return nil, nil
 	}
 	porcelain := &Presto{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -5277,6 +5390,7 @@ func convertPrestoToPlumbing(porcelain *Presto) *proto.Presto {
 		return nil
 	}
 	plumbing := &proto.Presto{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -5321,6 +5435,7 @@ func convertRDPToPorcelain(plumbing *proto.RDP) (*RDP, error) {
 		return nil, nil
 	}
 	porcelain := &RDP{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.DowngradeNlaConnections = plumbing.DowngradeNlaConnections
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -5345,6 +5460,7 @@ func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
 		return nil
 	}
 	plumbing := &proto.RDP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.DowngradeNlaConnections = (porcelain.DowngradeNlaConnections)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -5388,6 +5504,7 @@ func convertRabbitMQAMQP091ToPorcelain(plumbing *proto.RabbitMQAMQP091) (*Rabbit
 		return nil, nil
 	}
 	porcelain := &RabbitMQAMQP091{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -5412,6 +5529,7 @@ func convertRabbitMQAMQP091ToPlumbing(porcelain *RabbitMQAMQP091) *proto.RabbitM
 		return nil
 	}
 	plumbing := &proto.RabbitMQAMQP091{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -5506,6 +5624,7 @@ func convertRawTCPToPorcelain(plumbing *proto.RawTCP) (*RawTCP, error) {
 		return nil, nil
 	}
 	porcelain := &RawTCP{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -5527,6 +5646,7 @@ func convertRawTCPToPlumbing(porcelain *RawTCP) *proto.RawTCP {
 		return nil
 	}
 	plumbing := &proto.RawTCP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -5567,6 +5687,7 @@ func convertRedisToPorcelain(plumbing *proto.Redis) (*Redis, error) {
 		return nil, nil
 	}
 	porcelain := &Redis{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -5589,6 +5710,7 @@ func convertRedisToPlumbing(porcelain *Redis) *proto.Redis {
 		return nil
 	}
 	plumbing := &proto.Redis{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -5630,6 +5752,7 @@ func convertRedshiftToPorcelain(plumbing *proto.Redshift) (*Redshift, error) {
 		return nil, nil
 	}
 	porcelain := &Redshift{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -5655,6 +5778,7 @@ func convertRedshiftToPlumbing(porcelain *Redshift) *proto.Redshift {
 		return nil
 	}
 	plumbing := &proto.Redshift{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -7066,6 +7190,7 @@ func convertSQLServerToPorcelain(plumbing *proto.SQLServer) (*SQLServer, error) 
 		return nil, nil
 	}
 	porcelain := &SQLServer{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -7092,6 +7217,7 @@ func convertSQLServerToPlumbing(porcelain *SQLServer) *proto.SQLServer {
 		return nil
 	}
 	plumbing := &proto.SQLServer{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -7138,6 +7264,7 @@ func convertSSHToPorcelain(plumbing *proto.SSH) (*SSH, error) {
 	}
 	porcelain := &SSH{}
 	porcelain.AllowDeprecatedKeyExchanges = plumbing.AllowDeprecatedKeyExchanges
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -7145,6 +7272,7 @@ func convertSSHToPorcelain(plumbing *proto.SSH) (*SSH, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.PublicKey = plumbing.PublicKey
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7162,6 +7290,7 @@ func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
 	}
 	plumbing := &proto.SSH{}
 	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -7169,6 +7298,7 @@ func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.PublicKey = (porcelain.PublicKey)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7205,6 +7335,7 @@ func convertSSHCertToPorcelain(plumbing *proto.SSHCert) (*SSHCert, error) {
 	}
 	porcelain := &SSHCert{}
 	porcelain.AllowDeprecatedKeyExchanges = plumbing.AllowDeprecatedKeyExchanges
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -7212,6 +7343,7 @@ func convertSSHCertToPorcelain(plumbing *proto.SSHCert) (*SSHCert, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -7228,6 +7360,7 @@ func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
 	}
 	plumbing := &proto.SSHCert{}
 	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -7235,6 +7368,7 @@ func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)
@@ -7270,6 +7404,7 @@ func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) (*SSHCusto
 	}
 	porcelain := &SSHCustomerKey{}
 	porcelain.AllowDeprecatedKeyExchanges = plumbing.AllowDeprecatedKeyExchanges
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -7277,6 +7412,7 @@ func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) (*SSHCusto
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.PrivateKey = plumbing.PrivateKey
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7294,6 +7430,7 @@ func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustom
 	}
 	plumbing := &proto.SSHCustomerKey{}
 	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -7301,6 +7438,7 @@ func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustom
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.PrivateKey = (porcelain.PrivateKey)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7677,6 +7815,7 @@ func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) (*SingleStore, e
 		return nil, nil
 	}
 	porcelain := &SingleStore{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -7701,6 +7840,7 @@ func convertSingleStoreToPlumbing(porcelain *SingleStore) *proto.SingleStore {
 		return nil
 	}
 	plumbing := &proto.SingleStore{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -7744,6 +7884,7 @@ func convertSnowflakeToPorcelain(plumbing *proto.Snowflake) (*Snowflake, error) 
 		return nil, nil
 	}
 	porcelain := &Snowflake{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
@@ -7768,6 +7909,7 @@ func convertSnowflakeToPlumbing(porcelain *Snowflake) *proto.Snowflake {
 		return nil
 	}
 	plumbing := &proto.Snowflake{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -7811,6 +7953,7 @@ func convertSybaseToPorcelain(plumbing *proto.Sybase) (*Sybase, error) {
 		return nil, nil
 	}
 	porcelain := &Sybase{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -7834,6 +7977,7 @@ func convertSybaseToPlumbing(porcelain *Sybase) *proto.Sybase {
 		return nil
 	}
 	plumbing := &proto.Sybase{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -7876,6 +8020,7 @@ func convertSybaseIQToPorcelain(plumbing *proto.SybaseIQ) (*SybaseIQ, error) {
 		return nil, nil
 	}
 	porcelain := &SybaseIQ{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -7899,6 +8044,7 @@ func convertSybaseIQToPlumbing(porcelain *SybaseIQ) *proto.SybaseIQ {
 		return nil
 	}
 	plumbing := &proto.SybaseIQ{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -7984,6 +8130,7 @@ func convertTeradataToPorcelain(plumbing *proto.Teradata) (*Teradata, error) {
 		return nil, nil
 	}
 	porcelain := &Teradata{}
+	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -8007,6 +8154,7 @@ func convertTeradataToPlumbing(porcelain *Teradata) *proto.Teradata {
 		return nil
 	}
 	plumbing := &proto.Teradata{}
+	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)

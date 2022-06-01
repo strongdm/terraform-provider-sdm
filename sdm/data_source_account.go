@@ -167,8 +167,11 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("tags"); ok {
-		filter += "tags:? "
-		args = append(args, v)
+		tags := convertTagsToPlumbing(v)
+		for kk, vv := range tags {
+			filter += "tag:?=?"
+			args = append(args, kk, vv)
+		}
 	}
 	return filter, args
 }

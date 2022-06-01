@@ -32,6 +32,9 @@ func (t Tags) clone() Tags {
 }
 
 type AKS struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ClientCertificate string `json:"clientCertificate"`
@@ -58,6 +61,8 @@ type AKS struct {
 }
 
 type AKSBasicAuth struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -83,6 +88,8 @@ type AKSBasicAuth struct {
 }
 
 type AKSServiceAccount struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -106,6 +113,8 @@ type AKSServiceAccount struct {
 }
 
 type AKSServiceAccountUserImpersonation struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -129,6 +138,9 @@ type AKSServiceAccountUserImpersonation struct {
 }
 
 type AKSUserImpersonation struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ClientCertificate string `json:"clientCertificate"`
@@ -156,6 +168,8 @@ type AKSUserImpersonation struct {
 
 type AWS struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 
@@ -381,6 +395,8 @@ type AccountUpdateResponse struct {
 
 type AmazonEKS struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	CertificateAuthority string `json:"certificateAuthority"`
 
@@ -413,6 +429,8 @@ type AmazonEKS struct {
 
 type AmazonEKSUserImpersonation struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	CertificateAuthority string `json:"certificateAuthority"`
 
@@ -445,6 +463,8 @@ type AmazonEKSUserImpersonation struct {
 
 type AmazonES struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 
@@ -472,6 +492,8 @@ type AmazonES struct {
 }
 
 type AmazonMQAMQP091 struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -500,6 +522,8 @@ type AmazonMQAMQP091 struct {
 
 type Athena struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -527,6 +551,9 @@ type Athena struct {
 }
 
 type AuroraMysql struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -553,6 +580,9 @@ type AuroraMysql struct {
 }
 
 type AuroraPostgres struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -582,6 +612,8 @@ type AuroraPostgres struct {
 
 type Azure struct {
 	AppID string `json:"appId"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -602,6 +634,8 @@ type Azure struct {
 
 type AzureCertificate struct {
 	AppID string `json:"appId"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	ClientCertificate string `json:"clientCertificate"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -621,6 +655,9 @@ type AzureCertificate struct {
 }
 
 type AzurePostgres struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -660,6 +697,8 @@ type AzureStore struct {
 }
 
 type BigQuery struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 
@@ -685,6 +724,8 @@ type BigQuery struct {
 }
 
 type Cassandra struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -712,6 +753,9 @@ type Cassandra struct {
 }
 
 type Citus struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -740,6 +784,9 @@ type Citus struct {
 }
 
 type Clustrix struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -766,6 +813,9 @@ type Clustrix struct {
 }
 
 type Cockroach struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -820,6 +870,8 @@ type CreateResponseMetadata struct {
 }
 
 type DB2I struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -847,6 +899,9 @@ type DB2I struct {
 }
 
 type DB2LUW struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -878,6 +933,8 @@ type DeleteResponseMetadata struct {
 
 type DocumentDBHost struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -904,6 +961,8 @@ type DocumentDBHost struct {
 
 type DocumentDBReplicaSet struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	ConnectToReplica bool `json:"connectToReplica"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -931,6 +990,8 @@ type DocumentDBReplicaSet struct {
 }
 
 type Druid struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -957,6 +1018,8 @@ type Druid struct {
 
 type DynamoDB struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 
@@ -984,6 +1047,8 @@ type DynamoDB struct {
 }
 
 type Elastic struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1011,6 +1076,8 @@ type Elastic struct {
 }
 
 type ElasticacheRedis struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1036,6 +1103,8 @@ type ElasticacheRedis struct {
 }
 
 type GCP struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1091,6 +1160,9 @@ type GetResponseMetadata struct {
 }
 
 type GoogleGKE struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1113,6 +1185,9 @@ type GoogleGKE struct {
 }
 
 type GoogleGKEUserImpersonation struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1135,6 +1210,9 @@ type GoogleGKEUserImpersonation struct {
 }
 
 type Greenplum struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1164,6 +1242,8 @@ type Greenplum struct {
 
 type HTTPAuth struct {
 	AuthHeader string `json:"authHeader"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -1189,6 +1269,9 @@ type HTTPAuth struct {
 }
 
 type HTTPBasicAuth struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1217,6 +1300,9 @@ type HTTPBasicAuth struct {
 }
 
 type HTTPNoAuth struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1241,6 +1327,9 @@ type HTTPNoAuth struct {
 }
 
 type Kubernetes struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ClientCertificate string `json:"clientCertificate"`
@@ -1267,6 +1356,8 @@ type Kubernetes struct {
 }
 
 type KubernetesBasicAuth struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -1292,6 +1383,8 @@ type KubernetesBasicAuth struct {
 }
 
 type KubernetesServiceAccount struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -1315,6 +1408,8 @@ type KubernetesServiceAccount struct {
 }
 
 type KubernetesServiceAccountUserImpersonation struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -1338,6 +1433,9 @@ type KubernetesServiceAccountUserImpersonation struct {
 }
 
 type KubernetesUserImpersonation struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ClientCertificate string `json:"clientCertificate"`
@@ -1364,6 +1462,9 @@ type KubernetesUserImpersonation struct {
 }
 
 type MTLSMysql struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ClientCertificate string `json:"clientCertificate"`
@@ -1398,6 +1499,9 @@ type MTLSMysql struct {
 }
 
 type MTLSPostgres struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	CertificateAuthority string `json:"certificateAuthority"`
 
 	ClientCertificate string `json:"clientCertificate"`
@@ -1434,6 +1538,9 @@ type MTLSPostgres struct {
 }
 
 type Maria struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1460,6 +1567,8 @@ type Maria struct {
 }
 
 type Memcached struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1481,6 +1590,9 @@ type Memcached struct {
 }
 
 type Memsql struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1508,6 +1620,8 @@ type Memsql struct {
 
 type MongoHost struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1536,6 +1650,8 @@ type MongoHost struct {
 
 type MongoLegacyHost struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1566,6 +1682,8 @@ type MongoLegacyHost struct {
 
 type MongoLegacyReplicaset struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	ConnectToReplica bool `json:"connectToReplica"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -1598,6 +1716,8 @@ type MongoLegacyReplicaset struct {
 
 type MongoReplicaSet struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 
 	ConnectToReplica bool `json:"connectToReplica"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -1630,6 +1750,8 @@ type MongoReplicaSet struct {
 
 type MongoShardedCluster struct {
 	AuthDatabase string `json:"authDatabase"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1655,6 +1777,9 @@ type MongoShardedCluster struct {
 }
 
 type Mysql struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1681,6 +1806,8 @@ type Mysql struct {
 }
 
 type Neptune struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 
@@ -1703,6 +1830,8 @@ type Neptune struct {
 
 type NeptuneIAM struct {
 	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 
@@ -1841,6 +1970,9 @@ type NodeUpdateResponse struct {
 }
 
 type Oracle struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1869,6 +2001,9 @@ type Oracle struct {
 }
 
 type Postgres struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1897,6 +2032,9 @@ type Postgres struct {
 }
 
 type Presto struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1925,6 +2063,9 @@ type Presto struct {
 }
 
 type RDP struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	DowngradeNlaConnections bool `json:"downgradeNlaConnections"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1951,6 +2092,8 @@ type RDP struct {
 }
 
 type RabbitMQAMQP091 struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -1993,6 +2136,8 @@ type RateLimitMetadata struct {
 }
 
 type RawTCP struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -2014,6 +2159,8 @@ type RawTCP struct {
 }
 
 type Redis struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -2037,6 +2184,9 @@ type Redis struct {
 }
 
 type Redshift struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2102,6 +2252,10 @@ type Resource interface {
 	GetEgressFilter() string
 	// SetEgressFilter sets the egress filter of the Resource.
 	SetEgressFilter(string)
+	// GetBindInterface returns the bind interface of the Resource.
+	GetBindInterface() string
+	// SetBindInterface sets the bind interface of the Resource.
+	SetBindInterface(string)
 	isOneOf_Resource()
 }
 
@@ -2149,6 +2303,16 @@ func (m *AKS) GetEgressFilter() string {
 func (m *AKS) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AKS.
+func (m *AKS) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AKS.
+func (m *AKS) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AKSBasicAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKSBasicAuth.
@@ -2192,6 +2356,16 @@ func (m *AKSBasicAuth) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the AKSBasicAuth.
 func (m *AKSBasicAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AKSBasicAuth.
+func (m *AKSBasicAuth) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AKSBasicAuth.
+func (m *AKSBasicAuth) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AKSServiceAccount) isOneOf_Resource() {}
 
@@ -2237,6 +2411,16 @@ func (m *AKSServiceAccount) GetEgressFilter() string {
 func (m *AKSServiceAccount) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AKSServiceAccount.
+func (m *AKSServiceAccount) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AKSServiceAccount.
+func (m *AKSServiceAccount) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AKSServiceAccountUserImpersonation) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKSServiceAccountUserImpersonation.
@@ -2280,6 +2464,16 @@ func (m *AKSServiceAccountUserImpersonation) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the AKSServiceAccountUserImpersonation.
 func (m *AKSServiceAccountUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AKSServiceAccountUserImpersonation.
+func (m *AKSServiceAccountUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AKSUserImpersonation) isOneOf_Resource() {}
 
@@ -2325,6 +2519,16 @@ func (m *AKSUserImpersonation) GetEgressFilter() string {
 func (m *AKSUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AKSUserImpersonation.
+func (m *AKSUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AmazonEKS) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AmazonEKS.
@@ -2368,6 +2572,16 @@ func (m *AmazonEKS) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the AmazonEKS.
 func (m *AmazonEKS) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AmazonEKS.
+func (m *AmazonEKS) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AmazonEKS.
+func (m *AmazonEKS) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AmazonEKSUserImpersonation) isOneOf_Resource() {}
 
@@ -2413,6 +2627,16 @@ func (m *AmazonEKSUserImpersonation) GetEgressFilter() string {
 func (m *AmazonEKSUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AmazonEKSUserImpersonation.
+func (m *AmazonEKSUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AmazonES) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AmazonES.
@@ -2456,6 +2680,16 @@ func (m *AmazonES) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the AmazonES.
 func (m *AmazonES) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AmazonES.
+func (m *AmazonES) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AmazonES.
+func (m *AmazonES) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AmazonMQAMQP091) isOneOf_Resource() {}
 
@@ -2501,6 +2735,16 @@ func (m *AmazonMQAMQP091) GetEgressFilter() string {
 func (m *AmazonMQAMQP091) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AmazonMQAMQP091.
+func (m *AmazonMQAMQP091) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Athena) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Athena.
@@ -2544,6 +2788,16 @@ func (m *Athena) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Athena.
 func (m *Athena) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Athena.
+func (m *Athena) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Athena.
+func (m *Athena) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AuroraMysql) isOneOf_Resource() {}
 
@@ -2589,6 +2843,16 @@ func (m *AuroraMysql) GetEgressFilter() string {
 func (m *AuroraMysql) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AuroraMysql.
+func (m *AuroraMysql) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AuroraMysql.
+func (m *AuroraMysql) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AuroraPostgres) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AuroraPostgres.
@@ -2632,6 +2896,16 @@ func (m *AuroraPostgres) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the AuroraPostgres.
 func (m *AuroraPostgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AuroraPostgres.
+func (m *AuroraPostgres) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AuroraPostgres.
+func (m *AuroraPostgres) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AWS) isOneOf_Resource() {}
 
@@ -2677,6 +2951,16 @@ func (m *AWS) GetEgressFilter() string {
 func (m *AWS) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AWS.
+func (m *AWS) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AWS.
+func (m *AWS) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Azure) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Azure.
@@ -2720,6 +3004,16 @@ func (m *Azure) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Azure.
 func (m *Azure) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Azure.
+func (m *Azure) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Azure.
+func (m *Azure) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*AzureCertificate) isOneOf_Resource() {}
 
@@ -2765,6 +3059,16 @@ func (m *AzureCertificate) GetEgressFilter() string {
 func (m *AzureCertificate) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the AzureCertificate.
+func (m *AzureCertificate) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AzureCertificate.
+func (m *AzureCertificate) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AzurePostgres) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AzurePostgres.
@@ -2808,6 +3112,16 @@ func (m *AzurePostgres) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the AzurePostgres.
 func (m *AzurePostgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AzurePostgres.
+func (m *AzurePostgres) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AzurePostgres.
+func (m *AzurePostgres) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*BigQuery) isOneOf_Resource() {}
 
@@ -2853,6 +3167,16 @@ func (m *BigQuery) GetEgressFilter() string {
 func (m *BigQuery) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the BigQuery.
+func (m *BigQuery) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the BigQuery.
+func (m *BigQuery) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Cassandra) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Cassandra.
@@ -2896,6 +3220,16 @@ func (m *Cassandra) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Cassandra.
 func (m *Cassandra) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Cassandra.
+func (m *Cassandra) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Cassandra.
+func (m *Cassandra) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Citus) isOneOf_Resource() {}
 
@@ -2941,6 +3275,16 @@ func (m *Citus) GetEgressFilter() string {
 func (m *Citus) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Citus.
+func (m *Citus) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Citus.
+func (m *Citus) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Clustrix) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Clustrix.
@@ -2984,6 +3328,16 @@ func (m *Clustrix) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Clustrix.
 func (m *Clustrix) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Clustrix.
+func (m *Clustrix) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Clustrix.
+func (m *Clustrix) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Cockroach) isOneOf_Resource() {}
 
@@ -3029,6 +3383,16 @@ func (m *Cockroach) GetEgressFilter() string {
 func (m *Cockroach) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Cockroach.
+func (m *Cockroach) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Cockroach.
+func (m *Cockroach) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*DB2I) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the DB2I.
@@ -3072,6 +3436,16 @@ func (m *DB2I) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the DB2I.
 func (m *DB2I) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the DB2I.
+func (m *DB2I) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DB2I.
+func (m *DB2I) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*DB2LUW) isOneOf_Resource() {}
 
@@ -3117,6 +3491,16 @@ func (m *DB2LUW) GetEgressFilter() string {
 func (m *DB2LUW) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the DB2LUW.
+func (m *DB2LUW) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DB2LUW.
+func (m *DB2LUW) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*DocumentDBHost) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the DocumentDBHost.
@@ -3160,6 +3544,16 @@ func (m *DocumentDBHost) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the DocumentDBHost.
 func (m *DocumentDBHost) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the DocumentDBHost.
+func (m *DocumentDBHost) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DocumentDBHost.
+func (m *DocumentDBHost) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*DocumentDBReplicaSet) isOneOf_Resource() {}
 
@@ -3205,6 +3599,16 @@ func (m *DocumentDBReplicaSet) GetEgressFilter() string {
 func (m *DocumentDBReplicaSet) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DocumentDBReplicaSet.
+func (m *DocumentDBReplicaSet) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Druid) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Druid.
@@ -3248,6 +3652,16 @@ func (m *Druid) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Druid.
 func (m *Druid) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Druid.
+func (m *Druid) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Druid.
+func (m *Druid) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*DynamoDB) isOneOf_Resource() {}
 
@@ -3293,6 +3707,16 @@ func (m *DynamoDB) GetEgressFilter() string {
 func (m *DynamoDB) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the DynamoDB.
+func (m *DynamoDB) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DynamoDB.
+func (m *DynamoDB) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Elastic) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Elastic.
@@ -3336,6 +3760,16 @@ func (m *Elastic) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Elastic.
 func (m *Elastic) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Elastic.
+func (m *Elastic) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Elastic.
+func (m *Elastic) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*ElasticacheRedis) isOneOf_Resource() {}
 
@@ -3381,6 +3815,16 @@ func (m *ElasticacheRedis) GetEgressFilter() string {
 func (m *ElasticacheRedis) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the ElasticacheRedis.
+func (m *ElasticacheRedis) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the ElasticacheRedis.
+func (m *ElasticacheRedis) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*GCP) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the GCP.
@@ -3424,6 +3868,16 @@ func (m *GCP) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the GCP.
 func (m *GCP) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the GCP.
+func (m *GCP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GCP.
+func (m *GCP) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*GoogleGKE) isOneOf_Resource() {}
 
@@ -3469,6 +3923,16 @@ func (m *GoogleGKE) GetEgressFilter() string {
 func (m *GoogleGKE) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the GoogleGKE.
+func (m *GoogleGKE) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GoogleGKE.
+func (m *GoogleGKE) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*GoogleGKEUserImpersonation) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the GoogleGKEUserImpersonation.
@@ -3512,6 +3976,16 @@ func (m *GoogleGKEUserImpersonation) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the GoogleGKEUserImpersonation.
 func (m *GoogleGKEUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GoogleGKEUserImpersonation.
+func (m *GoogleGKEUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Greenplum) isOneOf_Resource() {}
 
@@ -3557,6 +4031,16 @@ func (m *Greenplum) GetEgressFilter() string {
 func (m *Greenplum) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Greenplum.
+func (m *Greenplum) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Greenplum.
+func (m *Greenplum) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*HTTPAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the HTTPAuth.
@@ -3600,6 +4084,16 @@ func (m *HTTPAuth) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the HTTPAuth.
 func (m *HTTPAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the HTTPAuth.
+func (m *HTTPAuth) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the HTTPAuth.
+func (m *HTTPAuth) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*HTTPBasicAuth) isOneOf_Resource() {}
 
@@ -3645,6 +4139,16 @@ func (m *HTTPBasicAuth) GetEgressFilter() string {
 func (m *HTTPBasicAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the HTTPBasicAuth.
+func (m *HTTPBasicAuth) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*HTTPNoAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the HTTPNoAuth.
@@ -3688,6 +4192,16 @@ func (m *HTTPNoAuth) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the HTTPNoAuth.
 func (m *HTTPNoAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the HTTPNoAuth.
+func (m *HTTPNoAuth) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the HTTPNoAuth.
+func (m *HTTPNoAuth) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Kubernetes) isOneOf_Resource() {}
 
@@ -3733,6 +4247,16 @@ func (m *Kubernetes) GetEgressFilter() string {
 func (m *Kubernetes) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Kubernetes.
+func (m *Kubernetes) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Kubernetes.
+func (m *Kubernetes) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*KubernetesBasicAuth) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the KubernetesBasicAuth.
@@ -3776,6 +4300,16 @@ func (m *KubernetesBasicAuth) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the KubernetesBasicAuth.
 func (m *KubernetesBasicAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the KubernetesBasicAuth.
+func (m *KubernetesBasicAuth) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*KubernetesServiceAccount) isOneOf_Resource() {}
 
@@ -3821,6 +4355,16 @@ func (m *KubernetesServiceAccount) GetEgressFilter() string {
 func (m *KubernetesServiceAccount) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the KubernetesServiceAccount.
+func (m *KubernetesServiceAccount) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*KubernetesServiceAccountUserImpersonation) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the KubernetesServiceAccountUserImpersonation.
@@ -3864,6 +4408,16 @@ func (m *KubernetesServiceAccountUserImpersonation) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the KubernetesServiceAccountUserImpersonation.
 func (m *KubernetesServiceAccountUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the KubernetesServiceAccountUserImpersonation.
+func (m *KubernetesServiceAccountUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*KubernetesUserImpersonation) isOneOf_Resource() {}
 
@@ -3909,6 +4463,16 @@ func (m *KubernetesUserImpersonation) GetEgressFilter() string {
 func (m *KubernetesUserImpersonation) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the KubernetesUserImpersonation.
+func (m *KubernetesUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Maria) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Maria.
@@ -3952,6 +4516,16 @@ func (m *Maria) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Maria.
 func (m *Maria) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Maria.
+func (m *Maria) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Maria.
+func (m *Maria) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Memcached) isOneOf_Resource() {}
 
@@ -3997,6 +4571,16 @@ func (m *Memcached) GetEgressFilter() string {
 func (m *Memcached) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Memcached.
+func (m *Memcached) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Memcached.
+func (m *Memcached) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Memsql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Memsql.
@@ -4040,6 +4624,16 @@ func (m *Memsql) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Memsql.
 func (m *Memsql) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Memsql.
+func (m *Memsql) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Memsql.
+func (m *Memsql) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*MongoHost) isOneOf_Resource() {}
 
@@ -4085,6 +4679,16 @@ func (m *MongoHost) GetEgressFilter() string {
 func (m *MongoHost) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the MongoHost.
+func (m *MongoHost) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MongoHost.
+func (m *MongoHost) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*MongoLegacyHost) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoLegacyHost.
@@ -4128,6 +4732,16 @@ func (m *MongoLegacyHost) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the MongoLegacyHost.
 func (m *MongoLegacyHost) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MongoLegacyHost.
+func (m *MongoLegacyHost) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MongoLegacyHost.
+func (m *MongoLegacyHost) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*MongoLegacyReplicaset) isOneOf_Resource() {}
 
@@ -4173,6 +4787,16 @@ func (m *MongoLegacyReplicaset) GetEgressFilter() string {
 func (m *MongoLegacyReplicaset) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MongoLegacyReplicaset.
+func (m *MongoLegacyReplicaset) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*MongoReplicaSet) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MongoReplicaSet.
@@ -4216,6 +4840,16 @@ func (m *MongoReplicaSet) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the MongoReplicaSet.
 func (m *MongoReplicaSet) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MongoReplicaSet.
+func (m *MongoReplicaSet) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MongoReplicaSet.
+func (m *MongoReplicaSet) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*MongoShardedCluster) isOneOf_Resource() {}
 
@@ -4261,6 +4895,16 @@ func (m *MongoShardedCluster) GetEgressFilter() string {
 func (m *MongoShardedCluster) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the MongoShardedCluster.
+func (m *MongoShardedCluster) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MongoShardedCluster.
+func (m *MongoShardedCluster) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*MTLSMysql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the MTLSMysql.
@@ -4304,6 +4948,16 @@ func (m *MTLSMysql) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the MTLSMysql.
 func (m *MTLSMysql) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MTLSMysql.
+func (m *MTLSMysql) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MTLSMysql.
+func (m *MTLSMysql) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*MTLSPostgres) isOneOf_Resource() {}
 
@@ -4349,6 +5003,16 @@ func (m *MTLSPostgres) GetEgressFilter() string {
 func (m *MTLSPostgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the MTLSPostgres.
+func (m *MTLSPostgres) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MTLSPostgres.
+func (m *MTLSPostgres) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Mysql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Mysql.
@@ -4392,6 +5056,16 @@ func (m *Mysql) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Mysql.
 func (m *Mysql) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Mysql.
+func (m *Mysql) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Mysql.
+func (m *Mysql) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Neptune) isOneOf_Resource() {}
 
@@ -4437,6 +5111,16 @@ func (m *Neptune) GetEgressFilter() string {
 func (m *Neptune) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Neptune.
+func (m *Neptune) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Neptune.
+func (m *Neptune) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*NeptuneIAM) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the NeptuneIAM.
@@ -4480,6 +5164,16 @@ func (m *NeptuneIAM) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the NeptuneIAM.
 func (m *NeptuneIAM) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the NeptuneIAM.
+func (m *NeptuneIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the NeptuneIAM.
+func (m *NeptuneIAM) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Oracle) isOneOf_Resource() {}
 
@@ -4525,6 +5219,16 @@ func (m *Oracle) GetEgressFilter() string {
 func (m *Oracle) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Oracle.
+func (m *Oracle) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Oracle.
+func (m *Oracle) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Postgres) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Postgres.
@@ -4568,6 +5272,16 @@ func (m *Postgres) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Postgres.
 func (m *Postgres) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Postgres.
+func (m *Postgres) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Postgres.
+func (m *Postgres) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Presto) isOneOf_Resource() {}
 
@@ -4613,6 +5327,16 @@ func (m *Presto) GetEgressFilter() string {
 func (m *Presto) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Presto.
+func (m *Presto) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Presto.
+func (m *Presto) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*RabbitMQAMQP091) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the RabbitMQAMQP091.
@@ -4656,6 +5380,16 @@ func (m *RabbitMQAMQP091) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the RabbitMQAMQP091.
 func (m *RabbitMQAMQP091) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RabbitMQAMQP091.
+func (m *RabbitMQAMQP091) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*RawTCP) isOneOf_Resource() {}
 
@@ -4701,6 +5435,16 @@ func (m *RawTCP) GetEgressFilter() string {
 func (m *RawTCP) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the RawTCP.
+func (m *RawTCP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RawTCP.
+func (m *RawTCP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*RDP) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the RDP.
@@ -4744,6 +5488,16 @@ func (m *RDP) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the RDP.
 func (m *RDP) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RDP.
+func (m *RDP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RDP.
+func (m *RDP) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Redis) isOneOf_Resource() {}
 
@@ -4789,6 +5543,16 @@ func (m *Redis) GetEgressFilter() string {
 func (m *Redis) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Redis.
+func (m *Redis) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Redis.
+func (m *Redis) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Redshift) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Redshift.
@@ -4832,6 +5596,16 @@ func (m *Redshift) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Redshift.
 func (m *Redshift) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Redshift.
+func (m *Redshift) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Redshift.
+func (m *Redshift) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*SingleStore) isOneOf_Resource() {}
 
@@ -4877,6 +5651,16 @@ func (m *SingleStore) GetEgressFilter() string {
 func (m *SingleStore) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the SingleStore.
+func (m *SingleStore) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SingleStore.
+func (m *SingleStore) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Snowflake) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Snowflake.
@@ -4920,6 +5704,16 @@ func (m *Snowflake) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Snowflake.
 func (m *Snowflake) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Snowflake.
+func (m *Snowflake) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Snowflake.
+func (m *Snowflake) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*SQLServer) isOneOf_Resource() {}
 
@@ -4965,6 +5759,16 @@ func (m *SQLServer) GetEgressFilter() string {
 func (m *SQLServer) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the SQLServer.
+func (m *SQLServer) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SQLServer.
+func (m *SQLServer) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*SSH) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SSH.
@@ -5008,6 +5812,16 @@ func (m *SSH) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the SSH.
 func (m *SSH) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the SSH.
+func (m *SSH) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SSH.
+func (m *SSH) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*SSHCert) isOneOf_Resource() {}
 
@@ -5053,6 +5867,16 @@ func (m *SSHCert) GetEgressFilter() string {
 func (m *SSHCert) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the SSHCert.
+func (m *SSHCert) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SSHCert.
+func (m *SSHCert) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*SSHCustomerKey) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SSHCustomerKey.
@@ -5096,6 +5920,16 @@ func (m *SSHCustomerKey) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the SSHCustomerKey.
 func (m *SSHCustomerKey) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the SSHCustomerKey.
+func (m *SSHCustomerKey) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SSHCustomerKey.
+func (m *SSHCustomerKey) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 func (*Sybase) isOneOf_Resource() {}
 
@@ -5141,6 +5975,16 @@ func (m *Sybase) GetEgressFilter() string {
 func (m *Sybase) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the Sybase.
+func (m *Sybase) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Sybase.
+func (m *Sybase) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*SybaseIQ) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SybaseIQ.
@@ -5185,6 +6029,16 @@ func (m *SybaseIQ) GetEgressFilter() string {
 func (m *SybaseIQ) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
+
+// GetBindInterface returns the bind interface of the SybaseIQ.
+func (m *SybaseIQ) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SybaseIQ.
+func (m *SybaseIQ) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Teradata) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Teradata.
@@ -5228,6 +6082,16 @@ func (m *Teradata) GetEgressFilter() string {
 // SetEgressFilter sets the egress filter of the Teradata.
 func (m *Teradata) SetEgressFilter(v string) {
 	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Teradata.
+func (m *Teradata) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Teradata.
+func (m *Teradata) SetBindInterface(v string) {
+	m.BindInterface = v
 }
 
 // ResourceCreateResponse reports how the Resources were created in the system.
@@ -5421,6 +6285,9 @@ type RoleUpdateResponse struct {
 }
 
 type SQLServer struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5452,6 +6319,8 @@ type SQLServer struct {
 
 type SSH struct {
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -5466,6 +6335,8 @@ type SSH struct {
 	Port int32 `json:"port"`
 
 	PortForwarding bool `json:"portForwarding"`
+
+	PortOverride int32 `json:"portOverride"`
 
 	PublicKey string `json:"publicKey"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -5478,6 +6349,8 @@ type SSH struct {
 
 type SSHCert struct {
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -5492,6 +6365,8 @@ type SSHCert struct {
 	Port int32 `json:"port"`
 
 	PortForwarding bool `json:"portForwarding"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -5502,6 +6377,8 @@ type SSHCert struct {
 
 type SSHCustomerKey struct {
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -5516,6 +6393,8 @@ type SSHCustomerKey struct {
 	Port int32 `json:"port"`
 
 	PortForwarding bool `json:"portForwarding"`
+
+	PortOverride int32 `json:"portOverride"`
 
 	PrivateKey string `json:"privateKey"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -5740,6 +6619,9 @@ type Service struct {
 }
 
 type SingleStore struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5766,6 +6648,9 @@ type SingleStore struct {
 }
 
 type Snowflake struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5792,6 +6677,8 @@ type Snowflake struct {
 }
 
 type Sybase struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -5817,6 +6704,8 @@ type Sybase struct {
 }
 
 type SybaseIQ struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -5848,6 +6737,8 @@ type Tag struct {
 }
 
 type Teradata struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.

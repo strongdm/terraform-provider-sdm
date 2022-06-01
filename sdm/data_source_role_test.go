@@ -1,11 +1,14 @@
 package sdm
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func TestAccSDMRoleDataSource_Get(t *testing.T) {
@@ -32,6 +35,46 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.composite", "false"),
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.access_rules", `[{"type":"redis"}]`),
+				),
+			},
+		},
+	})
+}
+
+func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
+	t.Parallel()
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatal("failed to create test client", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	createResp, err := client.Roles().Create(ctx, &sdm.Role{
+		Name: randomWithPrefix("role-tags"),
+		Tags: sdm.Tags{"envTags": "devTags"},
+	})
+	if err != nil {
+		t.Fatal("failed to create role", err)
+	}
+	role := createResp.Role
+	rsName := randomWithPrefix("test-role-ds")
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+					data "sdm_role" "%s" {
+						tags = {
+							envTags = "devTags"
+						}
+					}`, rsName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
+					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.tags.envTags", "devTags"),
 				),
 			},
 		},

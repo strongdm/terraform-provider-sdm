@@ -30,6 +30,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -118,6 +123,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -191,6 +201,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -251,6 +266,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -311,6 +331,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -411,6 +436,11 @@ func resourceResource() *schema.Resource {
 						"secret_store_access_key_key": {
 							Type:     schema.TypeString,
 							Optional: true,
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -530,6 +560,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -648,6 +683,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -734,6 +774,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -825,6 +870,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -911,6 +961,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -989,6 +1044,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1085,6 +1145,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1174,6 +1239,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1245,6 +1315,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1303,6 +1378,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1386,6 +1466,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1451,6 +1536,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1529,6 +1619,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1612,6 +1707,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1690,6 +1790,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1773,6 +1878,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1851,6 +1961,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -1934,6 +2049,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2011,6 +2131,11 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
@@ -2090,6 +2215,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2175,6 +2305,11 @@ func resourceResource() *schema.Resource {
 						"secret_store_access_key_key": {
 							Type:     schema.TypeString,
 							Optional: true,
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2262,6 +2397,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2340,6 +2480,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2405,6 +2550,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2455,6 +2605,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2524,6 +2679,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2593,6 +2753,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -2690,6 +2855,11 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"default_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2746,6 +2916,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"default_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2829,6 +3004,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"default_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2885,6 +3065,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -2973,6 +3158,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3046,6 +3236,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3106,6 +3301,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3166,6 +3366,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3254,6 +3459,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -3332,6 +3542,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3378,6 +3593,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -3461,6 +3681,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3543,6 +3768,11 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3631,6 +3861,11 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "",
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
@@ -3725,6 +3960,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
 							Optional:    true,
@@ -3818,6 +4058,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3891,6 +4136,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4016,6 +4266,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4146,6 +4401,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -4224,6 +4484,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4282,6 +4547,11 @@ func resourceResource() *schema.Resource {
 						"secret_store_access_key_key": {
 							Type:     schema.TypeString,
 							Optional: true,
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4374,6 +4644,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -4457,6 +4732,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -4540,6 +4820,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -4615,6 +4900,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4693,6 +4983,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4739,6 +5034,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"downgrade_nla_connections": {
 							Type:        schema.TypeBool,
 							Optional:    true,
@@ -4817,6 +5117,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4877,6 +5182,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -4960,6 +5270,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -5038,6 +5353,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -5116,6 +5436,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -5209,6 +5534,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -5232,6 +5562,11 @@ func resourceResource() *schema.Resource {
 						"port_forwarding": {
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"public_key": {
@@ -5278,6 +5613,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -5301,6 +5641,11 @@ func resourceResource() *schema.Resource {
 						"port_forwarding": {
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -5342,6 +5687,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -5365,6 +5715,11 @@ func resourceResource() *schema.Resource {
 						"port_forwarding": {
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"private_key": {
@@ -5415,6 +5770,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -5488,6 +5848,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -5561,6 +5926,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Bind interface",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -8363,6 +8733,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKS{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:            convertStringToPlumbing(raw["client_key"]),
@@ -8392,6 +8763,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSBasicAuth{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
@@ -8417,6 +8789,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSServiceAccount{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
@@ -8438,6 +8811,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSServiceAccountUserImpersonation{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
@@ -8459,6 +8833,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSUserImpersonation{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:            convertStringToPlumbing(raw["client_key"]),
@@ -8489,6 +8864,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AmazonEKS{
 			ID:                   d.Id(),
 			AccessKey:            convertStringToPlumbing(raw["access_key"]),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClusterName:          convertStringToPlumbing(raw["cluster_name"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
@@ -8527,6 +8903,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AmazonEKSUserImpersonation{
 			ID:                   d.Id(),
 			AccessKey:            convertStringToPlumbing(raw["access_key"]),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClusterName:          convertStringToPlumbing(raw["cluster_name"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
@@ -8565,6 +8942,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AmazonES{
 			ID:              d.Id(),
 			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			BindInterface:   convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
@@ -8601,6 +8979,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AmazonMQAMQP091{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -8632,6 +9011,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.Athena{
 			ID:              d.Id(),
 			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			BindInterface:   convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Name:            convertStringToPlumbing(raw["name"]),
 			Output:          convertStringToPlumbing(raw["output"]),
@@ -8668,6 +9048,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AuroraMysql{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -8698,6 +9079,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AuroraPostgres{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -8730,6 +9112,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AWS{
 			ID:                d.Id(),
 			AccessKey:         convertStringToPlumbing(raw["access_key"]),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckRegion: convertStringToPlumbing(raw["healthcheck_region"]),
 			Name:              convertStringToPlumbing(raw["name"]),
@@ -8761,6 +9144,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.Azure{
 			ID:            d.Id(),
 			AppID:         convertStringToPlumbing(raw["app_id"]),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
@@ -8787,6 +9171,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AzureCertificate{
 			ID:                d.Id(),
 			AppID:             convertStringToPlumbing(raw["app_id"]),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
 			ClientCertificate: convertStringToPlumbing(raw["client_certificate"]),
 			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
 			Name:              convertStringToPlumbing(raw["name"]),
@@ -8812,6 +9197,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AzurePostgres{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -8843,6 +9229,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.BigQuery{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -8869,6 +9256,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Cassandra{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -8899,6 +9287,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Citus{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -8930,6 +9319,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Clustrix{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -8960,6 +9350,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Cockroach{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -8991,6 +9382,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DB2I{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9021,6 +9413,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.DB2LUW{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -9052,6 +9445,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.DocumentDBHost{
 			ID:            d.Id(),
 			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9082,6 +9476,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.DocumentDBReplicaSet{
 			ID:               d.Id(),
 			AuthDatabase:     convertStringToPlumbing(raw["auth_database"]),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -9112,6 +9507,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Druid{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9142,6 +9538,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.DynamoDB{
 			ID:              d.Id(),
 			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			BindInterface:   convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
@@ -9178,6 +9575,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Elastic{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9208,6 +9606,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.ElasticacheRedis{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9234,6 +9633,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GCP{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Keyfile:       convertStringToPlumbing(raw["keyfile"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9253,6 +9653,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GoogleGKE{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
@@ -9277,6 +9678,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GoogleGKEUserImpersonation{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
@@ -9301,6 +9703,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Greenplum{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -9333,6 +9736,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.HTTPAuth{
 			ID:               d.Id(),
 			AuthHeader:       convertStringToPlumbing(raw["auth_header"]),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			DefaultPath:      convertStringToPlumbing(raw["default_path"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			HeadersBlacklist: convertStringToPlumbing(raw["headers_blacklist"]),
@@ -9355,6 +9759,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.HTTPBasicAuth{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			DefaultPath:      convertStringToPlumbing(raw["default_path"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			HeadersBlacklist: convertStringToPlumbing(raw["headers_blacklist"]),
@@ -9382,6 +9787,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.HTTPNoAuth{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			DefaultPath:      convertStringToPlumbing(raw["default_path"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			HeadersBlacklist: convertStringToPlumbing(raw["headers_blacklist"]),
@@ -9401,6 +9807,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Kubernetes{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:            convertStringToPlumbing(raw["client_key"]),
@@ -9430,6 +9837,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesBasicAuth{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
@@ -9455,6 +9863,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesServiceAccount{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
@@ -9476,6 +9885,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesServiceAccountUserImpersonation{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
@@ -9497,6 +9907,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesUserImpersonation{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:            convertStringToPlumbing(raw["client_key"]),
@@ -9526,6 +9937,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Maria{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -9556,6 +9968,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Memcached{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9577,6 +9990,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Memsql{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -9608,6 +10022,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.MongoHost{
 			ID:            d.Id(),
 			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9639,6 +10054,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.MongoLegacyHost{
 			ID:            d.Id(),
 			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9671,6 +10087,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.MongoLegacyReplicaset{
 			ID:               d.Id(),
 			AuthDatabase:     convertStringToPlumbing(raw["auth_database"]),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -9704,6 +10121,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.MongoReplicaSet{
 			ID:               d.Id(),
 			AuthDatabase:     convertStringToPlumbing(raw["auth_database"]),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -9737,6 +10155,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.MongoShardedCluster{
 			ID:            d.Id(),
 			AuthDatabase:  convertStringToPlumbing(raw["auth_database"]),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9766,6 +10185,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MTLSMysql{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:            convertStringToPlumbing(raw["client_key"]),
@@ -9809,6 +10229,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.MTLSPostgres{
 			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:            convertStringToPlumbing(raw["client_key"]),
@@ -9853,6 +10274,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Mysql{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -9883,6 +10305,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Neptune{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -9905,6 +10328,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.NeptuneIAM{
 			ID:              d.Id(),
 			AccessKey:       convertStringToPlumbing(raw["access_key"]),
+			BindInterface:   convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
@@ -9942,6 +10366,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Oracle{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -9973,6 +10398,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Postgres{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -10004,6 +10430,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Presto{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -10032,6 +10459,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.RabbitMQAMQP091{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -10062,6 +10490,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.RawTCP{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -10083,6 +10512,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.RDP{
 			ID:                      d.Id(),
+			BindInterface:           convertStringToPlumbing(raw["bind_interface"]),
 			DowngradeNlaConnections: convertBoolToPlumbing(raw["downgrade_nla_connections"]),
 			EgressFilter:            convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                convertStringToPlumbing(raw["hostname"]),
@@ -10113,6 +10543,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Redis{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -10138,6 +10569,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Redshift{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -10169,6 +10601,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SingleStore{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -10199,6 +10632,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Snowflake{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			Database:      convertStringToPlumbing(raw["database"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
@@ -10229,6 +10663,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SQLServer{
 			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
 			Database:         convertStringToPlumbing(raw["database"]),
 			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
@@ -10262,6 +10697,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.SSH{
 			ID:                          d.Id(),
 			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                    convertStringToPlumbing(raw["hostname"]),
 			Name:                        convertStringToPlumbing(raw["name"]),
@@ -10271,6 +10707,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
 			Username:                    convertStringToPlumbing(raw["username"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Username == "" {
 			out.Username = fullSecretStorePath(raw, "username")
 		}
@@ -10284,6 +10725,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.SSHCert{
 			ID:                          d.Id(),
 			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                    convertStringToPlumbing(raw["hostname"]),
 			Name:                        convertStringToPlumbing(raw["name"]),
@@ -10293,6 +10735,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
 			Username:                    convertStringToPlumbing(raw["username"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Username == "" {
 			out.Username = fullSecretStorePath(raw, "username")
 		}
@@ -10306,6 +10753,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.SSHCustomerKey{
 			ID:                          d.Id(),
 			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                    convertStringToPlumbing(raw["hostname"]),
 			Name:                        convertStringToPlumbing(raw["name"]),
@@ -10316,6 +10764,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
 			Username:                    convertStringToPlumbing(raw["username"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.PrivateKey == "" {
 			out.PrivateKey = fullSecretStorePath(raw, "private_key")
 		}
@@ -10331,6 +10784,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Sybase{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -10360,6 +10814,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.SybaseIQ{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -10389,6 +10844,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Teradata{
 			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
@@ -10432,6 +10888,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -10455,6 +10912,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"healthcheck_namespace":      (v.HealthcheckNamespace),
 				"hostname":                   (v.Hostname),
@@ -10475,6 +10933,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -10492,6 +10951,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_service_account_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -10509,6 +10969,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -10535,6 +10996,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                              seValues["access_key"],
 				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -10565,6 +11027,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                              seValues["access_key"],
 				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -10595,6 +11058,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"name":                                (v.Name),
@@ -10618,6 +11082,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazonmq_amqp_091", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -10642,6 +11107,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"name":                                (v.Name),
 				"output":                              (v.Output),
@@ -10665,6 +11131,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10686,6 +11153,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10711,6 +11179,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_region":                  (v.HealthcheckRegion),
 				"name":                                (v.Name),
@@ -10735,6 +11204,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"app_id":                      seValues["app_id"],
 				"secret_store_app_id_path":    seValues["secret_store_app_id_path"],
 				"secret_store_app_id_key":     seValues["secret_store_app_id_key"],
+				"bind_interface":              (v.BindInterface),
 				"egress_filter":               (v.EgressFilter),
 				"name":                        (v.Name),
 				"password":                    seValues["password"],
@@ -10755,6 +11225,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"app_id":                               seValues["app_id"],
 				"secret_store_app_id_path":             seValues["secret_store_app_id_path"],
 				"secret_store_app_id_key":              seValues["secret_store_app_id_key"],
+				"bind_interface":                       (v.BindInterface),
 				"client_certificate":                   seValues["client_certificate"],
 				"secret_store_client_certificate_path": seValues["secret_store_client_certificate_path"],
 				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
@@ -10772,6 +11243,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("azure_postgres", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10794,6 +11266,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
+				"bind_interface":                (v.BindInterface),
 				"egress_filter":                 (v.EgressFilter),
 				"endpoint":                      (v.Endpoint),
 				"name":                          (v.Name),
@@ -10812,6 +11285,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -10833,6 +11307,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("citus", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10855,6 +11330,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10876,6 +11352,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("cockroach", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10898,6 +11375,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("db_2_i", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -10919,6 +11397,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10941,6 +11420,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("document_db_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -10962,6 +11442,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("document_db_replica_set", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"connect_to_replica":         (v.ConnectToReplica),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -10983,6 +11464,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11006,6 +11488,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"name":                                (v.Name),
@@ -11029,6 +11512,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11050,6 +11534,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11068,6 +11553,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("gcp", []map[string]interface{}{
 			{
+				"bind_interface":            (v.BindInterface),
 				"egress_filter":             (v.EgressFilter),
 				"keyfile":                   seValues["keyfile"],
 				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
@@ -11083,6 +11569,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11102,6 +11589,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("google_gke_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11121,6 +11609,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("greenplum", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11146,6 +11635,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"auth_header":                   seValues["auth_header"],
 				"secret_store_auth_header_path": seValues["secret_store_auth_header_path"],
 				"secret_store_auth_header_key":  seValues["secret_store_auth_header_key"],
+				"bind_interface":                (v.BindInterface),
 				"default_path":                  (v.DefaultPath),
 				"egress_filter":                 (v.EgressFilter),
 				"headers_blacklist":             (v.HeadersBlacklist),
@@ -11162,6 +11652,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"default_path":               (v.DefaultPath),
 				"egress_filter":              (v.EgressFilter),
 				"headers_blacklist":          (v.HeadersBlacklist),
@@ -11184,6 +11675,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("http_no_auth", []map[string]interface{}{
 			{
+				"bind_interface":    (v.BindInterface),
 				"default_path":      (v.DefaultPath),
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -11200,6 +11692,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11223,6 +11716,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"healthcheck_namespace":      (v.HealthcheckNamespace),
 				"hostname":                   (v.Hostname),
@@ -11243,6 +11737,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -11260,6 +11755,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_service_account_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -11277,6 +11773,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11300,6 +11797,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11321,6 +11819,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("memcached", []map[string]interface{}{
 			{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"name":            (v.Name),
@@ -11335,6 +11834,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11357,6 +11857,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("mongo_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11379,6 +11880,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11402,6 +11904,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"connect_to_replica":         (v.ConnectToReplica),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11426,6 +11929,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"connect_to_replica":         (v.ConnectToReplica),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11450,6 +11954,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("mongo_sharded_cluster", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11470,6 +11975,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mtls_mysql", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11501,6 +12007,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mtls_postgres", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11533,6 +12040,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11554,6 +12062,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("neptune", []map[string]interface{}{
 			{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"endpoint":        (v.Endpoint),
 				"name":            (v.Name),
@@ -11571,6 +12080,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"name":                                (v.Name),
@@ -11595,6 +12105,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11617,6 +12128,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("postgres", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11639,6 +12151,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11659,6 +12172,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11680,6 +12194,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("raw_tcp", []map[string]interface{}{
 			{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"name":            (v.Name),
@@ -11694,6 +12209,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"downgrade_nla_connections":  (v.DowngradeNlaConnections),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11715,6 +12231,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11732,6 +12249,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("redshift", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11754,6 +12272,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("single_store", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11775,6 +12294,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11796,6 +12316,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sql_server", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -11820,11 +12341,13 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("ssh", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"public_key":                     (v.PublicKey),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
@@ -11839,11 +12362,13 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
@@ -11857,11 +12382,13 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("ssh_customer_key", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"private_key":                    seValues["private_key"],
 				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
 				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
@@ -11877,6 +12404,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11897,6 +12425,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11917,6 +12446,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -11961,6 +12491,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -11987,6 +12518,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"healthcheck_namespace":      (v.HealthcheckNamespace),
 				"hostname":                   (v.Hostname),
@@ -12010,6 +12542,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -12030,6 +12563,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aks_service_account_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -12050,6 +12584,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aks_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12079,6 +12614,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                              seValues["access_key"],
 				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12112,6 +12648,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                              seValues["access_key"],
 				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12145,6 +12682,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"name":                                (v.Name),
@@ -12171,6 +12709,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("amazonmq_amqp_091", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12198,6 +12737,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"name":                                (v.Name),
 				"output":                              (v.Output),
@@ -12224,6 +12764,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12248,6 +12789,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12276,6 +12818,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_region":                  (v.HealthcheckRegion),
 				"name":                                (v.Name),
@@ -12303,6 +12846,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"app_id":                      seValues["app_id"],
 				"secret_store_app_id_path":    seValues["secret_store_app_id_path"],
 				"secret_store_app_id_key":     seValues["secret_store_app_id_key"],
+				"bind_interface":              (v.BindInterface),
 				"egress_filter":               (v.EgressFilter),
 				"name":                        (v.Name),
 				"password":                    seValues["password"],
@@ -12326,6 +12870,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"app_id":                               seValues["app_id"],
 				"secret_store_app_id_path":             seValues["secret_store_app_id_path"],
 				"secret_store_app_id_key":              seValues["secret_store_app_id_key"],
+				"bind_interface":                       (v.BindInterface),
 				"client_certificate":                   seValues["client_certificate"],
 				"secret_store_client_certificate_path": seValues["secret_store_client_certificate_path"],
 				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
@@ -12346,6 +12891,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("azure_postgres", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12371,6 +12917,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
+				"bind_interface":                (v.BindInterface),
 				"egress_filter":                 (v.EgressFilter),
 				"endpoint":                      (v.Endpoint),
 				"name":                          (v.Name),
@@ -12392,6 +12939,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12416,6 +12964,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("citus", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12441,6 +12990,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12465,6 +13015,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("cockroach", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12490,6 +13041,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("db_2_i", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12514,6 +13066,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12539,6 +13092,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("document_db_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12563,6 +13117,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("document_db_replica_set", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"connect_to_replica":         (v.ConnectToReplica),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12587,6 +13142,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12613,6 +13169,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"name":                                (v.Name),
@@ -12639,6 +13196,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12663,6 +13221,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -12684,6 +13243,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("gcp", []map[string]interface{}{
 			{
+				"bind_interface":            (v.BindInterface),
 				"egress_filter":             (v.EgressFilter),
 				"keyfile":                   seValues["keyfile"],
 				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
@@ -12702,6 +13262,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12724,6 +13285,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("google_gke_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12746,6 +13308,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("greenplum", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12774,6 +13337,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"auth_header":                   seValues["auth_header"],
 				"secret_store_auth_header_path": seValues["secret_store_auth_header_path"],
 				"secret_store_auth_header_key":  seValues["secret_store_auth_header_key"],
+				"bind_interface":                (v.BindInterface),
 				"default_path":                  (v.DefaultPath),
 				"egress_filter":                 (v.EgressFilter),
 				"headers_blacklist":             (v.HeadersBlacklist),
@@ -12793,6 +13357,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"default_path":               (v.DefaultPath),
 				"egress_filter":              (v.EgressFilter),
 				"headers_blacklist":          (v.HeadersBlacklist),
@@ -12818,6 +13383,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("http_no_auth", []map[string]interface{}{
 			{
+				"bind_interface":    (v.BindInterface),
 				"default_path":      (v.DefaultPath),
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
@@ -12837,6 +13403,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12863,6 +13430,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"healthcheck_namespace":      (v.HealthcheckNamespace),
 				"hostname":                   (v.Hostname),
@@ -12886,6 +13454,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -12906,6 +13475,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("kubernetes_service_account_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
 				"healthcheck_namespace":   (v.HealthcheckNamespace),
 				"hostname":                (v.Hostname),
@@ -12926,6 +13496,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("kubernetes_user_impersonation", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -12952,6 +13523,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -12976,6 +13548,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("memcached", []map[string]interface{}{
 			{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"name":            (v.Name),
@@ -12993,6 +13566,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13018,6 +13592,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("mongo_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13043,6 +13618,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13069,6 +13645,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"connect_to_replica":         (v.ConnectToReplica),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13096,6 +13673,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"connect_to_replica":         (v.ConnectToReplica),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13123,6 +13701,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("mongo_sharded_cluster", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13146,6 +13725,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("mtls_mysql", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -13180,6 +13760,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("mtls_postgres", []map[string]interface{}{
 			{
+				"bind_interface":                          (v.BindInterface),
 				"certificate_authority":                   seValues["certificate_authority"],
 				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
 				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
@@ -13215,6 +13796,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13239,6 +13821,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("neptune", []map[string]interface{}{
 			{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"endpoint":        (v.Endpoint),
 				"name":            (v.Name),
@@ -13259,6 +13842,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"access_key":                          seValues["access_key"],
 				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
 				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
+				"bind_interface":                      (v.BindInterface),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"name":                                (v.Name),
@@ -13286,6 +13870,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13311,6 +13896,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("postgres", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13336,6 +13922,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13359,6 +13946,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13383,6 +13971,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("raw_tcp", []map[string]interface{}{
 			{
+				"bind_interface":  (v.BindInterface),
 				"egress_filter":   (v.EgressFilter),
 				"hostname":        (v.Hostname),
 				"name":            (v.Name),
@@ -13400,6 +13989,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"downgrade_nla_connections":  (v.DowngradeNlaConnections),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13424,6 +14014,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13444,6 +14035,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("redshift", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13469,6 +14061,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("single_store", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13493,6 +14086,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13517,6 +14111,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("sql_server", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"database":                   (v.Database),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
@@ -13544,11 +14139,13 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("ssh", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"public_key":                     (v.PublicKey),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
@@ -13566,11 +14163,13 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"secret_store_id":                (v.SecretStoreID),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
@@ -13587,11 +14186,13 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("ssh_customer_key", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"private_key":                    seValues["private_key"],
 				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
 				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
@@ -13610,6 +14211,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13633,6 +14235,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),
@@ -13656,6 +14259,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
+				"bind_interface":             (v.BindInterface),
 				"egress_filter":              (v.EgressFilter),
 				"hostname":                   (v.Hostname),
 				"name":                       (v.Name),

@@ -335,8 +335,11 @@ func convertSecretStoreFilterToPlumbing(d *schema.ResourceData) (string, []inter
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("tags"); ok {
-		filter += "tags:? "
-		args = append(args, v)
+		tags := convertTagsToPlumbing(v)
+		for kk, vv := range tags {
+			filter += "tag:?=?"
+			args = append(args, kk, vv)
+		}
 	}
 	if v, ok := d.GetOkExists("vault_uri"); ok {
 		filter += "vaulturi:? "
