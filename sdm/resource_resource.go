@@ -33,6 +33,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -126,6 +127,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -204,6 +206,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -269,6 +272,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -334,6 +338,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -440,6 +445,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -563,6 +569,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -686,6 +693,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -777,6 +785,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -873,6 +882,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -964,6 +974,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -1047,6 +1058,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -1148,6 +1160,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -1242,6 +1255,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -1318,6 +1332,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"client_certificate": {
@@ -1381,6 +1396,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -1469,6 +1485,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -1539,6 +1556,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -1622,6 +1640,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -1710,6 +1729,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -1793,6 +1813,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -1881,6 +1902,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -1964,6 +1986,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -2052,6 +2075,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -2135,6 +2159,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"connect_to_replica": {
@@ -2218,6 +2243,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -2309,6 +2335,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -2400,6 +2427,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -2483,6 +2511,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -2553,6 +2582,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -2608,6 +2638,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -2682,6 +2713,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -2756,6 +2788,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -2858,6 +2891,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"default_path": {
@@ -2919,6 +2953,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"default_path": {
@@ -3007,6 +3042,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"default_path": {
@@ -3068,6 +3104,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -3161,6 +3198,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -3239,6 +3277,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -3304,6 +3343,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -3369,6 +3409,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -3462,6 +3503,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -3545,6 +3587,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -3596,6 +3639,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -3684,6 +3728,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -3772,6 +3817,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -3865,6 +3911,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"connect_to_replica": {
@@ -3963,6 +4010,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"connect_to_replica": {
@@ -4061,6 +4109,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -4139,6 +4188,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -4269,6 +4319,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"certificate_authority": {
@@ -4404,6 +4455,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -4487,6 +4539,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -4551,6 +4604,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -4647,6 +4701,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -4735,6 +4790,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -4823,6 +4879,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -4903,6 +4960,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -4986,6 +5044,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5037,6 +5096,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"downgrade_nla_connections": {
@@ -5120,6 +5180,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5185,6 +5246,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -5273,6 +5335,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -5356,6 +5419,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -5439,6 +5503,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"database": {
@@ -5537,6 +5602,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5616,6 +5682,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5690,6 +5757,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5773,6 +5841,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5851,6 +5920,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
@@ -5929,6 +5999,7 @@ func resourceResource() *schema.Resource {
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "Bind interface",
 						},
 						"egress_filter": {
