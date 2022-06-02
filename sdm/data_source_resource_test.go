@@ -39,6 +39,51 @@ func TestAccSDMResource_Get(t *testing.T) {
 	})
 }
 
+func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
+	t.Parallel()
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatal("failed to create test client", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	tagValue := randomWithPrefix("value")
+	name := randomWithPrefix("name")
+	_, err = client.Resources().Create(ctx, &sdm.Redis{
+		Name:         name,
+		Hostname:     "hostname",
+		PortOverride: portOverride.Count(),
+		Tags: sdm.Tags{
+			"testTag": tagValue,
+		},
+	})
+	if err != nil {
+		t.Fatalf("failed to create resource: %v", err)
+	}
+	dsName := randomWithPrefix("test-resource-ds")
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+					data "sdm_resource" "%s" {
+						tags = {
+							"testTag" = "%s"
+						}
+					}`, dsName, tagValue),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.name", name),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.tags.testTag", tagValue),
+				),
+			},
+		},
+	})
+}
+
 func TestAccSDMResource_SecretStoreGet(t *testing.T) {
 	t.Parallel()
 

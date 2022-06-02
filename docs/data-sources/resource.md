@@ -28,6 +28,7 @@ The following arguments are supported by a Resources data source:
 * `id` - (Optional) Unique identifier of the Resource.
 * `name` - (Optional) Unique human-readable name of the Resource.
 * `port` - (Optional) 
+* `tags` - (Optional) Tags is a map of key, value pairs.
 * `username` - (Optional) 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a Resources data source:

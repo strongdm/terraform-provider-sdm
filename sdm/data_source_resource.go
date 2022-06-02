@@ -41,6 +41,10 @@ func dataSourceResource() *schema.Resource {
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
+			"tags": {
+				Type:     schema.TypeMap,
+				Optional: true,
+			},
 			"username": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -5141,6 +5145,13 @@ func convertResourceFilterToPlumbing(d *schema.ResourceData) (string, []interfac
 	if v, ok := d.GetOkExists("port"); ok {
 		filter += "port:? "
 		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("tags"); ok {
+		tags := convertTagsToPlumbing(v)
+		for kk, vv := range tags {
+			filter += "tag:?=?"
+			args = append(args, kk, vv)
+		}
 	}
 	if v, ok := d.GetOkExists("username"); ok {
 		filter += "username:? "
