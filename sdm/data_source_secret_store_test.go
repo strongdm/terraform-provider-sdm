@@ -37,6 +37,50 @@ func TestAccSDMSecretStore_Get(t *testing.T) {
 	})
 }
 
+func TestAccSDMSecretStoreDataSource_GetByTags(t *testing.T) {
+	t.Parallel()
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatal("failed to create test client", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	tagValue := randomWithPrefix("value")
+	name := randomWithPrefix("name")
+	_, err = client.SecretStores().Create(ctx, &sdm.VaultTokenStore{
+		Name:          name,
+		ServerAddress: name,
+		Tags: sdm.Tags{
+			"testTag": tagValue,
+		},
+	})
+	if err != nil {
+		t.Fatalf("failed to create store: %v", err)
+	}
+	dsName := randomWithPrefix("test-secretstore-ds")
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+					data "sdm_secret_store" "%s" {
+						tags = {
+							"testTag" = "%s"
+						}
+					}`, dsName, tagValue),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.0.name", name),
+					resource.TestCheckResourceAttr("data.sdm_secret_store."+dsName, "secret_stores.0.vault_token.0.tags.testTag", tagValue),
+				),
+			},
+		},
+	})
+}
+
 func TestAccSDMSecretStore_GetMultiple(t *testing.T) {
 	t.Parallel()
 	_, err := createVaultTokenStoresWithPrefix("secret-store-multiple", 2)

@@ -61,6 +61,10 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"tags": {
+				Type:     schema.TypeMap,
+				Optional: true,
+			},
 			"vault_uri": {
 				Type:     schema.TypeString,
 				Optional: true,

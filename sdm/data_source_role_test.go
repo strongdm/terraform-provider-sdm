@@ -51,15 +51,16 @@ func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
+	tagValue := randomWithPrefix("value")
 	createResp, err := client.Roles().Create(ctx, &sdm.Role{
 		Name: randomWithPrefix("role-tags"),
-		Tags: sdm.Tags{"envTags": "devTags"},
+		Tags: sdm.Tags{"testTag": tagValue},
 	})
 	if err != nil {
 		t.Fatal("failed to create role", err)
 	}
 	role := createResp.Role
-	rsName := randomWithPrefix("test-role-ds")
+	dsName := randomWithPrefix("test-role-ds")
 
 	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
@@ -69,12 +70,12 @@ func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
 				Config: fmt.Sprintf(`
 					data "sdm_role" "%s" {
 						tags = {
-							envTags = "devTags"
+							"testTag" = "%s"
 						}
-					}`, rsName),
+					}`, dsName, tagValue),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.tags.envTags", "devTags"),
+					resource.TestCheckResourceAttr("data.sdm_role."+dsName, "roles.0.name", role.Name),
+					resource.TestCheckResourceAttr("data.sdm_role."+dsName, "roles.0.tags.testTag", tagValue),
 				),
 			},
 		},

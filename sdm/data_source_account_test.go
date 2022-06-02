@@ -39,6 +39,52 @@ func TestAccSDMAccount_Get(t *testing.T) {
 	})
 }
 
+func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
+	t.Parallel()
+
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatal("failed to create test client", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	tagValue := randomWithPrefix("value")
+	name := randomWithPrefix("name")
+	createResp, err := client.Accounts().Create(ctx, &sdm.User{
+		FirstName: name,
+		LastName:  name,
+		Email:     name,
+		Tags: sdm.Tags{
+			"testTag": tagValue,
+		},
+	})
+	_ = createResp.Account
+	if err != nil {
+		t.Fatalf("failed to create account: %v", err)
+	}
+	dsName := randomWithPrefix("test-account-ds")
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+					data "sdm_account" "%s" {
+						tags = {
+							"testTag" = "%s"
+						}
+					}`, dsName, tagValue),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.email", name),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.tags.testTag", tagValue),
+				),
+			},
+		},
+	})
+}
+
 func TestAccSDMAccount_GetSuspended(t *testing.T) {
 	t.Parallel()
 

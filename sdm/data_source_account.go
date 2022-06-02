@@ -49,6 +49,10 @@ func dataSourceAccount() *schema.Resource {
 				Type:     schema.TypeBool,
 				Optional: true,
 			},
+			"tags": {
+				Type:     schema.TypeMap,
+				Optional: true,
+			},
 			"accounts": {
 				Type:     schema.TypeList,
 				Computed: true,
