@@ -5871,6 +5871,106 @@ func convertRepeatedRelayToPorcelain(plumbings []*proto.Relay) (
 	}
 	return items, nil
 }
+func convertRemoteIdentityGroupToPorcelain(plumbing *proto.RemoteIdentityGroup) (*RemoteIdentityGroup, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentityGroup{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	return porcelain, nil
+}
+
+func convertRemoteIdentityGroupToPlumbing(porcelain *RemoteIdentityGroup) *proto.RemoteIdentityGroup {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentityGroup{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityGroupToPlumbing(
+	porcelains []*RemoteIdentityGroup,
+) []*proto.RemoteIdentityGroup {
+	var items []*proto.RemoteIdentityGroup
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityGroupToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityGroupToPorcelain(plumbings []*proto.RemoteIdentityGroup) (
+	[]*RemoteIdentityGroup,
+	error,
+) {
+	var items []*RemoteIdentityGroup
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityGroupToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRemoteIdentityGroupGetResponseToPorcelain(plumbing *proto.RemoteIdentityGroupGetResponse) (*RemoteIdentityGroupGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentityGroupGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityGroupToPorcelain(plumbing.RemoteIdentityGroup); err != nil {
+		return nil, fmt.Errorf("error converting field RemoteIdentityGroup: %v", err)
+	} else {
+		porcelain.RemoteIdentityGroup = v
+	}
+	return porcelain, nil
+}
+
+func convertRemoteIdentityGroupGetResponseToPlumbing(porcelain *RemoteIdentityGroupGetResponse) *proto.RemoteIdentityGroupGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentityGroupGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RemoteIdentityGroup = convertRemoteIdentityGroupToPlumbing(porcelain.RemoteIdentityGroup)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityGroupGetResponseToPlumbing(
+	porcelains []*RemoteIdentityGroupGetResponse,
+) []*proto.RemoteIdentityGroupGetResponse {
+	var items []*proto.RemoteIdentityGroupGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityGroupGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityGroupGetResponseToPorcelain(plumbings []*proto.RemoteIdentityGroupGetResponse) (
+	[]*RemoteIdentityGroupGetResponse,
+	error,
+) {
+	var items []*RemoteIdentityGroupGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityGroupGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	if porcelain == nil {
 		return nil
@@ -8679,6 +8779,51 @@ func (n *nodeIteratorImpl) Value() Node {
 
 func (n *nodeIteratorImpl) Err() error {
 	return n.err
+}
+
+type remoteIdentityGroupIteratorImplFetchFunc func() (
+	[]*RemoteIdentityGroup,
+	bool, error)
+type remoteIdentityGroupIteratorImpl struct {
+	buffer      []*RemoteIdentityGroup
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       remoteIdentityGroupIteratorImplFetchFunc
+}
+
+func newRemoteIdentityGroupIteratorImpl(f remoteIdentityGroupIteratorImplFetchFunc) *remoteIdentityGroupIteratorImpl {
+	return &remoteIdentityGroupIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (r *remoteIdentityGroupIteratorImpl) Next() bool {
+	if r.index < len(r.buffer)-1 {
+		r.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !r.hasNextPage {
+		return false
+	}
+
+	r.index = 0
+	r.buffer, r.hasNextPage, r.err = r.fetch()
+	return len(r.buffer) > 0
+}
+
+func (r *remoteIdentityGroupIteratorImpl) Value() *RemoteIdentityGroup {
+	if r.index >= len(r.buffer) {
+		return nil
+	}
+	return r.buffer[r.index]
+}
+
+func (r *remoteIdentityGroupIteratorImpl) Err() error {
+	return r.err
 }
 
 type tagIteratorImplFetchFunc func() (

@@ -2231,6 +2231,26 @@ type Relay struct {
 	Tags Tags `json:"tags"`
 }
 
+// A RemoteIdentityGroup has a list of access rules which determine which Resources the members
+// of the RemoteIdentityGroup have access to. An Account can be a member of multiple RemoteIdentityGroups via
+// AccountAttachments.
+type RemoteIdentityGroup struct {
+	// Unique identifier of the RemoteIdentityGroup.
+	ID string `json:"id"`
+	// Unique human-readable name of the RemoteIdentityGroup.
+	Name string `json:"name"`
+}
+
+// RemoteIdentityGroupGetResponse returns a requested RemoteIdentityGroup.
+type RemoteIdentityGroupGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested RemoteIdentityGroup.
+	RemoteIdentityGroup *RemoteIdentityGroup `json:"remoteIdentityGroup"`
+}
+
 // A Resource is a database, server, cluster, website, or cloud that strongDM
 // delegates access to.
 type Resource interface {
@@ -6888,6 +6908,22 @@ type NodeIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() Node
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// RemoteIdentityGroupIterator provides read access to a list of RemoteIdentityGroup.
+// Use it like so:
+//     for iterator.Next() {
+//         remoteIdentityGroup := iterator.Value()
+//         // ...
+//     }
+type RemoteIdentityGroupIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *RemoteIdentityGroup
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

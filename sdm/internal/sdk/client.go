@@ -64,19 +64,20 @@ type Client struct {
 
 	grpcConn *grpc.ClientConn
 
-	maxRetries         int
-	baseRetryDelay     time.Duration
-	maxRetryDelay      time.Duration
-	accountAttachments *AccountAttachments
-	accountGrants      *AccountGrants
-	accounts           *Accounts
-	controlPanel       *ControlPanel
-	nodes              *Nodes
-	resources          *Resources
-	roleAttachments    *RoleAttachments
-	roleGrants         *RoleGrants
-	roles              *Roles
-	secretStores       *SecretStores
+	maxRetries           int
+	baseRetryDelay       time.Duration
+	maxRetryDelay        time.Duration
+	accountAttachments   *AccountAttachments
+	accountGrants        *AccountGrants
+	accounts             *Accounts
+	controlPanel         *ControlPanel
+	nodes                *Nodes
+	remoteIdentityGroups *RemoteIdentityGroups
+	resources            *Resources
+	roleAttachments      *RoleAttachments
+	roleGrants           *RoleGrants
+	roles                *Roles
+	secretStores         *SecretStores
 }
 
 // New creates a new strongDM API client.
@@ -135,6 +136,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.nodes = &Nodes{
 		client: plumbing.NewNodesClient(client.grpcConn),
+		parent: client,
+	}
+	client.remoteIdentityGroups = &RemoteIdentityGroups{
+		client: plumbing.NewRemoteIdentityGroupsClient(client.grpcConn),
 		parent: client,
 	}
 	client.resources = &Resources{
@@ -226,6 +231,12 @@ func (c *Client) ControlPanel() *ControlPanel {
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
 func (c *Client) Nodes() *Nodes {
 	return c.nodes
+}
+
+// A RemoteIdentityGroup is a named grouping of Remote Identities for Accounts.
+// An Account's relationship to a RemoteIdentityGroup is defined via RemoteIdentity objects.
+func (c *Client) RemoteIdentityGroups() *RemoteIdentityGroups {
+	return c.remoteIdentityGroups
 }
 
 // Resources are databases, servers, clusters, websites, or clouds that strongDM

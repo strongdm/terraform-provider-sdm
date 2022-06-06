@@ -933,6 +933,107 @@ func (svc *Nodes) List(
 	), nil
 }
 
+// A RemoteIdentityGroup is a named grouping of Remote Identities for Accounts.
+// An Account's relationship to a RemoteIdentityGroup is defined via RemoteIdentity objects.
+type RemoteIdentityGroups struct {
+	client plumbing.RemoteIdentityGroupsClient
+	parent *Client
+}
+
+// Get reads one RemoteIdentityGroup by ID.
+func (svc *RemoteIdentityGroups) Get(
+	ctx context.Context,
+	id string) (
+	*RemoteIdentityGroupGetResponse,
+	error) {
+	req := &plumbing.RemoteIdentityGroupGetRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.RemoteIdentityGroupGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "RemoteIdentityGroups.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &RemoteIdentityGroupGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityGroupToPorcelain(plumbingResponse.RemoteIdentityGroup); err != nil {
+		return nil, err
+	} else {
+		resp.RemoteIdentityGroup = v
+	}
+	return resp, nil
+}
+
+// List gets a list of RemoteIdentityGroups matching a given set of criteria.
+func (svc *RemoteIdentityGroups) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	RemoteIdentityGroupIterator,
+	error) {
+	req := &plumbing.RemoteIdentityGroupListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if value := svc.parent.testOption("PageLimit"); value != nil {
+		v, ok := value.(int)
+		if ok {
+			req.Meta.Limit = int32(v)
+		}
+	}
+	return newRemoteIdentityGroupIteratorImpl(
+		func() (
+			[]*RemoteIdentityGroup,
+			bool, error) {
+			var plumbingResponse *plumbing.RemoteIdentityGroupListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RemoteIdentityGroups.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedRemoteIdentityGroupToPorcelain(plumbingResponse.RemoteIdentityGroups)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // Resources are databases, servers, clusters, websites, or clouds that strongDM
 // delegates access to.
 type Resources struct {
