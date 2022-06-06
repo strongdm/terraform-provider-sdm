@@ -55,5 +55,5 @@ In addition to provided arguments above, the following attributes are returned b
 Role can be imported using the id, e.g.,
 
 ```
-$ terraform import sdm_role.example r-12345678
+$ terraform import Role.example r-12345678
 ```

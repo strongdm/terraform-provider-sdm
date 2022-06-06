@@ -29,5 +29,5 @@ In addition to provided arguments above, the following attributes are returned b
 AccountAttachment can be imported using the id, e.g.,
 
 ```
-$ terraform import sdm_account_attachment.example aa-12345678
+$ terraform import AccountAttachment.example aa-12345678
 ```

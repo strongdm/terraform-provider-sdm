@@ -1253,5 +1253,5 @@ In addition to provided arguments above, the following attributes are returned b
 Resource can be imported using the id, e.g.,
 
 ```
-$ terraform import sdm_resource.example rs-12345678
+$ terraform import Resource.example rs-12345678
 ```

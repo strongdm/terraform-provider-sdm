@@ -29,6 +29,10 @@ func dataSourceNode() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"gateway_filter": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"id": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -140,6 +144,10 @@ func convertNodeFilterToPlumbing(d *schema.ResourceData) (string, []interface{})
 	}
 	if v, ok := d.GetOkExists("bind_address"); ok {
 		filter += "bindaddress:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("gateway_filter"); ok {
+		filter += "gatewayfilter:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("id"); ok {

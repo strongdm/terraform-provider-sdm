@@ -32,5 +32,5 @@ In addition to provided arguments above, the following attributes are returned b
 RoleGrant can be imported using the id, e.g.,
 
 ```
-$ terraform import sdm_role_grant.example rg-12345678
+$ terraform import RoleGrant.example rg-12345678
 ```

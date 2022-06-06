@@ -32,5 +32,5 @@ In addition to provided arguments above, the following attributes are returned b
 RoleAttachment can be imported using the id, e.g.,
 
 ```
-$ terraform import sdm_role_attachment.example ra-12345678
+$ terraform import RoleAttachment.example ra-12345678
 ```

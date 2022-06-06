@@ -56,5 +56,5 @@ In addition to provided arguments above, the following attributes are returned b
 Account can be imported using the id, e.g.,
 
 ```
-$ terraform import sdm_account.example a-12345678
+$ terraform import Account.example a-12345678
 ```
