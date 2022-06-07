@@ -33,6 +33,7 @@ func TestAccSDMResource_Get(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.port_override", fmt.Sprintf("%d", redis.PortOverride)),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "ids.0", redis.ID),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "ids.#", "1"),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.bind_interface", "127.0.0.1"),
 				),
 			},
 		},
