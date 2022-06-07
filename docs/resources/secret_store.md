@@ -50,5 +50,5 @@ In addition to provided arguments above, the following attributes are returned b
 SecretStore can be imported using the id, e.g.,
 
 ```
-$ terraform import SecretStore.example se-12345678
+$ terraform import sdm_secret_store.example se-12345678
 ```

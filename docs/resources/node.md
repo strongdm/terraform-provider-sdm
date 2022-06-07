@@ -57,5 +57,5 @@ In addition to provided arguments above, the following attributes are returned b
 Node can be imported using the id, e.g.,
 
 ```
-$ terraform import Node.example n-12345678
+$ terraform import sdm_node.example n-12345678
 ```
