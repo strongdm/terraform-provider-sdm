@@ -933,6 +933,233 @@ func (svc *Nodes) List(
 	), nil
 }
 
+// RemoteIdentities assign a resource directly to an account, giving the account the permission to connect to that resource.
+type RemoteIdentities struct {
+	client plumbing.RemoteIdentitiesClient
+	parent *Client
+}
+
+// Create registers a new RemoteIdentity.
+func (svc *RemoteIdentities) Create(
+	ctx context.Context,
+	remoteIdentity *RemoteIdentity) (
+	*RemoteIdentityCreateResponse,
+	error) {
+	req := &plumbing.RemoteIdentityCreateRequest{}
+
+	req.RemoteIdentity = convertRemoteIdentityToPlumbing(remoteIdentity)
+	var plumbingResponse *plumbing.RemoteIdentityCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &RemoteIdentityCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityToPorcelain(plumbingResponse.RemoteIdentity); err != nil {
+		return nil, err
+	} else {
+		resp.RemoteIdentity = v
+	}
+	return resp, nil
+}
+
+// Get reads one RemoteIdentity by ID.
+func (svc *RemoteIdentities) Get(
+	ctx context.Context,
+	id string) (
+	*RemoteIdentityGetResponse,
+	error) {
+	req := &plumbing.RemoteIdentityGetRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.RemoteIdentityGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &RemoteIdentityGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityToPorcelain(plumbingResponse.RemoteIdentity); err != nil {
+		return nil, err
+	} else {
+		resp.RemoteIdentity = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a RemoteIdentity by ID.
+func (svc *RemoteIdentities) Update(
+	ctx context.Context,
+	remoteIdentity *RemoteIdentity) (
+	*RemoteIdentityUpdateResponse,
+	error) {
+	req := &plumbing.RemoteIdentityUpdateRequest{}
+
+	req.RemoteIdentity = convertRemoteIdentityToPlumbing(remoteIdentity)
+	var plumbingResponse *plumbing.RemoteIdentityUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &RemoteIdentityUpdateResponse{}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityToPorcelain(plumbingResponse.RemoteIdentity); err != nil {
+		return nil, err
+	} else {
+		resp.RemoteIdentity = v
+	}
+	return resp, nil
+}
+
+// Delete removes a RemoteIdentity by ID.
+func (svc *RemoteIdentities) Delete(
+	ctx context.Context,
+	id string) (
+	*RemoteIdentityDeleteResponse,
+	error) {
+	req := &plumbing.RemoteIdentityDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.RemoteIdentityDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &RemoteIdentityDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of RemoteIdentities matching a given set of criteria.
+func (svc *RemoteIdentities) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	RemoteIdentityIterator,
+	error) {
+	req := &plumbing.RemoteIdentityListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if value := svc.parent.testOption("PageLimit"); value != nil {
+		v, ok := value.(int)
+		if ok {
+			req.Meta.Limit = int32(v)
+		}
+	}
+	return newRemoteIdentityIteratorImpl(
+		func() (
+			[]*RemoteIdentity,
+			bool, error) {
+			var plumbingResponse *plumbing.RemoteIdentityListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RemoteIdentities.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedRemoteIdentityToPorcelain(plumbingResponse.RemoteIdentities)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // A RemoteIdentityGroup is a named grouping of Remote Identities for Accounts.
 // An Account's relationship to a RemoteIdentityGroup is defined via RemoteIdentity objects.
 type RemoteIdentityGroups struct {

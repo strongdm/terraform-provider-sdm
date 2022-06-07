@@ -340,11 +340,11 @@ type AccountGetResponse struct {
 
 // AccountGrants connect a resource directly to an account, giving the account the permission to connect to that resource.
 type AccountGrant struct {
-	// The id of the attached role of this AccountGrant.
+	// The account id of this AccountGrant.
 	AccountID string `json:"accountId"`
 	// Unique identifier of the AccountGrant.
 	ID string `json:"id"`
-	// The id of the composite role of this AccountGrant.
+	// The resource id of this AccountGrant.
 	ResourceID string `json:"resourceId"`
 	// The timestamp when the resource will be granted. Optional. Both start_at
 	// and end_at must be defined together, or not defined at all.
@@ -2231,9 +2231,48 @@ type Relay struct {
 	Tags Tags `json:"tags"`
 }
 
-// A RemoteIdentityGroup has a list of access rules which determine which Resources the members
-// of the RemoteIdentityGroup have access to. An Account can be a member of multiple RemoteIdentityGroups via
-// AccountAttachments.
+// RemoteIdentities define the username to be used for a specific account
+// when connecting to a remote resource using that group.
+type RemoteIdentity struct {
+	// The account for this remote identity.
+	AccountID string `json:"accountId"`
+	// Unique identifier of the RemoteIdentity.
+	ID string `json:"id"`
+	// The remote identity group.
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+	// The username to be used as the remote identity for this account.
+	Username string `json:"username"`
+}
+
+// RemoteIdentityCreateResponse reports how the RemoteIdentities were created in the system.
+type RemoteIdentityCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created RemoteIdentity.
+	RemoteIdentity *RemoteIdentity `json:"remoteIdentity"`
+}
+
+// RemoteIdentityDeleteResponse returns information about a RemoteIdentity that was deleted.
+type RemoteIdentityDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// RemoteIdentityGetResponse returns a requested RemoteIdentity.
+type RemoteIdentityGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested RemoteIdentity.
+	RemoteIdentity *RemoteIdentity `json:"remoteIdentity"`
+}
+
+// A RemoteIdentityGroup defines a group of remote identities.
 type RemoteIdentityGroup struct {
 	// Unique identifier of the RemoteIdentityGroup.
 	ID string `json:"id"`
@@ -2249,6 +2288,17 @@ type RemoteIdentityGroupGetResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 	// The requested RemoteIdentityGroup.
 	RemoteIdentityGroup *RemoteIdentityGroup `json:"remoteIdentityGroup"`
+}
+
+// RemoteIdentityUpdateResponse returns the fields of a RemoteIdentity after it has been updated by
+// a RemoteIdentityUpdateRequest.
+type RemoteIdentityUpdateResponse struct {
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The updated RemoteIdentity.
+	RemoteIdentity *RemoteIdentity `json:"remoteIdentity"`
 }
 
 // A Resource is a database, server, cluster, website, or cloud that strongDM
@@ -6908,6 +6958,22 @@ type NodeIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() Node
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// RemoteIdentityIterator provides read access to a list of RemoteIdentity.
+// Use it like so:
+//     for iterator.Next() {
+//         remoteIdentity := iterator.Value()
+//         // ...
+//     }
+type RemoteIdentityIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *RemoteIdentity
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

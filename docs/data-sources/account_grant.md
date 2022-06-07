@@ -18,14 +18,14 @@ data "sdm_account_grant" "account_grant_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a AccountGrants data source:
-* `account_id` - (Optional) The id of the attached role of this AccountGrant.
+* `account_id` - (Optional) The account id of this AccountGrant.
 * `id` - (Optional) Unique identifier of the AccountGrant.
-* `resource_id` - (Optional) The id of the composite role of this AccountGrant.
+* `resource_id` - (Optional) The resource id of this AccountGrant.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a AccountGrants data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_account_grant ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `account_grants` - A list where each element has the following attributes:
-	* `account_id` - The id of the attached role of this AccountGrant.
+	* `account_id` - The account id of this AccountGrant.
 	* `id` - Unique identifier of the AccountGrant.
-	* `resource_id` - The id of the composite role of this AccountGrant.
+	* `resource_id` - The resource id of this AccountGrant.

@@ -27,13 +27,13 @@ func resourceAccountGrant() *schema.Resource {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
-				Description: "The id of the attached role of this AccountGrant.",
+				Description: "The account id of this AccountGrant.",
 			},
 			"resource_id": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
-				Description: "The id of the composite role of this AccountGrant.",
+				Description: "The resource id of this AccountGrant.",
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{

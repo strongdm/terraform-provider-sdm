@@ -72,6 +72,7 @@ type Client struct {
 	accounts             *Accounts
 	controlPanel         *ControlPanel
 	nodes                *Nodes
+	remoteIdentities     *RemoteIdentities
 	remoteIdentityGroups *RemoteIdentityGroups
 	resources            *Resources
 	roleAttachments      *RoleAttachments
@@ -136,6 +137,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.nodes = &Nodes{
 		client: plumbing.NewNodesClient(client.grpcConn),
+		parent: client,
+	}
+	client.remoteIdentities = &RemoteIdentities{
+		client: plumbing.NewRemoteIdentitiesClient(client.grpcConn),
 		parent: client,
 	}
 	client.remoteIdentityGroups = &RemoteIdentityGroups{
@@ -231,6 +236,11 @@ func (c *Client) ControlPanel() *ControlPanel {
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
 func (c *Client) Nodes() *Nodes {
 	return c.nodes
+}
+
+// RemoteIdentities assign a resource directly to an account, giving the account the permission to connect to that resource.
+func (c *Client) RemoteIdentities() *RemoteIdentities {
+	return c.remoteIdentities
 }
 
 // A RemoteIdentityGroup is a named grouping of Remote Identities for Accounts.

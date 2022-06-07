@@ -21,8 +21,8 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 
 ## Argument Reference
 The following arguments are supported by the AccountGrant resource:
-* `account_id` - (Required) The id of the attached role of this AccountGrant.
-* `resource_id` - (Required) The id of the composite role of this AccountGrant.
+* `account_id` - (Required) The account id of this AccountGrant.
+* `resource_id` - (Required) The resource id of this AccountGrant.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the AccountGrant resource:
 * `id` - A unique identifier for the AccountGrant resource.

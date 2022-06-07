@@ -536,9 +536,9 @@ type AccountGrant struct {
 
 	// Unique identifier of the AccountGrant.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The id of the composite role of this AccountGrant.
+	// The resource id of this AccountGrant.
 	ResourceId string `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	// The id of the attached role of this AccountGrant.
+	// The account id of this AccountGrant.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The timestamp when the resource will be granted. Optional. Both start_at
 	// and end_at must be defined together, or not defined at all.

@@ -12,10 +12,9 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-func dataSourceAccountGrant() *schema.Resource {
+func dataSourceRemoteIdentity() *schema.Resource {
 	return &schema.Resource{
-		ReadContext:        wrapCrudOperation(dataSourceAccountGrantList),
-		DeprecationMessage: "sdm_account_grant is deprecated, see docs for more info",
+		ReadContext: wrapCrudOperation(dataSourceRemoteIdentityList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
@@ -26,19 +25,24 @@ func dataSourceAccountGrant() *schema.Resource {
 			"account_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The account id of this AccountGrant.",
+				Description: "The account for this remote identity.",
 			},
 			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "Unique identifier of the AccountGrant.",
+				Description: "Unique identifier of the RemoteIdentity.",
 			},
-			"resource_id": {
+			"remote_identity_group_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The resource id of this AccountGrant.",
+				Description: "The remote identity group.",
 			},
-			"account_grants": {
+			"username": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The username to be used as the remote identity for this account.",
+			},
+			"remote_identitys": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -47,17 +51,22 @@ func dataSourceAccountGrant() *schema.Resource {
 						"account_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The account id of this AccountGrant.",
+							Description: "The account for this remote identity.",
 						},
 						"id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "Unique identifier of the AccountGrant.",
+							Description: "Unique identifier of the RemoteIdentity.",
 						},
-						"resource_id": {
+						"remote_identity_group_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The resource id of this AccountGrant.",
+							Description: "The remote identity group.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to be used as the remote identity for this account.",
 						},
 					},
 				},
@@ -69,7 +78,7 @@ func dataSourceAccountGrant() *schema.Resource {
 	}
 }
 
-func convertAccountGrantFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
+func convertRemoteIdentityFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("account_id"); ok {
@@ -80,26 +89,22 @@ func convertAccountGrantFilterToPlumbing(d *schema.ResourceData) (string, []inte
 		filter += "id:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("resource_id"); ok {
-		filter += "resourceid:? "
+	if v, ok := d.GetOkExists("remote_identity_group_id"); ok {
+		filter += "remoteidentitygroupid:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("start_from"); ok {
-		filter += "startfrom:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("valid_until"); ok {
-		filter += "validuntil:? "
+	if v, ok := d.GetOkExists("username"); ok {
+		filter += "username:? "
 		args = append(args, v)
 	}
 	return filter, args
 }
 
-func dataSourceAccountGrantList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-	filter, args := convertAccountGrantFilterToPlumbing(d)
-	resp, err := cc.AccountGrants().List(ctx, filter, args...)
+func dataSourceRemoteIdentityList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	filter, args := convertRemoteIdentityFilterToPlumbing(d)
+	resp, err := cc.RemoteIdentities().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list AccountGrants %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list RemoteIdentitys %s: %w", d.Id(), err)
 	}
 	ids := []string{}
 	type entity = map[string]interface{}
@@ -109,9 +114,10 @@ func dataSourceAccountGrantList(ctx context.Context, d *schema.ResourceData, cc 
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"account_id":  (v.AccountID),
-				"id":          (v.ID),
-				"resource_id": (v.ResourceID),
+				"account_id":               (v.AccountID),
+				"id":                       (v.ID),
+				"remote_identity_group_id": (v.RemoteIdentityGroupID),
+				"username":                 (v.Username),
 			})
 	}
 	if resp.Err() != nil {
@@ -122,10 +128,10 @@ func dataSourceAccountGrantList(ctx context.Context, d *schema.ResourceData, cc 
 	if err != nil {
 		return fmt.Errorf("cannot set ids: %w", err)
 	}
-	err = d.Set("account_grants", output)
+	err = d.Set("remote_identitys", output)
 	if err != nil {
 		return fmt.Errorf("cannot set output: %w", err)
 	}
-	d.SetId("AccountGrant" + filter + fmt.Sprint(args...))
+	d.SetId("RemoteIdentity" + filter + fmt.Sprint(args...))
 	return nil
 }

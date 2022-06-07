@@ -7,9 +7,7 @@ sidebar_current: “docs-sdm-resource-remote-identity-group"
 ---
 # Resource: sdm_remote_identity_group
 
-A RemoteIdentityGroup has a list of access rules which determine which Resources the members
- of the RemoteIdentityGroup have access to. An Account can be a member of multiple RemoteIdentityGroups via
- AccountAttachments.
+A RemoteIdentityGroup defines a group of remote identities.
 ## Example Usage
 
 ```hcl

@@ -5871,6 +5871,218 @@ func convertRepeatedRelayToPorcelain(plumbings []*proto.Relay) (
 	}
 	return items, nil
 }
+func convertRemoteIdentityToPorcelain(plumbing *proto.RemoteIdentity) (*RemoteIdentity, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentity{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.ID = plumbing.Id
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertRemoteIdentityToPlumbing(porcelain *RemoteIdentity) *proto.RemoteIdentity {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentity{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityToPlumbing(
+	porcelains []*RemoteIdentity,
+) []*proto.RemoteIdentity {
+	var items []*proto.RemoteIdentity
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityToPorcelain(plumbings []*proto.RemoteIdentity) (
+	[]*RemoteIdentity,
+	error,
+) {
+	var items []*RemoteIdentity
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRemoteIdentityCreateResponseToPorcelain(plumbing *proto.RemoteIdentityCreateResponse) (*RemoteIdentityCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentityCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityToPorcelain(plumbing.RemoteIdentity); err != nil {
+		return nil, fmt.Errorf("error converting field RemoteIdentity: %v", err)
+	} else {
+		porcelain.RemoteIdentity = v
+	}
+	return porcelain, nil
+}
+
+func convertRemoteIdentityCreateResponseToPlumbing(porcelain *RemoteIdentityCreateResponse) *proto.RemoteIdentityCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentityCreateResponse{}
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RemoteIdentity = convertRemoteIdentityToPlumbing(porcelain.RemoteIdentity)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityCreateResponseToPlumbing(
+	porcelains []*RemoteIdentityCreateResponse,
+) []*proto.RemoteIdentityCreateResponse {
+	var items []*proto.RemoteIdentityCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityCreateResponseToPorcelain(plumbings []*proto.RemoteIdentityCreateResponse) (
+	[]*RemoteIdentityCreateResponse,
+	error,
+) {
+	var items []*RemoteIdentityCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRemoteIdentityDeleteResponseToPorcelain(plumbing *proto.RemoteIdentityDeleteResponse) (*RemoteIdentityDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentityDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertRemoteIdentityDeleteResponseToPlumbing(porcelain *RemoteIdentityDeleteResponse) *proto.RemoteIdentityDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentityDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityDeleteResponseToPlumbing(
+	porcelains []*RemoteIdentityDeleteResponse,
+) []*proto.RemoteIdentityDeleteResponse {
+	var items []*proto.RemoteIdentityDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityDeleteResponseToPorcelain(plumbings []*proto.RemoteIdentityDeleteResponse) (
+	[]*RemoteIdentityDeleteResponse,
+	error,
+) {
+	var items []*RemoteIdentityDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRemoteIdentityGetResponseToPorcelain(plumbing *proto.RemoteIdentityGetResponse) (*RemoteIdentityGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentityGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityToPorcelain(plumbing.RemoteIdentity); err != nil {
+		return nil, fmt.Errorf("error converting field RemoteIdentity: %v", err)
+	} else {
+		porcelain.RemoteIdentity = v
+	}
+	return porcelain, nil
+}
+
+func convertRemoteIdentityGetResponseToPlumbing(porcelain *RemoteIdentityGetResponse) *proto.RemoteIdentityGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentityGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RemoteIdentity = convertRemoteIdentityToPlumbing(porcelain.RemoteIdentity)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityGetResponseToPlumbing(
+	porcelains []*RemoteIdentityGetResponse,
+) []*proto.RemoteIdentityGetResponse {
+	var items []*proto.RemoteIdentityGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityGetResponseToPorcelain(plumbings []*proto.RemoteIdentityGetResponse) (
+	[]*RemoteIdentityGetResponse,
+	error,
+) {
+	var items []*RemoteIdentityGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertRemoteIdentityGroupToPorcelain(plumbing *proto.RemoteIdentityGroup) (*RemoteIdentityGroup, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -5964,6 +6176,63 @@ func convertRepeatedRemoteIdentityGroupGetResponseToPorcelain(plumbings []*proto
 	var items []*RemoteIdentityGroupGetResponse
 	for _, plumbing := range plumbings {
 		if v, err := convertRemoteIdentityGroupGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRemoteIdentityUpdateResponseToPorcelain(plumbing *proto.RemoteIdentityUpdateResponse) (*RemoteIdentityUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RemoteIdentityUpdateResponse{}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertRemoteIdentityToPorcelain(plumbing.RemoteIdentity); err != nil {
+		return nil, fmt.Errorf("error converting field RemoteIdentity: %v", err)
+	} else {
+		porcelain.RemoteIdentity = v
+	}
+	return porcelain, nil
+}
+
+func convertRemoteIdentityUpdateResponseToPlumbing(porcelain *RemoteIdentityUpdateResponse) *proto.RemoteIdentityUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RemoteIdentityUpdateResponse{}
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.RemoteIdentity = convertRemoteIdentityToPlumbing(porcelain.RemoteIdentity)
+	return plumbing
+}
+func convertRepeatedRemoteIdentityUpdateResponseToPlumbing(
+	porcelains []*RemoteIdentityUpdateResponse,
+) []*proto.RemoteIdentityUpdateResponse {
+	var items []*proto.RemoteIdentityUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertRemoteIdentityUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRemoteIdentityUpdateResponseToPorcelain(plumbings []*proto.RemoteIdentityUpdateResponse) (
+	[]*RemoteIdentityUpdateResponse,
+	error,
+) {
+	var items []*RemoteIdentityUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertRemoteIdentityUpdateResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -8779,6 +9048,51 @@ func (n *nodeIteratorImpl) Value() Node {
 
 func (n *nodeIteratorImpl) Err() error {
 	return n.err
+}
+
+type remoteIdentityIteratorImplFetchFunc func() (
+	[]*RemoteIdentity,
+	bool, error)
+type remoteIdentityIteratorImpl struct {
+	buffer      []*RemoteIdentity
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       remoteIdentityIteratorImplFetchFunc
+}
+
+func newRemoteIdentityIteratorImpl(f remoteIdentityIteratorImplFetchFunc) *remoteIdentityIteratorImpl {
+	return &remoteIdentityIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (r *remoteIdentityIteratorImpl) Next() bool {
+	if r.index < len(r.buffer)-1 {
+		r.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !r.hasNextPage {
+		return false
+	}
+
+	r.index = 0
+	r.buffer, r.hasNextPage, r.err = r.fetch()
+	return len(r.buffer) > 0
+}
+
+func (r *remoteIdentityIteratorImpl) Value() *RemoteIdentity {
+	if r.index >= len(r.buffer) {
+		return nil
+	}
+	return r.buffer[r.index]
+}
+
+func (r *remoteIdentityIteratorImpl) Err() error {
+	return r.err
 }
 
 type remoteIdentityGroupIteratorImplFetchFunc func() (
