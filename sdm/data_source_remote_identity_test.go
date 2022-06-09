@@ -50,11 +50,11 @@ func TestAccSDMRemoteIdentityDataSource_Get(t *testing.T) {
 				Config: config,
 				Check: resource.ComposeTestCheckFunc(
 					// TOOO fix s/remoteidentitys/remoteidentities/ (pkg/api/v1/templates/terraform-provider-sdm/sdm/data_source.go.tpl)
-					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identitys.#", "1"),
-					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identitys.0.id", created.RemoteIdentity.ID),
-					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identitys.0.account_id", created.RemoteIdentity.AccountID),
-					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identitys.0.remote_identity_group_id", created.RemoteIdentity.RemoteIdentityGroupID),
-					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identitys.0.username", created.RemoteIdentity.Username),
+					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identities.#", "1"),
+					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identities.0.id", created.RemoteIdentity.ID),
+					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identities.0.account_id", created.RemoteIdentity.AccountID),
+					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identities.0.remote_identity_group_id", created.RemoteIdentity.RemoteIdentityGroupID),
+					resource.TestCheckResourceAttr("data.sdm_remote_identity."+dsName, "remote_identities.0.username", created.RemoteIdentity.Username),
 				),
 			},
 		},

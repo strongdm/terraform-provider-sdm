@@ -42,7 +42,7 @@ func dataSourceRemoteIdentity() *schema.Resource {
 				Optional:    true,
 				Description: "The username to be used as the remote identity for this account.",
 			},
-			"remote_identitys": {
+			"remote_identities": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -104,7 +104,7 @@ func dataSourceRemoteIdentityList(ctx context.Context, d *schema.ResourceData, c
 	filter, args := convertRemoteIdentityFilterToPlumbing(d)
 	resp, err := cc.RemoteIdentities().List(ctx, filter, args...)
 	if err != nil {
-		return fmt.Errorf("cannot list RemoteIdentitys %s: %w", d.Id(), err)
+		return fmt.Errorf("cannot list RemoteIdentities %s: %w", d.Id(), err)
 	}
 	ids := []string{}
 	type entity = map[string]interface{}
@@ -128,7 +128,7 @@ func dataSourceRemoteIdentityList(ctx context.Context, d *schema.ResourceData, c
 	if err != nil {
 		return fmt.Errorf("cannot set ids: %w", err)
 	}
-	err = d.Set("remote_identitys", output)
+	err = d.Set("remote_identities", output)
 	if err != nil {
 		return fmt.Errorf("cannot set output: %w", err)
 	}
