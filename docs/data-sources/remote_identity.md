@@ -12,7 +12,10 @@ RemoteIdentities define the username to be used for a specific account
 ## Example Usage
 
 ```hcl
-
+data "sdm_remote_identity" "user" {
+    id = "i-0900909"
+    username = "user"
+}
 ```
 ## Argument Reference
 The following arguments are supported by a RemoteIdentities data source:

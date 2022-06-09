@@ -11,7 +11,9 @@ A RemoteIdentityGroup defines a group of remote identities.
 ## Example Usage
 
 ```hcl
-
+data "sdm_remote_identity_group" "default" {
+    name = "default"
+}
 ```
 ## Argument Reference
 The following arguments are supported by a RemoteIdentityGroups data source:

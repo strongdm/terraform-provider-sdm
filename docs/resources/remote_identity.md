@@ -12,6 +12,10 @@ RemoteIdentities define the username to be used for a specific account
 ## Example Usage
 
 ```hcl
+resource "sdm_remote_identity" "user" {
+    id = "i-0900909"
+    username = "user"
+}
 
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
