@@ -30,5 +30,5 @@ In addition to provided arguments above, the following attributes are returned b
 AccountGrant can be imported using the id, e.g.,
 
 ```
-$ terraform import AccountGrant.example ag-12345678
+$ terraform import sdm_account_grant.example ag-12345678
 ```

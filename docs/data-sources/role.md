@@ -23,7 +23,6 @@ data "sdm_role" "composite_role_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a Roles data source:
-* `access_rules` - (Optional) AccessRules is a list of access rules defining the resources this Role has access to.
 * `composite` - (Optional) Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.
 * `id` - (Optional) Unique identifier of the Role.
 * `name` - (Optional) Unique human-readable name of the Role.

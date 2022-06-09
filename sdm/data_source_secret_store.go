@@ -25,18 +25,6 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"ca_cert_path": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"client_cert_path": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"client_key_path": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 			"id": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -45,28 +33,8 @@ func dataSourceSecretStore() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"namespace": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"project_id": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"region": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"server_address": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 			"tags": {
 				Type:     schema.TypeMap,
-				Optional: true,
-			},
-			"vault_uri": {
-				Type:     schema.TypeString,
 				Optional: true,
 			},
 			"secret_stores": {
@@ -302,18 +270,6 @@ func convertSecretStoreFilterToPlumbing(d *schema.ResourceData) (string, []inter
 		filter += "type:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("CA_cert_path"); ok {
-		filter += "cacertpath:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("client_cert_path"); ok {
-		filter += "clientcertpath:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("client_key_path"); ok {
-		filter += "clientkeypath:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
@@ -322,32 +278,12 @@ func convertSecretStoreFilterToPlumbing(d *schema.ResourceData) (string, []inter
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("namespace"); ok {
-		filter += "namespace:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("projectID"); ok {
-		filter += "projectid:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("region"); ok {
-		filter += "region:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("server_address"); ok {
-		filter += "serveraddress:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOkExists("tags"); ok {
 		tags := convertTagsToPlumbing(v)
 		for kk, vv := range tags {
 			filter += "tag:?=?"
 			args = append(args, kk, vv)
 		}
-	}
-	if v, ok := d.GetOkExists("vault_uri"); ok {
-		filter += "vaulturi:? "
-		args = append(args, v)
 	}
 	return filter, args
 }

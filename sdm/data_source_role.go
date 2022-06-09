@@ -22,11 +22,6 @@ func dataSourceRole() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"access_rules": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "AccessRules is a list of access rules defining the resources this Role has access to.",
-			},
 			"composite": {
 				Type:        schema.TypeBool,
 				Optional:    true,
