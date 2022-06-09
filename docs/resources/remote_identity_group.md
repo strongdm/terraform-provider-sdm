@@ -25,5 +25,5 @@ In addition to provided arguments above, the following attributes are returned b
 RemoteIdentityGroup can be imported using the id, e.g.,
 
 ```
-$ terraform import RemoteIdentityGroup.example ig-12345678
+$ terraform import sdm_remote_identity_group.example ig-12345678
 ```

@@ -28,5 +28,5 @@ In addition to provided arguments above, the following attributes are returned b
 RemoteIdentity can be imported using the id, e.g.,
 
 ```
-$ terraform import RemoteIdentity.example i-12345678
+$ terraform import sdm_remote_identity.example i-12345678
 ```
