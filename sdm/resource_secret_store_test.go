@@ -238,8 +238,6 @@ func TestAccSDMSecretStore_Update(t *testing.T) {
 }
 
 func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
-	t.Parallel()
-
 	type testCase struct {
 		resource string
 		pairs    [][2]string

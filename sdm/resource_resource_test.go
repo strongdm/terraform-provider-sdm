@@ -469,8 +469,6 @@ func TestAccSDMResource_Update(t *testing.T) {
 }
 
 func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
-	t.Parallel()
-
 	certificateAuthorityRaw := []string{
 		"\"-----BEGIN CERTIFICATE-----",
 		"MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p",
@@ -1005,8 +1003,6 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 }
 
 func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
-	t.Parallel()
-
 	client, err := preTestClient()
 	if err != nil {
 		t.Fatalf("failed to create test client: %v", err)
