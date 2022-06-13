@@ -114,6 +114,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -232,6 +242,16 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port": {
 										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -442,6 +462,16 @@ func dataSourceResource() *schema.Resource {
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -2208,6 +2238,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2637,6 +2677,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2755,6 +2805,16 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port": {
 										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
 									},
@@ -4820,6 +4880,16 @@ func dataSourceResource() *schema.Resource {
 										Computed:    true,
 										Description: "",
 									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -5177,18 +5247,20 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		switch v := resp.Value().(type) {
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
-				"bind_interface":        (v.BindInterface),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"egress_filter":         (v.EgressFilter),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-				"hostname":              (v.Hostname),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"port":                  (v.Port),
-				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                (v.CertificateAuthority),
+				"client_certificate":                   (v.ClientCertificate),
+				"client_key":                           (v.ClientKey),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AKSBasicAuth:
 			output[0]["aks_basic_auth"] = append(output[0]["aks_basic_auth"], entity{
@@ -5206,16 +5278,18 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AKSServiceAccount:
 			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
-				"bind_interface":        (v.BindInterface),
-				"egress_filter":         (v.EgressFilter),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-				"hostname":              (v.Hostname),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"port":                  (v.Port),
-				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToPorcelain(v.Tags),
-				"token":                 (v.Token),
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"token":                                (v.Token),
 			})
 		case *sdm.AKSServiceAccountUserImpersonation:
 			output[0]["aks_service_account_user_impersonation"] = append(output[0]["aks_service_account_user_impersonation"], entity{
@@ -5247,21 +5321,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
-				"access_key":            (v.AccessKey),
-				"bind_interface":        (v.BindInterface),
-				"certificate_authority": (v.CertificateAuthority),
-				"cluster_name":          (v.ClusterName),
-				"egress_filter":         (v.EgressFilter),
-				"endpoint":              (v.Endpoint),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"region":                (v.Region),
-				"role_arn":              (v.RoleArn),
-				"role_external_id":      (v.RoleExternalID),
-				"secret_access_key":     (v.SecretAccessKey),
-				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToPorcelain(v.Tags),
+				"access_key":                           (v.AccessKey),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                (v.CertificateAuthority),
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             (v.RoleArn),
+				"role_external_id":                     (v.RoleExternalID),
+				"secret_access_key":                    (v.SecretAccessKey),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AmazonEKSUserImpersonation:
 			output[0]["amazon_eks_user_impersonation"] = append(output[0]["amazon_eks_user_impersonation"], entity{
@@ -5622,16 +5698,18 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
-				"bind_interface":        (v.BindInterface),
-				"certificate_authority": (v.CertificateAuthority),
-				"egress_filter":         (v.EgressFilter),
-				"endpoint":              (v.Endpoint),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"secret_store_id":       (v.SecretStoreID),
-				"service_account_key":   (v.ServiceAccountKey),
-				"tags":                  convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                (v.CertificateAuthority),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"service_account_key":                  (v.ServiceAccountKey),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.GoogleGKEUserImpersonation:
 			output[0]["google_gke_user_impersonation"] = append(output[0]["google_gke_user_impersonation"], entity{
@@ -5709,18 +5787,20 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Kubernetes:
 			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
-				"bind_interface":        (v.BindInterface),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"egress_filter":         (v.EgressFilter),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-				"hostname":              (v.Hostname),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"port":                  (v.Port),
-				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                (v.CertificateAuthority),
+				"client_certificate":                   (v.ClientCertificate),
+				"client_key":                           (v.ClientKey),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.KubernetesBasicAuth:
 			output[0]["kubernetes_basic_auth"] = append(output[0]["kubernetes_basic_auth"], entity{
@@ -5738,16 +5818,18 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
-				"bind_interface":        (v.BindInterface),
-				"egress_filter":         (v.EgressFilter),
-				"healthcheck_namespace": (v.HealthcheckNamespace),
-				"hostname":              (v.Hostname),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"port":                  (v.Port),
-				"secret_store_id":       (v.SecretStoreID),
-				"tags":                  convertTagsToPorcelain(v.Tags),
-				"token":                 (v.Token),
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"token":                                (v.Token),
 			})
 		case *sdm.KubernetesServiceAccountUserImpersonation:
 			output[0]["kubernetes_service_account_user_impersonation"] = append(output[0]["kubernetes_service_account_user_impersonation"], entity{
@@ -6170,18 +6252,20 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SSHCert:
 			output[0]["ssh_cert"] = append(output[0]["ssh_cert"], entity{
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
-				"bind_interface":                 (v.BindInterface),
-				"egress_filter":                  (v.EgressFilter),
-				"hostname":                       (v.Hostname),
-				"id":                             (v.ID),
-				"name":                           (v.Name),
-				"port":                           (v.Port),
-				"port_forwarding":                (v.PortForwarding),
-				"port_override":                  (v.PortOverride),
-				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToPorcelain(v.Tags),
-				"username":                       (v.Username),
+				"allow_deprecated_key_exchanges":       (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"hostname":                             (v.Hostname),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_forwarding":                      (v.PortForwarding),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"username":                             (v.Username),
 			})
 		case *sdm.SSHCustomerKey:
 			output[0]["ssh_customer_key"] = append(output[0]["ssh_customer_key"], entity{

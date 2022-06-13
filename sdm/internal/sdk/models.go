@@ -54,6 +54,10 @@ type AKS struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -104,6 +108,10 @@ type AKSServiceAccount struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -415,6 +423,10 @@ type AmazonEKS struct {
 	Name string `json:"name"`
 
 	Region string `json:"region"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 
 	RoleArn string `json:"roleArn"`
 
@@ -1176,6 +1188,10 @@ type GoogleGKE struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 
@@ -1349,6 +1365,10 @@ type Kubernetes struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1399,6 +1419,10 @@ type KubernetesServiceAccount struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -6437,6 +6461,10 @@ type SSHCert struct {
 	PortForwarding bool `json:"portForwarding"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.

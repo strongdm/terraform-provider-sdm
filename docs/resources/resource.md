@@ -59,6 +59,8 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aks_basic_auth:
@@ -83,6 +85,8 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
@@ -132,6 +136,8 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `region` - (Required) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)
 	* `secret_store_role_arn_key` - (Optional)
@@ -534,6 +540,8 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `service_account_key` - (Required if storing credentials directly strongDM) 
 	* `secret_store_service_account_key_path` - (Required if using credentials stored in a secret store)
@@ -627,6 +635,8 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * kubernetes_basic_auth:
@@ -651,6 +661,8 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
@@ -1082,6 +1094,8 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 

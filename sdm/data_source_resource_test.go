@@ -242,9 +242,65 @@ func TestAccSDMResource_GetTags(t *testing.T) {
 
 }
 
+func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
+	t.Parallel()
+
+	group := getDefaultRemoteIdentityGroup(t)
+
+	resources, err := createSSHCertsWithPrefix("resource-get-test", *group, 1)
+	if err != nil {
+		t.Fatal("failed to create redis in setup: ", err)
+	}
+	sshCert := resources[0].(*sdm.SSHCert)
+
+	dsName := randomWithPrefix("rs_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMResourceFilterConfig(dsName, "resource-get-test*"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.name", sshCert.Name),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.hostname", sshCert.Hostname),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.port", fmt.Sprintf("%d", sshCert.Port)),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "ids.0", sshCert.ID),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.remote_identity_group_id", group.ID),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.remote_identity_healthcheck_username", "healthcheck"),
+				),
+			},
+		},
+	})
+}
+
 func testAccSDMResourceFilterConfig(resourceDataSourceName, nameFilter string) string {
 	return fmt.Sprintf(`
 		data "sdm_resource" "%s" {
 			name = "%s"
 		}`, resourceDataSourceName, nameFilter)
+}
+
+func createSSHCertsWithPrefix(prefix string, group sdm.RemoteIdentityGroup, count int) ([]sdm.Resource, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	resources := []sdm.Resource{}
+	for i := 0; i < count; i++ {
+		port := portOverride.Count()
+		createResp, err := client.Resources().Create(ctx, &sdm.SSHCert{
+			Name:                              randomWithPrefix(prefix),
+			Hostname:                          randomWithPrefix(prefix),
+			Username:                          randomWithPrefix(prefix),
+			Port:                              port,
+			RemoteIdentityGroupID:             group.ID,
+			RemoteIdentityHealthcheckUsername: "healthcheck",
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create ssh: %w", err)
+		}
+		resources = append(resources, createResp.Resource)
+	}
+	return resources, nil
 }

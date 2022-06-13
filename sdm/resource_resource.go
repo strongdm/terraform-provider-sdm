@@ -103,6 +103,16 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -232,6 +242,16 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -490,6 +510,16 @@ func resourceResource() *schema.Resource {
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"role_arn": {
@@ -2675,6 +2705,16 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3174,6 +3214,16 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3303,6 +3353,16 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -5713,6 +5773,16 @@ func resourceResource() *schema.Resource {
 						"port_override": {
 							Type:        schema.TypeInt,
 							Computed:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -8803,18 +8873,20 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AKS{}
 		}
 		out := &sdm.AKS{
-			ID:                   d.Id(),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
-			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
-			ClientKey:            convertStringToPlumbing(raw["client_key"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Hostname:             convertStringToPlumbing(raw["hostname"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			Port:                 convertInt32ToPlumbing(raw["port"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:              convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:                 convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:                         convertStringToPlumbing(raw["client_key"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:                          convertStringToPlumbing(raw["hostname"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -8859,16 +8931,18 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AKSServiceAccount{}
 		}
 		out := &sdm.AKSServiceAccount{
-			ID:                   d.Id(),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Hostname:             convertStringToPlumbing(raw["hostname"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			Port:                 convertInt32ToPlumbing(raw["port"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
-			Token:                convertStringToPlumbing(raw["token"]),
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:                          convertStringToPlumbing(raw["hostname"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+			Token:                             convertStringToPlumbing(raw["token"]),
 		}
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
@@ -8933,21 +9007,23 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.AmazonEKS{}
 		}
 		out := &sdm.AmazonEKS{
-			ID:                   d.Id(),
-			AccessKey:            convertStringToPlumbing(raw["access_key"]),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
-			ClusterName:          convertStringToPlumbing(raw["cluster_name"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
-			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			Region:               convertStringToPlumbing(raw["region"]),
-			RoleArn:              convertStringToPlumbing(raw["role_arn"]),
-			RoleExternalID:       convertStringToPlumbing(raw["role_external_id"]),
-			SecretAccessKey:      convertStringToPlumbing(raw["secret_access_key"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			ID:                                d.Id(),
+			AccessKey:                         convertStringToPlumbing(raw["access_key"]),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:              convertStringToPlumbing(raw["certificate_authority"]),
+			ClusterName:                       convertStringToPlumbing(raw["cluster_name"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:                          convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Region:                            convertStringToPlumbing(raw["region"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			RoleArn:                           convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:                    convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey:                   convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
@@ -9723,16 +9799,18 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.GoogleGKE{}
 		}
 		out := &sdm.GoogleGKE{
-			ID:                   d.Id(),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
-			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			ServiceAccountKey:    convertStringToPlumbing(raw["service_account_key"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:              convertStringToPlumbing(raw["certificate_authority"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:                          convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			ServiceAccountKey:                 convertStringToPlumbing(raw["service_account_key"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -9877,18 +9955,20 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Kubernetes{}
 		}
 		out := &sdm.Kubernetes{
-			ID:                   d.Id(),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			CertificateAuthority: convertStringToPlumbing(raw["certificate_authority"]),
-			ClientCertificate:    convertStringToPlumbing(raw["client_certificate"]),
-			ClientKey:            convertStringToPlumbing(raw["client_key"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Hostname:             convertStringToPlumbing(raw["hostname"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			Port:                 convertInt32ToPlumbing(raw["port"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:              convertStringToPlumbing(raw["certificate_authority"]),
+			ClientCertificate:                 convertStringToPlumbing(raw["client_certificate"]),
+			ClientKey:                         convertStringToPlumbing(raw["client_key"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:                          convertStringToPlumbing(raw["hostname"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
@@ -9933,16 +10013,18 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.KubernetesServiceAccount{}
 		}
 		out := &sdm.KubernetesServiceAccount{
-			ID:                   d.Id(),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Hostname:             convertStringToPlumbing(raw["hostname"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			Port:                 convertInt32ToPlumbing(raw["port"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
-			Token:                convertStringToPlumbing(raw["token"]),
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Hostname:                          convertStringToPlumbing(raw["hostname"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+			Token:                             convertStringToPlumbing(raw["token"]),
 		}
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
@@ -10794,17 +10876,19 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SSHCert{}
 		}
 		out := &sdm.SSHCert{
-			ID:                          d.Id(),
-			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
-			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:                    convertStringToPlumbing(raw["hostname"]),
-			Name:                        convertStringToPlumbing(raw["name"]),
-			Port:                        convertInt32ToPlumbing(raw["port"]),
-			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
-			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:                        convertTagsToPlumbing(raw["tags"]),
-			Username:                    convertStringToPlumbing(raw["username"]),
+			ID:                                d.Id(),
+			AllowDeprecatedKeyExchanges:       convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                          convertStringToPlumbing(raw["hostname"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
+			PortForwarding:                    convertBoolToPlumbing(raw["port_forwarding"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+			Username:                          convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10974,6 +11058,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -11004,17 +11090,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"token":                                seValues["token"],
+				"secret_store_token_path":              seValues["secret_store_token_path"],
+				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.AKSServiceAccountUserImpersonation:
@@ -11077,6 +11165,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
 				"region":                                  (v.Region),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"role_arn":                                seValues["role_arn"],
 				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
@@ -11648,6 +11738,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
 				"service_account_key":                     seValues["service_account_key"],
 				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
@@ -11778,6 +11870,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -11808,17 +11902,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"token":                                seValues["token"],
+				"secret_store_token_path":              seValues["secret_store_token_path"],
+				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.KubernetesServiceAccountUserImpersonation:
@@ -12432,19 +12528,21 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
-				"bind_interface":                 (v.BindInterface),
-				"egress_filter":                  (v.EgressFilter),
-				"hostname":                       (v.Hostname),
-				"name":                           (v.Name),
-				"port":                           (v.Port),
-				"port_forwarding":                (v.PortForwarding),
-				"port_override":                  (v.PortOverride),
-				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToPorcelain(v.Tags),
-				"username":                       seValues["username"],
-				"secret_store_username_path":     seValues["secret_store_username_path"],
-				"secret_store_username_key":      seValues["secret_store_username_key"],
+				"allow_deprecated_key_exchanges":       (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_forwarding":                      (v.PortForwarding),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"username":                             seValues["username"],
+				"secret_store_username_path":           seValues["secret_store_username_path"],
+				"secret_store_username_key":            seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.SSHCustomerKey:
@@ -12577,6 +12675,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -12613,17 +12713,19 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"token":                                seValues["token"],
+				"secret_store_token_path":              seValues["secret_store_token_path"],
+				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.AKSServiceAccountUserImpersonation:
@@ -12695,6 +12797,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
 				"region":                                  (v.Region),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"role_arn":                                seValues["role_arn"],
 				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
@@ -13341,6 +13445,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
 				"service_account_key":                     seValues["service_account_key"],
 				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
@@ -13489,6 +13595,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -13525,17 +13633,19 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"secret_store_id":         (v.SecretStoreID),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"token":                                seValues["token"],
+				"secret_store_token_path":              seValues["secret_store_token_path"],
+				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.KubernetesServiceAccountUserImpersonation:
@@ -14233,19 +14343,21 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
-				"bind_interface":                 (v.BindInterface),
-				"egress_filter":                  (v.EgressFilter),
-				"hostname":                       (v.Hostname),
-				"name":                           (v.Name),
-				"port":                           (v.Port),
-				"port_forwarding":                (v.PortForwarding),
-				"port_override":                  (v.PortOverride),
-				"secret_store_id":                (v.SecretStoreID),
-				"tags":                           convertTagsToPorcelain(v.Tags),
-				"username":                       seValues["username"],
-				"secret_store_username_path":     seValues["secret_store_username_path"],
-				"secret_store_username_key":      seValues["secret_store_username_key"],
+				"allow_deprecated_key_exchanges":       (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_forwarding":                      (v.PortForwarding),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"username":                             seValues["username"],
+				"secret_store_username_path":           seValues["secret_store_username_path"],
+				"secret_store_username_key":            seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.SSHCustomerKey:

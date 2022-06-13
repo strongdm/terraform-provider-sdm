@@ -96,6 +96,8 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -121,6 +123,8 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
@@ -229,6 +233,8 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -252,6 +258,8 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Token = (porcelain.Token)
@@ -1253,6 +1261,8 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) 
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Region = plumbing.Region
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretAccessKey = plumbing.SecretAccessKey
@@ -1281,6 +1291,8 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Region = (porcelain.Region)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
@@ -3290,6 +3302,8 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServiceAccountKey = plumbing.ServiceAccountKey
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -3313,6 +3327,8 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -3701,6 +3717,8 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -3726,6 +3744,8 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
@@ -3834,6 +3854,8 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -3857,6 +3879,8 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Token = (porcelain.Token)
@@ -7713,6 +7737,8 @@ func convertSSHCertToPorcelain(plumbing *proto.SSHCert) (*SSHCert, error) {
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -7738,6 +7764,8 @@ func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)

@@ -46,6 +46,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 	* aks_basic_auth:
@@ -68,6 +70,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
@@ -106,6 +110,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `region` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `role_arn` - 
 		* `role_external_id` - 
 		* `secret_access_key` - 
@@ -428,6 +434,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `service_account_key` - 
 		* `tags` - Tags is a map of key, value pairs.
@@ -506,6 +514,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 	* kubernetes_basic_auth:
@@ -528,6 +538,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
@@ -906,6 +918,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_forwarding` - 
 		* `port_override` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
