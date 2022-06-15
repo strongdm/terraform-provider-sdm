@@ -7662,6 +7662,7 @@ func convertSSHToPorcelain(plumbing *proto.SSH) (*SSH, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.KeyType = plumbing.KeyType
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
@@ -7688,6 +7689,7 @@ func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.KeyType = (porcelain.KeyType)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)

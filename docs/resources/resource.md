@@ -1078,6 +1078,7 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) Bind interface
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
+	* `key_type` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
