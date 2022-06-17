@@ -12,8 +12,6 @@ import (
 )
 
 func TestAccSDMAccount_Get(t *testing.T) {
-	t.Parallel()
-
 	accounts, err := createUsersWithPrefix("account-get", 1)
 	if err != nil {
 		t.Fatal("failed to create account in setup: ", err)

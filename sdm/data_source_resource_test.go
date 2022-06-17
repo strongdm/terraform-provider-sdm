@@ -12,8 +12,6 @@ import (
 )
 
 func TestAccSDMResource_Get(t *testing.T) {
-	t.Parallel()
-
 	resources, err := createRedisesWithPrefix("resource-get-test", 1)
 	if err != nil {
 		t.Fatal("failed to create redis in setup: ", err)
