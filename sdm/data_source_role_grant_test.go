@@ -68,7 +68,6 @@ func TestAccSDMRoleGrantDataSource_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMRoleGrantDataSource_GetNone(t *testing.T) {
-	t.Parallel()
 	_, err := createRoleGrantsWithPrefix("test", 1)
 	if err != nil {
 		t.Fatal("failed to create role grants: ", err)
