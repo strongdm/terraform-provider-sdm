@@ -114,11 +114,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -190,11 +185,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -253,11 +243,6 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -329,11 +314,6 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -413,11 +393,6 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -2702,11 +2677,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2778,11 +2748,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Description: "",
-									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2841,11 +2806,6 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -2917,11 +2877,6 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3001,11 +2956,6 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Computed:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4835,11 +4785,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
-									"key_type": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4914,11 +4859,6 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
-									},
-									"key_type": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -5317,7 +5257,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
-				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -5333,7 +5272,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"password":              (v.Password),
 				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
@@ -5347,7 +5285,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
-				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -5363,7 +5300,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"token":                 (v.Token),
@@ -5380,7 +5316,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
@@ -5862,7 +5797,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
-				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -5878,7 +5812,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"password":              (v.Password),
 				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
@@ -5892,7 +5825,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
-				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -5908,7 +5840,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"token":                 (v.Token),
@@ -5925,7 +5856,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                    (v.ID),
 				"name":                  (v.Name),
 				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
@@ -6311,7 +6241,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"id":                             (v.ID),
-				"key_type":                       (v.KeyType),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
@@ -6328,7 +6257,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                        (v.EgressFilter),
 				"hostname":                             (v.Hostname),
 				"id":                                   (v.ID),
-				"key_type":                             (v.KeyType),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
 				"port_forwarding":                      (v.PortForwarding),

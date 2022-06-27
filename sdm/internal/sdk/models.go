@@ -55,8 +55,6 @@ type AKS struct {
 
 	Port int32 `json:"port"`
 
-	PortOverride int32 `json:"portOverride"`
-
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
@@ -85,8 +83,6 @@ type AKSBasicAuth struct {
 	Password string `json:"password"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -112,8 +108,6 @@ type AKSServiceAccount struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
@@ -143,8 +137,6 @@ type AKSServiceAccountUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -176,8 +168,6 @@ type AKSUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1376,8 +1366,6 @@ type Kubernetes struct {
 
 	Port int32 `json:"port"`
 
-	PortOverride int32 `json:"portOverride"`
-
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
@@ -1406,8 +1394,6 @@ type KubernetesBasicAuth struct {
 	Password string `json:"password"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1433,8 +1419,6 @@ type KubernetesServiceAccount struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
@@ -1464,8 +1448,6 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1497,8 +1479,6 @@ type KubernetesUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -6443,8 +6423,6 @@ type SSH struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-
-	KeyType string `json:"keyType"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
@@ -6475,8 +6453,6 @@ type SSHCert struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-
-	KeyType string `json:"keyType"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 

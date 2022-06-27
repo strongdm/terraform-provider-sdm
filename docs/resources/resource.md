@@ -1078,7 +1078,6 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) Bind interface
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
-	* `key_type` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
@@ -1092,7 +1091,6 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) Bind interface
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
-	* `key_type` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
@@ -1164,16 +1162,6 @@ The following arguments are supported by the Resource resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
-* aks:
-	* `port_override` - 
-* aks_basic_auth:
-	* `port_override` - 
-* aks_service_account:
-	* `port_override` - 
-* aks_service_account_user_impersonation:
-	* `port_override` - 
-* aks_user_impersonation:
-	* `port_override` - 
 * amazon_es:
 	* `port_override` - 
 * amazonmq_amqp_091:
@@ -1213,16 +1201,6 @@ In addition to provided arguments above, the following attributes are returned b
 * elasticache_redis:
 	* `port_override` - 
 * greenplum:
-	* `port_override` - 
-* kubernetes:
-	* `port_override` - 
-* kubernetes_basic_auth:
-	* `port_override` - 
-* kubernetes_service_account:
-	* `port_override` - 
-* kubernetes_service_account_user_impersonation:
-	* `port_override` - 
-* kubernetes_user_impersonation:
 	* `port_override` - 
 * maria:
 	* `port_override` - 
