@@ -6423,6 +6423,8 @@ type SSH struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+
+	KeyType string `json:"keyType"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
