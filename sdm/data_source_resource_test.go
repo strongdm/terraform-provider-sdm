@@ -241,6 +241,8 @@ func TestAccSDMResource_GetTags(t *testing.T) {
 }
 
 func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
+	t.Parallel()
+
 	group := getDefaultRemoteIdentityGroup(t)
 
 	resources, err := createSSHCertsWithPrefix("resource-get-test", *group, 1)
