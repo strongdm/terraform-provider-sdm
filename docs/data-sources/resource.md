@@ -915,6 +915,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - 
 		* `id` - Unique identifier of the Resource.
+		* `key_type` - 
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
 		* `port_forwarding` - 

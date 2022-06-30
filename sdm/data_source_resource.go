@@ -4865,6 +4865,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
+									"key_type": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -6263,6 +6268,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                        (v.EgressFilter),
 				"hostname":                             (v.Hostname),
 				"id":                                   (v.ID),
+				"key_type":                             (v.KeyType),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
 				"port_forwarding":                      (v.PortForwarding),
