@@ -59,6 +59,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
@@ -527,6 +528,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 

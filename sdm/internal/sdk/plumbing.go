@@ -167,6 +167,7 @@ func convertAKSBasicAuthToPorcelain(plumbing *proto.AKSBasicAuth) (*AKSBasicAuth
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -191,6 +192,7 @@ func convertAKSBasicAuthToPlumbing(porcelain *AKSBasicAuth) *proto.AKSBasicAuth 
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)
@@ -3788,6 +3790,7 @@ func convertKubernetesBasicAuthToPorcelain(plumbing *proto.KubernetesBasicAuth) 
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -3812,6 +3815,7 @@ func convertKubernetesBasicAuthToPlumbing(porcelain *KubernetesBasicAuth) *proto
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)

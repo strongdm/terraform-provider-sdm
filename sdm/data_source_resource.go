@@ -185,6 +185,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2748,6 +2753,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -5282,6 +5292,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"password":              (v.Password),
 				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
@@ -5822,6 +5833,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                  (v.Name),
 				"password":              (v.Password),
 				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),

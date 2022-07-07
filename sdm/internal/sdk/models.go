@@ -83,6 +83,8 @@ type AKSBasicAuth struct {
 	Password string `json:"password"`
 
 	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1394,6 +1396,8 @@ type KubernetesBasicAuth struct {
 	Password string `json:"password"`
 
 	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.

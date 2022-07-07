@@ -179,6 +179,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3288,6 +3293,11 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -8927,6 +8937,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Username:             convertStringToPlumbing(raw["username"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
 		}
@@ -10009,6 +10024,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Username:             convertStringToPlumbing(raw["username"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
 		}
@@ -11090,6 +11110,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_path": seValues["secret_store_password_path"],
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
+				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
@@ -11902,6 +11923,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_password_path": seValues["secret_store_password_path"],
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
+				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
@@ -12712,6 +12734,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_path": seValues["secret_store_password_path"],
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
+				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
@@ -13632,6 +13655,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_password_path": seValues["secret_store_password_path"],
 				"secret_store_password_key":  seValues["secret_store_password_key"],
 				"port":                       (v.Port),
+				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"username":                   seValues["username"],
