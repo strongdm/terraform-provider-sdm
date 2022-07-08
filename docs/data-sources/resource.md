@@ -46,6 +46,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -59,6 +60,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
@@ -70,6 +72,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -83,6 +86,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
@@ -97,6 +101,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 	* amazon_eks:
@@ -514,6 +519,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -527,6 +533,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
@@ -538,6 +545,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -551,6 +559,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
@@ -565,6 +574,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 	* maria:

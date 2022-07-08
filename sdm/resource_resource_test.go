@@ -854,6 +854,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"username", `"Username"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+				{"key_type", `"ed25519"`},
 			},
 		},
 		{
@@ -864,6 +865,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"username", `"Username"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+				{"key_type", `"ed25519"`},
 			},
 		},
 		{
@@ -1550,6 +1552,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_username_key", `"key"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+				{"key_type", `"ed25519"`},
 			},
 		},
 		{
@@ -1576,6 +1579,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_username_key", `"key"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+				{"key_type", `"ed25519"`},
 			},
 		},
 		{
@@ -1767,6 +1771,7 @@ func testAccSDMResourceSSHConfig(resourceName string, sdmResourceName string, po
 			hostname = "test.com"
 			username = "user"
 			port = %d
+			key_type = "ed25519"
 		}
 	}
 	`, resourceName, sdmResourceName, port)

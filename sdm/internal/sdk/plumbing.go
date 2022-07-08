@@ -96,6 +96,7 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
 	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -123,6 +124,7 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
 	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -167,6 +169,7 @@ func convertAKSBasicAuthToPorcelain(plumbing *proto.AKSBasicAuth) (*AKSBasicAuth
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -191,6 +194,7 @@ func convertAKSBasicAuthToPlumbing(porcelain *AKSBasicAuth) *proto.AKSBasicAuth 
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)
@@ -233,6 +237,7 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
 	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -258,6 +263,7 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
 	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -302,6 +308,7 @@ func convertAKSServiceAccountUserImpersonationToPorcelain(plumbing *proto.AKSSer
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -325,6 +332,7 @@ func convertAKSServiceAccountUserImpersonationToPlumbing(porcelain *AKSServiceAc
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Token = (porcelain.Token)
@@ -370,6 +378,7 @@ func convertAKSUserImpersonationToPorcelain(plumbing *proto.AKSUserImpersonation
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -395,6 +404,7 @@ func convertAKSUserImpersonationToPlumbing(porcelain *AKSUserImpersonation) *pro
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
@@ -3717,6 +3727,7 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
 	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -3744,6 +3755,7 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
 	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -3788,6 +3800,7 @@ func convertKubernetesBasicAuthToPorcelain(plumbing *proto.KubernetesBasicAuth) 
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -3812,6 +3825,7 @@ func convertKubernetesBasicAuthToPlumbing(porcelain *KubernetesBasicAuth) *proto
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)
@@ -3854,6 +3868,7 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
 	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -3879,6 +3894,7 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
 	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -3923,6 +3939,7 @@ func convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing *proto
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -3946,6 +3963,7 @@ func convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain *Kuber
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Token = (porcelain.Token)
@@ -3991,6 +4009,7 @@ func convertKubernetesUserImpersonationToPorcelain(plumbing *proto.KubernetesUse
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -4016,6 +4035,7 @@ func convertKubernetesUserImpersonationToPlumbing(porcelain *KubernetesUserImper
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
