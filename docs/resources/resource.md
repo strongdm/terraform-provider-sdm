@@ -1164,7 +1164,15 @@ The following arguments are supported by the Resource resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
+* aks:
+	* `port_override` - 
 * aks_basic_auth:
+	* `port_override` - 
+* aks_service_account:
+	* `port_override` - 
+* aks_service_account_user_impersonation:
+	* `port_override` - 
+* aks_user_impersonation:
 	* `port_override` - 
 * amazon_es:
 	* `port_override` - 
@@ -1206,7 +1214,15 @@ In addition to provided arguments above, the following attributes are returned b
 	* `port_override` - 
 * greenplum:
 	* `port_override` - 
+* kubernetes:
+	* `port_override` - 
 * kubernetes_basic_auth:
+	* `port_override` - 
+* kubernetes_service_account:
+	* `port_override` - 
+* kubernetes_service_account_user_impersonation:
+	* `port_override` - 
+* kubernetes_user_impersonation:
 	* `port_override` - 
 * maria:
 	* `port_override` - 

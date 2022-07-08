@@ -55,6 +55,8 @@ type AKS struct {
 
 	Port int32 `json:"port"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
@@ -111,6 +113,8 @@ type AKSServiceAccount struct {
 
 	Port int32 `json:"port"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
@@ -139,6 +143,8 @@ type AKSServiceAccountUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -170,6 +176,8 @@ type AKSUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1368,6 +1376,8 @@ type Kubernetes struct {
 
 	Port int32 `json:"port"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
@@ -1424,6 +1434,8 @@ type KubernetesServiceAccount struct {
 
 	Port int32 `json:"port"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
@@ -1452,6 +1464,8 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
@@ -1483,6 +1497,8 @@ type KubernetesUserImpersonation struct {
 	Name string `json:"name"`
 
 	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.

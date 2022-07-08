@@ -103,6 +103,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
 						"remote_identity_group_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -249,6 +254,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
 						"remote_identity_group_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -323,6 +333,11 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -431,6 +446,11 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -3219,6 +3239,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
 						"remote_identity_group_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3365,6 +3390,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "",
+						},
 						"remote_identity_group_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3439,6 +3469,11 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -3547,6 +3582,11 @@ func resourceResource() *schema.Resource {
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Computed:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -8908,6 +8948,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
 		}
@@ -8969,6 +9014,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 			Token:                             convertStringToPlumbing(raw["token"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
 		}
@@ -8991,6 +9041,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Token:                convertStringToPlumbing(raw["token"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
 		}
@@ -9015,6 +9070,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
 		}
@@ -9995,6 +10055,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
 		}
@@ -10056,6 +10121,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 			Token:                             convertStringToPlumbing(raw["token"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
 		}
@@ -10078,6 +10148,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Token:                convertStringToPlumbing(raw["token"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Token == "" {
 			out.Token = fullSecretStorePath(raw, "token")
 		}
@@ -10102,6 +10177,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
 		}
@@ -11090,6 +11170,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
@@ -11129,6 +11210,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                             (v.Hostname),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -11149,6 +11231,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                (v.Hostname),
 				"name":                    (v.Name),
 				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
 				"secret_store_id":         (v.SecretStoreID),
 				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
@@ -11176,6 +11259,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -11903,6 +11987,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
@@ -11942,6 +12027,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                             (v.Hostname),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -11962,6 +12048,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                (v.Hostname),
 				"name":                    (v.Name),
 				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
 				"secret_store_id":         (v.SecretStoreID),
 				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
@@ -11989,6 +12076,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -12711,6 +12799,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
@@ -12756,6 +12845,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                             (v.Hostname),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -12779,6 +12869,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                (v.Hostname),
 				"name":                    (v.Name),
 				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
 				"secret_store_id":         (v.SecretStoreID),
 				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
@@ -12809,6 +12900,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
@@ -13632,6 +13724,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                         (v.SecretStoreID),
@@ -13677,6 +13770,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                             (v.Hostname),
 				"name":                                 (v.Name),
 				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -13700,6 +13794,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                (v.Hostname),
 				"name":                    (v.Name),
 				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
 				"secret_store_id":         (v.SecretStoreID),
 				"tags":                    convertTagsToPorcelain(v.Tags),
 				"token":                   seValues["token"],
@@ -13730,6 +13825,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                                (v.Hostname),
 				"name":                                    (v.Name),
 				"port":                                    (v.Port),
+				"port_override":                           (v.PortOverride),
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
