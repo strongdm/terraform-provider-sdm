@@ -854,6 +854,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"username", `"Username"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+				{"key_type", `"ed25519"`},
 			},
 		},
 		{
@@ -864,6 +865,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"username", `"Username"`},
 				{"port", "22"},
 				{"port_forwarding", "true"},
+				{"key_type", `"ed25519"`},
 			},
 		},
 		{
