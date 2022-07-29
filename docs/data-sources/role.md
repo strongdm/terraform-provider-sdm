@@ -23,7 +23,6 @@ data "sdm_role" "composite_role_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a Roles data source:
-* `composite` - (Optional) Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.
 * `id` - (Optional) Unique identifier of the Role.
 * `name` - (Optional) Unique human-readable name of the Role.
 * `tags` - (Optional) Tags is a map of key, value pairs.
@@ -33,7 +32,6 @@ In addition to provided arguments above, the following attributes are returned b
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `roles` - A list where each element has the following attributes:
 	* `access_rules` - AccessRules is a list of access rules defining the resources this Role has access to.
-	* `composite` - Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.
 	* `id` - Unique identifier of the Role.
 	* `name` - Unique human-readable name of the Role.
 	* `tags` - Tags is a map of key, value pairs.

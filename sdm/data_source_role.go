@@ -22,12 +22,6 @@ func dataSourceRole() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"composite": {
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.",
-				Deprecated:  "composite is deprecated, see docs for more info",
-			},
 			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -54,12 +48,6 @@ func dataSourceRole() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "AccessRules is a list of access rules defining the resources this Role has access to.",
-						},
-						"composite": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.",
-							Deprecated:  "composite is deprecated, see docs for more info",
 						},
 						"id": {
 							Type:        schema.TypeString,
@@ -92,10 +80,6 @@ func convertRoleFilterToPlumbing(d *schema.ResourceData) (string, []interface{})
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("access_rules"); ok {
 		filter += "accessrules:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("composite"); ok {
-		filter += "composite:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("id"); ok {
@@ -131,7 +115,6 @@ func dataSourceRoleList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		output = append(output,
 			entity{
 				"access_rules": convertAccessRulesToPorcelain(v.AccessRules),
-				"composite":    (v.Composite),
 				"id":           (v.ID),
 				"name":         (v.Name),
 				"tags":         convertTagsToPorcelain(v.Tags),

@@ -6253,63 +6253,12 @@ type ResourceUpdateResponse struct {
 type Role struct {
 	// AccessRules is a list of access rules defining the resources this Role has access to.
 	AccessRules AccessRules `json:"accessRules"`
-	// Composite is true if the Role is a composite role.
-	//
-	// Deprecated: composite roles are deprecated, use multi-role via
-	// AccountAttachments instead.
-	Composite bool `json:"composite"`
 	// Unique identifier of the Role.
 	ID string `json:"id"`
 	// Unique human-readable name of the Role.
 	Name string `json:"name"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-}
-
-// A RoleAttachment assigns a role to a composite role.
-//
-// Deprecated: use multi-role via AccountAttachments instead.
-type RoleAttachment struct {
-	// The id of the attached role of this RoleAttachment.
-	AttachedRoleID string `json:"attachedRoleId"`
-	// The id of the composite role of this RoleAttachment.
-	CompositeRoleID string `json:"compositeRoleId"`
-	// Unique identifier of the RoleAttachment.
-	ID string `json:"id"`
-}
-
-// RoleAttachmentCreateResponse reports how the RoleAttachments were created in the system.
-//
-// Deprecated: use multi-role via AccountAttachments instead.
-type RoleAttachmentCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-	// The created RoleAttachment.
-	RoleAttachment *RoleAttachment `json:"roleAttachment"`
-}
-
-// RoleAttachmentDeleteResponse returns information about a RoleAttachment that was deleted.
-//
-// Deprecated: use multi-role via AccountAttachments instead.
-type RoleAttachmentDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// RoleAttachmentGetResponse returns a requested RoleAttachment.
-//
-// Deprecated: use multi-role via AccountAttachments instead.
-type RoleAttachmentGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-	// The requested RoleAttachment.
-	RoleAttachment *RoleAttachment `json:"roleAttachment"`
 }
 
 // RoleCreateResponse reports how the Roles were created in the system. It can
@@ -6339,52 +6288,6 @@ type RoleGetResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 	// The requested Role.
 	Role *Role `json:"role"`
-}
-
-// A RoleGrant connects a resource to a role, granting members of the role access to that resource.
-//
-// Deprecated: use Role access rules instead.
-type RoleGrant struct {
-	// Unique identifier of the RoleGrant.
-	ID string `json:"id"`
-	// The id of the resource of this RoleGrant.
-	ResourceID string `json:"resourceId"`
-	// The id of the attached role of this RoleGrant.
-	RoleID string `json:"roleId"`
-}
-
-// RoleGrantCreateResponse reports how the RoleGrants were created in the system.
-//
-// Deprecated: use Role access rules instead.
-type RoleGrantCreateResponse struct {
-	// Reserved for future use.
-	Meta *CreateResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-	// The created RoleGrant.
-	RoleGrant *RoleGrant `json:"roleGrant"`
-}
-
-// RoleGrantDeleteResponse returns information about a RoleGrant that was deleted.
-//
-// Deprecated: use Role access rules instead.
-type RoleGrantDeleteResponse struct {
-	// Reserved for future use.
-	Meta *DeleteResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
-// RoleGrantGetResponse returns a requested RoleGrant.
-//
-// Deprecated: use Role access rules instead.
-type RoleGrantGetResponse struct {
-	// Reserved for future use.
-	Meta *GetResponseMetadata `json:"meta"`
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-	// The requested RoleGrant.
-	RoleGrant *RoleGrant `json:"roleGrant"`
 }
 
 // RoleUpdateResponse returns the fields of a Role after it has been updated by
@@ -7074,38 +6977,6 @@ type ResourceIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() Resource
-	// Err returns the first error encountered during iteration, if any.
-	Err() error
-}
-
-// RoleAttachmentIterator provides read access to a list of RoleAttachment.
-// Use it like so:
-//     for iterator.Next() {
-//         roleAttachment := iterator.Value()
-//         // ...
-//     }
-type RoleAttachmentIterator interface {
-	// Next advances the iterator to the next item in the list. It returns
-	// true if an item is available to retrieve via the `Value()` function.
-	Next() bool
-	// Value returns the current item, if one is available.
-	Value() *RoleAttachment
-	// Err returns the first error encountered during iteration, if any.
-	Err() error
-}
-
-// RoleGrantIterator provides read access to a list of RoleGrant.
-// Use it like so:
-//     for iterator.Next() {
-//         roleGrant := iterator.Value()
-//         // ...
-//     }
-type RoleGrantIterator interface {
-	// Next advances the iterator to the next item in the list. It returns
-	// true if an item is available to retrieve via the `Value()` function.
-	Next() bool
-	// Value returns the current item, if one is available.
-	Value() *RoleGrant
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

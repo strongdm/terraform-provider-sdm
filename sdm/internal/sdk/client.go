@@ -59,8 +59,10 @@ type Client struct {
 	apiToken              string
 	apiSecret             []byte
 	apiInsecureTransport  bool
+	apiTLSConfig          *tls.Config
 	exposeRateLimitErrors bool
 	userAgent             string
+	disableSigning        bool
 
 	grpcConn *grpc.ClientConn
 
@@ -75,8 +77,6 @@ type Client struct {
 	remoteIdentities     *RemoteIdentities
 	remoteIdentityGroups *RemoteIdentityGroups
 	resources            *Resources
-	roleAttachments      *RoleAttachments
-	roleGrants           *RoleGrants
 	roles                *Roles
 	secretStores         *SecretStores
 }
@@ -108,6 +108,8 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	var dialOpt grpc.DialOption
 	if client.apiInsecureTransport {
 		dialOpt = grpc.WithInsecure()
+	} else if client.apiTLSConfig != nil {
+		dialOpt = grpc.WithTransportCredentials(credentials.NewTLS(client.apiTLSConfig))
 	} else {
 		dialOpt = grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{
 			RootCAs:            nil,
@@ -151,14 +153,6 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		client: plumbing.NewResourcesClient(client.grpcConn),
 		parent: client,
 	}
-	client.roleAttachments = &RoleAttachments{
-		client: plumbing.NewRoleAttachmentsClient(client.grpcConn),
-		parent: client,
-	}
-	client.roleGrants = &RoleGrants{
-		client: plumbing.NewRoleGrantsClient(client.grpcConn),
-		parent: client,
-	}
 	client.roles = &Roles{
 		client: plumbing.NewRolesClient(client.grpcConn),
 		parent: client,
@@ -188,6 +182,14 @@ func WithHost(host string) ClientOption {
 func WithInsecure() ClientOption {
 	return func(c *Client) {
 		c.apiInsecureTransport = true
+	}
+}
+
+// WithTLSConfig allows customization of the TLS configuration used to
+// communicate with the API server.
+func WithTLSConfig(cfg *tls.Config) ClientOption {
+	return func(c *Client) {
+		c.apiTLSConfig = cfg
 	}
 }
 
@@ -255,26 +257,6 @@ func (c *Client) Resources() *Resources {
 	return c.resources
 }
 
-// RoleAttachments represent relationships between composite roles and the roles
-// that make up those composite roles. When a composite role is attached to another
-// role, the permissions granted to members of the composite role are augmented to
-// include the permissions granted to members of the attached role.
-//
-// Deprecated: use multi-role via AccountAttachments instead.
-func (c *Client) RoleAttachments() *RoleAttachments {
-	return c.roleAttachments
-}
-
-// RoleGrants represent relationships between composite roles and the roles
-// that make up those composite roles. When a composite role is attached to another
-// role, the permissions granted to members of the composite role are augmented to
-// include the permissions granted to members of the attached role.
-//
-// Deprecated: use Role access rules instead.
-func (c *Client) RoleGrants() *RoleGrants {
-	return c.roleGrants
-}
-
 // A Role has a list of access rules which determine which Resources the members
 // of the Role have access to. An Account can be a member of multiple Roles via
 // AccountAttachments.
@@ -289,6 +271,9 @@ func (c *Client) SecretStores() *SecretStores {
 
 // Sign returns the signature for the given byte array
 func (c *Client) Sign(methodName string, message []byte) string {
+	if c.disableSigning {
+		return ""
+	}
 	// Current UTC date
 	y, m, d := time.Now().UTC().Date()
 	currentUTCDate := fmt.Sprintf("%04d-%02d-%02d", y, m, d)

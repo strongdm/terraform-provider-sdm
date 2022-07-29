@@ -30,13 +30,6 @@ func resourceRole() *schema.Resource {
 				DiffSuppressFunc: accessRulesDiffSuppress,
 				Description:      "AccessRules is a list of access rules defining the resources this Role has access to.",
 			},
-			"composite": {
-				Type:        schema.TypeBool,
-				Optional:    true,
-				ForceNew:    true,
-				Description: "Composite is true if the Role is a composite role.  Deprecated: composite roles are deprecated, use multi-role via AccountAttachments instead.",
-				Deprecated:  "composite is deprecated, see docs for more info",
-			},
 			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
@@ -58,7 +51,6 @@ func convertRoleToPlumbing(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),
 		AccessRules: convertAccessRulesToPlumbing(d.Get("access_rules")),
-		Composite:   convertBoolToPlumbing(d.Get("composite")),
 		Name:        convertStringToPlumbing(d.Get("name")),
 		Tags:        convertTagsToPlumbing(d.Get("tags")),
 	}
@@ -74,7 +66,6 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 	d.SetId(resp.Role.ID)
 	v := resp.Role
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
-	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToPorcelain(v.Tags))
 	return nil
@@ -94,7 +85,6 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 	}
 	v := resp.Role
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
-	d.Set("composite", (v.Composite))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToPorcelain(v.Tags))
 	return nil
