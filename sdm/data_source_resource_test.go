@@ -245,7 +245,7 @@ func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
 
 	group := getDefaultRemoteIdentityGroup(t)
 
-	resources, err := createSSHCertsWithPrefix("resource-get-test", *group, 1)
+	resources, err := createSSHCertsWithPrefix("resource-remote-identity-get-test", *group, 1)
 	if err != nil {
 		t.Fatal("failed to create redis in setup: ", err)
 	}
@@ -256,7 +256,7 @@ func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMResourceFilterConfig(dsName, "resource-get-test*"),
+				Config: testAccSDMResourceFilterConfig(dsName, "resource-remote-identity-get-test*"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.name", sshCert.Name),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.hostname", sshCert.Hostname),

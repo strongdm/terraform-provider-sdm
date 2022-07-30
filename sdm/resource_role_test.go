@@ -51,10 +51,9 @@ func TestAccSDMRole_Create(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMRoleConfig(rsName, roleName, false),
+				Config: testAccSDMRoleConfig(rsName, roleName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
 					func(s *terraform.State) error {
 						id, err := testCreatedID(s, "sdm_role", rsName)
 						if err != nil {
@@ -96,10 +95,9 @@ func TestAccSDMRole_Update(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMRoleConfig(rsName, roleName, false),
+				Config: testAccSDMRoleConfig(rsName, roleName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
 				),
 			},
 			{
@@ -108,10 +106,9 @@ func TestAccSDMRole_Update(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccSDMRoleConfig(rsName, updatedRoleName, false),
+				Config: testAccSDMRoleConfig(rsName, updatedRoleName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", updatedRoleName),
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
 					func(s *terraform.State) error {
 						id, err := testCreatedID(s, "sdm_role", rsName)
 						if err != nil {
@@ -144,65 +141,6 @@ func TestAccSDMRole_Update(t *testing.T) {
 	})
 }
 
-func TestAccSDMRole_UpdateComposite(t *testing.T) {
-	if os.Getenv("SDM_ACCESS_OVERHAUL") == "yes" {
-		t.Skip("skipping legacy test")
-	}
-	rsName := randomWithPrefix("test-role")
-	roleName := randomWithPrefix("test-role")
-	resource.ParallelTest(t, resource.TestCase{
-		Providers:    testAccProviders,
-		CheckDestroy: testCheckDestroy,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccSDMRoleConfig(rsName, roleName, false),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "false"),
-				),
-			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
-			{
-				Config: testAccSDMRoleConfig(rsName, roleName, true),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "name", roleName),
-					resource.TestCheckResourceAttr("sdm_role."+rsName, "composite", "true"),
-					func(s *terraform.State) error {
-						id, err := testCreatedID(s, "sdm_role", rsName)
-						if err != nil {
-							return err
-						}
-
-						// check if it was actually updated
-						client := testClient()
-						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-						defer cancel()
-						resp, err := client.Roles().Get(ctx, id)
-						if err != nil {
-							return fmt.Errorf("failed to get created resource: %w", err)
-						}
-
-						if resp.Role.Composite != true {
-							return fmt.Errorf("unexpected composite '%t'", resp.Role.Composite)
-						}
-
-						return nil
-					},
-				),
-			},
-			{
-				ResourceName:      "sdm_role." + rsName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
-		},
-	})
-}
-
 func TestAccSDMRole_Tags(t *testing.T) {
 	name := randomWithPrefix("test")
 	resource.ParallelTest(t, resource.TestCase{
@@ -210,7 +148,7 @@ func TestAccSDMRole_Tags(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMRoleTagsConfig(name, name, false, sdm.Tags{"key": "value", "foo": "bar"}),
+				Config: testAccSDMRoleTagsConfig(name, name, sdm.Tags{"key": "value", "foo": "bar"}),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_role."+name, "tags.key", "value"),
 					resource.TestCheckResourceAttr("sdm_role."+name, "tags.foo", "bar"),
@@ -246,7 +184,7 @@ func TestAccSDMRole_Tags(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccSDMRoleTagsConfig(name, name, false, sdm.Tags{"goat": "bananas"}),
+				Config: testAccSDMRoleTagsConfig(name, name, sdm.Tags{"goat": "bananas"}),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckNoResourceAttr("sdm_role."+name, "tags.key"),
 					resource.TestCheckNoResourceAttr("sdm_role."+name, "tags.foo"),
@@ -522,25 +460,23 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 	})
 }
 
-func testAccSDMRoleConfig(resourceName, roleName string, composite bool) string {
+func testAccSDMRoleConfig(resourceName, roleName string) string {
 	return fmt.Sprintf(`
 	resource "sdm_role" "%s" {
 		name = "%s"
-		composite = %t
 	}
-	`, resourceName, roleName, composite)
+	`, resourceName, roleName)
 }
 
-func testAccSDMRoleTagsConfig(resourceName string, roleName string, composite bool, tags sdm.Tags) string {
+func testAccSDMRoleTagsConfig(resourceName string, roleName string, tags sdm.Tags) string {
 	return fmt.Sprintf(`
 	resource "sdm_role" "%s" {
 		name = "%s"
-		composite = %t
 		tags = {
 %s
 		}
 	}
-	`, resourceName, roleName, composite, tagsToConfigString(tags))
+	`, resourceName, roleName, tagsToConfigString(tags))
 }
 
 func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, accessRules string) string {
@@ -559,7 +495,7 @@ func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, acces
 	`, resourceName, roleName, accessRules)
 }
 
-func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Role, error) {
+func createRolesWithPrefix(prefix string, count int) ([]*sdm.Role, error) {
 	client, err := preTestClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create test client: %w", err)
@@ -569,8 +505,7 @@ func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Rol
 	roles := []*sdm.Role{}
 	for i := 0; i < count; i++ {
 		createResp, err := client.Roles().Create(ctx, &sdm.Role{
-			Name:      randomWithPrefix(prefix),
-			Composite: composite,
+			Name: randomWithPrefix(prefix),
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to create role: %w", err)
@@ -580,7 +515,7 @@ func createRolesWithPrefix(prefix string, count int, composite bool) ([]*sdm.Rol
 	return roles, nil
 }
 
-func createRolesWithAccessRules(prefix string, count int, composite bool, accessRules sdm.AccessRules) ([]*sdm.Role, error) {
+func createRolesWithAccessRules(prefix string, count int, accessRules sdm.AccessRules) ([]*sdm.Role, error) {
 	client, err := preTestClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create test client: %w", err)
@@ -591,7 +526,6 @@ func createRolesWithAccessRules(prefix string, count int, composite bool, access
 	for i := 0; i < count; i++ {
 		createResp, err := client.Roles().Create(ctx, &sdm.Role{
 			Name:        randomWithPrefix(prefix),
-			Composite:   composite,
 			AccessRules: accessRules,
 		})
 		if err != nil {

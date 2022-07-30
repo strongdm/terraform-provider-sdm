@@ -260,7 +260,7 @@ func createAccountAttachmentsWithPrefix(prefix string, count int) ([]*sdm.Accoun
 	if err != nil {
 		return nil, fmt.Errorf("failed to create accounts: %w", err)
 	}
-	roles, err := createRolesWithPrefix(prefix, 1, false)
+	roles, err := createRolesWithPrefix(prefix, 1)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create role: %w", err)
 	}

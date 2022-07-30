@@ -17,7 +17,7 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 	}
 	t.Parallel()
 
-	roles, err := createRolesWithAccessRules("test-role", 1, false, `[{"type":"redis"}]`)
+	roles, err := createRolesWithAccessRules("test-role", 1, `[{"type":"redis"}]`)
 	if err != nil {
 		t.Fatal("failed to create role: ", err)
 	}
@@ -30,10 +30,9 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMRoleDataSourceGetFilterConfig(rsName, role.Name, false),
+				Config: testAccSDMRoleDataSourceGetFilterConfig(rsName, role.Name),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.composite", "false"),
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.access_rules", `[{"type":"redis"}]`),
 				),
 			},
@@ -85,11 +84,11 @@ func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
 func TestAccSDMRoleDataSource_GetMultiple(t *testing.T) {
 	t.Parallel()
 
-	_, err := createRolesWithPrefix("multi-test", 2, false)
+	_, err := createRolesWithPrefix("multi-test", 2)
 	if err != nil {
 		t.Fatal("failed to create roles: ", err)
 	}
-	_, err = createRolesWithPrefix("nomatch", 1, false)
+	_, err = createRolesWithPrefix("nomatch", 1)
 	if err != nil {
 		t.Fatal("failed to create role: ", err)
 	}
@@ -99,11 +98,9 @@ func TestAccSDMRoleDataSource_GetMultiple(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMRoleDataSourceGetFilterConfig(rsName, "multi-test*", false),
+				Config: testAccSDMRoleDataSourceGetFilterConfig(rsName, "multi-test*"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.#", "2"),
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.composite", "false"),
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.1.composite", "false"),
 				),
 			},
 		},
@@ -113,7 +110,7 @@ func TestAccSDMRoleDataSource_GetMultiple(t *testing.T) {
 func TestAccSDMRoleDataSource_GetNone(t *testing.T) {
 	t.Parallel()
 
-	_, err := createRolesWithPrefix("dontfind", 1, false)
+	_, err := createRolesWithPrefix("dontfind", 1)
 	if err != nil {
 		t.Fatal("failed to create role: ", err)
 	}
@@ -123,7 +120,7 @@ func TestAccSDMRoleDataSource_GetNone(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMRoleDataSourceGetFilterConfig(dsName, "neverWillMatch", false),
+				Config: testAccSDMRoleDataSourceGetFilterConfig(dsName, "neverWillMatch"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_role."+dsName, "roles.#", "0"),
 				),
@@ -148,12 +145,11 @@ func TestAccSDMRoleDataSource_GetByID(t *testing.T) {
 	})
 }
 
-func testAccSDMRoleDataSourceGetFilterConfig(roleDataSourceName, nameFilter string, composite bool) string {
+func testAccSDMRoleDataSourceGetFilterConfig(roleDataSourceName, nameFilter string) string {
 	return fmt.Sprintf(`
 	data "sdm_role" "%s" {
 		name = "%s"
-		composite = %t
-	}`, roleDataSourceName, nameFilter, composite)
+	}`, roleDataSourceName, nameFilter)
 }
 
 func testAccSDMRoleDataSourceGetByIDConfig(roleName string, roleDataSourceName string) string {
