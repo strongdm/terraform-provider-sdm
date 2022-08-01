@@ -3,7 +3,6 @@ package sdm
 import (
 	"context"
 	"fmt"
-	"os"
 	"testing"
 	"time"
 
@@ -222,9 +221,6 @@ func TestAccSDMRole_Tags(t *testing.T) {
 }
 
 func TestAccSDMRole_AccessRules(t *testing.T) {
-	if os.Getenv("SDM_ACCESS_OVERHAUL") != "yes" {
-		t.Skip("skipping access overhaul test")
-	}
 	resourceName := randomWithPrefix("testrs")
 	roleName := randomWithPrefix("test")
 	resource.ParallelTest(t, resource.TestCase{

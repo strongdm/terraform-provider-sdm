@@ -3,7 +3,6 @@ package sdm
 import (
 	"context"
 	"fmt"
-	"os"
 	"testing"
 	"time"
 
@@ -12,9 +11,6 @@ import (
 )
 
 func TestAccSDMRoleDataSource_Get(t *testing.T) {
-	if os.Getenv("SDM_ACCESS_OVERHAUL") != "yes" {
-		t.Skip("skipping access overhaul test")
-	}
 	t.Parallel()
 
 	roles, err := createRolesWithAccessRules("test-role", 1, `[{"type":"redis"}]`)
