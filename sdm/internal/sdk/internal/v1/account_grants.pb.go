@@ -35,8 +35,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// AccountGrantCreateRequest specifies what kind of AccountGrants should be registered in
-// the organizations fleet.
+// AccountGrantCreateRequest specifies what kind of AccountGrants should be registered in the organizations fleet.
 type AccountGrantCreateRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -460,8 +459,7 @@ func (x *AccountGrantListRequest) GetFilter() string {
 	return ""
 }
 
-// AccountGrantListResponse returns a list of AccountGrants that meet the criteria of a
-// AccountGrantListRequest.
+// AccountGrantListResponse returns a list of AccountGrants that meet the criteria of a AccountGrantListRequest.
 type AccountGrantListResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -536,15 +534,13 @@ type AccountGrant struct {
 
 	// Unique identifier of the AccountGrant.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The resource id of this AccountGrant.
+	// The resource ID of this AccountGrant.
 	ResourceId string `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	// The account id of this AccountGrant.
+	// The account ID of this AccountGrant.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The timestamp when the resource will be granted. Optional. Both start_at
-	// and end_at must be defined together, or not defined at all.
+	// The timestamp when the resource will be granted. When creating an AccountGrant, if this field is not specified, it will default to the current time.
 	StartFrom *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_from,json=startFrom,proto3" json:"start_from,omitempty"`
-	// The timestamp when the resource grant will expire. Optional. Both
-	// start_at and end_at must be defined together, or not defined at all.
+	// The timestamp when the resource grant will expire.
 	ValidUntil *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
 }
 

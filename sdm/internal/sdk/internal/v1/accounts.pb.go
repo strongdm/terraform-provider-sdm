@@ -684,6 +684,7 @@ type Account struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Account:
+	//
 	//	*Account_User
 	//	*Account_Service
 	Account isAccount_Account `protobuf_oneof:"account"`

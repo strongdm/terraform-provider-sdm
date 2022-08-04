@@ -44,6 +44,7 @@ type Resource struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Resource:
+	//
 	//	*Resource_Aks
 	//	*Resource_AksBasicAuth
 	//	*Resource_AksServiceAccount

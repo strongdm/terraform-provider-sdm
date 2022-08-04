@@ -44,6 +44,7 @@ type SecretStore struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to SecretStore:
+	//
 	//	*SecretStore_Aws
 	//	*SecretStore_Azure
 	//	*SecretStore_Gcp

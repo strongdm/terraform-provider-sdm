@@ -685,6 +685,7 @@ type Node struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Node:
+	//
 	//	*Node_Relay
 	//	*Node_Gateway
 	Node isNode_Node `protobuf_oneof:"node"`
