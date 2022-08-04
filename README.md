@@ -3,11 +3,11 @@
 The strongDM provider is used to configure and manage your strongDM account. It
 provides resources and datasources that allow you to:
 
-* Register gateways
-* Enroll databases and servers
-* Grant access
-* Create and suspend users
-* Manage roles
+- Register gateways
+- Enroll databases and servers
+- Grant access
+- Create and suspend users
+- Manage roles
 
 ## Requirements
 
@@ -37,6 +37,7 @@ $ terraform plan
 ```
 
 Provider statement
+
 ```hcl
 provider "sdm" {}
 ```
@@ -74,13 +75,14 @@ $ terraform apply
 
 ## Useful Links
 
-* Documentation: [terraform strongDM provider](https://registry.terraform.io/providers/strongdm/sdm/latest/docs)
-* [Migrating from Role Grants to Access Rules](https://registry.terraform.io/providers/strongdm/sdm/2.0.0/docs/guides/migrating_from_role_grants_to_access_rules)
-* Examples: [GitHub - strongdm/terraform-provider-sdm-examples](https://github.com/strongdm/terraform-provider-sdm-examples)
-	1. [Managing Resources](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/1_managing_resources)
-	2. [Managing Gateways](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/4_managing_gateways)
-	3. [Managing Roles](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/3_managing_roles)
-	4. [Managing Accounts](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/2_managing_accounts)
+- Documentation: [terraform strongDM provider](https://registry.terraform.io/providers/strongdm/sdm/latest/docs)
+- [Migrating from v2 to v3](https://github.com/strongdm/terraform-provider-sdm/releases/tag/v3.0.0)
+- [Migrating from Role Grants to Access Rules](https://registry.terraform.io/providers/strongdm/sdm/2.0.0/docs/guides/migrating_from_role_grants_to_access_rules)
+- Examples: [GitHub - strongdm/terraform-provider-sdm-examples](https://github.com/strongdm/terraform-provider-sdm-examples)
+  1.  [Managing Resources](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/1_managing_resources)
+  2.  [Managing Gateways](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/4_managing_gateways)
+  3.  [Managing Roles](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/3_managing_roles)
+  4.  [Managing Accounts](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/2_managing_accounts)
 
 ## Contributions
 
@@ -98,12 +100,14 @@ First clone this repository.
 
 In order to run the tests you must set these environment variables so that the
 provider can authenticate:
+
 ```sh
 $ export SDM_API_ACCESS_KEY="<access-key>"
 $ export SDM_API_SECRET_KEY="<secret-key>"
 ```
 
 From the cloned repo, run:
+
 ```sh
 $ cd terraform-provider-sdm
 $ TF_ACC=yes go test ./sdm -v -count=1 -mod=vendor
