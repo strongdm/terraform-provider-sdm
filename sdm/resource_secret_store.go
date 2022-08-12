@@ -75,6 +75,63 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"conjur_client_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "ConjurClientStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"app_url": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"delinea_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "DelineaStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"server_url": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tenant_name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"gcp_store": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -242,6 +299,33 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("conjur_client_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.ConjurClientStore{}
+		}
+		out := &sdm.ConjurClientStore{
+			ID:     d.Id(),
+			AppURL: convertStringToPlumbing(raw["app_url"]),
+			Name:   convertStringToPlumbing(raw["name"]),
+			Tags:   convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("delinea_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DelineaStore{}
+		}
+		out := &sdm.DelineaStore{
+			ID:         d.Id(),
+			Name:       convertStringToPlumbing(raw["name"]),
+			ServerUrl:  convertStringToPlumbing(raw["server_url"]),
+			Tags:       convertTagsToPlumbing(raw["tags"]),
+			TenantName: convertStringToPlumbing(raw["tenant_name"]),
+		}
+		return out
+	}
 	if list := d.Get("gcp_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -332,6 +416,27 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"vault_uri": (v.VaultUri),
 			},
 		})
+	case *sdm.ConjurClientStore:
+		localV, _ := localVersion.(*sdm.ConjurClientStore)
+		_ = localV
+		d.Set("conjur_client_store", []map[string]interface{}{
+			{
+				"app_url": (v.AppURL),
+				"name":    (v.Name),
+				"tags":    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.DelineaStore:
+		localV, _ := localVersion.(*sdm.DelineaStore)
+		_ = localV
+		d.Set("delinea_store", []map[string]interface{}{
+			{
+				"name":        (v.Name),
+				"server_url":  (v.ServerUrl),
+				"tags":        convertTagsToPorcelain(v.Tags),
+				"tenant_name": (v.TenantName),
+			},
+		})
 	case *sdm.GCPStore:
 		localV, _ := localVersion.(*sdm.GCPStore)
 		_ = localV
@@ -419,6 +524,33 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"name":      (v.Name),
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
+			},
+		})
+	case *sdm.ConjurClientStore:
+		localV, ok := localVersion.(*sdm.ConjurClientStore)
+		if !ok {
+			localV = &sdm.ConjurClientStore{}
+		}
+		_ = localV
+		d.Set("conjur_client_store", []map[string]interface{}{
+			{
+				"app_url": (v.AppURL),
+				"name":    (v.Name),
+				"tags":    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.DelineaStore:
+		localV, ok := localVersion.(*sdm.DelineaStore)
+		if !ok {
+			localV = &sdm.DelineaStore{}
+		}
+		_ = localV
+		d.Set("delinea_store", []map[string]interface{}{
+			{
+				"name":        (v.Name),
+				"server_url":  (v.ServerUrl),
+				"tags":        convertTagsToPorcelain(v.Tags),
+				"tenant_name": (v.TenantName),
 			},
 		})
 	case *sdm.GCPStore:

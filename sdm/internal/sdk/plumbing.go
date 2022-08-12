@@ -2355,6 +2355,57 @@ func convertRepeatedCockroachToPorcelain(plumbings []*proto.Cockroach) (
 	}
 	return items, nil
 }
+func convertConjurClientStoreToPorcelain(plumbing *proto.ConjurClientStore) (*ConjurClientStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConjurClientStore{}
+	porcelain.AppURL = plumbing.AppURL
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertConjurClientStoreToPlumbing(porcelain *ConjurClientStore) *proto.ConjurClientStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConjurClientStore{}
+	plumbing.AppURL = (porcelain.AppURL)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedConjurClientStoreToPlumbing(
+	porcelains []*ConjurClientStore,
+) []*proto.ConjurClientStore {
+	var items []*proto.ConjurClientStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertConjurClientStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConjurClientStoreToPorcelain(plumbings []*proto.ConjurClientStore) (
+	[]*ConjurClientStore,
+	error,
+) {
+	var items []*ConjurClientStore
+	for _, plumbing := range plumbings {
+		if v, err := convertConjurClientStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertControlPanelGetSSHCAPublicKeyResponseToPorcelain(plumbing *proto.ControlPanelGetSSHCAPublicKeyResponse) (*ControlPanelGetSSHCAPublicKeyResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -2670,6 +2721,59 @@ func convertRepeatedDeleteResponseMetadataToPorcelain(plumbings []*proto.DeleteR
 	var items []*DeleteResponseMetadata
 	for _, plumbing := range plumbings {
 		if v, err := convertDeleteResponseMetadataToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertDelineaStoreToPorcelain(plumbing *proto.DelineaStore) (*DelineaStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &DelineaStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.ServerUrl = plumbing.ServerUrl
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TenantName = plumbing.TenantName
+	return porcelain, nil
+}
+
+func convertDelineaStoreToPlumbing(porcelain *DelineaStore) *proto.DelineaStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DelineaStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ServerUrl = (porcelain.ServerUrl)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TenantName = (porcelain.TenantName)
+	return plumbing
+}
+func convertRepeatedDelineaStoreToPlumbing(
+	porcelains []*DelineaStore,
+) []*proto.DelineaStore {
+	var items []*proto.DelineaStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertDelineaStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDelineaStoreToPorcelain(plumbings []*proto.DelineaStore) (
+	[]*DelineaStore,
+	error,
+) {
+	var items []*DelineaStore
+	for _, plumbing := range plumbings {
+		if v, err := convertDelineaStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -3084,6 +3188,55 @@ func convertRepeatedElasticacheRedisToPorcelain(plumbings []*proto.ElasticacheRe
 	var items []*ElasticacheRedis
 	for _, plumbing := range plumbings {
 		if v, err := convertElasticacheRedisToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertEnvStoreToPorcelain(plumbing *proto.EnvStore) (*EnvStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &EnvStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertEnvStoreToPlumbing(porcelain *EnvStore) *proto.EnvStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.EnvStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedEnvStoreToPlumbing(
+	porcelains []*EnvStore,
+) []*proto.EnvStore {
+	var items []*proto.EnvStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertEnvStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedEnvStoreToPorcelain(plumbings []*proto.EnvStore) (
+	[]*EnvStore,
+	error,
+) {
+	var items []*EnvStore
+	for _, plumbing := range plumbings {
+		if v, err := convertEnvStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -7479,6 +7632,10 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
 	case *AzureStore:
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
+	case *ConjurClientStore:
+		plumbing.SecretStore = &proto.SecretStore_Conjur{Conjur: convertConjurClientStoreToPlumbing(v)}
+	case *DelineaStore:
+		plumbing.SecretStore = &proto.SecretStore_Delinea{Delinea: convertDelineaStoreToPlumbing(v)}
 	case *GCPStore:
 		plumbing.SecretStore = &proto.SecretStore_Gcp{Gcp: convertGCPStoreToPlumbing(v)}
 	case *VaultAppRoleStore:
@@ -7497,6 +7654,12 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetAzure() != nil {
 		return convertAzureStoreToPorcelain(plumbing.GetAzure())
+	}
+	if plumbing.GetConjur() != nil {
+		return convertConjurClientStoreToPorcelain(plumbing.GetConjur())
+	}
+	if plumbing.GetDelinea() != nil {
+		return convertDelineaStoreToPorcelain(plumbing.GetDelinea())
 	}
 	if plumbing.GetGcp() != nil {
 		return convertGCPStoreToPorcelain(plumbing.GetGcp())

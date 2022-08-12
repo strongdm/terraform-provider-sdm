@@ -21,6 +21,15 @@ The following arguments are supported by the SecretStore resource:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `vault_uri` - (Required) 
+* conjur_client_store:
+	* `app_url` - (Required) 
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* delinea_store:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `server_url` - (Optional) 
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tenant_name` - (Optional) 
 * gcp_store:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `project_id` - (Required) 

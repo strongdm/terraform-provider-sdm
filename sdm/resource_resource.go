@@ -105,7 +105,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -187,7 +186,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -258,7 +256,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -340,7 +337,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -454,7 +450,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -773,7 +768,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -885,7 +879,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -964,7 +957,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1081,7 +1073,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1171,7 +1162,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1510,7 +1500,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1571,7 +1560,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1662,7 +1650,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1757,7 +1744,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1842,7 +1828,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1932,7 +1917,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2012,7 +1996,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2102,7 +2085,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2187,7 +2169,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2272,7 +2253,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2357,7 +2337,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2431,7 +2410,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2543,7 +2521,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2628,7 +2605,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2926,7 +2902,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3266,7 +3241,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3348,7 +3322,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3419,7 +3392,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3501,7 +3473,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3615,7 +3586,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3687,7 +3657,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3753,7 +3722,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3825,7 +3793,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3860,7 +3827,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "MongoHost is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"auth_database": {
@@ -3910,7 +3877,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4000,7 +3966,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4100,7 +4065,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4145,7 +4109,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "MongoReplicaSet is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"auth_database": {
@@ -4200,7 +4164,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4245,7 +4208,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "MongoShardedCluster is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"auth_database": {
@@ -4290,7 +4253,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4330,7 +4292,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "MTLSMysql is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -4422,7 +4384,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4559,7 +4520,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4649,7 +4609,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4715,7 +4674,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4781,7 +4739,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4848,7 +4805,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "Oracle is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -4898,7 +4855,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4993,7 +4949,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5078,7 +5033,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5155,7 +5109,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5226,7 +5179,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5298,7 +5250,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5378,7 +5329,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5455,7 +5405,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5540,7 +5489,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5620,7 +5568,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5715,7 +5662,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5801,7 +5747,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5887,7 +5832,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5973,7 +5917,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6067,7 +6010,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6147,7 +6089,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6227,7 +6168,6 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
-							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -9003,7 +8943,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
-			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -9039,7 +8978,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Username:             convertStringToPlumbing(raw["username"]),
@@ -9070,7 +9008,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
-			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -9100,7 +9037,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Token:                convertStringToPlumbing(raw["token"]),
@@ -9131,7 +9067,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
@@ -9243,7 +9178,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
-			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -9283,7 +9217,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9314,7 +9247,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Name:            convertStringToPlumbing(raw["name"]),
 			Output:          convertStringToPlumbing(raw["output"]),
-			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -9355,7 +9287,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9388,7 +9319,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9507,7 +9437,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9536,7 +9465,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
 			Name:          convertStringToPlumbing(raw["name"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			PrivateKey:    convertStringToPlumbing(raw["private_key"]),
 			Project:       convertStringToPlumbing(raw["project"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
@@ -9566,7 +9494,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9600,7 +9527,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9632,7 +9558,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9665,7 +9590,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9696,7 +9620,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9729,7 +9652,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9761,7 +9683,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9793,7 +9714,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -9825,7 +9745,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9855,7 +9774,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
-			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -9895,7 +9813,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9927,7 +9844,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10029,7 +9945,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -10135,7 +10050,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
-			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -10171,7 +10085,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Username:             convertStringToPlumbing(raw["username"]),
@@ -10202,7 +10115,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
-			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -10232,7 +10144,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Token:                convertStringToPlumbing(raw["token"]),
@@ -10263,7 +10174,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10297,7 +10207,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10327,7 +10236,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10352,7 +10260,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10384,7 +10291,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10417,7 +10323,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:    convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
@@ -10452,7 +10357,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -10487,7 +10391,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -10520,7 +10423,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10556,7 +10458,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			ServerName:           convertStringToPlumbing(raw["server_name"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
@@ -10602,7 +10503,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase:     convertBoolToPlumbing(raw["override_database"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			ServerName:           convertStringToPlumbing(raw["server_name"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
@@ -10644,7 +10544,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10674,7 +10573,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10698,7 +10596,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
 			Port:            convertInt32ToPlumbing(raw["port"]),
-			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -10739,7 +10636,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10773,7 +10669,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -10805,7 +10700,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10834,7 +10728,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10865,7 +10758,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10890,7 +10782,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                    convertStringToPlumbing(raw["name"]),
 			Password:                convertStringToPlumbing(raw["password"]),
 			Port:                    convertInt32ToPlumbing(raw["port"]),
-			PortOverride:            convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                    convertTagsToPlumbing(raw["tags"]),
 			Username:                convertStringToPlumbing(raw["username"]),
@@ -10921,7 +10812,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10950,7 +10840,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -10982,7 +10871,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -11013,7 +10901,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			Schema:        convertStringToPlumbing(raw["schema"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
@@ -11047,7 +10934,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			Schema:           convertStringToPlumbing(raw["schema"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -11081,7 +10967,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                        convertStringToPlumbing(raw["name"]),
 			Port:                        convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
-			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
 			Username:                    convertStringToPlumbing(raw["username"]),
@@ -11111,7 +10996,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:                    convertBoolToPlumbing(raw["port_forwarding"]),
-			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -11142,7 +11026,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                        convertStringToPlumbing(raw["name"]),
 			Port:                        convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
-			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
 			PrivateKey:                  convertStringToPlumbing(raw["private_key"]),
 			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
@@ -11174,7 +11057,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -11205,7 +11087,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -11236,7 +11117,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),

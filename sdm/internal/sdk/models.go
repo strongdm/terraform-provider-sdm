@@ -863,6 +863,18 @@ type Cockroach struct {
 	Username string `json:"username"`
 }
 
+// ConjurClientStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type ConjurClientStore struct {
+	AppURL string `json:"appUrl"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 // ControlPanelGetSSHCAPublicKeyResponse represents a request for an
 // organization's SSH Certificate Authority public key.
 type ControlPanelGetSSHCAPublicKeyResponse struct {
@@ -949,6 +961,21 @@ type DB2LUW struct {
 
 // DeleteResponseMetadata is reserved for future use.
 type DeleteResponseMetadata struct {
+}
+
+// DelineaStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type DelineaStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+
+	ServerUrl string `json:"serverUrl"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TenantName string `json:"tenantName"`
 }
 
 type DocumentDBHost struct {
@@ -1120,6 +1147,17 @@ type ElasticacheRedis struct {
 	Tags Tags `json:"tags"`
 
 	TlsRequired bool `json:"tlsRequired"`
+}
+
+// EnvStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type EnvStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 type GCP struct {
@@ -1503,6 +1541,8 @@ type KubernetesUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
+// MTLSMysql is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type MTLSMysql struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
@@ -1660,6 +1700,8 @@ type Memsql struct {
 	Username string `json:"username"`
 }
 
+// MongoHost is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type MongoHost struct {
 	AuthDatabase string `json:"authDatabase"`
 	// Bind interface
@@ -1756,6 +1798,8 @@ type MongoLegacyReplicaset struct {
 	Username string `json:"username"`
 }
 
+// MongoReplicaSet is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type MongoReplicaSet struct {
 	AuthDatabase string `json:"authDatabase"`
 	// Bind interface
@@ -1790,6 +1834,8 @@ type MongoReplicaSet struct {
 	Username string `json:"username"`
 }
 
+// MongoShardedCluster is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type MongoShardedCluster struct {
 	AuthDatabase string `json:"authDatabase"`
 	// Bind interface
@@ -2011,6 +2057,8 @@ type NodeUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// Oracle is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type Oracle struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
@@ -6490,6 +6538,54 @@ func (m *AzureStore) GetName() string {
 
 // SetName sets the name of the AzureStore.
 func (m *AzureStore) SetName(v string) {
+	m.Name = v
+}
+func (*ConjurClientStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the ConjurClientStore.
+func (m *ConjurClientStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the ConjurClientStore.
+func (m *ConjurClientStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ConjurClientStore.
+func (m *ConjurClientStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the ConjurClientStore.
+func (m *ConjurClientStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ConjurClientStore.
+func (m *ConjurClientStore) SetName(v string) {
+	m.Name = v
+}
+func (*DelineaStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the DelineaStore.
+func (m *DelineaStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the DelineaStore.
+func (m *DelineaStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DelineaStore.
+func (m *DelineaStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the DelineaStore.
+func (m *DelineaStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DelineaStore.
+func (m *DelineaStore) SetName(v string) {
 	m.Name = v
 }
 func (*GCPStore) isOneOf_SecretStore() {}

@@ -30,6 +30,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
 		* `vault_uri` - 
+	* conjur_client_store:
+		* `app_url` - 
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `tags` - Tags is a map of key, value pairs.
+	* delinea_store:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `server_url` - 
+		* `tags` - Tags is a map of key, value pairs.
+		* `tenant_name` - 
 	* gcp_store:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.

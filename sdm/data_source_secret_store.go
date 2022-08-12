@@ -103,6 +103,71 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"conjur_client_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"app_url": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"delinea_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"server_url": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tenant_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+								},
+							},
+						},
 						"gcp_store": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -316,6 +381,21 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"name":      (v.Name),
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
+			})
+		case *sdm.ConjurClientStore:
+			output[0]["conjur_client_store"] = append(output[0]["conjur_client_store"], entity{
+				"app_url": (v.AppURL),
+				"id":      (v.ID),
+				"name":    (v.Name),
+				"tags":    convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.DelineaStore:
+			output[0]["delinea_store"] = append(output[0]["delinea_store"], entity{
+				"id":          (v.ID),
+				"name":        (v.Name),
+				"server_url":  (v.ServerUrl),
+				"tags":        convertTagsToPorcelain(v.Tags),
+				"tenant_name": (v.TenantName),
 			})
 		case *sdm.GCPStore:
 			output[0]["gcp_store"] = append(output[0]["gcp_store"], entity{
