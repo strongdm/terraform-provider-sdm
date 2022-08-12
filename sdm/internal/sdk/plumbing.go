@@ -2355,11 +2355,11 @@ func convertRepeatedCockroachToPorcelain(plumbings []*proto.Cockroach) (
 	}
 	return items, nil
 }
-func convertConjurClientStoreToPorcelain(plumbing *proto.ConjurClientStore) (*ConjurClientStore, error) {
+func convertConjurStoreToPorcelain(plumbing *proto.ConjurStore) (*ConjurStore, error) {
 	if plumbing == nil {
 		return nil, nil
 	}
-	porcelain := &ConjurClientStore{}
+	porcelain := &ConjurStore{}
 	porcelain.AppURL = plumbing.AppURL
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
@@ -2371,34 +2371,34 @@ func convertConjurClientStoreToPorcelain(plumbing *proto.ConjurClientStore) (*Co
 	return porcelain, nil
 }
 
-func convertConjurClientStoreToPlumbing(porcelain *ConjurClientStore) *proto.ConjurClientStore {
+func convertConjurStoreToPlumbing(porcelain *ConjurStore) *proto.ConjurStore {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.ConjurClientStore{}
+	plumbing := &proto.ConjurStore{}
 	plumbing.AppURL = (porcelain.AppURL)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
-func convertRepeatedConjurClientStoreToPlumbing(
-	porcelains []*ConjurClientStore,
-) []*proto.ConjurClientStore {
-	var items []*proto.ConjurClientStore
+func convertRepeatedConjurStoreToPlumbing(
+	porcelains []*ConjurStore,
+) []*proto.ConjurStore {
+	var items []*proto.ConjurStore
 	for _, porcelain := range porcelains {
-		items = append(items, convertConjurClientStoreToPlumbing(porcelain))
+		items = append(items, convertConjurStoreToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedConjurClientStoreToPorcelain(plumbings []*proto.ConjurClientStore) (
-	[]*ConjurClientStore,
+func convertRepeatedConjurStoreToPorcelain(plumbings []*proto.ConjurStore) (
+	[]*ConjurStore,
 	error,
 ) {
-	var items []*ConjurClientStore
+	var items []*ConjurStore
 	for _, plumbing := range plumbings {
-		if v, err := convertConjurClientStoreToPorcelain(plumbing); err != nil {
+		if v, err := convertConjurStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -3188,55 +3188,6 @@ func convertRepeatedElasticacheRedisToPorcelain(plumbings []*proto.ElasticacheRe
 	var items []*ElasticacheRedis
 	for _, plumbing := range plumbings {
 		if v, err := convertElasticacheRedisToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
-func convertEnvStoreToPorcelain(plumbing *proto.EnvStore) (*EnvStore, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &EnvStore{}
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	return porcelain, nil
-}
-
-func convertEnvStoreToPlumbing(porcelain *EnvStore) *proto.EnvStore {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.EnvStore{}
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	return plumbing
-}
-func convertRepeatedEnvStoreToPlumbing(
-	porcelains []*EnvStore,
-) []*proto.EnvStore {
-	var items []*proto.EnvStore
-	for _, porcelain := range porcelains {
-		items = append(items, convertEnvStoreToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedEnvStoreToPorcelain(plumbings []*proto.EnvStore) (
-	[]*EnvStore,
-	error,
-) {
-	var items []*EnvStore
-	for _, plumbing := range plumbings {
-		if v, err := convertEnvStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -7632,8 +7583,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
 	case *AzureStore:
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
-	case *ConjurClientStore:
-		plumbing.SecretStore = &proto.SecretStore_Conjur{Conjur: convertConjurClientStoreToPlumbing(v)}
+	case *ConjurStore:
+		plumbing.SecretStore = &proto.SecretStore_Conjur{Conjur: convertConjurStoreToPlumbing(v)}
 	case *DelineaStore:
 		plumbing.SecretStore = &proto.SecretStore_Delinea{Delinea: convertDelineaStoreToPlumbing(v)}
 	case *GCPStore:
@@ -7656,7 +7607,7 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 		return convertAzureStoreToPorcelain(plumbing.GetAzure())
 	}
 	if plumbing.GetConjur() != nil {
-		return convertConjurClientStoreToPorcelain(plumbing.GetConjur())
+		return convertConjurStoreToPorcelain(plumbing.GetConjur())
 	}
 	if plumbing.GetDelinea() != nil {
 		return convertDelineaStoreToPorcelain(plumbing.GetDelinea())

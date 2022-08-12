@@ -863,9 +863,9 @@ type Cockroach struct {
 	Username string `json:"username"`
 }
 
-// ConjurClientStore is currently unstable, and its API may change, or it may be removed,
+// ConjurStore is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
-type ConjurClientStore struct {
+type ConjurStore struct {
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -1147,17 +1147,6 @@ type ElasticacheRedis struct {
 	Tags Tags `json:"tags"`
 
 	TlsRequired bool `json:"tlsRequired"`
-}
-
-// EnvStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type EnvStore struct {
-	// Unique identifier of the SecretStore.
-	ID string `json:"id"`
-	// Unique human-readable name of the SecretStore.
-	Name string `json:"name"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
 }
 
 type GCP struct {
@@ -6540,28 +6529,28 @@ func (m *AzureStore) GetName() string {
 func (m *AzureStore) SetName(v string) {
 	m.Name = v
 }
-func (*ConjurClientStore) isOneOf_SecretStore() {}
+func (*ConjurStore) isOneOf_SecretStore() {}
 
-// GetID returns the unique identifier of the ConjurClientStore.
-func (m *ConjurClientStore) GetID() string { return m.ID }
+// GetID returns the unique identifier of the ConjurStore.
+func (m *ConjurStore) GetID() string { return m.ID }
 
-// GetTags returns the tags of the ConjurClientStore.
-func (m *ConjurClientStore) GetTags() Tags {
+// GetTags returns the tags of the ConjurStore.
+func (m *ConjurStore) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the ConjurClientStore.
-func (m *ConjurClientStore) SetTags(v Tags) {
+// SetTags sets the tags of the ConjurStore.
+func (m *ConjurStore) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetName returns the name of the ConjurClientStore.
-func (m *ConjurClientStore) GetName() string {
+// GetName returns the name of the ConjurStore.
+func (m *ConjurStore) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the ConjurClientStore.
-func (m *ConjurClientStore) SetName(v string) {
+// SetName sets the name of the ConjurStore.
+func (m *ConjurStore) SetName(v string) {
 	m.Name = v
 }
 func (*DelineaStore) isOneOf_SecretStore() {}

@@ -103,7 +103,7 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
-						"conjur_client_store": {
+						"conjur_store": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
@@ -382,8 +382,8 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
 			})
-		case *sdm.ConjurClientStore:
-			output[0]["conjur_client_store"] = append(output[0]["conjur_client_store"], entity{
+		case *sdm.ConjurStore:
+			output[0]["conjur_store"] = append(output[0]["conjur_store"], entity{
 				"app_url": (v.AppURL),
 				"id":      (v.ID),
 				"name":    (v.Name),

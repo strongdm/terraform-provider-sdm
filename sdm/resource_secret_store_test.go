@@ -276,6 +276,34 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 				{"vault_uri", `"https://azure.secrets/secret"`},
 			},
 		},
+		{
+			resource: "conjur_store",
+			pairs: [][2]string{
+				{"name", `"conjurStore"`},
+				{"app_url", `"https://conjur.store"`},
+			},
+		},
+		{
+			resource: "delinea_store",
+			pairs: [][2]string{
+				{"name", `"delineaStore"`},
+				{"server_url", `"https://conjur.store"`},
+				{"tenant_name", `"tenantName"`},
+			},
+		}, {
+			resource: "gcp_store",
+			pairs: [][2]string{
+				{"name", `"gcpStore"`},
+				{"project_id", `"projectID"`},
+			},
+		}, {
+			resource: "vault_approle",
+			pairs: [][2]string{
+				{"name", `"vaultAppRole"`},
+				{"server_address", `"serverAddress"`},
+				{"namespace", `"namespace"`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")
