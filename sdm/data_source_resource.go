@@ -116,7 +116,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -192,7 +192,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -257,7 +257,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -333,7 +333,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -417,7 +417,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -656,7 +656,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"region": {
@@ -738,7 +738,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -803,7 +803,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"region": {
@@ -890,7 +890,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -966,7 +966,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1220,7 +1220,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1275,7 +1275,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"private_key": {
@@ -1352,7 +1352,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1433,7 +1433,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1504,7 +1504,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1580,7 +1580,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1646,7 +1646,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1722,7 +1722,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1793,7 +1793,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1864,7 +1864,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"replica_set": {
@@ -1935,7 +1935,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -1995,7 +1995,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"region": {
@@ -2077,7 +2077,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -2148,7 +2148,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -2409,7 +2409,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -2704,7 +2704,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -2780,7 +2780,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -2845,7 +2845,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -2921,7 +2921,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3005,7 +3005,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3071,7 +3071,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3131,7 +3131,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3197,7 +3197,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3268,7 +3268,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3344,7 +3344,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"replica_set": {
@@ -3430,7 +3430,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"replica_set": {
@@ -3516,7 +3516,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"replica_set": {
@@ -3592,7 +3592,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3686,7 +3686,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3785,7 +3785,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3861,7 +3861,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3921,7 +3921,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -3981,7 +3981,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"region": {
@@ -4068,7 +4068,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4149,7 +4149,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4220,7 +4220,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4291,7 +4291,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4356,7 +4356,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4422,7 +4422,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4488,7 +4488,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4559,7 +4559,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4630,7 +4630,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -4696,7 +4696,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"schema": {
@@ -4777,7 +4777,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"schema": {
@@ -4857,7 +4857,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"public_key": {
@@ -4937,7 +4937,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"remote_identity_group_id": {
@@ -5017,7 +5017,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"private_key": {
@@ -5089,7 +5089,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -5155,7 +5155,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
@@ -5221,7 +5221,7 @@ func dataSourceResource() *schema.Resource {
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
-										Computed:    true,
+										Optional:    true,
 										Description: "",
 									},
 									"secret_store_id": {
