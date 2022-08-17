@@ -105,6 +105,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -186,6 +187,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -256,6 +258,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -337,6 +340,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -450,6 +454,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -768,6 +773,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -879,6 +885,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -957,6 +964,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1073,6 +1081,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1162,6 +1171,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1277,6 +1287,226 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"aws_console": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AWSConsole is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"enable_env_variables": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"session_expiry": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"aws_console_static_key_pair": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AWSConsoleStaticKeyPair is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"access_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_access_key_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_access_key_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_access_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_secret_access_key_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_secret_access_key_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"session_expiry": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -1500,6 +1730,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1560,6 +1791,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1650,6 +1882,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1744,6 +1977,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1828,6 +2062,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1917,6 +2152,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -1996,6 +2232,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2085,6 +2322,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2169,6 +2407,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2253,6 +2492,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2337,6 +2577,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2410,6 +2651,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2521,6 +2763,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2605,6 +2848,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -2902,6 +3146,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3241,6 +3486,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3322,6 +3568,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3392,6 +3639,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3473,6 +3721,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3586,6 +3835,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3657,6 +3907,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3722,6 +3973,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3793,6 +4045,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3877,6 +4130,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -3966,6 +4220,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4065,6 +4320,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4164,6 +4420,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4253,6 +4510,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4384,6 +4642,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4520,6 +4779,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4609,6 +4869,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4674,6 +4935,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4739,6 +5001,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4855,6 +5118,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -4949,6 +5213,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5033,6 +5298,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5109,6 +5375,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5179,6 +5446,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5250,6 +5518,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5329,6 +5598,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5405,6 +5675,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5489,6 +5760,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5568,6 +5840,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5662,6 +5935,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5747,6 +6021,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5832,6 +6107,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -5917,6 +6193,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6010,6 +6287,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6089,6 +6367,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6168,6 +6447,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
+							Optional:    true,
 							Computed:    true,
 							Description: "",
 						},
@@ -6770,6 +7050,104 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}, nil
 	}
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
+			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"access_key":                          convertStringToPlumbing(raw["access_key"]),
+			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
+			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
+			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
+			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
+			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+		}, nil
+	}
+	if list := d.Get("aws_console").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"role_arn":                           convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":         convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":          convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                   convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path": convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":  convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+		}, nil
+	}
+	if list := d.Get("aws_console_static_key_pair").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return map[string]string{}, nil
@@ -8943,6 +9321,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -8978,6 +9357,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Username:             convertStringToPlumbing(raw["username"]),
@@ -9008,6 +9388,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -9037,6 +9418,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Token:                convertStringToPlumbing(raw["token"]),
@@ -9067,6 +9449,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
@@ -9178,6 +9561,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
+			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -9217,6 +9601,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9247,6 +9632,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Name:            convertStringToPlumbing(raw["name"]),
 			Output:          convertStringToPlumbing(raw["output"]),
+			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -9287,6 +9673,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9319,6 +9706,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9354,6 +9742,83 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:              convertTagsToPlumbing(raw["tags"]),
 		}
+		if out.AccessKey == "" {
+			out.AccessKey = fullSecretStorePath(raw, "access_key")
+		}
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
+		}
+		if out.SecretAccessKey == "" {
+			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
+		}
+		return out
+	}
+	if list := d.Get("aws_console").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWSConsole{}
+		}
+		out := &sdm.AWSConsole{
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			EnableEnvVariables:                convertBoolToPlumbing(raw["enable_env_variables"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
+			Region:                            convertStringToPlumbing(raw["region"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			RoleArn:                           convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:                    convertStringToPlumbing(raw["role_external_id"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			SessionExpiry:                     convertStringToPlumbing(raw["session_expiry"]),
+			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
+		}
+		return out
+	}
+	if list := d.Get("aws_console_static_key_pair").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWSConsoleStaticKeyPair{}
+		}
+		out := &sdm.AWSConsoleStaticKeyPair{
+			ID:                                d.Id(),
+			AccessKey:                         convertStringToPlumbing(raw["access_key"]),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
+			Region:                            convertStringToPlumbing(raw["region"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			RoleArn:                           convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:                    convertStringToPlumbing(raw["role_external_id"]),
+			SecretAccessKey:                   convertStringToPlumbing(raw["secret_access_key"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			SessionExpiry:                     convertStringToPlumbing(raw["session_expiry"]),
+			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
 		}
@@ -9437,6 +9902,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9465,6 +9931,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
 			Name:          convertStringToPlumbing(raw["name"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			PrivateKey:    convertStringToPlumbing(raw["private_key"]),
 			Project:       convertStringToPlumbing(raw["project"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
@@ -9494,6 +9961,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9527,6 +9995,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9558,6 +10027,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9590,6 +10060,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -9620,6 +10091,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9652,6 +10124,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9683,6 +10156,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9714,6 +10188,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:         convertStringToPlumbing(raw["hostname"]),
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -9745,6 +10220,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -9774,6 +10250,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
+			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -9813,6 +10290,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9844,6 +10322,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -9945,6 +10424,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -10050,6 +10530,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -10085,6 +10566,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Username:             convertStringToPlumbing(raw["username"]),
@@ -10115,6 +10597,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                          convertStringToPlumbing(raw["hostname"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -10144,6 +10627,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 			Token:                convertStringToPlumbing(raw["token"]),
@@ -10174,6 +10658,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:             convertStringToPlumbing(raw["hostname"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10207,6 +10692,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10236,6 +10722,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10260,6 +10747,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10291,6 +10779,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10323,6 +10812,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:    convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
@@ -10357,6 +10847,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -10391,6 +10882,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -10423,6 +10915,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10458,6 +10951,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                 convertStringToPlumbing(raw["name"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			ServerName:           convertStringToPlumbing(raw["server_name"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
@@ -10503,6 +10997,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase:     convertBoolToPlumbing(raw["override_database"]),
 			Password:             convertStringToPlumbing(raw["password"]),
 			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
 			ServerName:           convertStringToPlumbing(raw["server_name"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
@@ -10544,6 +11039,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10573,6 +11069,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:      convertStringToPlumbing(raw["endpoint"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10596,6 +11093,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:        convertStringToPlumbing(raw["endpoint"]),
 			Name:            convertStringToPlumbing(raw["name"]),
 			Port:            convertInt32ToPlumbing(raw["port"]),
+			PortOverride:    convertInt32ToPlumbing(raw["port_override"]),
 			Region:          convertStringToPlumbing(raw["region"]),
 			RoleArn:         convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:  convertStringToPlumbing(raw["role_external_id"]),
@@ -10636,6 +11134,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10669,6 +11168,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -10700,6 +11200,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10728,6 +11229,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
@@ -10758,6 +11260,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10782,6 +11285,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                    convertStringToPlumbing(raw["name"]),
 			Password:                convertStringToPlumbing(raw["password"]),
 			Port:                    convertInt32ToPlumbing(raw["port"]),
+			PortOverride:            convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                    convertTagsToPlumbing(raw["tags"]),
 			Username:                convertStringToPlumbing(raw["username"]),
@@ -10812,6 +11316,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
@@ -10840,6 +11345,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -10871,6 +11377,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -10901,6 +11408,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:      convertStringToPlumbing(raw["hostname"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			Schema:        convertStringToPlumbing(raw["schema"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
@@ -10934,6 +11442,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			Schema:           convertStringToPlumbing(raw["schema"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -10967,6 +11476,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                        convertStringToPlumbing(raw["name"]),
 			Port:                        convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
+			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
 			Username:                    convertStringToPlumbing(raw["username"]),
@@ -10996,6 +11506,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                              convertStringToPlumbing(raw["name"]),
 			Port:                              convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:                    convertBoolToPlumbing(raw["port_forwarding"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
@@ -11026,6 +11537,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                        convertStringToPlumbing(raw["name"]),
 			Port:                        convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
+			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
 			PrivateKey:                  convertStringToPlumbing(raw["private_key"]),
 			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:                        convertTagsToPlumbing(raw["tags"]),
@@ -11057,6 +11569,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -11087,6 +11600,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -11117,6 +11631,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
 			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			Username:      convertStringToPlumbing(raw["username"]),
@@ -11472,6 +11987,61 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AWSConsole:
+		localV, _ := localVersion.(*sdm.AWSConsole)
+		_ = localV
+		d.Set("aws_console", []map[string]interface{}{
+			{
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"enable_env_variables":                 (v.EnableEnvVariables),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"session_expiry":                       (v.SessionExpiry),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AWSConsoleStaticKeyPair:
+		localV, _ := localVersion.(*sdm.AWSConsoleStaticKeyPair)
+		_ = localV
+		d.Set("aws_console_static_key_pair", []map[string]interface{}{
+			{
+				"access_key":                           seValues["access_key"],
+				"secret_store_access_key_path":         seValues["secret_store_access_key_path"],
+				"secret_store_access_key_key":          seValues["secret_store_access_key_key"],
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
+				"secret_access_key":                    seValues["secret_access_key"],
+				"secret_store_secret_access_key_path":  seValues["secret_store_secret_access_key_path"],
+				"secret_store_secret_access_key_key":   seValues["secret_store_secret_access_key_key"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"session_expiry":                       (v.SessionExpiry),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Azure:
@@ -13137,6 +13707,67 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AWSConsole:
+		localV, ok := localVersion.(*sdm.AWSConsole)
+		if !ok {
+			localV = &sdm.AWSConsole{}
+		}
+		_ = localV
+		d.Set("aws_console", []map[string]interface{}{
+			{
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"enable_env_variables":                 (v.EnableEnvVariables),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"session_expiry":                       (v.SessionExpiry),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AWSConsoleStaticKeyPair:
+		localV, ok := localVersion.(*sdm.AWSConsoleStaticKeyPair)
+		if !ok {
+			localV = &sdm.AWSConsoleStaticKeyPair{}
+		}
+		_ = localV
+		d.Set("aws_console_static_key_pair", []map[string]interface{}{
+			{
+				"access_key":                           seValues["access_key"],
+				"secret_store_access_key_path":         seValues["secret_store_access_key_path"],
+				"secret_store_access_key_key":          seValues["secret_store_access_key_key"],
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
+				"secret_access_key":                    seValues["secret_access_key"],
+				"secret_store_secret_access_key_path":  seValues["secret_store_secret_access_key_path"],
+				"secret_store_secret_access_key_key":   seValues["secret_store_secret_access_key_key"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"session_expiry":                       (v.SessionExpiry),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Azure:

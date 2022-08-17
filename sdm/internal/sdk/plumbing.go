@@ -500,6 +500,158 @@ func convertRepeatedAWSToPorcelain(plumbings []*proto.AWS) (
 	}
 	return items, nil
 }
+func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AWSConsole{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.EnableEnvVariables = plumbing.EnableEnvVariables
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.Region = plumbing.Region
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SessionExpiry = plumbing.SessionExpiry
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAWSConsoleToPlumbing(porcelain *AWSConsole) *proto.AWSConsole {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AWSConsole{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.EnableEnvVariables = (porcelain.EnableEnvVariables)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SessionExpiry = (porcelain.SessionExpiry)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAWSConsoleToPlumbing(
+	porcelains []*AWSConsole,
+) []*proto.AWSConsole {
+	var items []*proto.AWSConsole
+	for _, porcelain := range porcelains {
+		items = append(items, convertAWSConsoleToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAWSConsoleToPorcelain(plumbings []*proto.AWSConsole) (
+	[]*AWSConsole,
+	error,
+) {
+	var items []*AWSConsole
+	for _, plumbing := range plumbings {
+		if v, err := convertAWSConsoleToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAWSConsoleStaticKeyPairToPorcelain(plumbing *proto.AWSConsoleStaticKeyPair) (*AWSConsoleStaticKeyPair, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AWSConsoleStaticKeyPair{}
+	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.Region = plumbing.Region
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretAccessKey = plumbing.SecretAccessKey
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SessionExpiry = plumbing.SessionExpiry
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAWSConsoleStaticKeyPairToPlumbing(porcelain *AWSConsoleStaticKeyPair) *proto.AWSConsoleStaticKeyPair {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AWSConsoleStaticKeyPair{}
+	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SessionExpiry = (porcelain.SessionExpiry)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAWSConsoleStaticKeyPairToPlumbing(
+	porcelains []*AWSConsoleStaticKeyPair,
+) []*proto.AWSConsoleStaticKeyPair {
+	var items []*proto.AWSConsoleStaticKeyPair
+	for _, porcelain := range porcelains {
+		items = append(items, convertAWSConsoleStaticKeyPairToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAWSConsoleStaticKeyPairToPorcelain(plumbings []*proto.AWSConsoleStaticKeyPair) (
+	[]*AWSConsoleStaticKeyPair,
+	error,
+) {
+	var items []*AWSConsoleStaticKeyPair
+	for _, plumbing := range plumbings {
+		if v, err := convertAWSConsoleStaticKeyPairToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAWSStoreToPorcelain(plumbing *proto.AWSStore) (*AWSStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -2355,57 +2507,6 @@ func convertRepeatedCockroachToPorcelain(plumbings []*proto.Cockroach) (
 	}
 	return items, nil
 }
-func convertConjurStoreToPorcelain(plumbing *proto.ConjurStore) (*ConjurStore, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &ConjurStore{}
-	porcelain.AppURL = plumbing.AppURL
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	return porcelain, nil
-}
-
-func convertConjurStoreToPlumbing(porcelain *ConjurStore) *proto.ConjurStore {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.ConjurStore{}
-	plumbing.AppURL = (porcelain.AppURL)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	return plumbing
-}
-func convertRepeatedConjurStoreToPlumbing(
-	porcelains []*ConjurStore,
-) []*proto.ConjurStore {
-	var items []*proto.ConjurStore
-	for _, porcelain := range porcelains {
-		items = append(items, convertConjurStoreToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedConjurStoreToPorcelain(plumbings []*proto.ConjurStore) (
-	[]*ConjurStore,
-	error,
-) {
-	var items []*ConjurStore
-	for _, plumbing := range plumbings {
-		if v, err := convertConjurStoreToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
 func convertControlPanelGetSSHCAPublicKeyResponseToPorcelain(plumbing *proto.ControlPanelGetSSHCAPublicKeyResponse) (*ControlPanelGetSSHCAPublicKeyResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -2544,6 +2645,108 @@ func convertRepeatedCreateResponseMetadataToPorcelain(plumbings []*proto.CreateR
 	var items []*CreateResponseMetadata
 	for _, plumbing := range plumbings {
 		if v, err := convertCreateResponseMetadataToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertCyberarkConjurStoreToPorcelain(plumbing *proto.CyberarkConjurStore) (*CyberarkConjurStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CyberarkConjurStore{}
+	porcelain.AppURL = plumbing.AppURL
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertCyberarkConjurStoreToPlumbing(porcelain *CyberarkConjurStore) *proto.CyberarkConjurStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CyberarkConjurStore{}
+	plumbing.AppURL = (porcelain.AppURL)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedCyberarkConjurStoreToPlumbing(
+	porcelains []*CyberarkConjurStore,
+) []*proto.CyberarkConjurStore {
+	var items []*proto.CyberarkConjurStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertCyberarkConjurStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCyberarkConjurStoreToPorcelain(plumbings []*proto.CyberarkConjurStore) (
+	[]*CyberarkConjurStore,
+	error,
+) {
+	var items []*CyberarkConjurStore
+	for _, plumbing := range plumbings {
+		if v, err := convertCyberarkConjurStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertCyberarkPAMExperimentalStoreToPorcelain(plumbing *proto.CyberarkPAMExperimentalStore) (*CyberarkPAMExperimentalStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CyberarkPAMExperimentalStore{}
+	porcelain.AppURL = plumbing.AppURL
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertCyberarkPAMExperimentalStoreToPlumbing(porcelain *CyberarkPAMExperimentalStore) *proto.CyberarkPAMExperimentalStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CyberarkPAMExperimentalStore{}
+	plumbing.AppURL = (porcelain.AppURL)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedCyberarkPAMExperimentalStoreToPlumbing(
+	porcelains []*CyberarkPAMExperimentalStore,
+) []*proto.CyberarkPAMExperimentalStore {
+	var items []*proto.CyberarkPAMExperimentalStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertCyberarkPAMExperimentalStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCyberarkPAMExperimentalStoreToPorcelain(plumbings []*proto.CyberarkPAMExperimentalStore) (
+	[]*CyberarkPAMExperimentalStore,
+	error,
+) {
+	var items []*CyberarkPAMExperimentalStore
+	for _, plumbing := range plumbings {
+		if v, err := convertCyberarkPAMExperimentalStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -6421,6 +6624,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AuroraPostgres{AuroraPostgres: convertAuroraPostgresToPlumbing(v)}
 	case *AWS:
 		plumbing.Resource = &proto.Resource_Aws{Aws: convertAWSToPlumbing(v)}
+	case *AWSConsole:
+		plumbing.Resource = &proto.Resource_AwsConsole{AwsConsole: convertAWSConsoleToPlumbing(v)}
+	case *AWSConsoleStaticKeyPair:
+		plumbing.Resource = &proto.Resource_AwsConsoleStaticKeyPair{AwsConsoleStaticKeyPair: convertAWSConsoleStaticKeyPairToPlumbing(v)}
 	case *Azure:
 		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
 	case *AzureCertificate:
@@ -6580,6 +6787,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAws() != nil {
 		return convertAWSToPorcelain(plumbing.GetAws())
+	}
+	if plumbing.GetAwsConsole() != nil {
+		return convertAWSConsoleToPorcelain(plumbing.GetAwsConsole())
+	}
+	if plumbing.GetAwsConsoleStaticKeyPair() != nil {
+		return convertAWSConsoleStaticKeyPairToPorcelain(plumbing.GetAwsConsoleStaticKeyPair())
 	}
 	if plumbing.GetAzure() != nil {
 		return convertAzureToPorcelain(plumbing.GetAzure())
@@ -7583,8 +7796,10 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
 	case *AzureStore:
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
-	case *ConjurStore:
-		plumbing.SecretStore = &proto.SecretStore_Conjur{Conjur: convertConjurStoreToPlumbing(v)}
+	case *CyberarkConjurStore:
+		plumbing.SecretStore = &proto.SecretStore_CyberarkConjur{CyberarkConjur: convertCyberarkConjurStoreToPlumbing(v)}
+	case *CyberarkPAMExperimentalStore:
+		plumbing.SecretStore = &proto.SecretStore_CyberarkPamExperimental{CyberarkPamExperimental: convertCyberarkPAMExperimentalStoreToPlumbing(v)}
 	case *DelineaStore:
 		plumbing.SecretStore = &proto.SecretStore_Delinea{Delinea: convertDelineaStoreToPlumbing(v)}
 	case *GCPStore:
@@ -7606,8 +7821,11 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	if plumbing.GetAzure() != nil {
 		return convertAzureStoreToPorcelain(plumbing.GetAzure())
 	}
-	if plumbing.GetConjur() != nil {
-		return convertConjurStoreToPorcelain(plumbing.GetConjur())
+	if plumbing.GetCyberarkConjur() != nil {
+		return convertCyberarkConjurStoreToPorcelain(plumbing.GetCyberarkConjur())
+	}
+	if plumbing.GetCyberarkPamExperimental() != nil {
+		return convertCyberarkPAMExperimentalStoreToPorcelain(plumbing.GetCyberarkPamExperimental())
 	}
 	if plumbing.GetDelinea() != nil {
 		return convertDelineaStoreToPorcelain(plumbing.GetDelinea())

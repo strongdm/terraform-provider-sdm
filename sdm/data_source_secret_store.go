@@ -103,7 +103,37 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
-						"conjur_store": {
+						"cyberark_conjur": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"app_url": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"cyberark_pam_experimental": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
@@ -382,8 +412,15 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":      convertTagsToPorcelain(v.Tags),
 				"vault_uri": (v.VaultUri),
 			})
-		case *sdm.ConjurStore:
-			output[0]["conjur_store"] = append(output[0]["conjur_store"], entity{
+		case *sdm.CyberarkConjurStore:
+			output[0]["cyberark_conjur"] = append(output[0]["cyberark_conjur"], entity{
+				"app_url": (v.AppURL),
+				"id":      (v.ID),
+				"name":    (v.Name),
+				"tags":    convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.CyberarkPAMExperimentalStore:
+			output[0]["cyberark_pam_experimental"] = append(output[0]["cyberark_pam_experimental"], entity{
 				"app_url": (v.AppURL),
 				"id":      (v.ID),
 				"name":    (v.Name),

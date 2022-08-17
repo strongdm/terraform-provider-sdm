@@ -210,6 +210,81 @@ type AWS struct {
 	Tags Tags `json:"tags"`
 }
 
+// AWSConsole is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AWSConsole struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	EnableEnvVariables bool `json:"enableEnvVariables"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Region string `json:"region"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	SessionExpiry string `json:"sessionExpiry"`
+
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// AWSConsoleStaticKeyPair is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AWSConsoleStaticKeyPair struct {
+	AccessKey string `json:"accessKey"`
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Region string `json:"region"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+
+	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	SessionExpiry string `json:"sessionExpiry"`
+
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type AWSStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -863,18 +938,6 @@ type Cockroach struct {
 	Username string `json:"username"`
 }
 
-// ConjurStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type ConjurStore struct {
-	AppURL string `json:"appUrl"`
-	// Unique identifier of the SecretStore.
-	ID string `json:"id"`
-	// Unique human-readable name of the SecretStore.
-	Name string `json:"name"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-}
-
 // ControlPanelGetSSHCAPublicKeyResponse represents a request for an
 // organization's SSH Certificate Authority public key.
 type ControlPanelGetSSHCAPublicKeyResponse struct {
@@ -899,6 +962,30 @@ type ControlPanelVerifyJWTResponse struct {
 
 // CreateResponseMetadata is reserved for future use.
 type CreateResponseMetadata struct {
+}
+
+// CyberarkConjurStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type CyberarkConjurStore struct {
+	AppURL string `json:"appUrl"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// CyberarkPAMExperimentalStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type CyberarkPAMExperimentalStore struct {
+	AppURL string `json:"appUrl"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 type DB2I struct {
@@ -3108,6 +3195,114 @@ func (m *AWS) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AWS.
 func (m *AWS) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AWSConsole) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AWSConsole.
+func (m *AWSConsole) GetID() string { return m.ID }
+
+// GetName returns the name of the AWSConsole.
+func (m *AWSConsole) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWSConsole.
+func (m *AWSConsole) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AWSConsole.
+func (m *AWSConsole) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AWSConsole.
+func (m *AWSConsole) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AWSConsole.
+func (m *AWSConsole) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AWSConsole.
+func (m *AWSConsole) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AWSConsole.
+func (m *AWSConsole) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AWSConsole.
+func (m *AWSConsole) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AWSConsole.
+func (m *AWSConsole) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AWSConsole.
+func (m *AWSConsole) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AWSConsoleStaticKeyPair) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) GetID() string { return m.ID }
+
+// GetName returns the name of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AWSConsoleStaticKeyPair.
+func (m *AWSConsoleStaticKeyPair) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Azure) isOneOf_Resource() {}
@@ -6529,28 +6724,52 @@ func (m *AzureStore) GetName() string {
 func (m *AzureStore) SetName(v string) {
 	m.Name = v
 }
-func (*ConjurStore) isOneOf_SecretStore() {}
+func (*CyberarkConjurStore) isOneOf_SecretStore() {}
 
-// GetID returns the unique identifier of the ConjurStore.
-func (m *ConjurStore) GetID() string { return m.ID }
+// GetID returns the unique identifier of the CyberarkConjurStore.
+func (m *CyberarkConjurStore) GetID() string { return m.ID }
 
-// GetTags returns the tags of the ConjurStore.
-func (m *ConjurStore) GetTags() Tags {
+// GetTags returns the tags of the CyberarkConjurStore.
+func (m *CyberarkConjurStore) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the ConjurStore.
-func (m *ConjurStore) SetTags(v Tags) {
+// SetTags sets the tags of the CyberarkConjurStore.
+func (m *CyberarkConjurStore) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetName returns the name of the ConjurStore.
-func (m *ConjurStore) GetName() string {
+// GetName returns the name of the CyberarkConjurStore.
+func (m *CyberarkConjurStore) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the ConjurStore.
-func (m *ConjurStore) SetName(v string) {
+// SetName sets the name of the CyberarkConjurStore.
+func (m *CyberarkConjurStore) SetName(v string) {
+	m.Name = v
+}
+func (*CyberarkPAMExperimentalStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the CyberarkPAMExperimentalStore.
+func (m *CyberarkPAMExperimentalStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the CyberarkPAMExperimentalStore.
+func (m *CyberarkPAMExperimentalStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the CyberarkPAMExperimentalStore.
+func (m *CyberarkPAMExperimentalStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the CyberarkPAMExperimentalStore.
+func (m *CyberarkPAMExperimentalStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the CyberarkPAMExperimentalStore.
+func (m *CyberarkPAMExperimentalStore) SetName(v string) {
 	m.Name = v
 }
 func (*DelineaStore) isOneOf_SecretStore() {}

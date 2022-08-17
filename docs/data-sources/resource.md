@@ -218,6 +218,39 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
+	* aws_console:
+		* `bind_interface` - Bind interface
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `enable_env_variables` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
+		* `region` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `session_expiry` - 
+		* `subdomain` - 
+		* `tags` - Tags is a map of key, value pairs.
+	* aws_console_static_key_pair:
+		* `access_key` - 
+		* `bind_interface` - Bind interface
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
+		* `region` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_access_key` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `session_expiry` - 
+		* `subdomain` - 
+		* `tags` - Tags is a map of key, value pairs.
 	* azure:
 		* `app_id` - 
 		* `bind_interface` - Bind interface

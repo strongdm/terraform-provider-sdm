@@ -30,7 +30,12 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
 		* `vault_uri` - 
-	* conjur_store:
+	* cyberark_conjur:
+		* `app_url` - 
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `tags` - Tags is a map of key, value pairs.
+	* cyberark_pam_experimental:
 		* `app_url` - 
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.

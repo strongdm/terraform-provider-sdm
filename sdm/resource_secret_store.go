@@ -75,11 +75,37 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
-			"conjur_store": {
+			"cyberark_conjur": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "ConjurStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "CyberarkConjurStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"app_url": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"cyberark_pam_experimental": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "CyberarkPAMExperimentalStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"app_url": {
@@ -299,12 +325,25 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
-	if list := d.Get("conjur_store").([]interface{}); len(list) > 0 {
+	if list := d.Get("cyberark_conjur").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return &sdm.ConjurStore{}
+			return &sdm.CyberarkConjurStore{}
 		}
-		out := &sdm.ConjurStore{
+		out := &sdm.CyberarkConjurStore{
+			ID:     d.Id(),
+			AppURL: convertStringToPlumbing(raw["app_url"]),
+			Name:   convertStringToPlumbing(raw["name"]),
+			Tags:   convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("cyberark_pam_experimental").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.CyberarkPAMExperimentalStore{}
+		}
+		out := &sdm.CyberarkPAMExperimentalStore{
 			ID:     d.Id(),
 			AppURL: convertStringToPlumbing(raw["app_url"]),
 			Name:   convertStringToPlumbing(raw["name"]),
@@ -416,10 +455,20 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"vault_uri": (v.VaultUri),
 			},
 		})
-	case *sdm.ConjurStore:
-		localV, _ := localVersion.(*sdm.ConjurStore)
+	case *sdm.CyberarkConjurStore:
+		localV, _ := localVersion.(*sdm.CyberarkConjurStore)
 		_ = localV
-		d.Set("conjur_store", []map[string]interface{}{
+		d.Set("cyberark_conjur", []map[string]interface{}{
+			{
+				"app_url": (v.AppURL),
+				"name":    (v.Name),
+				"tags":    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.CyberarkPAMExperimentalStore:
+		localV, _ := localVersion.(*sdm.CyberarkPAMExperimentalStore)
+		_ = localV
+		d.Set("cyberark_pam_experimental", []map[string]interface{}{
 			{
 				"app_url": (v.AppURL),
 				"name":    (v.Name),
@@ -526,13 +575,26 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"vault_uri": (v.VaultUri),
 			},
 		})
-	case *sdm.ConjurStore:
-		localV, ok := localVersion.(*sdm.ConjurStore)
+	case *sdm.CyberarkConjurStore:
+		localV, ok := localVersion.(*sdm.CyberarkConjurStore)
 		if !ok {
-			localV = &sdm.ConjurStore{}
+			localV = &sdm.CyberarkConjurStore{}
 		}
 		_ = localV
-		d.Set("conjur_store", []map[string]interface{}{
+		d.Set("cyberark_conjur", []map[string]interface{}{
+			{
+				"app_url": (v.AppURL),
+				"name":    (v.Name),
+				"tags":    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.CyberarkPAMExperimentalStore:
+		localV, ok := localVersion.(*sdm.CyberarkPAMExperimentalStore)
+		if !ok {
+			localV = &sdm.CyberarkPAMExperimentalStore{}
+		}
+		_ = localV
+		d.Set("cyberark_pam_experimental", []map[string]interface{}{
 			{
 				"app_url": (v.AppURL),
 				"name":    (v.Name),
