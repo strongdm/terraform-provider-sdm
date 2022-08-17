@@ -277,9 +277,9 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
-			resource: "conjur_store",
+			resource: "cyberark_conjur",
 			pairs: [][2]string{
-				{"name", `"conjurStore"`},
+				{"name", `"cyberarkConjur"`},
 				{"app_url", `"https://conjur.store"`},
 			},
 		},
