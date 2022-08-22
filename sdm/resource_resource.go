@@ -1378,7 +1378,7 @@ func resourceResource() *schema.Resource {
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"session_expiry": {
-							Type:        schema.TypeString,
+							Type:        schema.TypeInt,
 							Optional:    true,
 							Description: "",
 						},
@@ -1499,7 +1499,7 @@ func resourceResource() *schema.Resource {
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"session_expiry": {
-							Type:        schema.TypeString,
+							Type:        schema.TypeInt,
 							Optional:    true,
 							Description: "",
 						},
@@ -9774,7 +9774,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			RoleArn:                           convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:                    convertStringToPlumbing(raw["role_external_id"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
-			SessionExpiry:                     convertStringToPlumbing(raw["session_expiry"]),
+			SessionExpiry:                     convertInt32ToPlumbing(raw["session_expiry"]),
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
@@ -9810,7 +9810,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			RoleExternalID:                    convertStringToPlumbing(raw["role_external_id"]),
 			SecretAccessKey:                   convertStringToPlumbing(raw["secret_access_key"]),
 			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
-			SessionExpiry:                     convertStringToPlumbing(raw["session_expiry"]),
+			SessionExpiry:                     convertInt32ToPlumbing(raw["session_expiry"]),
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}

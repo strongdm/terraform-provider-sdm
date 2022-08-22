@@ -240,7 +240,7 @@ type AWSConsole struct {
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 
-	SessionExpiry string `json:"sessionExpiry"`
+	SessionExpiry int32 `json:"sessionExpiry"`
 
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
@@ -278,7 +278,7 @@ type AWSConsoleStaticKeyPair struct {
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 
-	SessionExpiry string `json:"sessionExpiry"`
+	SessionExpiry int32 `json:"sessionExpiry"`
 
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.

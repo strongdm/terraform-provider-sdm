@@ -1121,7 +1121,7 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"session_expiry": {
-										Type:        schema.TypeString,
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
@@ -1212,7 +1212,7 @@ func dataSourceResource() *schema.Resource {
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"session_expiry": {
-										Type:        schema.TypeString,
+										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "",
 									},
