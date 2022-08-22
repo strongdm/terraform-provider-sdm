@@ -3,6 +3,7 @@ package sdm
 import (
 	"context"
 	"fmt"
+	"strings"
 	"testing"
 	"time"
 
@@ -234,6 +235,117 @@ func TestAccSDMSecretStore_Update(t *testing.T) {
 			},
 		},
 	})
+}
+
+func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
+	t.Parallel()
+
+	type testCase struct {
+		resource string
+		pairs    [][2]string
+	}
+	tcs := []testCase{
+		{
+			resource: "vault_token",
+			pairs: [][2]string{
+				{"name", `"vault_token"`},
+				{"server_address", `"ServerAddress"`},
+			},
+		},
+		{
+			resource: "vault_tls",
+			pairs: [][2]string{
+				{"name", `"vault_tls"`},
+				{"server_address", `"ServerAddress"`},
+				{"ca_cert_path", `"CACertPath"`},
+				{"client_cert_path", `"ClientCertPath"`},
+				{"client_key_path", `"ClientKeyPath"`},
+			},
+		},
+		{
+			resource: "aws",
+			pairs: [][2]string{
+				{"name", `"awsStore"`},
+				{"region", `"us-west"`},
+			},
+		},
+		{
+			resource: "azure_store",
+			pairs: [][2]string{
+				{"name", `"azureStore"`},
+				{"vault_uri", `"https://azure.secrets/secret"`},
+			},
+		},
+		{
+			resource: "cyberark_conjur",
+			pairs: [][2]string{
+				{"name", `"cyberarkConjur"`},
+				{"app_url", `"https://conjur.store"`},
+			},
+		},
+		{
+			resource: "delinea_store",
+			pairs: [][2]string{
+				{"name", `"delineaStore"`},
+				{"server_url", `"https://conjur.store"`},
+				{"tenant_name", `"tenantName"`},
+			},
+		}, {
+			resource: "gcp_store",
+			pairs: [][2]string{
+				{"name", `"gcpStore"`},
+				{"project_id", `"projectID"`},
+			},
+		}, {
+			resource: "vault_approle",
+			pairs: [][2]string{
+				{"name", `"vaultAppRole"`},
+				{"server_address", `"serverAddress"`},
+				{"namespace", `"namespace"`},
+			},
+		},
+	}
+
+	resourceNameBase := randomWithPrefix("test")
+
+	for _, tc := range tcs {
+		tc := tc
+		t.Run(tc.resource, func(t *testing.T) {
+			name := resourceNameBase + tc.resource
+			cfg := testAccSDMSecretStoreAnyConfig(name, tc.resource, tc.pairs)
+
+			checks := make([]resource.TestCheckFunc, len(tc.pairs))
+			for i, p := range tc.pairs {
+				val := p[1]
+				// TF removes quotes around strings
+				val = strings.Trim(val, "\"")
+				// ... and converts escaped new lines into real newlines
+				val = strings.Replace(val, "\\n", "\n", -1)
+				checks[i] = resource.TestCheckResourceAttr("sdm_secret_store."+name, tc.resource+".0."+p[0], val)
+			}
+
+			resource.ParallelTest(t, resource.TestCase{
+				Providers:    testAccProviders,
+				CheckDestroy: testCheckDestroy,
+				Steps: []resource.TestStep{
+					{
+						Config: cfg,
+						Check:  resource.ComposeTestCheckFunc(checks...),
+					},
+					{
+						// there should be no change if the resource is updated from the server
+						Taint:  []string{"sdm_secret_store." + name},
+						Config: cfg,
+						Check:  resource.ComposeTestCheckFunc(checks...),
+					},
+					{
+						ResourceName: "sdm_secret_store." + name,
+						ImportState:  true,
+					},
+				},
+			})
+		})
+	}
 }
 
 func testAccSDMSecretStoreAnyConfig(resourceName, resourceType string, pairs [][2]string) string {

@@ -89,7 +89,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `remote_identity_group_id` - (Optional) 
-	* `remote_identity_healthcheck_username` - (Required) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
@@ -142,7 +142,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
-	* `remote_identity_healthcheck_username` - (Required) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)
 	* `secret_store_role_arn_key` - (Optional)
@@ -294,7 +294,6 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `enable_env_variables` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
@@ -353,8 +352,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_app_id_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_app_id_key` - (Optional)
 	* `bind_interface` - (Optional) Bind interface
-	* `client_certificate` - (Required if storing credentials directly strongDM) 
-	* `secret_store_client_certificate_path` - (Required if using credentials stored in a secret store)
+	* `client_certificate` - (Optional) 
+	* `secret_store_client_certificate_path` - (Optional)
 	* `secret_store_client_certificate_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `name` - (Required) Unique human-readable name of the Resource.

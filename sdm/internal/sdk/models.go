@@ -226,8 +226,6 @@ type AWSConsole struct {
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
-	Port int32 `json:"port"`
-
 	PortOverride int32 `json:"portOverride"`
 
 	Region string `json:"region"`
