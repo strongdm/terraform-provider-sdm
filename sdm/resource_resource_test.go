@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"regexp"
-	"strings"
 	"testing"
 	"time"
 
@@ -468,1222 +467,326 @@ func TestAccSDMResource_Update(t *testing.T) {
 	})
 }
 
-func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
-	t.Parallel()
+func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
+	t.Run("present->present", func(t *testing.T) {
+		resourceName := randomWithPrefix("test")
+		redisName := randomWithPrefix("test")
+		portOverride, updatedPortOverride := portOverride.Count(), portOverride.Count()
 
-	certificateAuthorityRaw := []string{
-		"\"-----BEGIN CERTIFICATE-----",
-		"MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p",
-		"a3ViZUNBMB4XDTE5MDkyNDE2MDgwMVoXDTI5MDkyMjE2MDgwMVowFTETMBEGA1UE",
-		"AxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALpg",
-		"4/Kjq9CXaU7lSO9v5m7wFHg2+t1U8q7MmO4M9tDmhcgCR3x2lnQZR3cXSuq/BzV+",
-		"9VAalARIiA7JYXQRJvucqb9Aj7Q2A/wC9D2CovCCnfslZRGGhcw3zVRM0UwP0zg6",
-		"sgBixcls9YqKP2Td2+TwnWYMd43ah9MSO823VLNJi56JXoV0fyrdERpL5+5y6aUM",
-		"X3qXXZusVYGwJ4c2ucqWRWcXDDArxYVqNJV7GONeDee2HMBC+k12CUJU7HxIzZlW",
-		"QPWSRr9j3nTeJyC8sgbNJDJWLYvIv4j0+0OTUvB/2f8T7vbeWR5VeD7PtmzVN4/M",
-		"4U8jI64qUsPZBZGhXg0CAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMB0GA1UdJQQW",
-		"MBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3",
-		"DQEBCwUAA4IBAQB33WY0z4Aw1RCLYK06V/HtcuZdh5d6TWKHg/b9ncNbroJaEJGk",
-		"xPaIuVBzajygn2vdyv8iRX0yDgYM3lZ/P5SLbhD2oZRhi9qgOW6oNuN99EinUnQw",
-		"jp1R7F1ug1yxRgZLGgDlBL83jRJV0AgmxgOrbsd8sAVXKI8p70RFYAyBoGd9Pj9D",
-		"nohAJ+7Eh2xuPqnU2J7bzddP+ECoucSZ/Ex4qWF+0RFyFUwk/c/2nH9AvTNCUY2H",
-		"d/ref47hNcAAjTHG7OKqSUHhAkaOuGUdnGEyNuGHREd11S0x+oTjFDoNaJ6O4PDF",
-		"VTzHCUQlVvCxKklV3pArPBB7vJdjBFvZcreB",
-		"-----END CERTIFICATE-----\"",
-	}
-	certificateAuthority := strings.Join(certificateAuthorityRaw, "\\n")
-
-	type testCase struct {
-		resource string
-		pairs    [][2]string
-	}
-	tcs := []testCase{
-		{
-			resource: "athena",
-			pairs: [][2]string{
-				{"name", "\"athena\""},
-				{"access_key", "\"AccessKey\""},
-				{"secret_access_key", "\"SecretAccessKey\""},
-				{"output", "\"Output\""},
-			},
-		},
-		{
-			resource: "big_query",
-			pairs: [][2]string{
-				{"name", `"big_query"`},
-				{"endpoint", `"Endpoint"`},
-				{"private_key", `"PrivateKey"`},
-				{"project", `"Project"`},
-			},
-		},
-		{
-			resource: "cassandra",
-			pairs: [][2]string{
-				{"name", `"cassandra"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-			},
-		},
-		{
-			resource: "druid",
-			pairs: [][2]string{
-				{"name", `"druid"`},
-				{"hostname", `"Hostname"`},
-			},
-		},
-		{
-			resource: "dynamo_db",
-			pairs: [][2]string{
-				{"name", `"dynamo_db"`},
-				{"endpoint", `"Endpoint"`},
-				{"access_key", `"AccessKey"`},
-				{"secret_access_key", `"SecretAccessKey"`},
-				{"region", `"Region"`},
-			},
-		},
-		{
-			resource: "amazon_es",
-			pairs: [][2]string{
-				{"name", `"amazon_es"`},
-				{"secret_access_key", `"SecretAccessKey"`},
-				{"region", `"Region"`},
-			},
-		},
-		{
-			resource: "elastic",
-			pairs: [][2]string{
-				{"name", `"elastic"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-			},
-		},
-		{
-			resource: "http_basic_auth",
-			pairs: [][2]string{
-				{"name", `"http_basic"`},
-				{"url", `"http://example.com"`},
-				{"healthcheck_path", `"/"`},
-				{"subdomain", `"basic"`},
-			},
-		},
-		{
-			resource: "http_no_auth",
-			pairs: [][2]string{
-				{"name", `"http_no_auth"`},
-				{"url", `"http://example.com"`},
-				{"healthcheck_path", `"/"`},
-				{"subdomain", `"noauth"`},
-			},
-		},
-		{
-			resource: "http_auth",
-			pairs: [][2]string{
-				{"name", `"http_auth"`},
-				{"url", `"http://example.com"`},
-				{"healthcheck_path", `"/"`},
-				{"auth_header", `"AuthHeader"`},
-				{"subdomain", `"auth"`},
-			},
-		},
-		{
-			resource: "kubernetes",
-			pairs: [][2]string{
-				{"name", `"kubernetes"`},
-				{"hostname", `"Hostname"`},
-				{"port", "443"},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "kubernetes_basic_auth",
-			pairs: [][2]string{
-				{"name", `"kubernetes_basic_auth"`},
-				{"hostname", `"Hostname"`},
-				{"port", "443"},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "amazon_eks",
-			pairs: [][2]string{
-				{"name", `"amazon_eks"`},
-				{"endpoint", `"Endpoint"`},
-				{"access_key", `"AccessKey"`},
-				{"secret_access_key", `"SecretAccessKey"`},
-				{"certificate_authority", certificateAuthority},
-				{"region", `"Region"`},
-				{"cluster_name", `"ClusterName"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "google_gke",
-			pairs: [][2]string{
-				{"name", `"google_gke"`},
-				{"endpoint", `"Endpoint"`},
-				{"certificate_authority", certificateAuthority},
-				{"service_account_key", `"{}"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "memcached",
-			pairs: [][2]string{
-				{"name", `"memcached"`},
-				{"hostname", `"Hostname"`},
-			},
-		},
-		{
-			resource: "mongo_legacy_host",
-			pairs: [][2]string{
-				{"name", `"mongo_legacy_host"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-			},
-		},
-		{
-			resource: "mongo_legacy_replicaset",
-			pairs: [][2]string{
-				{"name", `"mongo_legacy_replicaset"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-				{"replica_set", `"ReplicaSet"`},
-			},
-		},
-		{
-			resource: "mongo_host",
-			pairs: [][2]string{
-				{"name", `"mongo_host"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-			},
-		},
-		{
-			resource: "mongo_replica_set",
-			pairs: [][2]string{
-				{"name", `"mongo_replica_set"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-				{"replica_set", `"ReplicaSet"`},
-			},
-		},
-		{
-			resource: "mysql",
-			pairs: [][2]string{
-				{"name", `"mysql"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "aurora_mysql",
-			pairs: [][2]string{
-				{"name", `"aurora_mysql"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "clustrix",
-			pairs: [][2]string{
-				{"name", `"clustrix"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "maria",
-			pairs: [][2]string{
-				{"name", `"maria"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "memsql",
-			pairs: [][2]string{
-				{"name", `"memsql"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "single_store",
-			pairs: [][2]string{
-				{"name", `"single_store"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "oracle",
-			pairs: [][2]string{
-				{"name", `"oracle"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-				{"port", "1521"},
-			},
-		},
-		{
-			resource: "postgres",
-			pairs: [][2]string{
-				{"name", `"postgres"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "aurora_postgres",
-			pairs: [][2]string{
-				{"name", `"aurora-postgres"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "greenplum",
-			pairs: [][2]string{
-				{"name", `"greenplum"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "cockroach",
-			pairs: [][2]string{
-				{"name", `"cockroach"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "redshift",
-			pairs: [][2]string{
-				{"name", `"redshift"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "presto",
-			pairs: [][2]string{
-				{"name", `"presto"`},
-				{"hostname", `"Hostname"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "rdp",
-			pairs: [][2]string{
-				{"name", `"rdp"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"port", "3389"},
-			},
-		},
-		{
-			resource: "redis",
-			pairs: [][2]string{
-				{"name", `"redis"`},
-				{"hostname", `"Hostname"`},
-			},
-		},
-		{
-			resource: "elasticache_redis",
-			pairs: [][2]string{
-				{"name", `"elasticache_redis"`},
-				{"hostname", `"Hostname"`},
-			},
-		},
-		{
-			resource: "snowflake",
-			pairs: [][2]string{
-				{"name", `"snowflake"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-				{"schema", `"Schema"`},
-			},
-		},
-		{
-			resource: "sql_server",
-			pairs: [][2]string{
-				{"name", `"sql_server"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "ssh",
-			pairs: [][2]string{
-				{"name", `"ssh"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"port", "22"},
-				{"port_forwarding", "true"},
-				{"key_type", `"ed25519"`},
-			},
-		},
-		{
-			resource: "ssh_cert",
-			pairs: [][2]string{
-				{"name", `"ssh_cert"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"port", "22"},
-				{"port_forwarding", "true"},
-				{"key_type", `"ed25519"`},
-			},
-		},
-		{
-			resource: "ssh_customer_key",
-			pairs: [][2]string{
-				{"name", `"ssh_customer_key"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"port", "22"},
-				{"port_forwarding", "true"},
-				{"private_key", `"PrivateKey"`},
-			},
-		},
-		{
-			resource: "sybase",
-			pairs: [][2]string{
-				{"name", `"sybase"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-			},
-		},
-		{
-			resource: "sybase_iq",
-			pairs: [][2]string{
-				{"name", `"sybase_iq"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-			},
-		},
-		{
-			resource: "teradata",
-			pairs: [][2]string{
-				{"name", `"teradata"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-			},
-		},
-		{
-			resource: "db_2_luw",
-			pairs: [][2]string{
-				{"name", `"db2luw"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"database", `"Database"`},
-				{"port", `50000`},
-			},
-		},
-		{
-			resource: "db_2_i",
-			pairs: [][2]string{
-				{"name", `"db2i"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-				{"port", `50000`},
-				{"tls_required", "true"},
-			},
-		},
-		{
-			resource: "aws",
-			pairs: [][2]string{
-				{"name", `"aws"`},
-				{"healthcheck_region", `"region"`},
-				{"access_key", `"access-key"`},
-				{"secret_access_key", `"secret-access-key"`},
-				{"role_arn", `"role-arn"`},
-			},
-		},
-		{
-			resource: "rabbitmq_amqp_091",
-			pairs: [][2]string{
-				{"name", `"rabbitmq_amqp_091"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-			},
-		},
-		{
-			resource: "amazonmq_amqp_091",
-			pairs: [][2]string{
-				{"name", `"amazonmq_amqp_091"`},
-				{"hostname", `"Hostname"`},
-				{"username", `"Username"`},
-				{"password", `"Password"`},
-			},
-		},
-		{
-			resource: "raw_tcp",
-			pairs: [][2]string{
-				{"name", `"raw_tcp"`},
-				{"hostname", `"Hostname"`},
-				{"port", `50000`},
-			},
-		},
-	}
-
-	resourceNameBase := randomWithPrefix("test")
-
-	for _, tc := range tcs {
-		tc := tc
-		t.Run(tc.resource, func(t *testing.T) {
-			name := resourceNameBase + tc.resource
-			cfg := testAccSDMResourceAnyConfig(name, tc.resource, tc.pairs)
-
-			checks := make([]resource.TestCheckFunc, len(tc.pairs))
-			for i, p := range tc.pairs {
-				val := p[1]
-				// TF removes quotes around strings
-				val = strings.Trim(val, "\"")
-				// ... and converts escaped new lines into real newlines
-				val = strings.Replace(val, "\\n", "\n", -1)
-				checks[i] = resource.TestCheckResourceAttr("sdm_resource."+name, tc.resource+".0."+p[0], val)
-			}
-
-			resource.Test(t, resource.TestCase{
-				Providers:    testAccProviders,
-				CheckDestroy: testCheckDestroy,
-				Steps: []resource.TestStep{
-					{
-						Config: cfg,
-						Check:  resource.ComposeTestCheckFunc(checks...),
-					},
-					{
-						// there should be no change if the resource is updated from the server
-						Taint:  []string{"sdm_resource." + name},
-						Config: cfg,
-						Check:  resource.ComposeTestCheckFunc(checks...),
-					},
-					{
-						ResourceName: "sdm_resource." + name,
-						ImportState:  true,
-					},
+		resource.ParallelTest(t, resource.TestCase{
+			Providers:    testAccProviders,
+			CheckDestroy: testCheckDestroy,
+			Steps: []resource.TestStep{
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+							port_override = %v
+						}
+					}
+					`, resourceName, redisName, portOverride),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
+						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+					),
 				},
-			})
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+							bind_interface = "127.0.0.2"
+							port_override = %v
+						}
+					}
+					`, resourceName, redisName, updatedPortOverride),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(updatedPortOverride)),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+						func(s *terraform.State) error {
+							id, err := testCreatedID(s, "sdm_resource", resourceName)
+							if err != nil {
+								return err
+							}
+
+							// check if it was actually updated
+							client := testClient()
+							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+							defer cancel()
+							resp, err := client.Resources().Get(ctx, id)
+							if err != nil {
+								return fmt.Errorf("failed to get created resource: %w", err)
+							}
+
+							if resp.Resource.(*sdm.Redis).PortOverride != updatedPortOverride {
+								return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, updatedPortOverride)
+							}
+
+							return nil
+						},
+					),
+				},
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+			},
 		})
-	}
-}
-
-func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
-	t.Parallel()
-
-	client, err := preTestClient()
-	if err != nil {
-		t.Fatalf("failed to create test client: %v", err)
-	}
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
-	resp, err := client.SecretStores().Create(ctx, &sdm.VaultTokenStore{
-		Name:          "all-resources-test-store",
-		ServerAddress: "allresourcestestaddr",
 	})
-	if err != nil {
-		t.Fatalf("failed to create secret store: %v", err)
-	}
 
-	seID := resp.SecretStore.(*sdm.VaultTokenStore).ID
+	t.Run("absent->present", func(t *testing.T) {
+		resourceName := randomWithPrefix("test")
+		redisName := randomWithPrefix("test")
+		updatedPortOverride := portOverride.Count()
 
-	type testCase struct {
-		resource string
-		pairs    [][2]string
-	}
-	tcs := []testCase{
-		{
-			resource: "athena",
-			pairs: [][2]string{
-				{"name", "\"athena_secret_store_secret_store\""},
-				{"secret_store_id", `"` + seID + `"`},
-				{"secret_store_access_key_path", `"/path/to/access_key"`},
-				{"secret_store_access_key_key", `"key"`},
-				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
-				{"secret_store_secret_access_key_key", `"key"`},
-				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
-				{"secret_store_role_arn_key", `"key"`},
-				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
-				{"secret_store_role_external_id_key", `"key"`},
-				{"output", "\"Output\""},
-			},
-		},
-		{
-			resource: "aws",
-			pairs: [][2]string{
-				{"name", `"aws_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"healthcheck_region", `"region"`},
-				{"secret_store_access_key_path", `"/path/to/access_key"`},
-				{"secret_store_access_key_key", `"key"`},
-				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
-				{"secret_store_secret_access_key_key", `"key"`},
-				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
-				{"secret_store_role_arn_key", `"key"`},
-				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
-				{"secret_store_role_external_id_key", `"key"`},
-			},
-		},
-		{
-			resource: "big_query",
-			pairs: [][2]string{
-				{"name", `"big_query_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"endpoint", `"Endpoint"`},
-				{"secret_store_private_key_path", `"/path/to/private_key"`},
-				{"secret_store_private_key_key", `"key"`},
-				{"project", `"Project"`},
-			},
-		},
-		{
-			resource: "cassandra",
-			pairs: [][2]string{
-				{"name", `"cassandra_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "db_2_luw",
-			pairs: [][2]string{
-				{"name", `"db2luw_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"database", `"Database"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"port", `50000`},
-			},
-		},
-		{
-			resource: "db_2_i",
-			pairs: [][2]string{
-				{"name", `"db2i_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"port", `50000`},
-				{"tls_required", "true"},
-			},
-		},
-		{
-			resource: "druid",
-			pairs: [][2]string{
-				{"name", `"druid_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "dynamo_db",
-			pairs: [][2]string{
-				{"name", `"dynamo_db_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"endpoint", `"Endpoint"`},
-				{"secret_store_access_key_path", `"/path/to/access_key"`},
-				{"secret_store_access_key_key", `"key"`},
-				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
-				{"secret_store_secret_access_key_key", `"key"`},
-				{"region", `"Region"`},
-				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
-				{"secret_store_role_arn_key", `"key"`},
-				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
-				{"secret_store_role_external_id_key", `"key"`},
-			},
-		},
-		{
-			resource: "amazon_es",
-			pairs: [][2]string{
-				{"name", `"amazon_es_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"secret_store_access_key_path", `"/path/to/access_key"`},
-				{"secret_store_access_key_key", `"key"`},
-				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
-				{"secret_store_secret_access_key_key", `"key"`},
-				{"region", `"Region"`},
-				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
-				{"secret_store_role_arn_key", `"key"`},
-				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
-				{"secret_store_role_external_id_key", `"key"`},
-			},
-		},
-		{
-			resource: "elastic",
-			pairs: [][2]string{
-				{"name", `"elastic_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "http_basic_auth",
-			pairs: [][2]string{
-				{"name", `"http_basic_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"url", `"http://example.com"`},
-				{"healthcheck_path", `"/"`},
-				{"subdomain", `"basicsecretstore"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "http_auth",
-			pairs: [][2]string{
-				{"name", `"http_auth_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"url", `"http://example.com"`},
-				{"healthcheck_path", `"/"`},
-				{"secret_store_auth_header_path", `"/path/to/auth_header"`},
-				{"secret_store_auth_header_key", `"key"`},
-				{"subdomain", `"authsecretstore"`},
-			},
-		},
-		{
-			resource: "kubernetes",
-			pairs: [][2]string{
-				{"name", `"kubernetes_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"port", "443"},
-				{"secret_store_certificate_authority_path", `"/path/to/certificate_authority"`},
-				{"secret_store_certificate_authority_key", `"key"`},
-				{"secret_store_client_certificate_path", `"/path/to/client_certificate"`},
-				{"secret_store_client_certificate_key", `"key"`},
-				{"secret_store_client_key_path", `"/path/to/client_key"`},
-				{"secret_store_client_key_key", `"key"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "kubernetes_basic_auth",
-			pairs: [][2]string{
-				{"name", `"kubernetes_basic_auth_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"port", "443"},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "amazon_eks",
-			pairs: [][2]string{
-				{"name", `"amazon_eks_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"endpoint", `"Endpoint"`},
-				{"secret_store_access_key_path", `"/path/to/access_key"`},
-				{"secret_store_access_key_key", `"key"`},
-				{"secret_store_secret_access_key_path", `"/path/to/secret_access_key"`},
-				{"secret_store_secret_access_key_key", `"key"`},
-				{"secret_store_certificate_authority_path", `"/path/to/certificate_authority"`},
-				{"secret_store_certificate_authority_key", `"key"`},
-				{"region", `"Region"`},
-				{"cluster_name", `"ClusterName"`},
-				{"secret_store_role_arn_path", `"/path/to/role_arn"`},
-				{"secret_store_role_arn_key", `"key"`},
-				{"secret_store_role_external_id_path", `"/path/to/role_external_id"`},
-				{"secret_store_role_external_id_key", `"key"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "google_gke",
-			pairs: [][2]string{
-				{"name", `"google_gke_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"endpoint", `"Endpoint"`},
-				{"secret_store_certificate_authority_path", `"/path/to/certificate_authority"`},
-				{"secret_store_certificate_authority_key", `"key"`},
-				{"secret_store_service_account_key_path", `"/path/to/service_account_key"`},
-				{"secret_store_service_account_key_key", `"key"`},
-				{"healthcheck_namespace", `"default"`},
-			},
-		},
-		{
-			resource: "mongo_legacy_host",
-			pairs: [][2]string{
-				{"name", `"mongo_legacy_host_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "mongo_legacy_replicaset",
-			pairs: [][2]string{
-				{"name", `"mongo_legacy_replicaset_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-				{"replica_set", `"ReplicaSet"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "mongo_host",
-			pairs: [][2]string{
-				{"name", `"mongo_host_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "mongo_replica_set",
-			pairs: [][2]string{
-				{"name", `"mongo_replica_set_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"auth_database", `"AuthDatabase"`},
-				{"replica_set", `"ReplicaSet"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "mysql",
-			pairs: [][2]string{
-				{"name", `"mysql_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "aurora_mysql",
-			pairs: [][2]string{
-				{"name", `"aurora_mysql_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "clustrix",
-			pairs: [][2]string{
-				{"name", `"clustrix_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "maria",
-			pairs: [][2]string{
-				{"name", `"maria_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "memsql",
-			pairs: [][2]string{
-				{"name", `"memsql_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "single_store",
-			pairs: [][2]string{
-				{"name", `"single_store_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "oracle",
-			pairs: [][2]string{
-				{"name", `"oracle_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-				{"port", "1521"},
-			},
-		},
-		{
-			resource: "postgres",
-			pairs: [][2]string{
-				{"name", `"postgres_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "aurora_postgres",
-			pairs: [][2]string{
-				{"name", `"aurora-postgres_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "greenplum",
-			pairs: [][2]string{
-				{"name", `"greenplum_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "cockroach",
-			pairs: [][2]string{
-				{"name", `"cockroach_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "redshift",
-			pairs: [][2]string{
-				{"name", `"redshift_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "presto",
-			pairs: [][2]string{
-				{"name", `"presto_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "rdp",
-			pairs: [][2]string{
-				{"name", `"rdp_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"port", "3389"},
-			},
-		},
-		{
-			resource: "redis",
-			pairs: [][2]string{
-				{"name", `"redis_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "elasticache_redis",
-			pairs: [][2]string{
-				{"name", `"elasticache_redis_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "snowflake",
-			pairs: [][2]string{
-				{"name", `"snowflake_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-				{"schema", `"Schema"`},
-			},
-		},
-		{
-			resource: "sql_server",
-			pairs: [][2]string{
-				{"name", `"sql_server_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-				{"database", `"Database"`},
-			},
-		},
-		{
-			resource: "ssh",
-			pairs: [][2]string{
-				{"name", `"ssh_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"port", "22"},
-				{"port_forwarding", "true"},
-				{"key_type", `"ed25519"`},
-			},
-		},
-		{
-			resource: "ssh_customer_key",
-			pairs: [][2]string{
-				{"name", `"ssh_customer_key_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"port", "22"},
-				{"port_forwarding", "true"},
-				{"secret_store_private_key_path", `"/path/to/private_key"`},
-				{"secret_store_private_key_key", `"key"`},
-			},
-		},
-		{
-			resource: "ssh_cert",
-			pairs: [][2]string{
-				{"name", `"ssh_cert_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"port", "22"},
-				{"port_forwarding", "true"},
-				{"key_type", `"ed25519"`},
-			},
-		},
-		{
-			resource: "sybase",
-			pairs: [][2]string{
-				{"name", `"sybase_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "sybase_iq",
-			pairs: [][2]string{
-				{"name", `"sybase_iq_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "teradata",
-			pairs: [][2]string{
-				{"name", `"teradata_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "rabbitmq_amqp_091",
-			pairs: [][2]string{
-				{"name", `"rabbitmq_amqp_091_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-		{
-			resource: "amazonmq_amqp_091",
-			pairs: [][2]string{
-				{"name", `"amazonmq_amqp_091_secret_store"`},
-				{"secret_store_id", `"` + seID + `"`},
-				{"hostname", `"Hostname"`},
-				{"secret_store_username_path", `"/path/to/username"`},
-				{"secret_store_username_key", `"key"`},
-				{"secret_store_password_path", `"/path/to/password"`},
-				{"secret_store_password_key", `"key"`},
-			},
-		},
-	}
-
-	resourceNameBase := randomWithPrefix("test")
-
-	for _, tc := range tcs {
-		tc := tc
-		t.Run(tc.resource, func(t *testing.T) {
-			name := resourceNameBase + tc.resource
-			cfg := testAccSDMResourceAnyConfig(name, tc.resource, tc.pairs)
-
-			checks := make([]resource.TestCheckFunc, len(tc.pairs))
-			for i, p := range tc.pairs {
-				val := p[1]
-				// TF removes quotes around strings
-				val = strings.Trim(val, "\"")
-				// ... and converts escaped new lines into real newlines
-				val = strings.Replace(val, "\\n", "\n", -1)
-				checks[i] = resource.TestCheckResourceAttr("sdm_resource."+name, tc.resource+".0."+p[0], val)
-			}
-
-			resource.Test(t, resource.TestCase{
-				Providers:    testAccProviders,
-				CheckDestroy: testCheckDestroy,
-				Steps: []resource.TestStep{
-					{
-						Config: cfg,
-						Check:  resource.ComposeTestCheckFunc(checks...),
-					},
-					{
-						// there should be no change if the resource is updated from the server
-						Taint:  []string{"sdm_resource." + name},
-						Config: cfg,
-						Check:  resource.ComposeTestCheckFunc(checks...),
-					},
-					{
-						ResourceName: "sdm_resource." + name,
-						ImportState:  true,
-					},
+		resource.ParallelTest(t, resource.TestCase{
+			Providers:    testAccProviders,
+			CheckDestroy: testCheckDestroy,
+			Steps: []resource.TestStep{
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+						}
+					}
+					`, resourceName, redisName),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+					),
 				},
-			})
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+							bind_interface = "127.0.0.2"
+							port_override = %v
+						}
+					}
+					`, resourceName, redisName, updatedPortOverride),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(updatedPortOverride)),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+						func(s *terraform.State) error {
+							id, err := testCreatedID(s, "sdm_resource", resourceName)
+							if err != nil {
+								return err
+							}
+
+							// check if it was actually updated
+							client := testClient()
+							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+							defer cancel()
+							resp, err := client.Resources().Get(ctx, id)
+							if err != nil {
+								return fmt.Errorf("failed to get created resource: %w", err)
+							}
+
+							if resp.Resource.(*sdm.Redis).PortOverride != updatedPortOverride {
+								return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, updatedPortOverride)
+							}
+
+							return nil
+						},
+					),
+				},
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+			},
 		})
-	}
+	})
+
+	t.Run("present->absent", func(t *testing.T) {
+		resourceName := randomWithPrefix("test")
+		redisName := randomWithPrefix("test")
+		portOverride := portOverride.Count()
+
+		resource.ParallelTest(t, resource.TestCase{
+			Providers:    testAccProviders,
+			CheckDestroy: testCheckDestroy,
+			Steps: []resource.TestStep{
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+							port_override = %v
+						}
+					}
+					`, resourceName, redisName, portOverride),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+					),
+				},
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+							bind_interface = "127.0.0.2"
+						}
+					}
+					`, resourceName, redisName),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+						func(s *terraform.State) error {
+							id, err := testCreatedID(s, "sdm_resource", resourceName)
+							if err != nil {
+								return err
+							}
+
+							// check if it was actually updated
+							client := testClient()
+							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+							defer cancel()
+							resp, err := client.Resources().Get(ctx, id)
+							if err != nil {
+								return fmt.Errorf("failed to get created resource: %w", err)
+							}
+
+							if resp.Resource.(*sdm.Redis).PortOverride != portOverride {
+								return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, portOverride)
+							}
+
+							return nil
+						},
+					),
+				},
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+			},
+		})
+	})
+
+	t.Run("absent->absent", func(t *testing.T) {
+		resourceName := randomWithPrefix("test")
+		redisName := randomWithPrefix("test")
+
+		resource.ParallelTest(t, resource.TestCase{
+			Providers:    testAccProviders,
+			CheckDestroy: testCheckDestroy,
+			Steps: []resource.TestStep{
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+						}
+					}
+					`, resourceName, redisName),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+					),
+				},
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+				{
+					Config: fmt.Sprintf(`
+					resource "sdm_resource" "%s" {
+						redis {
+							name = "%s"
+							hostname = "test.com"
+							port = 6379
+							bind_interface = "127.0.0.2"
+						}
+					}
+					`, resourceName, redisName),
+					Check: resource.ComposeTestCheckFunc(
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+						func(s *terraform.State) error {
+							id, err := testCreatedID(s, "sdm_resource", resourceName)
+							if err != nil {
+								return err
+							}
+
+							// check if it was actually updated
+							client := testClient()
+							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+							defer cancel()
+							resp, err := client.Resources().Get(ctx, id)
+							if err != nil {
+								return fmt.Errorf("failed to get created resource: %w", err)
+							}
+
+							if resp.Resource.(*sdm.Redis).PortOverride == 0 {
+								return fmt.Errorf("missing port override '%d'", resp.Resource.(*sdm.Redis).PortOverride)
+							}
+
+							return nil
+						},
+					),
+				},
+				{
+					ResourceName:      "sdm_resource." + resourceName,
+					ImportState:       true,
+					ImportStateVerify: true,
+				},
+			},
+		})
+	})
 }
 
 func testAccSDMResourceAnyConfig(resourceName, resourceType string, pairs [][2]string) string {
