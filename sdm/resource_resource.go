@@ -6002,6 +6002,7 @@ func resourceResource() *schema.Resource {
 						"key_type": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"name": {
@@ -6088,6 +6089,7 @@ func resourceResource() *schema.Resource {
 						"key_type": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "",
 						},
 						"name": {
