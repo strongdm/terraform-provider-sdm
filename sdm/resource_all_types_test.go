@@ -216,6 +216,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"enable_env_variables", `true`},
 				{"name", `"name"`},
+				{"port", `443`},
 				{"region", `"region"`},
 				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
 				{"role_arn", `"role_arn"`},
@@ -1243,6 +1244,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"enable_env_variables", `true`},
 				{"name", `"secret_name"`},
+				{"port", `443`},
 				{"region", `"region"`},
 				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
 				{"secret_store_role_arn_path", `"path"`},
@@ -2155,7 +2157,6 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		})
 	}
 }
-
 func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 	type testCase struct {
 		resource string
