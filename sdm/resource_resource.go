@@ -269,7 +269,7 @@ func resourceResource() *schema.Resource {
 						},
 						"remote_identity_healthcheck_username": {
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -549,7 +549,7 @@ func resourceResource() *schema.Resource {
 						},
 						"remote_identity_healthcheck_username": {
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 							Description: "",
 						},
 						"role_arn": {
@@ -1324,6 +1324,11 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
@@ -9769,6 +9774,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
 			EnableEnvVariables:                convertBoolToPlumbing(raw["enable_env_variables"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
 			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			Region:                            convertStringToPlumbing(raw["region"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
@@ -12000,6 +12006,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                        (v.EgressFilter),
 				"enable_env_variables":                 (v.EnableEnvVariables),
 				"name":                                 (v.Name),
+				"port":                                 (v.Port),
 				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
@@ -13723,6 +13730,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"egress_filter":                        (v.EgressFilter),
 				"enable_env_variables":                 (v.EnableEnvVariables),
 				"name":                                 (v.Name),
+				"port":                                 (v.Port),
 				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),

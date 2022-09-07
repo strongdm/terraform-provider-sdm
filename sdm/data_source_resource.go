@@ -1085,6 +1085,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
@@ -5697,6 +5702,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"enable_env_variables":                 (v.EnableEnvVariables),
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
+				"port":                                 (v.Port),
 				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),

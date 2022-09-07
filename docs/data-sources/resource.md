@@ -224,6 +224,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `enable_env_variables` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port` - 
 		* `port_override` - 
 		* `region` - 
 		* `remote_identity_group_id` - 

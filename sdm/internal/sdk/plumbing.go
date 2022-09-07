@@ -511,6 +511,7 @@ func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, erro
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
@@ -539,6 +540,7 @@ func convertAWSConsoleToPlumbing(porcelain *AWSConsole) *proto.AWSConsole {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
