@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/3.2.2"
+	defaultUserAgent = "strongdm-sdk-go/3.2.3"
 )
 
 var _ = metadata.Pairs
@@ -352,7 +352,7 @@ func (c *Client) shouldRetry(iter int, err error) bool {
 			}
 			return true
 		}
-		return s.Code() == codes.Internal
+		return s.Code() == codes.Internal || s.Code() == codes.Unavailable
 	}
 	return true
 }
