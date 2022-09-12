@@ -224,7 +224,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `enable_env_variables` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `port` - 
 		* `port_override` - 
 		* `region` - 
 		* `remote_identity_group_id` - 
@@ -923,6 +922,17 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
+	* snowsight:
+		* `bind_interface` - Bind interface
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_username` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
+		* `saml_metadata` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - 
+		* `tags` - Tags is a map of key, value pairs.
 	* sql_server:
 		* `bind_interface` - Bind interface
 		* `database` - 

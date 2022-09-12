@@ -511,7 +511,6 @@ func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, erro
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
-	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
@@ -540,7 +539,6 @@ func convertAWSConsoleToPlumbing(porcelain *AWSConsole) *proto.AWSConsole {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
-	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
@@ -6732,6 +6730,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_SingleStore{SingleStore: convertSingleStoreToPlumbing(v)}
 	case *Snowflake:
 		plumbing.Resource = &proto.Resource_Snowflake{Snowflake: convertSnowflakeToPlumbing(v)}
+	case *Snowsight:
+		plumbing.Resource = &proto.Resource_Snowsight{Snowsight: convertSnowsightToPlumbing(v)}
 	case *SQLServer:
 		plumbing.Resource = &proto.Resource_SqlServer{SqlServer: convertSQLServerToPlumbing(v)}
 	case *SSH:
@@ -6948,6 +6948,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetSnowflake() != nil {
 		return convertSnowflakeToPorcelain(plumbing.GetSnowflake())
+	}
+	if plumbing.GetSnowsight() != nil {
+		return convertSnowsightToPorcelain(plumbing.GetSnowsight())
 	}
 	if plumbing.GetSqlServer() != nil {
 		return convertSQLServerToPorcelain(plumbing.GetSqlServer())
@@ -8274,6 +8277,71 @@ func convertRepeatedSnowflakeToPorcelain(plumbings []*proto.Snowflake) (
 	var items []*Snowflake
 	for _, plumbing := range plumbings {
 		if v, err := convertSnowflakeToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSnowsightToPorcelain(plumbing *proto.Snowsight) (*Snowsight, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Snowsight{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.HealthcheckUsername = plumbing.HealthcheckUsername
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SamlMetadata = plumbing.SamlMetadata
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertSnowsightToPlumbing(porcelain *Snowsight) *proto.Snowsight {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Snowsight{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckUsername = (porcelain.HealthcheckUsername)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SamlMetadata = (porcelain.SamlMetadata)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedSnowsightToPlumbing(
+	porcelains []*Snowsight,
+) []*proto.Snowsight {
+	var items []*proto.Snowsight
+	for _, porcelain := range porcelains {
+		items = append(items, convertSnowsightToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSnowsightToPorcelain(plumbings []*proto.Snowsight) (
+	[]*Snowsight,
+	error,
+) {
+	var items []*Snowsight
+	for _, plumbing := range plumbings {
+		if v, err := convertSnowsightToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

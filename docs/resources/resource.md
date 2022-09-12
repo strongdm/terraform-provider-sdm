@@ -294,7 +294,6 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `enable_env_variables` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
@@ -467,7 +466,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required if storing credentials directly strongDM) 
 	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
-	* `port` - (Optional) 
+	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1153,6 +1152,18 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
+* snowsight:
+	* `bind_interface` - (Optional) Bind interface
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `healthcheck_username` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) 
+	* `saml_metadata` - (Required if storing credentials directly strongDM) 
+	* `secret_store_saml_metadata_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_saml_metadata_key` - (Optional)
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Required) 
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * sql_server:
 	* `bind_interface` - (Optional) Bind interface
 	* `database` - (Required) 

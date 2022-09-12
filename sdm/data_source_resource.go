@@ -1085,11 +1085,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
@@ -4904,6 +4899,66 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"snowsight": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
+									"saml_metadata": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"sql_server": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -5702,7 +5757,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"enable_env_variables":                 (v.EnableEnvVariables),
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
-				"port":                                 (v.Port),
 				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
@@ -6505,6 +6559,19 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id": (v.SecretStoreID),
 				"tags":            convertTagsToPorcelain(v.Tags),
 				"username":        (v.Username),
+			})
+		case *sdm.Snowsight:
+			output[0]["snowsight"] = append(output[0]["snowsight"], entity{
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"healthcheck_username": (v.HealthcheckUsername),
+				"id":                   (v.ID),
+				"name":                 (v.Name),
+				"port_override":        (v.PortOverride),
+				"saml_metadata":        (v.SamlMetadata),
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.SQLServer:
 			output[0]["sql_server"] = append(output[0]["sql_server"], entity{

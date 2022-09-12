@@ -216,7 +216,6 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"enable_env_variables", `true`},
 				{"name", `"name"`},
-				{"port", `443`},
 				{"region", `"region"`},
 				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
 				{"role_arn", `"role_arn"`},
@@ -865,6 +864,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "snowsight",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"healthcheck_username", `"healthcheck_username"`},
+				{"name", `"name"`},
+				{"saml_metadata", `"saml_metadata"`},
+				{"subdomain", `"subdomain"`},
+			},
+		},
+		{
 			resource: "sql_server",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1244,7 +1253,6 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"enable_env_variables", `true`},
 				{"name", `"secret_name"`},
-				{"port", `443`},
 				{"region", `"region"`},
 				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
 				{"secret_store_role_arn_path", `"path"`},
@@ -2007,6 +2015,18 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"secret_store_username_path", `"path"`},
 				{"secret_store_username_key", `"key"`},
+			},
+		},
+		{
+			resource: "snowsight",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"healthcheck_username", `"healthcheck_username"`},
+				{"name", `"secret_name"`},
+				{"secret_store_saml_metadata_path", `"path"`},
+				{"secret_store_saml_metadata_key", `"key"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"subdomain", `"subdomain"`},
 			},
 		},
 		{

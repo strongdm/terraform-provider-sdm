@@ -1325,11 +1325,6 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
-						"port": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Description: "",
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2232,7 +2227,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Optional:    true,
+							Required:    true,
 							Description: "",
 						},
 						"port_override": {
@@ -5881,6 +5876,72 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"snowsight": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "Snowsight is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"healthcheck_username": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
+						"saml_metadata": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_saml_metadata_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_saml_metadata_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"sql_server": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -9074,6 +9135,31 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
+	if list := d.Get("snowsight").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["saml_metadata"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential saml_metadata cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_saml_metadata_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_saml_metadata_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_saml_metadata_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_saml_metadata_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"saml_metadata":                   convertStringToPlumbing(raw["saml_metadata"]),
+			"secret_store_saml_metadata_path": convertStringToPlumbing(raw["secret_store_saml_metadata_path"]),
+			"secret_store_saml_metadata_key":  convertStringToPlumbing(raw["secret_store_saml_metadata_key"]),
+		}, nil
+	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9774,7 +9860,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
 			EnableEnvVariables:                convertBoolToPlumbing(raw["enable_env_variables"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
-			Port:                              convertInt32ToPlumbing(raw["port"]),
 			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			Region:                            convertStringToPlumbing(raw["region"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
@@ -11435,6 +11520,33 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("snowsight").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.Snowsight{}
+		}
+		out := &sdm.Snowsight{
+			ID:                  d.Id(),
+			BindInterface:       convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:        convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckUsername: convertStringToPlumbing(raw["healthcheck_username"]),
+			Name:                convertStringToPlumbing(raw["name"]),
+			PortOverride:        convertInt32ToPlumbing(raw["port_override"]),
+			SamlMetadata:        convertStringToPlumbing(raw["saml_metadata"]),
+			SecretStoreID:       convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:           convertStringToPlumbing(raw["subdomain"]),
+			Tags:                convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.SamlMetadata == "" {
+			out.SamlMetadata = fullSecretStorePath(raw, "saml_metadata")
+		}
+		return out
+	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12006,7 +12118,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                        (v.EgressFilter),
 				"enable_env_variables":                 (v.EnableEnvVariables),
 				"name":                                 (v.Name),
-				"port":                                 (v.Port),
 				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
@@ -13179,6 +13290,24 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
+	case *sdm.Snowsight:
+		localV, _ := localVersion.(*sdm.Snowsight)
+		_ = localV
+		d.Set("snowsight", []map[string]interface{}{
+			{
+				"bind_interface":                  (v.BindInterface),
+				"egress_filter":                   (v.EgressFilter),
+				"healthcheck_username":            (v.HealthcheckUsername),
+				"name":                            (v.Name),
+				"port_override":                   (v.PortOverride),
+				"saml_metadata":                   seValues["saml_metadata"],
+				"secret_store_saml_metadata_path": seValues["secret_store_saml_metadata_path"],
+				"secret_store_saml_metadata_key":  seValues["secret_store_saml_metadata_key"],
+				"secret_store_id":                 (v.SecretStoreID),
+				"subdomain":                       (v.Subdomain),
+				"tags":                            convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.SQLServer:
 		localV, _ := localVersion.(*sdm.SQLServer)
 		_ = localV
@@ -13730,7 +13859,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"egress_filter":                        (v.EgressFilter),
 				"enable_env_variables":                 (v.EnableEnvVariables),
 				"name":                                 (v.Name),
-				"port":                                 (v.Port),
 				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
@@ -15057,6 +15185,27 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
+			},
+		})
+	case *sdm.Snowsight:
+		localV, ok := localVersion.(*sdm.Snowsight)
+		if !ok {
+			localV = &sdm.Snowsight{}
+		}
+		_ = localV
+		d.Set("snowsight", []map[string]interface{}{
+			{
+				"bind_interface":                  (v.BindInterface),
+				"egress_filter":                   (v.EgressFilter),
+				"healthcheck_username":            (v.HealthcheckUsername),
+				"name":                            (v.Name),
+				"port_override":                   (v.PortOverride),
+				"saml_metadata":                   seValues["saml_metadata"],
+				"secret_store_saml_metadata_path": seValues["secret_store_saml_metadata_path"],
+				"secret_store_saml_metadata_key":  seValues["secret_store_saml_metadata_key"],
+				"secret_store_id":                 (v.SecretStoreID),
+				"subdomain":                       (v.Subdomain),
+				"tags":                            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.SQLServer:
