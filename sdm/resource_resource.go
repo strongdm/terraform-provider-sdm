@@ -269,7 +269,7 @@ func resourceResource() *schema.Resource {
 						},
 						"remote_identity_healthcheck_username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"secret_store_id": {
@@ -549,7 +549,7 @@ func resourceResource() *schema.Resource {
 						},
 						"remote_identity_healthcheck_username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"role_arn": {
