@@ -654,6 +654,7 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `headers_blacklist` - (Optional) 
 	* `healthcheck_path` - (Required) 
+	* `host_override` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) 
@@ -665,6 +666,7 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `headers_blacklist` - (Optional) 
 	* `healthcheck_path` - (Required) 
+	* `host_override` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Optional) 
 	* `secret_store_password_path` - (Optional)
@@ -682,6 +684,7 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `headers_blacklist` - (Optional) 
 	* `healthcheck_path` - (Required) 
+	* `host_override` - (Optional) 
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) 

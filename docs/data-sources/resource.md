@@ -509,6 +509,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `headers_blacklist` - 
 		* `healthcheck_path` - 
+		* `host_override` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -521,6 +522,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `headers_blacklist` - 
 		* `healthcheck_path` - 
+		* `host_override` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
@@ -535,6 +537,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `headers_blacklist` - 
 		* `healthcheck_path` - 
+		* `host_override` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.

@@ -2644,6 +2644,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"host_override": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2705,6 +2710,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"healthcheck_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"host_override": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -2781,6 +2791,11 @@ func dataSourceResource() *schema.Resource {
 										Description: "",
 									},
 									"healthcheck_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"host_override": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "",
@@ -6086,6 +6101,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"secret_store_id":   (v.SecretStoreID),
@@ -6100,6 +6116,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"password":          (v.Password),
@@ -6116,6 +6133,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":     (v.EgressFilter),
 				"headers_blacklist": (v.HeadersBlacklist),
 				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"secret_store_id":   (v.SecretStoreID),

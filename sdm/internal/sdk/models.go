@@ -1392,6 +1392,8 @@ type HTTPAuth struct {
 	HealthcheckPath string `json:"healthcheckPath"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+
+	HostOverride string `json:"hostOverride"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
@@ -1419,6 +1421,8 @@ type HTTPBasicAuth struct {
 	HealthcheckPath string `json:"healthcheckPath"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+
+	HostOverride string `json:"hostOverride"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
@@ -1450,6 +1454,8 @@ type HTTPNoAuth struct {
 	HealthcheckPath string `json:"healthcheckPath"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
+
+	HostOverride string `json:"hostOverride"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.

@@ -3823,6 +3823,7 @@ func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
 	porcelain.HealthcheckPath = plumbing.HealthcheckPath
 	porcelain.Healthy = plumbing.Healthy
+	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -3848,6 +3849,7 @@ func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
 	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
 	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -3891,6 +3893,7 @@ func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) (*HTTPBasicA
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
 	porcelain.HealthcheckPath = plumbing.HealthcheckPath
 	porcelain.Healthy = plumbing.Healthy
+	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
@@ -3917,6 +3920,7 @@ func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAu
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
 	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
 	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
@@ -3962,6 +3966,7 @@ func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) (*HTTPNoAuth, erro
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
 	porcelain.HealthcheckPath = plumbing.HealthcheckPath
 	porcelain.Healthy = plumbing.Healthy
+	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -3986,6 +3991,7 @@ func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
 	plumbing.HealthcheckPath = (porcelain.HealthcheckPath)
 	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
