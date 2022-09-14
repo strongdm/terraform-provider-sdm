@@ -20,12 +20,13 @@ package sdm
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
+	"time"
+
 	proto "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/internal/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	"strings"
-	"time"
 )
 
 func quoteFilterArgs(filter string, args ...interface{}) (string, error) {

@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"hash"
 	"io"
-	"io/ioutil"
 	"net"
 	"os"
 	"os/exec"
@@ -307,14 +306,14 @@ func NewClient(config *ClientConfig) (c *Client) {
 	}
 
 	if config.Stderr == nil {
-		config.Stderr = ioutil.Discard
+		config.Stderr = io.Discard
 	}
 
 	if config.SyncStdout == nil {
-		config.SyncStdout = ioutil.Discard
+		config.SyncStdout = io.Discard
 	}
 	if config.SyncStderr == nil {
-		config.SyncStderr = ioutil.Discard
+		config.SyncStderr = io.Discard
 	}
 
 	if config.AllowedProtocols == nil {

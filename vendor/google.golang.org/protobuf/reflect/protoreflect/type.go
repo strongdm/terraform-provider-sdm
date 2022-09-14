@@ -446,6 +446,7 @@ type ExtensionDescriptors interface {
 // relative to the parent that it is declared within.
 //
 // For example:
+//
 //	syntax = "proto2";
 //	package example;
 //	message FooMessage {

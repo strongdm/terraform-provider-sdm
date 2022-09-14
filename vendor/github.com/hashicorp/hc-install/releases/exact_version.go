@@ -83,7 +83,7 @@ func (ev *ExactVersion) Install(ctx context.Context) (string, error) {
 	if dstDir == "" {
 		var err error
 		dirName := fmt.Sprintf("%s_*", ev.Product.Name)
-		dstDir, err = ioutil.TempDir("", dirName)
+		dstDir, err = os.MkdirTemp("", dirName)
 		if err != nil {
 			return "", err
 		}

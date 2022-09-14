@@ -3,11 +3,12 @@ package schema
 import (
 	"bytes"
 	"fmt"
-	"github.com/google/go-cmp/cmp"
 	"reflect"
 	"sort"
 	"strconv"
 	"sync"
+
+	"github.com/google/go-cmp/cmp"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/internal/helper/hashcode"
 )

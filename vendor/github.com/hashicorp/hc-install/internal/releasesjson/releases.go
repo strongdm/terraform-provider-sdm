@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/url"
 	"strings"
@@ -51,7 +51,7 @@ type Releases struct {
 
 func NewReleases() *Releases {
 	return &Releases{
-		logger:  log.New(ioutil.Discard, "", 0),
+		logger:  log.New(io.Discard, "", 0),
 		BaseURL: defaultBaseURL,
 	}
 }
@@ -87,7 +87,7 @@ func (r *Releases) ListProductVersions(ctx context.Context, productName string) 
 
 	r.logger.Printf("received %s", resp.Status)
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +152,7 @@ func (r *Releases) GetProductVersion(ctx context.Context, product string, versio
 
 	r.logger.Printf("received %s", resp.Status)
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}

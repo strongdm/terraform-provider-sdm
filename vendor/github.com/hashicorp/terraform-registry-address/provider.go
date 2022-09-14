@@ -224,9 +224,10 @@ func (pt Provider) Equals(other Provider) bool {
 // terraform-config-inspect.
 //
 // The following are valid source string formats:
-// 		name
-// 		namespace/name
-// 		hostname/namespace/name
+//
+//	name
+//	namespace/name
+//	hostname/namespace/name
 //
 // "name"-only format is parsed as -/name (i.e. legacy namespace)
 // requiring further identification of the namespace via Registry API
@@ -337,9 +338,10 @@ func ParseRawProviderSourceString(str string) (Provider, error) {
 // terraform-config-inspect.
 //
 // The following are valid source string formats:
-// 		name
-// 		namespace/name
-// 		hostname/namespace/name
+//
+//	name
+//	namespace/name
+//	hostname/namespace/name
 //
 // "name" format is assumed to be hashicorp/name
 func ParseAndInferProviderSourceString(str string) (Provider, error) {

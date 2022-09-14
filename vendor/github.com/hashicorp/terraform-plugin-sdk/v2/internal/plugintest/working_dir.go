@@ -5,7 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 
@@ -84,7 +84,7 @@ func (wd *WorkingDir) GetHelper() *Helper {
 // discarded and any saved plan is cleared.
 func (wd *WorkingDir) SetConfig(cfg string) error {
 	configFilename := filepath.Join(wd.baseDir, ConfigFileName)
-	err := ioutil.WriteFile(configFilename, []byte(cfg), 0700)
+	err := os.WriteFile(configFilename, []byte(cfg), 0700)
 	if err != nil {
 		return err
 	}
@@ -217,7 +217,7 @@ func (wd *WorkingDir) SavedPlanRawStdout() (string, error) {
 	var ret bytes.Buffer
 
 	wd.tf.SetStdout(&ret)
-	defer wd.tf.SetStdout(ioutil.Discard)
+	defer wd.tf.SetStdout(io.Discard)
 	_, err := wd.tf.ShowPlanFileRaw(context.Background(), wd.planFilename(), tfexec.Reattach(wd.reattachInfo))
 	if err != nil {
 		return "", err

@@ -22,10 +22,10 @@ const (
 // You may check for unset keys, however this will also match keys set to empty
 // string. Please provide a map with at least 1 non-empty value.
 //
-//   map[string]string{
-//	     "key1": "value",
-//       "key2": "",
-//   }
+//	  map[string]string{
+//		     "key1": "value",
+//	      "key2": "",
+//	  }
 //
 // Use this function over SDK provided TestCheckFunctions when validating a
 // TypeSet where its elements are a nested object with their own attrs/values.
@@ -70,11 +70,10 @@ func TestCheckTypeSetElemNestedAttrs(name, attr string, values map[string]string
 // You may check for unset keys, however this will also match keys set to empty
 // string. Please provide a map with at least 1 non-empty value e.g.
 //
-//   map[string]*regexp.Regexp{
-//	     "key1": regexp.MustCompile("value"),
-//       "key2": regexp.MustCompile(""),
-//   }
-//
+//	  map[string]*regexp.Regexp{
+//		     "key1": regexp.MustCompile("value"),
+//	      "key2": regexp.MustCompile(""),
+//	  }
 func TestMatchTypeSetElemNestedAttrs(name, attr string, values map[string]*regexp.Regexp) TestCheckFunc {
 	return func(s *terraform.State) error {
 		is, err := primaryInstanceState(s, name)

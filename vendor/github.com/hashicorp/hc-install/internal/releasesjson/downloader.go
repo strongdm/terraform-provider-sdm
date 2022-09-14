@@ -108,7 +108,7 @@ func (d *Downloader) DownloadAndUnpack(ctx context.Context, pv *ProductVersion, 
 		}
 	}
 
-	pkgFile, err := ioutil.TempFile("", pb.Filename)
+	pkgFile, err := os.CreateTemp("", pb.Filename)
 	if err != nil {
 		return err
 	}

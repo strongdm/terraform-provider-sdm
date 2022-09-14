@@ -94,7 +94,7 @@ const (
 
 // Address represents a server the client connects to.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
