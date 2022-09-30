@@ -2139,6 +2139,8 @@ type NodeUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// Oracle is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type Oracle struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
