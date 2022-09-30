@@ -235,8 +235,7 @@ func (e *ErrNoConfig) Error() string {
 
 // ErrCLIUsage is returned when the combination of flags or arguments is incorrect.
 //
-//	CLI indicates usage errors in three different ways: either
-//
+//  CLI indicates usage errors in three different ways: either
 // 1. Exit 1, with a custom error message on stderr.
 // 2. Exit 1, with command usage logged to stderr.
 // 3. Exit 127, with command usage logged to stdout.

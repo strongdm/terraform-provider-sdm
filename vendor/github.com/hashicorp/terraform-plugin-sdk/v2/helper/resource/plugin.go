@@ -3,7 +3,7 @@ package resource
 import (
 	"context"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -91,7 +91,7 @@ func runProviderCommand(t testing.T, f func() error, wd *plugintest.WorkingDir, 
 			Logger: hclog.New(&hclog.LoggerOptions{
 				Name:   "plugintest",
 				Level:  hclog.Trace,
-				Output: io.Discard,
+				Output: ioutil.Discard,
 			}),
 			NoLogOutputOverride: true,
 			UseTFLogSink:        t,
@@ -170,7 +170,7 @@ func runProviderCommand(t testing.T, f func() error, wd *plugintest.WorkingDir, 
 			Logger: hclog.New(&hclog.LoggerOptions{
 				Name:   "plugintest",
 				Level:  hclog.Trace,
-				Output: io.Discard,
+				Output: ioutil.Discard,
 			}),
 			NoLogOutputOverride: true,
 			UseTFLogSink:        t,
@@ -246,7 +246,7 @@ func runProviderCommand(t testing.T, f func() error, wd *plugintest.WorkingDir, 
 			Logger: hclog.New(&hclog.LoggerOptions{
 				Name:   "plugintest",
 				Level:  hclog.Trace,
-				Output: io.Discard,
+				Output: ioutil.Discard,
 			}),
 			NoLogOutputOverride: true,
 			UseTFLogSink:        t,

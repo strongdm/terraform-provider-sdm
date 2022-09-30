@@ -69,7 +69,7 @@ func AutoInitHelper(sourceDir string) (*Helper, error) {
 // automatically clean those up.
 func InitHelper(config *Config) (*Helper, error) {
 	tempDir := os.Getenv("TF_ACC_TEMP_DIR")
-	baseDir, err := os.MkdirTemp(tempDir, "plugintest")
+	baseDir, err := ioutil.TempDir(tempDir, "plugintest")
 	if err != nil {
 		return nil, fmt.Errorf("failed to create temporary directory for test helper: %s", err)
 	}
@@ -104,7 +104,7 @@ func (h *Helper) Close() error {
 // program exits, the Close method on the helper itself will attempt to
 // delete it.
 func (h *Helper) NewWorkingDir() (*WorkingDir, error) {
-	dir, err := os.MkdirTemp(h.baseDir, "work")
+	dir, err := ioutil.TempDir(h.baseDir, "work")
 	if err != nil {
 		return nil, err
 	}

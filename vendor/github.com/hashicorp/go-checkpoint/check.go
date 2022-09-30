@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	mrand "math/rand"
 	"net/http"
 	"net/url"
@@ -296,7 +297,7 @@ func checkSignature(path string) (string, error) {
 	_, err := os.Stat(path)
 	if err == nil {
 		// The file exists, read it out
-		sigBytes, err := os.ReadFile(path)
+		sigBytes, err := ioutil.ReadFile(path)
 		if err != nil {
 			return "", err
 		}
@@ -333,7 +334,7 @@ func checkSignature(path string) (string, error) {
 	}
 
 	// Write the signature
-	if err := os.WriteFile(path, []byte(signature+"\n\n"+userMessage+"\n"), 0644); err != nil {
+	if err := ioutil.WriteFile(path, []byte(signature+"\n\n"+userMessage+"\n"), 0644); err != nil {
 		return "", err
 	}
 

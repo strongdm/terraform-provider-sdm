@@ -10,22 +10,19 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/base64"
-	"io"
-
 	"golang.org/x/crypto/openpgp/errors"
+	"io"
 )
 
 // A Block represents an OpenPGP armored structure.
 //
 // The encoded form is:
+//    -----BEGIN Type-----
+//    Headers
 //
-//	-----BEGIN Type-----
-//	Headers
-//
-//	base64-encoded Bytes
-//	'=' base64 encoded checksum
-//	-----END Type-----
-//
+//    base64-encoded Bytes
+//    '=' base64 encoded checksum
+//    -----END Type-----
 // where Headers is a possibly empty sequence of Key: Value lines.
 //
 // Since the armored data can be very large, this package presents a streaming

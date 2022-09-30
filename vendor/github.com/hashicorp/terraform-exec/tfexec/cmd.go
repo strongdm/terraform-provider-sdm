@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -222,7 +223,7 @@ func mergeWriters(writers ...io.Writer) io.Writer {
 		}
 	}
 	if len(compact) == 0 {
-		return io.Discard
+		return ioutil.Discard
 	}
 	if len(compact) == 1 {
 		return compact[0]

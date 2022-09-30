@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"sync"
@@ -31,14 +32,14 @@ type printfer interface {
 // but it ignores certain environment variables that are managed within the code and prohibits
 // setting them through SetEnv:
 //
-//   - TF_APPEND_USER_AGENT
-//   - TF_IN_AUTOMATION
-//   - TF_INPUT
-//   - TF_LOG
-//   - TF_LOG_PATH
-//   - TF_REATTACH_PROVIDERS
-//   - TF_DISABLE_PLUGIN_TLS
-//   - TF_SKIP_PROVIDER_VERIFY
+//  - TF_APPEND_USER_AGENT
+//  - TF_IN_AUTOMATION
+//  - TF_INPUT
+//  - TF_LOG
+//  - TF_LOG_PATH
+//  - TF_REATTACH_PROVIDERS
+//  - TF_DISABLE_PLUGIN_TLS
+//  - TF_SKIP_PROVIDER_VERIFY
 type Terraform struct {
 	execPath           string
 	workingDir         string
@@ -79,7 +80,7 @@ func NewTerraform(workingDir string, execPath string) (*Terraform, error) {
 		execPath:   execPath,
 		workingDir: workingDir,
 		env:        nil, // explicit nil means copy os.Environ
-		logger:     log.New(io.Discard, "", 0),
+		logger:     log.New(ioutil.Discard, "", 0),
 	}
 
 	return &tf, nil

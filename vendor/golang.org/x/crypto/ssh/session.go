@@ -13,6 +13,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"sync"
 )
 
@@ -504,7 +505,7 @@ func (s *Session) stdout() {
 		return
 	}
 	if s.Stdout == nil {
-		s.Stdout = io.Discard
+		s.Stdout = ioutil.Discard
 	}
 	s.copyFuncs = append(s.copyFuncs, func() error {
 		_, err := io.Copy(s.Stdout, s.ch)
@@ -517,7 +518,7 @@ func (s *Session) stderr() {
 		return
 	}
 	if s.Stderr == nil {
-		s.Stderr = io.Discard
+		s.Stderr = ioutil.Discard
 	}
 	s.copyFuncs = append(s.copyFuncs, func() error {
 		_, err := io.Copy(s.Stderr, s.ch.Stderr())

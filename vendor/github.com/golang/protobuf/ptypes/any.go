@@ -116,10 +116,9 @@ func Is(any *anypb.Any, m proto.Message) bool {
 // The allocated message is stored in the embedded proto.Message.
 //
 // Example:
-//
-//	var x ptypes.DynamicAny
-//	if err := ptypes.UnmarshalAny(a, &x); err != nil { ... }
-//	fmt.Printf("unmarshaled message: %v", x.Message)
+//   var x ptypes.DynamicAny
+//   if err := ptypes.UnmarshalAny(a, &x); err != nil { ... }
+//   fmt.Printf("unmarshaled message: %v", x.Message)
 type DynamicAny struct{ proto.Message }
 
 func (m DynamicAny) String() string {

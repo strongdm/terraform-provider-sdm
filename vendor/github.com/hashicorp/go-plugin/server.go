@@ -542,7 +542,7 @@ func serverListener_tcp() (net.Listener, error) {
 }
 
 func serverListener_unix() (net.Listener, error) {
-	tf, err := os.CreateTemp("", "plugin")
+	tf, err := ioutil.TempFile("", "plugin")
 	if err != nil {
 		return nil, err
 	}

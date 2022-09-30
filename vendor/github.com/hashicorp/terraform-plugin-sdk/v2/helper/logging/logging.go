@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -33,7 +34,7 @@ var ValidLevels = []logutils.LogLevel{"TRACE", "DEBUG", "INFO", "WARN", "ERROR"}
 // environment variable. Calls to tflog.* will have their output managed by the
 // tfsdklog sink.
 func LogOutput(t testing.T) (logOutput io.Writer, err error) {
-	logOutput = io.Discard
+	logOutput = ioutil.Discard
 
 	logLevel := LogLevel()
 	if logLevel == "" {
@@ -97,7 +98,7 @@ func SetOutput(t testing.T) {
 	}
 
 	if out == nil {
-		out = io.Discard
+		out = ioutil.Discard
 	}
 
 	log.SetOutput(out)

@@ -31,7 +31,7 @@ import (
 	"sync"
 	"time"
 
-	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/internal/v1"
+	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
