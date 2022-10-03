@@ -5083,7 +5083,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "Oracle is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
