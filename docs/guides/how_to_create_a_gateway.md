@@ -9,7 +9,7 @@ StrongDM creates a secure, software-defined network that controls access to your
 * [Gateways](https://www.strongdm.com/docs/architecture/deployment/gateways/) serve as the entry points into your network. They listen for connections from the StrongDM client and provide access to network resources, such as databases and servers.
 * [Relays](https://www.strongdm.com/docs/architecture/deployment/relays/) are also gateways, but they have a different purpose. They can be used to extend the StrongDM network into segmented subnets that do not allow ingress. Relays provide access to network resources behind your firewall, but they do not listen for incoming connections.
 
-For AWS and Azure-specific onboarding examples, check our [StrongDM with Terraform and AWS](https://github.com/strongdm/terraform-sdm-onboarding/tree/master/onboarding) and [StrongDM with Terraform and Azure](https://github.com/strongdm/SDM-Azure-Terraform-Onboarding/tree/main/onboarding) quick start guides.
+For AWS and Azure-specific onboarding examples, check our [StrongDM with Terraform and AWS](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-aws/) and [StrongDM with Terraform and Azure](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-azure/) quick start guides.
 
 ## Create a Gateway
 

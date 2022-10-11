@@ -13,7 +13,7 @@ Both account types are managed using the `sdm_account` resource.
 
 ## Create a User
 
-The following example [creates a user](https://www.strongdm.com/docs/admin-ui-guide/access/users/) in the StrongDM Admin UI using the Terraform provider. For argument and attribute references, see the [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/resource) page.
+The following example [creates a user](https://www.strongdm.com/docs/admin-ui-guide/access/users/) in the StrongDM Admin UI using the Terraform provider. For argument and attribute references, see the [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account) page.
 
 ### Example Usage
 
@@ -30,7 +30,7 @@ resource "sdm_account" "jane_doe" {
 
 ## Create a Service Account
 
-The following example [creates a service account](https://www.strongdm.com/docs/admin-ui-guide/access/service-accounts/) in the StrongDM Admin UI using the Terraform provider. For argument and attribute references, see the [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/resource) page.
+The following example [creates a service account](https://www.strongdm.com/docs/admin-ui-guide/access/service-accounts/) in the StrongDM Admin UI using the Terraform provider. For argument and attribute references, see the [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account) page.
 
 ### Example Usage
 
@@ -57,7 +57,7 @@ output "dev_ci_pipeline_token" {
 
 StrongDM uses role-based privileges to control access to infrastructure resources. You can grant users and service accounts access by [assigning each to a role](https://www.strongdm.com/docs/admin-ui-guide/access/roles/). After the role assignment, each user entity can access the StrongDM resources attached to the specific role.
 
-For argument and attribute references, see [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/resource), [sdm_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/role), and [sdm_account_attachment](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account_attachment).
+For argument and attribute references, see [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account), [sdm_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/role), and [sdm_account_attachment](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account_attachment).
 
 ### Example Usage
 

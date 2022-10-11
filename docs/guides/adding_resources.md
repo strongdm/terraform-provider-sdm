@@ -4,11 +4,11 @@ page_title: "Add Resources to StrongDM"
 
 # Add Resources to StrongDM
 
-Your infrastructure may include various resources, such as databases, servers, clusters, or websites. With StrongDM, you can authenticate and gain secure access to these various tools. For more information, see the [Admin UI guide](https://www.strongdm.com/docs/admin-ui-guide/infrastructure-management/) in our documentation.
+Your infrastructure may include various resources, such as databases, servers, clusters, or websites. With StrongDM, you can authenticate and gain secure access to these various tools. For more information, see the [Admin UI guide](https://www.strongdm.com/docs/admin-ui-guide) in our documentation.
 
 Our Terraform provider helps to automate the creation and management of the different resource types that make up your StrongDM environment.
 
-To see AWS and Azure-specific onboarding examples, check the [StrongDM with Terraform and AWS](https://github.com/strongdm/terraform-sdm-onboarding/tree/master/onboarding) and [StrongDM with Terraform and Azure](https://github.com/strongdm/SDM-Azure-Terraform-Onboarding/tree/main/onboarding) quick start guides.
+To see AWS and Azure-specific onboarding examples, check the [StrongDM with Terraform and AWS](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-aws/) and [StrongDM with Terraform and Azure](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-azure/) quick start guides.
 
 ## Add a MySQL Database
 
@@ -107,7 +107,7 @@ The following example [adds an Amazon Elastic Kubernetes (EKS) cluster](https://
 
 ### Example Usage
 
-Install both the StrongDM and AWS Terraform providers. Then continue with the following example, where we use direct credentials to configure the StrongDM provider. However, to configure the StrongDM Terraform provider, we typically recommend using [environment variables](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/guides/adding_resources#environment-variables).
+Install both the StrongDM and AWS Terraform providers. Then continue with the following example, where we use direct credentials to configure the StrongDM provider. However, to configure the StrongDM Terraform provider, we typically recommend using [environment variables](https://registry.terraform.io/providers/strongdm/sdm/latest/docs#environment-variables).
 
 ```hcl
 # Configure all providers
