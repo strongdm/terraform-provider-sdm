@@ -271,19 +271,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `tenant_id` - 
-	* azure_mysql:
-		* `bind_interface` - Bind interface
-		* `database` - 
-		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - 
-		* `id` - Unique identifier of the Resource.
-		* `name` - Unique human-readable name of the Resource.
-		* `password` - 
-		* `port` - 
-		* `port_override` - 
-		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `tags` - Tags is a map of key, value pairs.
-		* `username` - 
 	* azure_postgres:
 		* `bind_interface` - Bind interface
 		* `database` - 
@@ -468,7 +455,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
-		* `username` - 
 	* gcp:
 		* `bind_interface` - Bind interface
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
@@ -899,8 +885,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
-		* `tls_required` - 
-		* `username` - 
 	* redshift:
 		* `bind_interface` - Bind interface
 		* `database` - 

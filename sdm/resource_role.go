@@ -30,11 +30,6 @@ func resourceRole() *schema.Resource {
 				DiffSuppressFunc: accessRulesDiffSuppress,
 				Description:      "AccessRules is a list of access rules defining the resources this Role has access to.",
 			},
-			"managed_by": {
-				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.",
-			},
 			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
@@ -56,7 +51,6 @@ func convertRoleToPlumbing(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),
 		AccessRules: convertAccessRulesToPlumbing(d.Get("access_rules")),
-		ManagedBy:   convertStringToPlumbing(d.Get("managed_by")),
 		Name:        convertStringToPlumbing(d.Get("name")),
 		Tags:        convertTagsToPlumbing(d.Get("tags")),
 	}
@@ -72,7 +66,6 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 	d.SetId(resp.Role.ID)
 	v := resp.Role
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
-	d.Set("managed_by", (v.ManagedBy))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToPorcelain(v.Tags))
 	return nil
@@ -92,7 +85,6 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 	}
 	v := resp.Role
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
-	d.Set("managed_by", (v.ManagedBy))
 	d.Set("name", (v.Name))
 	d.Set("tags", convertTagsToPorcelain(v.Tags))
 	return nil

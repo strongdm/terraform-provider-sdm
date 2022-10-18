@@ -25,10 +25,6 @@ The following arguments are supported by the SecretStore resource:
 	* `app_url` - (Required) 
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-* cyberark_pam:
-	* `app_url` - (Required) 
-	* `name` - (Required) Unique human-readable name of the SecretStore.
-	* `tags` - (Optional) Tags is a map of key, value pairs.
 * cyberark_pam_experimental:
 	* `app_url` - (Required) 
 	* `name` - (Required) Unique human-readable name of the SecretStore.

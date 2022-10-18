@@ -133,36 +133,6 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
-						"cyberark_pam": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"app_url": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the SecretStore.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the SecretStore.",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-								},
-							},
-						},
 						"cyberark_pam_experimental": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -444,13 +414,6 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 			})
 		case *sdm.CyberarkConjurStore:
 			output[0]["cyberark_conjur"] = append(output[0]["cyberark_conjur"], entity{
-				"app_url": (v.AppURL),
-				"id":      (v.ID),
-				"name":    (v.Name),
-				"tags":    convertTagsToPorcelain(v.Tags),
-			})
-		case *sdm.CyberarkPAMStore:
-			output[0]["cyberark_pam"] = append(output[0]["cyberark_pam"], entity{
 				"app_url": (v.AppURL),
 				"id":      (v.ID),
 				"name":    (v.Name),

@@ -2038,75 +2038,6 @@ func convertRepeatedAzureCertificateToPorcelain(plumbings []*proto.AzureCertific
 	}
 	return items, nil
 }
-func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &AzureMysql{}
-	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.Database = plumbing.Database
-	porcelain.EgressFilter = plumbing.EgressFilter
-	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	porcelain.Password = plumbing.Password
-	porcelain.Port = plumbing.Port
-	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.SecretStoreID = plumbing.SecretStoreId
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	porcelain.Username = plumbing.Username
-	return porcelain, nil
-}
-
-func convertAzureMysqlToPlumbing(porcelain *AzureMysql) *proto.AzureMysql {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AzureMysql{}
-	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.Database = (porcelain.Database)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.Username = (porcelain.Username)
-	return plumbing
-}
-func convertRepeatedAzureMysqlToPlumbing(
-	porcelains []*AzureMysql,
-) []*proto.AzureMysql {
-	var items []*proto.AzureMysql
-	for _, porcelain := range porcelains {
-		items = append(items, convertAzureMysqlToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAzureMysqlToPorcelain(plumbings []*proto.AzureMysql) (
-	[]*AzureMysql,
-	error,
-) {
-	var items []*AzureMysql
-	for _, plumbing := range plumbings {
-		if v, err := convertAzureMysqlToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
 func convertAzurePostgresToPorcelain(plumbing *proto.AzurePostgres) (*AzurePostgres, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -2823,57 +2754,6 @@ func convertRepeatedCyberarkPAMExperimentalStoreToPorcelain(plumbings []*proto.C
 	}
 	return items, nil
 }
-func convertCyberarkPAMStoreToPorcelain(plumbing *proto.CyberarkPAMStore) (*CyberarkPAMStore, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &CyberarkPAMStore{}
-	porcelain.AppURL = plumbing.AppURL
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	return porcelain, nil
-}
-
-func convertCyberarkPAMStoreToPlumbing(porcelain *CyberarkPAMStore) *proto.CyberarkPAMStore {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.CyberarkPAMStore{}
-	plumbing.AppURL = (porcelain.AppURL)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	return plumbing
-}
-func convertRepeatedCyberarkPAMStoreToPlumbing(
-	porcelains []*CyberarkPAMStore,
-) []*proto.CyberarkPAMStore {
-	var items []*proto.CyberarkPAMStore
-	for _, porcelain := range porcelains {
-		items = append(items, convertCyberarkPAMStoreToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedCyberarkPAMStoreToPorcelain(plumbings []*proto.CyberarkPAMStore) (
-	[]*CyberarkPAMStore,
-	error,
-) {
-	var items []*CyberarkPAMStore
-	for _, plumbing := range plumbings {
-		if v, err := convertCyberarkPAMStoreToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
 func convertDB2IToPorcelain(plumbing *proto.DB2I) (*DB2I, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -3472,7 +3352,6 @@ func convertElasticacheRedisToPorcelain(plumbing *proto.ElasticacheRedis) (*Elas
 		porcelain.Tags = v
 	}
 	porcelain.TlsRequired = plumbing.TlsRequired
-	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
@@ -3493,7 +3372,6 @@ func convertElasticacheRedisToPlumbing(porcelain *ElasticacheRedis) *proto.Elast
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
-	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedElasticacheRedisToPlumbing(
@@ -3638,11 +3516,9 @@ func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	}
 	porcelain := &Gateway{}
 	porcelain.BindAddress = plumbing.BindAddress
-	porcelain.Device = plumbing.Device
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
 	porcelain.ListenAddress = plumbing.ListenAddress
-	porcelain.Location = plumbing.Location
 	porcelain.Name = plumbing.Name
 	porcelain.State = plumbing.State
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -3650,7 +3526,6 @@ func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	} else {
 		porcelain.Tags = v
 	}
-	porcelain.Version = plumbing.Version
 	return porcelain, nil
 }
 
@@ -3660,15 +3535,12 @@ func convertGatewayToPlumbing(porcelain *Gateway) *proto.Gateway {
 	}
 	plumbing := &proto.Gateway{}
 	plumbing.BindAddress = (porcelain.BindAddress)
-	plumbing.Device = (porcelain.Device)
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
 	plumbing.ListenAddress = (porcelain.ListenAddress)
-	plumbing.Location = (porcelain.Location)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.Version = (porcelain.Version)
 	return plumbing
 }
 func convertRepeatedGatewayToPlumbing(
@@ -6187,8 +6059,6 @@ func convertRedisToPorcelain(plumbing *proto.Redis) (*Redis, error) {
 	} else {
 		porcelain.Tags = v
 	}
-	porcelain.TlsRequired = plumbing.TlsRequired
-	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
@@ -6208,8 +6078,6 @@ func convertRedisToPlumbing(porcelain *Redis) *proto.Redis {
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.TlsRequired = (porcelain.TlsRequired)
-	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedRedisToPlumbing(
@@ -6312,10 +6180,8 @@ func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 		return nil, nil
 	}
 	porcelain := &Relay{}
-	porcelain.Device = plumbing.Device
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
-	porcelain.Location = plumbing.Location
 	porcelain.Name = plumbing.Name
 	porcelain.State = plumbing.State
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6323,7 +6189,6 @@ func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 	} else {
 		porcelain.Tags = v
 	}
-	porcelain.Version = plumbing.Version
 	return porcelain, nil
 }
 
@@ -6332,14 +6197,11 @@ func convertRelayToPlumbing(porcelain *Relay) *proto.Relay {
 		return nil
 	}
 	plumbing := &proto.Relay{}
-	plumbing.Device = (porcelain.Device)
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
-	plumbing.Location = (porcelain.Location)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.Version = (porcelain.Version)
 	return plumbing
 }
 func convertRepeatedRelayToPlumbing(
@@ -6776,8 +6638,6 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
 	case *AzureCertificate:
 		plumbing.Resource = &proto.Resource_AzureCertificate{AzureCertificate: convertAzureCertificateToPlumbing(v)}
-	case *AzureMysql:
-		plumbing.Resource = &proto.Resource_AzureMysql{AzureMysql: convertAzureMysqlToPlumbing(v)}
 	case *AzurePostgres:
 		plumbing.Resource = &proto.Resource_AzurePostgres{AzurePostgres: convertAzurePostgresToPlumbing(v)}
 	case *BigQuery:
@@ -6947,9 +6807,6 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAzureCertificate() != nil {
 		return convertAzureCertificateToPorcelain(plumbing.GetAzureCertificate())
-	}
-	if plumbing.GetAzureMysql() != nil {
-		return convertAzureMysqlToPorcelain(plumbing.GetAzureMysql())
 	}
 	if plumbing.GetAzurePostgres() != nil {
 		return convertAzurePostgresToPorcelain(plumbing.GetAzurePostgres())
@@ -7381,7 +7238,6 @@ func convertRoleToPorcelain(plumbing *proto.Role) (*Role, error) {
 		porcelain.AccessRules = v
 	}
 	porcelain.ID = plumbing.Id
-	porcelain.ManagedBy = plumbing.ManagedBy
 	porcelain.Name = plumbing.Name
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -7398,7 +7254,6 @@ func convertRoleToPlumbing(porcelain *Role) *proto.Role {
 	plumbing := &proto.Role{}
 	plumbing.AccessRules = convertAccessRulesToPlumbing(porcelain.AccessRules)
 	plumbing.Id = (porcelain.ID)
-	plumbing.ManagedBy = (porcelain.ManagedBy)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
@@ -7954,8 +7809,6 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
 	case *CyberarkConjurStore:
 		plumbing.SecretStore = &proto.SecretStore_CyberarkConjur{CyberarkConjur: convertCyberarkConjurStoreToPlumbing(v)}
-	case *CyberarkPAMStore:
-		plumbing.SecretStore = &proto.SecretStore_CyberarkPam{CyberarkPam: convertCyberarkPAMStoreToPlumbing(v)}
 	case *CyberarkPAMExperimentalStore:
 		plumbing.SecretStore = &proto.SecretStore_CyberarkPamExperimental{CyberarkPamExperimental: convertCyberarkPAMExperimentalStoreToPlumbing(v)}
 	case *DelineaStore:
@@ -7981,9 +7834,6 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetCyberarkConjur() != nil {
 		return convertCyberarkConjurStoreToPorcelain(plumbing.GetCyberarkConjur())
-	}
-	if plumbing.GetCyberarkPam() != nil {
-		return convertCyberarkPAMStoreToPorcelain(plumbing.GetCyberarkPam())
 	}
 	if plumbing.GetCyberarkPamExperimental() != nil {
 		return convertCyberarkPAMExperimentalStoreToPorcelain(plumbing.GetCyberarkPamExperimental())
@@ -8794,12 +8644,9 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 	}
 	porcelain := &User{}
 	porcelain.Email = plumbing.Email
-	porcelain.ExternalID = plumbing.ExternalId
 	porcelain.FirstName = plumbing.FirstName
 	porcelain.ID = plumbing.Id
 	porcelain.LastName = plumbing.LastName
-	porcelain.ManagedBy = plumbing.ManagedBy
-	porcelain.PermissionLevel = plumbing.PermissionLevel
 	porcelain.Suspended = plumbing.Suspended
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -8815,12 +8662,9 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 	}
 	plumbing := &proto.User{}
 	plumbing.Email = (porcelain.Email)
-	plumbing.ExternalId = (porcelain.ExternalID)
 	plumbing.FirstName = (porcelain.FirstName)
 	plumbing.Id = (porcelain.ID)
 	plumbing.LastName = (porcelain.LastName)
-	plumbing.ManagedBy = (porcelain.ManagedBy)
-	plumbing.PermissionLevel = (porcelain.PermissionLevel)
 	plumbing.Suspended = (porcelain.Suspended)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing

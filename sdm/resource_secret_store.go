@@ -101,32 +101,6 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
-			"cyberark_pam": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "CyberarkPAMStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"app_url": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the SecretStore.",
-						},
-						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-					},
-				},
-			},
 			"cyberark_pam_experimental": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -364,19 +338,6 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
-	if list := d.Get("cyberark_pam").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.CyberarkPAMStore{}
-		}
-		out := &sdm.CyberarkPAMStore{
-			ID:     d.Id(),
-			AppURL: convertStringToPlumbing(raw["app_url"]),
-			Name:   convertStringToPlumbing(raw["name"]),
-			Tags:   convertTagsToPlumbing(raw["tags"]),
-		}
-		return out
-	}
 	if list := d.Get("cyberark_pam_experimental").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -504,16 +465,6 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":    convertTagsToPorcelain(v.Tags),
 			},
 		})
-	case *sdm.CyberarkPAMStore:
-		localV, _ := localVersion.(*sdm.CyberarkPAMStore)
-		_ = localV
-		d.Set("cyberark_pam", []map[string]interface{}{
-			{
-				"app_url": (v.AppURL),
-				"name":    (v.Name),
-				"tags":    convertTagsToPorcelain(v.Tags),
-			},
-		})
 	case *sdm.CyberarkPAMExperimentalStore:
 		localV, _ := localVersion.(*sdm.CyberarkPAMExperimentalStore)
 		_ = localV
@@ -631,19 +582,6 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 		}
 		_ = localV
 		d.Set("cyberark_conjur", []map[string]interface{}{
-			{
-				"app_url": (v.AppURL),
-				"name":    (v.Name),
-				"tags":    convertTagsToPorcelain(v.Tags),
-			},
-		})
-	case *sdm.CyberarkPAMStore:
-		localV, ok := localVersion.(*sdm.CyberarkPAMStore)
-		if !ok {
-			localV = &sdm.CyberarkPAMStore{}
-		}
-		_ = localV
-		d.Set("cyberark_pam", []map[string]interface{}{
 			{
 				"app_url": (v.AppURL),
 				"name":    (v.Name),

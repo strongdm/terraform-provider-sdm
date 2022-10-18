@@ -45,7 +45,6 @@ The following arguments are supported by the Account resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * user:
 	* `email` - (Required) The User's email address. Must be unique.
-	* `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
 	* `first_name` - (Required) The User's first name.
 	* `last_name` - (Required) The User's last name.
 	* `suspended` - (Optional) The User's suspended state.
@@ -53,9 +52,6 @@ The following arguments are supported by the Account resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Account resource:
 * `id` - A unique identifier for the Account resource.
-* user:
-	* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
-	* `permission_level` - PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
 ## Import
 Account can be imported using the id, e.g.,
 

@@ -749,37 +749,6 @@ type AzureCertificate struct {
 	TenantID string `json:"tenantId"`
 }
 
-// AzureMysql is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type AzureMysql struct {
-	// Bind interface
-	BindInterface string `json:"bindInterface"`
-
-	Database string `json:"database"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-
-	Hostname string `json:"hostname"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-
-	Password string `json:"password"`
-
-	Port int32 `json:"port"`
-
-	PortOverride int32 `json:"portOverride"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-
-	Username string `json:"username"`
-}
-
 type AzurePostgres struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
@@ -1010,18 +979,6 @@ type CyberarkConjurStore struct {
 // CyberarkPAMExperimentalStore is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type CyberarkPAMExperimentalStore struct {
-	AppURL string `json:"appUrl"`
-	// Unique identifier of the SecretStore.
-	ID string `json:"id"`
-	// Unique human-readable name of the SecretStore.
-	Name string `json:"name"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-}
-
-// CyberarkPAMStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type CyberarkPAMStore struct {
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -1277,8 +1234,6 @@ type ElasticacheRedis struct {
 	Tags Tags `json:"tags"`
 
 	TlsRequired bool `json:"tlsRequired"`
-
-	Username string `json:"username"`
 }
 
 type GCP struct {
@@ -1318,9 +1273,6 @@ type Gateway struct {
 	// The hostname/port tuple which the gateway daemon will bind to.
 	// If not provided on create, set to "0.0.0.0:listen_address_port".
 	BindAddress string `json:"bindAddress"`
-	// Device is a read only device name uploaded by the gateway process when
-	// it comes online.
-	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
 	// gateways.
 	GatewayFilter string `json:"gatewayFilter"`
@@ -1328,9 +1280,6 @@ type Gateway struct {
 	ID string `json:"id"`
 	// The public hostname/port tuple at which the gateway will be accessible to clients.
 	ListenAddress string `json:"listenAddress"`
-	// Location is a read only network location uploaded by the gateway process
-	// when it comes online.
-	Location string `json:"location"`
 	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the gateway. One of: "new", "verifying_restart",
@@ -1338,9 +1287,6 @@ type Gateway struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-	// Version is a read only sdm binary version uploaded by the gateway process
-	// when it comes online.
-	Version string `json:"version"`
 }
 
 // GetResponseMetadata is reserved for future use.
@@ -2405,10 +2351,6 @@ type Redis struct {
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
-	TlsRequired bool `json:"tlsRequired"`
-
-	Username string `json:"username"`
 }
 
 type Redshift struct {
@@ -2444,17 +2386,11 @@ type Redshift struct {
 
 // Relay represents a StrongDM CLI installation running in relay mode.
 type Relay struct {
-	// Device is a read only device name uploaded by the gateway process when
-	// it comes online.
-	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
 	// gateways.
 	GatewayFilter string `json:"gatewayFilter"`
 	// Unique identifier of the Relay.
 	ID string `json:"id"`
-	// Location is a read only network location uploaded by the gateway process
-	// when it comes online.
-	Location string `json:"location"`
 	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the relay. One of: "new", "verifying_restart",
@@ -2463,9 +2399,6 @@ type Relay struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-	// Version is a read only sdm binary version uploaded by the gateway process
-	// when it comes online.
-	Version string `json:"version"`
 }
 
 // RemoteIdentities define the username to be used for a specific account
@@ -3482,60 +3415,6 @@ func (m *AzureCertificate) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AzureCertificate.
 func (m *AzureCertificate) SetBindInterface(v string) {
-	m.BindInterface = v
-}
-func (*AzureMysql) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AzureMysql.
-func (m *AzureMysql) GetID() string { return m.ID }
-
-// GetName returns the name of the AzureMysql.
-func (m *AzureMysql) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AzureMysql.
-func (m *AzureMysql) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AzureMysql.
-func (m *AzureMysql) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AzureMysql.
-func (m *AzureMysql) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AzureMysql.
-func (m *AzureMysql) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AzureMysql.
-func (m *AzureMysql) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AzureMysql.
-func (m *AzureMysql) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AzureMysql.
-func (m *AzureMysql) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-
-// GetBindInterface returns the bind interface of the AzureMysql.
-func (m *AzureMysql) GetBindInterface() string {
-	return m.BindInterface
-}
-
-// SetBindInterface sets the bind interface of the AzureMysql.
-func (m *AzureMysql) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AzurePostgres) isOneOf_Resource() {}
@@ -6664,8 +6543,6 @@ type Role struct {
 	AccessRules AccessRules `json:"accessRules"`
 	// Unique identifier of the Role.
 	ID string `json:"id"`
-	// Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.
-	ManagedBy string `json:"managedBy"`
 	// Unique human-readable name of the Role.
 	Name string `json:"name"`
 	// Tags is a map of key, value pairs.
@@ -6927,30 +6804,6 @@ func (m *CyberarkConjurStore) GetName() string {
 
 // SetName sets the name of the CyberarkConjurStore.
 func (m *CyberarkConjurStore) SetName(v string) {
-	m.Name = v
-}
-func (*CyberarkPAMStore) isOneOf_SecretStore() {}
-
-// GetID returns the unique identifier of the CyberarkPAMStore.
-func (m *CyberarkPAMStore) GetID() string { return m.ID }
-
-// GetTags returns the tags of the CyberarkPAMStore.
-func (m *CyberarkPAMStore) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the CyberarkPAMStore.
-func (m *CyberarkPAMStore) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetName returns the name of the CyberarkPAMStore.
-func (m *CyberarkPAMStore) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the CyberarkPAMStore.
-func (m *CyberarkPAMStore) SetName(v string) {
 	m.Name = v
 }
 func (*CyberarkPAMExperimentalStore) isOneOf_SecretStore() {}
@@ -7331,18 +7184,12 @@ type UpdateResponseMetadata struct {
 type User struct {
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
-	// External ID is an alternative unique ID this user is represented by within an external service.
-	ExternalID string `json:"externalId"`
 	// The User's first name.
 	FirstName string `json:"firstName"`
 	// Unique identifier of the User.
 	ID string `json:"id"`
 	// The User's last name.
 	LastName string `json:"lastName"`
-	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
-	ManagedBy string `json:"managedBy"`
-	// PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
-	PermissionLevel string `json:"permissionLevel"`
 	// The User's suspended state.
 	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.

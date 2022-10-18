@@ -1671,91 +1671,6 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"azure_mysql": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "AzureMysql is currently unstable, and its API may change, or it may be removed, without a major version bump.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"bind_interface": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "Bind interface",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"egress_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Sensitive:   true,
-							Description: "",
-						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Description: "",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-							Description: "",
-						},
-						"secret_store_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ID of the secret store containing credentials for this resource, if any.",
-						},
-						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-					},
-				},
-			},
 			"azure_postgres": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -2952,19 +2867,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -5726,24 +5628,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
-						"tls_required": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -7505,43 +7389,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_tenant_id_key":           convertStringToPlumbing(raw["secret_store_tenant_id_key"]),
 		}, nil
 	}
-	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
-			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
-			}
-		}
-
-		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
-		}, nil
-	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8045,9 +7892,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["password"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
 			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
 		} else {
 			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
@@ -8055,21 +7899,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
 			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
-			}
 		}
 
 		return map[string]string{
 			"password":                   convertStringToPlumbing(raw["password"]),
 			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
 			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
@@ -9189,9 +9024,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["password"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
 			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
 		} else {
 			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
@@ -9199,21 +9031,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
 			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
-			}
 		}
 
 		return map[string]string{
 			"password":                   convertStringToPlumbing(raw["password"]),
 			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
 			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
@@ -10172,38 +9995,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
-	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.AzureMysql{}
-		}
-		out := &sdm.AzureMysql{
-			ID:            d.Id(),
-			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
-			Database:      convertStringToPlumbing(raw["database"]),
-			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:      convertStringToPlumbing(raw["hostname"]),
-			Name:          convertStringToPlumbing(raw["name"]),
-			Password:      convertStringToPlumbing(raw["password"]),
-			Port:          convertInt32ToPlumbing(raw["port"]),
-			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
-			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
-			Tags:          convertTagsToPlumbing(raw["tags"]),
-			Username:      convertStringToPlumbing(raw["username"]),
-		}
-		override, ok := raw["port_override"].(int)
-		if !ok || override == 0 {
-			override = -1
-		}
-		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
-		return out
-	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10643,7 +10434,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
-			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10652,9 +10442,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
 		}
 		return out
 	}
@@ -11643,8 +11430,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
-			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
-			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -11653,9 +11438,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
 		}
 		return out
 	}
@@ -12442,28 +12224,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
 			},
 		})
-	case *sdm.AzureMysql:
-		localV, _ := localVersion.(*sdm.AzureMysql)
-		_ = localV
-		d.Set("azure_mysql", []map[string]interface{}{
-			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
-			},
-		})
 	case *sdm.AzurePostgres:
 		localV, _ := localVersion.(*sdm.AzurePostgres)
 		_ = localV
@@ -12772,9 +12532,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.GCP:
@@ -13485,10 +13242,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.Redshift:
@@ -14224,31 +13977,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
 			},
 		})
-	case *sdm.AzureMysql:
-		localV, ok := localVersion.(*sdm.AzureMysql)
-		if !ok {
-			localV = &sdm.AzureMysql{}
-		}
-		_ = localV
-		d.Set("azure_mysql", []map[string]interface{}{
-			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
-			},
-		})
 	case *sdm.AzurePostgres:
 		localV, ok := localVersion.(*sdm.AzurePostgres)
 		if !ok {
@@ -14599,9 +14327,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.GCP:
@@ -15408,10 +15133,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.Redshift:
