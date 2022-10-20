@@ -11,7 +11,7 @@ import (
 )
 
 func TestAccSDMRoleDataSource_Get(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	roles, err := createRolesWithAccessRules("test-role", 1, `[{"type":"redis"}]`)
 	if err != nil {
@@ -30,7 +30,6 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.name", role.Name),
 					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.access_rules", `[{"type":"redis"}]`),
-					resource.TestCheckResourceAttr("data.sdm_role."+rsName, "roles.0.managed_by", "StrongDM"),
 				),
 			},
 		},
@@ -38,7 +37,7 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 }
 
 func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	client, err := preTestClient()
 	if err != nil {
@@ -79,7 +78,7 @@ func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
 }
 
 func TestAccSDMRoleDataSource_GetMultiple(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	_, err := createRolesWithPrefix("multi-test", 2)
 	if err != nil {
@@ -105,7 +104,7 @@ func TestAccSDMRoleDataSource_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMRoleDataSource_GetNone(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	_, err := createRolesWithPrefix("dontfind", 1)
 	if err != nil {
@@ -127,10 +126,9 @@ func TestAccSDMRoleDataSource_GetNone(t *testing.T) {
 }
 
 func TestAccSDMRoleDataSource_GetByID(t *testing.T) {
-	initAcceptanceTest(t)
 	roleName := randomWithPrefix("role")
 	dsName := randomWithPrefix("role")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

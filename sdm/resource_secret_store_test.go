@@ -43,10 +43,9 @@ func init() {
 }
 
 func TestAccSDMSecretStore_Create(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	address := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -91,10 +90,9 @@ func TestAccSDMSecretStore_Create(t *testing.T) {
 }
 
 func TestAccSDMSecretStore_Tags(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	address := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -173,7 +171,6 @@ func TestAccSDMSecretStore_Tags(t *testing.T) {
 }
 
 func TestAccSDMSecretStore_Update(t *testing.T) {
-	initAcceptanceTest(t)
 	resourceName := randomWithPrefix("test")
 
 	storeName := randomWithPrefix("test")
@@ -182,7 +179,7 @@ func TestAccSDMSecretStore_Update(t *testing.T) {
 	address := randomWithPrefix("test")
 	updatedAddress := randomWithPrefix("test2")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

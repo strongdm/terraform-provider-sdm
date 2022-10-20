@@ -47,10 +47,9 @@ func init() {
 }
 
 func TestAccSDMResource_Create(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -94,10 +93,9 @@ func TestAccSDMResource_Create(t *testing.T) {
 }
 
 func TestAccSDMResource_CreateWithBindInterface(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -150,7 +148,6 @@ func TestAccSDMResource_CreateWithBindInterface(t *testing.T) {
 }
 
 func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
 
@@ -162,7 +159,7 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 	path := "/path/to/secret"
 	key := "password2"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -212,14 +209,13 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 }
 
 func TestAccSDMResource_CreateWithSecretStoreNoSecretStoreID(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
 
 	path := "/path/to/secret"
 	key := "password2"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -232,7 +228,6 @@ func TestAccSDMResource_CreateWithSecretStoreNoSecretStoreID(t *testing.T) {
 }
 
 func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
 
@@ -242,7 +237,7 @@ func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
 	}
 	vault := vaults[0]
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -255,9 +250,8 @@ func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
 }
 
 func TestAccSDMResource_Tags(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -336,10 +330,9 @@ func TestAccSDMResource_Tags(t *testing.T) {
 }
 
 func TestAccSDMResource_CreateSSH(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -386,7 +379,6 @@ func TestAccSDMResource_CreateSSH(t *testing.T) {
 }
 
 func TestAccSDMResource_Update(t *testing.T) {
-	initAcceptanceTest(t)
 	resourceName := randomWithPrefix("test")
 
 	redisName := randomWithPrefix("test")
@@ -395,7 +387,7 @@ func TestAccSDMResource_Update(t *testing.T) {
 	port := portOverride.Count()
 	updatedPort := portOverride.Count()
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -476,14 +468,12 @@ func TestAccSDMResource_Update(t *testing.T) {
 }
 
 func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
-	initAcceptanceTest(t)
 	t.Run("present->present", func(t *testing.T) {
-		initAcceptanceTest(t)
 		resourceName := randomWithPrefix("test")
 		redisName := randomWithPrefix("test")
 		portOverride, updatedPortOverride := portOverride.Count(), portOverride.Count()
 
-		resource.Test(t, resource.TestCase{
+		resource.ParallelTest(t, resource.TestCase{
 			Providers:    testAccProviders,
 			CheckDestroy: testCheckDestroy,
 			Steps: []resource.TestStep{
@@ -561,12 +551,11 @@ func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
 	})
 
 	t.Run("absent->present", func(t *testing.T) {
-		initAcceptanceTest(t)
 		resourceName := randomWithPrefix("test")
 		redisName := randomWithPrefix("test")
 		updatedPortOverride := portOverride.Count()
 
-		resource.Test(t, resource.TestCase{
+		resource.ParallelTest(t, resource.TestCase{
 			Providers:    testAccProviders,
 			CheckDestroy: testCheckDestroy,
 			Steps: []resource.TestStep{
@@ -642,12 +631,11 @@ func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
 	})
 
 	t.Run("present->absent", func(t *testing.T) {
-		initAcceptanceTest(t)
 		resourceName := randomWithPrefix("test")
 		redisName := randomWithPrefix("test")
 		portOverride := portOverride.Count()
 
-		resource.Test(t, resource.TestCase{
+		resource.ParallelTest(t, resource.TestCase{
 			Providers:    testAccProviders,
 			CheckDestroy: testCheckDestroy,
 			Steps: []resource.TestStep{
@@ -723,11 +711,10 @@ func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
 	})
 
 	t.Run("absent->absent", func(t *testing.T) {
-		initAcceptanceTest(t)
 		resourceName := randomWithPrefix("test")
 		redisName := randomWithPrefix("test")
 
-		resource.Test(t, resource.TestCase{
+		resource.ParallelTest(t, resource.TestCase{
 			Providers:    testAccProviders,
 			CheckDestroy: testCheckDestroy,
 			Steps: []resource.TestStep{
