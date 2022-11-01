@@ -54,13 +54,12 @@ func init() {
 }
 
 func TestAccSDMAccountAttachment_Create(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test-attachment-create")
 	roleRsName := randomWithPrefix("test-role")
 	accountRsName := randomWithPrefix("test-account")
 	accountID := ""
 	roleID := ""
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -127,13 +126,12 @@ func TestAccSDMAccountAttachment_Create(t *testing.T) {
 }
 
 func TestAccSDMAccountAttachment_Update(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test-update-attachment")
 	roleRsName := randomWithPrefix("test-role")
 	accountRsName := randomWithPrefix("test-account")
 	altAccountRsName := randomWithPrefix("test-account-updated")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

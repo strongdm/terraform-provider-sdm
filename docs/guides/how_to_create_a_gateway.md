@@ -1,8 +1,8 @@
 ---
-page_title: "Add a StrongDM Gateway or Relay"
+page_title: "Create a StrongDM Gateway or Relay"
 ---
 
-# Add a StrongDM Gateway or Relay
+# Create a StrongDM Gateway or Relay
 
 StrongDM creates a secure, software-defined network that controls access to your infrastructure resources, such as databases, servers, clusters, clouds, and websites. We use node resources to create the members of this network, and nodes come in two forms &#8212; gateways or relays.
 

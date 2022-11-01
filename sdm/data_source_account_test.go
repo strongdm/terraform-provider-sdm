@@ -12,7 +12,6 @@ import (
 )
 
 func TestAccSDMAccount_Get(t *testing.T) {
-	initAcceptanceTest(t)
 	accounts, err := createUsersWithPrefix("account-get", 1)
 	if err != nil {
 		t.Fatal("failed to create account in setup: ", err)
@@ -39,7 +38,7 @@ func TestAccSDMAccount_Get(t *testing.T) {
 }
 
 func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	client, err := preTestClient()
 	if err != nil {
@@ -50,7 +49,7 @@ func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
 
 	tagValue := randomWithPrefix("value")
 	name := randomWithPrefix("name")
-	_, err = client.Accounts().Create(ctx, &sdm.User{
+	createResp, err := client.Accounts().Create(ctx, &sdm.User{
 		FirstName: name,
 		LastName:  name,
 		Email:     name,
@@ -58,6 +57,7 @@ func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
 			"testTag": tagValue,
 		},
 	})
+	_ = createResp.Account
 	if err != nil {
 		t.Fatalf("failed to create account: %v", err)
 	}
@@ -84,7 +84,7 @@ func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
 }
 
 func TestAccSDMAccount_GetSuspended(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	dsName := randomWithPrefix("ac_suspended_query")
 	userName := randomWithPrefix("ac_suspended_query")
@@ -135,7 +135,7 @@ func createUserWithSuspension(t *testing.T, name string, suspended bool) *sdm.Us
 }
 
 func TestAccSDMAccount_GetMultiple(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 	_, err := createUsersWithPrefix("account-multiple", 2)
 	if err != nil {
 		t.Fatal("failed to create accounts in setup: ", err)
@@ -161,7 +161,7 @@ func TestAccSDMAccount_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMAccount_GetNone(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 	_, err := createUsersWithPrefix("test", 1)
 	if err != nil {
 		t.Fatal("failed to create account in setup: ", err)

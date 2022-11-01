@@ -12,7 +12,7 @@ import (
 )
 
 func TestAccSDMNode_Get(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 	nodes, err := createRelaysWithPrefix("node-get", 1)
 	if err != nil {
 		t.Fatal("failed to create node in setup: ", err)
@@ -36,7 +36,7 @@ func TestAccSDMNode_Get(t *testing.T) {
 }
 
 func TestAccSDMNodeDataSource_GetByTags(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	client, err := preTestClient()
 	if err != nil {
@@ -47,12 +47,13 @@ func TestAccSDMNodeDataSource_GetByTags(t *testing.T) {
 
 	tagValue := randomWithPrefix("value")
 	name := randomWithPrefix("name")
-	_, err = client.Nodes().Create(ctx, &sdm.Relay{
+	createResp, err := client.Nodes().Create(ctx, &sdm.Relay{
 		Name: name,
 		Tags: sdm.Tags{
 			"testTag": tagValue,
 		},
 	})
+	_ = createResp.Node
 	if err != nil {
 		t.Fatalf("failed to create node: %v", err)
 	}
@@ -79,7 +80,7 @@ func TestAccSDMNodeDataSource_GetByTags(t *testing.T) {
 }
 
 func TestAccSDMNode_GetMultiple(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	_, err := createRelaysWithPrefix("node-multiple", 2)
 	if err != nil {
@@ -107,7 +108,7 @@ func TestAccSDMNode_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMNode_GetNone(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	_, err := createRelaysWithPrefix("test", 1)
 	if err != nil {

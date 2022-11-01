@@ -44,12 +44,11 @@ func init() {
 }
 
 func TestAccSDMNode_GatewayCreate(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	gwName := randomWithPrefix("test")
 	ip, _ := acctest.RandIpAddress("192.0.2.0/24")
 	listenAddr := fmt.Sprintf("%s:21222", ip)
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -105,14 +104,13 @@ func TestAccSDMNode_GatewayCreate(t *testing.T) {
 }
 
 func TestAccSDMNode_GatewayCreateNoNameOrBindAddress(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	gwName := randomWithPrefix("test")
 	ip, _ := acctest.RandIpAddress("192.0.2.0/24")
 	listenAddr := fmt.Sprintf("%s:21222", ip)
 	gwBindAddr1 := "0.0.0.0:21222"
 	gwBindAddr2 := "0.0.0.0:5000"
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -265,10 +263,9 @@ func TestAccSDMNode_GatewayCreateNoNameOrBindAddress(t *testing.T) {
 }
 
 func TestAccSDMNode_RelayCreate(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	relayName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -316,10 +313,9 @@ func TestAccSDMNode_RelayCreate(t *testing.T) {
 }
 
 func TestAccSDMNode_RelayCreateGeneratedName(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	relayName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -445,12 +441,11 @@ func TestAccSDMNode_RelayCreateGeneratedName(t *testing.T) {
 }
 
 func TestAccSDMNode_Update(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	relayName := randomWithPrefix("test")
 	updatedRelayName := randomWithPrefix("test2")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -509,12 +504,11 @@ func TestAccSDMNode_Update(t *testing.T) {
 }
 
 func TestAccSDMNode_UpdateTokenStays(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	relayName := randomWithPrefix("test")
 	updatedRelayName := randomWithPrefix("test2")
 	createdToken := ""
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -564,9 +558,8 @@ func TestAccSDMNode_UpdateTokenStays(t *testing.T) {
 }
 
 func TestAccSDMNode_Tags(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

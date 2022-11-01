@@ -11,7 +11,7 @@ import (
 )
 
 func TestAccSDMRemoteIdentityGroupDataSource_GetByName(t *testing.T) {
-	initAcceptanceTest(t)
+	t.Parallel()
 
 	dsName := randomWithPrefix("test-remote-identity-group-ds")
 	name := "default"

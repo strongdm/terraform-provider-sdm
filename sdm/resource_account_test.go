@@ -44,10 +44,9 @@ func init() {
 }
 
 func TestAccSDMAccount_ServiceCreate(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	serviceName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -95,12 +94,11 @@ func TestAccSDMAccount_ServiceCreate(t *testing.T) {
 }
 
 func TestAccSDMAccount_UserCreate(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	firstName := randomWithPrefix("ursula")
 	lastName := randomWithPrefix("leguin")
 	email := randomWithPrefix("testsuites@strongdm.com")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -149,7 +147,6 @@ func TestAccSDMAccount_UserCreate(t *testing.T) {
 }
 
 func TestAccSDMAccount_Update(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 
 	firstName := randomWithPrefix("ursula")
@@ -159,7 +156,7 @@ func TestAccSDMAccount_Update(t *testing.T) {
 	firstName2 := randomWithPrefix("cheese")
 	lastName2 := randomWithPrefix("cake")
 	email2 := randomWithPrefix("testsuites+1@strongdm.com")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -222,12 +219,11 @@ func TestAccSDMAccount_Update(t *testing.T) {
 }
 
 func TestAccSDMAccount_Tags(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	firstName := randomWithPrefix("ursula")
 	lastName := randomWithPrefix("leguin")
 	email := randomWithPrefix("testsuites@strongdm.com")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

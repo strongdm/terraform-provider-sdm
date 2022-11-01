@@ -43,10 +43,9 @@ func init() {
 }
 
 func TestAccSDMRole_Create(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test-role-resource")
 	roleName := randomWithPrefix("test-role")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -87,11 +86,10 @@ func TestAccSDMRole_Create(t *testing.T) {
 }
 
 func TestAccSDMRole_Update(t *testing.T) {
-	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test-role")
 	roleName := randomWithPrefix("test-role")
 	updatedRoleName := randomWithPrefix("test-role-updated")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -143,9 +141,8 @@ func TestAccSDMRole_Update(t *testing.T) {
 }
 
 func TestAccSDMRole_Tags(t *testing.T) {
-	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -224,10 +221,9 @@ func TestAccSDMRole_Tags(t *testing.T) {
 }
 
 func TestAccSDMRole_AccessRules(t *testing.T) {
-	initAcceptanceTest(t)
 	resourceName := randomWithPrefix("testrs")
 	roleName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

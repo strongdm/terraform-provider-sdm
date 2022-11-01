@@ -1342,77 +1342,6 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"azure_mysql": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"bind_interface": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Bind interface",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "",
-									},
-								},
-							},
-						},
 						"azure_postgres": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -5896,21 +5825,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":    (v.SecretStoreID),
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"tenant_id":          (v.TenantID),
-			})
-		case *sdm.AzureMysql:
-			output[0]["azure_mysql"] = append(output[0]["azure_mysql"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
 			})
 		case *sdm.AzurePostgres:
 			output[0]["azure_postgres"] = append(output[0]["azure_postgres"], entity{
