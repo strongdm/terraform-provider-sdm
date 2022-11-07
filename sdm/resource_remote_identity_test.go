@@ -9,6 +9,7 @@ import (
 )
 
 func TestAccSDMRemoteIdentity_Create(t *testing.T) {
+	initAcceptanceTest(t)
 	// setup data
 	accounts, err := createUsersWithPrefix("remote-identity-user", 1)
 	if err != nil {
@@ -19,7 +20,7 @@ func TestAccSDMRemoteIdentity_Create(t *testing.T) {
 	username := randomWithPrefix("test-username")
 
 	rsName := randomWithPrefix("test-remote-identity-resource")
-	resource.ParallelTest(t, resource.TestCase{
+	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -46,6 +47,7 @@ func TestAccSDMRemoteIdentity_Create(t *testing.T) {
 }
 
 func TestAccSDMRemoteIdentity_Update(t *testing.T) {
+	initAcceptanceTest(t)
 	// setup data
 	accounts, err := createUsersWithPrefix("remote-identity-user", 1)
 	if err != nil {
@@ -56,7 +58,7 @@ func TestAccSDMRemoteIdentity_Update(t *testing.T) {
 	username := randomWithPrefix("test-username")
 
 	rsName := randomWithPrefix("test-remote-identity-resource")
-	resource.ParallelTest(t, resource.TestCase{
+	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

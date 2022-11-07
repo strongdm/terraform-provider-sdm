@@ -11,7 +11,7 @@ import (
 )
 
 func TestAccSDMRemoteIdentityDataSource_Get(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	client, err := preTestClient()
 	if err != nil {

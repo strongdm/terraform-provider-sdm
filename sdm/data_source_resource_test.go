@@ -12,6 +12,7 @@ import (
 )
 
 func TestAccSDMResource_Get(t *testing.T) {
+	initAcceptanceTest(t)
 	resources, err := createRedisesWithPrefix("resource-get-test", 1)
 	if err != nil {
 		t.Fatal("failed to create redis in setup: ", err)
@@ -39,7 +40,7 @@ func TestAccSDMResource_Get(t *testing.T) {
 }
 
 func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	client, err := preTestClient()
 	if err != nil {
@@ -84,7 +85,7 @@ func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
 }
 
 func TestAccSDMResource_SecretStoreGet(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	vaults, err := createVaultTokenStoresWithPrefix("vaultTest", 1)
 	if err != nil {
@@ -123,7 +124,7 @@ func TestAccSDMResource_SecretStoreGet(t *testing.T) {
 }
 
 func TestAccSDMResource_SSHGet(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	resources, err := createSSHesWithPrefix("resource-get-ssh-test", 1)
 	if err != nil {
@@ -152,7 +153,7 @@ func TestAccSDMResource_SSHGet(t *testing.T) {
 }
 
 func TestAccSDMResource_GetMultiple(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 	_, err := createRedisesWithPrefix("resource-multiple", 2)
 	if err != nil {
 		t.Fatal("failed to create redises in setup: ", err)
@@ -178,7 +179,7 @@ func TestAccSDMResource_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMResource_GetNone(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	_, err := createRedisesWithPrefix("test", 1)
 	if err != nil {
@@ -201,7 +202,7 @@ func TestAccSDMResource_GetNone(t *testing.T) {
 }
 
 func TestAccSDMResource_GetTags(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
@@ -241,7 +242,7 @@ func TestAccSDMResource_GetTags(t *testing.T) {
 }
 
 func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	group := getDefaultRemoteIdentityGroup(t)
 
