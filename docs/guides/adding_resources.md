@@ -4,11 +4,14 @@ page_title: "Add Resources to StrongDM"
 
 # Add Resources to StrongDM
 
-Your infrastructure may include various resources, such as databases, servers, clusters, or websites. With StrongDM, you can authenticate and gain secure access to these various tools. For more information, see the [Admin UI guide](https://www.strongdm.com/docs/admin-ui-guide) in our documentation.
+Your infrastructure may include various resources, such as databases, servers, clusters, or websites. With StrongDM, you can authenticate and gain secure access to these various tools. For more information, see the Infrastructure Management section of our [Admin UI](https://www.strongdm.com/docs/admin-ui-guide) documentation.
 
-Our Terraform provider helps to automate the creation and management of the different resource types that make up your StrongDM environment.
+Our Terraform provider helps to automate the creation and management of the different resource types that make up your StrongDM environment. To see AWS- and Azure-specific onboarding examples, check the following quick start guides:
 
-To see AWS and Azure-specific onboarding examples, check the [StrongDM with Terraform and AWS](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-aws/) and [StrongDM with Terraform and Azure](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-azure/) quick start guides.
+- [Quick Start StrongDM with Terraform and AWS](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-aws/)
+- [Quick Start StrongDM with Terraform and Azure](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-azure/)
+
+->**Note: Gateways and Relays** When creating your StrongDM resources, remember that you must have a properly functioning gateway or relay set up and running. Each datasource must be accessible by at least one gateway or relay.
 
 ## Add a MySQL Database
 

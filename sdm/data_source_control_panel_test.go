@@ -8,7 +8,7 @@ import (
 )
 
 func TestAccSDMControlPanel_SSHCAPublicKeyGet(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	dataName := randomWithPrefix("test")
 	resource.Test(t, resource.TestCase{

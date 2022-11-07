@@ -12,6 +12,7 @@ import (
 )
 
 func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
+	initAcceptanceTest(t)
 	certificateAuthorityRaw := []string{
 		"\"-----BEGIN CERTIFICATE-----",
 		"MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p",
@@ -1008,6 +1009,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 }
 
 func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
+	initAcceptanceTest(t)
 	client, err := preTestClient()
 	if err != nil {
 		t.Fatalf("failed to create test client: %v", err)
@@ -2183,6 +2185,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	}
 }
 func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
+	initAcceptanceTest(t)
 	type testCase struct {
 		resource string
 		pairs    [][2]string

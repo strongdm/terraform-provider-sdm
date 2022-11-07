@@ -8,7 +8,7 @@ import (
 )
 
 func TestAccSDMAccountAttachment_DataSourceGet(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	attachments, err := createAccountAttachmentsWithPrefix("test", 1)
 	if err != nil {
@@ -35,7 +35,7 @@ func TestAccSDMAccountAttachment_DataSourceGet(t *testing.T) {
 }
 
 func TestAccSDMAccountAttachment_DataSourceGetMultiple(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	// create three accounts
 	accounts, err := createUsersWithPrefix("test", 3)
@@ -74,7 +74,7 @@ func TestAccSDMAccountAttachment_DataSourceGetMultiple(t *testing.T) {
 }
 
 func TestAccSDMAccountAttachment_DataSourceGetNone(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	_, err := createAccountAttachmentsWithPrefix("test", 1)
 	if err != nil {
