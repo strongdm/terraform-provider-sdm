@@ -2038,6 +2038,75 @@ func convertRepeatedAzureCertificateToPorcelain(plumbings []*proto.AzureCertific
 	}
 	return items, nil
 }
+func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AzureMysql{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertAzureMysqlToPlumbing(porcelain *AzureMysql) *proto.AzureMysql {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzureMysql{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAzureMysqlToPlumbing(
+	porcelains []*AzureMysql,
+) []*proto.AzureMysql {
+	var items []*proto.AzureMysql
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureMysqlToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureMysqlToPorcelain(plumbings []*proto.AzureMysql) (
+	[]*AzureMysql,
+	error,
+) {
+	var items []*AzureMysql
+	for _, plumbing := range plumbings {
+		if v, err := convertAzureMysqlToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAzurePostgresToPorcelain(plumbing *proto.AzurePostgres) (*AzurePostgres, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6638,6 +6707,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
 	case *AzureCertificate:
 		plumbing.Resource = &proto.Resource_AzureCertificate{AzureCertificate: convertAzureCertificateToPlumbing(v)}
+	case *AzureMysql:
+		plumbing.Resource = &proto.Resource_AzureMysql{AzureMysql: convertAzureMysqlToPlumbing(v)}
 	case *AzurePostgres:
 		plumbing.Resource = &proto.Resource_AzurePostgres{AzurePostgres: convertAzurePostgresToPlumbing(v)}
 	case *BigQuery:
@@ -6807,6 +6878,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAzureCertificate() != nil {
 		return convertAzureCertificateToPorcelain(plumbing.GetAzureCertificate())
+	}
+	if plumbing.GetAzureMysql() != nil {
+		return convertAzureMysqlToPorcelain(plumbing.GetAzureMysql())
 	}
 	if plumbing.GetAzurePostgres() != nil {
 		return convertAzurePostgresToPorcelain(plumbing.GetAzurePostgres())
