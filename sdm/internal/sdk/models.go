@@ -749,6 +749,37 @@ type AzureCertificate struct {
 	TenantID string `json:"tenantId"`
 }
 
+// AzureMysql is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AzureMysql struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
 type AzurePostgres struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
@@ -3415,6 +3446,60 @@ func (m *AzureCertificate) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AzureCertificate.
 func (m *AzureCertificate) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AzureMysql) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AzureMysql.
+func (m *AzureMysql) GetID() string { return m.ID }
+
+// GetName returns the name of the AzureMysql.
+func (m *AzureMysql) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzureMysql.
+func (m *AzureMysql) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AzureMysql.
+func (m *AzureMysql) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzureMysql.
+func (m *AzureMysql) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AzureMysql.
+func (m *AzureMysql) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AzureMysql.
+func (m *AzureMysql) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AzureMysql.
+func (m *AzureMysql) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AzureMysql.
+func (m *AzureMysql) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AzureMysql.
+func (m *AzureMysql) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AzureMysql.
+func (m *AzureMysql) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AzurePostgres) isOneOf_Resource() {}

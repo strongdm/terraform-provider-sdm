@@ -12,7 +12,7 @@ import (
 )
 
 func TestAccSDMSecretStore_Get(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	stores, err := createVaultTokenStoresWithPrefix("secret-store-get-test", 1)
 	if err != nil {
@@ -38,7 +38,7 @@ func TestAccSDMSecretStore_Get(t *testing.T) {
 }
 
 func TestAccSDMSecretStoreDataSource_GetByTags(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	client, err := preTestClient()
 	if err != nil {
@@ -82,7 +82,7 @@ func TestAccSDMSecretStoreDataSource_GetByTags(t *testing.T) {
 }
 
 func TestAccSDMSecretStore_GetMultiple(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 	_, err := createVaultTokenStoresWithPrefix("secret-store-multiple", 2)
 	if err != nil {
 		t.Fatal("failed to create stores in setup: ", err)
@@ -108,7 +108,7 @@ func TestAccSDMSecretStore_GetMultiple(t *testing.T) {
 }
 
 func TestAccSDMSecretStore_GetNone(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	_, err := createVaultTokenStoresWithPrefix("test", 1)
 	if err != nil {
@@ -131,7 +131,7 @@ func TestAccSDMSecretStore_GetNone(t *testing.T) {
 }
 
 func TestAccSDMSecretStore_GetTags(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	name := randomWithPrefix("test")
 	address := randomWithPrefix("test")
