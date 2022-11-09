@@ -12,6 +12,7 @@ import (
 )
 
 func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
+	initAcceptanceTest(t)
 	certificateAuthorityRaw := []string{
 		"\"-----BEGIN CERTIFICATE-----",
 		"MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p",
@@ -257,6 +258,18 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"name", `"name"`},
 				{"tenant_id", `"tenant_id"`},
+			},
+		},
+		{
+			resource: "azure_mysql",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"username", `"username"`},
 			},
 		},
 		{
@@ -1008,6 +1021,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 }
 
 func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
+	initAcceptanceTest(t)
 	client, err := preTestClient()
 	if err != nil {
 		t.Fatalf("failed to create test client: %v", err)
@@ -1313,6 +1327,21 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"secret_store_tenant_id_path", `"path"`},
 				{"secret_store_tenant_id_key", `"key"`},
+			},
+		},
+		{
+			resource: "azure_mysql",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"secret_store_password_path", `"path"`},
+				{"secret_store_password_key", `"key"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"secret_store_username_path", `"path"`},
+				{"secret_store_username_key", `"key"`},
 			},
 		},
 		{
@@ -2183,6 +2212,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	}
 }
 func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
+	initAcceptanceTest(t)
 	type testCase struct {
 		resource string
 		pairs    [][2]string

@@ -171,11 +171,8 @@ func (svc *AccountAttachments) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newAccountAttachmentIteratorImpl(
 		func() (
@@ -354,11 +351,8 @@ func (svc *AccountGrants) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newAccountGrantIteratorImpl(
 		func() (
@@ -584,11 +578,8 @@ func (svc *Accounts) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newAccountIteratorImpl(
 		func() (
@@ -898,11 +889,8 @@ func (svc *Nodes) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newNodeIteratorImpl(
 		func() (
@@ -1125,11 +1113,8 @@ func (svc *RemoteIdentities) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newRemoteIdentityIteratorImpl(
 		func() (
@@ -1226,11 +1211,8 @@ func (svc *RemoteIdentityGroups) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newRemoteIdentityGroupIteratorImpl(
 		func() (
@@ -1283,11 +1265,8 @@ func (svc *Resources) EnumerateTags(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newTagIteratorImpl(
 		func() (
@@ -1504,11 +1483,8 @@ func (svc *Resources) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newResourceIteratorImpl(
 		func() (
@@ -1733,11 +1709,8 @@ func (svc *Roles) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newRoleIteratorImpl(
 		func() (
@@ -1959,11 +1932,8 @@ func (svc *SecretStores) List(
 		return nil, filterErr
 	}
 	req.Meta = &plumbing.ListRequestMetadata{}
-	if value := svc.parent.testOption("PageLimit"); value != nil {
-		v, ok := value.(int)
-		if ok {
-			req.Meta.Limit = int32(v)
-		}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	return newSecretStoreIteratorImpl(
 		func() (

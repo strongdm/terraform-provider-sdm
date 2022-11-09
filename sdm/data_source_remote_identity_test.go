@@ -11,13 +11,13 @@ import (
 )
 
 func TestAccSDMRemoteIdentityDataSource_Get(t *testing.T) {
-	t.Parallel()
+	initAcceptanceTest(t)
 
 	client, err := preTestClient()
 	if err != nil {
 		t.Fatalf("failed to create test client: %v", err)
 	}
-	accounts, err := createUsersWithPrefix("account-get", 1)
+	accounts, err := createUsersWithPrefix("remote-identity-get", 1)
 	if err != nil {
 		t.Fatalf("failed to create account in setup: %v", err)
 	}
