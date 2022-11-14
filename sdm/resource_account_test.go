@@ -352,9 +352,10 @@ func createUsersWithPrefix(prefix string, count int) ([]sdm.Account, error) {
 	accounts := []sdm.Account{}
 	for i := 0; i < count; i++ {
 		createResp, err := client.Accounts().Create(ctx, &sdm.User{
-			FirstName: randomWithPrefix(prefix),
-			LastName:  randomWithPrefix(prefix),
-			Email:     randomWithPrefix(prefix),
+			FirstName:  randomWithPrefix(prefix),
+			LastName:   randomWithPrefix(prefix),
+			Email:      randomWithPrefix(prefix),
+			ExternalID: randomWithPrefix(prefix),
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to create account: %w", err)

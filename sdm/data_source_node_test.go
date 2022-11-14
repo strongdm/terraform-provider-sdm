@@ -29,6 +29,8 @@ func TestAccSDMNode_Get(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdm_node."+dsName, "ids.0", relay.ID),
 					resource.TestCheckResourceAttr("data.sdm_node."+dsName, "ids.#", "1"),
 					resource.TestCheckResourceAttr("data.sdm_node."+dsName, "nodes.0.relay.#", "1"),
+					resource.TestCheckResourceAttr("data.sdm_node."+dsName, "nodes.0.relay.0.device", "unknown"),
+					resource.TestCheckResourceAttr("data.sdm_node."+dsName, "nodes.0.relay.0.location", "unknown"),
 				),
 			},
 		},
