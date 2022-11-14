@@ -6646,6 +6646,8 @@ type Role struct {
 	AccessRules AccessRules `json:"accessRules"`
 	// Unique identifier of the Role.
 	ID string `json:"id"`
+	// Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.
+	ManagedBy string `json:"managedBy"`
 	// Unique human-readable name of the Role.
 	Name string `json:"name"`
 	// Tags is a map of key, value pairs.
@@ -7287,12 +7289,18 @@ type UpdateResponseMetadata struct {
 type User struct {
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
+	// External ID is an alternative unique ID this user is represented by within an external service.
+	ExternalID string `json:"externalId"`
 	// The User's first name.
 	FirstName string `json:"firstName"`
 	// Unique identifier of the User.
 	ID string `json:"id"`
 	// The User's last name.
 	LastName string `json:"lastName"`
+	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
+	ManagedBy string `json:"managedBy"`
+	// PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
+	PermissionLevel string `json:"permissionLevel"`
 	// The User's suspended state.
 	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.
