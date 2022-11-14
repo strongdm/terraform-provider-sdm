@@ -50,15 +50,16 @@ The following arguments are supported by the Node resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `version` - (Optional) Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 * relay:
-	* `device` - (Optional) Device is a read only device name uploaded by the gateway process when  it comes online.
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways.
-	* `location` - (Optional) Location is a read only network location uploaded by the gateway process when it comes online.
 	* `name` - (Optional) Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `version` - (Optional) Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Node resource:
 * `id` - A unique identifier for the Node resource.
+* relay:
+	* `device` - Device is a read only device name uploaded by the gateway process when  it comes online.
+	* `location` - Location is a read only network location uploaded by the gateway process when it comes online.
+	* `version` - Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 ## Import
 Node can be imported using the id, e.g.,
 

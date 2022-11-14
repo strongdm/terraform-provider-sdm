@@ -114,7 +114,7 @@ func dataSourceNode() *schema.Resource {
 								Schema: map[string]*schema.Schema{
 									"device": {
 										Type:        schema.TypeString,
-										Optional:    true,
+										Computed:    true,
 										Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
 									},
 									"gateway_filter": {
@@ -129,7 +129,7 @@ func dataSourceNode() *schema.Resource {
 									},
 									"location": {
 										Type:        schema.TypeString,
-										Optional:    true,
+										Computed:    true,
 										Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
 									},
 									"name": {
@@ -145,7 +145,7 @@ func dataSourceNode() *schema.Resource {
 									},
 									"version": {
 										Type:        schema.TypeString,
-										Optional:    true,
+										Computed:    true,
 										Description: "Version is a read only sdm binary version uploaded by the gateway process when it comes online.",
 									},
 								},
