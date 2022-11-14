@@ -1304,6 +1304,9 @@ type Gateway struct {
 	// The hostname/port tuple which the gateway daemon will bind to.
 	// If not provided on create, set to "0.0.0.0:listen_address_port".
 	BindAddress string `json:"bindAddress"`
+	// Device is a read only device name uploaded by the gateway process when
+	// it comes online.
+	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
 	// gateways.
 	GatewayFilter string `json:"gatewayFilter"`
@@ -1311,6 +1314,9 @@ type Gateway struct {
 	ID string `json:"id"`
 	// The public hostname/port tuple at which the gateway will be accessible to clients.
 	ListenAddress string `json:"listenAddress"`
+	// Location is a read only network location uploaded by the gateway process
+	// when it comes online.
+	Location string `json:"location"`
 	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the gateway. One of: "new", "verifying_restart",
@@ -1318,6 +1324,9 @@ type Gateway struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Version is a read only sdm binary version uploaded by the gateway process
+	// when it comes online.
+	Version string `json:"version"`
 }
 
 // GetResponseMetadata is reserved for future use.
@@ -2417,11 +2426,17 @@ type Redshift struct {
 
 // Relay represents a StrongDM CLI installation running in relay mode.
 type Relay struct {
+	// Device is a read only device name uploaded by the gateway process when
+	// it comes online.
+	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
 	// gateways.
 	GatewayFilter string `json:"gatewayFilter"`
 	// Unique identifier of the Relay.
 	ID string `json:"id"`
+	// Location is a read only network location uploaded by the gateway process
+	// when it comes online.
+	Location string `json:"location"`
 	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the relay. One of: "new", "verifying_restart",
@@ -2430,6 +2445,9 @@ type Relay struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Version is a read only sdm binary version uploaded by the gateway process
+	// when it comes online.
+	Version string `json:"version"`
 }
 
 // RemoteIdentities define the username to be used for a specific account

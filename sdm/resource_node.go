@@ -37,6 +37,11 @@ func resourceNode() *schema.Resource {
 							ForceNew:    true,
 							Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:listen_address_port\".",
 						},
+						"device": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
+						},
 						"gateway_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -47,6 +52,11 @@ func resourceNode() *schema.Resource {
 							Required:    true,
 							ForceNew:    true,
 							Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
+						},
+						"location": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -59,6 +69,11 @@ func resourceNode() *schema.Resource {
 							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"version": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Version is a read only sdm binary version uploaded by the gateway process when it comes online.",
 						},
 						"token": {
 							Type:      schema.TypeString,
@@ -75,10 +90,20 @@ func resourceNode() *schema.Resource {
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"device": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
+						},
 						"gateway_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+						},
+						"location": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -91,6 +116,11 @@ func resourceNode() *schema.Resource {
 							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"version": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Version is a read only sdm binary version uploaded by the gateway process when it comes online.",
 						},
 						"token": {
 							Type:      schema.TypeString,
@@ -115,10 +145,13 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 		out := &sdm.Gateway{
 			ID:            d.Id(),
 			BindAddress:   convertStringToPlumbing(raw["bind_address"]),
+			Device:        convertStringToPlumbing(raw["device"]),
 			GatewayFilter: convertStringToPlumbing(raw["gateway_filter"]),
 			ListenAddress: convertStringToPlumbing(raw["listen_address"]),
+			Location:      convertStringToPlumbing(raw["location"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Version:       convertStringToPlumbing(raw["version"]),
 		}
 		return out
 	}
@@ -129,9 +162,12 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 		}
 		out := &sdm.Relay{
 			ID:            d.Id(),
+			Device:        convertStringToPlumbing(raw["device"]),
 			GatewayFilter: convertStringToPlumbing(raw["gateway_filter"]),
+			Location:      convertStringToPlumbing(raw["location"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Version:       convertStringToPlumbing(raw["version"]),
 		}
 		return out
 	}
@@ -153,10 +189,13 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		d.Set("gateway", []map[string]interface{}{
 			{
 				"bind_address":   (v.BindAddress),
+				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
 				"listen_address": (v.ListenAddress),
+				"location":       (v.Location),
 				"name":           (v.Name),
 				"tags":           convertTagsToPorcelain(v.Tags),
+				"version":        (v.Version),
 				"token":          resp.Token,
 			},
 		})
@@ -165,9 +204,12 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
+				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
+				"location":       (v.Location),
 				"name":           (v.Name),
 				"tags":           convertTagsToPorcelain(v.Tags),
+				"version":        (v.Version),
 				"token":          resp.Token,
 			},
 		})
@@ -197,10 +239,13 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		d.Set("gateway", []map[string]interface{}{
 			{
 				"bind_address":   (v.BindAddress),
+				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
 				"listen_address": (v.ListenAddress),
+				"location":       (v.Location),
 				"name":           (v.Name),
 				"tags":           convertTagsToPorcelain(v.Tags),
+				"version":        (v.Version),
 				"token":          d.Get("gateway.0.token"),
 			},
 		})
@@ -212,9 +257,12 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
+				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
+				"location":       (v.Location),
 				"name":           (v.Name),
 				"tags":           convertTagsToPorcelain(v.Tags),
+				"version":        (v.Version),
 				"token":          d.Get("relay.0.token"),
 			},
 		})

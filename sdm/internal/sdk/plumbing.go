@@ -3585,9 +3585,11 @@ func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	}
 	porcelain := &Gateway{}
 	porcelain.BindAddress = plumbing.BindAddress
+	porcelain.Device = plumbing.Device
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
 	porcelain.ListenAddress = plumbing.ListenAddress
+	porcelain.Location = plumbing.Location
 	porcelain.Name = plumbing.Name
 	porcelain.State = plumbing.State
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -3595,6 +3597,7 @@ func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Version = plumbing.Version
 	return porcelain, nil
 }
 
@@ -3604,12 +3607,15 @@ func convertGatewayToPlumbing(porcelain *Gateway) *proto.Gateway {
 	}
 	plumbing := &proto.Gateway{}
 	plumbing.BindAddress = (porcelain.BindAddress)
+	plumbing.Device = (porcelain.Device)
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
 	plumbing.ListenAddress = (porcelain.ListenAddress)
+	plumbing.Location = (porcelain.Location)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Version = (porcelain.Version)
 	return plumbing
 }
 func convertRepeatedGatewayToPlumbing(
@@ -6249,8 +6255,10 @@ func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 		return nil, nil
 	}
 	porcelain := &Relay{}
+	porcelain.Device = plumbing.Device
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
+	porcelain.Location = plumbing.Location
 	porcelain.Name = plumbing.Name
 	porcelain.State = plumbing.State
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6258,6 +6266,7 @@ func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Version = plumbing.Version
 	return porcelain, nil
 }
 
@@ -6266,11 +6275,14 @@ func convertRelayToPlumbing(porcelain *Relay) *proto.Relay {
 		return nil
 	}
 	plumbing := &proto.Relay{}
+	plumbing.Device = (porcelain.Device)
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
+	plumbing.Location = (porcelain.Location)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Version = (porcelain.Version)
 	return plumbing
 }
 func convertRepeatedRelayToPlumbing(

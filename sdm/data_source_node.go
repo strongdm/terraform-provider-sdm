@@ -62,6 +62,11 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:listen_address_port\".",
 									},
+									"device": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
+									},
 									"gateway_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -77,6 +82,11 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "The public hostname/port tuple at which the gateway will be accessible to clients.",
 									},
+									"location": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -88,6 +98,11 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"version": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Version is a read only sdm binary version uploaded by the gateway process when it comes online.",
+									},
 								},
 							},
 						},
@@ -97,6 +112,11 @@ func dataSourceNode() *schema.Resource {
 							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"device": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
+									},
 									"gateway_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -106,6 +126,11 @@ func dataSourceNode() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique identifier of the Relay.",
+									},
+									"location": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -117,6 +142,11 @@ func dataSourceNode() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"version": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Version is a read only sdm binary version uploaded by the gateway process when it comes online.",
 									},
 								},
 							},
@@ -182,18 +212,24 @@ func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		case *sdm.Gateway:
 			output[0]["gateway"] = append(output[0]["gateway"], entity{
 				"bind_address":   (v.BindAddress),
+				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
 				"id":             (v.ID),
 				"listen_address": (v.ListenAddress),
+				"location":       (v.Location),
 				"name":           (v.Name),
 				"tags":           convertTagsToPorcelain(v.Tags),
+				"version":        (v.Version),
 			})
 		case *sdm.Relay:
 			output[0]["relay"] = append(output[0]["relay"], entity{
+				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
 				"id":             (v.ID),
+				"location":       (v.Location),
 				"name":           (v.Name),
 				"tags":           convertTagsToPorcelain(v.Tags),
+				"version":        (v.Version),
 			})
 		}
 	}
