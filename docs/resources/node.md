@@ -42,13 +42,10 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 The following arguments are supported by the Node resource:
 * gateway:
 	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to "0.0.0.0:listen_address_port".
-	* `device` - (Optional) Device is a read only device name uploaded by the gateway process when  it comes online.
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways.
 	* `listen_address` - (Required) The public hostname/port tuple at which the gateway will be accessible to clients.
-	* `location` - (Optional) Location is a read only network location uploaded by the gateway process when it comes online.
 	* `name` - (Optional) Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `version` - (Optional) Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 * relay:
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways.
 	* `name` - (Optional) Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
@@ -56,6 +53,10 @@ The following arguments are supported by the Node resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Node resource:
 * `id` - A unique identifier for the Node resource.
+* gateway:
+	* `device` - Device is a read only device name uploaded by the gateway process when  it comes online.
+	* `location` - Location is a read only network location uploaded by the gateway process when it comes online.
+	* `version` - Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 * relay:
 	* `device` - Device is a read only device name uploaded by the gateway process when  it comes online.
 	* `location` - Location is a read only network location uploaded by the gateway process when it comes online.
