@@ -33,5 +33,6 @@ In addition to provided arguments above, the following attributes are returned b
 * `roles` - A list where each element has the following attributes:
 	* `access_rules` - AccessRules is a list of access rules defining the resources this Role has access to.
 	* `id` - Unique identifier of the Role.
+	* `managed_by` - Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.
 	* `name` - Unique human-readable name of the Role.
 	* `tags` - Tags is a map of key, value pairs.

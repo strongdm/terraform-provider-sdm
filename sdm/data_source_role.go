@@ -27,6 +27,11 @@ func dataSourceRole() *schema.Resource {
 				Optional:    true,
 				Description: "Unique identifier of the Role.",
 			},
+			"managed_by": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.",
+			},
 			"name": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -53,6 +58,11 @@ func dataSourceRole() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "Unique identifier of the Role.",
+						},
+						"managed_by": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -86,6 +96,10 @@ func convertRoleFilterToPlumbing(d *schema.ResourceData) (string, []interface{})
 		filter += "id:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("managed_by"); ok {
+		filter += "managedby:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
@@ -116,6 +130,7 @@ func dataSourceRoleList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 			entity{
 				"access_rules": convertAccessRulesToPorcelain(v.AccessRules),
 				"id":           (v.ID),
+				"managed_by":   (v.ManagedBy),
 				"name":         (v.Name),
 				"tags":         convertTagsToPorcelain(v.Tags),
 			})

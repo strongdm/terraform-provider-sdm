@@ -26,6 +26,7 @@ data "sdm_account" "user-queries" {
 The following arguments are supported by a Accounts data source:
 * `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters for more information.
 * `email` - (Optional) The User's email address. Must be unique.
+* `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
 * `first_name` - (Optional) The User's first name.
 * `id` - (Optional) Unique identifier of the User.
 * `last_name` - (Optional) The User's last name.
@@ -44,8 +45,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* user:
 		* `email` - The User's email address. Must be unique.
+		* `external_id` - External ID is an alternative unique ID this user is represented by within an external service.
 		* `first_name` - The User's first name.
 		* `id` - Unique identifier of the User.
 		* `last_name` - The User's last name.
+		* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
+		* `permission_level` - PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
 		* `suspended` - The User's suspended state.
 		* `tags` - Tags is a map of key, value pairs.
