@@ -4769,6 +4769,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -6628,6 +6633,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
 				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
 				"username":        (v.Username),
 			})
 		case *sdm.Redshift:

@@ -1125,6 +1125,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
 	* `secret_store_username_key` - (Optional)

@@ -5726,6 +5726,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
 						"username": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -11638,6 +11643,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
 			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -13479,6 +13485,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
@@ -15401,6 +15408,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls_required":               (v.TlsRequired),
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],

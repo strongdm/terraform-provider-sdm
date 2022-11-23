@@ -2394,6 +2394,8 @@ type Redis struct {
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 
+	TlsRequired bool `json:"tlsRequired"`
+
 	Username string `json:"username"`
 }
 
