@@ -2414,6 +2414,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -4764,6 +4769,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
 								},
 							},
 						},
@@ -6123,6 +6133,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id": (v.SecretStoreID),
 				"tags":            convertTagsToPorcelain(v.Tags),
 				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
 			})
 		case *sdm.GCP:
 			output[0]["gcp"] = append(output[0]["gcp"], entity{
@@ -6617,6 +6628,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
 				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        (v.Username),
 			})
 		case *sdm.Redshift:
 			output[0]["redshift"] = append(output[0]["redshift"], entity{
