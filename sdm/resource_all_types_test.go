@@ -440,6 +440,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"password", `"password"`},
 				{"port", `443`},
 				{"tls_required", `true`},
+				{"username", `"username"`},
 			},
 		},
 		{
@@ -840,6 +841,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"name", `"name"`},
 				{"password", `"password"`},
 				{"port", `443`},
+				{"tls_required", `true`},
+				{"username", `"username"`},
 			},
 		},
 		{
@@ -1554,6 +1557,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"tls_required", `true`},
+				{"secret_store_username_path", `"path"`},
+				{"secret_store_username_key", `"key"`},
 			},
 		},
 		{
@@ -2003,6 +2008,9 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_password_key", `"key"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
+				{"tls_required", `true`},
+				{"secret_store_username_path", `"path"`},
+				{"secret_store_username_key", `"key"`},
 			},
 		},
 		{

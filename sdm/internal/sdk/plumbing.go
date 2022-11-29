@@ -3421,6 +3421,7 @@ func convertElasticacheRedisToPorcelain(plumbing *proto.ElasticacheRedis) (*Elas
 		porcelain.Tags = v
 	}
 	porcelain.TlsRequired = plumbing.TlsRequired
+	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
@@ -3441,6 +3442,7 @@ func convertElasticacheRedisToPlumbing(porcelain *ElasticacheRedis) *proto.Elast
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedElasticacheRedisToPlumbing(
@@ -6134,6 +6136,8 @@ func convertRedisToPorcelain(plumbing *proto.Redis) (*Redis, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsRequired = plumbing.TlsRequired
+	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
@@ -6153,6 +6157,8 @@ func convertRedisToPlumbing(porcelain *Redis) *proto.Redis {
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedRedisToPlumbing(

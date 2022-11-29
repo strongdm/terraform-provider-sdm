@@ -1265,6 +1265,8 @@ type ElasticacheRedis struct {
 	Tags Tags `json:"tags"`
 
 	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
 }
 
 type GCP struct {
@@ -2391,6 +2393,10 @@ type Redis struct {
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
 }
 
 type Redshift struct {

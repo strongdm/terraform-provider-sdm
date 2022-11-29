@@ -2953,6 +2953,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -5713,6 +5726,24 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_username_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_username_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -8014,6 +8045,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["password"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
 			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
 		} else {
 			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
@@ -8021,12 +8055,21 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
 			}
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
 		}
 
 		return map[string]string{
 			"password":                   convertStringToPlumbing(raw["password"]),
 			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
 			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
@@ -9146,6 +9189,9 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["password"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
 			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
+			}
 		} else {
 			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
@@ -9153,12 +9199,21 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
 				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
 			}
+			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+			}
 		}
 
 		return map[string]string{
 			"password":                   convertStringToPlumbing(raw["password"]),
 			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
 			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"username":                   convertStringToPlumbing(raw["username"]),
+			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
+			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
@@ -10588,6 +10643,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -10596,6 +10652,9 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
+		}
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
 		}
 		return out
 	}
@@ -11584,6 +11643,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -11592,6 +11653,9 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		if out.Password == "" {
 			out.Password = fullSecretStorePath(raw, "password")
+		}
+		if out.Username == "" {
+			out.Username = fullSecretStorePath(raw, "username")
 		}
 		return out
 	}
@@ -12708,6 +12772,9 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.GCP:
@@ -13418,6 +13485,10 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls_required":               (v.TlsRequired),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.Redshift:
@@ -14528,6 +14599,9 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls_required":               (v.TlsRequired),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.GCP:
@@ -15334,6 +15408,10 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":              (v.PortOverride),
 				"secret_store_id":            (v.SecretStoreID),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls_required":               (v.TlsRequired),
+				"username":                   seValues["username"],
+				"secret_store_username_path": seValues["secret_store_username_path"],
+				"secret_store_username_key":  seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.Redshift:
