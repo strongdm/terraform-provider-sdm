@@ -1019,6 +1019,18 @@ type CyberarkPAMExperimentalStore struct {
 	Tags Tags `json:"tags"`
 }
 
+// CyberarkPAMStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type CyberarkPAMStore struct {
+	AppURL string `json:"appUrl"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type DB2I struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
@@ -6915,6 +6927,30 @@ func (m *CyberarkConjurStore) GetName() string {
 
 // SetName sets the name of the CyberarkConjurStore.
 func (m *CyberarkConjurStore) SetName(v string) {
+	m.Name = v
+}
+func (*CyberarkPAMStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the CyberarkPAMStore.
+func (m *CyberarkPAMStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the CyberarkPAMStore.
+func (m *CyberarkPAMStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the CyberarkPAMStore.
+func (m *CyberarkPAMStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the CyberarkPAMStore.
+func (m *CyberarkPAMStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the CyberarkPAMStore.
+func (m *CyberarkPAMStore) SetName(v string) {
 	m.Name = v
 }
 func (*CyberarkPAMExperimentalStore) isOneOf_SecretStore() {}

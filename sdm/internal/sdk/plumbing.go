@@ -2823,6 +2823,57 @@ func convertRepeatedCyberarkPAMExperimentalStoreToPorcelain(plumbings []*proto.C
 	}
 	return items, nil
 }
+func convertCyberarkPAMStoreToPorcelain(plumbing *proto.CyberarkPAMStore) (*CyberarkPAMStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CyberarkPAMStore{}
+	porcelain.AppURL = plumbing.AppURL
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertCyberarkPAMStoreToPlumbing(porcelain *CyberarkPAMStore) *proto.CyberarkPAMStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CyberarkPAMStore{}
+	plumbing.AppURL = (porcelain.AppURL)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedCyberarkPAMStoreToPlumbing(
+	porcelains []*CyberarkPAMStore,
+) []*proto.CyberarkPAMStore {
+	var items []*proto.CyberarkPAMStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertCyberarkPAMStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCyberarkPAMStoreToPorcelain(plumbings []*proto.CyberarkPAMStore) (
+	[]*CyberarkPAMStore,
+	error,
+) {
+	var items []*CyberarkPAMStore
+	for _, plumbing := range plumbings {
+		if v, err := convertCyberarkPAMStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertDB2IToPorcelain(plumbing *proto.DB2I) (*DB2I, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7903,6 +7954,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
 	case *CyberarkConjurStore:
 		plumbing.SecretStore = &proto.SecretStore_CyberarkConjur{CyberarkConjur: convertCyberarkConjurStoreToPlumbing(v)}
+	case *CyberarkPAMStore:
+		plumbing.SecretStore = &proto.SecretStore_CyberarkPam{CyberarkPam: convertCyberarkPAMStoreToPlumbing(v)}
 	case *CyberarkPAMExperimentalStore:
 		plumbing.SecretStore = &proto.SecretStore_CyberarkPamExperimental{CyberarkPamExperimental: convertCyberarkPAMExperimentalStoreToPlumbing(v)}
 	case *DelineaStore:
@@ -7928,6 +7981,9 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetCyberarkConjur() != nil {
 		return convertCyberarkConjurStoreToPorcelain(plumbing.GetCyberarkConjur())
+	}
+	if plumbing.GetCyberarkPam() != nil {
+		return convertCyberarkPAMStoreToPorcelain(plumbing.GetCyberarkPam())
 	}
 	if plumbing.GetCyberarkPamExperimental() != nil {
 		return convertCyberarkPAMExperimentalStoreToPorcelain(plumbing.GetCyberarkPamExperimental())
