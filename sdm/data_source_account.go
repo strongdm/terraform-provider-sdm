@@ -29,6 +29,10 @@ func dataSourceAccount() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"external_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"first_name": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -100,6 +104,11 @@ func dataSourceAccount() *schema.Resource {
 										Optional:    true,
 										Description: "The User's email address. Must be unique.",
 									},
+									"external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "External ID is an alternative unique ID this user is represented by within an external service.",
+									},
 									"first_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -114,6 +123,16 @@ func dataSourceAccount() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The User's last name.",
+									},
+									"managed_by": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.",
+									},
+									"permission_level": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.",
 									},
 									"suspended": {
 										Type:        schema.TypeBool,
@@ -150,6 +169,10 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		filter += "email:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("external_id"); ok {
+		filter += "externalid:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("first_name"); ok {
 		filter += "firstname:? "
 		args = append(args, v)
@@ -162,8 +185,16 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		filter += "lastname:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("managed_by"); ok {
+		filter += "managedby:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("permission_level"); ok {
+		filter += "permissionlevel:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("suspended"); ok {
@@ -204,12 +235,15 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 			})
 		case *sdm.User:
 			output[0]["user"] = append(output[0]["user"], entity{
-				"email":      (v.Email),
-				"first_name": (v.FirstName),
-				"id":         (v.ID),
-				"last_name":  (v.LastName),
-				"suspended":  (v.Suspended),
-				"tags":       convertTagsToPorcelain(v.Tags),
+				"email":            (v.Email),
+				"external_id":      (v.ExternalID),
+				"first_name":       (v.FirstName),
+				"id":               (v.ID),
+				"last_name":        (v.LastName),
+				"managed_by":       (v.ManagedBy),
+				"permission_level": (v.PermissionLevel),
+				"suspended":        (v.Suspended),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			})
 		}
 	}

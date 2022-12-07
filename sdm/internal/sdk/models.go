@@ -1265,6 +1265,8 @@ type ElasticacheRedis struct {
 	Tags Tags `json:"tags"`
 
 	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
 }
 
 type GCP struct {
@@ -1304,6 +1306,9 @@ type Gateway struct {
 	// The hostname/port tuple which the gateway daemon will bind to.
 	// If not provided on create, set to "0.0.0.0:listen_address_port".
 	BindAddress string `json:"bindAddress"`
+	// Device is a read only device name uploaded by the gateway process when
+	// it comes online.
+	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
 	// gateways.
 	GatewayFilter string `json:"gatewayFilter"`
@@ -1311,6 +1316,9 @@ type Gateway struct {
 	ID string `json:"id"`
 	// The public hostname/port tuple at which the gateway will be accessible to clients.
 	ListenAddress string `json:"listenAddress"`
+	// Location is a read only network location uploaded by the gateway process
+	// when it comes online.
+	Location string `json:"location"`
 	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the gateway. One of: "new", "verifying_restart",
@@ -1318,6 +1326,9 @@ type Gateway struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Version is a read only sdm binary version uploaded by the gateway process
+	// when it comes online.
+	Version string `json:"version"`
 }
 
 // GetResponseMetadata is reserved for future use.
@@ -2382,6 +2393,10 @@ type Redis struct {
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	TlsRequired bool `json:"tlsRequired"`
+
+	Username string `json:"username"`
 }
 
 type Redshift struct {
@@ -2417,11 +2432,17 @@ type Redshift struct {
 
 // Relay represents a StrongDM CLI installation running in relay mode.
 type Relay struct {
+	// Device is a read only device name uploaded by the gateway process when
+	// it comes online.
+	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
 	// gateways.
 	GatewayFilter string `json:"gatewayFilter"`
 	// Unique identifier of the Relay.
 	ID string `json:"id"`
+	// Location is a read only network location uploaded by the gateway process
+	// when it comes online.
+	Location string `json:"location"`
 	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the relay. One of: "new", "verifying_restart",
@@ -2430,6 +2451,9 @@ type Relay struct {
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Version is a read only sdm binary version uploaded by the gateway process
+	// when it comes online.
+	Version string `json:"version"`
 }
 
 // RemoteIdentities define the username to be used for a specific account
@@ -6628,6 +6652,8 @@ type Role struct {
 	AccessRules AccessRules `json:"accessRules"`
 	// Unique identifier of the Role.
 	ID string `json:"id"`
+	// Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.
+	ManagedBy string `json:"managedBy"`
 	// Unique human-readable name of the Role.
 	Name string `json:"name"`
 	// Tags is a map of key, value pairs.
@@ -7269,12 +7295,18 @@ type UpdateResponseMetadata struct {
 type User struct {
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
+	// External ID is an alternative unique ID this user is represented by within an external service.
+	ExternalID string `json:"externalId"`
 	// The User's first name.
 	FirstName string `json:"firstName"`
 	// Unique identifier of the User.
 	ID string `json:"id"`
 	// The User's last name.
 	LastName string `json:"lastName"`
+	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
+	ManagedBy string `json:"managedBy"`
+	// PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
+	PermissionLevel string `json:"permissionLevel"`
 	// The User's suspended state.
 	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.
