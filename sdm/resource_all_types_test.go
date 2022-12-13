@@ -2248,6 +2248,13 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "cyberark_pam",
+			pairs: [][2]string{
+				{"app_url", `"app_url"`},
+				{"name", `"all_secrets_name"`},
+			},
+		},
+		{
 			resource: "cyberark_pam_experimental",
 			pairs: [][2]string{
 				{"app_url", `"app_url"`},
