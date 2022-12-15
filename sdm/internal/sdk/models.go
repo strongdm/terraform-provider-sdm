@@ -995,8 +995,6 @@ type ControlPanelVerifyJWTResponse struct {
 type CreateResponseMetadata struct {
 }
 
-// CyberarkConjurStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type CyberarkConjurStore struct {
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
@@ -1019,8 +1017,6 @@ type CyberarkPAMExperimentalStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// CyberarkPAMStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type CyberarkPAMStore struct {
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
