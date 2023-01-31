@@ -154,6 +154,27 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* amazon_eks_instance_profile:
+	* `bind_interface` - (Optional) Bind interface
+	* `certificate_authority` - (Required if storing credentials directly strongDM) 
+	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
+	* `secret_store_certificate_authority_key` - (Optional)
+	* `cluster_name` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) 
+	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `region` - (Required) 
+	* `remote_identity_group_id` - (Optional) 
+	* `remote_identity_healthcheck_username` - (Required) 
+	* `role_arn` - (Optional) 
+	* `secret_store_role_arn_path` - (Optional)
+	* `secret_store_role_arn_key` - (Optional)
+	* `role_external_id` - (Optional) 
+	* `secret_store_role_external_id_path` - (Optional)
+	* `secret_store_role_external_id_key` - (Optional)
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_user_impersonation:
 	* `access_key` - (Required if storing credentials directly strongDM) 
 	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)

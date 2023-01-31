@@ -122,6 +122,22 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `tags` - Tags is a map of key, value pairs.
+	* amazon_eks_instance_profile:
+		* `bind_interface` - Bind interface
+		* `certificate_authority` - 
+		* `cluster_name` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - 
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `region` - 
+		* `remote_identity_group_id` - 
+		* `remote_identity_healthcheck_username` - 
+		* `role_arn` - 
+		* `role_external_id` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `tags` - Tags is a map of key, value pairs.
 	* amazon_eks_user_impersonation:
 		* `access_key` - 
 		* `bind_interface` - Bind interface

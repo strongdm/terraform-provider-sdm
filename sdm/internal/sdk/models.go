@@ -522,6 +522,41 @@ type AmazonEKS struct {
 	Tags Tags `json:"tags"`
 }
 
+type AmazonEKSInstanceProfile struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClusterName string `json:"clusterName"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Region string `json:"region"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type AmazonEKSUserImpersonation struct {
 	AccessKey string `json:"accessKey"`
 	// Bind interface
@@ -2884,6 +2919,60 @@ func (m *AmazonEKS) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AmazonEKS.
 func (m *AmazonEKS) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AmazonEKSInstanceProfile) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AmazonEKSInstanceProfile.
+func (m *AmazonEKSInstanceProfile) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AmazonEKSUserImpersonation) isOneOf_Resource() {}

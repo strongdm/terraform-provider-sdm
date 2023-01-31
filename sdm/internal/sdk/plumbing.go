@@ -1486,6 +1486,81 @@ func convertRepeatedAmazonEKSToPorcelain(plumbings []*proto.AmazonEKS) (
 	}
 	return items, nil
 }
+func convertAmazonEKSInstanceProfileToPorcelain(plumbing *proto.AmazonEKSInstanceProfile) (*AmazonEKSInstanceProfile, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AmazonEKSInstanceProfile{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.CertificateAuthority = plumbing.CertificateAuthority
+	porcelain.ClusterName = plumbing.ClusterName
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Endpoint = plumbing.Endpoint
+	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Region = plumbing.Region
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAmazonEKSInstanceProfileToPlumbing(porcelain *AmazonEKSInstanceProfile) *proto.AmazonEKSInstanceProfile {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonEKSInstanceProfile{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClusterName = (porcelain.ClusterName)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAmazonEKSInstanceProfileToPlumbing(
+	porcelains []*AmazonEKSInstanceProfile,
+) []*proto.AmazonEKSInstanceProfile {
+	var items []*proto.AmazonEKSInstanceProfile
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonEKSInstanceProfileToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonEKSInstanceProfileToPorcelain(plumbings []*proto.AmazonEKSInstanceProfile) (
+	[]*AmazonEKSInstanceProfile,
+	error,
+) {
+	var items []*AmazonEKSInstanceProfile
+	for _, plumbing := range plumbings {
+		if v, err := convertAmazonEKSInstanceProfileToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAmazonEKSUserImpersonationToPorcelain(plumbing *proto.AmazonEKSUserImpersonation) (*AmazonEKSUserImpersonation, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6754,6 +6829,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AksUserImpersonation{AksUserImpersonation: convertAKSUserImpersonationToPlumbing(v)}
 	case *AmazonEKS:
 		plumbing.Resource = &proto.Resource_AmazonEks{AmazonEks: convertAmazonEKSToPlumbing(v)}
+	case *AmazonEKSInstanceProfile:
+		plumbing.Resource = &proto.Resource_AmazonEksInstanceProfile{AmazonEksInstanceProfile: convertAmazonEKSInstanceProfileToPlumbing(v)}
 	case *AmazonEKSUserImpersonation:
 		plumbing.Resource = &proto.Resource_AmazonEksUserImpersonation{AmazonEksUserImpersonation: convertAmazonEKSUserImpersonationToPlumbing(v)}
 	case *AmazonES:
@@ -6914,6 +6991,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAmazonEks() != nil {
 		return convertAmazonEKSToPorcelain(plumbing.GetAmazonEks())
+	}
+	if plumbing.GetAmazonEksInstanceProfile() != nil {
+		return convertAmazonEKSInstanceProfileToPorcelain(plumbing.GetAmazonEksInstanceProfile())
 	}
 	if plumbing.GetAmazonEksUserImpersonation() != nil {
 		return convertAmazonEKSUserImpersonationToPorcelain(plumbing.GetAmazonEksUserImpersonation())

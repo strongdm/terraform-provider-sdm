@@ -531,6 +531,92 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"amazon_eks_instance_profile": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Bind interface",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "",
+									},
+									"cluster_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"remote_identity_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"amazon_eks_user_impersonation": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -5738,6 +5824,24 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"role_arn":                             (v.RoleArn),
 				"role_external_id":                     (v.RoleExternalID),
 				"secret_access_key":                    (v.SecretAccessKey),
+				"secret_store_id":                      (v.SecretStoreID),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.AmazonEKSInstanceProfile:
+			output[0]["amazon_eks_instance_profile"] = append(output[0]["amazon_eks_instance_profile"], entity{
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                (v.CertificateAuthority),
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"id":                                   (v.ID),
+				"name":                                 (v.Name),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             (v.RoleArn),
+				"role_external_id":                     (v.RoleExternalID),
 				"secret_store_id":                      (v.SecretStoreID),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 			})

@@ -606,6 +606,113 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"amazon_eks_instance_profile": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"certificate_authority": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_certificate_authority_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_certificate_authority_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"cluster_name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"endpoint": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_arn_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_arn_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_role_external_id_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_role_external_id_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"amazon_eks_user_impersonation": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -6942,6 +7049,55 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_secret_access_key_key":      convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
 		}, nil
 	}
+	if list := d.Get("amazon_eks_instance_profile").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+			}
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
+			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
+			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
+			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
+			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
+			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
+			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
+			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
+			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+		}, nil
+	}
 	if list := d.Get("amazon_eks_user_impersonation").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9795,6 +9951,39 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("amazon_eks_instance_profile").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AmazonEKSInstanceProfile{}
+		}
+		out := &sdm.AmazonEKSInstanceProfile{
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:              convertStringToPlumbing(raw["certificate_authority"]),
+			ClusterName:                       convertStringToPlumbing(raw["cluster_name"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:                          convertStringToPlumbing(raw["endpoint"]),
+			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Region:                            convertStringToPlumbing(raw["region"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			RoleArn:                           convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:                    convertStringToPlumbing(raw["role_external_id"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+		}
+		if out.CertificateAuthority == "" {
+			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
+		}
+		if out.RoleArn == "" {
+			out.RoleArn = fullSecretStorePath(raw, "role_arn")
+		}
+		if out.RoleExternalID == "" {
+			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
+		}
+		return out
+	}
 	if list := d.Get("amazon_eks_user_impersonation").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12168,6 +12357,33 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.AmazonEKSInstanceProfile:
+		localV, _ := localVersion.(*sdm.AmazonEKSInstanceProfile)
+		_ = localV
+		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
+			{
+				"bind_interface":                          (v.BindInterface),
+				"certificate_authority":                   seValues["certificate_authority"],
+				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
+				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
+				"cluster_name":                            (v.ClusterName),
+				"egress_filter":                           (v.EgressFilter),
+				"endpoint":                                (v.Endpoint),
+				"healthcheck_namespace":                   (v.HealthcheckNamespace),
+				"name":                                    (v.Name),
+				"region":                                  (v.Region),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                                seValues["role_arn"],
+				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
+				"role_external_id":                        seValues["role_external_id"],
+				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
+				"secret_store_id":                         (v.SecretStoreID),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AmazonEKSUserImpersonation:
 		localV, _ := localVersion.(*sdm.AmazonEKSUserImpersonation)
 		_ = localV
@@ -13913,6 +14129,36 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_access_key":                       seValues["secret_access_key"],
 				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
+				"secret_store_id":                         (v.SecretStoreID),
+				"tags":                                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AmazonEKSInstanceProfile:
+		localV, ok := localVersion.(*sdm.AmazonEKSInstanceProfile)
+		if !ok {
+			localV = &sdm.AmazonEKSInstanceProfile{}
+		}
+		_ = localV
+		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
+			{
+				"bind_interface":                          (v.BindInterface),
+				"certificate_authority":                   seValues["certificate_authority"],
+				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
+				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
+				"cluster_name":                            (v.ClusterName),
+				"egress_filter":                           (v.EgressFilter),
+				"endpoint":                                (v.Endpoint),
+				"healthcheck_namespace":                   (v.HealthcheckNamespace),
+				"name":                                    (v.Name),
+				"region":                                  (v.Region),
+				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                                seValues["role_arn"],
+				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
+				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
+				"role_external_id":                        seValues["role_external_id"],
+				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
+				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
 				"secret_store_id":                         (v.SecretStoreID),
 				"tags":                                    convertTagsToPorcelain(v.Tags),
 			},
