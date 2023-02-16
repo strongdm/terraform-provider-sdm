@@ -43,6 +43,7 @@ const (
 
 // Providers responsible for managing roles and users.
 // None, or an empty string, implies the user is managed by strongDM.
+// Deprecated: Please use SCIMProvider instead.
 const (
 	ProviderNone      = ""
 	ProviderOkta      = "okta"
@@ -51,4 +52,16 @@ const (
 	ProviderGeneric   = "generic"
 	ProviderOneLogin  = "onelogin"
 	ProviderGoogle    = "google"
+)
+
+// Providers responsible for managing roles and users.
+// None, or an empty string, implies the user is managed by strongDM.
+const (
+	SCIMProviderNone      = ""
+	SCIMProviderOkta      = "okta"
+	SCIMProviderSailPoint = "sailpoint"
+	SCIMProviderAzure     = "azure"
+	SCIMProviderGeneric   = "generic"
+	SCIMProviderOneLogin  = "onelogin"
+	SCIMProviderGoogle    = "google"
 )

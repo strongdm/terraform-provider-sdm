@@ -23,6 +23,7 @@ import (
 	proto "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"strings"
 	"time"
@@ -63,6 +64,17 @@ func convertTimestampToPlumbing(t time.Time) *timestamppb.Timestamp {
 		Seconds: t.Unix(),
 		Nanos:   int32(t.Nanosecond()),
 	}
+}
+
+func convertDurationToPorcelain(d *durationpb.Duration) (time.Duration, error) {
+	if d == nil {
+		return 0, nil
+	}
+	return d.AsDuration(), nil
+}
+
+func convertDurationToPlumbing(d time.Duration) *durationpb.Duration {
+	return durationpb.New(d)
 }
 
 func convertTagsToPorcelain(tags *proto.Tags) (Tags, error) {

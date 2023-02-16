@@ -1124,8 +1124,6 @@ type DB2LUW struct {
 type DeleteResponseMetadata struct {
 }
 
-// DelineaStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type DelineaStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`

@@ -89,7 +89,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `remote_identity_group_id` - (Optional) 
-	* `remote_identity_healthcheck_username` - (Required) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
@@ -142,7 +142,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
-	* `remote_identity_healthcheck_username` - (Required) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)
 	* `secret_store_role_arn_key` - (Optional)
@@ -166,7 +166,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
-	* `remote_identity_healthcheck_username` - (Required) 
+	* `remote_identity_healthcheck_username` - (Optional) 
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)
 	* `secret_store_role_arn_key` - (Optional)
@@ -1127,7 +1127,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required if storing credentials directly strongDM) 
 	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_password_key` - (Optional)
-	* `port` - (Required) 
+	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1270,8 +1270,8 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_forwarding` - (Optional) 
 	* `port_override` - (Optional) 
-	* `private_key` - (Optional) 
-	* `secret_store_private_key_path` - (Optional)
+	* `private_key` - (Required if storing credentials directly strongDM) 
+	* `secret_store_private_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_private_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.

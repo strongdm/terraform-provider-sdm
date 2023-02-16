@@ -5733,7 +5733,7 @@ func resourceResource() *schema.Resource {
 						},
 						"port": {
 							Type:        schema.TypeInt,
-							Required:    true,
+							Optional:    true,
 							Description: "",
 						},
 						"port_override": {
