@@ -31,8 +31,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QueriesClient interface {
-	// Get reads one Query by ID.
-	Get(ctx context.Context, in *QueryGetRequest, opts ...grpc.CallOption) (*QueryGetResponse, error)
 	// List gets a list of Queries matching a given set of criteria.
 	List(ctx context.Context, in *QueryListRequest, opts ...grpc.CallOption) (*QueryListResponse, error)
 }
@@ -43,15 +41,6 @@ type queriesClient struct {
 
 func NewQueriesClient(cc grpc.ClientConnInterface) QueriesClient {
 	return &queriesClient{cc}
-}
-
-func (c *queriesClient) Get(ctx context.Context, in *QueryGetRequest, opts ...grpc.CallOption) (*QueryGetResponse, error) {
-	out := new(QueryGetResponse)
-	err := c.cc.Invoke(ctx, "/v1.Queries/Get", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *queriesClient) List(ctx context.Context, in *QueryListRequest, opts ...grpc.CallOption) (*QueryListResponse, error) {
@@ -67,8 +56,6 @@ func (c *queriesClient) List(ctx context.Context, in *QueryListRequest, opts ...
 // All implementations must embed UnimplementedQueriesServer
 // for forward compatibility
 type QueriesServer interface {
-	// Get reads one Query by ID.
-	Get(context.Context, *QueryGetRequest) (*QueryGetResponse, error)
 	// List gets a list of Queries matching a given set of criteria.
 	List(context.Context, *QueryListRequest) (*QueryListResponse, error)
 	mustEmbedUnimplementedQueriesServer()
@@ -78,9 +65,6 @@ type QueriesServer interface {
 type UnimplementedQueriesServer struct {
 }
 
-func (UnimplementedQueriesServer) Get(context.Context, *QueryGetRequest) (*QueryGetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
 func (UnimplementedQueriesServer) List(context.Context, *QueryListRequest) (*QueryListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
@@ -95,24 +79,6 @@ type UnsafeQueriesServer interface {
 
 func RegisterQueriesServer(s grpc.ServiceRegistrar, srv QueriesServer) {
 	s.RegisterService(&_Queries_serviceDesc, srv)
-}
-
-func _Queries_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueriesServer).Get(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/v1.Queries/Get",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueriesServer).Get(ctx, req.(*QueryGetRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Queries_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -137,10 +103,6 @@ var _Queries_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.Queries",
 	HandlerType: (*QueriesServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Get",
-			Handler:    _Queries_Get_Handler,
-		},
 		{
 			MethodName: "List",
 			Handler:    _Queries_List_Handler,

@@ -50,6 +50,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* aks_basic_auth:
 		* `bind_interface` - Bind interface
@@ -62,6 +63,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* aks_service_account:
@@ -76,6 +78,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
 	* aks_service_account_user_impersonation:
@@ -88,6 +91,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
 	* aks_user_impersonation:
@@ -103,6 +107,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* amazon_eks:
 		* `access_key` - 
@@ -121,6 +126,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* amazon_eks_instance_profile:
 		* `bind_interface` - Bind interface
@@ -137,6 +143,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_arn` - 
 		* `role_external_id` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* amazon_eks_user_impersonation:
 		* `access_key` - 
@@ -153,6 +160,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* amazon_es:
 		* `access_key` - 
@@ -167,6 +175,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* amazonmq_amqp_091:
 		* `bind_interface` - Bind interface
@@ -178,6 +187,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -194,6 +204,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* aurora_mysql:
 		* `bind_interface` - Bind interface
@@ -206,6 +217,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* aurora_postgres:
@@ -220,6 +232,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* aws:
@@ -298,6 +311,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* azure_postgres:
@@ -312,6 +326,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* big_query:
@@ -324,6 +339,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `private_key` - 
 		* `project` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* cassandra:
@@ -336,6 +352,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -351,6 +368,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* clustrix:
@@ -364,6 +382,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* cockroach:
@@ -378,6 +397,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* db_2_i:
@@ -390,6 +410,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -404,6 +425,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* document_db_host:
@@ -417,6 +439,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* document_db_replica_set:
@@ -431,6 +454,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `replica_set` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* druid:
@@ -443,6 +467,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* dynamo_db:
@@ -458,6 +483,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* elastic:
 		* `bind_interface` - Bind interface
@@ -469,6 +495,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -482,6 +509,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -506,6 +534,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `service_account_key` - 
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* google_gke_user_impersonation:
 		* `bind_interface` - Bind interface
@@ -517,6 +546,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `service_account_key` - 
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* greenplum:
 		* `bind_interface` - Bind interface
@@ -530,6 +560,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* http_auth:
@@ -589,6 +620,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* kubernetes_basic_auth:
 		* `bind_interface` - Bind interface
@@ -601,6 +633,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* kubernetes_service_account:
@@ -615,6 +648,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
 	* kubernetes_service_account_user_impersonation:
@@ -627,6 +661,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `token` - 
 	* kubernetes_user_impersonation:
@@ -642,6 +677,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* maria:
 		* `bind_interface` - Bind interface
@@ -654,6 +690,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* memcached:
@@ -665,6 +702,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* memsql:
 		* `bind_interface` - Bind interface
@@ -677,6 +715,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* mongo_host:
@@ -690,6 +729,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -705,6 +745,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `replica_set` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -721,6 +762,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `replica_set` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -737,6 +779,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `replica_set` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -750,6 +793,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -768,6 +812,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `server_name` - 
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* mtls_postgres:
@@ -786,6 +831,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `server_name` - 
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* mysql:
@@ -799,6 +845,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* neptune:
@@ -810,6 +857,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* neptune_iam:
 		* `access_key` - 
@@ -825,6 +873,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* oracle:
 		* `bind_interface` - Bind interface
@@ -837,6 +886,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -852,6 +902,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* presto:
@@ -865,6 +916,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -878,6 +930,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -890,6 +943,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* rdp:
 		* `bind_interface` - Bind interface
@@ -902,6 +956,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* redis:
@@ -914,6 +969,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - 
 		* `username` - 
@@ -929,6 +985,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* single_store:
@@ -942,6 +999,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* snowflake:
@@ -955,6 +1013,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `schema` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* snowsight:
@@ -981,6 +1040,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `schema` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* ssh:
@@ -996,6 +1056,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `public_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* ssh_cert:
@@ -1012,6 +1073,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* ssh_customer_key:
@@ -1026,6 +1088,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - 
 		* `private_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* sybase:
@@ -1038,6 +1101,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* sybase_iq:
@@ -1050,6 +1114,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
 	* teradata:
@@ -1062,5 +1127,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - 
 		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 

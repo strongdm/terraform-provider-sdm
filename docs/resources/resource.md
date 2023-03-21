@@ -63,6 +63,7 @@ The following arguments are supported by the Resource resource:
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aks_basic_auth:
 	* `bind_interface` - (Optional) Bind interface
@@ -76,6 +77,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -91,6 +93,7 @@ The following arguments are supported by the Resource resource:
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
 	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
@@ -104,6 +107,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
 	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
@@ -126,14 +130,15 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks:
 	* `access_key` - (Required if storing credentials directly strongDM) 
 	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
 	* `bind_interface` - (Optional) Bind interface
-	* `certificate_authority` - (Required if storing credentials directly strongDM) 
-	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `cluster_name` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -153,11 +158,12 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_instance_profile:
 	* `bind_interface` - (Optional) Bind interface
-	* `certificate_authority` - (Required if storing credentials directly strongDM) 
-	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `cluster_name` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -174,14 +180,15 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_role_external_id_path` - (Optional)
 	* `secret_store_role_external_id_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_user_impersonation:
 	* `access_key` - (Required if storing credentials directly strongDM) 
 	* `secret_store_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_access_key_key` - (Optional)
 	* `bind_interface` - (Optional) Bind interface
-	* `certificate_authority` - (Required if storing credentials directly strongDM) 
-	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `cluster_name` - (Required) 
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -199,6 +206,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_es:
 	* `access_key` - (Optional) 
@@ -220,6 +228,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_path` - (Optional)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazonmq_amqp_091:
 	* `bind_interface` - (Optional) Bind interface
@@ -232,6 +241,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Required if storing credentials directly strongDM) 
@@ -257,6 +267,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aurora_mysql:
 	* `bind_interface` - (Optional) Bind interface
@@ -270,6 +281,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -287,6 +299,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -395,6 +408,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -412,6 +426,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -427,6 +442,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_private_key_key` - (Optional)
 	* `project` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) 
 * cassandra:
@@ -440,6 +456,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Required if storing credentials directly strongDM) 
@@ -458,6 +475,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -474,6 +492,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -491,6 +510,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -506,6 +526,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Required if storing credentials directly strongDM) 
@@ -523,6 +544,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -539,6 +561,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -556,6 +579,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `replica_set` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -571,6 +595,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) 
 	* `secret_store_username_path` - (Optional)
@@ -595,6 +620,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * elastic:
 	* `bind_interface` - (Optional) Bind interface
@@ -607,6 +633,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -623,6 +650,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -640,8 +668,8 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke:
 	* `bind_interface` - (Optional) Bind interface
-	* `certificate_authority` - (Required if storing credentials directly strongDM) 
-	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
@@ -653,11 +681,12 @@ The following arguments are supported by the Resource resource:
 	* `service_account_key` - (Required if storing credentials directly strongDM) 
 	* `secret_store_service_account_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_service_account_key_key` - (Optional)
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke_user_impersonation:
 	* `bind_interface` - (Optional) Bind interface
-	* `certificate_authority` - (Required if storing credentials directly strongDM) 
-	* `secret_store_certificate_authority_path` - (Required if using credentials stored in a secret store)
+	* `certificate_authority` - (Optional) 
+	* `secret_store_certificate_authority_path` - (Optional)
 	* `secret_store_certificate_authority_key` - (Optional)
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) 
@@ -667,6 +696,7 @@ The following arguments are supported by the Resource resource:
 	* `service_account_key` - (Required if storing credentials directly strongDM) 
 	* `secret_store_service_account_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_service_account_key_key` - (Optional)
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * greenplum:
 	* `bind_interface` - (Optional) Bind interface
@@ -681,6 +711,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -750,6 +781,7 @@ The following arguments are supported by the Resource resource:
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * kubernetes_basic_auth:
 	* `bind_interface` - (Optional) Bind interface
@@ -763,6 +795,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -778,6 +811,7 @@ The following arguments are supported by the Resource resource:
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
 	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
@@ -791,6 +825,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required if storing credentials directly strongDM) 
 	* `secret_store_token_path` - (Required if using credentials stored in a secret store)
@@ -813,6 +848,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * maria:
 	* `bind_interface` - (Optional) Bind interface
@@ -826,6 +862,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -838,6 +875,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * memsql:
 	* `bind_interface` - (Optional) Bind interface
@@ -851,6 +889,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -867,6 +906,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -885,6 +925,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `replica_set` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -904,6 +945,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `replica_set` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -923,6 +965,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `replica_set` - (Required) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -939,6 +982,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_password_key` - (Optional)
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -966,6 +1010,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) 
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -993,6 +1038,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) 
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1009,6 +1055,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1021,6 +1068,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * neptune_iam:
 	* `access_key` - (Required if storing credentials directly strongDM) 
@@ -1043,6 +1091,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_secret_access_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_secret_access_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * oracle:
 	* `bind_interface` - (Optional) Bind interface
@@ -1056,6 +1105,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Required if storing credentials directly strongDM) 
@@ -1074,6 +1124,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1090,6 +1141,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -1104,6 +1156,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Required if storing credentials directly strongDM) 
@@ -1117,6 +1170,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * rdp:
 	* `bind_interface` - (Optional) Bind interface
@@ -1130,6 +1184,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1145,6 +1200,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) 
 	* `username` - (Optional) 
@@ -1163,6 +1219,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1179,6 +1236,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1195,6 +1253,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `schema` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1225,6 +1284,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `schema` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1240,6 +1300,7 @@ The following arguments are supported by the Resource resource:
 	* `port_forwarding` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1257,6 +1318,7 @@ The following arguments are supported by the Resource resource:
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1274,6 +1336,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_private_key_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_private_key_key` - (Optional)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1289,6 +1352,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1304,6 +1368,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
@@ -1319,6 +1384,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
