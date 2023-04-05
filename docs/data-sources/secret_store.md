@@ -8,7 +8,7 @@ sidebar_current: “docs-sdm-datasource-secret-store"
 # Data Source: sdm_secret_store
 
 A SecretStore is a server where resource secrets (passwords, keys) are stored.
- Coming soon support for HashiCorp Vault and AWS Secret Store. Contact support@strongdm.com to request access to the beta.
+ Coming soon support for HashiCorp Vault and AWS Secret Store.
 ## Argument Reference
 The following arguments are supported by a SecretStores data source:
 * `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters for more information.

@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/3.8.0"
+	defaultUserAgent = "strongdm-sdk-go/3.10.0"
 )
 
 var _ = metadata.Pairs
@@ -75,6 +75,7 @@ type Client struct {
 	accountGrantsHistory        *AccountGrantsHistory
 	accountPermissions          *AccountPermissions
 	accountResources            *AccountResources
+	accountResourcesHistory     *AccountResourcesHistory
 	accounts                    *Accounts
 	accountsHistory             *AccountsHistory
 	activities                  *Activities
@@ -162,6 +163,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.accountResources = &AccountResources{
 		client: plumbing.NewAccountResourcesClient(client.grpcConn),
+		parent: client,
+	}
+	client.accountResourcesHistory = &AccountResourcesHistory{
+		client: plumbing.NewAccountResourcesHistoryClient(client.grpcConn),
 		parent: client,
 	}
 	client.accounts = &Accounts{
@@ -341,6 +346,11 @@ func (c *Client) AccountPermissions() *AccountPermissions {
 // The AccountResources service is read-only.
 func (c *Client) AccountResources() *AccountResources {
 	return c.accountResources
+}
+
+// AccountResourcesHistory records all changes to the state of a AccountResource.
+func (c *Client) AccountResourcesHistory() *AccountResourcesHistory {
+	return c.accountResourcesHistory
 }
 
 // Accounts are users that have access to strongDM. There are two types of accounts:

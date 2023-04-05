@@ -1661,6 +1661,65 @@ func convertRepeatedAccountResourceToPorcelain(plumbings []*proto.AccountResourc
 	}
 	return items, nil
 }
+func convertAccountResourceHistoryToPorcelain(plumbing *proto.AccountResourceHistory) (*AccountResourceHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountResourceHistory{}
+	if v, err := convertAccountResourceToPorcelain(plumbing.AccountResource); err != nil {
+		return nil, fmt.Errorf("error converting field AccountResource: %v", err)
+	} else {
+		porcelain.AccountResource = v
+	}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountResourceHistoryToPlumbing(porcelain *AccountResourceHistory) *proto.AccountResourceHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountResourceHistory{}
+	plumbing.AccountResource = convertAccountResourceToPlumbing(porcelain.AccountResource)
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedAccountResourceHistoryToPlumbing(
+	porcelains []*AccountResourceHistory,
+) []*proto.AccountResourceHistory {
+	var items []*proto.AccountResourceHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountResourceHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountResourceHistoryToPorcelain(plumbings []*proto.AccountResourceHistory) (
+	[]*AccountResourceHistory,
+	error,
+) {
+	var items []*AccountResourceHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountResourceHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAccountUpdateResponseToPorcelain(plumbing *proto.AccountUpdateResponse) (*AccountUpdateResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -2089,6 +2148,83 @@ func convertRepeatedAmazonEKSInstanceProfileToPorcelain(plumbings []*proto.Amazo
 	var items []*AmazonEKSInstanceProfile
 	for _, plumbing := range plumbings {
 		if v, err := convertAmazonEKSInstanceProfileToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAmazonEKSInstanceProfileUserImpersonationToPorcelain(plumbing *proto.AmazonEKSInstanceProfileUserImpersonation) (*AmazonEKSInstanceProfileUserImpersonation, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AmazonEKSInstanceProfileUserImpersonation{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.CertificateAuthority = plumbing.CertificateAuthority
+	porcelain.ClusterName = plumbing.ClusterName
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Endpoint = plumbing.Endpoint
+	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Region = plumbing.Region
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAmazonEKSInstanceProfileUserImpersonationToPlumbing(porcelain *AmazonEKSInstanceProfileUserImpersonation) *proto.AmazonEKSInstanceProfileUserImpersonation {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonEKSInstanceProfileUserImpersonation{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.ClusterName = (porcelain.ClusterName)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAmazonEKSInstanceProfileUserImpersonationToPlumbing(
+	porcelains []*AmazonEKSInstanceProfileUserImpersonation,
+) []*proto.AmazonEKSInstanceProfileUserImpersonation {
+	var items []*proto.AmazonEKSInstanceProfileUserImpersonation
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonEKSInstanceProfileUserImpersonationToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonEKSInstanceProfileUserImpersonationToPorcelain(plumbings []*proto.AmazonEKSInstanceProfileUserImpersonation) (
+	[]*AmazonEKSInstanceProfileUserImpersonation,
+	error,
+) {
+	var items []*AmazonEKSInstanceProfileUserImpersonation
+	for _, plumbing := range plumbings {
+		if v, err := convertAmazonEKSInstanceProfileUserImpersonationToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -7994,6 +8130,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AmazonEks{AmazonEks: convertAmazonEKSToPlumbing(v)}
 	case *AmazonEKSInstanceProfile:
 		plumbing.Resource = &proto.Resource_AmazonEksInstanceProfile{AmazonEksInstanceProfile: convertAmazonEKSInstanceProfileToPlumbing(v)}
+	case *AmazonEKSInstanceProfileUserImpersonation:
+		plumbing.Resource = &proto.Resource_AmazonEksInstanceProfileUserImpersonation{AmazonEksInstanceProfileUserImpersonation: convertAmazonEKSInstanceProfileUserImpersonationToPlumbing(v)}
 	case *AmazonEKSUserImpersonation:
 		plumbing.Resource = &proto.Resource_AmazonEksUserImpersonation{AmazonEksUserImpersonation: convertAmazonEKSUserImpersonationToPlumbing(v)}
 	case *AmazonES:
@@ -8157,6 +8295,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAmazonEksInstanceProfile() != nil {
 		return convertAmazonEKSInstanceProfileToPorcelain(plumbing.GetAmazonEksInstanceProfile())
+	}
+	if plumbing.GetAmazonEksInstanceProfileUserImpersonation() != nil {
+		return convertAmazonEKSInstanceProfileUserImpersonationToPorcelain(plumbing.GetAmazonEksInstanceProfileUserImpersonation())
 	}
 	if plumbing.GetAmazonEksUserImpersonation() != nil {
 		return convertAmazonEKSUserImpersonationToPorcelain(plumbing.GetAmazonEksUserImpersonation())
@@ -10877,6 +11018,51 @@ func (a *accountResourceIteratorImpl) Value() *AccountResource {
 }
 
 func (a *accountResourceIteratorImpl) Err() error {
+	return a.err
+}
+
+type accountResourceHistoryIteratorImplFetchFunc func() (
+	[]*AccountResourceHistory,
+	bool, error)
+type accountResourceHistoryIteratorImpl struct {
+	buffer      []*AccountResourceHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       accountResourceHistoryIteratorImplFetchFunc
+}
+
+func newAccountResourceHistoryIteratorImpl(f accountResourceHistoryIteratorImplFetchFunc) *accountResourceHistoryIteratorImpl {
+	return &accountResourceHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *accountResourceHistoryIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *accountResourceHistoryIteratorImpl) Value() *AccountResourceHistory {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *accountResourceHistoryIteratorImpl) Err() error {
 	return a.err
 }
 

@@ -136,6 +136,21 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "amazon_eks_instance_profile_user_impersonation",
+			pairs: [][2]string{
+				{"certificate_authority", certificateAuthority},
+				{"cluster_name", `"cluster_name"`},
+				{"egress_filter", `"name:value"`},
+				{"endpoint", `"endpoint"`},
+				{"healthcheck_namespace", `"healthcheck_namespace"`},
+				{"name", `"name"`},
+				{"region", `"region"`},
+				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
+				{"role_arn", `"role_arn"`},
+				{"role_external_id", `"role_external_id"`},
+			},
+		},
+		{
 			resource: "amazon_eks_user_impersonation",
 			pairs: [][2]string{
 				{"access_key", `"access_key"`},
@@ -1163,6 +1178,25 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		},
 		{
 			resource: "amazon_eks_instance_profile",
+			pairs: [][2]string{
+				{"secret_store_certificate_authority_path", `"path"`},
+				{"secret_store_certificate_authority_key", `"key"`},
+				{"cluster_name", `"cluster_name"`},
+				{"egress_filter", `"name:value"`},
+				{"endpoint", `"endpoint"`},
+				{"healthcheck_namespace", `"healthcheck_namespace"`},
+				{"name", `"secret_name"`},
+				{"region", `"region"`},
+				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
+				{"secret_store_role_arn_path", `"path"`},
+				{"secret_store_role_arn_key", `"key"`},
+				{"secret_store_role_external_id_path", `"path"`},
+				{"secret_store_role_external_id_key", `"key"`},
+				{"secret_store_id", `"` + seID + `"`},
+			},
+		},
+		{
+			resource: "amazon_eks_instance_profile_user_impersonation",
 			pairs: [][2]string{
 				{"secret_store_certificate_authority_path", `"path"`},
 				{"secret_store_certificate_authority_key", `"key"`},

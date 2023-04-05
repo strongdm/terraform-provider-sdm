@@ -568,6 +568,21 @@ type AccountResource struct {
 	RoleID string `json:"roleId"`
 }
 
+// AccountResourceHistory records the state of a AccountResource at a given point in time,
+// where every change (create or delete) to a AccountResource produces an
+// AccountResourceHistory record.
+type AccountResourceHistory struct {
+	// The complete AccountResource state at this time.
+	AccountResource *AccountResource `json:"accountResource"`
+	// The unique identifier of the Activity that produced this change to the AccountResource.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this AccountResource was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the AccountResource state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
 // AccountUpdateResponse returns the fields of a Account after it has been updated by
 // a AccountUpdateRequest.
 type AccountUpdateResponse struct {
@@ -679,6 +694,43 @@ type AmazonEKS struct {
 }
 
 type AmazonEKSInstanceProfile struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
+	CertificateAuthority string `json:"certificateAuthority"`
+
+	ClusterName string `json:"clusterName"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+
+	Endpoint string `json:"endpoint"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Region string `json:"region"`
+
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
+
+	RoleArn string `json:"roleArn"`
+
+	RoleExternalID string `json:"roleExternalId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type AmazonEKSInstanceProfileUserImpersonation struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
 
@@ -3410,6 +3462,60 @@ func (m *AmazonEKSInstanceProfile) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AmazonEKSInstanceProfile.
 func (m *AmazonEKSInstanceProfile) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AmazonEKSInstanceProfileUserImpersonation) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) GetID() string { return m.ID }
+
+// GetName returns the name of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AmazonEKSInstanceProfileUserImpersonation.
+func (m *AmazonEKSInstanceProfileUserImpersonation) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AmazonEKSUserImpersonation) isOneOf_Resource() {}
@@ -7428,7 +7534,7 @@ type SSHCustomerKey struct {
 }
 
 // A SecretStore is a server where resource secrets (passwords, keys) are stored.
-// Coming soon support for HashiCorp Vault and AWS Secret Store. Contact support@strongdm.com to request access to the beta.
+// Coming soon support for HashiCorp Vault and AWS Secret Store.
 type SecretStore interface {
 	// GetID returns the unique identifier of the SecretStore.
 	GetID() string
@@ -8102,6 +8208,23 @@ type AccountResourceIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *AccountResource
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// AccountResourceHistoryIterator provides read access to a list of AccountResourceHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    accountResourceHistory := iterator.Value()
+//	    // ...
+//	}
+type AccountResourceHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *AccountResourceHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

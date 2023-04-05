@@ -661,6 +661,60 @@ func (svc *AccountResources) List(
 	), nil
 }
 
+// AccountResourcesHistory records all changes to the state of a AccountResource.
+type AccountResourcesHistory struct {
+	client plumbing.AccountResourcesHistoryClient
+	parent *Client
+}
+
+// List gets a list of AccountResourceHistory records matching a given set of criteria.
+func (svc *AccountResourcesHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	AccountResourceHistoryIterator,
+	error) {
+	req := &plumbing.AccountResourceHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newAccountResourceHistoryIteratorImpl(
+		func() (
+			[]*AccountResourceHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.AccountResourceHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountResourcesHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedAccountResourceHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // Accounts are users that have access to strongDM. There are two types of accounts:
 // 1. **Users:** humans who are authenticated through username and password or SSO.
 // 2. **Service Accounts:** machines that are authenticated using a service token.
