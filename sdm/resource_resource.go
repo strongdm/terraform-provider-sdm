@@ -1973,7 +1973,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AzureMysql is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -7293,6 +7293,89 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"trino": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "Trino is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_password_path": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"secret_store_password_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
@@ -10301,6 +10384,31 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
 		}, nil
 	}
+	if list := d.Get("trino").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+			}
+		} else {
+			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
+			}
+			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
+				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+			}
+		}
+
+		return map[string]string{
+			"password":                   convertStringToPlumbing(raw["password"]),
+			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
+			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+		}, nil
+	}
 	return map[string]string{}, nil
 }
 func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
@@ -12852,6 +12960,36 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		return out
 	}
+	if list := d.Get("trino").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.Trino{}
+		}
+		out := &sdm.Trino{
+			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
+			Database:      convertStringToPlumbing(raw["database"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:     convertStringToPlumbing(raw["subdomain"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Username:      convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		if out.Password == "" {
+			out.Password = fullSecretStorePath(raw, "password")
+		}
+		return out
+	}
 	return nil
 }
 
@@ -14697,6 +14835,27 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
+			},
+		})
+	case *sdm.Trino:
+		localV, _ := localVersion.(*sdm.Trino)
+		_ = localV
+		d.Set("trino", []map[string]interface{}{
+			{
+				"bind_interface":             (v.BindInterface),
+				"database":                   (v.Database),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"name":                       (v.Name),
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"port":                       (v.Port),
+				"port_override":              (v.PortOverride),
+				"secret_store_id":            (v.SecretStoreID),
+				"subdomain":                  (v.Subdomain),
+				"tags":                       convertTagsToPorcelain(v.Tags),
+				"username":                   (v.Username),
 			},
 		})
 	}
@@ -16780,6 +16939,30 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":                   seValues["username"],
 				"secret_store_username_path": seValues["secret_store_username_path"],
 				"secret_store_username_key":  seValues["secret_store_username_key"],
+			},
+		})
+	case *sdm.Trino:
+		localV, ok := localVersion.(*sdm.Trino)
+		if !ok {
+			localV = &sdm.Trino{}
+		}
+		_ = localV
+		d.Set("trino", []map[string]interface{}{
+			{
+				"bind_interface":             (v.BindInterface),
+				"database":                   (v.Database),
+				"egress_filter":              (v.EgressFilter),
+				"hostname":                   (v.Hostname),
+				"name":                       (v.Name),
+				"password":                   seValues["password"],
+				"secret_store_password_path": seValues["secret_store_password_path"],
+				"secret_store_password_key":  seValues["secret_store_password_key"],
+				"port":                       (v.Port),
+				"port_override":              (v.PortOverride),
+				"secret_store_id":            (v.SecretStoreID),
+				"subdomain":                  (v.Subdomain),
+				"tags":                       convertTagsToPorcelain(v.Tags),
+				"username":                   (v.Username),
 			},
 		})
 	}

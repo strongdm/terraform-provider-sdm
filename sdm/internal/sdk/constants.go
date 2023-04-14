@@ -90,6 +90,7 @@ const (
 const (
 	MFAProviderNone = ""
 	MFAProviderDuo  = "duo"
+	MFAProviderTOTP = "totp"
 )
 
 // Activity Entities, all entity types that can be part of an activity.
@@ -239,6 +240,8 @@ const (
 	ActivityVerbAccessRequestToResourceCanceled                  = "access request to resource canceled"
 	ActivityVerbAccessRequestToResourceDenied                    = "access request to resource denied"
 	ActivityVerbAccessRequestToResourceTimedOut                  = "access request to resource timed out"
+	ActivityVerbWorkflowAdded                                    = "access workflow added"
+	ActivityVerbWorkflowDeleted                                  = "access workflow deleted"
 	ActivityVerbWorkflowResourceAssigned                         = "resource assigned to workflow"
 	ActivityVerbWorkflowResourceUnassigned                       = "resource unassigned from workflow"
 	ActivityVerbWorkflowResourceMultipleAssigned                 = "multiple resources assigned to workflow"
@@ -246,6 +249,8 @@ const (
 	ActivityVerbWorkflowNotificationOptionAdded                  = "workflow notification type added"
 	ActivityVerbWorkflowNotificationOptionRemoved                = "workflow notification type removed"
 	ActivityVerbWorkflowNotificationOptionsUpdated               = "workflow notification settings updated"
+	ActivityVerbWorkflowNameUpdated                              = "workflow name updated"
+	ActivityVerbWorkflowDescriptionUpdated                       = "workflow description updated"
 	ActivityVerbOrgVNMSubnetUpdated                              = "organization VNM subnet updated"
 	ActivityVerbOrgVNMResourcesAllocated                         = "organization resources allocated within VNM subnet"
 	ActivityVerbDeprecatedOrgActivateDeviceApproval              = "activate device approval"

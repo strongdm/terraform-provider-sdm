@@ -1006,8 +1006,6 @@ type AzureCertificate struct {
 	TenantID string `json:"tenantId"`
 }
 
-// AzureMysql is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AzureMysql struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
@@ -2693,7 +2691,11 @@ type Presto struct {
 	Username string `json:"username"`
 }
 
-// A Query is a record of a single client request to a resource, such as an SQL query.
+// A Query is a record of a single client request to a resource, such as a SQL query.
+// Longer-running queries including long-running SSH commands and SSH, RDP, or Kubernetes
+// interactive sessions will return two Query records with the same identifier, one record
+// at the start of the query and a second record upon the completion of the query with
+// additional detail.
 type Query struct {
 	// The email of the account performing this query, at the time the query was executed.
 	// If the account email is later changed, that change will not be reflected via this field.
@@ -2709,6 +2711,9 @@ type Query struct {
 	// The tags of the account accessed, at the time the query was executed. If the account
 	// tags are later changed, that change will not be reflected via this field.
 	AccountTags Tags `json:"accountTags"`
+	// The time at which the Query was completed.
+	// Empty if this record indicates the start of a long-running query.
+	CompletedAt time.Time `json:"completedAt"`
 	// The duration of the Query.
 	Duration time.Duration `json:"duration"`
 	// The unique ID of the node through which the Resource was accessed.
@@ -2744,7 +2749,7 @@ type Query struct {
 	ResourceTags Tags `json:"resourceTags"`
 	// The specific type of Resource against which the Query was performed, e.g. "ssh" or "postgres".
 	ResourceType string `json:"resourceType"`
-	// The time at which the Query was performed.
+	// The time at which the Query was started.
 	Timestamp time.Time `json:"timestamp"`
 }
 
@@ -7244,6 +7249,60 @@ func (m *Teradata) GetBindInterface() string {
 func (m *Teradata) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*Trino) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Trino.
+func (m *Trino) GetID() string { return m.ID }
+
+// GetName returns the name of the Trino.
+func (m *Trino) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Trino.
+func (m *Trino) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Trino.
+func (m *Trino) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Trino.
+func (m *Trino) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Trino.
+func (m *Trino) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Trino.
+func (m *Trino) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Trino.
+func (m *Trino) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Trino.
+func (m *Trino) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Trino.
+func (m *Trino) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Trino.
+func (m *Trino) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 
 // ResourceCreateResponse reports how the Resources were created in the system.
 type ResourceCreateResponse struct {
@@ -8013,6 +8072,39 @@ type Tag struct {
 type Teradata struct {
 	// Bind interface
 	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	Password string `json:"password"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+// Trino is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type Trino struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
+	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.

@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/3.10.0"
+	defaultUserAgent = "strongdm-sdk-go/3.11.0"
 )
 
 var _ = metadata.Pairs
@@ -394,7 +394,7 @@ func (c *Client) OrganizationHistory() *OrganizationHistory {
 	return c.organizationHistory
 }
 
-// A Query is a record of a single client request to a resource, such as an SQL query.
+// A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.
 func (c *Client) Queries() *Queries {

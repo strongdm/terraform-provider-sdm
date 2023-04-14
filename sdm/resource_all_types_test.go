@@ -1009,6 +1009,18 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"username", `"username"`},
 			},
 		},
+		{
+			resource: "trino",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"username", `"username"`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")
@@ -2243,6 +2255,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"secret_store_username_path", `"path"`},
 				{"secret_store_username_key", `"key"`},
+			},
+		},
+		{
+			resource: "trino",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"secret_store_password_path", `"path"`},
+				{"secret_store_password_key", `"key"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"username"`},
 			},
 		},
 	}

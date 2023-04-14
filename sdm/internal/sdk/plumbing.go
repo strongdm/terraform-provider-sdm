@@ -6984,6 +6984,11 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	} else {
 		porcelain.AccountTags = v
 	}
+	if v, err := convertTimestampToPorcelain(plumbing.CompletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field CompletedAt: %v", err)
+	} else {
+		porcelain.CompletedAt = v
+	}
 	if v, err := convertDurationToPorcelain(plumbing.Duration); err != nil {
 		return nil, fmt.Errorf("error converting field Duration: %v", err)
 	} else {
@@ -7025,6 +7030,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.AccountId = (porcelain.AccountID)
 	plumbing.AccountLastName = (porcelain.AccountLastName)
 	plumbing.AccountTags = convertTagsToPlumbing(porcelain.AccountTags)
+	plumbing.CompletedAt = convertTimestampToPlumbing(porcelain.CompletedAt)
 	plumbing.Duration = convertDurationToPlumbing(porcelain.Duration)
 	plumbing.EgressNodeId = (porcelain.EgressNodeID)
 	plumbing.Encrypted = (porcelain.Encrypted)
@@ -8270,6 +8276,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_SybaseIq{SybaseIq: convertSybaseIQToPlumbing(v)}
 	case *Teradata:
 		plumbing.Resource = &proto.Resource_Teradata{Teradata: convertTeradataToPlumbing(v)}
+	case *Trino:
+		plumbing.Resource = &proto.Resource_Trino{Trino: convertTrinoToPlumbing(v)}
 	}
 	return plumbing
 }
@@ -8505,6 +8513,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetTeradata() != nil {
 		return convertTeradataToPorcelain(plumbing.GetTeradata())
+	}
+	if plumbing.GetTrino() != nil {
+		return convertTrinoToPorcelain(plumbing.GetTrino())
 	}
 	return nil, &UnknownError{Wrapped: fmt.Errorf("unknown polymorphic type, please upgrade your SDK")}
 }
@@ -10429,6 +10440,77 @@ func convertRepeatedTeradataToPorcelain(plumbings []*proto.Teradata) (
 	var items []*Teradata
 	for _, plumbing := range plumbings {
 		if v, err := convertTeradataToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertTrinoToPorcelain(plumbing *proto.Trino) (*Trino, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Trino{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertTrinoToPlumbing(porcelain *Trino) *proto.Trino {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Trino{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedTrinoToPlumbing(
+	porcelains []*Trino,
+) []*proto.Trino {
+	var items []*proto.Trino
+	for _, porcelain := range porcelains {
+		items = append(items, convertTrinoToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedTrinoToPorcelain(plumbings []*proto.Trino) (
+	[]*Trino,
+	error,
+) {
+	var items []*Trino
+	for _, plumbing := range plumbings {
+		if v, err := convertTrinoToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

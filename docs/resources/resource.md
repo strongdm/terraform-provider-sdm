@@ -649,8 +649,8 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) 
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Required if storing credentials directly strongDM) 
-	* `secret_store_password_path` - (Required if using credentials stored in a secret store)
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
 	* `secret_store_password_key` - (Optional)
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
@@ -1411,6 +1411,21 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required if storing credentials directly strongDM) 
 	* `secret_store_username_path` - (Required if using credentials stored in a secret store)
 	* `secret_store_username_key` - (Optional)
+* trino:
+	* `bind_interface` - (Optional) Bind interface
+	* `database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Optional) 
+	* `secret_store_password_path` - (Optional)
+	* `secret_store_password_key` - (Optional)
+	* `port` - (Optional) 
+	* `port_override` - (Optional) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Optional) 
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
