@@ -6,6 +6,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/url"
+	"strings"
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -14885,6 +14887,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AKS{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.ClientKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
+				if err == nil {
+					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_key"] = v.ClientKey
+			}
+		}
 		d.Set("aks", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -14916,6 +14951,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AKSBasicAuth{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -14942,6 +14999,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AKSServiceAccount{}
 		}
 		_ = localV
+		if v.Token != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
+				if err == nil {
+					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_token_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["token"] = v.Token
+			}
+		}
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
 				"bind_interface":                       (v.BindInterface),
@@ -14967,6 +15035,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AKSServiceAccountUserImpersonation{}
 		}
 		_ = localV
+		if v.Token != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
+				if err == nil {
+					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_token_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["token"] = v.Token
+			}
+		}
 		d.Set("aks_service_account_user_impersonation", []map[string]interface{}{
 			{
 				"bind_interface":          (v.BindInterface),
@@ -14990,6 +15069,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AKSUserImpersonation{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.ClientKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
+				if err == nil {
+					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_key"] = v.ClientKey
+			}
+		}
 		d.Set("aks_user_impersonation", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -15019,6 +15131,61 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AmazonEKS{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
 				"access_key":                              seValues["access_key"],
@@ -15056,6 +15223,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AmazonEKSInstanceProfile{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
 		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -15087,6 +15287,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AmazonEKSInstanceProfileUserImpersonation{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
 		d.Set("amazon_eks_instance_profile_user_impersonation", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -15118,6 +15351,61 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AmazonEKSUserImpersonation{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("amazon_eks_user_impersonation", []map[string]interface{}{
 			{
 				"access_key":                              seValues["access_key"],
@@ -15153,6 +15441,50 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AmazonES{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("amazon_es", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
@@ -15184,6 +15516,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AmazonMQAMQP091{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("amazonmq_amqp_091", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15210,6 +15564,50 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Athena{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("athena", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
@@ -15241,6 +15639,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AuroraMysql{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15267,6 +15687,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AuroraPostgres{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15294,6 +15736,50 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AWS{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("aws", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
@@ -15322,6 +15808,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AWSConsole{}
 		}
 		_ = localV
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
 		d.Set("aws_console", []map[string]interface{}{
 			{
 				"bind_interface":                       (v.BindInterface),
@@ -15350,6 +15858,50 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AWSConsoleStaticKeyPair{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("aws_console_static_key_pair", []map[string]interface{}{
 			{
 				"access_key":                           seValues["access_key"],
@@ -15383,6 +15935,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Azure{}
 		}
 		_ = localV
+		if v.AppID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AppID)
+				if err == nil {
+					seValues["secret_store_app_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_app_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["app_id"] = v.AppID
+			}
+		}
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.TenantID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.TenantID)
+				if err == nil {
+					seValues["secret_store_tenant_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_tenant_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["tenant_id"] = v.TenantID
+			}
+		}
 		d.Set("azure", []map[string]interface{}{
 			{
 				"app_id":                      seValues["app_id"],
@@ -15407,6 +15992,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AzureCertificate{}
 		}
 		_ = localV
+		if v.AppID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AppID)
+				if err == nil {
+					seValues["secret_store_app_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_app_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["app_id"] = v.AppID
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.TenantID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.TenantID)
+				if err == nil {
+					seValues["secret_store_tenant_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_tenant_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["tenant_id"] = v.TenantID
+			}
+		}
 		d.Set("azure_certificate", []map[string]interface{}{
 			{
 				"app_id":                               seValues["app_id"],
@@ -15431,6 +16049,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AzureMysql{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("azure_mysql", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15457,6 +16097,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.AzurePostgres{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("azure_postgres", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15484,6 +16146,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.BigQuery{}
 		}
 		_ = localV
+		if v.PrivateKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.PrivateKey)
+				if err == nil {
+					seValues["secret_store_private_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_private_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["private_key"] = v.PrivateKey
+			}
+		}
 		d.Set("big_query", []map[string]interface{}{
 			{
 				"bind_interface":                (v.BindInterface),
@@ -15507,6 +16180,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Cassandra{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("cassandra", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15533,6 +16228,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Citus{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("citus", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15560,6 +16277,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Clustrix{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("clustrix", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15586,6 +16325,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Cockroach{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("cockroach", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15613,6 +16374,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.DB2I{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("db_2_i", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15639,6 +16422,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.DB2LUW{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15665,6 +16470,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.DocumentDBHost{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("document_db_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -15691,6 +16518,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.DocumentDBReplicaSet{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("document_db_replica_set", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -15718,6 +16567,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Druid{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("druid", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15743,6 +16614,50 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.DynamoDB{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("dynamo_db", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
@@ -15774,6 +16689,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Elastic{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("elastic", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15800,6 +16737,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.ElasticacheRedis{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15826,6 +16785,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.GCP{}
 		}
 		_ = localV
+		if v.Keyfile != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Keyfile)
+				if err == nil {
+					seValues["secret_store_keyfile_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_keyfile_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["keyfile"] = v.Keyfile
+			}
+		}
 		d.Set("gcp", []map[string]interface{}{
 			{
 				"bind_interface":            (v.BindInterface),
@@ -15845,6 +16815,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.GoogleGKE{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ServiceAccountKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ServiceAccountKey)
+				if err == nil {
+					seValues["secret_store_service_account_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_service_account_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["service_account_key"] = v.ServiceAccountKey
+			}
+		}
 		d.Set("google_gke", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -15871,6 +16863,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.GoogleGKEUserImpersonation{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ServiceAccountKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ServiceAccountKey)
+				if err == nil {
+					seValues["secret_store_service_account_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_service_account_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["service_account_key"] = v.ServiceAccountKey
+			}
+		}
 		d.Set("google_gke_user_impersonation", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -15895,6 +16909,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Greenplum{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("greenplum", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15922,6 +16958,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.HTTPAuth{}
 		}
 		_ = localV
+		if v.AuthHeader != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AuthHeader)
+				if err == nil {
+					seValues["secret_store_auth_header_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_auth_header_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["auth_header"] = v.AuthHeader
+			}
+		}
 		d.Set("http_auth", []map[string]interface{}{
 			{
 				"auth_header":                   seValues["auth_header"],
@@ -15946,6 +16993,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.HTTPBasicAuth{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -15994,6 +17063,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Kubernetes{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.ClientKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
+				if err == nil {
+					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_key"] = v.ClientKey
+			}
+		}
 		d.Set("kubernetes", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -16025,6 +17127,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.KubernetesBasicAuth{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16051,6 +17175,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.KubernetesServiceAccount{}
 		}
 		_ = localV
+		if v.Token != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
+				if err == nil {
+					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_token_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["token"] = v.Token
+			}
+		}
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
 				"bind_interface":                       (v.BindInterface),
@@ -16076,6 +17211,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.KubernetesServiceAccountUserImpersonation{}
 		}
 		_ = localV
+		if v.Token != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
+				if err == nil {
+					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_token_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["token"] = v.Token
+			}
+		}
 		d.Set("kubernetes_service_account_user_impersonation", []map[string]interface{}{
 			{
 				"bind_interface":          (v.BindInterface),
@@ -16099,6 +17245,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.KubernetesUserImpersonation{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.ClientKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
+				if err == nil {
+					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_key"] = v.ClientKey
+			}
+		}
 		d.Set("kubernetes_user_impersonation", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -16128,6 +17307,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Maria{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("maria", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16173,6 +17374,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Memsql{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("memsql", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16199,6 +17422,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MongoHost{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mongo_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -16226,6 +17471,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MongoLegacyHost{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -16254,6 +17521,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MongoLegacyReplicaset{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -16283,6 +17572,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MongoReplicaSet{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -16312,6 +17623,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MongoShardedCluster{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mongo_sharded_cluster", []map[string]interface{}{
 			{
 				"auth_database":              (v.AuthDatabase),
@@ -16338,6 +17671,61 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MTLSMysql{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.ClientKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
+				if err == nil {
+					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_key"] = v.ClientKey
+			}
+		}
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mtls_mysql", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -16374,6 +17762,61 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.MTLSPostgres{}
 		}
 		_ = localV
+		if v.CertificateAuthority != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
+				if err == nil {
+					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["certificate_authority"] = v.CertificateAuthority
+			}
+		}
+		if v.ClientCertificate != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
+				if err == nil {
+					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_certificate"] = v.ClientCertificate
+			}
+		}
+		if v.ClientKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
+				if err == nil {
+					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_client_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["client_key"] = v.ClientKey
+			}
+		}
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mtls_postgres", []map[string]interface{}{
 			{
 				"bind_interface":                          (v.BindInterface),
@@ -16411,6 +17854,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Mysql{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("mysql", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16456,6 +17921,50 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.NeptuneIAM{}
 		}
 		_ = localV
+		if v.AccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
+				if err == nil {
+					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["access_key"] = v.AccessKey
+			}
+		}
+		if v.RoleArn != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
+				if err == nil {
+					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_arn"] = v.RoleArn
+			}
+		}
+		if v.RoleExternalID != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
+				if err == nil {
+					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["role_external_id"] = v.RoleExternalID
+			}
+		}
+		if v.SecretAccessKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
+				if err == nil {
+					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["secret_access_key"] = v.SecretAccessKey
+			}
+		}
 		d.Set("neptune_iam", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
@@ -16488,6 +17997,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Oracle{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("oracle", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16515,6 +18046,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Postgres{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("postgres", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16542,6 +18095,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Presto{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
 		d.Set("presto", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16567,6 +18131,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.RabbitMQAMQP091{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16612,6 +18198,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.RDP{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("rdp", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16638,6 +18246,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Redis{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("redis", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16664,6 +18294,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Redshift{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("redshift", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16691,6 +18343,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.SingleStore{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("single_store", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16717,6 +18391,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Snowflake{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("snowflake", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16743,6 +18439,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Snowsight{}
 		}
 		_ = localV
+		if v.SamlMetadata != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.SamlMetadata)
+				if err == nil {
+					seValues["secret_store_saml_metadata_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_saml_metadata_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["saml_metadata"] = v.SamlMetadata
+			}
+		}
 		d.Set("snowsight", []map[string]interface{}{
 			{
 				"bind_interface":                  (v.BindInterface),
@@ -16764,6 +18471,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.SQLServer{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("sql_server", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16792,6 +18521,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.SSH{}
 		}
 		_ = localV
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("ssh", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
@@ -16818,6 +18558,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.SSHCert{}
 		}
 		_ = localV
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges":       (v.AllowDeprecatedKeyExchanges),
@@ -16845,6 +18596,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.SSHCustomerKey{}
 		}
 		_ = localV
+		if v.PrivateKey != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.PrivateKey)
+				if err == nil {
+					seValues["secret_store_private_key_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_private_key_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["private_key"] = v.PrivateKey
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("ssh_customer_key", []map[string]interface{}{
 			{
 				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
@@ -16872,6 +18645,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Sybase{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("sybase", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16897,6 +18692,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.SybaseIQ{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16922,6 +18739,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Teradata{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
+		if v.Username != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
+				if err == nil {
+					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_username_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["username"] = v.Username
+			}
+		}
 		d.Set("teradata", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),
@@ -16947,6 +18786,17 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Trino{}
 		}
 		_ = localV
+		if v.Password != "" {
+			if v.SecretStoreID != "" {
+				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
+				if err == nil {
+					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
+					seValues["secret_store_password_key"] = u.Query().Get("key")
+				}
+			} else {
+				seValues["password"] = v.Password
+			}
+		}
 		d.Set("trino", []map[string]interface{}{
 			{
 				"bind_interface":             (v.BindInterface),

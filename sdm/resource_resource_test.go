@@ -475,6 +475,40 @@ func TestAccSDMResource_Update(t *testing.T) {
 	})
 }
 
+func TestAccSDMImportMongoLegacyReplicaSet(t *testing.T) {
+	initAcceptanceTest(t)
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`resource "sdm_resource" "%s" {
+					mongo_legacy_replicaset {
+						name = "%s"
+						hostname = "test.com"
+						port = %d
+						auth_database = "asdf"
+						bind_interface = "127.0.0.2"
+						username = "username"
+						replica_set = "blah"
+					}
+				}`, name, name, port),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+name, "mongo_legacy_replicaset.0.username", "username"),
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
 	initAcceptanceTest(t)
 	t.Run("present->present", func(t *testing.T) {

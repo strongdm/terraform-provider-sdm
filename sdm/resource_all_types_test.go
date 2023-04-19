@@ -2305,8 +2305,9 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 						Check:  resource.ComposeTestCheckFunc(checks...),
 					},
 					{
-						ResourceName: "sdm_resource." + name,
-						ImportState:  true,
+						ResourceName:      "sdm_resource." + name,
+						ImportState:       true,
+						ImportStateVerify: true,
 					},
 				},
 			})
