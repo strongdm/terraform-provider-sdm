@@ -209,6 +209,7 @@ const (
 	ActivityVerbOrgSelfRegistrationDeactivated                   = "self-registration deactivated"
 	ActivityVerbOrgNameUpdated                                   = "organization name updated"
 	ActivityVerbOrgSettingUpdated                                = "organization setting updated"
+	ActivityVerbOrgLogSyncSettingUpdated                         = "organization log sync setting updated"
 	ActivityVerbOrgCreated                                       = "organization created"
 	ActivityVerbOrgSCIMProvisioningUpdated                       = "SCIM provider set"
 	ActivityVerbOrgSCIMProvisioningDeleted                       = "SCIM provider deleted"
@@ -246,6 +247,7 @@ const (
 	ActivityVerbWorkflowResourceUnassigned                       = "resource unassigned from workflow"
 	ActivityVerbWorkflowResourceMultipleAssigned                 = "multiple resources assigned to workflow"
 	ActivityVerbWorkflowResourceMultipleUnassigned               = "multiple resources unassigned from workflow"
+	ActivityVerbWorkflowRolesUpdated                             = "workflow roles updated"
 	ActivityVerbWorkflowNotificationOptionAdded                  = "workflow notification type added"
 	ActivityVerbWorkflowNotificationOptionRemoved                = "workflow notification type removed"
 	ActivityVerbWorkflowNotificationOptionsUpdated               = "workflow notification settings updated"
@@ -393,4 +395,25 @@ const (
 	SSHKeyTypeECDSA_384 = "ecdsa-384"
 	SSHKeyTypeECDSA_521 = "ecdsa-521"
 	SSHKeyTypeED25519   = "ed25519"
+)
+
+// CaptureType designates what type of SSH/RDP/K8s capture we have.
+const (
+	CaptureTypeShell          = "shell"
+	CaptureTypeScpUpload      = "scp-upload"
+	CaptureTypeScpDownload    = "scp-download"
+	CaptureTypeCommand        = "command"
+	CaptureTypeRDPBasic       = "rdp-basic"
+	CaptureTypeRDPEnhanced    = "rdp-enhanced"
+	CaptureTypeK8sExec        = "k8s-exec"
+	CaptureTypeK8sExecTTY     = "k8s-execTTY"
+	CaptureTypeK8sPortForward = "k8s-portForward"
+	CaptureTypeK8sCPUpload    = "k8s-cp-upload"
+	CaptureTypeK8sCPDownload  = "k8s-cp-download"
+	CaptureTypeK8sDescribe    = "k8s-describe"
+	CaptureTypeK8sGet         = "k8s-get"
+	CaptureTypeK8sDelete      = "k8s-delete"
+	CaptureTypeK8sGeneric     = "k8s-generic"
+	CaptureTypeK8sApply       = "k8s-apply"
+	CaptureTypeSSHPortForward = "ssh-portForward"
 )

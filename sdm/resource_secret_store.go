@@ -467,7 +467,6 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 
 func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertSecretStoreToPlumbing(d)
-
 	resp, err := cc.SecretStores().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create SecretStore: %w", err)
@@ -588,7 +587,6 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertSecretStoreToPlumbing(d)
 	_ = localVersion
-
 	resp, err := cc.SecretStores().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -739,7 +737,6 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 	return nil
 }
 func resourceSecretStoreUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-
 	resp, err := cc.SecretStores().Update(ctx, convertSecretStoreToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update SecretStore %s: %w", d.Id(), err)

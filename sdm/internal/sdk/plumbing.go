@@ -467,10 +467,12 @@ func convertAWSToPorcelain(plumbing *proto.AWS) (*AWS, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretAccessKey = plumbing.SecretAccessKey
 	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
 	} else {
@@ -491,10 +493,12 @@ func convertAWSToPlumbing(porcelain *AWS) *proto.AWS {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
@@ -2682,7 +2686,9 @@ func convertAzureToPorcelain(plumbing *proto.Azure) (*Azure, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
 	} else {
@@ -2704,7 +2710,9 @@ func convertAzureToPlumbing(porcelain *Azure) *proto.Azure {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TenantId = (porcelain.TenantID)
 	return plumbing
@@ -2745,7 +2753,9 @@ func convertAzureCertificateToPorcelain(plumbing *proto.AzureCertificate) (*Azur
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
 	} else {
@@ -2767,7 +2777,9 @@ func convertAzureCertificateToPlumbing(porcelain *AzureCertificate) *proto.Azure
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.TenantId = (porcelain.TenantID)
 	return plumbing
@@ -4319,8 +4331,10 @@ func convertGCPToPorcelain(plumbing *proto.GCP) (*GCP, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Keyfile = plumbing.Keyfile
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Scopes = plumbing.Scopes
 	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
 	} else {
@@ -4340,8 +4354,10 @@ func convertGCPToPlumbing(porcelain *GCP) *proto.GCP {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Keyfile = (porcelain.Keyfile)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Scopes = (porcelain.Scopes)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }
@@ -6984,6 +7000,11 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	} else {
 		porcelain.AccountTags = v
 	}
+	if v, err := convertQueryCaptureToPorcelain(plumbing.Capture); err != nil {
+		return nil, fmt.Errorf("error converting field Capture: %v", err)
+	} else {
+		porcelain.Capture = v
+	}
 	if v, err := convertTimestampToPorcelain(plumbing.CompletedAt); err != nil {
 		return nil, fmt.Errorf("error converting field CompletedAt: %v", err)
 	} else {
@@ -7030,6 +7051,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.AccountId = (porcelain.AccountID)
 	plumbing.AccountLastName = (porcelain.AccountLastName)
 	plumbing.AccountTags = convertTagsToPlumbing(porcelain.AccountTags)
+	plumbing.Capture = convertQueryCaptureToPlumbing(porcelain.Capture)
 	plumbing.CompletedAt = convertTimestampToPlumbing(porcelain.CompletedAt)
 	plumbing.Duration = convertDurationToPlumbing(porcelain.Duration)
 	plumbing.EgressNodeId = (porcelain.EgressNodeID)
@@ -7066,6 +7088,71 @@ func convertRepeatedQueryToPorcelain(plumbings []*proto.Query) (
 	var items []*Query
 	for _, plumbing := range plumbings {
 		if v, err := convertQueryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertQueryCaptureToPorcelain(plumbing *proto.QueryCapture) (*QueryCapture, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &QueryCapture{}
+	porcelain.ClientCommand = plumbing.ClientCommand
+	porcelain.Command = plumbing.Command
+	porcelain.Container = plumbing.Container
+	porcelain.Env = plumbing.Env
+	porcelain.FileName = plumbing.FileName
+	porcelain.FileSize = plumbing.FileSize
+	porcelain.Height = plumbing.Height
+	porcelain.Pod = plumbing.Pod
+	porcelain.RequestBody = plumbing.RequestBody
+	porcelain.RequestMethod = plumbing.RequestMethod
+	porcelain.RequestURI = plumbing.RequestUri
+	porcelain.Type = plumbing.Type
+	porcelain.Width = plumbing.Width
+	return porcelain, nil
+}
+
+func convertQueryCaptureToPlumbing(porcelain *QueryCapture) *proto.QueryCapture {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.QueryCapture{}
+	plumbing.ClientCommand = (porcelain.ClientCommand)
+	plumbing.Command = (porcelain.Command)
+	plumbing.Container = (porcelain.Container)
+	plumbing.Env = (porcelain.Env)
+	plumbing.FileName = (porcelain.FileName)
+	plumbing.FileSize = (porcelain.FileSize)
+	plumbing.Height = (porcelain.Height)
+	plumbing.Pod = (porcelain.Pod)
+	plumbing.RequestBody = (porcelain.RequestBody)
+	plumbing.RequestMethod = (porcelain.RequestMethod)
+	plumbing.RequestUri = (porcelain.RequestURI)
+	plumbing.Type = (porcelain.Type)
+	plumbing.Width = (porcelain.Width)
+	return plumbing
+}
+func convertRepeatedQueryCaptureToPlumbing(
+	porcelains []*QueryCapture,
+) []*proto.QueryCapture {
+	var items []*proto.QueryCapture
+	for _, porcelain := range porcelains {
+		items = append(items, convertQueryCaptureToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedQueryCaptureToPorcelain(plumbings []*proto.QueryCapture) (
+	[]*QueryCapture,
+	error,
+) {
+	var items []*QueryCapture
+	for _, plumbing := range plumbings {
+		if v, err := convertQueryCaptureToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

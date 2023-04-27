@@ -55,7 +55,6 @@ func convertRemoteIdentityToPlumbing(d *schema.ResourceData) *sdm.RemoteIdentity
 
 func resourceRemoteIdentityCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRemoteIdentityToPlumbing(d)
-
 	resp, err := cc.RemoteIdentities().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create RemoteIdentity: %w", err)
@@ -71,7 +70,6 @@ func resourceRemoteIdentityCreate(ctx context.Context, d *schema.ResourceData, c
 func resourceRemoteIdentityRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertRemoteIdentityToPlumbing(d)
 	_ = localVersion
-
 	resp, err := cc.RemoteIdentities().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -87,7 +85,6 @@ func resourceRemoteIdentityRead(ctx context.Context, d *schema.ResourceData, cc 
 	return nil
 }
 func resourceRemoteIdentityUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-
 	resp, err := cc.RemoteIdentities().Update(ctx, convertRemoteIdentityToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update RemoteIdentity %s: %w", d.Id(), err)

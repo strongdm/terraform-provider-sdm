@@ -50,7 +50,6 @@ func convertAccountAttachmentToPlumbing(d *schema.ResourceData) *sdm.AccountAtta
 
 func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountAttachmentToPlumbing(d)
-
 	resp, err := cc.AccountAttachments().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create AccountAttachment: %w", err)
@@ -65,7 +64,6 @@ func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData
 func resourceAccountAttachmentRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountAttachmentToPlumbing(d)
 	_ = localVersion
-
 	resp, err := cc.AccountAttachments().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {

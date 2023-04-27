@@ -1543,6 +1543,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
 						"role_arn": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1587,6 +1593,12 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -1867,10 +1879,22 @@ func resourceResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -1944,10 +1968,22 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -3396,6 +3432,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
 						"scopes": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -3405,6 +3447,12 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -10925,12 +10973,19 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckRegion: convertStringToPlumbing(raw["healthcheck_region"]),
 			Name:              convertStringToPlumbing(raw["name"]),
+			PortOverride:      convertInt32ToPlumbing(raw["port_override"]),
 			RoleArn:           convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:    convertStringToPlumbing(raw["role_external_id"]),
 			SecretAccessKey:   convertStringToPlumbing(raw["secret_access_key"]),
 			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
 			Tags:              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
 		}
@@ -11034,10 +11089,17 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Name:          convertStringToPlumbing(raw["name"]),
 			Password:      convertStringToPlumbing(raw["password"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:     convertStringToPlumbing(raw["subdomain"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 			TenantID:      convertStringToPlumbing(raw["tenant_id"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.AppID == "" {
 			out.AppID = fullSecretStorePath(raw, "app_id")
 		}
@@ -11061,10 +11123,17 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ClientCertificate: convertStringToPlumbing(raw["client_certificate"]),
 			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
 			Name:              convertStringToPlumbing(raw["name"]),
+			PortOverride:      convertInt32ToPlumbing(raw["port_override"]),
 			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
 			Tags:              convertTagsToPlumbing(raw["tags"]),
 			TenantID:          convertStringToPlumbing(raw["tenant_id"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.AppID == "" {
 			out.AppID = fullSecretStorePath(raw, "app_id")
 		}
@@ -11588,10 +11657,17 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
 			Keyfile:       convertStringToPlumbing(raw["keyfile"]),
 			Name:          convertStringToPlumbing(raw["name"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
 			Scopes:        convertStringToPlumbing(raw["scopes"]),
 			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:     convertStringToPlumbing(raw["subdomain"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.Keyfile == "" {
 			out.Keyfile = fullSecretStorePath(raw, "keyfile")
 		}
@@ -13001,7 +13077,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	if err != nil {
 		return fmt.Errorf("cannot create Resource: %w", err)
 	}
-
 	resp, err := cc.Resources().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Resource: %w", err)
@@ -13387,6 +13462,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_region":                  (v.HealthcheckRegion),
 				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
 				"role_arn":                            seValues["role_arn"],
 				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
@@ -13397,6 +13473,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
@@ -13469,7 +13546,9 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":                    seValues["password"],
 				"secret_store_password_path":  seValues["secret_store_password_path"],
 				"secret_store_password_key":   seValues["secret_store_password_key"],
+				"port_override":               (v.PortOverride),
 				"secret_store_id":             (v.SecretStoreID),
+				"subdomain":                   (v.Subdomain),
 				"tags":                        convertTagsToPorcelain(v.Tags),
 				"tenant_id":                   seValues["tenant_id"],
 				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
@@ -13490,7 +13569,9 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
 				"egress_filter":                        (v.EgressFilter),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"tenant_id":                            seValues["tenant_id"],
 				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
@@ -13858,8 +13939,10 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
 				"secret_store_keyfile_key":  seValues["secret_store_keyfile_key"],
 				"name":                      (v.Name),
+				"port_override":             (v.PortOverride),
 				"scopes":                    (v.Scopes),
 				"secret_store_id":           (v.SecretStoreID),
+				"subdomain":                 (v.Subdomain),
 				"tags":                      convertTagsToPorcelain(v.Tags),
 			},
 		})
@@ -14871,7 +14954,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 	if err != nil {
 		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
 	}
-
 	resp, err := cc.Resources().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -15789,6 +15871,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_region":                  (v.HealthcheckRegion),
 				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
 				"role_arn":                            seValues["role_arn"],
 				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
 				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
@@ -15799,6 +15882,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
 				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
@@ -15979,7 +16063,9 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"password":                    seValues["password"],
 				"secret_store_password_path":  seValues["secret_store_password_path"],
 				"secret_store_password_key":   seValues["secret_store_password_key"],
+				"port_override":               (v.PortOverride),
 				"secret_store_id":             (v.SecretStoreID),
+				"subdomain":                   (v.Subdomain),
 				"tags":                        convertTagsToPorcelain(v.Tags),
 				"tenant_id":                   seValues["tenant_id"],
 				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
@@ -16036,7 +16122,9 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
 				"egress_filter":                        (v.EgressFilter),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"tenant_id":                            seValues["tenant_id"],
 				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
@@ -16804,8 +16892,10 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
 				"secret_store_keyfile_key":  seValues["secret_store_keyfile_key"],
 				"name":                      (v.Name),
+				"port_override":             (v.PortOverride),
 				"scopes":                    (v.Scopes),
 				"secret_store_id":           (v.SecretStoreID),
+				"subdomain":                 (v.Subdomain),
 				"tags":                      convertTagsToPorcelain(v.Tags),
 			},
 		})
@@ -18823,7 +18913,6 @@ func resourceResourceUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
 	}
-
 	resp, err := cc.Resources().Update(ctx, convertResourceToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)

@@ -170,7 +170,6 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 
 func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertNodeToPlumbing(d)
-
 	resp, err := cc.Nodes().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Node: %w", err)
@@ -214,7 +213,6 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertNodeToPlumbing(d)
 	_ = localVersion
-
 	resp, err := cc.Nodes().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -264,7 +262,6 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 	return nil
 }
 func resourceNodeUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-
 	resp, err := cc.Nodes().Update(ctx, convertNodeToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Node %s: %w", d.Id(), err)

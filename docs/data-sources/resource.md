@@ -259,10 +259,12 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_region` - 
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `role_arn` - 
 		* `role_external_id` - 
 		* `secret_access_key` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* aws_console:
 		* `bind_interface` - Bind interface
@@ -304,7 +306,9 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - 
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tenant_id` - 
 	* azure_certificate:
@@ -314,7 +318,9 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tenant_id` - 
 	* azure_mysql:
@@ -536,8 +542,10 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `keyfile` - 
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `scopes` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 	* google_gke:
 		* `bind_interface` - Bind interface

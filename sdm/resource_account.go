@@ -146,7 +146,6 @@ func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 
 func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountToPlumbing(d)
-
 	resp, err := cc.Accounts().Create(ctx, localVersion)
 	if err != nil {
 		return fmt.Errorf("cannot create Account: %w", err)
@@ -186,7 +185,6 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	localVersion := convertAccountToPlumbing(d)
 	_ = localVersion
-
 	resp, err := cc.Accounts().Get(ctx, d.Id())
 	var errNotFound *sdm.NotFoundError
 	if err != nil && errors.As(err, &errNotFound) {
@@ -232,7 +230,6 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 	return nil
 }
 func resourceAccountUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
-
 	resp, err := cc.Accounts().Update(ctx, convertAccountToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Account %s: %w", d.Id(), err)

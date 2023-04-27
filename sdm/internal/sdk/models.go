@@ -209,6 +209,8 @@ type AWS struct {
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	RoleArn string `json:"roleArn"`
 
 	RoleExternalID string `json:"roleExternalId"`
@@ -216,6 +218,8 @@ type AWS struct {
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -976,8 +980,12 @@ type Azure struct {
 	Name string `json:"name"`
 
 	Password string `json:"password"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 
@@ -998,8 +1006,12 @@ type AzureCertificate struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 
@@ -1574,9 +1586,13 @@ type GCP struct {
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	Scopes string `json:"scopes"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -2711,6 +2727,9 @@ type Query struct {
 	// The tags of the account accessed, at the time the query was executed. If the account
 	// tags are later changed, that change will not be reflected via this field.
 	AccountTags Tags `json:"accountTags"`
+	// For queries against SSH, Kubernetes, and RDP resources, this contains additional information
+	// about the captured query.
+	Capture *QueryCapture `json:"capture"`
 	// The time at which the Query was completed.
 	// Empty if this record indicates the start of a long-running query.
 	CompletedAt time.Time `json:"completedAt"`
@@ -2723,6 +2742,7 @@ type Query struct {
 	// Unique identifier of the Query.
 	ID string `json:"id"`
 	// The captured content of the Query.
+	// For queries against SSH, Kubernetes, and RDP resources, this contains a JSON representation of the QueryCapture.
 	QueryBody string `json:"queryBody"`
 	// The general category of Resource against which Query was performed, e.g. "web" or "cloud".
 	QueryCategory string `json:"queryCategory"`
@@ -2751,6 +2771,36 @@ type Query struct {
 	ResourceType string `json:"resourceType"`
 	// The time at which the Query was started.
 	Timestamp time.Time `json:"timestamp"`
+}
+
+// A QueryCapture contains additional information about queries against SSH, Kubernetes, and RDP resources.
+type QueryCapture struct {
+	// The command executed on the client for a Kubernetes session.
+	ClientCommand string `json:"clientCommand"`
+	// The command executed over an SSH or Kubernetes session.
+	Command string `json:"command"`
+	// The target container of a Kubernetes operation.
+	Container string `json:"container"`
+	// The environment variables for an SSH or Kubernetes session.
+	Env map[string]string `json:"env"`
+	// The remote file name of an SCP operation.
+	FileName string `json:"fileName"`
+	// The file size transferred for an SCP operation.
+	FileSize int64 `json:"fileSize"`
+	// The height of the terminal or window for SSH, Kubernetes, and RDP interactive sessions.
+	Height int32 `json:"height"`
+	// The target pod of a Kubernetes operation.
+	Pod string `json:"pod"`
+	// The HTTP request body of a Kubernetes operation.
+	RequestBody []byte `json:"requestBody"`
+	// The HTTP request method of a Kubernetes operation.
+	RequestMethod string `json:"requestMethod"`
+	// The HTTP request URI of a Kubernetes operation.
+	RequestURI string `json:"requestUri"`
+	// The CaptureType of this query capture.
+	Type string `json:"type"`
+	// The width of the terminal or window for SSH, Kubernetes, and RDP interactive sessions.
+	Width int32 `json:"width"`
 }
 
 type RDP struct {

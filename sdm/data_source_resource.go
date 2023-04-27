@@ -1266,6 +1266,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1286,6 +1291,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1509,10 +1519,20 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1565,10 +1585,20 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2771,6 +2801,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"scopes": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2780,6 +2815,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6478,10 +6518,12 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_region": (v.HealthcheckRegion),
 				"id":                 (v.ID),
 				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
 				"role_arn":           (v.RoleArn),
 				"role_external_id":   (v.RoleExternalID),
 				"secret_access_key":  (v.SecretAccessKey),
 				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AWSConsole:
@@ -6529,7 +6571,9 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":              (v.ID),
 				"name":            (v.Name),
 				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
 				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
 				"tags":            convertTagsToPorcelain(v.Tags),
 				"tenant_id":       (v.TenantID),
 			})
@@ -6541,7 +6585,9 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":      (v.EgressFilter),
 				"id":                 (v.ID),
 				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
 				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"tenant_id":          (v.TenantID),
 			})
@@ -6795,8 +6841,10 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":              (v.ID),
 				"keyfile":         (v.Keyfile),
 				"name":            (v.Name),
+				"port_override":   (v.PortOverride),
 				"scopes":          (v.Scopes),
 				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
 				"tags":            convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.GoogleGKE:
