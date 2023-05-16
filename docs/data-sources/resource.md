@@ -119,6 +119,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `region` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
@@ -137,6 +138,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `region` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
@@ -154,6 +156,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `region` - 
 		* `remote_identity_group_id` - 
 		* `remote_identity_healthcheck_username` - 
@@ -172,6 +175,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - 
 		* `region` - 
 		* `role_arn` - 
 		* `role_external_id` - 

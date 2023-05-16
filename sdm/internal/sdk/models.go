@@ -560,6 +560,9 @@ type AccountResource struct {
 	AccountGrantID string `json:"accountGrantId"`
 	// The unique identifier of the Account to which access is granted.
 	AccountID string `json:"accountId"`
+	// The time this grant was created, distinct from 'granted at' in the case where access is scheduled
+	// for the future. If access was granted, revoked, and granted again, this will reflect the later creation time.
+	CreatedAt time.Time `json:"createdAt"`
 	// The time at which access will expire. If empty, this access has no expiration.
 	ExpiresAt time.Time `json:"expiresAt"`
 	// The most recent time at which access was granted. If access was granted,
@@ -678,6 +681,8 @@ type AmazonEKS struct {
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	Region string `json:"region"`
 
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
@@ -717,6 +722,8 @@ type AmazonEKSInstanceProfile struct {
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 
+	PortOverride int32 `json:"portOverride"`
+
 	Region string `json:"region"`
 
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
@@ -753,6 +760,8 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
 
 	Region string `json:"region"`
 
@@ -791,6 +800,8 @@ type AmazonEKSUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+
+	PortOverride int32 `json:"portOverride"`
 
 	Region string `json:"region"`
 

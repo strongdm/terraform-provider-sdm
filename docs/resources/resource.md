@@ -145,6 +145,7 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) 
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
@@ -170,6 +171,7 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) 
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
@@ -192,6 +194,7 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) 
 	* `region` - (Required) 
 	* `remote_identity_group_id` - (Optional) 
 	* `remote_identity_healthcheck_username` - (Optional) 
@@ -217,6 +220,7 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Required) 
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) 
 	* `region` - (Required) 
 	* `role_arn` - (Optional) 
 	* `secret_store_role_arn_path` - (Optional)

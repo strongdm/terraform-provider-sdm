@@ -511,6 +511,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -608,6 +613,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
+									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -698,6 +708,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
 									},
 									"region": {
 										Type:        schema.TypeString,
@@ -794,6 +809,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "",
 									},
 									"region": {
 										Type:        schema.TypeString,
@@ -6360,6 +6380,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace":                (v.HealthcheckNamespace),
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
@@ -6380,6 +6401,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace":                (v.HealthcheckNamespace),
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
@@ -6399,6 +6421,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace":                (v.HealthcheckNamespace),
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"region":                               (v.Region),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
@@ -6419,6 +6442,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"id":                    (v.ID),
 				"name":                  (v.Name),
+				"port_override":         (v.PortOverride),
 				"region":                (v.Region),
 				"role_arn":              (v.RoleArn),
 				"role_external_id":      (v.RoleExternalID),

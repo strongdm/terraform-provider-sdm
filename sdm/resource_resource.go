@@ -569,6 +569,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -696,6 +702,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -808,6 +820,12 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
 						},
 						"region": {
 							Type:        schema.TypeString,
@@ -934,6 +952,12 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
 						},
 						"region": {
 							Type:        schema.TypeString,
@@ -10646,6 +10670,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:                          convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			Region:                            convertStringToPlumbing(raw["region"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
@@ -10656,6 +10681,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
 		}
@@ -10687,6 +10717,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:                          convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			Region:                            convertStringToPlumbing(raw["region"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
@@ -10696,6 +10727,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
 		}
@@ -10721,6 +10757,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:                          convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace:              convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Name:                              convertStringToPlumbing(raw["name"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
 			Region:                            convertStringToPlumbing(raw["region"]),
 			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
 			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
@@ -10730,6 +10767,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.CertificateAuthority == "" {
 			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
 		}
@@ -10756,6 +10798,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Endpoint:             convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace: convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Name:                 convertStringToPlumbing(raw["name"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
 			Region:               convertStringToPlumbing(raw["region"]),
 			RoleArn:              convertStringToPlumbing(raw["role_arn"]),
 			RoleExternalID:       convertStringToPlumbing(raw["role_external_id"]),
@@ -10764,6 +10807,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:            convertStringToPlumbing(raw["subdomain"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		if out.AccessKey == "" {
 			out.AccessKey = fullSecretStorePath(raw, "access_key")
 		}
@@ -13219,6 +13267,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
@@ -13250,6 +13299,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
@@ -13278,6 +13328,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
@@ -13309,6 +13360,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"role_arn":                                seValues["role_arn"],
 				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
@@ -15282,6 +15334,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
@@ -15349,6 +15402,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
@@ -15413,6 +15467,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
@@ -15502,6 +15557,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"endpoint":                                (v.Endpoint),
 				"healthcheck_namespace":                   (v.HealthcheckNamespace),
 				"name":                                    (v.Name),
+				"port_override":                           (v.PortOverride),
 				"region":                                  (v.Region),
 				"role_arn":                                seValues["role_arn"],
 				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
