@@ -171,8 +171,7 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.name", name),
 					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.hostname", "test.com"),
-					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.secret_store_password_path", path),
-					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.secret_store_password_key", key),
+					resource.TestCheckResourceAttr("sdm_resource."+name, "redis.0.password", path+"?key="+key),
 					resource.TestCheckResourceAttrSet("sdm_resource."+name, "redis.0.port_override"),
 					resource.TestCheckResourceAttrSet("sdm_resource."+name, "redis.0.secret_store_id"),
 					func(s *terraform.State) error {
@@ -202,30 +201,6 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 				ResourceName:      "sdm_resource." + name,
 				ImportState:       true,
 				ImportStateVerify: true,
-				ImportStateVerifyIgnore: []string{
-					"redis.0.secret_store_password_path",
-					"redis.0.secret_store_password_key",
-				},
-			},
-		},
-	})
-}
-
-func TestAccSDMResource_CreateWithSecretStoreNoSecretStoreID(t *testing.T) {
-	initAcceptanceTest(t)
-	name := randomWithPrefix("test")
-	port := portOverride.Count()
-
-	path := "/path/to/secret"
-	key := "password2"
-
-	resource.Test(t, resource.TestCase{
-		Providers:    testAccProviders,
-		CheckDestroy: testCheckDestroy,
-		Steps: []resource.TestStep{
-			{
-				Config:      testAccSDMResourceRedisSecretStoreConfig(name, name, port, "", path, key),
-				ExpectError: regexp.MustCompile("secret store credential secret_store_password_path must be combined with secret_store_id"),
 			},
 		},
 	})
@@ -242,13 +217,17 @@ func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
 	}
 	vault := vaults[0]
 
+	// There are fairly few invalid URI cases possible via secret store paths,
+	// so this will likely just catch binary inputs.
+	password := string([]byte{0x7f})
+
 	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccSDMResourceRedisSecretStoreRawCredentialConfig(name, name, port, vault.GetID(), "password"),
-				ExpectError: regexp.MustCompile("raw credential password cannot be combined with secret_store_id"),
+				Config:      testAccSDMResourceRedisSecretStoreRawCredentialConfig(name, name, port, vault.GetID(), password),
+				ExpectError: regexp.MustCompile("secret store credential password was not parseable"),
 			},
 		},
 	})
@@ -870,8 +849,7 @@ func testAccSDMResourceRedisSecretStoreConfig(resourceName, sdmResourceName stri
 			hostname = "test.com"
 			port = %d
 			secret_store_id = "%s"
-			secret_store_password_path = "%s"
-			secret_store_password_key = "%s"
+			password = "%s?key=%s"
 		}
 	}
 	`, resourceName, sdmResourceName, port, seID, path, key)

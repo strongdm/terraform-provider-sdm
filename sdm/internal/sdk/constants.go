@@ -242,6 +242,7 @@ const (
 	ActivityVerbAccessRequestToResourceDenied                    = "access request to resource denied"
 	ActivityVerbAccessRequestToResourceTimedOut                  = "access request to resource timed out"
 	ActivityVerbAccessRequestToResourceGranted                   = "access request to resource granted"
+	ActivityVerbAccessRequestToResourceGrantedAutomatically      = "access request to resource granted automatically"
 	ActivityVerbWorkflowAdded                                    = "access workflow added"
 	ActivityVerbWorkflowDeleted                                  = "access workflow deleted"
 	ActivityVerbWorkflowResourceAssigned                         = "resource assigned to workflow"

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
-	"strings"
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -44,41 +43,17 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -180,14 +155,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
@@ -220,14 +187,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -309,14 +268,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_token_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_token_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -387,14 +338,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_token_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_token_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -417,41 +360,17 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -516,14 +435,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -535,14 +446,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"cluster_name": {
 							Type:        schema.TypeString,
@@ -595,40 +498,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -669,14 +548,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"cluster_name": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -728,26 +599,10 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -788,14 +643,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"cluster_name": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -847,26 +694,10 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -900,14 +731,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -919,14 +742,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"cluster_name": {
 							Type:        schema.TypeString,
@@ -969,40 +784,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -1035,14 +826,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"bind_interface": {
 							Type:        schema.TypeString,
@@ -1081,40 +864,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -1170,14 +929,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -1216,14 +967,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -1238,14 +981,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"bind_interface": {
 							Type:        schema.TypeString,
@@ -1284,40 +1019,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -1378,14 +1089,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -1418,14 +1121,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -1474,14 +1169,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -1515,14 +1202,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -1537,14 +1216,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"bind_interface": {
 							Type:        schema.TypeString,
@@ -1578,40 +1249,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -1687,26 +1334,10 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -1743,14 +1374,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"bind_interface": {
 							Type:        schema.TypeString,
@@ -1794,40 +1417,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -1865,14 +1464,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_app_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_app_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1895,14 +1486,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -1931,14 +1514,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_tenant_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_tenant_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -1954,14 +1529,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_app_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_app_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -1973,14 +1540,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2019,14 +1578,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_tenant_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_tenant_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2070,14 +1621,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2110,14 +1653,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2166,14 +1701,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2206,14 +1733,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2257,14 +1776,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_private_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_private_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"project": {
 							Type:        schema.TypeString,
@@ -2330,14 +1841,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2375,14 +1878,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2431,14 +1926,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2471,14 +1958,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2522,14 +2001,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2562,14 +2033,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2618,14 +2081,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2658,14 +2113,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2704,14 +2151,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
@@ -2749,14 +2188,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2800,14 +2231,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2840,14 +2263,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2891,14 +2306,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -2931,14 +2338,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -2987,14 +2386,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -3027,14 +2418,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -3073,14 +2456,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -3114,14 +2489,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -3136,14 +2503,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"bind_interface": {
 							Type:        schema.TypeString,
@@ -3182,40 +2541,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -3271,14 +2606,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -3316,14 +2643,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -3362,14 +2681,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -3408,14 +2719,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -3442,14 +2745,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_keyfile_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_keyfile_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -3506,14 +2801,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3555,14 +2842,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_service_account_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_service_account_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"subdomain": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3597,14 +2876,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3635,14 +2906,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_service_account_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_service_account_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"subdomain": {
 							Type:        schema.TypeString,
@@ -3703,14 +2966,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -3744,14 +2999,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -3767,14 +3014,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_auth_header_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_auth_header_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"bind_interface": {
 							Type:        schema.TypeString,
@@ -3885,14 +3124,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3918,14 +3149,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -4016,41 +3239,17 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4152,14 +3351,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
@@ -4192,14 +3383,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -4281,14 +3464,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_token_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_token_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -4359,14 +3534,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_token_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_token_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -4389,41 +3556,17 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4515,14 +3658,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -4555,14 +3690,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -4665,14 +3792,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -4705,14 +3824,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -4756,14 +3867,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -4801,14 +3904,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -4852,14 +3947,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -4902,14 +3989,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -4958,14 +4037,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -5008,14 +4079,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -5064,14 +4127,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -5115,14 +4170,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -5165,14 +4212,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -5206,14 +4245,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -5236,41 +4267,17 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -5297,14 +4304,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"port": {
 							Type:        schema.TypeInt,
@@ -5344,14 +4343,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -5374,41 +4365,17 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_certificate_authority_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_certificate_authority_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_certificate": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_client_certificate_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_certificate_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"client_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_client_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_client_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -5441,14 +4408,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -5486,14 +4445,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -5537,14 +4488,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -5577,14 +4520,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -5660,14 +4595,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -5710,40 +4637,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_role_arn_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_arn_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"role_external_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_role_external_id_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_role_external_id_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_access_key": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_secret_access_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_secret_access_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -5804,14 +4707,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Required:    true,
@@ -5849,14 +4744,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -5905,14 +4792,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -5945,14 +4824,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -5995,14 +4866,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"port": {
 							Type:        schema.TypeInt,
@@ -6079,14 +4942,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6124,14 +4979,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6234,14 +5081,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6274,14 +5113,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6320,14 +5151,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6365,14 +5188,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6421,14 +5236,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6461,14 +5268,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6512,14 +5311,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6552,14 +5343,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6603,14 +5386,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6643,14 +5418,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6693,14 +5460,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_saml_metadata_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_saml_metadata_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -6765,14 +5524,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -6810,14 +5561,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -6903,14 +5646,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -7002,14 +5737,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "",
 						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 					},
 				},
 			},
@@ -7068,14 +5795,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_private_key_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_private_key_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -7097,14 +5816,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -7143,14 +5854,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -7183,14 +5886,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -7229,14 +5924,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -7269,14 +5956,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -7315,14 +5994,6 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "",
 						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
 						"port": {
 							Type:        schema.TypeInt,
 							Optional:    true,
@@ -7355,14 +6026,6 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "",
-						},
-						"secret_store_username_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_username_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 					},
 				},
@@ -7405,14 +6068,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "",
-						},
-						"secret_store_password_path": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"secret_store_password_key": {
-							Type:     schema.TypeString,
-							Optional: true,
 						},
 						"port": {
 							Type:        schema.TypeInt,
@@ -7465,45 +6120,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"client_key":                              convertStringToPlumbing(raw["client_key"]),
-			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
-			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"client_certificate":    convertStringToPlumbing(raw["client_certificate"]),
+			"client_key":            convertStringToPlumbing(raw["client_key"]),
 		}, nil
 	}
 	if list := d.Get("aks_basic_auth").([]interface{}); len(list) > 0 {
@@ -7514,33 +6153,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("aks_service_account").([]interface{}); len(list) > 0 {
@@ -7551,21 +6179,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["token"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential token cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_token_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_token_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential token was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"token":                   convertStringToPlumbing(raw["token"]),
-			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
-			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
+			"token": convertStringToPlumbing(raw["token"]),
 		}, nil
 	}
 	if list := d.Get("aks_service_account_user_impersonation").([]interface{}); len(list) > 0 {
@@ -7576,21 +6198,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["token"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential token cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_token_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_token_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential token was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"token":                   convertStringToPlumbing(raw["token"]),
-			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
-			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
+			"token": convertStringToPlumbing(raw["token"]),
 		}, nil
 	}
 	if list := d.Get("aks_user_impersonation").([]interface{}); len(list) > 0 {
@@ -7601,45 +6217,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"client_key":                              convertStringToPlumbing(raw["client_key"]),
-			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
-			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"client_certificate":    convertStringToPlumbing(raw["client_certificate"]),
+			"client_key":            convertStringToPlumbing(raw["client_key"]),
 		}, nil
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
@@ -7650,69 +6250,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                              convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":            convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":             convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                       convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path":     convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":      convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":            convertStringToPlumbing(raw["access_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"role_arn":              convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":      convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key":     convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("amazon_eks_instance_profile").([]interface{}); len(list) > 0 {
@@ -7723,45 +6297,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"role_arn":              convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":      convertStringToPlumbing(raw["role_external_id"]),
 		}, nil
 	}
 	if list := d.Get("amazon_eks_instance_profile_user_impersonation").([]interface{}); len(list) > 0 {
@@ -7772,45 +6330,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"role_arn":              convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":      convertStringToPlumbing(raw["role_external_id"]),
 		}, nil
 	}
 	if list := d.Get("amazon_eks_user_impersonation").([]interface{}); len(list) > 0 {
@@ -7821,69 +6363,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                              convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":            convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":             convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"role_arn":                                convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":              convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":               convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                        convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":      convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":       convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                       convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path":     convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":      convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":            convertStringToPlumbing(raw["access_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"role_arn":              convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":      convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key":     convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
@@ -7894,57 +6410,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":        convertStringToPlumbing(raw["access_key"]),
+			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("amazonmq_amqp_091").([]interface{}); len(list) > 0 {
@@ -7955,33 +6450,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
@@ -7992,57 +6476,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":        convertStringToPlumbing(raw["access_key"]),
+			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
@@ -8053,33 +6516,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("aurora_postgres").([]interface{}); len(list) > 0 {
@@ -8090,33 +6542,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
@@ -8127,57 +6568,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":        convertStringToPlumbing(raw["access_key"]),
+			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("aws_console").([]interface{}); len(list) > 0 {
@@ -8188,33 +6608,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"role_arn":                           convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":         convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":          convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                   convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path": convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":  convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
+			"role_arn":         convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id": convertStringToPlumbing(raw["role_external_id"]),
 		}, nil
 	}
 	if list := d.Get("aws_console_static_key_pair").([]interface{}); len(list) > 0 {
@@ -8225,57 +6634,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":        convertStringToPlumbing(raw["access_key"]),
+			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("azure").([]interface{}); len(list) > 0 {
@@ -8286,45 +6674,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["app_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential app_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential app_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["tenant_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential tenant_id cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_app_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_app_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_app_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_app_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_tenant_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_tenant_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_tenant_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_tenant_id_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential tenant_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"app_id":                      convertStringToPlumbing(raw["app_id"]),
-			"secret_store_app_id_path":    convertStringToPlumbing(raw["secret_store_app_id_path"]),
-			"secret_store_app_id_key":     convertStringToPlumbing(raw["secret_store_app_id_key"]),
-			"password":                    convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path":  convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":   convertStringToPlumbing(raw["secret_store_password_key"]),
-			"tenant_id":                   convertStringToPlumbing(raw["tenant_id"]),
-			"secret_store_tenant_id_path": convertStringToPlumbing(raw["secret_store_tenant_id_path"]),
-			"secret_store_tenant_id_key":  convertStringToPlumbing(raw["secret_store_tenant_id_key"]),
+			"app_id":    convertStringToPlumbing(raw["app_id"]),
+			"password":  convertStringToPlumbing(raw["password"]),
+			"tenant_id": convertStringToPlumbing(raw["tenant_id"]),
 		}, nil
 	}
 	if list := d.Get("azure_certificate").([]interface{}); len(list) > 0 {
@@ -8335,45 +6707,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["app_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential app_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential app_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["tenant_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential tenant_id cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_app_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_app_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_app_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_app_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_tenant_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_tenant_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_tenant_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_tenant_id_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential tenant_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"app_id":                               convertStringToPlumbing(raw["app_id"]),
-			"secret_store_app_id_path":             convertStringToPlumbing(raw["secret_store_app_id_path"]),
-			"secret_store_app_id_key":              convertStringToPlumbing(raw["secret_store_app_id_key"]),
-			"client_certificate":                   convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path": convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":  convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"tenant_id":                            convertStringToPlumbing(raw["tenant_id"]),
-			"secret_store_tenant_id_path":          convertStringToPlumbing(raw["secret_store_tenant_id_path"]),
-			"secret_store_tenant_id_key":           convertStringToPlumbing(raw["secret_store_tenant_id_key"]),
+			"app_id":             convertStringToPlumbing(raw["app_id"]),
+			"client_certificate": convertStringToPlumbing(raw["client_certificate"]),
+			"tenant_id":          convertStringToPlumbing(raw["tenant_id"]),
 		}, nil
 	}
 	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
@@ -8384,33 +6740,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
@@ -8421,33 +6766,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
@@ -8458,21 +6792,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["private_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential private_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_private_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_private_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_private_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_private_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential private_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"private_key":                   convertStringToPlumbing(raw["private_key"]),
-			"secret_store_private_key_path": convertStringToPlumbing(raw["secret_store_private_key_path"]),
-			"secret_store_private_key_key":  convertStringToPlumbing(raw["secret_store_private_key_key"]),
+			"private_key": convertStringToPlumbing(raw["private_key"]),
 		}, nil
 	}
 	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
@@ -8483,33 +6811,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("citus").([]interface{}); len(list) > 0 {
@@ -8520,33 +6837,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
@@ -8557,33 +6863,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("cockroach").([]interface{}); len(list) > 0 {
@@ -8594,33 +6889,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
@@ -8631,33 +6915,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("db_2_luw").([]interface{}); len(list) > 0 {
@@ -8668,33 +6941,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("document_db_host").([]interface{}); len(list) > 0 {
@@ -8705,33 +6967,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("document_db_replica_set").([]interface{}); len(list) > 0 {
@@ -8742,33 +6993,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
@@ -8779,33 +7019,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
@@ -8816,57 +7045,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":        convertStringToPlumbing(raw["access_key"]),
+			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
@@ -8877,33 +7085,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
@@ -8914,33 +7111,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
@@ -8951,21 +7137,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["keyfile"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential keyfile cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_keyfile_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_keyfile_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_keyfile_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_keyfile_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential keyfile was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"keyfile":                   convertStringToPlumbing(raw["keyfile"]),
-			"secret_store_keyfile_path": convertStringToPlumbing(raw["secret_store_keyfile_path"]),
-			"secret_store_keyfile_key":  convertStringToPlumbing(raw["secret_store_keyfile_key"]),
+			"keyfile": convertStringToPlumbing(raw["keyfile"]),
 		}, nil
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
@@ -8976,33 +7156,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["service_account_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential service_account_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_service_account_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_service_account_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_service_account_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_service_account_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential service_account_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"service_account_key":                     convertStringToPlumbing(raw["service_account_key"]),
-			"secret_store_service_account_key_path":   convertStringToPlumbing(raw["secret_store_service_account_key_path"]),
-			"secret_store_service_account_key_key":    convertStringToPlumbing(raw["secret_store_service_account_key_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"service_account_key":   convertStringToPlumbing(raw["service_account_key"]),
 		}, nil
 	}
 	if list := d.Get("google_gke_user_impersonation").([]interface{}); len(list) > 0 {
@@ -9013,33 +7182,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["service_account_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential service_account_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_service_account_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_service_account_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_service_account_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_service_account_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential service_account_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"service_account_key":                     convertStringToPlumbing(raw["service_account_key"]),
-			"secret_store_service_account_key_path":   convertStringToPlumbing(raw["secret_store_service_account_key_path"]),
-			"secret_store_service_account_key_key":    convertStringToPlumbing(raw["secret_store_service_account_key_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"service_account_key":   convertStringToPlumbing(raw["service_account_key"]),
 		}, nil
 	}
 	if list := d.Get("greenplum").([]interface{}); len(list) > 0 {
@@ -9050,33 +7208,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
@@ -9087,21 +7234,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["auth_header"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential auth_header cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_auth_header_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_auth_header_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_auth_header_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_auth_header_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential auth_header was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"auth_header":                   convertStringToPlumbing(raw["auth_header"]),
-			"secret_store_auth_header_path": convertStringToPlumbing(raw["secret_store_auth_header_path"]),
-			"secret_store_auth_header_key":  convertStringToPlumbing(raw["secret_store_auth_header_key"]),
+			"auth_header": convertStringToPlumbing(raw["auth_header"]),
 		}, nil
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
@@ -9112,33 +7253,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
@@ -9148,7 +7278,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-		} else {
 		}
 
 		return map[string]string{}, nil
@@ -9161,45 +7290,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"client_key":                              convertStringToPlumbing(raw["client_key"]),
-			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
-			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"client_certificate":    convertStringToPlumbing(raw["client_certificate"]),
+			"client_key":            convertStringToPlumbing(raw["client_key"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
@@ -9210,33 +7323,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
@@ -9247,21 +7349,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["token"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential token cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_token_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_token_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential token was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"token":                   convertStringToPlumbing(raw["token"]),
-			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
-			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
+			"token": convertStringToPlumbing(raw["token"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_service_account_user_impersonation").([]interface{}); len(list) > 0 {
@@ -9272,21 +7368,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["token"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential token cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_token_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_token_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_token_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential token was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"token":                   convertStringToPlumbing(raw["token"]),
-			"secret_store_token_path": convertStringToPlumbing(raw["secret_store_token_path"]),
-			"secret_store_token_key":  convertStringToPlumbing(raw["secret_store_token_key"]),
+			"token": convertStringToPlumbing(raw["token"]),
 		}, nil
 	}
 	if list := d.Get("kubernetes_user_impersonation").([]interface{}); len(list) > 0 {
@@ -9297,45 +7387,29 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"client_key":                              convertStringToPlumbing(raw["client_key"]),
-			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
-			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"client_certificate":    convertStringToPlumbing(raw["client_certificate"]),
+			"client_key":            convertStringToPlumbing(raw["client_key"]),
 		}, nil
 	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
@@ -9346,33 +7420,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
@@ -9382,7 +7445,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-		} else {
 		}
 
 		return map[string]string{}, nil
@@ -9395,33 +7457,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
@@ -9432,33 +7483,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
@@ -9469,33 +7509,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
@@ -9506,33 +7535,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
@@ -9543,33 +7561,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mongo_sharded_cluster").([]interface{}); len(list) > 0 {
@@ -9580,33 +7587,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mtls_mysql").([]interface{}); len(list) > 0 {
@@ -9617,69 +7613,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"client_key":                              convertStringToPlumbing(raw["client_key"]),
-			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
-			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
-			"password":                                convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path":              convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":               convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                                convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path":              convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":               convertStringToPlumbing(raw["secret_store_username_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"client_certificate":    convertStringToPlumbing(raw["client_certificate"]),
+			"client_key":            convertStringToPlumbing(raw["client_key"]),
+			"password":              convertStringToPlumbing(raw["password"]),
+			"username":              convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mtls_postgres").([]interface{}); len(list) > 0 {
@@ -9690,69 +7660,43 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential certificate_authority cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_certificate"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_certificate cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_certificate was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["client_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential client_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_certificate_authority_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_certificate_authority_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_certificate_authority_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_certificate_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_certificate_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_client_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_client_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"certificate_authority":                   convertStringToPlumbing(raw["certificate_authority"]),
-			"secret_store_certificate_authority_path": convertStringToPlumbing(raw["secret_store_certificate_authority_path"]),
-			"secret_store_certificate_authority_key":  convertStringToPlumbing(raw["secret_store_certificate_authority_key"]),
-			"client_certificate":                      convertStringToPlumbing(raw["client_certificate"]),
-			"secret_store_client_certificate_path":    convertStringToPlumbing(raw["secret_store_client_certificate_path"]),
-			"secret_store_client_certificate_key":     convertStringToPlumbing(raw["secret_store_client_certificate_key"]),
-			"client_key":                              convertStringToPlumbing(raw["client_key"]),
-			"secret_store_client_key_path":            convertStringToPlumbing(raw["secret_store_client_key_path"]),
-			"secret_store_client_key_key":             convertStringToPlumbing(raw["secret_store_client_key_key"]),
-			"password":                                convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path":              convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":               convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                                convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path":              convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":               convertStringToPlumbing(raw["secret_store_username_key"]),
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+			"client_certificate":    convertStringToPlumbing(raw["client_certificate"]),
+			"client_key":            convertStringToPlumbing(raw["client_key"]),
+			"password":              convertStringToPlumbing(raw["password"]),
+			"username":              convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
@@ -9763,33 +7707,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("neptune").([]interface{}); len(list) > 0 {
@@ -9799,7 +7732,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-		} else {
 		}
 
 		return map[string]string{}, nil
@@ -9812,57 +7744,36 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential access_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_arn"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_arn cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential role_external_id cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["secret_access_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential secret_access_key cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_access_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_arn_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_arn_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_role_external_id_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_role_external_id_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_secret_access_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_secret_access_key_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret_access_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"access_key":                          convertStringToPlumbing(raw["access_key"]),
-			"secret_store_access_key_path":        convertStringToPlumbing(raw["secret_store_access_key_path"]),
-			"secret_store_access_key_key":         convertStringToPlumbing(raw["secret_store_access_key_key"]),
-			"role_arn":                            convertStringToPlumbing(raw["role_arn"]),
-			"secret_store_role_arn_path":          convertStringToPlumbing(raw["secret_store_role_arn_path"]),
-			"secret_store_role_arn_key":           convertStringToPlumbing(raw["secret_store_role_arn_key"]),
-			"role_external_id":                    convertStringToPlumbing(raw["role_external_id"]),
-			"secret_store_role_external_id_path":  convertStringToPlumbing(raw["secret_store_role_external_id_path"]),
-			"secret_store_role_external_id_key":   convertStringToPlumbing(raw["secret_store_role_external_id_key"]),
-			"secret_access_key":                   convertStringToPlumbing(raw["secret_access_key"]),
-			"secret_store_secret_access_key_path": convertStringToPlumbing(raw["secret_store_secret_access_key_path"]),
-			"secret_store_secret_access_key_key":  convertStringToPlumbing(raw["secret_store_secret_access_key_key"]),
+			"access_key":        convertStringToPlumbing(raw["access_key"]),
+			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
+			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
@@ -9873,33 +7784,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
@@ -9910,33 +7810,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("presto").([]interface{}); len(list) > 0 {
@@ -9947,21 +7836,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
 		}, nil
 	}
 	if list := d.Get("rabbitmq_amqp_091").([]interface{}); len(list) > 0 {
@@ -9972,33 +7855,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("raw_tcp").([]interface{}); len(list) > 0 {
@@ -10008,7 +7880,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-		} else {
 		}
 
 		return map[string]string{}, nil
@@ -10021,33 +7892,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
@@ -10058,33 +7918,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
@@ -10095,33 +7944,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
@@ -10132,33 +7970,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
@@ -10169,33 +7996,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("snowsight").([]interface{}); len(list) > 0 {
@@ -10206,21 +8022,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["saml_metadata"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential saml_metadata cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_saml_metadata_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_saml_metadata_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_saml_metadata_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_saml_metadata_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential saml_metadata was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"saml_metadata":                   convertStringToPlumbing(raw["saml_metadata"]),
-			"secret_store_saml_metadata_path": convertStringToPlumbing(raw["secret_store_saml_metadata_path"]),
-			"secret_store_saml_metadata_key":  convertStringToPlumbing(raw["secret_store_saml_metadata_key"]),
+			"saml_metadata": convertStringToPlumbing(raw["saml_metadata"]),
 		}, nil
 	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
@@ -10231,33 +8041,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
@@ -10268,21 +8067,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("ssh_cert").([]interface{}); len(list) > 0 {
@@ -10293,21 +8086,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("ssh_customer_key").([]interface{}); len(list) > 0 {
@@ -10318,33 +8105,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["private_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential private_key cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential private_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_private_key_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_private_key_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_private_key_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_private_key_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"private_key":                   convertStringToPlumbing(raw["private_key"]),
-			"secret_store_private_key_path": convertStringToPlumbing(raw["secret_store_private_key_path"]),
-			"secret_store_private_key_key":  convertStringToPlumbing(raw["secret_store_private_key_key"]),
-			"username":                      convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path":    convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":     convertStringToPlumbing(raw["secret_store_username_key"]),
+			"private_key": convertStringToPlumbing(raw["private_key"]),
+			"username":    convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
@@ -10355,33 +8131,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("sybase_iq").([]interface{}); len(list) > 0 {
@@ -10392,33 +8157,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
@@ -10429,33 +8183,22 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential username cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_username_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_username_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
-			"username":                   convertStringToPlumbing(raw["username"]),
-			"secret_store_username_path": convertStringToPlumbing(raw["secret_store_username_path"]),
-			"secret_store_username_key":  convertStringToPlumbing(raw["secret_store_username_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("trino").([]interface{}); len(list) > 0 {
@@ -10466,21 +8209,15 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
 			if v := raw["password"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("raw credential password cannot be combined with secret_store_id")
-			}
-		} else {
-			if v := raw["secret_store_password_path"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_path must be combined with secret_store_id")
-			}
-			if v := raw["secret_store_password_key"]; v != nil && v.(string) != "" {
-				return nil, fmt.Errorf("secret store credential secret_store_password_key must be combined with secret_store_id")
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
 			}
 		}
 
 		return map[string]string{
-			"password":                   convertStringToPlumbing(raw["password"]),
-			"secret_store_password_path": convertStringToPlumbing(raw["secret_store_password_path"]),
-			"secret_store_password_key":  convertStringToPlumbing(raw["secret_store_password_key"]),
+			"password": convertStringToPlumbing(raw["password"]),
 		}, nil
 	}
 	return map[string]string{}, nil
@@ -10514,15 +8251,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.ClientKey == "" {
-			out.ClientKey = fullSecretStorePath(raw, "client_key")
-		}
 		return out
 	}
 	if list := d.Get("aks_basic_auth").([]interface{}); len(list) > 0 {
@@ -10550,12 +8278,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("aks_service_account").([]interface{}); len(list) > 0 {
@@ -10584,9 +8306,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Token == "" {
-			out.Token = fullSecretStorePath(raw, "token")
-		}
 		return out
 	}
 	if list := d.Get("aks_service_account_user_impersonation").([]interface{}); len(list) > 0 {
@@ -10613,9 +8332,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Token == "" {
-			out.Token = fullSecretStorePath(raw, "token")
-		}
 		return out
 	}
 	if list := d.Get("aks_user_impersonation").([]interface{}); len(list) > 0 {
@@ -10644,15 +8360,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.ClientKey == "" {
-			out.ClientKey = fullSecretStorePath(raw, "client_key")
-		}
 		return out
 	}
 	if list := d.Get("amazon_eks").([]interface{}); len(list) > 0 {
@@ -10686,21 +8393,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("amazon_eks_instance_profile").([]interface{}); len(list) > 0 {
@@ -10732,15 +8424,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
 		return out
 	}
 	if list := d.Get("amazon_eks_instance_profile_user_impersonation").([]interface{}); len(list) > 0 {
@@ -10772,15 +8455,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
 		return out
 	}
 	if list := d.Get("amazon_eks_user_impersonation").([]interface{}); len(list) > 0 {
@@ -10812,21 +8486,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("amazon_es").([]interface{}); len(list) > 0 {
@@ -10855,18 +8514,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("amazonmq_amqp_091").([]interface{}); len(list) > 0 {
@@ -10894,12 +8541,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
@@ -10928,18 +8569,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
@@ -10967,12 +8596,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("aurora_postgres").([]interface{}); len(list) > 0 {
@@ -11001,12 +8624,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
@@ -11034,18 +8651,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("aws_console").([]interface{}); len(list) > 0 {
@@ -11075,12 +8680,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
 		return out
 	}
 	if list := d.Get("aws_console_static_key_pair").([]interface{}); len(list) > 0 {
@@ -11111,18 +8710,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("azure").([]interface{}); len(list) > 0 {
@@ -11148,15 +8735,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AppID == "" {
-			out.AppID = fullSecretStorePath(raw, "app_id")
-		}
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.TenantID == "" {
-			out.TenantID = fullSecretStorePath(raw, "tenant_id")
-		}
 		return out
 	}
 	if list := d.Get("azure_certificate").([]interface{}); len(list) > 0 {
@@ -11182,15 +8760,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AppID == "" {
-			out.AppID = fullSecretStorePath(raw, "app_id")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.TenantID == "" {
-			out.TenantID = fullSecretStorePath(raw, "tenant_id")
-		}
 		return out
 	}
 	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
@@ -11218,12 +8787,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("azure_postgres").([]interface{}); len(list) > 0 {
@@ -11252,12 +8815,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("big_query").([]interface{}); len(list) > 0 {
@@ -11284,9 +8841,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.PrivateKey == "" {
-			out.PrivateKey = fullSecretStorePath(raw, "private_key")
-		}
 		return out
 	}
 	if list := d.Get("cassandra").([]interface{}); len(list) > 0 {
@@ -11314,12 +8868,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("citus").([]interface{}); len(list) > 0 {
@@ -11348,12 +8896,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
@@ -11381,12 +8923,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("cockroach").([]interface{}); len(list) > 0 {
@@ -11415,12 +8951,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
@@ -11448,12 +8978,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("db_2_luw").([]interface{}); len(list) > 0 {
@@ -11481,12 +9005,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("document_db_host").([]interface{}); len(list) > 0 {
@@ -11514,12 +9032,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("document_db_replica_set").([]interface{}); len(list) > 0 {
@@ -11548,12 +9060,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
@@ -11580,12 +9086,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("dynamo_db").([]interface{}); len(list) > 0 {
@@ -11614,18 +9114,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
@@ -11653,12 +9141,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("elasticache_redis").([]interface{}); len(list) > 0 {
@@ -11686,12 +9168,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("gcp").([]interface{}); len(list) > 0 {
@@ -11716,9 +9192,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Keyfile == "" {
-			out.Keyfile = fullSecretStorePath(raw, "keyfile")
-		}
 		return out
 	}
 	if list := d.Get("google_gke").([]interface{}); len(list) > 0 {
@@ -11741,12 +9214,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ServiceAccountKey == "" {
-			out.ServiceAccountKey = fullSecretStorePath(raw, "service_account_key")
-		}
 		return out
 	}
 	if list := d.Get("google_gke_user_impersonation").([]interface{}); len(list) > 0 {
@@ -11766,12 +9233,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ServiceAccountKey:    convertStringToPlumbing(raw["service_account_key"]),
 			Subdomain:            convertStringToPlumbing(raw["subdomain"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
-		}
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ServiceAccountKey == "" {
-			out.ServiceAccountKey = fullSecretStorePath(raw, "service_account_key")
 		}
 		return out
 	}
@@ -11801,12 +9262,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("http_auth").([]interface{}); len(list) > 0 {
@@ -11828,9 +9283,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Url:              convertStringToPlumbing(raw["url"]),
-		}
-		if out.AuthHeader == "" {
-			out.AuthHeader = fullSecretStorePath(raw, "auth_header")
 		}
 		return out
 	}
@@ -11854,12 +9306,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 			Username:         convertStringToPlumbing(raw["username"]),
-		}
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
 		}
 		return out
 	}
@@ -11912,15 +9358,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.ClientKey == "" {
-			out.ClientKey = fullSecretStorePath(raw, "client_key")
-		}
 		return out
 	}
 	if list := d.Get("kubernetes_basic_auth").([]interface{}); len(list) > 0 {
@@ -11948,12 +9385,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
@@ -11982,9 +9413,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Token == "" {
-			out.Token = fullSecretStorePath(raw, "token")
-		}
 		return out
 	}
 	if list := d.Get("kubernetes_service_account_user_impersonation").([]interface{}); len(list) > 0 {
@@ -12011,9 +9439,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Token == "" {
-			out.Token = fullSecretStorePath(raw, "token")
-		}
 		return out
 	}
 	if list := d.Get("kubernetes_user_impersonation").([]interface{}); len(list) > 0 {
@@ -12042,15 +9467,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.ClientKey == "" {
-			out.ClientKey = fullSecretStorePath(raw, "client_key")
-		}
 		return out
 	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
@@ -12078,12 +9494,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
@@ -12135,12 +9545,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mongo_host").([]interface{}); len(list) > 0 {
@@ -12169,12 +9573,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mongo_legacy_host").([]interface{}); len(list) > 0 {
@@ -12204,12 +9602,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mongo_legacy_replicaset").([]interface{}); len(list) > 0 {
@@ -12240,12 +9632,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mongo_replica_set").([]interface{}); len(list) > 0 {
@@ -12276,12 +9662,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mongo_sharded_cluster").([]interface{}); len(list) > 0 {
@@ -12309,12 +9689,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mtls_mysql").([]interface{}); len(list) > 0 {
@@ -12346,21 +9720,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.ClientKey == "" {
-			out.ClientKey = fullSecretStorePath(raw, "client_key")
-		}
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mtls_postgres").([]interface{}); len(list) > 0 {
@@ -12393,21 +9752,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.CertificateAuthority == "" {
-			out.CertificateAuthority = fullSecretStorePath(raw, "certificate_authority")
-		}
-		if out.ClientCertificate == "" {
-			out.ClientCertificate = fullSecretStorePath(raw, "client_certificate")
-		}
-		if out.ClientKey == "" {
-			out.ClientKey = fullSecretStorePath(raw, "client_key")
-		}
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("mysql").([]interface{}); len(list) > 0 {
@@ -12435,12 +9779,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("neptune").([]interface{}); len(list) > 0 {
@@ -12494,18 +9832,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.AccessKey == "" {
-			out.AccessKey = fullSecretStorePath(raw, "access_key")
-		}
-		if out.RoleArn == "" {
-			out.RoleArn = fullSecretStorePath(raw, "role_arn")
-		}
-		if out.RoleExternalID == "" {
-			out.RoleExternalID = fullSecretStorePath(raw, "role_external_id")
-		}
-		if out.SecretAccessKey == "" {
-			out.SecretAccessKey = fullSecretStorePath(raw, "secret_access_key")
-		}
 		return out
 	}
 	if list := d.Get("oracle").([]interface{}); len(list) > 0 {
@@ -12534,12 +9860,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
@@ -12568,12 +9888,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("presto").([]interface{}); len(list) > 0 {
@@ -12602,9 +9916,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
 		return out
 	}
 	if list := d.Get("rabbitmq_amqp_091").([]interface{}); len(list) > 0 {
@@ -12632,12 +9943,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("raw_tcp").([]interface{}); len(list) > 0 {
@@ -12689,12 +9994,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
@@ -12722,12 +10021,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
@@ -12756,12 +10049,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
@@ -12789,12 +10076,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("snowflake").([]interface{}); len(list) > 0 {
@@ -12822,12 +10103,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("snowsight").([]interface{}); len(list) > 0 {
@@ -12852,9 +10127,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.SamlMetadata == "" {
-			out.SamlMetadata = fullSecretStorePath(raw, "saml_metadata")
-		}
 		return out
 	}
 	if list := d.Get("sql_server").([]interface{}); len(list) > 0 {
@@ -12884,12 +10156,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
@@ -12918,9 +10184,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("ssh_cert").([]interface{}); len(list) > 0 {
@@ -12951,9 +10214,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("ssh_customer_key").([]interface{}); len(list) > 0 {
@@ -12982,12 +10242,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.PrivateKey == "" {
-			out.PrivateKey = fullSecretStorePath(raw, "private_key")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
@@ -13014,12 +10268,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("sybase_iq").([]interface{}); len(list) > 0 {
@@ -13046,12 +10294,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("teradata").([]interface{}); len(list) > 0 {
@@ -13078,12 +10320,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
-		if out.Username == "" {
-			out.Username = fullSecretStorePath(raw, "username")
-		}
 		return out
 	}
 	if list := d.Get("trino").([]interface{}); len(list) > 0 {
@@ -13111,9 +10347,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			override = -1
 		}
 		out.PortOverride = int32(override)
-		if out.Password == "" {
-			out.Password = fullSecretStorePath(raw, "password")
-		}
 		return out
 	}
 	return nil
@@ -13136,27 +10369,21 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"client_certificate":                   seValues["client_certificate"],
+				"client_key":                           seValues["client_key"],
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -13164,22 +10391,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.AKSServiceAccount:
@@ -13200,8 +10423,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"token":                                seValues["token"],
-				"secret_store_token_path":              seValues["secret_store_token_path"],
-				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.AKSServiceAccountUserImpersonation:
@@ -13209,19 +10430,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_service_account_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"port_override":           (v.PortOverride),
-				"secret_store_id":         (v.SecretStoreID),
-				"subdomain":               (v.Subdomain),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"token":                 seValues["token"],
 			},
 		})
 	case *sdm.AKSUserImpersonation:
@@ -13229,25 +10448,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKS:
@@ -13255,34 +10468,24 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"access_key":                              seValues["access_key"],
-				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                       seValues["secret_access_key"],
-				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"access_key":                           seValues["access_key"],
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_access_key":                    seValues["secret_access_key"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSInstanceProfile:
@@ -13290,28 +10493,22 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSInstanceProfileUserImpersonation:
@@ -13319,28 +10516,22 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazon_eks_instance_profile_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSUserImpersonation:
@@ -13348,32 +10539,22 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazon_eks_user_impersonation", []map[string]interface{}{
 			{
-				"access_key":                              seValues["access_key"],
-				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                       seValues["secret_access_key"],
-				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"access_key":            seValues["access_key"],
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"cluster_name":          (v.ClusterName),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                  (v.Name),
+				"port_override":         (v.PortOverride),
+				"region":                (v.Region),
+				"role_arn":              seValues["role_arn"],
+				"role_external_id":      seValues["role_external_id"],
+				"secret_access_key":     seValues["secret_access_key"],
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonES:
@@ -13381,27 +10562,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazon_es", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"endpoint":                            (v.Endpoint),
-				"name":                                (v.Name),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonMQAMQP091:
@@ -13409,22 +10582,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazonmq_amqp_091", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Athena:
@@ -13432,27 +10601,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("athena", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"name":                                (v.Name),
-				"output":                              (v.Output),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"name":              (v.Name),
+				"output":            (v.Output),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AuroraMysql:
@@ -13460,22 +10621,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.AuroraPostgres:
@@ -13483,23 +10640,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.AWS:
@@ -13507,26 +10660,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aws", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"healthcheck_region":                  (v.HealthcheckRegion),
-				"name":                                (v.Name),
-				"port_override":                       (v.PortOverride),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":         seValues["access_key"],
+				"bind_interface":     (v.BindInterface),
+				"egress_filter":      (v.EgressFilter),
+				"healthcheck_region": (v.HealthcheckRegion),
+				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
+				"role_arn":           seValues["role_arn"],
+				"role_external_id":   seValues["role_external_id"],
+				"secret_access_key":  seValues["secret_access_key"],
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AWSConsole:
@@ -13543,11 +10688,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"role_arn":                             seValues["role_arn"],
-				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
 				"role_external_id":                     seValues["role_external_id"],
-				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
 				"secret_store_id":                      (v.SecretStoreID),
 				"session_expiry":                       (v.SessionExpiry),
 				"subdomain":                            (v.Subdomain),
@@ -13560,8 +10701,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("aws_console_static_key_pair", []map[string]interface{}{
 			{
 				"access_key":                           seValues["access_key"],
-				"secret_store_access_key_path":         seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":          seValues["secret_store_access_key_key"],
 				"bind_interface":                       (v.BindInterface),
 				"egress_filter":                        (v.EgressFilter),
 				"name":                                 (v.Name),
@@ -13570,14 +10709,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"role_arn":                             seValues["role_arn"],
-				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
 				"role_external_id":                     seValues["role_external_id"],
-				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
 				"secret_access_key":                    seValues["secret_access_key"],
-				"secret_store_secret_access_key_path":  seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":   seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                      (v.SecretStoreID),
 				"session_expiry":                       (v.SessionExpiry),
 				"subdomain":                            (v.Subdomain),
@@ -13589,22 +10722,16 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("azure", []map[string]interface{}{
 			{
-				"app_id":                      seValues["app_id"],
-				"secret_store_app_id_path":    seValues["secret_store_app_id_path"],
-				"secret_store_app_id_key":     seValues["secret_store_app_id_key"],
-				"bind_interface":              (v.BindInterface),
-				"egress_filter":               (v.EgressFilter),
-				"name":                        (v.Name),
-				"password":                    seValues["password"],
-				"secret_store_password_path":  seValues["secret_store_password_path"],
-				"secret_store_password_key":   seValues["secret_store_password_key"],
-				"port_override":               (v.PortOverride),
-				"secret_store_id":             (v.SecretStoreID),
-				"subdomain":                   (v.Subdomain),
-				"tags":                        convertTagsToPorcelain(v.Tags),
-				"tenant_id":                   seValues["tenant_id"],
-				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
-				"secret_store_tenant_id_key":  seValues["secret_store_tenant_id_key"],
+				"app_id":          seValues["app_id"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tenant_id":       seValues["tenant_id"],
 			},
 		})
 	case *sdm.AzureCertificate:
@@ -13612,22 +10739,16 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("azure_certificate", []map[string]interface{}{
 			{
-				"app_id":                               seValues["app_id"],
-				"secret_store_app_id_path":             seValues["secret_store_app_id_path"],
-				"secret_store_app_id_key":              seValues["secret_store_app_id_key"],
-				"bind_interface":                       (v.BindInterface),
-				"client_certificate":                   seValues["client_certificate"],
-				"secret_store_client_certificate_path": seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
-				"egress_filter":                        (v.EgressFilter),
-				"name":                                 (v.Name),
-				"port_override":                        (v.PortOverride),
-				"secret_store_id":                      (v.SecretStoreID),
-				"subdomain":                            (v.Subdomain),
-				"tags":                                 convertTagsToPorcelain(v.Tags),
-				"tenant_id":                            seValues["tenant_id"],
-				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
-				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
+				"app_id":             seValues["app_id"],
+				"bind_interface":     (v.BindInterface),
+				"client_certificate": seValues["client_certificate"],
+				"egress_filter":      (v.EgressFilter),
+				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"tenant_id":          seValues["tenant_id"],
 			},
 		})
 	case *sdm.AzureMysql:
@@ -13635,22 +10756,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("azure_mysql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.AzurePostgres:
@@ -13658,23 +10775,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("azure_postgres", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -13682,19 +10795,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("big_query", []map[string]interface{}{
 			{
-				"bind_interface":                (v.BindInterface),
-				"egress_filter":                 (v.EgressFilter),
-				"endpoint":                      (v.Endpoint),
-				"name":                          (v.Name),
-				"port_override":                 (v.PortOverride),
-				"private_key":                   seValues["private_key"],
-				"secret_store_private_key_path": seValues["secret_store_private_key_path"],
-				"secret_store_private_key_key":  seValues["secret_store_private_key_key"],
-				"project":                       (v.Project),
-				"secret_store_id":               (v.SecretStoreID),
-				"subdomain":                     (v.Subdomain),
-				"tags":                          convertTagsToPorcelain(v.Tags),
-				"username":                      (v.Username),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"endpoint":        (v.Endpoint),
+				"name":            (v.Name),
+				"port_override":   (v.PortOverride),
+				"private_key":     seValues["private_key"],
+				"project":         (v.Project),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        (v.Username),
 			},
 		})
 	case *sdm.Cassandra:
@@ -13702,22 +10813,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("cassandra", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Citus:
@@ -13725,23 +10832,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("citus", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.Clustrix:
@@ -13749,22 +10852,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("clustrix", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Cockroach:
@@ -13772,23 +10871,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("cockroach", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.DB2I:
@@ -13796,22 +10891,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("db_2_i", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DB2LUW:
@@ -13819,22 +10910,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DocumentDBHost:
@@ -13842,22 +10929,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("document_db_host", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DocumentDBReplicaSet:
@@ -13865,23 +10948,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("document_db_replica_set", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"connect_to_replica":         (v.ConnectToReplica),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"password":           seValues["password"],
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"username":           seValues["username"],
 			},
 		})
 	case *sdm.Druid:
@@ -13889,21 +10968,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("druid", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DynamoDB:
@@ -13911,27 +10986,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("dynamo_db", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"endpoint":                            (v.Endpoint),
-				"name":                                (v.Name),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Elastic:
@@ -13939,22 +11006,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("elastic", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.ElasticacheRedis:
@@ -13962,22 +11025,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.GCP:
@@ -13985,17 +11044,15 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("gcp", []map[string]interface{}{
 			{
-				"bind_interface":            (v.BindInterface),
-				"egress_filter":             (v.EgressFilter),
-				"keyfile":                   seValues["keyfile"],
-				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
-				"secret_store_keyfile_key":  seValues["secret_store_keyfile_key"],
-				"name":                      (v.Name),
-				"port_override":             (v.PortOverride),
-				"scopes":                    (v.Scopes),
-				"secret_store_id":           (v.SecretStoreID),
-				"subdomain":                 (v.Subdomain),
-				"tags":                      convertTagsToPorcelain(v.Tags),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"keyfile":         seValues["keyfile"],
+				"name":            (v.Name),
+				"port_override":   (v.PortOverride),
+				"scopes":          (v.Scopes),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -14003,22 +11060,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"secret_store_id":                         (v.SecretStoreID),
-				"service_account_key":                     seValues["service_account_key"],
-				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
-				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"service_account_key":                  seValues["service_account_key"],
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKEUserImpersonation:
@@ -14026,20 +11079,16 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("google_gke_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"secret_store_id":                         (v.SecretStoreID),
-				"service_account_key":                     seValues["service_account_key"],
-				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
-				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                  (v.Name),
+				"secret_store_id":       (v.SecretStoreID),
+				"service_account_key":   seValues["service_account_key"],
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Greenplum:
@@ -14047,23 +11096,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("greenplum", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.HTTPAuth:
@@ -14071,20 +11116,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("http_auth", []map[string]interface{}{
 			{
-				"auth_header":                   seValues["auth_header"],
-				"secret_store_auth_header_path": seValues["secret_store_auth_header_path"],
-				"secret_store_auth_header_key":  seValues["secret_store_auth_header_key"],
-				"bind_interface":                (v.BindInterface),
-				"default_path":                  (v.DefaultPath),
-				"egress_filter":                 (v.EgressFilter),
-				"headers_blacklist":             (v.HeadersBlacklist),
-				"healthcheck_path":              (v.HealthcheckPath),
-				"host_override":                 (v.HostOverride),
-				"name":                          (v.Name),
-				"secret_store_id":               (v.SecretStoreID),
-				"subdomain":                     (v.Subdomain),
-				"tags":                          convertTagsToPorcelain(v.Tags),
-				"url":                           (v.Url),
+				"auth_header":       seValues["auth_header"],
+				"bind_interface":    (v.BindInterface),
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
+				"name":              (v.Name),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"url":               (v.Url),
 			},
 		})
 	case *sdm.HTTPBasicAuth:
@@ -14092,23 +11135,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"default_path":               (v.DefaultPath),
-				"egress_filter":              (v.EgressFilter),
-				"headers_blacklist":          (v.HeadersBlacklist),
-				"healthcheck_path":           (v.HealthcheckPath),
-				"host_override":              (v.HostOverride),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"url":                        (v.Url),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
+				"name":              (v.Name),
+				"password":          seValues["password"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"url":               (v.Url),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.HTTPNoAuth:
@@ -14134,27 +11173,21 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"client_certificate":                   seValues["client_certificate"],
+				"client_key":                           seValues["client_key"],
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -14162,22 +11195,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
@@ -14198,8 +11227,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"token":                                seValues["token"],
-				"secret_store_token_path":              seValues["secret_store_token_path"],
-				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.KubernetesServiceAccountUserImpersonation:
@@ -14207,19 +11234,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_service_account_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"port_override":           (v.PortOverride),
-				"secret_store_id":         (v.SecretStoreID),
-				"subdomain":               (v.Subdomain),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"token":                 seValues["token"],
 			},
 		})
 	case *sdm.KubernetesUserImpersonation:
@@ -14227,25 +11252,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Maria:
@@ -14253,22 +11272,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("maria", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Memcached:
@@ -14292,22 +11307,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("memsql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MongoHost:
@@ -14315,23 +11326,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mongo_host", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MongoLegacyHost:
@@ -14339,24 +11346,20 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"replica_set":     (v.ReplicaSet),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MongoLegacyReplicaset:
@@ -14364,25 +11367,21 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"connect_to_replica":         (v.ConnectToReplica),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"password":           seValues["password"],
+				"port":               (v.Port),
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"tls_required":       (v.TlsRequired),
+				"username":           seValues["username"],
 			},
 		})
 	case *sdm.MongoReplicaSet:
@@ -14390,25 +11389,21 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"connect_to_replica":         (v.ConnectToReplica),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"password":           seValues["password"],
+				"port":               (v.Port),
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"tls_required":       (v.TlsRequired),
+				"username":           seValues["username"],
 			},
 		})
 	case *sdm.MongoShardedCluster:
@@ -14416,22 +11411,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mongo_sharded_cluster", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MTLSMysql:
@@ -14439,32 +11430,22 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mtls_mysql", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"database":                                (v.Database),
-				"egress_filter":                           (v.EgressFilter),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"password":                                seValues["password"],
-				"secret_store_password_path":              seValues["secret_store_password_path"],
-				"secret_store_password_key":               seValues["secret_store_password_key"],
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"server_name":                             (v.ServerName),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
-				"username":                                seValues["username"],
-				"secret_store_username_path":              seValues["secret_store_username_path"],
-				"secret_store_username_key":               seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"database":              (v.Database),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"server_name":           (v.ServerName),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.MTLSPostgres:
@@ -14472,33 +11453,23 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mtls_postgres", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"database":                                (v.Database),
-				"egress_filter":                           (v.EgressFilter),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"override_database":                       (v.OverrideDatabase),
-				"password":                                seValues["password"],
-				"secret_store_password_path":              seValues["secret_store_password_path"],
-				"secret_store_password_key":               seValues["secret_store_password_key"],
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"server_name":                             (v.ServerName),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
-				"username":                                seValues["username"],
-				"secret_store_username_path":              seValues["secret_store_username_path"],
-				"secret_store_username_key":               seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"database":              (v.Database),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"override_database":     (v.OverrideDatabase),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"server_name":           (v.ServerName),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.Mysql:
@@ -14506,22 +11477,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mysql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Neptune:
@@ -14545,28 +11512,20 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("neptune_iam", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"endpoint":                            (v.Endpoint),
-				"name":                                (v.Name),
-				"port":                                (v.Port),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"name":              (v.Name),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Oracle:
@@ -14574,23 +11533,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("oracle", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Postgres:
@@ -14598,23 +11553,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("postgres", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.Presto:
@@ -14622,21 +11573,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("presto", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   (v.Username),
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
 			},
 		})
 	case *sdm.RabbitMQAMQP091:
@@ -14644,22 +11593,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.RawTCP:
@@ -14683,22 +11628,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("rdp", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"downgrade_nla_connections":  (v.DowngradeNlaConnections),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":            (v.BindInterface),
+				"downgrade_nla_connections": (v.DowngradeNlaConnections),
+				"egress_filter":             (v.EgressFilter),
+				"hostname":                  (v.Hostname),
+				"name":                      (v.Name),
+				"password":                  seValues["password"],
+				"port":                      (v.Port),
+				"port_override":             (v.PortOverride),
+				"secret_store_id":           (v.SecretStoreID),
+				"subdomain":                 (v.Subdomain),
+				"tags":                      convertTagsToPorcelain(v.Tags),
+				"username":                  seValues["username"],
 			},
 		})
 	case *sdm.Redis:
@@ -14706,22 +11647,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("redis", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Redshift:
@@ -14729,23 +11666,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("redshift", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.SingleStore:
@@ -14753,22 +11686,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("single_store", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Snowflake:
@@ -14776,22 +11705,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("snowflake", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port_override":              (v.PortOverride),
-				"schema":                     (v.Schema),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"schema":          (v.Schema),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Snowsight:
@@ -14799,17 +11724,15 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("snowsight", []map[string]interface{}{
 			{
-				"bind_interface":                  (v.BindInterface),
-				"egress_filter":                   (v.EgressFilter),
-				"healthcheck_username":            (v.HealthcheckUsername),
-				"name":                            (v.Name),
-				"port_override":                   (v.PortOverride),
-				"saml_metadata":                   seValues["saml_metadata"],
-				"secret_store_saml_metadata_path": seValues["secret_store_saml_metadata_path"],
-				"secret_store_saml_metadata_key":  seValues["secret_store_saml_metadata_key"],
-				"secret_store_id":                 (v.SecretStoreID),
-				"subdomain":                       (v.Subdomain),
-				"tags":                            convertTagsToPorcelain(v.Tags),
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"healthcheck_username": (v.HealthcheckUsername),
+				"name":                 (v.Name),
+				"port_override":        (v.PortOverride),
+				"saml_metadata":        seValues["saml_metadata"],
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.SQLServer:
@@ -14817,24 +11740,20 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sql_server", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"schema":                     (v.Schema),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.SSH:
@@ -14856,8 +11775,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
-				"secret_store_username_path":     seValues["secret_store_username_path"],
-				"secret_store_username_key":      seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.SSHCert:
@@ -14880,8 +11797,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"username":                             seValues["username"],
-				"secret_store_username_path":           seValues["secret_store_username_path"],
-				"secret_store_username_key":            seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.SSHCustomerKey:
@@ -14898,14 +11813,10 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_forwarding":                (v.PortForwarding),
 				"port_override":                  (v.PortOverride),
 				"private_key":                    seValues["private_key"],
-				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
-				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
 				"secret_store_id":                (v.SecretStoreID),
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
-				"secret_store_username_path":     seValues["secret_store_username_path"],
-				"secret_store_username_key":      seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.Sybase:
@@ -14913,21 +11824,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sybase", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.SybaseIQ:
@@ -14935,21 +11842,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Teradata:
@@ -14957,21 +11860,17 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("teradata", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Trino:
@@ -14979,20 +11878,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("trino", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   (v.Username),
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        (v.Username),
 			},
 		})
 	}
@@ -15022,61 +11919,31 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.ClientKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
-				if err == nil {
-					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_key"] = v.ClientKey
-			}
+			seValues["client_key"] = v.ClientKey
 		}
 		d.Set("aks", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"client_certificate":                   seValues["client_certificate"],
+				"client_key":                           seValues["client_key"],
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AKSBasicAuth:
@@ -15086,45 +11953,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("aks_basic_auth", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.AKSServiceAccount:
@@ -15134,15 +11981,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Token != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
-				if err == nil {
-					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_token_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["token"] = v.Token
-			}
+			seValues["token"] = v.Token
 		}
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
@@ -15159,8 +11998,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"token":                                seValues["token"],
-				"secret_store_token_path":              seValues["secret_store_token_path"],
-				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.AKSServiceAccountUserImpersonation:
@@ -15170,31 +12007,21 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Token != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
-				if err == nil {
-					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_token_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["token"] = v.Token
-			}
+			seValues["token"] = v.Token
 		}
 		d.Set("aks_service_account_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"port_override":           (v.PortOverride),
-				"secret_store_id":         (v.SecretStoreID),
-				"subdomain":               (v.Subdomain),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"token":                 seValues["token"],
 			},
 		})
 	case *sdm.AKSUserImpersonation:
@@ -15204,59 +12031,29 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.ClientKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
-				if err == nil {
-					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_key"] = v.ClientKey
-			}
+			seValues["client_key"] = v.ClientKey
 		}
 		d.Set("aks_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKS:
@@ -15266,90 +12063,40 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
-				"access_key":                              seValues["access_key"],
-				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                       seValues["secret_access_key"],
-				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"access_key":                           seValues["access_key"],
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_access_key":                    seValues["secret_access_key"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSInstanceProfile:
@@ -15359,62 +12106,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSInstanceProfileUserImpersonation:
@@ -15424,62 +12141,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		d.Set("amazon_eks_instance_profile_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"cluster_name":                         (v.ClusterName),
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
+				"region":                               (v.Region),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"role_arn":                             seValues["role_arn"],
+				"role_external_id":                     seValues["role_external_id"],
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonEKSUserImpersonation:
@@ -15489,88 +12176,38 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("amazon_eks_user_impersonation", []map[string]interface{}{
 			{
-				"access_key":                              seValues["access_key"],
-				"secret_store_access_key_path":            seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":             seValues["secret_store_access_key_key"],
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"cluster_name":                            (v.ClusterName),
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"port_override":                           (v.PortOverride),
-				"region":                                  (v.Region),
-				"role_arn":                                seValues["role_arn"],
-				"secret_store_role_arn_path":              seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":               seValues["secret_store_role_arn_key"],
-				"role_external_id":                        seValues["role_external_id"],
-				"secret_store_role_external_id_path":      seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":       seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                       seValues["secret_access_key"],
-				"secret_store_secret_access_key_path":     seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":      seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"access_key":            seValues["access_key"],
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"cluster_name":          (v.ClusterName),
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                  (v.Name),
+				"port_override":         (v.PortOverride),
+				"region":                (v.Region),
+				"role_arn":              seValues["role_arn"],
+				"role_external_id":      seValues["role_external_id"],
+				"secret_access_key":     seValues["secret_access_key"],
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonES:
@@ -15580,72 +12217,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("amazon_es", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"endpoint":                            (v.Endpoint),
-				"name":                                (v.Name),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AmazonMQAMQP091:
@@ -15655,45 +12252,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("amazonmq_amqp_091", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Athena:
@@ -15703,72 +12280,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("athena", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"name":                                (v.Name),
-				"output":                              (v.Output),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"name":              (v.Name),
+				"output":            (v.Output),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AuroraMysql:
@@ -15778,45 +12315,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("aurora_mysql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.AuroraPostgres:
@@ -15826,46 +12343,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("aurora_postgres", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.AWS:
@@ -15875,71 +12372,31 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("aws", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"healthcheck_region":                  (v.HealthcheckRegion),
-				"name":                                (v.Name),
-				"port_override":                       (v.PortOverride),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":         seValues["access_key"],
+				"bind_interface":     (v.BindInterface),
+				"egress_filter":      (v.EgressFilter),
+				"healthcheck_region": (v.HealthcheckRegion),
+				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
+				"role_arn":           seValues["role_arn"],
+				"role_external_id":   seValues["role_external_id"],
+				"secret_access_key":  seValues["secret_access_key"],
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AWSConsole:
@@ -15949,26 +12406,10 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		d.Set("aws_console", []map[string]interface{}{
 			{
@@ -15981,11 +12422,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"role_arn":                             seValues["role_arn"],
-				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
 				"role_external_id":                     seValues["role_external_id"],
-				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
 				"secret_store_id":                      (v.SecretStoreID),
 				"session_expiry":                       (v.SessionExpiry),
 				"subdomain":                            (v.Subdomain),
@@ -15999,54 +12436,20 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("aws_console_static_key_pair", []map[string]interface{}{
 			{
 				"access_key":                           seValues["access_key"],
-				"secret_store_access_key_path":         seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":          seValues["secret_store_access_key_key"],
 				"bind_interface":                       (v.BindInterface),
 				"egress_filter":                        (v.EgressFilter),
 				"name":                                 (v.Name),
@@ -16055,14 +12458,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"role_arn":                             seValues["role_arn"],
-				"secret_store_role_arn_path":           seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":            seValues["secret_store_role_arn_key"],
 				"role_external_id":                     seValues["role_external_id"],
-				"secret_store_role_external_id_path":   seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":    seValues["secret_store_role_external_id_key"],
 				"secret_access_key":                    seValues["secret_access_key"],
-				"secret_store_secret_access_key_path":  seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":   seValues["secret_store_secret_access_key_key"],
 				"secret_store_id":                      (v.SecretStoreID),
 				"session_expiry":                       (v.SessionExpiry),
 				"subdomain":                            (v.Subdomain),
@@ -16076,56 +12473,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AppID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AppID)
-				if err == nil {
-					seValues["secret_store_app_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_app_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["app_id"] = v.AppID
-			}
+			seValues["app_id"] = v.AppID
 		}
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.TenantID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.TenantID)
-				if err == nil {
-					seValues["secret_store_tenant_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_tenant_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["tenant_id"] = v.TenantID
-			}
+			seValues["tenant_id"] = v.TenantID
 		}
 		d.Set("azure", []map[string]interface{}{
 			{
-				"app_id":                      seValues["app_id"],
-				"secret_store_app_id_path":    seValues["secret_store_app_id_path"],
-				"secret_store_app_id_key":     seValues["secret_store_app_id_key"],
-				"bind_interface":              (v.BindInterface),
-				"egress_filter":               (v.EgressFilter),
-				"name":                        (v.Name),
-				"password":                    seValues["password"],
-				"secret_store_password_path":  seValues["secret_store_password_path"],
-				"secret_store_password_key":   seValues["secret_store_password_key"],
-				"port_override":               (v.PortOverride),
-				"secret_store_id":             (v.SecretStoreID),
-				"subdomain":                   (v.Subdomain),
-				"tags":                        convertTagsToPorcelain(v.Tags),
-				"tenant_id":                   seValues["tenant_id"],
-				"secret_store_tenant_id_path": seValues["secret_store_tenant_id_path"],
-				"secret_store_tenant_id_key":  seValues["secret_store_tenant_id_key"],
+				"app_id":          seValues["app_id"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tenant_id":       seValues["tenant_id"],
 			},
 		})
 	case *sdm.AzureCertificate:
@@ -16135,56 +12502,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AppID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AppID)
-				if err == nil {
-					seValues["secret_store_app_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_app_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["app_id"] = v.AppID
-			}
+			seValues["app_id"] = v.AppID
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.TenantID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.TenantID)
-				if err == nil {
-					seValues["secret_store_tenant_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_tenant_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["tenant_id"] = v.TenantID
-			}
+			seValues["tenant_id"] = v.TenantID
 		}
 		d.Set("azure_certificate", []map[string]interface{}{
 			{
-				"app_id":                               seValues["app_id"],
-				"secret_store_app_id_path":             seValues["secret_store_app_id_path"],
-				"secret_store_app_id_key":              seValues["secret_store_app_id_key"],
-				"bind_interface":                       (v.BindInterface),
-				"client_certificate":                   seValues["client_certificate"],
-				"secret_store_client_certificate_path": seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":  seValues["secret_store_client_certificate_key"],
-				"egress_filter":                        (v.EgressFilter),
-				"name":                                 (v.Name),
-				"port_override":                        (v.PortOverride),
-				"secret_store_id":                      (v.SecretStoreID),
-				"subdomain":                            (v.Subdomain),
-				"tags":                                 convertTagsToPorcelain(v.Tags),
-				"tenant_id":                            seValues["tenant_id"],
-				"secret_store_tenant_id_path":          seValues["secret_store_tenant_id_path"],
-				"secret_store_tenant_id_key":           seValues["secret_store_tenant_id_key"],
+				"app_id":             seValues["app_id"],
+				"bind_interface":     (v.BindInterface),
+				"client_certificate": seValues["client_certificate"],
+				"egress_filter":      (v.EgressFilter),
+				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"tenant_id":          seValues["tenant_id"],
 			},
 		})
 	case *sdm.AzureMysql:
@@ -16194,45 +12531,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("azure_mysql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.AzurePostgres:
@@ -16242,46 +12559,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("azure_postgres", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -16291,31 +12588,21 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.PrivateKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.PrivateKey)
-				if err == nil {
-					seValues["secret_store_private_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_private_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["private_key"] = v.PrivateKey
-			}
+			seValues["private_key"] = v.PrivateKey
 		}
 		d.Set("big_query", []map[string]interface{}{
 			{
-				"bind_interface":                (v.BindInterface),
-				"egress_filter":                 (v.EgressFilter),
-				"endpoint":                      (v.Endpoint),
-				"name":                          (v.Name),
-				"port_override":                 (v.PortOverride),
-				"private_key":                   seValues["private_key"],
-				"secret_store_private_key_path": seValues["secret_store_private_key_path"],
-				"secret_store_private_key_key":  seValues["secret_store_private_key_key"],
-				"project":                       (v.Project),
-				"secret_store_id":               (v.SecretStoreID),
-				"subdomain":                     (v.Subdomain),
-				"tags":                          convertTagsToPorcelain(v.Tags),
-				"username":                      (v.Username),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"endpoint":        (v.Endpoint),
+				"name":            (v.Name),
+				"port_override":   (v.PortOverride),
+				"private_key":     seValues["private_key"],
+				"project":         (v.Project),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        (v.Username),
 			},
 		})
 	case *sdm.Cassandra:
@@ -16325,45 +12612,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("cassandra", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Citus:
@@ -16373,46 +12640,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("citus", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.Clustrix:
@@ -16422,45 +12669,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("clustrix", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Cockroach:
@@ -16470,46 +12697,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("cockroach", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.DB2I:
@@ -16519,45 +12726,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("db_2_i", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DB2LUW:
@@ -16567,45 +12754,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("db_2_luw", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DocumentDBHost:
@@ -16615,45 +12782,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("document_db_host", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DocumentDBReplicaSet:
@@ -16663,46 +12810,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("document_db_replica_set", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"connect_to_replica":         (v.ConnectToReplica),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"password":           seValues["password"],
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"username":           seValues["username"],
 			},
 		})
 	case *sdm.Druid:
@@ -16712,44 +12839,24 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("druid", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DynamoDB:
@@ -16759,72 +12866,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("dynamo_db", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"endpoint":                            (v.Endpoint),
-				"name":                                (v.Name),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Elastic:
@@ -16834,45 +12901,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("elastic", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.ElasticacheRedis:
@@ -16882,45 +12929,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("elasticache_redis", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.GCP:
@@ -16930,29 +12957,19 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Keyfile != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Keyfile)
-				if err == nil {
-					seValues["secret_store_keyfile_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_keyfile_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["keyfile"] = v.Keyfile
-			}
+			seValues["keyfile"] = v.Keyfile
 		}
 		d.Set("gcp", []map[string]interface{}{
 			{
-				"bind_interface":            (v.BindInterface),
-				"egress_filter":             (v.EgressFilter),
-				"keyfile":                   seValues["keyfile"],
-				"secret_store_keyfile_path": seValues["secret_store_keyfile_path"],
-				"secret_store_keyfile_key":  seValues["secret_store_keyfile_key"],
-				"name":                      (v.Name),
-				"port_override":             (v.PortOverride),
-				"scopes":                    (v.Scopes),
-				"secret_store_id":           (v.SecretStoreID),
-				"subdomain":                 (v.Subdomain),
-				"tags":                      convertTagsToPorcelain(v.Tags),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"keyfile":         seValues["keyfile"],
+				"name":            (v.Name),
+				"port_override":   (v.PortOverride),
+				"scopes":          (v.Scopes),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKE:
@@ -16962,45 +12979,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ServiceAccountKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ServiceAccountKey)
-				if err == nil {
-					seValues["secret_store_service_account_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_service_account_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["service_account_key"] = v.ServiceAccountKey
-			}
+			seValues["service_account_key"] = v.ServiceAccountKey
 		}
 		d.Set("google_gke", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"secret_store_id":                         (v.SecretStoreID),
-				"service_account_key":                     seValues["service_account_key"],
-				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
-				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"egress_filter":                        (v.EgressFilter),
+				"endpoint":                             (v.Endpoint),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"name":                                 (v.Name),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"service_account_key":                  seValues["service_account_key"],
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.GoogleGKEUserImpersonation:
@@ -17010,43 +13007,23 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ServiceAccountKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ServiceAccountKey)
-				if err == nil {
-					seValues["secret_store_service_account_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_service_account_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["service_account_key"] = v.ServiceAccountKey
-			}
+			seValues["service_account_key"] = v.ServiceAccountKey
 		}
 		d.Set("google_gke_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"endpoint":                                (v.Endpoint),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"name":                                    (v.Name),
-				"secret_store_id":                         (v.SecretStoreID),
-				"service_account_key":                     seValues["service_account_key"],
-				"secret_store_service_account_key_path":   seValues["secret_store_service_account_key_path"],
-				"secret_store_service_account_key_key":    seValues["secret_store_service_account_key_key"],
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"egress_filter":         (v.EgressFilter),
+				"endpoint":              (v.Endpoint),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"name":                  (v.Name),
+				"secret_store_id":       (v.SecretStoreID),
+				"service_account_key":   seValues["service_account_key"],
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Greenplum:
@@ -17056,46 +13033,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("greenplum", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.HTTPAuth:
@@ -17105,32 +13062,22 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AuthHeader != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AuthHeader)
-				if err == nil {
-					seValues["secret_store_auth_header_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_auth_header_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["auth_header"] = v.AuthHeader
-			}
+			seValues["auth_header"] = v.AuthHeader
 		}
 		d.Set("http_auth", []map[string]interface{}{
 			{
-				"auth_header":                   seValues["auth_header"],
-				"secret_store_auth_header_path": seValues["secret_store_auth_header_path"],
-				"secret_store_auth_header_key":  seValues["secret_store_auth_header_key"],
-				"bind_interface":                (v.BindInterface),
-				"default_path":                  (v.DefaultPath),
-				"egress_filter":                 (v.EgressFilter),
-				"headers_blacklist":             (v.HeadersBlacklist),
-				"healthcheck_path":              (v.HealthcheckPath),
-				"host_override":                 (v.HostOverride),
-				"name":                          (v.Name),
-				"secret_store_id":               (v.SecretStoreID),
-				"subdomain":                     (v.Subdomain),
-				"tags":                          convertTagsToPorcelain(v.Tags),
-				"url":                           (v.Url),
+				"auth_header":       seValues["auth_header"],
+				"bind_interface":    (v.BindInterface),
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
+				"name":              (v.Name),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"url":               (v.Url),
 			},
 		})
 	case *sdm.HTTPBasicAuth:
@@ -17140,46 +13087,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("http_basic_auth", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"default_path":               (v.DefaultPath),
-				"egress_filter":              (v.EgressFilter),
-				"headers_blacklist":          (v.HeadersBlacklist),
-				"healthcheck_path":           (v.HealthcheckPath),
-				"host_override":              (v.HostOverride),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"url":                        (v.Url),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"default_path":      (v.DefaultPath),
+				"egress_filter":     (v.EgressFilter),
+				"headers_blacklist": (v.HeadersBlacklist),
+				"healthcheck_path":  (v.HealthcheckPath),
+				"host_override":     (v.HostOverride),
+				"name":              (v.Name),
+				"password":          seValues["password"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"url":               (v.Url),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.HTTPNoAuth:
@@ -17210,61 +13137,31 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.ClientKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
-				if err == nil {
-					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_key"] = v.ClientKey
-			}
+			seValues["client_key"] = v.ClientKey
 		}
 		d.Set("kubernetes", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"remote_identity_group_id":                (v.RemoteIdentityGroupID),
-				"remote_identity_healthcheck_username":    (v.RemoteIdentityHealthcheckUsername),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":                       (v.BindInterface),
+				"certificate_authority":                seValues["certificate_authority"],
+				"client_certificate":                   seValues["client_certificate"],
+				"client_key":                           seValues["client_key"],
+				"egress_filter":                        (v.EgressFilter),
+				"healthcheck_namespace":                (v.HealthcheckNamespace),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesBasicAuth:
@@ -17274,45 +13171,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("kubernetes_basic_auth", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
@@ -17322,15 +13199,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Token != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
-				if err == nil {
-					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_token_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["token"] = v.Token
-			}
+			seValues["token"] = v.Token
 		}
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
@@ -17347,8 +13216,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"token":                                seValues["token"],
-				"secret_store_token_path":              seValues["secret_store_token_path"],
-				"secret_store_token_key":               seValues["secret_store_token_key"],
 			},
 		})
 	case *sdm.KubernetesServiceAccountUserImpersonation:
@@ -17358,31 +13225,21 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Token != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Token)
-				if err == nil {
-					seValues["secret_store_token_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_token_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["token"] = v.Token
-			}
+			seValues["token"] = v.Token
 		}
 		d.Set("kubernetes_service_account_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":          (v.BindInterface),
-				"egress_filter":           (v.EgressFilter),
-				"healthcheck_namespace":   (v.HealthcheckNamespace),
-				"hostname":                (v.Hostname),
-				"name":                    (v.Name),
-				"port":                    (v.Port),
-				"port_override":           (v.PortOverride),
-				"secret_store_id":         (v.SecretStoreID),
-				"subdomain":               (v.Subdomain),
-				"tags":                    convertTagsToPorcelain(v.Tags),
-				"token":                   seValues["token"],
-				"secret_store_token_path": seValues["secret_store_token_path"],
-				"secret_store_token_key":  seValues["secret_store_token_key"],
+				"bind_interface":        (v.BindInterface),
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"token":                 seValues["token"],
 			},
 		})
 	case *sdm.KubernetesUserImpersonation:
@@ -17392,59 +13249,29 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.ClientKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
-				if err == nil {
-					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_key"] = v.ClientKey
-			}
+			seValues["client_key"] = v.ClientKey
 		}
 		d.Set("kubernetes_user_impersonation", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"egress_filter":                           (v.EgressFilter),
-				"healthcheck_namespace":                   (v.HealthcheckNamespace),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"egress_filter":         (v.EgressFilter),
+				"healthcheck_namespace": (v.HealthcheckNamespace),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Maria:
@@ -17454,45 +13281,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("maria", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Memcached:
@@ -17521,45 +13328,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("memsql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MongoHost:
@@ -17569,46 +13356,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mongo_host", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MongoLegacyHost:
@@ -17618,47 +13385,27 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mongo_legacy_host", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"replica_set":     (v.ReplicaSet),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MongoLegacyReplicaset:
@@ -17668,48 +13415,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mongo_legacy_replicaset", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"connect_to_replica":         (v.ConnectToReplica),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"password":           seValues["password"],
+				"port":               (v.Port),
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"tls_required":       (v.TlsRequired),
+				"username":           seValues["username"],
 			},
 		})
 	case *sdm.MongoReplicaSet:
@@ -17719,48 +13446,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mongo_replica_set", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"connect_to_replica":         (v.ConnectToReplica),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"replica_set":                (v.ReplicaSet),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":      (v.AuthDatabase),
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"password":           seValues["password"],
+				"port":               (v.Port),
+				"port_override":      (v.PortOverride),
+				"replica_set":        (v.ReplicaSet),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"tls_required":       (v.TlsRequired),
+				"username":           seValues["username"],
 			},
 		})
 	case *sdm.MongoShardedCluster:
@@ -17770,45 +13477,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mongo_sharded_cluster", []map[string]interface{}{
 			{
-				"auth_database":              (v.AuthDatabase),
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"auth_database":   (v.AuthDatabase),
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.MTLSMysql:
@@ -17818,88 +13505,38 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.ClientKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
-				if err == nil {
-					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_key"] = v.ClientKey
-			}
+			seValues["client_key"] = v.ClientKey
 		}
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mtls_mysql", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"database":                                (v.Database),
-				"egress_filter":                           (v.EgressFilter),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"password":                                seValues["password"],
-				"secret_store_password_path":              seValues["secret_store_password_path"],
-				"secret_store_password_key":               seValues["secret_store_password_key"],
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"server_name":                             (v.ServerName),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
-				"username":                                seValues["username"],
-				"secret_store_username_path":              seValues["secret_store_username_path"],
-				"secret_store_username_key":               seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"database":              (v.Database),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"server_name":           (v.ServerName),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.MTLSPostgres:
@@ -17909,89 +13546,39 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.CertificateAuthority != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.CertificateAuthority)
-				if err == nil {
-					seValues["secret_store_certificate_authority_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_certificate_authority_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["certificate_authority"] = v.CertificateAuthority
-			}
+			seValues["certificate_authority"] = v.CertificateAuthority
 		}
 		if v.ClientCertificate != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientCertificate)
-				if err == nil {
-					seValues["secret_store_client_certificate_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_certificate_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_certificate"] = v.ClientCertificate
-			}
+			seValues["client_certificate"] = v.ClientCertificate
 		}
 		if v.ClientKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.ClientKey)
-				if err == nil {
-					seValues["secret_store_client_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_client_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["client_key"] = v.ClientKey
-			}
+			seValues["client_key"] = v.ClientKey
 		}
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mtls_postgres", []map[string]interface{}{
 			{
-				"bind_interface":                          (v.BindInterface),
-				"certificate_authority":                   seValues["certificate_authority"],
-				"secret_store_certificate_authority_path": seValues["secret_store_certificate_authority_path"],
-				"secret_store_certificate_authority_key":  seValues["secret_store_certificate_authority_key"],
-				"client_certificate":                      seValues["client_certificate"],
-				"secret_store_client_certificate_path":    seValues["secret_store_client_certificate_path"],
-				"secret_store_client_certificate_key":     seValues["secret_store_client_certificate_key"],
-				"client_key":                              seValues["client_key"],
-				"secret_store_client_key_path":            seValues["secret_store_client_key_path"],
-				"secret_store_client_key_key":             seValues["secret_store_client_key_key"],
-				"database":                                (v.Database),
-				"egress_filter":                           (v.EgressFilter),
-				"hostname":                                (v.Hostname),
-				"name":                                    (v.Name),
-				"override_database":                       (v.OverrideDatabase),
-				"password":                                seValues["password"],
-				"secret_store_password_path":              seValues["secret_store_password_path"],
-				"secret_store_password_key":               seValues["secret_store_password_key"],
-				"port":                                    (v.Port),
-				"port_override":                           (v.PortOverride),
-				"secret_store_id":                         (v.SecretStoreID),
-				"server_name":                             (v.ServerName),
-				"subdomain":                               (v.Subdomain),
-				"tags":                                    convertTagsToPorcelain(v.Tags),
-				"username":                                seValues["username"],
-				"secret_store_username_path":              seValues["secret_store_username_path"],
-				"secret_store_username_key":               seValues["secret_store_username_key"],
+				"bind_interface":        (v.BindInterface),
+				"certificate_authority": seValues["certificate_authority"],
+				"client_certificate":    seValues["client_certificate"],
+				"client_key":            seValues["client_key"],
+				"database":              (v.Database),
+				"egress_filter":         (v.EgressFilter),
+				"hostname":              (v.Hostname),
+				"name":                  (v.Name),
+				"override_database":     (v.OverrideDatabase),
+				"password":              seValues["password"],
+				"port":                  (v.Port),
+				"port_override":         (v.PortOverride),
+				"secret_store_id":       (v.SecretStoreID),
+				"server_name":           (v.ServerName),
+				"subdomain":             (v.Subdomain),
+				"tags":                  convertTagsToPorcelain(v.Tags),
+				"username":              seValues["username"],
 			},
 		})
 	case *sdm.Mysql:
@@ -18001,45 +13588,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("mysql", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Neptune:
@@ -18068,73 +13635,33 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.AccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.AccessKey)
-				if err == nil {
-					seValues["secret_store_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["access_key"] = v.AccessKey
-			}
+			seValues["access_key"] = v.AccessKey
 		}
 		if v.RoleArn != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleArn)
-				if err == nil {
-					seValues["secret_store_role_arn_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_arn_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_arn"] = v.RoleArn
-			}
+			seValues["role_arn"] = v.RoleArn
 		}
 		if v.RoleExternalID != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.RoleExternalID)
-				if err == nil {
-					seValues["secret_store_role_external_id_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_role_external_id_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["role_external_id"] = v.RoleExternalID
-			}
+			seValues["role_external_id"] = v.RoleExternalID
 		}
 		if v.SecretAccessKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SecretAccessKey)
-				if err == nil {
-					seValues["secret_store_secret_access_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_secret_access_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["secret_access_key"] = v.SecretAccessKey
-			}
+			seValues["secret_access_key"] = v.SecretAccessKey
 		}
 		d.Set("neptune_iam", []map[string]interface{}{
 			{
-				"access_key":                          seValues["access_key"],
-				"secret_store_access_key_path":        seValues["secret_store_access_key_path"],
-				"secret_store_access_key_key":         seValues["secret_store_access_key_key"],
-				"bind_interface":                      (v.BindInterface),
-				"egress_filter":                       (v.EgressFilter),
-				"endpoint":                            (v.Endpoint),
-				"name":                                (v.Name),
-				"port":                                (v.Port),
-				"port_override":                       (v.PortOverride),
-				"region":                              (v.Region),
-				"role_arn":                            seValues["role_arn"],
-				"secret_store_role_arn_path":          seValues["secret_store_role_arn_path"],
-				"secret_store_role_arn_key":           seValues["secret_store_role_arn_key"],
-				"role_external_id":                    seValues["role_external_id"],
-				"secret_store_role_external_id_path":  seValues["secret_store_role_external_id_path"],
-				"secret_store_role_external_id_key":   seValues["secret_store_role_external_id_key"],
-				"secret_access_key":                   seValues["secret_access_key"],
-				"secret_store_secret_access_key_path": seValues["secret_store_secret_access_key_path"],
-				"secret_store_secret_access_key_key":  seValues["secret_store_secret_access_key_key"],
-				"secret_store_id":                     (v.SecretStoreID),
-				"subdomain":                           (v.Subdomain),
-				"tags":                                convertTagsToPorcelain(v.Tags),
+				"access_key":        seValues["access_key"],
+				"bind_interface":    (v.BindInterface),
+				"egress_filter":     (v.EgressFilter),
+				"endpoint":          (v.Endpoint),
+				"name":              (v.Name),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"role_arn":          seValues["role_arn"],
+				"role_external_id":  seValues["role_external_id"],
+				"secret_access_key": seValues["secret_access_key"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Oracle:
@@ -18144,46 +13671,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("oracle", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Postgres:
@@ -18193,46 +13700,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("postgres", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.Presto:
@@ -18242,33 +13729,23 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		d.Set("presto", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   (v.Username),
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
 			},
 		})
 	case *sdm.RabbitMQAMQP091:
@@ -18278,45 +13755,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("rabbitmq_amqp_091", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.RawTCP:
@@ -18345,45 +13802,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("rdp", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"downgrade_nla_connections":  (v.DowngradeNlaConnections),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":            (v.BindInterface),
+				"downgrade_nla_connections": (v.DowngradeNlaConnections),
+				"egress_filter":             (v.EgressFilter),
+				"hostname":                  (v.Hostname),
+				"name":                      (v.Name),
+				"password":                  seValues["password"],
+				"port":                      (v.Port),
+				"port_override":             (v.PortOverride),
+				"secret_store_id":           (v.SecretStoreID),
+				"subdomain":                 (v.Subdomain),
+				"tags":                      convertTagsToPorcelain(v.Tags),
+				"username":                  seValues["username"],
 			},
 		})
 	case *sdm.Redis:
@@ -18393,45 +13830,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("redis", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"tls_required":               (v.TlsRequired),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Redshift:
@@ -18441,46 +13858,26 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("redshift", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.SingleStore:
@@ -18490,45 +13887,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("single_store", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Snowflake:
@@ -18538,45 +13915,25 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("snowflake", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port_override":              (v.PortOverride),
-				"schema":                     (v.Schema),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"schema":          (v.Schema),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Snowsight:
@@ -18586,29 +13943,19 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.SamlMetadata != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.SamlMetadata)
-				if err == nil {
-					seValues["secret_store_saml_metadata_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_saml_metadata_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["saml_metadata"] = v.SamlMetadata
-			}
+			seValues["saml_metadata"] = v.SamlMetadata
 		}
 		d.Set("snowsight", []map[string]interface{}{
 			{
-				"bind_interface":                  (v.BindInterface),
-				"egress_filter":                   (v.EgressFilter),
-				"healthcheck_username":            (v.HealthcheckUsername),
-				"name":                            (v.Name),
-				"port_override":                   (v.PortOverride),
-				"saml_metadata":                   seValues["saml_metadata"],
-				"secret_store_saml_metadata_path": seValues["secret_store_saml_metadata_path"],
-				"secret_store_saml_metadata_key":  seValues["secret_store_saml_metadata_key"],
-				"secret_store_id":                 (v.SecretStoreID),
-				"subdomain":                       (v.Subdomain),
-				"tags":                            convertTagsToPorcelain(v.Tags),
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"healthcheck_username": (v.HealthcheckUsername),
+				"name":                 (v.Name),
+				"port_override":        (v.PortOverride),
+				"saml_metadata":        seValues["saml_metadata"],
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.SQLServer:
@@ -18618,47 +13965,27 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("sql_server", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"override_database":          (v.OverrideDatabase),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"schema":                     (v.Schema),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          seValues["password"],
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.SSH:
@@ -18668,15 +13995,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("ssh", []map[string]interface{}{
 			{
@@ -18694,8 +14013,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
-				"secret_store_username_path":     seValues["secret_store_username_path"],
-				"secret_store_username_key":      seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.SSHCert:
@@ -18705,15 +14022,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("ssh_cert", []map[string]interface{}{
 			{
@@ -18732,8 +14041,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":                            (v.Subdomain),
 				"tags":                                 convertTagsToPorcelain(v.Tags),
 				"username":                             seValues["username"],
-				"secret_store_username_path":           seValues["secret_store_username_path"],
-				"secret_store_username_key":            seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.SSHCustomerKey:
@@ -18743,26 +14050,10 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.PrivateKey != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.PrivateKey)
-				if err == nil {
-					seValues["secret_store_private_key_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_private_key_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["private_key"] = v.PrivateKey
-			}
+			seValues["private_key"] = v.PrivateKey
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("ssh_customer_key", []map[string]interface{}{
 			{
@@ -18775,14 +14066,10 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_forwarding":                (v.PortForwarding),
 				"port_override":                  (v.PortOverride),
 				"private_key":                    seValues["private_key"],
-				"secret_store_private_key_path":  seValues["secret_store_private_key_path"],
-				"secret_store_private_key_key":   seValues["secret_store_private_key_key"],
 				"secret_store_id":                (v.SecretStoreID),
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),
 				"username":                       seValues["username"],
-				"secret_store_username_path":     seValues["secret_store_username_path"],
-				"secret_store_username_key":      seValues["secret_store_username_key"],
 			},
 		})
 	case *sdm.Sybase:
@@ -18792,44 +14079,24 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("sybase", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.SybaseIQ:
@@ -18839,44 +14106,24 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("sybase_iq", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Teradata:
@@ -18886,44 +14133,24 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		if v.Username != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Username)
-				if err == nil {
-					seValues["secret_store_username_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_username_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["username"] = v.Username
-			}
+			seValues["username"] = v.Username
 		}
 		d.Set("teradata", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   seValues["username"],
-				"secret_store_username_path": seValues["secret_store_username_path"],
-				"secret_store_username_key":  seValues["secret_store_username_key"],
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.Trino:
@@ -18933,32 +14160,22 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		_ = localV
 		if v.Password != "" {
-			if v.SecretStoreID != "" {
-				u, err := url.ParseRequestURI("secretstore://store/" + v.Password)
-				if err == nil {
-					seValues["secret_store_password_path"] = strings.TrimPrefix(u.Path, "/")
-					seValues["secret_store_password_key"] = u.Query().Get("key")
-				}
-			} else {
-				seValues["password"] = v.Password
-			}
+			seValues["password"] = v.Password
 		}
 		d.Set("trino", []map[string]interface{}{
 			{
-				"bind_interface":             (v.BindInterface),
-				"database":                   (v.Database),
-				"egress_filter":              (v.EgressFilter),
-				"hostname":                   (v.Hostname),
-				"name":                       (v.Name),
-				"password":                   seValues["password"],
-				"secret_store_password_path": seValues["secret_store_password_path"],
-				"secret_store_password_key":  seValues["secret_store_password_key"],
-				"port":                       (v.Port),
-				"port_override":              (v.PortOverride),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
-				"username":                   (v.Username),
+				"bind_interface":  (v.BindInterface),
+				"database":        (v.Database),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"username":        (v.Username),
 			},
 		})
 	}
