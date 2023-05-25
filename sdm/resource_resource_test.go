@@ -2,6 +2,7 @@ package sdm
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"regexp"
 	"testing"
@@ -196,6 +197,91 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 						return nil
 					},
 				),
+			},
+			{
+				ResourceName:      "sdm_resource." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccSDMResource_RecreateWithSecretStore(t *testing.T) {
+	initAcceptanceTest(t)
+	name := randomWithPrefix("test")
+	port := portOverride.Count()
+
+	vaults, err := createVaultTokenStoresWithPrefix("vaultTest", 2)
+	if err != nil {
+		t.Fatalf("failed to create secret store: %v", err)
+	}
+	vault := vaults[0]
+	path := "/path/to/secret"
+	key := "password2"
+
+	newVault := vaults[1]
+
+	var createdID string
+
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMResourceRedisSecretStoreConfig(name, name, port, vault.GetID(), path, key),
+				Check: func(s *terraform.State) error {
+					id, err := testCreatedID(s, "sdm_resource", name)
+					if err != nil {
+						return err
+					}
+
+					createdID = id
+
+					// check if it was actually created
+					client := testClient()
+					ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+					defer cancel()
+					resp, err := client.Resources().Get(ctx, id)
+					if err != nil {
+						return fmt.Errorf("failed to get created resource: %w", err)
+					}
+
+					if resp.Resource.(*sdm.Redis).SecretStoreID != vault.GetID() {
+						return fmt.Errorf("unexpected secret store id '%s', expected '%s'", resp.Resource.(*sdm.Redis).SecretStoreID, vault.GetID())
+					}
+
+					return nil
+				},
+			},
+			{
+				Config: testAccSDMResourceRedisSecretStoreConfig(name, name, port, newVault.GetID(), path, key),
+				Check: func(s *terraform.State) error {
+					id, err := testCreatedID(s, "sdm_resource", name)
+					if err != nil {
+						return err
+					}
+
+					// did the id change?
+					if id == createdID {
+						return errors.New("expected resource ID to change")
+					}
+
+					// confirm it was recreated with new secret store
+					client := testClient()
+					ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+					defer cancel()
+					resp, err := client.Resources().Get(ctx, id)
+					if err != nil {
+						return fmt.Errorf("failed to get created resource: %w", err)
+					}
+
+					if resp.Resource.(*sdm.Redis).SecretStoreID != newVault.GetID() {
+						return fmt.Errorf("unexpected secret store id '%s', expected '%s'", resp.Resource.(*sdm.Redis).SecretStoreID, newVault.GetID())
+					}
+
+					return nil
+				},
 			},
 			{
 				ResourceName:      "sdm_resource." + name,

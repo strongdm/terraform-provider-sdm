@@ -108,12 +108,3 @@ func convertBoolToPlumbing(porcelain interface{}) bool {
 	}
 	return porcelain.(bool)
 }
-
-func fullSecretStorePath(raw map[string]interface{}, cred string) string {
-	path := convertStringToPlumbing(raw["secret_store_"+cred+"_path"])
-	key := convertStringToPlumbing(raw["secret_store_"+cred+"_key"])
-	if key != "" {
-		return path + "?key=" + key
-	}
-	return path
-}
