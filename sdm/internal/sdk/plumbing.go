@@ -8365,6 +8365,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Snowsight{Snowsight: convertSnowsightToPlumbing(v)}
 	case *SQLServer:
 		plumbing.Resource = &proto.Resource_SqlServer{SqlServer: convertSQLServerToPlumbing(v)}
+	case *SQLServerAzureAD:
+		plumbing.Resource = &proto.Resource_SqlServerAzureAd{SqlServerAzureAd: convertSQLServerAzureADToPlumbing(v)}
+	case *SQLServerKerberosAD:
+		plumbing.Resource = &proto.Resource_SqlServerKerberosAd{SqlServerKerberosAd: convertSQLServerKerberosADToPlumbing(v)}
 	case *SSH:
 		plumbing.Resource = &proto.Resource_Ssh{Ssh: convertSSHToPlumbing(v)}
 	case *SSHCert:
@@ -8596,6 +8600,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetSqlServer() != nil {
 		return convertSQLServerToPorcelain(plumbing.GetSqlServer())
+	}
+	if plumbing.GetSqlServerAzureAd() != nil {
+		return convertSQLServerAzureADToPorcelain(plumbing.GetSqlServerAzureAd())
+	}
+	if plumbing.GetSqlServerKerberosAd() != nil {
+		return convertSQLServerKerberosADToPorcelain(plumbing.GetSqlServerKerberosAd())
 	}
 	if plumbing.GetSsh() != nil {
 		return convertSSHToPorcelain(plumbing.GetSsh())
@@ -9439,6 +9449,164 @@ func convertRepeatedSQLServerToPorcelain(plumbings []*proto.SQLServer) (
 	var items []*SQLServer
 	for _, plumbing := range plumbings {
 		if v, err := convertSQLServerToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSQLServerAzureADToPorcelain(plumbing *proto.SQLServerAzureAD) (*SQLServerAzureAD, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SQLServerAzureAD{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.ClientID = plumbing.ClientId
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.OverrideDatabase = plumbing.OverrideDatabase
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.Schema = plumbing.Schema
+	porcelain.Secret = plumbing.Secret
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TenantID = plumbing.TenantId
+	return porcelain, nil
+}
+
+func convertSQLServerAzureADToPlumbing(porcelain *SQLServerAzureAD) *proto.SQLServerAzureAD {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SQLServerAzureAD{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.ClientId = (porcelain.ClientID)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Schema = (porcelain.Schema)
+	plumbing.Secret = (porcelain.Secret)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TenantId = (porcelain.TenantID)
+	return plumbing
+}
+func convertRepeatedSQLServerAzureADToPlumbing(
+	porcelains []*SQLServerAzureAD,
+) []*proto.SQLServerAzureAD {
+	var items []*proto.SQLServerAzureAD
+	for _, porcelain := range porcelains {
+		items = append(items, convertSQLServerAzureADToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSQLServerAzureADToPorcelain(plumbings []*proto.SQLServerAzureAD) (
+	[]*SQLServerAzureAD,
+	error,
+) {
+	var items []*SQLServerAzureAD
+	for _, plumbing := range plumbings {
+		if v, err := convertSQLServerAzureADToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSQLServerKerberosADToPorcelain(plumbing *proto.SQLServerKerberosAD) (*SQLServerKerberosAD, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SQLServerKerberosAD{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Keytab = plumbing.Keytab
+	porcelain.KrbConfig = plumbing.KrbConfig
+	porcelain.Name = plumbing.Name
+	porcelain.OverrideDatabase = plumbing.OverrideDatabase
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.Realm = plumbing.Realm
+	porcelain.Schema = plumbing.Schema
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.ServerSpn = plumbing.ServerSpn
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertSQLServerKerberosADToPlumbing(porcelain *SQLServerKerberosAD) *proto.SQLServerKerberosAD {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SQLServerKerberosAD{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Keytab = (porcelain.Keytab)
+	plumbing.KrbConfig = (porcelain.KrbConfig)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Realm = (porcelain.Realm)
+	plumbing.Schema = (porcelain.Schema)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.ServerSpn = (porcelain.ServerSpn)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSQLServerKerberosADToPlumbing(
+	porcelains []*SQLServerKerberosAD,
+) []*proto.SQLServerKerberosAD {
+	var items []*proto.SQLServerKerberosAD
+	for _, porcelain := range porcelains {
+		items = append(items, convertSQLServerKerberosADToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSQLServerKerberosADToPorcelain(plumbings []*proto.SQLServerKerberosAD) (
+	[]*SQLServerKerberosAD,
+	error,
+) {
+	var items []*SQLServerKerberosAD
+	for _, plumbing := range plumbings {
+		if v, err := convertSQLServerKerberosADToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

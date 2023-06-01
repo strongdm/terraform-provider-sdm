@@ -10,7 +10,6 @@ sidebar_current: “docs-sdm-resource-secret-store"
 A SecretStore is a server where resource secrets (passwords, keys) are stored.
  Coming soon support for HashiCorp Vault and AWS Secret Store.
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the SecretStore resource:
 * aws:

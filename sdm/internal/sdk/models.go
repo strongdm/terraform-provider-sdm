@@ -6986,6 +6986,114 @@ func (m *SQLServer) GetBindInterface() string {
 func (m *SQLServer) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*SQLServerAzureAD) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) GetID() string { return m.ID }
+
+// GetName returns the name of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SQLServerAzureAD.
+func (m *SQLServerAzureAD) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*SQLServerKerberosAD) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) GetID() string { return m.ID }
+
+// GetName returns the name of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SQLServerKerberosAD.
+func (m *SQLServerKerberosAD) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*SSH) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the SSH.
@@ -7543,6 +7651,84 @@ type SQLServer struct {
 	Schema string `json:"schema"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	Username string `json:"username"`
+}
+
+type SQLServerAzureAD struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
+	ClientID string `json:"clientId"`
+
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Schema string `json:"schema"`
+
+	Secret string `json:"secret"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+
+	TenantID string `json:"tenantId"`
+}
+
+type SQLServerKerberosAD struct {
+	// Bind interface
+	BindInterface string `json:"bindInterface"`
+
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+
+	Keytab string `json:"keytab"`
+
+	KrbConfig string `json:"krbConfig"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+
+	OverrideDatabase bool `json:"overrideDatabase"`
+
+	Port int32 `json:"port"`
+
+	PortOverride int32 `json:"portOverride"`
+
+	Realm string `json:"realm"`
+
+	Schema string `json:"schema"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+
+	ServerSpn string `json:"serverSpn"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.

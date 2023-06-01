@@ -17,7 +17,6 @@ resource "sdm_account_attachment" "test_account_attachment" {
 }
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the AccountAttachment resource:
 * `account_id` - (Required) The id of the account of this AccountAttachment.

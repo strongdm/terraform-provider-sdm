@@ -19,7 +19,6 @@ resource "sdm_remote_identity" "user" {
 
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the RemoteIdentity resource:
 * `account_id` - (Required) The account for this remote identity.

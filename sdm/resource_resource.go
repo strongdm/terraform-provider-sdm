@@ -5636,6 +5636,199 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"sql_server_azure_ad": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"client_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
+						"schema": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tenant_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
+			"sql_server_kerberos_ad": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Bind interface",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "",
+						},
+						"keytab": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"krb_config": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "",
+						},
+						"realm": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"schema": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"server_spn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "",
+						},
+					},
+				},
+			},
 			"ssh": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -8137,6 +8330,86 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("sql_server_azure_ad").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["client_id"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential client_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["secret"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential secret was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["tenant_id"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential tenant_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"client_id": convertStringToPlumbing(raw["client_id"]),
+			"secret":    convertStringToPlumbing(raw["secret"]),
+			"tenant_id": convertStringToPlumbing(raw["tenant_id"]),
+		}, nil
+	}
+	if list := d.Get("sql_server_kerberos_ad").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["keytab"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential keytab was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["krb_config"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential krb_config was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["realm"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential realm was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["server_spn"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential server_spn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"keytab":     convertStringToPlumbing(raw["keytab"]),
+			"krb_config": convertStringToPlumbing(raw["krb_config"]),
+			"realm":      convertStringToPlumbing(raw["realm"]),
+			"server_spn": convertStringToPlumbing(raw["server_spn"]),
+			"username":   convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10236,6 +10509,68 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("sql_server_azure_ad").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.SQLServerAzureAD{}
+		}
+		out := &sdm.SQLServerAzureAD{
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			ClientID:         convertStringToPlumbing(raw["client_id"]),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
+			Schema:           convertStringToPlumbing(raw["schema"]),
+			Secret:           convertStringToPlumbing(raw["secret"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TenantID:         convertStringToPlumbing(raw["tenant_id"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("sql_server_kerberos_ad").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.SQLServerKerberosAD{}
+		}
+		out := &sdm.SQLServerKerberosAD{
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Keytab:           convertStringToPlumbing(raw["keytab"]),
+			KrbConfig:        convertStringToPlumbing(raw["krb_config"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
+			Realm:            convertStringToPlumbing(raw["realm"]),
+			Schema:           convertStringToPlumbing(raw["schema"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			ServerSpn:        convertStringToPlumbing(raw["server_spn"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("ssh").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11829,6 +12164,52 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":     (v.PortOverride),
 				"schema":            (v.Schema),
 				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
+			},
+		})
+	case *sdm.SQLServerAzureAD:
+		localV, _ := localVersion.(*sdm.SQLServerAzureAD)
+		_ = localV
+		d.Set("sql_server_azure_ad", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"client_id":         seValues["client_id"],
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"secret":            seValues["secret"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"tenant_id":         seValues["tenant_id"],
+			},
+		})
+	case *sdm.SQLServerKerberosAD:
+		localV, _ := localVersion.(*sdm.SQLServerKerberosAD)
+		_ = localV
+		d.Set("sql_server_kerberos_ad", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"keytab":            seValues["keytab"],
+				"krb_config":        seValues["krb_config"],
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"realm":             seValues["realm"],
+				"schema":            (v.Schema),
+				"secret_store_id":   (v.SecretStoreID),
+				"server_spn":        seValues["server_spn"],
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          seValues["username"],
@@ -14061,6 +14442,82 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":     (v.PortOverride),
 				"schema":            (v.Schema),
 				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
+			},
+		})
+	case *sdm.SQLServerAzureAD:
+		localV, ok := localVersion.(*sdm.SQLServerAzureAD)
+		if !ok {
+			localV = &sdm.SQLServerAzureAD{}
+		}
+		_ = localV
+		if v.ClientID != "" {
+			seValues["client_id"] = v.ClientID
+		}
+		if v.Secret != "" {
+			seValues["secret"] = v.Secret
+		}
+		if v.TenantID != "" {
+			seValues["tenant_id"] = v.TenantID
+		}
+		d.Set("sql_server_azure_ad", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"client_id":         seValues["client_id"],
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"schema":            (v.Schema),
+				"secret":            seValues["secret"],
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"tenant_id":         seValues["tenant_id"],
+			},
+		})
+	case *sdm.SQLServerKerberosAD:
+		localV, ok := localVersion.(*sdm.SQLServerKerberosAD)
+		if !ok {
+			localV = &sdm.SQLServerKerberosAD{}
+		}
+		_ = localV
+		if v.Keytab != "" {
+			seValues["keytab"] = v.Keytab
+		}
+		if v.KrbConfig != "" {
+			seValues["krb_config"] = v.KrbConfig
+		}
+		if v.Realm != "" {
+			seValues["realm"] = v.Realm
+		}
+		if v.ServerSpn != "" {
+			seValues["server_spn"] = v.ServerSpn
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("sql_server_kerberos_ad", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"keytab":            seValues["keytab"],
+				"krb_config":        seValues["krb_config"],
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"realm":             seValues["realm"],
+				"schema":            (v.Schema),
+				"secret_store_id":   (v.SecretStoreID),
+				"server_spn":        seValues["server_spn"],
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          seValues["username"],

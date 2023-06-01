@@ -37,7 +37,6 @@ resource "sdm_node" "relay" {
 }
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the Node resource:
 * gateway:

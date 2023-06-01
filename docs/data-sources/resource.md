@@ -1072,6 +1072,42 @@ In addition to provided arguments above, the following attributes are returned b
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - 
+	* sql_server_azure_ad:
+		* `bind_interface` - Bind interface
+		* `client_id` - 
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `port` - 
+		* `port_override` - 
+		* `schema` - 
+		* `secret` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `tenant_id` - 
+	* sql_server_kerberos_ad:
+		* `bind_interface` - Bind interface
+		* `database` - 
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - 
+		* `id` - Unique identifier of the Resource.
+		* `keytab` - 
+		* `krb_config` - 
+		* `name` - Unique human-readable name of the Resource.
+		* `override_database` - 
+		* `port` - 
+		* `port_override` - 
+		* `realm` - 
+		* `schema` - 
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `server_spn` - 
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - 
 	* ssh:
 		* `allow_deprecated_key_exchanges` - 
 		* `bind_interface` - Bind interface

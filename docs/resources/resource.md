@@ -47,7 +47,6 @@ Credentials can be provided to resources in two forms:
 - As a path to a credential in a Secret Store, which will be returned on import. e.g. /path/to/secret?key=password&encoding=base64
 
 All credentials must be either raw or Secret Store paths, depending on whether the resource has a Secret Store ID provided. In both cases, some credentials may be optional depending on the resource subtype.
-
 ## Argument Reference
 The following arguments are supported by the Resource resource:
 * aks:
@@ -1013,6 +1012,40 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) 
 	* `schema` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Required, either in plaintext, or as a secret store path) 
+* sql_server_azure_ad:
+	* `bind_interface` - (Optional) Bind interface
+	* `client_id` - (Required, either in plaintext, or as a secret store path) 
+	* `database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `override_database` - (Optional) 
+	* `port` - (Optional) 
+	* `port_override` - (Optional) 
+	* `schema` - (Optional) 
+	* `secret` - (Required, either in plaintext, or as a secret store path) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tenant_id` - (Required, either in plaintext, or as a secret store path) 
+* sql_server_kerberos_ad:
+	* `bind_interface` - (Optional) Bind interface
+	* `database` - (Required) 
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) 
+	* `keytab` - (Required, either in plaintext, or as a secret store path) 
+	* `krb_config` - (Required, either in plaintext, or as a secret store path) 
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `override_database` - (Optional) 
+	* `port` - (Optional) 
+	* `port_override` - (Optional) 
+	* `realm` - (Required, either in plaintext, or as a secret store path) 
+	* `schema` - (Optional) 
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `server_spn` - (Required, either in plaintext, or as a secret store path) 
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) 

@@ -250,9 +250,7 @@ const (
 	ActivityVerbWorkflowResourceMultipleAssigned                 = "multiple resources assigned to workflow"
 	ActivityVerbWorkflowResourceMultipleUnassigned               = "multiple resources unassigned from workflow"
 	ActivityVerbWorkflowRolesUpdated                             = "workflow roles updated"
-	ActivityVerbWorkflowNotificationOptionAdded                  = "workflow notification type added"
-	ActivityVerbWorkflowNotificationOptionRemoved                = "workflow notification type removed"
-	ActivityVerbWorkflowNotificationOptionsUpdated               = "workflow approvers updated"
+	ActivityVerbWorkflowApproversUpdated                         = "workflow approvers updated"
 	ActivityVerbWorkflowNameUpdated                              = "workflow name updated"
 	ActivityVerbWorkflowDescriptionUpdated                       = "workflow description updated"
 	ActivityVerbWorkflowAutoGrantUpdated                         = "workflow auto grant updated"
@@ -345,6 +343,7 @@ const (
 	PermissionGrantRead                              = "grant:read"
 	PermissionGrantWrite                             = "grant:write"
 	PermissionReportRead                             = "report:read"
+	PermissionBillingRead                            = "billing:read"
 )
 
 // Query Categories, all the categories of resource against which queries are logged.

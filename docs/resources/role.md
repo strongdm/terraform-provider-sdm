@@ -42,7 +42,6 @@ resource "sdm_role" "example-role" {
 }
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
-
 ## Argument Reference
 The following arguments are supported by the Role resource:
 * `access_rules` - (Optional) AccessRules is a list of access rules defining the resources this Role has access to.
