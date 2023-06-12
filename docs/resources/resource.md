@@ -238,9 +238,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * aurora_postgres:
 	* `bind_interface` - (Optional) Bind interface
@@ -331,9 +333,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * azure_postgres:
 	* `bind_interface` - (Optional) Bind interface
@@ -397,9 +401,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * cockroach:
 	* `bind_interface` - (Optional) Bind interface
@@ -685,9 +691,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * memcached:
 	* `bind_interface` - (Optional) Bind interface
@@ -708,9 +716,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * mongo_host:
 	* `auth_database` - (Required) 
@@ -798,10 +808,12 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) 
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * mtls_postgres:
 	* `bind_interface` - (Optional) Bind interface
@@ -830,9 +842,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * neptune:
 	* `bind_interface` - (Optional) Bind interface
@@ -973,9 +987,11 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) 
 	* `port` - (Optional) 
 	* `port_override` - (Optional) 
+	* `require_native_auth` - (Optional) 
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_azure_single_server_usernames` - (Optional) 
 	* `username` - (Required, either in plaintext, or as a secret store path) 
 * snowflake:
 	* `bind_interface` - (Optional) Bind interface

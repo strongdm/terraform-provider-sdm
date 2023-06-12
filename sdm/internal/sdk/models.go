@@ -934,12 +934,16 @@ type AuroraMysql struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -1050,12 +1054,16 @@ type AzureMysql struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -1218,12 +1226,16 @@ type Clustrix struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -2028,6 +2040,8 @@ type MTLSMysql struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 
@@ -2036,6 +2050,8 @@ type MTLSMysql struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -2102,12 +2118,16 @@ type Maria struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -2158,12 +2178,16 @@ type Memsql struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -2363,12 +2387,16 @@ type Mysql struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }
@@ -8184,12 +8212,16 @@ type SingleStore struct {
 	Port int32 `json:"port"`
 
 	PortOverride int32 `json:"portOverride"`
+
+	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 
 	Username string `json:"username"`
 }

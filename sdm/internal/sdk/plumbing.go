@@ -2559,6 +2559,7 @@ func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) (*AuroraMysql, e
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -2566,6 +2567,7 @@ func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) (*AuroraMysql, e
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -2585,9 +2587,11 @@ func convertAuroraMysqlToPlumbing(porcelain *AuroraMysql) *proto.AuroraMysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -2837,6 +2841,7 @@ func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, erro
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -2844,6 +2849,7 @@ func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, erro
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -2863,9 +2869,11 @@ func convertAzureMysqlToPlumbing(porcelain *AzureMysql) *proto.AzureMysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -3245,6 +3253,7 @@ func convertClustrixToPorcelain(plumbing *proto.Clustrix) (*Clustrix, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -3252,6 +3261,7 @@ func convertClustrixToPorcelain(plumbing *proto.Clustrix) (*Clustrix, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -3271,9 +3281,11 @@ func convertClustrixToPlumbing(porcelain *Clustrix) *proto.Clustrix {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -5357,6 +5369,7 @@ func convertMTLSMysqlToPorcelain(plumbing *proto.MTLSMysql) (*MTLSMysql, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServerName = plumbing.ServerName
 	porcelain.Subdomain = plumbing.Subdomain
@@ -5365,6 +5378,7 @@ func convertMTLSMysqlToPorcelain(plumbing *proto.MTLSMysql) (*MTLSMysql, error) 
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -5387,10 +5401,12 @@ func convertMTLSMysqlToPlumbing(porcelain *MTLSMysql) *proto.MTLSMysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServerName = (porcelain.ServerName)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -5514,6 +5530,7 @@ func convertMariaToPorcelain(plumbing *proto.Maria) (*Maria, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5521,6 +5538,7 @@ func convertMariaToPorcelain(plumbing *proto.Maria) (*Maria, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -5540,9 +5558,11 @@ func convertMariaToPlumbing(porcelain *Maria) *proto.Maria {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -5650,6 +5670,7 @@ func convertMemsqlToPorcelain(plumbing *proto.Memsql) (*Memsql, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5657,6 +5678,7 @@ func convertMemsqlToPorcelain(plumbing *proto.Memsql) (*Memsql, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -5676,9 +5698,11 @@ func convertMemsqlToPlumbing(porcelain *Memsql) *proto.Memsql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -6094,6 +6118,7 @@ func convertMysqlToPorcelain(plumbing *proto.Mysql) (*Mysql, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6101,6 +6126,7 @@ func convertMysqlToPorcelain(plumbing *proto.Mysql) (*Mysql, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -6120,9 +6146,11 @@ func convertMysqlToPlumbing(porcelain *Mysql) *proto.Mysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -10274,6 +10302,7 @@ func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) (*SingleStore, e
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -10281,6 +10310,7 @@ func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) (*SingleStore, e
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -10300,9 +10330,11 @@ func convertSingleStoreToPlumbing(porcelain *SingleStore) *proto.SingleStore {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }

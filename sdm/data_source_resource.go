@@ -1145,6 +1145,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1160,6 +1165,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -1686,6 +1696,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -1701,6 +1716,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -2071,6 +2091,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -2086,6 +2111,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -3758,6 +3788,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3773,6 +3808,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -3894,6 +3934,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3909,6 +3954,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -4413,6 +4463,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4433,6 +4488,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -4598,6 +4658,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4613,6 +4678,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -5432,6 +5502,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "",
 									},
+									"require_native_auth": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -5447,6 +5522,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"use_azure_single_server_usernames": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -6696,19 +6776,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AuroraMysql:
 			output[0]["aurora_mysql"] = append(output[0]["aurora_mysql"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.AuroraPostgres:
 			output[0]["aurora_postgres"] = append(output[0]["aurora_postgres"], entity{
@@ -6810,19 +6892,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AzureMysql:
 			output[0]["azure_mysql"] = append(output[0]["azure_mysql"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.AzurePostgres:
 			output[0]["azure_postgres"] = append(output[0]["azure_postgres"], entity{
@@ -6891,19 +6975,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Clustrix:
 			output[0]["clustrix"] = append(output[0]["clustrix"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.Cockroach:
 			output[0]["cockroach"] = append(output[0]["cockroach"], entity{
@@ -7245,19 +7331,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Maria:
 			output[0]["maria"] = append(output[0]["maria"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
@@ -7274,19 +7362,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Memsql:
 			output[0]["memsql"] = append(output[0]["memsql"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.MongoHost:
 			output[0]["mongo_host"] = append(output[0]["mongo_host"], entity{
@@ -7379,23 +7469,25 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.MTLSMysql:
 			output[0]["mtls_mysql"] = append(output[0]["mtls_mysql"], entity{
-				"bind_interface":        (v.BindInterface),
-				"certificate_authority": (v.CertificateAuthority),
-				"client_certificate":    (v.ClientCertificate),
-				"client_key":            (v.ClientKey),
-				"database":              (v.Database),
-				"egress_filter":         (v.EgressFilter),
-				"hostname":              (v.Hostname),
-				"id":                    (v.ID),
-				"name":                  (v.Name),
-				"password":              (v.Password),
-				"port":                  (v.Port),
-				"port_override":         (v.PortOverride),
-				"secret_store_id":       (v.SecretStoreID),
-				"server_name":           (v.ServerName),
-				"subdomain":             (v.Subdomain),
-				"tags":                  convertTagsToPorcelain(v.Tags),
-				"username":              (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"certificate_authority":             (v.CertificateAuthority),
+				"client_certificate":                (v.ClientCertificate),
+				"client_key":                        (v.ClientKey),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"server_name":                       (v.ServerName),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.MTLSPostgres:
 			output[0]["mtls_postgres"] = append(output[0]["mtls_postgres"], entity{
@@ -7420,19 +7512,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Mysql:
 			output[0]["mysql"] = append(output[0]["mysql"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.Neptune:
 			output[0]["neptune"] = append(output[0]["neptune"], entity{
@@ -7596,19 +7690,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SingleStore:
 			output[0]["single_store"] = append(output[0]["single_store"], entity{
-				"bind_interface":  (v.BindInterface),
-				"database":        (v.Database),
-				"egress_filter":   (v.EgressFilter),
-				"hostname":        (v.Hostname),
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"password":        (v.Password),
-				"port":            (v.Port),
-				"port_override":   (v.PortOverride),
-				"secret_store_id": (v.SecretStoreID),
-				"subdomain":       (v.Subdomain),
-				"tags":            convertTagsToPorcelain(v.Tags),
-				"username":        (v.Username),
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.Snowflake:
 			output[0]["snowflake"] = append(output[0]["snowflake"], entity{

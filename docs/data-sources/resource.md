@@ -237,9 +237,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* aurora_postgres:
 		* `bind_interface` - Bind interface
@@ -337,9 +339,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* azure_postgres:
 		* `bind_interface` - Bind interface
@@ -408,9 +412,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* cockroach:
 		* `bind_interface` - Bind interface
@@ -718,9 +724,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* memcached:
 		* `bind_interface` - Bind interface
@@ -743,9 +751,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* mongo_host:
 		* `auth_database` - 
@@ -839,10 +849,12 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `server_name` - 
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* mtls_postgres:
 		* `bind_interface` - Bind interface
@@ -873,9 +885,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* neptune:
 		* `bind_interface` - Bind interface
@@ -1027,9 +1041,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - 
 		* `port` - 
 		* `port_override` - 
+		* `require_native_auth` - 
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - 
 		* `username` - 
 	* snowflake:
 		* `bind_interface` - Bind interface
