@@ -26,6 +26,7 @@ type Error interface {
 
 // UnknownError is a generic wrapper that indicates an unknown internal error in the SDK.
 type UnknownError struct {
+	// Wrapped is a underlying error.
 	Wrapped error
 }
 
@@ -43,6 +44,7 @@ func (e *UnknownError) Code() int {
 
 // DeadlineExceededError indicates a timeout occurred.
 type DeadlineExceededError struct {
+	// Wrapped is a underlying error.
 	Wrapped error
 }
 
@@ -60,6 +62,7 @@ func (e *DeadlineExceededError) Code() int {
 
 // ContextCanceledError indicates an operation was canceled.
 type ContextCanceledError struct {
+	// Wrapped is a underlying error.
 	Wrapped error
 }
 
@@ -77,6 +80,7 @@ func (e *ContextCanceledError) Code() int {
 
 // AlreadyExistsError is used when an entity already exists in the system
 type AlreadyExistsError struct {
+	// Message is the error content.
 	Message string
 }
 
@@ -90,6 +94,7 @@ func (e AlreadyExistsError) Code() int {
 
 // NotFoundError is used when an entity does not exist in the system
 type NotFoundError struct {
+	// Message is the error content.
 	Message string
 }
 
@@ -103,6 +108,7 @@ func (e NotFoundError) Code() int {
 
 // BadRequestError identifies a bad request sent by the client
 type BadRequestError struct {
+	// Message is the error content.
 	Message string
 }
 
@@ -116,6 +122,7 @@ func (e BadRequestError) Code() int {
 
 // AuthenticationError is used to specify an authentication failure condition
 type AuthenticationError struct {
+	// Message is the error content.
 	Message string
 }
 
@@ -129,6 +136,7 @@ func (e AuthenticationError) Code() int {
 
 // PermissionError is used to specify a permissions violation
 type PermissionError struct {
+	// Message is the error content.
 	Message string
 }
 
@@ -142,6 +150,7 @@ func (e PermissionError) Code() int {
 
 // InternalError is used to specify an internal system error
 type InternalError struct {
+	// Message is the error content.
 	Message string
 }
 
@@ -155,7 +164,9 @@ func (e InternalError) Code() int {
 
 // RateLimitError is used for rate limit excess condition
 type RateLimitError struct {
-	Message   string
+	// Message is the error content.
+	Message string
+	// RateLimit provides information on the bucket in use, and by how much it was exceeded.
 	RateLimit *RateLimitMetadata
 }
 

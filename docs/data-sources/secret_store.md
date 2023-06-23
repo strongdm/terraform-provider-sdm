@@ -23,57 +23,57 @@ In addition to provided arguments above, the following attributes are returned b
 	* aws:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `region` - 
+		* `region` - The AWS region to target e.g. us-east-1
 		* `tags` - Tags is a map of key, value pairs.
 	* azure_store:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
-		* `vault_uri` - 
+		* `vault_uri` - The URI of the key vault to target e.g. https://myvault.vault.azure.net
 	* cyberark_conjur:
-		* `app_url` - 
+		* `app_url` - The URL of the Cyberark instance
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
 	* cyberark_pam:
-		* `app_url` - 
+		* `app_url` - The URL of the Cyberark instance
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
 	* cyberark_pam_experimental:
-		* `app_url` - 
+		* `app_url` - The URL of the Cyberark instance
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `tags` - Tags is a map of key, value pairs.
 	* delinea_store:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `server_url` - 
+		* `server_url` - The URL of the Delinea instance
 		* `tags` - Tags is a map of key, value pairs.
-		* `tenant_name` - 
+		* `tenant_name` - The tenant name to target
 	* gcp_store:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `project_id` - 
+		* `project_id` - The GCP project ID to target.
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_approle:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `namespace` - 
-		* `server_address` - 
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
-		* `ca_cert_path` - 
-		* `client_cert_path` - 
-		* `client_key_path` - 
+		* `ca_cert_path` - A path to a CA file accessible by a Node
+		* `client_cert_path` - A path to a client certificate file accessible by a Node
+		* `client_key_path` - A path to a client key file accessible by a Node
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `namespace` - 
-		* `server_address` - 
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_token:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `namespace` - 
-		* `server_address` - 
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
 		* `tags` - Tags is a map of key, value pairs.

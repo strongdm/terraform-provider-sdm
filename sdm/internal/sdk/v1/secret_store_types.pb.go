@@ -239,7 +239,8 @@ type AWSStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name   string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The AWS region to target e.g. us-east-1
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,4,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -313,7 +314,8 @@ type AzureStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name     string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The URI of the key vault to target e.g. https://myvault.vault.azure.net
 	VaultUri string `protobuf:"bytes,3,opt,name=vault_uri,json=vaultUri,proto3" json:"vault_uri,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,32771,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -387,7 +389,8 @@ type CyberarkConjurStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name   string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The URL of the Cyberark instance
 	AppURL string `protobuf:"bytes,3,opt,name=appURL,proto3" json:"appURL,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,32771,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -461,7 +464,8 @@ type CyberarkPAMStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name   string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The URL of the Cyberark instance
 	AppURL string `protobuf:"bytes,3,opt,name=appURL,proto3" json:"appURL,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,32771,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -535,7 +539,8 @@ type CyberarkPAMExperimentalStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name   string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The URL of the Cyberark instance
 	AppURL string `protobuf:"bytes,3,opt,name=appURL,proto3" json:"appURL,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,32771,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -609,8 +614,10 @@ type DelineaStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name       string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ServerUrl  string `protobuf:"bytes,3,opt,name=server_url,json=serverUrl,proto3" json:"server_url,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The URL of the Delinea instance
+	ServerUrl string `protobuf:"bytes,3,opt,name=server_url,json=serverUrl,proto3" json:"server_url,omitempty"`
+	// The tenant name to target
 	TenantName string `protobuf:"bytes,4,opt,name=tenant_name,json=tenantName,proto3" json:"tenant_name,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,32771,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -691,7 +698,8 @@ type GCPStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The GCP project ID to target.
 	ProjectID string `protobuf:"bytes,3,opt,name=projectID,proto3" json:"projectID,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,32771,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -765,8 +773,10 @@ type VaultAppRoleStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Namespace     string `protobuf:"bytes,5,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The namespace to make requests within
+	Namespace string `protobuf:"bytes,5,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// The URL of the Vault to target
 	ServerAddress string `protobuf:"bytes,3,opt,name=server_address,json=serverAddress,proto3" json:"server_address,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,8,opt,name=tags,proto3" json:"tags,omitempty"`
@@ -847,12 +857,17 @@ type VaultTLSStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name           string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CACertPath     string `protobuf:"bytes,4,opt,name=CA_cert_path,json=CACertPath,proto3" json:"CA_cert_path,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// A path to a CA file accessible by a Node
+	CACertPath string `protobuf:"bytes,4,opt,name=CA_cert_path,json=CACertPath,proto3" json:"CA_cert_path,omitempty"`
+	// A path to a client certificate file accessible by a Node
 	ClientCertPath string `protobuf:"bytes,5,opt,name=client_cert_path,json=clientCertPath,proto3" json:"client_cert_path,omitempty"`
-	ClientKeyPath  string `protobuf:"bytes,6,opt,name=client_key_path,json=clientKeyPath,proto3" json:"client_key_path,omitempty"`
-	Namespace      string `protobuf:"bytes,8,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	ServerAddress  string `protobuf:"bytes,3,opt,name=server_address,json=serverAddress,proto3" json:"server_address,omitempty"`
+	// A path to a client key file accessible by a Node
+	ClientKeyPath string `protobuf:"bytes,6,opt,name=client_key_path,json=clientKeyPath,proto3" json:"client_key_path,omitempty"`
+	// The namespace to make requests within
+	Namespace string `protobuf:"bytes,8,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// The URL of the Vault to target
+	ServerAddress string `protobuf:"bytes,3,opt,name=server_address,json=serverAddress,proto3" json:"server_address,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,7,opt,name=tags,proto3" json:"tags,omitempty"`
 }
@@ -953,8 +968,10 @@ type VaultTokenStore struct {
 	// Unique identifier of the SecretStore.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Unique human-readable name of the SecretStore.
-	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Namespace     string `protobuf:"bytes,5,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The namespace to make requests within
+	Namespace string `protobuf:"bytes,5,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// The URL of the Vault to target
 	ServerAddress string `protobuf:"bytes,3,opt,name=server_address,json=serverAddress,proto3" json:"server_address,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,4,opt,name=tags,proto3" json:"tags,omitempty"`

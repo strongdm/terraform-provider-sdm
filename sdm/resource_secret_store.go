@@ -38,7 +38,7 @@ func resourceSecretStore() *schema.Resource {
 						"region": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The AWS region to target e.g. us-east-1",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -70,7 +70,7 @@ func resourceSecretStore() *schema.Resource {
 						"vault_uri": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URI of the key vault to target e.g. https://myvault.vault.azure.net",
 						},
 					},
 				},
@@ -85,7 +85,7 @@ func resourceSecretStore() *schema.Resource {
 						"app_url": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URL of the Cyberark instance",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -111,7 +111,7 @@ func resourceSecretStore() *schema.Resource {
 						"app_url": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URL of the Cyberark instance",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -137,7 +137,7 @@ func resourceSecretStore() *schema.Resource {
 						"app_url": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URL of the Cyberark instance",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -168,7 +168,7 @@ func resourceSecretStore() *schema.Resource {
 						"server_url": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The URL of the Delinea instance",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -179,7 +179,7 @@ func resourceSecretStore() *schema.Resource {
 						"tenant_name": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The tenant name to target",
 						},
 					},
 				},
@@ -199,7 +199,7 @@ func resourceSecretStore() *schema.Resource {
 						"project_id": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The GCP project ID to target.",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -225,12 +225,12 @@ func resourceSecretStore() *schema.Resource {
 						"namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The namespace to make requests within",
 						},
 						"server_address": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URL of the Vault to target",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -251,17 +251,17 @@ func resourceSecretStore() *schema.Resource {
 						"ca_cert_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "A path to a CA file accessible by a Node",
 						},
 						"client_cert_path": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "A path to a client certificate file accessible by a Node",
 						},
 						"client_key_path": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "A path to a client key file accessible by a Node",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -271,12 +271,12 @@ func resourceSecretStore() *schema.Resource {
 						"namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The namespace to make requests within",
 						},
 						"server_address": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URL of the Vault to target",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -302,12 +302,12 @@ func resourceSecretStore() *schema.Resource {
 						"namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "",
+							Description: "The namespace to make requests within",
 						},
 						"server_address": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "",
+							Description: "The URL of the Vault to target",
 						},
 						"tags": {
 							Type:        schema.TypeMap,

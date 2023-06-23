@@ -32,13 +32,13 @@ func (t Tags) clone() Tags {
 }
 
 type AKS struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The certificate to authenticate TLS connections with.
 	ClientCertificate string `json:"clientCertificate"`
-
+	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -46,19 +46,19 @@ type AKS struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -69,7 +69,7 @@ type AKS struct {
 }
 
 type AKSBasicAuth struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -77,17 +77,17 @@ type AKSBasicAuth struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -95,12 +95,12 @@ type AKSBasicAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type AKSServiceAccount struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -108,19 +108,19 @@ type AKSServiceAccount struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -128,12 +128,12 @@ type AKSServiceAccount struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The API token to authenticate with.
 	Token string `json:"token"`
 }
 
 type AKSServiceAccountUserImpersonation struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -141,15 +141,15 @@ type AKSServiceAccountUserImpersonation struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -157,18 +157,18 @@ type AKSServiceAccountUserImpersonation struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The API token to authenticate with.
 	Token string `json:"token"`
 }
 
 type AKSUserImpersonation struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The certificate to authenticate TLS connections with.
 	ClientCertificate string `json:"clientCertificate"`
-
+	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -176,15 +176,15 @@ type AKSUserImpersonation struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -195,12 +195,13 @@ type AKSUserImpersonation struct {
 }
 
 type AWS struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The AWS region healthcheck requests should attempt to connect to.
 	HealthcheckRegion string `json:"healthcheckRegion"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -208,13 +209,13 @@ type AWS struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -227,11 +228,11 @@ type AWS struct {
 // AWSConsole is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type AWSConsole struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// If true, prefer environment variables to authenticate connection even if EC2 roles are configured.
 	EnableEnvVariables bool `json:"enableEnvVariables"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -239,23 +240,23 @@ type AWSConsole struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to.
 	Region string `json:"region"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// The length of time in seconds AWS console sessions will live before needing to reauthenticate.
 	SessionExpiry int32 `json:"sessionExpiry"`
-
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -264,8 +265,9 @@ type AWSConsole struct {
 // AWSConsoleStaticKeyPair is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type AWSConsoleStaticKeyPair struct {
+	// The Access Key ID to authenticate with.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -275,25 +277,25 @@ type AWSConsoleStaticKeyPair struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to.
 	Region string `json:"region"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to authenticate with.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// The length of time in seconds AWS console sessions will live before needing to reauthenticate.
 	SessionExpiry int32 `json:"sessionExpiry"`
-
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -304,7 +306,7 @@ type AWSStore struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
-
+	// The AWS region to target e.g. us-east-1
 	Region string `json:"region"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -661,16 +663,17 @@ type ActivityGetResponse struct {
 }
 
 type AmazonEKS struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The name of the cluster to connect to.
 	ClusterName string `json:"clusterName"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
@@ -680,19 +683,19 @@ type AmazonEKS struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -703,15 +706,15 @@ type AmazonEKS struct {
 }
 
 type AmazonEKSInstanceProfile struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The name of the cluster to connect to.
 	ClusterName string `json:"clusterName"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
@@ -721,17 +724,17 @@ type AmazonEKSInstanceProfile struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -742,15 +745,15 @@ type AmazonEKSInstanceProfile struct {
 }
 
 type AmazonEKSInstanceProfileUserImpersonation struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The name of the cluster to connect to.
 	ClusterName string `json:"clusterName"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
@@ -760,17 +763,17 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -781,16 +784,17 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 }
 
 type AmazonEKSUserImpersonation struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The name of the cluster to connect to.
 	ClusterName string `json:"clusterName"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
@@ -800,15 +804,15 @@ type AmazonEKSUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -819,12 +823,13 @@ type AmazonEKSUserImpersonation struct {
 }
 
 type AmazonES struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial e.g. search-?.region.es.amazonaws.com"
 	Endpoint string `json:"endpoint"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -832,15 +837,15 @@ type AmazonES struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -851,23 +856,23 @@ type AmazonES struct {
 }
 
 type AmazonMQAMQP091 struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -875,15 +880,16 @@ type AmazonMQAMQP091 struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Athena struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -893,17 +899,17 @@ type Athena struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The AWS S3 output location.
 	Output string `json:"output"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -914,27 +920,27 @@ type Athena struct {
 }
 
 type AuroraMysql struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -942,34 +948,34 @@ type AuroraMysql struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type AuroraPostgres struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -977,13 +983,14 @@ type AuroraPostgres struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Azure struct {
+	// The application ID to authenticate with.
 	AppID string `json:"appId"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -993,9 +1000,9 @@ type Azure struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1003,15 +1010,16 @@ type Azure struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The tenant ID to authenticate to.
 	TenantID string `json:"tenantId"`
 }
 
 type AzureCertificate struct {
+	// The application ID to authenticate with.
 	AppID string `json:"appId"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The service Principal certificate file, both private and public key included.
 	ClientCertificate string `json:"clientCertificate"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1021,7 +1029,7 @@ type AzureCertificate struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1029,32 +1037,32 @@ type AzureCertificate struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The tenant ID to authenticate to.
 	TenantID string `json:"tenantId"`
 }
 
 type AzureMysql struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1062,34 +1070,34 @@ type AzureMysql struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type AzurePostgres struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1097,7 +1105,77 @@ type AzurePostgres struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
 
+// AzurePostgresFlexible is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AzurePostgresFlexible struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	OverrideDatabase bool `json:"overrideDatabase"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+// AzurePostgresSingle is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AzurePostgresSingle struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	OverrideDatabase bool `json:"overrideDatabase"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -1108,16 +1186,16 @@ type AzureStore struct {
 	Name string `json:"name"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The URI of the key vault to target e.g. https://myvault.vault.azure.net
 	VaultUri string `json:"vaultUri"`
 }
 
 type BigQuery struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -1125,11 +1203,11 @@ type BigQuery struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The JSON Private key to authenticate with.
 	PrivateKey string `json:"privateKey"`
-
+	// The project to connect to.
 	Project string `json:"project"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1137,28 +1215,28 @@ type BigQuery struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Cassandra struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1166,34 +1244,34 @@ type Cassandra struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Citus struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1201,32 +1279,32 @@ type Citus struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Clustrix struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1234,34 +1312,34 @@ type Clustrix struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Cockroach struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1269,7 +1347,7 @@ type Cockroach struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -1300,6 +1378,7 @@ type CreateResponseMetadata struct {
 }
 
 type CyberarkConjurStore struct {
+	// The URL of the Cyberark instance
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -1312,6 +1391,7 @@ type CyberarkConjurStore struct {
 // CyberarkPAMExperimentalStore is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type CyberarkPAMExperimentalStore struct {
+	// The URL of the Cyberark instance
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -1322,6 +1402,7 @@ type CyberarkPAMExperimentalStore struct {
 }
 
 type CyberarkPAMStore struct {
+	// The URL of the Cyberark instance
 	AppURL string `json:"appUrl"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -1332,23 +1413,23 @@ type CyberarkPAMStore struct {
 }
 
 type DB2I struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1356,32 +1437,32 @@ type DB2I struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type DB2LUW struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1389,7 +1470,7 @@ type DB2LUW struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -1402,33 +1483,34 @@ type DelineaStore struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
-
+	// The URL of the Delinea instance
 	ServerUrl string `json:"serverUrl"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The tenant name to target
 	TenantName string `json:"tenantName"`
 }
 
 type DocumentDBHost struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1436,15 +1518,16 @@ type DocumentDBHost struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type DocumentDBReplicaSet struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1456,11 +1539,11 @@ type DocumentDBReplicaSet struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1468,28 +1551,28 @@ type DocumentDBReplicaSet struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Druid struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1497,17 +1580,18 @@ type Druid struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type DynamoDB struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial e.g. dynamodb.region.amazonaws.com
 	Endpoint string `json:"endpoint"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -1515,15 +1599,15 @@ type DynamoDB struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The region to authenticate requests against e.g. us-east-1
 	Region string `json:"region"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1534,23 +1618,23 @@ type DynamoDB struct {
 }
 
 type Elastic struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1558,30 +1642,30 @@ type Elastic struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type ElasticacheRedis struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1589,14 +1673,14 @@ type ElasticacheRedis struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type GCP struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1604,13 +1688,13 @@ type GCP struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-
+	// The service account keyfile to authenticate with.
 	Keyfile string `json:"keyfile"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Space separated scopes that this login should assume into when authenticating.
 	Scopes string `json:"scopes"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1625,7 +1709,7 @@ type GCPStore struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
-
+	// The GCP project ID to target.
 	ProjectID string `json:"projectId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -1636,11 +1720,14 @@ type Gateway struct {
 	// The hostname/port tuple which the gateway daemon will bind to.
 	// If not provided on create, set to "0.0.0.0:listen_address_port".
 	BindAddress string `json:"bindAddress"`
+	// ConnectsTo can be used to restrict the peering between relays and
+	// gateways.
+	ConnectsTo string `json:"connectsTo"`
 	// Device is a read only device name uploaded by the gateway process when
 	// it comes online.
 	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
-	// gateways.
+	// gateways. Deprecated.
 	GatewayFilter string `json:"gatewayFilter"`
 	// Unique identifier of the Gateway.
 	ID string `json:"id"`
@@ -1666,13 +1753,13 @@ type GetResponseMetadata struct {
 }
 
 type GoogleGKE struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
@@ -1682,13 +1769,13 @@ type GoogleGKE struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// The service account key to authenticate with.
 	ServiceAccountKey string `json:"serviceAccountKey"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
@@ -1697,13 +1784,13 @@ type GoogleGKE struct {
 }
 
 type GoogleGKEUserImpersonation struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The endpoint to dial.
 	Endpoint string `json:"endpoint"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
@@ -1715,7 +1802,7 @@ type GoogleGKEUserImpersonation struct {
 	Name string `json:"name"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// The service account key to authenticate with.
 	ServiceAccountKey string `json:"serviceAccountKey"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
@@ -1724,27 +1811,27 @@ type GoogleGKEUserImpersonation struct {
 }
 
 type Greenplum struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1752,25 +1839,26 @@ type Greenplum struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type HTTPAuth struct {
+	// The content to set as the authorization header.
 	AuthHeader string `json:"authHeader"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// Header names (e.g. Authorization), to omit from logs.
 	HeadersBlacklist string `json:"headersBlacklist"`
-
+	// This path will be used to check the health of your site.
 	HealthcheckPath string `json:"healthcheckPath"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host header will be overwritten with this field if provided.
 	HostOverride string `json:"hostOverride"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -1778,61 +1866,61 @@ type HTTPAuth struct {
 	Name string `json:"name"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The base address of your website without the path.
 	Url string `json:"url"`
 }
 
 type HTTPBasicAuth struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// Header names (e.g. Authorization), to omit from logs.
 	HeadersBlacklist string `json:"headersBlacklist"`
-
+	// This path will be used to check the health of your site.
 	HealthcheckPath string `json:"healthcheckPath"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host header will be overwritten with this field if provided.
 	HostOverride string `json:"hostOverride"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The base address of your website without the path.
 	Url string `json:"url"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type HTTPNoAuth struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// Header names (e.g. Authorization), to omit from logs.
 	HeadersBlacklist string `json:"headersBlacklist"`
-
+	// This path will be used to check the health of your site.
 	HealthcheckPath string `json:"healthcheckPath"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host header will be overwritten with this field if provided.
 	HostOverride string `json:"hostOverride"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -1840,22 +1928,22 @@ type HTTPNoAuth struct {
 	Name string `json:"name"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The base address of your website without the path.
 	Url string `json:"url"`
 }
 
 type Kubernetes struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The certificate to authenticate TLS connections with.
 	ClientCertificate string `json:"clientCertificate"`
-
+	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1863,19 +1951,19 @@ type Kubernetes struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1886,7 +1974,7 @@ type Kubernetes struct {
 }
 
 type KubernetesBasicAuth struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1894,17 +1982,17 @@ type KubernetesBasicAuth struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1912,12 +2000,12 @@ type KubernetesBasicAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type KubernetesServiceAccount struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1925,19 +2013,19 @@ type KubernetesServiceAccount struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1945,12 +2033,12 @@ type KubernetesServiceAccount struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The API token to authenticate with.
 	Token string `json:"token"`
 }
 
 type KubernetesServiceAccountUserImpersonation struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1958,15 +2046,15 @@ type KubernetesServiceAccountUserImpersonation struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -1974,18 +2062,18 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The API token to authenticate with.
 	Token string `json:"token"`
 }
 
 type KubernetesUserImpersonation struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The certificate to authenticate TLS connections with.
 	ClientCertificate string `json:"clientCertificate"`
-
+	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1993,15 +2081,15 @@ type KubernetesUserImpersonation struct {
 	HealthcheckNamespace string `json:"healthcheckNamespace"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2014,111 +2102,111 @@ type KubernetesUserImpersonation struct {
 // MTLSMysql is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type MTLSMysql struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The certificate to authenticate TLS connections with.
 	ClientCertificate string `json:"clientCertificate"`
-
+	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// Server name for TLS verification (unverified by StrongDM if empty)
 	ServerName string `json:"serverName"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type MTLSPostgres struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
-
+	// The certificate to authenticate TLS connections with.
 	ClientCertificate string `json:"clientCertificate"`
-
+	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// Server name for TLS verification (unverified by StrongDM if empty)
 	ServerName string `json:"serverName"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Maria struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2126,28 +2214,28 @@ type Maria struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Memcached struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2158,27 +2246,27 @@ type Memcached struct {
 }
 
 type Memsql struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2186,33 +2274,34 @@ type Memsql struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 // MongoHost is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type MongoHost struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2220,33 +2309,34 @@ type MongoHost struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type MongoLegacyHost struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2254,35 +2344,36 @@ type MongoLegacyHost struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type MongoLegacyReplicaset struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2290,37 +2381,38 @@ type MongoLegacyReplicaset struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 // MongoReplicaSet is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type MongoReplicaSet struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2328,31 +2420,32 @@ type MongoReplicaSet struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 // MongoShardedCluster is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type MongoShardedCluster struct {
+	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2360,34 +2453,34 @@ type MongoShardedCluster struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Mysql struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2395,18 +2488,18 @@ type Mysql struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Neptune struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The neptune endpoint to connect to as in endpoint.region.neptune.amazonaws.com
 	Endpoint string `json:"endpoint"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -2414,9 +2507,9 @@ type Neptune struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2427,12 +2520,13 @@ type Neptune struct {
 }
 
 type NeptuneIAM struct {
+	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The neptune endpoint to connect to as in endpoint.region.neptune.amazonaws.com
 	Endpoint string `json:"endpoint"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -2440,17 +2534,17 @@ type NeptuneIAM struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The AWS region to connect to.
 	Region string `json:"region"`
-
+	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
-
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	RoleExternalID string `json:"roleExternalId"`
-
+	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2585,25 +2679,25 @@ type NodeUpdateResponse struct {
 }
 
 type Oracle struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2611,9 +2705,9 @@ type Oracle struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -2681,27 +2775,27 @@ type OrganizationHistoryRecord struct {
 }
 
 type Postgres struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2709,30 +2803,30 @@ type Postgres struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Presto struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2740,9 +2834,9 @@ type Presto struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -2843,25 +2937,25 @@ type QueryCapture struct {
 }
 
 type RDP struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// When set, network level authentication will not be used. May resolve unexpected authentication errors to older servers. When set, healthchecks cannot detect if a provided username / password pair is correct.
 	DowngradeNlaConnections bool `json:"downgradeNlaConnections"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2869,28 +2963,28 @@ type RDP struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type RabbitMQAMQP091 struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2898,9 +2992,9 @@ type RabbitMQAMQP091 struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -2920,21 +3014,21 @@ type RateLimitMetadata struct {
 }
 
 type RawTCP struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2945,23 +3039,23 @@ type RawTCP struct {
 }
 
 type Redis struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -2969,34 +3063,34 @@ type Redis struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Redshift struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -3004,17 +3098,20 @@ type Redshift struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 // Relay represents a StrongDM CLI installation running in relay mode.
 type Relay struct {
+	// ConnectsTo can be used to restrict the peering between relays and
+	// gateways.
+	ConnectsTo string `json:"connectsTo"`
 	// Device is a read only device name uploaded by the gateway process when
 	// it comes online.
 	Device string `json:"device"`
 	// GatewayFilter can be used to restrict the peering between relays and
-	// gateways.
+	// gateways. Deprecated.
 	GatewayFilter string `json:"gatewayFilter"`
 	// Unique identifier of the Relay.
 	ID string `json:"id"`
@@ -4312,6 +4409,114 @@ func (m *AzurePostgres) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AzurePostgres.
 func (m *AzurePostgres) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AzurePostgresFlexible) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) GetID() string { return m.ID }
+
+// GetName returns the name of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AzurePostgresFlexible.
+func (m *AzurePostgresFlexible) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AzurePostgresSingle) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) GetID() string { return m.ID }
+
+// GetName returns the name of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AzurePostgresSingle.
+func (m *AzurePostgresSingle) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*BigQuery) isOneOf_Resource() {}
@@ -7653,29 +7858,29 @@ type RoleUpdateResponse struct {
 }
 
 type SQLServer struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The Schema to use to direct initial requests.
 	Schema string `json:"schema"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -7683,36 +7888,36 @@ type SQLServer struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type SQLServerAzureAD struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The Azure AD application (client) ID with which to authenticate.
 	ClientID string `json:"clientId"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The Schema to use to direct initial requests.
 	Schema string `json:"schema"`
-
+	// The Azure AD client secret (application password) with which to authenticate.
 	Secret string `json:"secret"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -7720,74 +7925,75 @@ type SQLServerAzureAD struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The Azure AD directory (tenant) ID with which to authenticate.
 	TenantID string `json:"tenantId"`
 }
 
 type SQLServerKerberosAD struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-
+	// The keytab file in base64 format containing an entry with the principal name (username@realm) and key version number with which to authenticate.
 	Keytab string `json:"keytab"`
-
+	// The Kerberos 5 configuration file (krb5.conf) specifying the Active Directory server (KDC) for the configured realm.
 	KrbConfig string `json:"krbConfig"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The Active Directory domain (realm) to which the configured username belongs.
 	Realm string `json:"realm"`
-
+	// The Schema to use to direct initial requests.
 	Schema string `json:"schema"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// The Service Principal Name of the Microsoft SQL Server instance in Active Directory.
 	ServerSpn string `json:"serverSpn"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type SSH struct {
+	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-
+	// The key type to use e.g. rsa-2048 or ed25519
 	KeyType string `json:"keyType"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The public key to append to a server's authorized keys. This will be generated after resource creation.
 	PublicKey string `json:"publicKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -7795,35 +8001,36 @@ type SSH struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type SSHCert struct {
+	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-
+	// The key type to use e.g. rsa-2048 or ed25519
 	KeyType string `json:"keyType"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -7831,31 +8038,32 @@ type SSHCert struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type SSHCustomerKey struct {
+	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The private key used to authenticate with the server.
 	PrivateKey string `json:"privateKey"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -7863,7 +8071,7 @@ type SSHCustomerKey struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -8192,27 +8400,27 @@ type Service struct {
 }
 
 type SingleStore struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -8220,32 +8428,32 @@ type SingleStore struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Snowflake struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The schema to provide on authentication.
 	Schema string `json:"schema"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -8253,18 +8461,18 @@ type Snowflake struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 // Snowsight is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type Snowsight struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
-
+	// The StrongDM user email to use for healthchecks.
 	HealthcheckUsername string `json:"healthcheckUsername"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
@@ -8272,36 +8480,36 @@ type Snowsight struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-
+	// The Metadata for your snowflake IDP integration
 	SamlMetadata string `json:"samlMetadata"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
 
 type Sybase struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -8309,28 +8517,28 @@ type Sybase struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type SybaseIQ struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -8338,34 +8546,35 @@ type SybaseIQ struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 type Tag struct {
+	// The name or key of this tag. Each name can only refer to one value on a tagged entity.
 	Name string `json:"name"`
-
+	// The value of this tag.
 	Value string `json:"value"`
 }
 
 type Teradata struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -8373,32 +8582,32 @@ type Teradata struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
 // Trino is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type Trino struct {
-	// Bind interface
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-
+	// The host to dial to initiate a connection from the egress node to this resource.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-
+	// The password to authenticate with.
 	Password string `json:"password"`
-
+	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-
+	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
@@ -8406,7 +8615,7 @@ type Trino struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-
+	// The username to authenticate with.
 	Username string `json:"username"`
 }
 
@@ -8442,27 +8651,28 @@ type VaultAppRoleStore struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
-
+	// The namespace to make requests within
 	Namespace string `json:"namespace"`
-
+	// The URL of the Vault to target
 	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
 
 type VaultTLSStore struct {
+	// A path to a CA file accessible by a Node
 	CACertPath string `json:"caCertPath"`
-
+	// A path to a client certificate file accessible by a Node
 	ClientCertPath string `json:"clientCertPath"`
-
+	// A path to a client key file accessible by a Node
 	ClientKeyPath string `json:"clientKeyPath"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
-
+	// The namespace to make requests within
 	Namespace string `json:"namespace"`
-
+	// The URL of the Vault to target
 	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -8473,9 +8683,9 @@ type VaultTokenStore struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
-
+	// The namespace to make requests within
 	Namespace string `json:"namespace"`
-
+	// The URL of the Vault to target
 	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`

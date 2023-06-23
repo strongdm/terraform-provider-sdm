@@ -62,15 +62,20 @@ func dataSourceNode() *schema.Resource {
 										Optional:    true,
 										Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:listen_address_port\".",
 									},
+									"connects_to": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ConnectsTo can be used to restrict the peering between relays and gateways.",
+									},
 									"device": {
 										Type:        schema.TypeString,
 										Computed:    true,
-										Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
+										Description: "Device is a read only device name uploaded by the gateway process when it comes online.",
 									},
 									"gateway_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+										Description: "GatewayFilter can be used to restrict the peering between relays and gateways. Deprecated.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -112,15 +117,20 @@ func dataSourceNode() *schema.Resource {
 							Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"connects_to": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ConnectsTo can be used to restrict the peering between relays and gateways.",
+									},
 									"device": {
 										Type:        schema.TypeString,
 										Computed:    true,
-										Description: "Device is a read only device name uploaded by the gateway process when  it comes online.",
+										Description: "Device is a read only device name uploaded by the gateway process when it comes online.",
 									},
 									"gateway_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "GatewayFilter can be used to restrict the peering between relays and gateways.",
+										Description: "GatewayFilter can be used to restrict the peering between relays and gateways. Deprecated.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -212,6 +222,7 @@ func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		case *sdm.Gateway:
 			output[0]["gateway"] = append(output[0]["gateway"], entity{
 				"bind_address":   (v.BindAddress),
+				"connects_to":    (v.ConnectsTo),
 				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
 				"id":             (v.ID),
@@ -223,6 +234,7 @@ func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 			})
 		case *sdm.Relay:
 			output[0]["relay"] = append(output[0]["relay"], entity{
+				"connects_to":    (v.ConnectsTo),
 				"device":         (v.Device),
 				"gateway_filter": (v.GatewayFilter),
 				"id":             (v.ID),

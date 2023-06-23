@@ -64,25 +64,25 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The key to authenticate TLS connections with.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -97,7 +97,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -112,22 +112,22 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -157,7 +157,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -172,7 +172,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -188,17 +188,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -219,7 +219,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -233,7 +233,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -248,7 +248,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -263,22 +263,22 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -300,7 +300,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The API token to authenticate with.",
 									},
 								},
 							},
@@ -314,7 +314,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -329,7 +329,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -344,12 +344,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -371,7 +371,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The API token to authenticate with.",
 									},
 								},
 							},
@@ -385,25 +385,25 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The key to authenticate TLS connections with.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -418,7 +418,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -433,12 +433,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -468,23 +468,23 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the cluster to connect to.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -494,7 +494,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
@@ -514,38 +514,38 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -575,18 +575,18 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the cluster to connect to.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -596,7 +596,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
@@ -616,32 +616,32 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -671,18 +671,18 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the cluster to connect to.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -692,7 +692,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
@@ -712,32 +712,32 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -767,23 +767,23 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the cluster to connect to.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -793,7 +793,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
@@ -813,28 +813,28 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -864,12 +864,12 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -879,7 +879,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial e.g. search-?.region.es.amazonaws.com\"",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -894,28 +894,28 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -945,7 +945,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -955,7 +955,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -971,17 +971,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1002,12 +1002,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1021,12 +1021,12 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1046,33 +1046,33 @@ func dataSourceResource() *schema.Resource {
 									"output": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS S3 output location.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1102,12 +1102,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1117,7 +1117,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1133,22 +1133,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1169,12 +1169,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1188,12 +1188,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1203,7 +1203,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1218,23 +1218,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1255,7 +1255,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1269,12 +1269,12 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1284,7 +1284,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region healthcheck requests should attempt to connect to.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1299,23 +1299,23 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1345,7 +1345,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1355,7 +1355,7 @@ func dataSourceResource() *schema.Resource {
 									"enable_env_variables": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, prefer environment variables to authenticate connection even if EC2 roles are configured.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1370,32 +1370,32 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1405,12 +1405,12 @@ func dataSourceResource() *schema.Resource {
 									"session_expiry": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The length of time in seconds AWS console sessions will live before needing to reauthenticate.",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1430,12 +1430,12 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to authenticate with.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1455,38 +1455,38 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to authenticate with.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1496,12 +1496,12 @@ func dataSourceResource() *schema.Resource {
 									"session_expiry": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The length of time in seconds AWS console sessions will live before needing to reauthenticate.",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1521,12 +1521,12 @@ func dataSourceResource() *schema.Resource {
 									"app_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The application ID to authenticate with.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1547,12 +1547,12 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1573,7 +1573,7 @@ func dataSourceResource() *schema.Resource {
 									"tenant_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The tenant ID to authenticate to.",
 									},
 								},
 							},
@@ -1587,18 +1587,18 @@ func dataSourceResource() *schema.Resource {
 									"app_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The application ID to authenticate with.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The service Principal certificate file, both private and public key included.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1618,7 +1618,7 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1639,7 +1639,7 @@ func dataSourceResource() *schema.Resource {
 									"tenant_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The tenant ID to authenticate to.",
 									},
 								},
 							},
@@ -1653,12 +1653,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1668,7 +1668,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1684,22 +1684,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1720,12 +1720,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1739,12 +1739,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1754,7 +1754,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1769,23 +1769,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1806,7 +1806,169 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
+						"azure_postgres_flexible": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The password to authenticate with.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
+						"azure_postgres_single": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The password to authenticate with.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1820,7 +1982,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1830,7 +1992,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1845,18 +2007,18 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"private_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The JSON Private key to authenticate with.",
 									},
 									"project": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The project to connect to.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1877,7 +2039,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1891,7 +2053,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1901,7 +2063,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1917,17 +2079,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -1948,12 +2110,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -1967,12 +2129,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1982,7 +2144,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -1997,23 +2159,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2034,7 +2196,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2048,12 +2210,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2063,7 +2225,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2079,22 +2241,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2115,12 +2277,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2134,12 +2296,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2149,7 +2311,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2164,23 +2326,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2201,7 +2363,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2215,7 +2377,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2225,7 +2387,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2241,17 +2403,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2272,12 +2434,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2291,12 +2453,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2306,7 +2468,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2322,17 +2484,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2353,7 +2515,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2367,12 +2529,12 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2382,7 +2544,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2398,17 +2560,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2429,7 +2591,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2443,17 +2605,17 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"connect_to_replica": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2479,17 +2641,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"replica_set": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2510,7 +2672,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2524,7 +2686,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2534,7 +2696,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2550,17 +2712,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2581,7 +2743,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2595,12 +2757,12 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2610,7 +2772,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial e.g. dynamodb.region.amazonaws.com",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2625,28 +2787,28 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The region to authenticate requests against e.g. us-east-1",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2676,7 +2838,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2686,7 +2848,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2702,17 +2864,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2733,12 +2895,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2752,7 +2914,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2762,7 +2924,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -2778,17 +2940,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2809,12 +2971,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -2828,7 +2990,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2844,7 +3006,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The service account keyfile to authenticate with.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -2854,12 +3016,12 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"scopes": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Space separated scopes that this login should assume into when authenticating.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2889,13 +3051,13 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2905,7 +3067,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
@@ -2925,12 +3087,12 @@ func dataSourceResource() *schema.Resource {
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -2941,7 +3103,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The service account key to authenticate with.",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
@@ -2966,13 +3128,13 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2982,7 +3144,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
 										Type:        schema.TypeString,
@@ -3008,7 +3170,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The service account key to authenticate with.",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
@@ -3033,12 +3195,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3048,7 +3210,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3063,23 +3225,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3100,7 +3262,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -3115,17 +3277,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The content to set as the authorization header.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"default_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Automatically redirect to this path upon connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3135,17 +3297,17 @@ func dataSourceResource() *schema.Resource {
 									"headers_blacklist": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Header names (e.g. Authorization), to omit from logs.",
 									},
 									"healthcheck_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "This path will be used to check the health of your site.",
 									},
 									"host_override": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host header will be overwritten with this field if provided.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3165,7 +3327,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3176,7 +3338,7 @@ func dataSourceResource() *schema.Resource {
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The base address of your website without the path.",
 									},
 								},
 							},
@@ -3190,12 +3352,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"default_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Automatically redirect to this path upon connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3205,17 +3367,17 @@ func dataSourceResource() *schema.Resource {
 									"headers_blacklist": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Header names (e.g. Authorization), to omit from logs.",
 									},
 									"healthcheck_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "This path will be used to check the health of your site.",
 									},
 									"host_override": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host header will be overwritten with this field if provided.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3231,7 +3393,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3241,7 +3403,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3252,12 +3414,12 @@ func dataSourceResource() *schema.Resource {
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The base address of your website without the path.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -3271,12 +3433,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"default_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Automatically redirect to this path upon connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3286,17 +3448,17 @@ func dataSourceResource() *schema.Resource {
 									"headers_blacklist": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Header names (e.g. Authorization), to omit from logs.",
 									},
 									"healthcheck_path": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "This path will be used to check the health of your site.",
 									},
 									"host_override": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host header will be overwritten with this field if provided.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3316,7 +3478,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3327,7 +3489,7 @@ func dataSourceResource() *schema.Resource {
 									"url": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The base address of your website without the path.",
 									},
 								},
 							},
@@ -3341,25 +3503,25 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The key to authenticate TLS connections with.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3374,7 +3536,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3389,22 +3551,22 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3434,7 +3596,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3449,7 +3611,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3465,17 +3627,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3496,7 +3658,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -3510,7 +3672,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3525,7 +3687,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3540,22 +3702,22 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3577,7 +3739,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The API token to authenticate with.",
 									},
 								},
 							},
@@ -3591,7 +3753,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3606,7 +3768,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3621,12 +3783,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3648,7 +3810,7 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The API token to authenticate with.",
 									},
 								},
 							},
@@ -3662,25 +3824,25 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The key to authenticate TLS connections with.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3695,7 +3857,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3710,12 +3872,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3745,12 +3907,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3760,7 +3922,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3776,22 +3938,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3812,12 +3974,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -3831,7 +3993,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3841,7 +4003,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3856,12 +4018,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3891,12 +4053,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3906,7 +4068,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -3922,22 +4084,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -3958,12 +4120,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -3977,12 +4139,12 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3992,7 +4154,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4008,17 +4170,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4039,12 +4201,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4058,12 +4220,12 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4073,7 +4235,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4089,22 +4251,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"replica_set": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4125,12 +4287,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4144,17 +4306,17 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"connect_to_replica": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4164,7 +4326,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4180,22 +4342,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"replica_set": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4216,12 +4378,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4235,17 +4397,17 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"connect_to_replica": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4255,7 +4417,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4271,22 +4433,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"replica_set": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4307,12 +4469,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4326,12 +4488,12 @@ func dataSourceResource() *schema.Resource {
 									"auth_database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4341,7 +4503,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4357,12 +4519,12 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4383,12 +4545,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4402,30 +4564,30 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The key to authenticate TLS connections with.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4435,7 +4597,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4451,22 +4613,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4476,7 +4638,7 @@ func dataSourceResource() *schema.Resource {
 									"server_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Server name for TLS verification (unverified by StrongDM if empty)",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
@@ -4492,12 +4654,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4511,30 +4673,30 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"certificate_authority": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The key to authenticate TLS connections with.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4544,7 +4706,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4559,23 +4721,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4585,7 +4747,7 @@ func dataSourceResource() *schema.Resource {
 									"server_name": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Server name for TLS verification (unverified by StrongDM if empty)",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
@@ -4601,7 +4763,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4615,12 +4777,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4630,7 +4792,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4646,22 +4808,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4682,12 +4844,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4701,7 +4863,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4711,7 +4873,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The neptune endpoint to connect to as in endpoint.region.neptune.amazonaws.com",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4726,12 +4888,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4761,12 +4923,12 @@ func dataSourceResource() *schema.Resource {
 									"access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4776,7 +4938,7 @@ func dataSourceResource() *schema.Resource {
 									"endpoint": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The neptune endpoint to connect to as in endpoint.region.neptune.amazonaws.com",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4791,33 +4953,33 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"region": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The AWS region to connect to.",
 									},
 									"role_arn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4847,12 +5009,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4862,7 +5024,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4878,17 +5040,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4909,12 +5071,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -4928,12 +5090,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4943,7 +5105,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -4958,23 +5120,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -4995,7 +5157,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5009,12 +5171,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5024,7 +5186,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5040,17 +5202,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5071,12 +5233,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5090,7 +5252,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5100,7 +5262,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5116,17 +5278,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5147,12 +5309,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5166,7 +5328,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5176,7 +5338,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5191,12 +5353,12 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5226,12 +5388,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"downgrade_nla_connections": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "When set, network level authentication will not be used. May resolve unexpected authentication errors to older servers. When set, healthchecks cannot detect if a provided username / password pair is correct.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5241,7 +5403,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5257,17 +5419,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5288,7 +5450,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5302,7 +5464,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5312,7 +5474,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5328,17 +5490,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5359,12 +5521,12 @@ func dataSourceResource() *schema.Resource {
 									"tls_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5378,12 +5540,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5393,7 +5555,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5408,23 +5570,23 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5445,7 +5607,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5459,12 +5621,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5474,7 +5636,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5490,22 +5652,22 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"require_native_auth": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5526,12 +5688,12 @@ func dataSourceResource() *schema.Resource {
 									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5545,12 +5707,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5560,7 +5722,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5576,17 +5738,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"schema": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The schema to provide on authentication.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5607,7 +5769,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5621,7 +5783,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5631,7 +5793,7 @@ func dataSourceResource() *schema.Resource {
 									"healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The StrongDM user email to use for healthchecks.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5646,12 +5808,12 @@ func dataSourceResource() *schema.Resource {
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"saml_metadata": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Metadata for your snowflake IDP integration",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5661,7 +5823,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5681,12 +5843,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5696,7 +5858,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5711,28 +5873,28 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"schema": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Schema to use to direct initial requests.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5753,7 +5915,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5767,17 +5929,17 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"client_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Azure AD application (client) ID with which to authenticate.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5787,7 +5949,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5802,28 +5964,28 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"schema": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Schema to use to direct initial requests.",
 									},
 									"secret": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Azure AD client secret (application password) with which to authenticate.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5844,7 +6006,7 @@ func dataSourceResource() *schema.Resource {
 									"tenant_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Azure AD directory (tenant) ID with which to authenticate.",
 									},
 								},
 							},
@@ -5858,12 +6020,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5873,7 +6035,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5884,13 +6046,13 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The keytab file in base64 format containing an entry with the principal name (username@realm) and key version number with which to authenticate.",
 									},
 									"krb_config": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The Kerberos 5 configuration file (krb5.conf) specifying the Active Directory server (KDC) for the configured realm.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -5900,27 +6062,27 @@ func dataSourceResource() *schema.Resource {
 									"override_database": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"realm": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Active Directory domain (realm) to which the configured username belongs.",
 									},
 									"schema": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Schema to use to direct initial requests.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -5930,7 +6092,7 @@ func dataSourceResource() *schema.Resource {
 									"server_spn": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The Service Principal Name of the Microsoft SQL Server instance in Active Directory.",
 									},
 									"subdomain": {
 										Type:        schema.TypeString,
@@ -5946,7 +6108,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -5960,12 +6122,12 @@ func dataSourceResource() *schema.Resource {
 									"allow_deprecated_key_exchanges": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5975,7 +6137,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -5985,7 +6147,7 @@ func dataSourceResource() *schema.Resource {
 									"key_type": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The key type to use e.g. rsa-2048 or ed25519",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -5995,22 +6157,22 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"public_key": {
 										Type:        schema.TypeString,
 										Computed:    true,
-										Description: "",
+										Description: "The public key to append to a server's authorized keys. This will be generated after resource creation.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6031,7 +6193,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6045,12 +6207,12 @@ func dataSourceResource() *schema.Resource {
 									"allow_deprecated_key_exchanges": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6060,7 +6222,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -6070,7 +6232,7 @@ func dataSourceResource() *schema.Resource {
 									"key_type": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The key type to use e.g. rsa-2048 or ed25519",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -6080,27 +6242,27 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The ID of the remote identity group to use for remote identity connections.",
 									},
 									"remote_identity_healthcheck_username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6121,7 +6283,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6135,12 +6297,12 @@ func dataSourceResource() *schema.Resource {
 									"allow_deprecated_key_exchanges": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6150,7 +6312,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -6165,23 +6327,23 @@ func dataSourceResource() *schema.Resource {
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "",
+										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"private_key": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The private key used to authenticate with the server.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6202,7 +6364,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6216,7 +6378,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6226,7 +6388,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -6242,17 +6404,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6273,7 +6435,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6287,7 +6449,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6297,7 +6459,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -6313,17 +6475,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6344,7 +6506,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6358,7 +6520,7 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6368,7 +6530,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -6384,17 +6546,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6415,7 +6577,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6429,12 +6591,12 @@ func dataSourceResource() *schema.Resource {
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Bind interface",
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6444,7 +6606,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type:        schema.TypeString,
@@ -6460,17 +6622,17 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Sensitive:   true,
-										Description: "",
+										Description: "The password to authenticate with.",
 									},
 									"port": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "",
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -6491,7 +6653,7 @@ func dataSourceResource() *schema.Resource {
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "",
+										Description: "The username to authenticate with.",
 									},
 								},
 							},
@@ -6910,6 +7072,40 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AzurePostgres:
 			output[0]["azure_postgres"] = append(output[0]["azure_postgres"], entity{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          (v.Username),
+			})
+		case *sdm.AzurePostgresFlexible:
+			output[0]["azure_postgres_flexible"] = append(output[0]["azure_postgres_flexible"], entity{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"password":          (v.Password),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          (v.Username),
+			})
+		case *sdm.AzurePostgresSingle:
+			output[0]["azure_postgres_single"] = append(output[0]["azure_postgres_single"], entity{
 				"bind_interface":    (v.BindInterface),
 				"database":          (v.Database),
 				"egress_filter":     (v.EgressFilter),
