@@ -103,6 +103,82 @@ func TestAccSDMNode_GatewayCreate(t *testing.T) {
 		},
 	})
 }
+func TestAccSDMNode_GatewayCreate_MaintenanceWindows(t *testing.T) {
+	initAcceptanceTest(t)
+	rsName := randomWithPrefix("test")
+	gwName := randomWithPrefix("test")
+	ip, _ := acctest.RandIpAddress("192.0.2.0/24")
+	listenAddr := fmt.Sprintf("%s:21222", ip)
+	sched0 := "* * * * *"
+	sched1 := "* 1 * * 0,6"
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMNodeGatewayConfigWithMaintenanceWindows(rsName, gwName, listenAddr, "0.0.0.0:21222", sched0, sched1),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.name", gwName),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.#", "1"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.maintenance_window.#", "2"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.maintenance_window.0.cron_schedule", sched0),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.maintenance_window.0.require_idleness", "true"),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.maintenance_window.1.cron_schedule", sched1),
+					resource.TestCheckResourceAttr("sdm_node."+rsName, "gateway.0.maintenance_window.1.require_idleness", "false"),
+					resource.TestCheckResourceAttrSet("sdm_node."+rsName, "gateway.0.token"),
+					func(s *terraform.State) error {
+						// retrieve the resource by name from state
+						id, err := testCreatedID(s, "sdm_node", rsName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Nodes().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						gateway, ok := resp.Node.(*sdm.Gateway)
+						if !ok {
+							return fmt.Errorf("expected gateway, got relay")
+						}
+						if gateway.Name != gwName {
+							return fmt.Errorf("unexpected name '%s', expected '%s'", gateway.Name, gwName)
+						}
+						if len(gateway.MaintenanceWindows) != 2 {
+							return fmt.Errorf("unexpected maintenance window length, expected 2, got %v", len(gateway.MaintenanceWindows))
+						}
+						w0 := gateway.MaintenanceWindows[0]
+						if w0.CronSchedule != sched0 {
+							return fmt.Errorf("unexpected cron schedule  '%s', expected '%s'", w0.CronSchedule, sched0)
+						}
+						if !w0.RequireIdleness {
+							return fmt.Errorf("unexpected require idleness '%v', expected true", w0.RequireIdleness)
+						}
+						w1 := gateway.MaintenanceWindows[1]
+						if w1.CronSchedule != sched1 {
+							return fmt.Errorf("unexpected cron schedule  '%s', expected '%s'", w1.CronSchedule, sched1)
+						}
+						if w1.RequireIdleness {
+							return fmt.Errorf("unexpected require idleness '%v', expected false", w1.RequireIdleness)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_node." + rsName,
+				ImportState:       true,
+				ImportStateVerify: false, // can't verify because token cannot be recovered
+			},
+		},
+	})
+}
 
 func TestAccSDMNode_GatewayCreateNoNameOrBindAddress(t *testing.T) {
 	initAcceptanceTest(t)
@@ -669,6 +745,26 @@ func testAccSDMNodeGatewayConfig(resourceName, gatewayName, listenAddr string, b
 	`, resourceName, gatewayName, listenAddr, bindAddr)
 }
 
+func testAccSDMNodeGatewayConfigWithMaintenanceWindows(resourceName, gatewayName, listenAddr, bindAddr, sched1, sched2 string) string {
+	return fmt.Sprintf(`
+	resource "sdm_node" "%s" {
+		gateway {
+			name = "%s"
+			listen_address = "%s"
+			bind_address = "%s"
+			maintenance_window {
+				cron_schedule = %q
+				require_idleness = true
+			}
+			maintenance_window {
+				cron_schedule = %q
+				require_idleness = false
+			}
+		}
+	}
+	`, resourceName, gatewayName, listenAddr, bindAddr, sched1, sched2)
+}
+
 func testAccSDMNodeGatewayConfigNoNameOrBindAddress(resourceName, listenAddr string) string {
 	return fmt.Sprintf(`
 	resource "sdm_node" "%s" {
@@ -709,6 +805,15 @@ func createRelaysWithPrefix(prefix string, count int) ([]sdm.Node, error) {
 	for i := 0; i < count; i++ {
 		createResp, err := client.Nodes().Create(ctx, &sdm.Relay{
 			Name: randomWithPrefix(prefix),
+			MaintenanceWindows: []*sdm.NodeMaintenanceWindow{
+				{
+					CronSchedule: "57 2 * * 0",
+				},
+				{
+					CronSchedule:    "* 2 * * 0",
+					RequireIdleness: true,
+				},
+			},
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to create relay: %w", err)

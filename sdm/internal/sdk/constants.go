@@ -255,6 +255,9 @@ const (
 	ActivityVerbWorkflowDescriptionUpdated                       = "workflow description updated"
 	ActivityVerbWorkflowAutoGrantUpdated                         = "workflow auto grant updated"
 	ActivityVerbWorkflowRequiresReasonUpdated                    = "workflow requires reason updated"
+	ActivityVerbWorkflowAccessRulesUpdated                       = "workflow access rules updated"
+	ActivityVerbWorkflowAccessRulesDeleted                       = "workflow access rules deleted"
+	ActivityVerbWorkflowAccessRulesCreated                       = "workflow access rules created"
 	ActivityVerbOrgVNMSubnetUpdated                              = "organization VNM subnet updated"
 	ActivityVerbOrgVNMResourcesAllocated                         = "organization resources allocated within VNM subnet"
 	ActivityVerbDeprecatedOrgActivateDeviceApproval              = "activate device approval"
@@ -265,6 +268,9 @@ const (
 	ActivityVerbTOTPEnrollmentAdded                              = "user enrolled a totp device"
 	ActivityVerbTOTPEnrollmentDeleted                            = "user reset their totp enrollment"
 	ActivityVerbSuspendedUserEnrollAttemptFromTheUI              = "attempt to enroll by a suspended user from the Admin UI"
+	ActivityVerbResourceLocked                                   = "user locked a resource"
+	ActivityVerbResourceUnlocked                                 = "user unlocked a resource"
+	ActivityVerbResourceForceUnlocked                            = "admin force-unlocked a resource"
 )
 
 // Permissions, all permissions that may be granted to an account.
@@ -422,4 +428,11 @@ const (
 	CaptureTypeK8sGeneric     = "k8s-generic"
 	CaptureTypeK8sApply       = "k8s-apply"
 	CaptureTypeSSHPortForward = "ssh-portForward"
+)
+
+// Providers responsible for device posture enforcement
+const (
+	DevicePostureProviderNone        = ""
+	DevicePostureProviderSentinelOne = "sentinelone"
+	DevicePostureProviderCrowdStrike = "crowdstrike"
 )

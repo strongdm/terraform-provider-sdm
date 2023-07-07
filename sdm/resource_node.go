@@ -63,6 +63,12 @@ func resourceNode() *schema.Resource {
 							Computed:    true,
 							Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
 						},
+						"maintenance_window": {
+							Type:        schema.TypeList,
+							Elem:        nodeMaintenanceWindowElemType,
+							Optional:    true,
+							Description: "Maintenance Windows define when this node is allowed to restart. If a node is requested to restart, it will check each window to determine if any of them permit it to restart, and if any do, it will. This check is repeated per window until the restart is successfully completed.  If not set here, may be set on the command line or via an environment variable on the process itself; any server setting will take precedence over local settings. This setting is ineffective for nodes below version 38.44.0.  If this setting is not applied via this remote configuration or via local configuration, the default setting is used: always allow restarts if serving no connections, and allow a restart even if serving connections between 7-8 UTC, any day.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -115,6 +121,12 @@ func resourceNode() *schema.Resource {
 							Computed:    true,
 							Description: "Location is a read only network location uploaded by the gateway process when it comes online.",
 						},
+						"maintenance_window": {
+							Type:        schema.TypeList,
+							Elem:        nodeMaintenanceWindowElemType,
+							Optional:    true,
+							Description: "Maintenance Windows define when this node is allowed to restart. If a node is requested to restart, it will check each window to determine if any of them permit it to restart, and if any do, it will. This check is repeated per window until the restart is successfully completed.  If not set here, may be set on the command line or via an environment variable on the process itself; any server setting will take precedence over local settings. This setting is ineffective for nodes below version 38.44.0.  If this setting is not applied via this remote configuration or via local configuration, the default setting is used: always allow restarts if serving no connections, and allow a restart even if serving connections between 7-8 UTC, any day.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -153,13 +165,14 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 			return &sdm.Gateway{}
 		}
 		out := &sdm.Gateway{
-			ID:            d.Id(),
-			BindAddress:   convertStringToPlumbing(raw["bind_address"]),
-			ConnectsTo:    convertStringToPlumbing(raw["connects_to"]),
-			GatewayFilter: convertStringToPlumbing(raw["gateway_filter"]),
-			ListenAddress: convertStringToPlumbing(raw["listen_address"]),
-			Name:          convertStringToPlumbing(raw["name"]),
-			Tags:          convertTagsToPlumbing(raw["tags"]),
+			ID:                 d.Id(),
+			BindAddress:        convertStringToPlumbing(raw["bind_address"]),
+			ConnectsTo:         convertStringToPlumbing(raw["connects_to"]),
+			GatewayFilter:      convertStringToPlumbing(raw["gateway_filter"]),
+			ListenAddress:      convertStringToPlumbing(raw["listen_address"]),
+			MaintenanceWindows: convertRepeatedNodeMaintenanceWindowToPlumbing(raw["maintenance_window"]),
+			Name:               convertStringToPlumbing(raw["name"]),
+			Tags:               convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -169,11 +182,12 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 			return &sdm.Relay{}
 		}
 		out := &sdm.Relay{
-			ID:            d.Id(),
-			ConnectsTo:    convertStringToPlumbing(raw["connects_to"]),
-			GatewayFilter: convertStringToPlumbing(raw["gateway_filter"]),
-			Name:          convertStringToPlumbing(raw["name"]),
-			Tags:          convertTagsToPlumbing(raw["tags"]),
+			ID:                 d.Id(),
+			ConnectsTo:         convertStringToPlumbing(raw["connects_to"]),
+			GatewayFilter:      convertStringToPlumbing(raw["gateway_filter"]),
+			MaintenanceWindows: convertRepeatedNodeMaintenanceWindowToPlumbing(raw["maintenance_window"]),
+			Name:               convertStringToPlumbing(raw["name"]),
+			Tags:               convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -193,16 +207,17 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"bind_address":   (v.BindAddress),
-				"connects_to":    (v.ConnectsTo),
-				"device":         (v.Device),
-				"gateway_filter": (v.GatewayFilter),
-				"listen_address": (v.ListenAddress),
-				"location":       (v.Location),
-				"name":           (v.Name),
-				"tags":           convertTagsToPorcelain(v.Tags),
-				"version":        (v.Version),
-				"token":          resp.Token,
+				"bind_address":       (v.BindAddress),
+				"connects_to":        (v.ConnectsTo),
+				"device":             (v.Device),
+				"gateway_filter":     (v.GatewayFilter),
+				"listen_address":     (v.ListenAddress),
+				"location":           (v.Location),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"version":            (v.Version),
+				"token":              resp.Token,
 			},
 		})
 	case *sdm.Relay:
@@ -210,14 +225,15 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"connects_to":    (v.ConnectsTo),
-				"device":         (v.Device),
-				"gateway_filter": (v.GatewayFilter),
-				"location":       (v.Location),
-				"name":           (v.Name),
-				"tags":           convertTagsToPorcelain(v.Tags),
-				"version":        (v.Version),
-				"token":          resp.Token,
+				"connects_to":        (v.ConnectsTo),
+				"device":             (v.Device),
+				"gateway_filter":     (v.GatewayFilter),
+				"location":           (v.Location),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"version":            (v.Version),
+				"token":              resp.Token,
 			},
 		})
 	}
@@ -244,16 +260,17 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		_ = localV
 		d.Set("gateway", []map[string]interface{}{
 			{
-				"bind_address":   (v.BindAddress),
-				"connects_to":    (v.ConnectsTo),
-				"device":         (v.Device),
-				"gateway_filter": (v.GatewayFilter),
-				"listen_address": (v.ListenAddress),
-				"location":       (v.Location),
-				"name":           (v.Name),
-				"tags":           convertTagsToPorcelain(v.Tags),
-				"version":        (v.Version),
-				"token":          d.Get("gateway.0.token"),
+				"bind_address":       (v.BindAddress),
+				"connects_to":        (v.ConnectsTo),
+				"device":             (v.Device),
+				"gateway_filter":     (v.GatewayFilter),
+				"listen_address":     (v.ListenAddress),
+				"location":           (v.Location),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"version":            (v.Version),
+				"token":              d.Get("gateway.0.token"),
 			},
 		})
 	case *sdm.Relay:
@@ -264,14 +281,15 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"connects_to":    (v.ConnectsTo),
-				"device":         (v.Device),
-				"gateway_filter": (v.GatewayFilter),
-				"location":       (v.Location),
-				"name":           (v.Name),
-				"tags":           convertTagsToPorcelain(v.Tags),
-				"version":        (v.Version),
-				"token":          d.Get("relay.0.token"),
+				"connects_to":        (v.ConnectsTo),
+				"device":             (v.Device),
+				"gateway_filter":     (v.GatewayFilter),
+				"location":           (v.Location),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
+				"version":            (v.Version),
+				"token":              d.Get("relay.0.token"),
 			},
 		})
 	}

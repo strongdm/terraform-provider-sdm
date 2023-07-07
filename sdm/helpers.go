@@ -65,6 +65,60 @@ var tagsElemType = &schema.Schema{
 	Type: schema.TypeString,
 }
 
+func convertRepeatedNodeMaintenanceWindowToPlumbing(porcelain interface{}) []*sdm.NodeMaintenanceWindow {
+	if porcelain == nil {
+		return nil
+	}
+	windows, ok := porcelain.([]interface{})
+	if !ok {
+		return nil
+	}
+	ws := make([]*sdm.NodeMaintenanceWindow, len(windows))
+	for i, w := range windows {
+		window, ok := w.(map[string]interface{})
+		if !ok {
+			return nil
+		}
+		ri, ok := window["require_idleness"].(bool)
+		if !ok {
+			return nil
+		}
+		cs, ok := window["cron_schedule"].(string)
+		if !ok {
+			return nil
+		}
+		ws[i] = &sdm.NodeMaintenanceWindow{
+			CronSchedule:    cs,
+			RequireIdleness: ri,
+		}
+	}
+	return ws
+}
+
+func convertRepeatedNodeMaintenanceWindowToPorcelain(ws []*sdm.NodeMaintenanceWindow) interface{} {
+	windows := make([]map[string]interface{}, len(ws))
+	for i, w := range ws {
+		windows[i] = map[string]interface{}{
+			"require_idleness": w.RequireIdleness,
+			"cron_schedule":    w.CronSchedule,
+		}
+	}
+	return windows
+}
+
+var nodeMaintenanceWindowElemType = &schema.Resource{
+	Schema: map[string]*schema.Schema{
+		"cron_schedule": {
+			Type:     schema.TypeString,
+			Required: true,
+		},
+		"require_idleness": {
+			Type:     schema.TypeBool,
+			Required: true,
+		},
+	},
+}
+
 func accessRulesDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
 	var oldRules []interface{}
 	if err := json.Unmarshal([]byte(old), &oldRules); err != nil {

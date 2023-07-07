@@ -622,6 +622,9 @@ type Activity struct {
 	ID string `json:"id"`
 	// The IP from which this action was taken.
 	IPAddress string `json:"ipAddress"`
+	// The User Agent present when this request was executed. Generally a client type and version
+	// like strongdm-cli/55.66.77
+	UserAgent string `json:"userAgent"`
 	// The kind of activity which has taken place.
 	Verb string `json:"verb"`
 }
@@ -1109,9 +1112,9 @@ type AzurePostgres struct {
 	Username string `json:"username"`
 }
 
-// AzurePostgresFlexible is currently unstable, and its API may change, or it may be removed,
+// AzurePostgresManagedIdentity is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
-type AzurePostgresFlexible struct {
+type AzurePostgresManagedIdentity struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
@@ -1140,41 +1143,8 @@ type AzurePostgresFlexible struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-	// The username to authenticate with.
-	Username string `json:"username"`
-}
-
-// AzurePostgresSingle is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type AzurePostgresSingle struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
-	Database string `json:"database"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
-	OverrideDatabase bool `json:"overrideDatabase"`
-	// The password to authenticate with.
-	Password string `json:"password"`
-	// The port to dial to initiate a connection from the egress node to this resource.
-	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
-	PortOverride int32 `json:"portOverride"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	Subdomain string `json:"subdomain"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
+	// If true, appends the hostname to the username when hitting a database.azure.com address
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 	// The username to authenticate with.
 	Username string `json:"username"`
 }
@@ -1736,6 +1706,19 @@ type Gateway struct {
 	// Location is a read only network location uploaded by the gateway process
 	// when it comes online.
 	Location string `json:"location"`
+	// Maintenance Windows define when this node is allowed to restart. If a node
+	// is requested to restart, it will check each window to determine if any of
+	// them permit it to restart, and if any do, it will. This check is repeated
+	// per window until the restart is successfully completed.
+	//
+	// If not set here, may be set on the command line or via an environment variable
+	// on the process itself; any server setting will take precedence over local
+	// settings. This setting is ineffective for nodes below version 38.44.0.
+	//
+	// If this setting is not applied via this remote configuration or via local
+	// configuration, the default setting is used: always allow restarts if serving
+	// no connections, and allow a restart even if serving connections between 7-8 UTC, any day.
+	MaintenanceWindows []*NodeMaintenanceWindow `json:"maintenanceWindows"`
 	// Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the gateway. One of: "new", "verifying_restart",
@@ -2667,6 +2650,22 @@ type NodeHistory struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
+type NodeMaintenanceWindow struct {
+	// Cron job syntax for when this maintenance window is active. On this schedule, associated
+	// nodes will restart if requested, provided other checks allow the restart to proceed. Times
+	// are represented in UTC.
+	// e.g. * 7 * * 0,6 to check for a restart at every minute from 7:00 to 8:00 UTC on Sunday and
+	// Saturday. Not all possible inputs are supported: the month and day of month selections
+	// must be '*'.
+	CronSchedule string `json:"cronSchedule"`
+	// Require Idleness defines whether this window can sever live connections. If true,
+	// this window will not allow a node to be restarted unless it is serving no connections.
+	// If false, given a restart of the node has been requested (for an update, usually), the
+	// node will restart as soon as it enters an allowed day / hour combination. At least one
+	// maintenance window, out of all configured windows for a node, must have this as false.
+	RequireIdleness bool `json:"requireIdleness"`
+}
+
 // NodeUpdateResponse returns the fields of a Node after it has been updated by
 // a NodeUpdateRequest.
 type NodeUpdateResponse struct {
@@ -3118,6 +3117,19 @@ type Relay struct {
 	// Location is a read only network location uploaded by the gateway process
 	// when it comes online.
 	Location string `json:"location"`
+	// Maintenance Windows define when this node is allowed to restart. If a node
+	// is requested to restart, it will check each window to determine if any of
+	// them permit it to restart, and if any do, it will. This check is repeated
+	// per window until the restart is successfully completed.
+	//
+	// If not set here, may be set on the command line or via an environment variable
+	// on the process itself; any server setting will take precedence over local
+	// settings. This setting is ineffective for nodes below version 38.44.0.
+	//
+	// If this setting is not applied via this remote configuration or via local
+	// configuration, the default setting is used: always allow restarts if serving
+	// no connections, and allow a restart even if serving connections between 7-8 UTC, any day.
+	MaintenanceWindows []*NodeMaintenanceWindow `json:"maintenanceWindows"`
 	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
 	// The current state of the relay. One of: "new", "verifying_restart",
@@ -4411,112 +4423,58 @@ func (m *AzurePostgres) GetBindInterface() string {
 func (m *AzurePostgres) SetBindInterface(v string) {
 	m.BindInterface = v
 }
-func (*AzurePostgresFlexible) isOneOf_Resource() {}
+func (*AzurePostgresManagedIdentity) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) GetID() string { return m.ID }
+// GetID returns the unique identifier of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) GetID() string { return m.ID }
 
-// GetName returns the name of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) GetName() string {
+// GetName returns the name of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) SetName(v string) {
+// SetName sets the name of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) GetTags() Tags {
+// GetTags returns the tags of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) SetTags(v Tags) {
+// SetTags sets the tags of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 
-// GetBindInterface returns the bind interface of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) GetBindInterface() string {
+// GetBindInterface returns the bind interface of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) GetBindInterface() string {
 	return m.BindInterface
 }
 
-// SetBindInterface sets the bind interface of the AzurePostgresFlexible.
-func (m *AzurePostgresFlexible) SetBindInterface(v string) {
-	m.BindInterface = v
-}
-func (*AzurePostgresSingle) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) GetID() string { return m.ID }
-
-// GetName returns the name of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-
-// GetBindInterface returns the bind interface of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) GetBindInterface() string {
-	return m.BindInterface
-}
-
-// SetBindInterface sets the bind interface of the AzurePostgresSingle.
-func (m *AzurePostgresSingle) SetBindInterface(v string) {
+// SetBindInterface sets the bind interface of the AzurePostgresManagedIdentity.
+func (m *AzurePostgresManagedIdentity) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*BigQuery) isOneOf_Resource() {}

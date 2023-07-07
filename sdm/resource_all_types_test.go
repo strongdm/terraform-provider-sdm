@@ -320,7 +320,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
-			resource: "azure_postgres_flexible",
+			resource: "azure_postgres_managed_identity",
 			pairs: [][2]string{
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
@@ -329,19 +329,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"override_database", `true`},
 				{"password", `"password"`},
 				{"port", `443`},
-				{"username", `"username"`},
-			},
-		},
-		{
-			resource: "azure_postgres_single",
-			pairs: [][2]string{
-				{"database", `"database"`},
-				{"egress_filter", `"name:value"`},
-				{"hostname", `"hostname"`},
-				{"name", `"name"`},
-				{"override_database", `true`},
-				{"password", `"password"`},
-				{"port", `443`},
+				{"use_azure_single_server_usernames", `true`},
 				{"username", `"username"`},
 			},
 		},
@@ -1462,7 +1450,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			},
 		},
 		{
-			resource: "azure_postgres_flexible",
+			resource: "azure_postgres_managed_identity",
 			pairs: [][2]string{
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
@@ -1472,20 +1460,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
-				{"username", `"path/to/secret?key=key&encoding=base64"`},
-			},
-		},
-		{
-			resource: "azure_postgres_single",
-			pairs: [][2]string{
-				{"database", `"database"`},
-				{"egress_filter", `"name:value"`},
-				{"hostname", `"hostname"`},
-				{"name", `"secret_name"`},
-				{"override_database", `true`},
-				{"password", `"path/to/secret?key=key&encoding=base64"`},
-				{"port", `443`},
-				{"secret_store_id", `"` + seID + `"`},
+				{"use_azure_single_server_usernames", `true`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},

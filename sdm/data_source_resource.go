@@ -1811,7 +1811,7 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"azure_postgres_flexible": {
+						"azure_postgres_managed_identity": {
 							Type:        schema.TypeList,
 							Computed:    true,
 							Description: "",
@@ -1884,86 +1884,10 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The username to authenticate with.",
-									},
-								},
-							},
-						},
-						"azure_postgres_single": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"bind_interface": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"override_database": {
+									"use_azure_single_server_usernames": {
 										Type:        schema.TypeBool,
 										Optional:    true,
-										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "The password to authenticate with.",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The port to dial to initiate a connection from the egress node to this resource.",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The local port used by clients to connect to this resource.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"subdomain": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
+										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -7087,39 +7011,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
-		case *sdm.AzurePostgresFlexible:
-			output[0]["azure_postgres_flexible"] = append(output[0]["azure_postgres_flexible"], entity{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"password":          (v.Password),
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          (v.Username),
-			})
-		case *sdm.AzurePostgresSingle:
-			output[0]["azure_postgres_single"] = append(output[0]["azure_postgres_single"], entity{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"password":          (v.Password),
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          (v.Username),
+		case *sdm.AzurePostgresManagedIdentity:
+			output[0]["azure_postgres_managed_identity"] = append(output[0]["azure_postgres_managed_identity"], entity{
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"id":                                (v.ID),
+				"name":                              (v.Name),
+				"override_database":                 (v.OverrideDatabase),
+				"password":                          (v.Password),
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          (v.Username),
 			})
 		case *sdm.BigQuery:
 			output[0]["big_query"] = append(output[0]["big_query"], entity{

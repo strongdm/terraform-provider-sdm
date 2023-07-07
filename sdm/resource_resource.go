@@ -1778,11 +1778,11 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"azure_postgres_flexible": {
+			"azure_postgres_managed_identity": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AzurePostgresFlexible is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "AzurePostgresManagedIdentity is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -1851,86 +1851,10 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The username to authenticate with.",
-						},
-					},
-				},
-			},
-			"azure_postgres_single": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "AzurePostgresSingle is currently unstable, and its API may change, or it may be removed, without a major version bump.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"bind_interface": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
-						},
-						"egress_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"override_database": {
+						"use_azure_single_server_usernames": {
 							Type:        schema.TypeBool,
 							Optional:    true,
-							Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Sensitive:   true,
-							Description: "The password to authenticate with.",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Description: "The port to dial to initiate a connection from the egress node to this resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
-						},
-						"secret_store_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-							Description: "ID of the secret store containing credentials for this resource, if any.",
-						},
-						"subdomain": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-						},
-						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
+							Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 						},
 						"username": {
 							Type:        schema.TypeString,
@@ -7297,33 +7221,7 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
-	if list := d.Get("azure_postgres_flexible").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["password"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
-		}
-
-		return map[string]string{
-			"password": convertStringToPlumbing(raw["password"]),
-			"username": convertStringToPlumbing(raw["username"]),
-		}, nil
-	}
-	if list := d.Get("azure_postgres_single").([]interface{}); len(list) > 0 {
+	if list := d.Get("azure_postgres_managed_identity").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return map[string]string{}, nil
@@ -9466,54 +9364,27 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
-	if list := d.Get("azure_postgres_flexible").([]interface{}); len(list) > 0 {
+	if list := d.Get("azure_postgres_managed_identity").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return &sdm.AzurePostgresFlexible{}
+			return &sdm.AzurePostgresManagedIdentity{}
 		}
-		out := &sdm.AzurePostgresFlexible{
-			ID:               d.Id(),
-			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
-			Database:         convertStringToPlumbing(raw["database"]),
-			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:         convertStringToPlumbing(raw["hostname"]),
-			Name:             convertStringToPlumbing(raw["name"]),
-			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
-			Password:         convertStringToPlumbing(raw["password"]),
-			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
-			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
-			Tags:             convertTagsToPlumbing(raw["tags"]),
-			Username:         convertStringToPlumbing(raw["username"]),
-		}
-		override, ok := raw["port_override"].(int)
-		if !ok || override == 0 {
-			override = -1
-		}
-		out.PortOverride = int32(override)
-		return out
-	}
-	if list := d.Get("azure_postgres_single").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.AzurePostgresSingle{}
-		}
-		out := &sdm.AzurePostgresSingle{
-			ID:               d.Id(),
-			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
-			Database:         convertStringToPlumbing(raw["database"]),
-			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:         convertStringToPlumbing(raw["hostname"]),
-			Name:             convertStringToPlumbing(raw["name"]),
-			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
-			Password:         convertStringToPlumbing(raw["password"]),
-			Port:             convertInt32ToPlumbing(raw["port"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
-			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
-			Tags:             convertTagsToPlumbing(raw["tags"]),
-			Username:         convertStringToPlumbing(raw["username"]),
+		out := &sdm.AzurePostgresManagedIdentity{
+			ID:                            d.Id(),
+			BindInterface:                 convertStringToPlumbing(raw["bind_interface"]),
+			Database:                      convertStringToPlumbing(raw["database"]),
+			EgressFilter:                  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                      convertStringToPlumbing(raw["hostname"]),
+			Name:                          convertStringToPlumbing(raw["name"]),
+			OverrideDatabase:              convertBoolToPlumbing(raw["override_database"]),
+			Password:                      convertStringToPlumbing(raw["password"]),
+			Port:                          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                  convertInt32ToPlumbing(raw["port_override"]),
+			SecretStoreID:                 convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:                     convertStringToPlumbing(raw["subdomain"]),
+			Tags:                          convertTagsToPlumbing(raw["tags"]),
+			UseAzureSingleServerUsernames: convertBoolToPlumbing(raw["use_azure_single_server_usernames"]),
+			Username:                      convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -11573,44 +11444,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":          seValues["username"],
 			},
 		})
-	case *sdm.AzurePostgresFlexible:
-		localV, _ := localVersion.(*sdm.AzurePostgresFlexible)
+	case *sdm.AzurePostgresManagedIdentity:
+		localV, _ := localVersion.(*sdm.AzurePostgresManagedIdentity)
 		_ = localV
-		d.Set("azure_postgres_flexible", []map[string]interface{}{
+		d.Set("azure_postgres_managed_identity", []map[string]interface{}{
 			{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"password":          seValues["password"],
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          seValues["username"],
-			},
-		})
-	case *sdm.AzurePostgresSingle:
-		localV, _ := localVersion.(*sdm.AzurePostgresSingle)
-		_ = localV
-		d.Set("azure_postgres_single", []map[string]interface{}{
-			{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"password":          seValues["password"],
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          seValues["username"],
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"name":                              (v.Name),
+				"override_database":                 (v.OverrideDatabase),
+				"password":                          seValues["password"],
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          seValues["username"],
 			},
 		})
 	case *sdm.BigQuery:
@@ -13466,10 +13318,10 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":          seValues["username"],
 			},
 		})
-	case *sdm.AzurePostgresFlexible:
-		localV, ok := localVersion.(*sdm.AzurePostgresFlexible)
+	case *sdm.AzurePostgresManagedIdentity:
+		localV, ok := localVersion.(*sdm.AzurePostgresManagedIdentity)
 		if !ok {
-			localV = &sdm.AzurePostgresFlexible{}
+			localV = &sdm.AzurePostgresManagedIdentity{}
 		}
 		_ = localV
 		if v.Password != "" {
@@ -13478,50 +13330,22 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		if v.Username != "" {
 			seValues["username"] = v.Username
 		}
-		d.Set("azure_postgres_flexible", []map[string]interface{}{
+		d.Set("azure_postgres_managed_identity", []map[string]interface{}{
 			{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"password":          seValues["password"],
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          seValues["username"],
-			},
-		})
-	case *sdm.AzurePostgresSingle:
-		localV, ok := localVersion.(*sdm.AzurePostgresSingle)
-		if !ok {
-			localV = &sdm.AzurePostgresSingle{}
-		}
-		_ = localV
-		if v.Password != "" {
-			seValues["password"] = v.Password
-		}
-		if v.Username != "" {
-			seValues["username"] = v.Username
-		}
-		d.Set("azure_postgres_single", []map[string]interface{}{
-			{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"password":          seValues["password"],
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          seValues["username"],
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"name":                              (v.Name),
+				"override_database":                 (v.OverrideDatabase),
+				"password":                          seValues["password"],
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          seValues["username"],
 			},
 		})
 	case *sdm.BigQuery:

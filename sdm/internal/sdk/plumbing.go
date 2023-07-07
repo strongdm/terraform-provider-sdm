@@ -1810,6 +1810,7 @@ func convertActivityToPorcelain(plumbing *proto.Activity) (*Activity, error) {
 	}
 	porcelain.ID = plumbing.Id
 	porcelain.IPAddress = plumbing.IpAddress
+	porcelain.UserAgent = plumbing.UserAgent
 	porcelain.Verb = plumbing.Verb
 	return porcelain, nil
 }
@@ -1825,6 +1826,7 @@ func convertActivityToPlumbing(porcelain *Activity) *proto.Activity {
 	plumbing.Entities = convertRepeatedActivityEntityToPlumbing(porcelain.Entities)
 	plumbing.Id = (porcelain.ID)
 	plumbing.IpAddress = (porcelain.IPAddress)
+	plumbing.UserAgent = (porcelain.UserAgent)
 	plumbing.Verb = (porcelain.Verb)
 	return plumbing
 }
@@ -2974,11 +2976,11 @@ func convertRepeatedAzurePostgresToPorcelain(plumbings []*proto.AzurePostgres) (
 	}
 	return items, nil
 }
-func convertAzurePostgresFlexibleToPorcelain(plumbing *proto.AzurePostgresFlexible) (*AzurePostgresFlexible, error) {
+func convertAzurePostgresManagedIdentityToPorcelain(plumbing *proto.AzurePostgresManagedIdentity) (*AzurePostgresManagedIdentity, error) {
 	if plumbing == nil {
 		return nil, nil
 	}
-	porcelain := &AzurePostgresFlexible{}
+	porcelain := &AzurePostgresManagedIdentity{}
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
@@ -2997,15 +2999,16 @@ func convertAzurePostgresFlexibleToPorcelain(plumbing *proto.AzurePostgresFlexib
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
-func convertAzurePostgresFlexibleToPlumbing(porcelain *AzurePostgresFlexible) *proto.AzurePostgresFlexible {
+func convertAzurePostgresManagedIdentityToPlumbing(porcelain *AzurePostgresManagedIdentity) *proto.AzurePostgresManagedIdentity {
 	if porcelain == nil {
 		return nil
 	}
-	plumbing := &proto.AzurePostgresFlexible{}
+	plumbing := &proto.AzurePostgresManagedIdentity{}
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
@@ -3020,99 +3023,27 @@ func convertAzurePostgresFlexibleToPlumbing(porcelain *AzurePostgresFlexible) *p
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
-func convertRepeatedAzurePostgresFlexibleToPlumbing(
-	porcelains []*AzurePostgresFlexible,
-) []*proto.AzurePostgresFlexible {
-	var items []*proto.AzurePostgresFlexible
+func convertRepeatedAzurePostgresManagedIdentityToPlumbing(
+	porcelains []*AzurePostgresManagedIdentity,
+) []*proto.AzurePostgresManagedIdentity {
+	var items []*proto.AzurePostgresManagedIdentity
 	for _, porcelain := range porcelains {
-		items = append(items, convertAzurePostgresFlexibleToPlumbing(porcelain))
+		items = append(items, convertAzurePostgresManagedIdentityToPlumbing(porcelain))
 	}
 	return items
 }
 
-func convertRepeatedAzurePostgresFlexibleToPorcelain(plumbings []*proto.AzurePostgresFlexible) (
-	[]*AzurePostgresFlexible,
+func convertRepeatedAzurePostgresManagedIdentityToPorcelain(plumbings []*proto.AzurePostgresManagedIdentity) (
+	[]*AzurePostgresManagedIdentity,
 	error,
 ) {
-	var items []*AzurePostgresFlexible
+	var items []*AzurePostgresManagedIdentity
 	for _, plumbing := range plumbings {
-		if v, err := convertAzurePostgresFlexibleToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
-func convertAzurePostgresSingleToPorcelain(plumbing *proto.AzurePostgresSingle) (*AzurePostgresSingle, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &AzurePostgresSingle{}
-	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.Database = plumbing.Database
-	porcelain.EgressFilter = plumbing.EgressFilter
-	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	porcelain.OverrideDatabase = plumbing.OverrideDatabase
-	porcelain.Password = plumbing.Password
-	porcelain.Port = plumbing.Port
-	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.SecretStoreID = plumbing.SecretStoreId
-	porcelain.Subdomain = plumbing.Subdomain
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	porcelain.Username = plumbing.Username
-	return porcelain, nil
-}
-
-func convertAzurePostgresSingleToPlumbing(porcelain *AzurePostgresSingle) *proto.AzurePostgresSingle {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AzurePostgresSingle{}
-	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.Database = (porcelain.Database)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.Username = (porcelain.Username)
-	return plumbing
-}
-func convertRepeatedAzurePostgresSingleToPlumbing(
-	porcelains []*AzurePostgresSingle,
-) []*proto.AzurePostgresSingle {
-	var items []*proto.AzurePostgresSingle
-	for _, porcelain := range porcelains {
-		items = append(items, convertAzurePostgresSingleToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAzurePostgresSingleToPorcelain(plumbings []*proto.AzurePostgresSingle) (
-	[]*AzurePostgresSingle,
-	error,
-) {
-	var items []*AzurePostgresSingle
-	for _, plumbing := range plumbings {
-		if v, err := convertAzurePostgresSingleToPorcelain(plumbing); err != nil {
+		if v, err := convertAzurePostgresManagedIdentityToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -4620,6 +4551,11 @@ func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.ListenAddress = plumbing.ListenAddress
 	porcelain.Location = plumbing.Location
+	if v, err := convertRepeatedNodeMaintenanceWindowToPorcelain(plumbing.MaintenanceWindows); err != nil {
+		return nil, fmt.Errorf("error converting field MaintenanceWindows: %v", err)
+	} else {
+		porcelain.MaintenanceWindows = v
+	}
 	porcelain.Name = plumbing.Name
 	porcelain.State = plumbing.State
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4643,6 +4579,7 @@ func convertGatewayToPlumbing(porcelain *Gateway) *proto.Gateway {
 	plumbing.Id = (porcelain.ID)
 	plumbing.ListenAddress = (porcelain.ListenAddress)
 	plumbing.Location = (porcelain.Location)
+	plumbing.MaintenanceWindows = convertRepeatedNodeMaintenanceWindowToPlumbing(porcelain.MaintenanceWindows)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -6740,6 +6677,49 @@ func convertRepeatedNodeHistoryToPorcelain(plumbings []*proto.NodeHistory) (
 	}
 	return items, nil
 }
+func convertNodeMaintenanceWindowToPorcelain(plumbing *proto.NodeMaintenanceWindow) (*NodeMaintenanceWindow, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &NodeMaintenanceWindow{}
+	porcelain.CronSchedule = plumbing.CronSchedule
+	porcelain.RequireIdleness = plumbing.RequireIdleness
+	return porcelain, nil
+}
+
+func convertNodeMaintenanceWindowToPlumbing(porcelain *NodeMaintenanceWindow) *proto.NodeMaintenanceWindow {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.NodeMaintenanceWindow{}
+	plumbing.CronSchedule = (porcelain.CronSchedule)
+	plumbing.RequireIdleness = (porcelain.RequireIdleness)
+	return plumbing
+}
+func convertRepeatedNodeMaintenanceWindowToPlumbing(
+	porcelains []*NodeMaintenanceWindow,
+) []*proto.NodeMaintenanceWindow {
+	var items []*proto.NodeMaintenanceWindow
+	for _, porcelain := range porcelains {
+		items = append(items, convertNodeMaintenanceWindowToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedNodeMaintenanceWindowToPorcelain(plumbings []*proto.NodeMaintenanceWindow) (
+	[]*NodeMaintenanceWindow,
+	error,
+) {
+	var items []*NodeMaintenanceWindow
+	for _, plumbing := range plumbings {
+		if v, err := convertNodeMaintenanceWindowToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertNodeUpdateResponseToPorcelain(plumbing *proto.NodeUpdateResponse) (*NodeUpdateResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7762,6 +7742,11 @@ func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
 	porcelain.Location = plumbing.Location
+	if v, err := convertRepeatedNodeMaintenanceWindowToPorcelain(plumbing.MaintenanceWindows); err != nil {
+		return nil, fmt.Errorf("error converting field MaintenanceWindows: %v", err)
+	} else {
+		porcelain.MaintenanceWindows = v
+	}
 	porcelain.Name = plumbing.Name
 	porcelain.State = plumbing.State
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7783,6 +7768,7 @@ func convertRelayToPlumbing(porcelain *Relay) *proto.Relay {
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Location = (porcelain.Location)
+	plumbing.MaintenanceWindows = convertRepeatedNodeMaintenanceWindowToPlumbing(porcelain.MaintenanceWindows)
 	plumbing.Name = (porcelain.Name)
 	plumbing.State = (porcelain.State)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8443,10 +8429,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AzureMysql{AzureMysql: convertAzureMysqlToPlumbing(v)}
 	case *AzurePostgres:
 		plumbing.Resource = &proto.Resource_AzurePostgres{AzurePostgres: convertAzurePostgresToPlumbing(v)}
-	case *AzurePostgresFlexible:
-		plumbing.Resource = &proto.Resource_AzurePostgresFlexible{AzurePostgresFlexible: convertAzurePostgresFlexibleToPlumbing(v)}
-	case *AzurePostgresSingle:
-		plumbing.Resource = &proto.Resource_AzurePostgresSingle{AzurePostgresSingle: convertAzurePostgresSingleToPlumbing(v)}
+	case *AzurePostgresManagedIdentity:
+		plumbing.Resource = &proto.Resource_AzurePostgresManagedIdentity{AzurePostgresManagedIdentity: convertAzurePostgresManagedIdentityToPlumbing(v)}
 	case *BigQuery:
 		plumbing.Resource = &proto.Resource_BigQuery{BigQuery: convertBigQueryToPlumbing(v)}
 	case *Cassandra:
@@ -8633,11 +8617,8 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	if plumbing.GetAzurePostgres() != nil {
 		return convertAzurePostgresToPorcelain(plumbing.GetAzurePostgres())
 	}
-	if plumbing.GetAzurePostgresFlexible() != nil {
-		return convertAzurePostgresFlexibleToPorcelain(plumbing.GetAzurePostgresFlexible())
-	}
-	if plumbing.GetAzurePostgresSingle() != nil {
-		return convertAzurePostgresSingleToPorcelain(plumbing.GetAzurePostgresSingle())
+	if plumbing.GetAzurePostgresManagedIdentity() != nil {
+		return convertAzurePostgresManagedIdentityToPorcelain(plumbing.GetAzurePostgresManagedIdentity())
 	}
 	if plumbing.GetBigQuery() != nil {
 		return convertBigQueryToPorcelain(plumbing.GetBigQuery())
