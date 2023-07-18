@@ -4545,7 +4545,6 @@ func convertGatewayToPorcelain(plumbing *proto.Gateway) (*Gateway, error) {
 	}
 	porcelain := &Gateway{}
 	porcelain.BindAddress = plumbing.BindAddress
-	porcelain.ConnectsTo = plumbing.ConnectsTo
 	porcelain.Device = plumbing.Device
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
@@ -4573,7 +4572,6 @@ func convertGatewayToPlumbing(porcelain *Gateway) *proto.Gateway {
 	}
 	plumbing := &proto.Gateway{}
 	plumbing.BindAddress = (porcelain.BindAddress)
-	plumbing.ConnectsTo = (porcelain.ConnectsTo)
 	plumbing.Device = (porcelain.Device)
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)
@@ -7203,6 +7201,7 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 		porcelain.ResourceTags = v
 	}
 	porcelain.ResourceType = plumbing.ResourceType
+	porcelain.SourceIP = plumbing.SourceIp
 	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
 		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
 	} else {
@@ -7238,6 +7237,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.ResourceName = (porcelain.ResourceName)
 	plumbing.ResourceTags = convertTagsToPlumbing(porcelain.ResourceTags)
 	plumbing.ResourceType = (porcelain.ResourceType)
+	plumbing.SourceIp = (porcelain.SourceIP)
 	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
 	return plumbing
 }
@@ -7737,7 +7737,6 @@ func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 		return nil, nil
 	}
 	porcelain := &Relay{}
-	porcelain.ConnectsTo = plumbing.ConnectsTo
 	porcelain.Device = plumbing.Device
 	porcelain.GatewayFilter = plumbing.GatewayFilter
 	porcelain.ID = plumbing.Id
@@ -7763,7 +7762,6 @@ func convertRelayToPlumbing(porcelain *Relay) *proto.Relay {
 		return nil
 	}
 	plumbing := &proto.Relay{}
-	plumbing.ConnectsTo = (porcelain.ConnectsTo)
 	plumbing.Device = (porcelain.Device)
 	plumbing.GatewayFilter = (porcelain.GatewayFilter)
 	plumbing.Id = (porcelain.ID)

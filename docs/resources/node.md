@@ -41,14 +41,12 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 The following arguments are supported by the Node resource:
 * gateway:
 	* `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to "0.0.0.0:listen_address_port".
-	* `connects_to` - (Optional) ConnectsTo can be used to restrict the peering between relays and gateways.
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways. Deprecated.
 	* `listen_address` - (Required) The public hostname/port tuple at which the gateway will be accessible to clients.
 	* `maintenance_window` - (Optional) Maintenance Windows define when this node is allowed to restart. If a node is requested to restart, it will check each window to determine if any of them permit it to restart, and if any do, it will. This check is repeated per window until the restart is successfully completed.  If not set here, may be set on the command line or via an environment variable on the process itself; any server setting will take precedence over local settings. This setting is ineffective for nodes below version 38.44.0.  If this setting is not applied via this remote configuration or via local configuration, the default setting is used: always allow restarts if serving no connections, and allow a restart even if serving connections between 7-8 UTC, any day.
 	* `name` - (Optional) Unique human-readable name of the Gateway. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * relay:
-	* `connects_to` - (Optional) ConnectsTo can be used to restrict the peering between relays and gateways.
 	* `gateway_filter` - (Optional) GatewayFilter can be used to restrict the peering between relays and gateways. Deprecated.
 	* `maintenance_window` - (Optional) Maintenance Windows define when this node is allowed to restart. If a node is requested to restart, it will check each window to determine if any of them permit it to restart, and if any do, it will. This check is repeated per window until the restart is successfully completed.  If not set here, may be set on the command line or via an environment variable on the process itself; any server setting will take precedence over local settings. This setting is ineffective for nodes below version 38.44.0.  If this setting is not applied via this remote configuration or via local configuration, the default setting is used: always allow restarts if serving no connections, and allow a restart even if serving connections between 7-8 UTC, any day.
 	* `name` - (Optional) Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.

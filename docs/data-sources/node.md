@@ -37,7 +37,6 @@ In addition to provided arguments above, the following attributes are returned b
 * `nodes` - A single element list containing a map, where each key lists one of the following objects:
 	* gateway:
 		* `bind_address` - The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to "0.0.0.0:listen_address_port".
-		* `connects_to` - ConnectsTo can be used to restrict the peering between relays and gateways.
 		* `device` - Device is a read only device name uploaded by the gateway process when it comes online.
 		* `gateway_filter` - GatewayFilter can be used to restrict the peering between relays and gateways. Deprecated.
 		* `id` - Unique identifier of the Gateway.
@@ -48,7 +47,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 		* `version` - Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 	* relay:
-		* `connects_to` - ConnectsTo can be used to restrict the peering between relays and gateways.
 		* `device` - Device is a read only device name uploaded by the gateway process when it comes online.
 		* `gateway_filter` - GatewayFilter can be used to restrict the peering between relays and gateways. Deprecated.
 		* `id` - Unique identifier of the Relay.

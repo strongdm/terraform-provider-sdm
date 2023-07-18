@@ -37,11 +37,6 @@ func resourceNode() *schema.Resource {
 							ForceNew:    true,
 							Description: "The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to \"0.0.0.0:listen_address_port\".",
 						},
-						"connects_to": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ConnectsTo can be used to restrict the peering between relays and gateways.",
-						},
 						"device": {
 							Type:        schema.TypeString,
 							Computed:    true,
@@ -101,11 +96,6 @@ func resourceNode() *schema.Resource {
 				Description: "Relay represents a StrongDM CLI installation running in relay mode.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"connects_to": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ConnectsTo can be used to restrict the peering between relays and gateways.",
-						},
 						"device": {
 							Type:        schema.TypeString,
 							Computed:    true,
@@ -167,7 +157,6 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 		out := &sdm.Gateway{
 			ID:                 d.Id(),
 			BindAddress:        convertStringToPlumbing(raw["bind_address"]),
-			ConnectsTo:         convertStringToPlumbing(raw["connects_to"]),
 			GatewayFilter:      convertStringToPlumbing(raw["gateway_filter"]),
 			ListenAddress:      convertStringToPlumbing(raw["listen_address"]),
 			MaintenanceWindows: convertRepeatedNodeMaintenanceWindowToPlumbing(raw["maintenance_window"]),
@@ -183,7 +172,6 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 		}
 		out := &sdm.Relay{
 			ID:                 d.Id(),
-			ConnectsTo:         convertStringToPlumbing(raw["connects_to"]),
 			GatewayFilter:      convertStringToPlumbing(raw["gateway_filter"]),
 			MaintenanceWindows: convertRepeatedNodeMaintenanceWindowToPlumbing(raw["maintenance_window"]),
 			Name:               convertStringToPlumbing(raw["name"]),
@@ -208,7 +196,6 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		d.Set("gateway", []map[string]interface{}{
 			{
 				"bind_address":       (v.BindAddress),
-				"connects_to":        (v.ConnectsTo),
 				"device":             (v.Device),
 				"gateway_filter":     (v.GatewayFilter),
 				"listen_address":     (v.ListenAddress),
@@ -225,7 +212,6 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"connects_to":        (v.ConnectsTo),
 				"device":             (v.Device),
 				"gateway_filter":     (v.GatewayFilter),
 				"location":           (v.Location),
@@ -261,7 +247,6 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		d.Set("gateway", []map[string]interface{}{
 			{
 				"bind_address":       (v.BindAddress),
-				"connects_to":        (v.ConnectsTo),
 				"device":             (v.Device),
 				"gateway_filter":     (v.GatewayFilter),
 				"listen_address":     (v.ListenAddress),
@@ -281,7 +266,6 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 		_ = localV
 		d.Set("relay", []map[string]interface{}{
 			{
-				"connects_to":        (v.ConnectsTo),
 				"device":             (v.Device),
 				"gateway_filter":     (v.GatewayFilter),
 				"location":           (v.Location),
