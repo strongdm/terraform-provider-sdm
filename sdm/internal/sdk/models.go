@@ -2770,6 +2770,157 @@ type OrganizationHistoryRecord struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
+// PeeringGroups are the building blocks used for explicit network topology making.
+// They may be linked to other peering groups. Sets of PeeringGroupResource and PeeringGroupNode can be attached to a peering group.
+type PeeringGroup struct {
+	// Unique identifier of the PeeringGroup.
+	ID string `json:"id"`
+	// Unique human-readable name of the PeeringGroup.
+	Name string `json:"name"`
+}
+
+// PeeringGroupCreateResponse reports how the PeeringGroup was created in the system.
+type PeeringGroupCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created PeeringGroup.
+	PeeringGroup *PeeringGroup `json:"peeringGroup"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupDeleteResponse returns information about a PeeringGroup that was deleted.
+type PeeringGroupDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupGetResponse returns a requested PeeringGroup.
+type PeeringGroupGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested PeeringGroup.
+	PeeringGroup *PeeringGroup `json:"peeringGroup"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupNode represents the attachment between a PeeringGroup and a Node.
+type PeeringGroupNode struct {
+	// Peering Group ID to which the node will be attached to.
+	GroupID string `json:"groupId"`
+	// Unique identifier of the Attachment.
+	ID string `json:"id"`
+	// Node ID to be attached.
+	NodeID string `json:"nodeId"`
+}
+
+// PeeringGroupNodeCreateResponse reports how the PeeringGroupNode was created in the system.
+type PeeringGroupNodeCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created PeeringGroupNode.
+	PeeringGroupNode *PeeringGroupNode `json:"peeringGroupNode"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupNodeDeleteResponse returns information about a PeeringGroupNode that was deleted.
+type PeeringGroupNodeDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupNodeGetResponse returns a requested PeeringGroupNode.
+type PeeringGroupNodeGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested PeeringGroupNode.
+	PeeringGroupNode *PeeringGroupNode `json:"peeringGroupNode"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupPeer represents the link between two PeeringGroups
+type PeeringGroupPeer struct {
+	// Group ID from which the link will originate.
+	GroupID string `json:"groupId"`
+	// Unique identifier of the Attachment.
+	ID string `json:"id"`
+	// Peering Group ID to which Group ID will link.
+	PeersWithGroupID string `json:"peersWithGroupId"`
+}
+
+// PeeringGroupPeerCreateResponse reports how the PeeringGroupPeer was created in the system.
+type PeeringGroupPeerCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created PeeringGroupPeer.
+	PeeringGroupPeer *PeeringGroupPeer `json:"peeringGroupPeer"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupPeerDeleteResponse returns information about a PeeringGroupPeer that was deleted.
+type PeeringGroupPeerDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupPeerGetResponse returns a requested PeeringGroupPeer.
+type PeeringGroupPeerGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested PeeringGroupPeer.
+	PeeringGroupPeer *PeeringGroupPeer `json:"peeringGroupPeer"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupResource represents the attachment between a PeeringGroup and a Resource.
+type PeeringGroupResource struct {
+	// Peering Group ID to which the resource will be attached to.
+	GroupID string `json:"groupId"`
+	// Unique identifier of the Attachment.
+	ID string `json:"id"`
+	// Resource ID to be attached.
+	ResourceID string `json:"resourceId"`
+}
+
+// PeeringGroupResourceCreateResponse reports how the attachment was created in the system.
+type PeeringGroupResourceCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created PeeringGroupResource.
+	PeeringGroupResource *PeeringGroupResource `json:"peeringGroupResource"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupResourceDeleteResponse returns information about a PeeringGroupResource that was deleted.
+type PeeringGroupResourceDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PeeringGroupResourceGetResponse returns a requested PeeringGroupResource.
+type PeeringGroupResourceGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested PeeringGroupResource.
+	PeeringGroupResource *PeeringGroupResource `json:"peeringGroupResource"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 type Postgres struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -8862,6 +9013,74 @@ type OrganizationHistoryRecordIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *OrganizationHistoryRecord
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// PeeringGroupNodeIterator provides read access to a list of PeeringGroupNode.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    peeringGroupNode := iterator.Value()
+//	    // ...
+//	}
+type PeeringGroupNodeIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *PeeringGroupNode
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// PeeringGroupPeerIterator provides read access to a list of PeeringGroupPeer.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    peeringGroupPeer := iterator.Value()
+//	    // ...
+//	}
+type PeeringGroupPeerIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *PeeringGroupPeer
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// PeeringGroupResourceIterator provides read access to a list of PeeringGroupResource.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    peeringGroupResource := iterator.Value()
+//	    // ...
+//	}
+type PeeringGroupResourceIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *PeeringGroupResource
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// PeeringGroupIterator provides read access to a list of PeeringGroup.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    peeringGroup := iterator.Value()
+//	    // ...
+//	}
+type PeeringGroupIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *PeeringGroup
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

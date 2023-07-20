@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/4.5.0"
+const userAgent = "terraform-provider-sdm/5.1.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -44,24 +44,32 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"sdm_account_attachment": resourceAccountAttachment(),
-			"sdm_account":            resourceAccount(),
-			"sdm_node":               resourceNode(),
-			"sdm_remote_identity":    resourceRemoteIdentity(),
-			"sdm_resource":           resourceResource(),
-			"sdm_role":               resourceRole(),
-			"sdm_secret_store":       resourceSecretStore(),
+			"sdm_account_attachment":     resourceAccountAttachment(),
+			"sdm_account":                resourceAccount(),
+			"sdm_node":                   resourceNode(),
+			"sdm_peering_group_node":     resourcePeeringGroupNode(),
+			"sdm_peering_group_peer":     resourcePeeringGroupPeer(),
+			"sdm_peering_group_resource": resourcePeeringGroupResource(),
+			"sdm_peering_group":          resourcePeeringGroup(),
+			"sdm_remote_identity":        resourceRemoteIdentity(),
+			"sdm_resource":               resourceResource(),
+			"sdm_role":                   resourceRole(),
+			"sdm_secret_store":           resourceSecretStore(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"sdm_ssh_ca_pubkey":         dataSourceControlPanelSSHCAPublicKey(),
-			"sdm_account_attachment":    dataSourceAccountAttachment(),
-			"sdm_account":               dataSourceAccount(),
-			"sdm_node":                  dataSourceNode(),
-			"sdm_remote_identity":       dataSourceRemoteIdentity(),
-			"sdm_remote_identity_group": dataSourceRemoteIdentityGroup(),
-			"sdm_resource":              dataSourceResource(),
-			"sdm_role":                  dataSourceRole(),
-			"sdm_secret_store":          dataSourceSecretStore(),
+			"sdm_ssh_ca_pubkey":          dataSourceControlPanelSSHCAPublicKey(),
+			"sdm_account_attachment":     dataSourceAccountAttachment(),
+			"sdm_account":                dataSourceAccount(),
+			"sdm_node":                   dataSourceNode(),
+			"sdm_peering_group_node":     dataSourcePeeringGroupNode(),
+			"sdm_peering_group_peer":     dataSourcePeeringGroupPeer(),
+			"sdm_peering_group_resource": dataSourcePeeringGroupResource(),
+			"sdm_peering_group":          dataSourcePeeringGroup(),
+			"sdm_remote_identity":        dataSourceRemoteIdentity(),
+			"sdm_remote_identity_group":  dataSourceRemoteIdentityGroup(),
+			"sdm_resource":               dataSourceResource(),
+			"sdm_role":                   dataSourceRole(),
+			"sdm_secret_store":           dataSourceSecretStore(),
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			host := d.Get("host").(string)

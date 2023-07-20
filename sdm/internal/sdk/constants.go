@@ -95,19 +95,22 @@ const (
 
 // Activity Entities, all entity types that can be part of an activity.
 const (
-	ActivityEntityTypeUser                = "user"
-	ActivityEntityTypeRole                = "role"
-	ActivityEntityTypeLegacyCompositeRole = "composite_role"
-	ActivityEntityTypeDatasource          = "datasource"
-	ActivityEntityTypeOrganization        = "organization"
-	ActivityEntityTypeInstallation        = "installation"
-	ActivityEntityTypeSecretStore         = "secretstore"
-	ActivityEntityTypeRemoteIdentityGroup = "remote_identity_group"
-	ActivityEntityTypeRemoteIdentity      = "remote_identity"
-	ActivityEntityTypeAccessRequest       = "access_request"
-	ActivityEntityTypeWorkflow            = "workflow"
-	ActivityEntityTypeNode                = "node"
-	ActivityEntityTypePeeringGroup        = "peering_group"
+	ActivityEntityTypeUser                 = "user"
+	ActivityEntityTypeRole                 = "role"
+	ActivityEntityTypeLegacyCompositeRole  = "composite_role"
+	ActivityEntityTypeDatasource           = "datasource"
+	ActivityEntityTypeOrganization         = "organization"
+	ActivityEntityTypeInstallation         = "installation"
+	ActivityEntityTypeSecretStore          = "secretstore"
+	ActivityEntityTypeRemoteIdentityGroup  = "remote_identity_group"
+	ActivityEntityTypeRemoteIdentity       = "remote_identity"
+	ActivityEntityTypeAccessRequest        = "access_request"
+	ActivityEntityTypeWorkflow             = "workflow"
+	ActivityEntityTypeNode                 = "node"
+	ActivityEntityTypePeeringGroup         = "peering_group"
+	ActivityEntityTypePeeringGroupNode     = "peering_group_node"
+	ActivityEntityTypePeeringGroupResource = "peering_group_resource"
+	ActivityEntityTypePeeringGroupPeer     = "peering_group_peer"
 )
 
 // Activity Verbs, describe which kind of activity has taken place.

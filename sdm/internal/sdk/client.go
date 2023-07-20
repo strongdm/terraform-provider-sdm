@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/3.19.0"
+	defaultUserAgent = "strongdm-sdk-go/4.1.0"
 )
 
 var _ = metadata.Pairs
@@ -83,6 +83,10 @@ type Client struct {
 	nodes                       *Nodes
 	nodesHistory                *NodesHistory
 	organizationHistory         *OrganizationHistory
+	peeringGroupNodes           *PeeringGroupNodes
+	peeringGroupPeers           *PeeringGroupPeers
+	peeringGroupResources       *PeeringGroupResources
+	peeringGroups               *PeeringGroups
 	queries                     *Queries
 	remoteIdentities            *RemoteIdentities
 	remoteIdentitiesHistory     *RemoteIdentitiesHistory
@@ -195,6 +199,22 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.organizationHistory = &OrganizationHistory{
 		client: plumbing.NewOrganizationHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.peeringGroupNodes = &PeeringGroupNodes{
+		client: plumbing.NewPeeringGroupNodesClient(client.grpcConn),
+		parent: client,
+	}
+	client.peeringGroupPeers = &PeeringGroupPeers{
+		client: plumbing.NewPeeringGroupPeersClient(client.grpcConn),
+		parent: client,
+	}
+	client.peeringGroupResources = &PeeringGroupResources{
+		client: plumbing.NewPeeringGroupResourcesClient(client.grpcConn),
+		parent: client,
+	}
+	client.peeringGroups = &PeeringGroups{
+		client: plumbing.NewPeeringGroupsClient(client.grpcConn),
 		parent: client,
 	}
 	client.queries = &Queries{
@@ -394,6 +414,26 @@ func (c *Client) OrganizationHistory() *OrganizationHistory {
 	return c.organizationHistory
 }
 
+// PeeringGroupNodes provides the building blocks necessary to obtain attach a node to a peering group.
+func (c *Client) PeeringGroupNodes() *PeeringGroupNodes {
+	return c.peeringGroupNodes
+}
+
+// PeeringGroupPeers provides the building blocks necessary to link two peering groups.
+func (c *Client) PeeringGroupPeers() *PeeringGroupPeers {
+	return c.peeringGroupPeers
+}
+
+// PeeringGroupResources provides the building blocks necessary to obtain attach a resource to a peering group.
+func (c *Client) PeeringGroupResources() *PeeringGroupResources {
+	return c.peeringGroupResources
+}
+
+// PeeringGroups provides the building blocks necessary to obtain explicit network topology and routing.
+func (c *Client) PeeringGroups() *PeeringGroups {
+	return c.peeringGroups
+}
+
 // A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.
@@ -506,6 +546,22 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewNodesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.peeringGroupNodes = &PeeringGroupNodes{
+		client: plumbing.NewPeeringGroupNodesClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.peeringGroupPeers = &PeeringGroupPeers{
+		client: plumbing.NewPeeringGroupPeersClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.peeringGroupResources = &PeeringGroupResources{
+		client: plumbing.NewPeeringGroupResourcesClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.peeringGroups = &PeeringGroups{
+		client: plumbing.NewPeeringGroupsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.remoteIdentities = &RemoteIdentities{
 		client: plumbing.NewRemoteIdentitiesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -567,6 +623,26 @@ func (c *SnapshotClient) Accounts() SnapshotAccounts {
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
 func (c *SnapshotClient) Nodes() SnapshotNodes {
 	return c.client.nodes
+}
+
+// PeeringGroupNodes provides the building blocks necessary to obtain attach a node to a peering group.
+func (c *SnapshotClient) PeeringGroupNodes() SnapshotPeeringGroupNodes {
+	return c.client.peeringGroupNodes
+}
+
+// PeeringGroupPeers provides the building blocks necessary to link two peering groups.
+func (c *SnapshotClient) PeeringGroupPeers() SnapshotPeeringGroupPeers {
+	return c.client.peeringGroupPeers
+}
+
+// PeeringGroupResources provides the building blocks necessary to obtain attach a resource to a peering group.
+func (c *SnapshotClient) PeeringGroupResources() SnapshotPeeringGroupResources {
+	return c.client.peeringGroupResources
+}
+
+// PeeringGroups provides the building blocks necessary to obtain explicit network topology and routing.
+func (c *SnapshotClient) PeeringGroups() SnapshotPeeringGroups {
+	return c.client.peeringGroups
 }
 
 // RemoteIdentities assign a resource directly to an account, giving the account the permission to connect to that resource.

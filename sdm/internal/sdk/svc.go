@@ -1555,6 +1555,802 @@ func (svc *OrganizationHistory) List(
 	), nil
 }
 
+// PeeringGroupNodes provides the building blocks necessary to obtain attach a node to a peering group.
+type PeeringGroupNodes struct {
+	client plumbing.PeeringGroupNodesClient
+	parent *Client
+}
+
+// A SnapshotPeeringGroupNodes exposes the read only methods of the PeeringGroupNodes
+// service for historical queries.
+type SnapshotPeeringGroupNodes interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*PeeringGroupNodeGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		PeeringGroupNodeIterator,
+		error)
+}
+
+// Create attaches a Node to a PeeringGroup
+func (svc *PeeringGroupNodes) Create(
+	ctx context.Context,
+	peeringGroupNode *PeeringGroupNode) (
+	*PeeringGroupNodeCreateResponse,
+	error) {
+	req := &plumbing.PeeringGroupNodeCreateRequest{}
+
+	req.PeeringGroupNode = convertPeeringGroupNodeToPlumbing(peeringGroupNode)
+	var plumbingResponse *plumbing.PeeringGroupNodeCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupNodeCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupNodeToPorcelain(plumbingResponse.PeeringGroupNode); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroupNode = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete detaches a Node to a PeeringGroup.
+func (svc *PeeringGroupNodes) Delete(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupNodeDeleteResponse,
+	error) {
+	req := &plumbing.PeeringGroupNodeDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.PeeringGroupNodeDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupNodeDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads the information of one peering group to node attachment.
+func (svc *PeeringGroupNodes) Get(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupNodeGetResponse,
+	error) {
+	req := &plumbing.PeeringGroupNodeGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.PeeringGroupNodeGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupNodeGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupNodeToPorcelain(plumbingResponse.PeeringGroupNode); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroupNode = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of peering group node attachments.
+func (svc *PeeringGroupNodes) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	PeeringGroupNodeIterator,
+	error) {
+	req := &plumbing.PeeringGroupNodeListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newPeeringGroupNodeIteratorImpl(
+		func() (
+			[]*PeeringGroupNode,
+			bool, error) {
+			var plumbingResponse *plumbing.PeeringGroupNodeListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedPeeringGroupNodeToPorcelain(plumbingResponse.PeeringGroupNodes)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// PeeringGroupPeers provides the building blocks necessary to link two peering groups.
+type PeeringGroupPeers struct {
+	client plumbing.PeeringGroupPeersClient
+	parent *Client
+}
+
+// A SnapshotPeeringGroupPeers exposes the read only methods of the PeeringGroupPeers
+// service for historical queries.
+type SnapshotPeeringGroupPeers interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*PeeringGroupPeerGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		PeeringGroupPeerIterator,
+		error)
+}
+
+// Create links two peering groups.
+func (svc *PeeringGroupPeers) Create(
+	ctx context.Context,
+	peeringGroupPeer *PeeringGroupPeer) (
+	*PeeringGroupPeerCreateResponse,
+	error) {
+	req := &plumbing.PeeringGroupPeerCreateRequest{}
+
+	req.PeeringGroupPeer = convertPeeringGroupPeerToPlumbing(peeringGroupPeer)
+	var plumbingResponse *plumbing.PeeringGroupPeerCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupPeerCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupPeerToPorcelain(plumbingResponse.PeeringGroupPeer); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroupPeer = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete unlinks two peering groups.
+func (svc *PeeringGroupPeers) Delete(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupPeerDeleteResponse,
+	error) {
+	req := &plumbing.PeeringGroupPeerDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.PeeringGroupPeerDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupPeerDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads the information of one peering group link.
+func (svc *PeeringGroupPeers) Get(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupPeerGetResponse,
+	error) {
+	req := &plumbing.PeeringGroupPeerGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.PeeringGroupPeerGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupPeerGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupPeerToPorcelain(plumbingResponse.PeeringGroupPeer); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroupPeer = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of peering group links.
+func (svc *PeeringGroupPeers) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	PeeringGroupPeerIterator,
+	error) {
+	req := &plumbing.PeeringGroupPeerListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newPeeringGroupPeerIteratorImpl(
+		func() (
+			[]*PeeringGroupPeer,
+			bool, error) {
+			var plumbingResponse *plumbing.PeeringGroupPeerListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedPeeringGroupPeerToPorcelain(plumbingResponse.PeeringGroupPeers)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// PeeringGroupResources provides the building blocks necessary to obtain attach a resource to a peering group.
+type PeeringGroupResources struct {
+	client plumbing.PeeringGroupResourcesClient
+	parent *Client
+}
+
+// A SnapshotPeeringGroupResources exposes the read only methods of the PeeringGroupResources
+// service for historical queries.
+type SnapshotPeeringGroupResources interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*PeeringGroupResourceGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		PeeringGroupResourceIterator,
+		error)
+}
+
+// Create attaches a Resource to a PeeringGroup
+func (svc *PeeringGroupResources) Create(
+	ctx context.Context,
+	peeringGroupResource *PeeringGroupResource) (
+	*PeeringGroupResourceCreateResponse,
+	error) {
+	req := &plumbing.PeeringGroupResourceCreateRequest{}
+
+	req.PeeringGroupResource = convertPeeringGroupResourceToPlumbing(peeringGroupResource)
+	var plumbingResponse *plumbing.PeeringGroupResourceCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupResourceCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupResourceToPorcelain(plumbingResponse.PeeringGroupResource); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroupResource = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete detaches a Resource to a PeeringGroup
+func (svc *PeeringGroupResources) Delete(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupResourceDeleteResponse,
+	error) {
+	req := &plumbing.PeeringGroupResourceDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.PeeringGroupResourceDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupResourceDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads the information of one peering group to resource attachment.
+func (svc *PeeringGroupResources) Get(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupResourceGetResponse,
+	error) {
+	req := &plumbing.PeeringGroupResourceGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.PeeringGroupResourceGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupResourceGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupResourceToPorcelain(plumbingResponse.PeeringGroupResource); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroupResource = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of peering group resource attachments.
+func (svc *PeeringGroupResources) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	PeeringGroupResourceIterator,
+	error) {
+	req := &plumbing.PeeringGroupResourceListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newPeeringGroupResourceIteratorImpl(
+		func() (
+			[]*PeeringGroupResource,
+			bool, error) {
+			var plumbingResponse *plumbing.PeeringGroupResourceListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedPeeringGroupResourceToPorcelain(plumbingResponse.PeeringGroupResources)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// PeeringGroups provides the building blocks necessary to obtain explicit network topology and routing.
+type PeeringGroups struct {
+	client plumbing.PeeringGroupsClient
+	parent *Client
+}
+
+// A SnapshotPeeringGroups exposes the read only methods of the PeeringGroups
+// service for historical queries.
+type SnapshotPeeringGroups interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*PeeringGroupGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		PeeringGroupIterator,
+		error)
+}
+
+// Create registers a new PeeringGroup.
+func (svc *PeeringGroups) Create(
+	ctx context.Context,
+	peeringGroup *PeeringGroup) (
+	*PeeringGroupCreateResponse,
+	error) {
+	req := &plumbing.PeeringGroupCreateRequest{}
+
+	req.PeeringGroup = convertPeeringGroupToPlumbing(peeringGroup)
+	var plumbingResponse *plumbing.PeeringGroupCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroups.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupToPorcelain(plumbingResponse.PeeringGroup); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroup = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a PeeringGroup by ID.
+func (svc *PeeringGroups) Delete(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupDeleteResponse,
+	error) {
+	req := &plumbing.PeeringGroupDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.PeeringGroupDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroups.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one PeeringGroup by ID. It will load all its dependencies.
+func (svc *PeeringGroups) Get(
+	ctx context.Context,
+	id string) (
+	*PeeringGroupGetResponse,
+	error) {
+	req := &plumbing.PeeringGroupGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.PeeringGroupGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroups.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PeeringGroupGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPeeringGroupToPorcelain(plumbingResponse.PeeringGroup); err != nil {
+		return nil, err
+	} else {
+		resp.PeeringGroup = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of Peering Groups.
+func (svc *PeeringGroups) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	PeeringGroupIterator,
+	error) {
+	req := &plumbing.PeeringGroupListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newPeeringGroupIteratorImpl(
+		func() (
+			[]*PeeringGroup,
+			bool, error) {
+			var plumbingResponse *plumbing.PeeringGroupListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroups.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedPeeringGroupToPorcelain(plumbingResponse.PeeringGroups)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.
