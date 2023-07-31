@@ -2972,6 +2972,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
 						"remote_identity_group_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -9792,6 +9798,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
 			Tags:                              convertTagsToPlumbing(raw["tags"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		return out
 	}
 	if list := d.Get("google_gke_user_impersonation").([]interface{}); len(list) > 0 {
@@ -11743,6 +11754,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"endpoint":                             (v.Endpoint),
 				"healthcheck_namespace":                (v.HealthcheckNamespace),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -13761,6 +13773,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"endpoint":                             (v.Endpoint),
 				"healthcheck_namespace":                (v.HealthcheckNamespace),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
