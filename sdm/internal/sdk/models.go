@@ -1749,6 +1749,8 @@ type GoogleGKE struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
 	// The ID of the remote identity group to use for remote identity connections.
 	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
 	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
@@ -1780,6 +1782,8 @@ type GoogleGKEUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// The service account key to authenticate with.

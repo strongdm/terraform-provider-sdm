@@ -3008,6 +3008,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
 									"remote_identity_group_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3084,6 +3089,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
@@ -7263,6 +7273,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace":                (v.HealthcheckNamespace),
 				"id":                                   (v.ID),
 				"name":                                 (v.Name),
+				"port_override":                        (v.PortOverride),
 				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
 				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
 				"secret_store_id":                      (v.SecretStoreID),
@@ -7279,6 +7290,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_namespace": (v.HealthcheckNamespace),
 				"id":                    (v.ID),
 				"name":                  (v.Name),
+				"port_override":         (v.PortOverride),
 				"secret_store_id":       (v.SecretStoreID),
 				"service_account_key":   (v.ServiceAccountKey),
 				"subdomain":             (v.Subdomain),

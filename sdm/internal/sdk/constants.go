@@ -318,6 +318,8 @@ const (
 	PermissionOrgAuditRemoteIdentities               = "audit:remoteidentities"
 	PermissionOrgAuditRemoteIdentityGroups           = "audit:remoteidentitygroups"
 	PermissionOrgAuditSecretStores                   = "audit:secretstores"
+	PermissionOrgAuditWorkflows                      = "audit:workflows"
+	PermissionOrgAuditAccessRequests                 = "audit:accessrequests"
 	PermissionWorkflowList                           = "workflow:list"
 	PermissionWorkflowEdit                           = "workflow:edit"
 	PermissionAccessRequestEdit                      = "accessrequest:edit"

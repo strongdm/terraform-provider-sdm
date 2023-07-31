@@ -581,6 +581,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
 		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
 		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -595,6 +596,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `service_account_key` - The service account key to authenticate with.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)

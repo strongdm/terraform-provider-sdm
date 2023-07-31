@@ -4660,6 +4660,7 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
 	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -4686,6 +4687,7 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
 	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -4731,6 +4733,7 @@ func convertGoogleGKEUserImpersonationToPorcelain(plumbing *proto.GoogleGKEUserI
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServiceAccountKey = plumbing.ServiceAccountKey
 	porcelain.Subdomain = plumbing.Subdomain
@@ -4755,6 +4758,7 @@ func convertGoogleGKEUserImpersonationToPlumbing(porcelain *GoogleGKEUserImperso
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.Subdomain = (porcelain.Subdomain)
