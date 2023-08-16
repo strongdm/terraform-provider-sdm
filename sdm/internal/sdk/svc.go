@@ -23,6 +23,179 @@ import (
 	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/v1"
 )
 
+// AccessRequests are requests for access to a resource that may match a Workflow.
+type AccessRequests struct {
+	client plumbing.AccessRequestsClient
+	parent *Client
+}
+
+// A SnapshotAccessRequests exposes the read only methods of the AccessRequests
+// service for historical queries.
+type SnapshotAccessRequests interface {
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		AccessRequestIterator,
+		error)
+}
+
+// Lists existing workflows.
+func (svc *AccessRequests) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	AccessRequestIterator,
+	error) {
+	req := &plumbing.AccessRequestListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newAccessRequestIteratorImpl(
+		func() (
+			[]*AccessRequest,
+			bool, error) {
+			var plumbingResponse *plumbing.AccessRequestListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccessRequests.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedAccessRequestToPorcelain(plumbingResponse.AccessRequests)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// AccessRequestEventsHistory provides records of all changes to the state of an AccessRequest.
+type AccessRequestEventsHistory struct {
+	client plumbing.AccessRequestEventsHistoryClient
+	parent *Client
+}
+
+// List gets a list of AccessRequestEventHistory records matching a given set of criteria.
+func (svc *AccessRequestEventsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	AccessRequestEventHistoryIterator,
+	error) {
+	req := &plumbing.AccessRequestEventHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newAccessRequestEventHistoryIteratorImpl(
+		func() (
+			[]*AccessRequestEventHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.AccessRequestEventHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccessRequestEventsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedAccessRequestEventHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// AccessRequestsHistory provides records of all changes to the state of an AccessRequest.
+type AccessRequestsHistory struct {
+	client plumbing.AccessRequestsHistoryClient
+	parent *Client
+}
+
+// List gets a list of AccessRequestHistory records matching a given set of criteria.
+func (svc *AccessRequestsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	AccessRequestHistoryIterator,
+	error) {
+	req := &plumbing.AccessRequestHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newAccessRequestHistoryIteratorImpl(
+		func() (
+			[]*AccessRequestHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.AccessRequestHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccessRequestsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedAccessRequestHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // AccountAttachments assign an account to a role.
 type AccountAttachments struct {
 	client plumbing.AccountAttachmentsClient
@@ -3982,6 +4155,289 @@ func (svc *SecretStoresHistory) List(
 				break
 			}
 			result, err := convertRepeatedSecretStoreHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// Workflows are the collection of rules that define the resources to which access can be requested,
+// the users that can request that access, and the mechanism for approving those requests which can either
+// but automatic approval or a set of users authorized to approve the requests.
+type Workflows struct {
+	client plumbing.WorkflowsClient
+	parent *Client
+}
+
+// A SnapshotWorkflows exposes the read only methods of the Workflows
+// service for historical queries.
+type SnapshotWorkflows interface {
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		WorkflowIterator,
+		error)
+}
+
+// Lists existing workflows.
+func (svc *Workflows) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowIterator,
+	error) {
+	req := &plumbing.WorkflowListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowIteratorImpl(
+		func() (
+			[]*Workflow,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Workflows.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowToPorcelain(plumbingResponse.Workflows)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// WorkflowApproversHistory provides records of all changes to the state of a WorkflowApprover.
+type WorkflowApproversHistory struct {
+	client plumbing.WorkflowApproversHistoryClient
+	parent *Client
+}
+
+// List gets a list of WorkflowApproversHistory records matching a given set of criteria.
+func (svc *WorkflowApproversHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowApproverHistoryIterator,
+	error) {
+	req := &plumbing.WorkflowApproversHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowApproverHistoryIteratorImpl(
+		func() (
+			[]*WorkflowApproverHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowApproversHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowApproversHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowApproverHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// WorkflowAssignmentsHistory provides records of all changes to the state of a WorkflowAssignment.
+type WorkflowAssignmentsHistory struct {
+	client plumbing.WorkflowAssignmentsHistoryClient
+	parent *Client
+}
+
+// List gets a list of WorkflowAssignmentsHistory records matching a given set of criteria.
+func (svc *WorkflowAssignmentsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowAssignmentHistoryIterator,
+	error) {
+	req := &plumbing.WorkflowAssignmentsHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowAssignmentHistoryIteratorImpl(
+		func() (
+			[]*WorkflowAssignmentHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowAssignmentsHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowAssignmentsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowAssignmentHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// WorkflowRolesHistory provides records of all changes to the state of a WorkflowRole
+type WorkflowRolesHistory struct {
+	client plumbing.WorkflowRolesHistoryClient
+	parent *Client
+}
+
+// List gets a list of WorkflowRolesHistory records matching a given set of criteria.
+func (svc *WorkflowRolesHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowRoleHistoryIterator,
+	error) {
+	req := &plumbing.WorkflowRolesHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowRoleHistoryIteratorImpl(
+		func() (
+			[]*WorkflowRoleHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowRolesHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowRolesHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowRoleHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// WorkflowsHistory provides records of all changes to the state of a Workflow.
+type WorkflowsHistory struct {
+	client plumbing.WorkflowsHistoryClient
+	parent *Client
+}
+
+// List gets a list of WorkflowHistory records matching a given set of criteria.
+func (svc *WorkflowsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowHistoryIterator,
+	error) {
+	req := &plumbing.WorkflowHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowHistoryIteratorImpl(
+		func() (
+			[]*WorkflowHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
 				return nil, false, err
 			}

@@ -312,6 +312,89 @@ type AWSStore struct {
 	Tags Tags `json:"tags"`
 }
 
+// AccessRequests are requests for access to a resource that may match a Workflow.
+type AccessRequest struct {
+	// The account that initiated the request.
+	AccountID string `json:"accountId"`
+	// The account grant created, if it exists.
+	GrantID string `json:"grantId"`
+	// The access request id.
+	ID string `json:"id"`
+	// The reason the access was requested.
+	Reason string `json:"reason"`
+	// The resource id.
+	ResourceID string `json:"resourceId"`
+	// The timestamp when the requested access will be granted.
+	// If this field is not specified it will default to the current time.
+	StartFrom time.Time `json:"startFrom"`
+	// The status of the access request.
+	Status string `json:"status"`
+	// The timestamp when the status changed.
+	StatusAt time.Time `json:"statusAt"`
+	// The timestamp when the requested access will expire.
+	ValidUntil time.Time `json:"validUntil"`
+	// The workflow the request bound to.
+	WorkflowID string `json:"workflowId"`
+}
+
+// AccessRequestEvents hold information about events related to an access
+// request such as creation, approval and denial.
+type AccessRequestEvent struct {
+	// The account responsible for the event.
+	ActorID string `json:"actorId"`
+	// The access request event id.
+	ID string `json:"id"`
+	// The metadata about the event
+	Metadata string `json:"metadata"`
+	// The request that the event is bound to.
+	RequestID string `json:"requestId"`
+	// The type of event.
+	Type string `json:"type"`
+}
+
+// AccessRequestEventHistory records the state of a AccessRequest at a given point in time,
+// where every change (create, update and delete) to a AccessRequest produces an
+// AccessRequestEventHistory record.
+type AccessRequestEventHistory struct {
+	// The complete AccessRequestEvent state at this time.
+	AccessRequestEvent *AccessRequestEvent `json:"accessRequestEvent"`
+	// The unique identifier of the Activity that produced this change to the AccessRequest.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Workflow was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the AccessRequest state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// AccessRequestHistory records the state of a AccessRequest at a given point in time,
+// where every change (create, update and delete) to a AccessRequest produces an
+// AccessRequestHistory record.
+type AccessRequestHistory struct {
+	// The complete AccessRequest state at this time.
+	AccessRequest *AccessRequest `json:"accessRequest"`
+	// The unique identifier of the Activity that produced this change to the AccessRequest.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Workflow was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the AccessRequest state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// AccessRequestListRequest specifies criteria for retrieving a list of
+// AccessRequest records
+type AccessRequestListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// AccessRequestListResponse reports how the Workflow was created in the system.
+type AccessRequestListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 // Accounts are users that have access to strongDM. There are two types of accounts:
 // 1. **Users:** humans who are authenticated through username and password or SSO.
 // 2. **Service Accounts:** machines that are authenticated using a service token.
@@ -8800,6 +8883,177 @@ type VaultTokenStore struct {
 	Tags Tags `json:"tags"`
 }
 
+// Workflows are the collection of rules that define the resources to which access can be requested,
+// the users that can request that access, and the mechanism for approving those requests which can either
+// but automatic approval or a set of users authorized to approve the requests.
+type Workflow struct {
+	// AccessRules is a list of access rules defining the resources this Workflow provides access to.
+	AccessRules AccessRules `json:"accessRules"`
+	// Optional auto grant setting to automatically approve requests or not, defaults to false.
+	AutoGrant bool `json:"autoGrant"`
+	// Optional description of the Workflow.
+	Description string `json:"description"`
+	// Optional enabled state for workflow. This setting may be overridden by the system if
+	// the workflow doesn't meet the requirements to be enabled or if other conditions prevent
+	// enabling the workflow.
+	Enabled bool `json:"enabled"`
+	// Unique identifier of the Workflow.
+	ID string `json:"id"`
+	// Unique human-readable name of the Workflow.
+	Name string `json:"name"`
+	// Optional weight for workflow to specify it's priority in matching a request.
+	Weight int64 `json:"weight"`
+}
+
+// WorkflowApprover is an account with the ability to approve requests bound to a workflow.
+type WorkflowApprover struct {
+	// The approver id.
+	ApproverID string `json:"approverId"`
+	// The workflow id.
+	WorkflowID string `json:"workflowId"`
+}
+
+// WorkflowApproverHistory records the state of a WorkflowApprover at a given point in time,
+// where every change (create, update and delete) to a WorkflowApprover produces an
+// WorkflowApproverHistory record.
+type WorkflowApproverHistory struct {
+	// The unique identifier of the Activity that produced this change to the Workflow.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Workflow was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the Workflow state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+	// The complete WorkflowApprover state at this time.
+	WorkflowApprover *WorkflowApprover `json:"workflowApprover"`
+}
+
+// WorkflowAssignment links a Resource to a Workflow.
+type WorkflowAssignment struct {
+	// The resource id.
+	ResourceID string `json:"resourceId"`
+	// The workflow id.
+	WorkflowID string `json:"workflowId"`
+}
+
+// WorkflowAssignmentHistory records the state of a WorkflowAssignment at a given point in time,
+// where every change (create, update and delete) to a WorkflowAssignment produces an
+// WorkflowAssignmentHistory record.
+type WorkflowAssignmentHistory struct {
+	// The unique identifier of the Activity that produced this change to the Workflow.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Workflow was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the Workflow state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+	// The complete WorkflowAssignment state at this time.
+	WorkflowAssignment *WorkflowAssignment `json:"workflowAssignment"`
+}
+
+// WorkflowHistory records the state of a Workflow at a given point in time,
+// where every change (create, update and delete) to a Workflow produces an
+// WorkflowHistory record.
+type WorkflowHistory struct {
+	// The unique identifier of the Activity that produced this change to the Workflow.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Workflow was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the Workflow state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+	// The complete Workflow state at this time.
+	Workflow *Workflow `json:"workflow"`
+}
+
+// WorkflowListRequest specifies criteria for retrieving a list of
+// Workflow records
+type WorkflowListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// WorkflowListResponse returns a list of Workflow records that meet
+// the criteria of a WorkflowListRequest.
+type WorkflowListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowRole links a Role to a Workflow.
+type WorkflowRole struct {
+	// The role id.
+	RoleID string `json:"roleId"`
+	// The workflow id.
+	WorkflowID string `json:"workflowId"`
+}
+
+// WorkflowRolesHistory records the state of a Workflow at a given point in time,
+// where every change (create, update and delete) to a WorkflowRole produces a
+// WorkflowRoleHistory record.
+type WorkflowRoleHistory struct {
+	// The unique identifier of the Activity that produced this change to the Workflow.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this WorkflowRole was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the Workflow state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+	// The complete WorkflowRole state at this time.
+	WorkflowRole *WorkflowRole `json:"workflowRole"`
+}
+
+// AccessRequestIterator provides read access to a list of AccessRequest.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    accessRequest := iterator.Value()
+//	    // ...
+//	}
+type AccessRequestIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *AccessRequest
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// AccessRequestEventHistoryIterator provides read access to a list of AccessRequestEventHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    accessRequestEventHistory := iterator.Value()
+//	    // ...
+//	}
+type AccessRequestEventHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *AccessRequestEventHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// AccessRequestHistoryIterator provides read access to a list of AccessRequestHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    accessRequestHistory := iterator.Value()
+//	    // ...
+//	}
+type AccessRequestHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *AccessRequestHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
 // AccountAttachmentIterator provides read access to a list of AccountAttachment.
 // Use it like so:
 //
@@ -9340,6 +9594,91 @@ type SecretStoreHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *SecretStoreHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// WorkflowIterator provides read access to a list of Workflow.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflow := iterator.Value()
+//	    // ...
+//	}
+type WorkflowIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *Workflow
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// WorkflowApproverHistoryIterator provides read access to a list of WorkflowApproverHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflowApproverHistory := iterator.Value()
+//	    // ...
+//	}
+type WorkflowApproverHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *WorkflowApproverHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// WorkflowAssignmentHistoryIterator provides read access to a list of WorkflowAssignmentHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflowAssignmentHistory := iterator.Value()
+//	    // ...
+//	}
+type WorkflowAssignmentHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *WorkflowAssignmentHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// WorkflowRoleHistoryIterator provides read access to a list of WorkflowRoleHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflowRoleHistory := iterator.Value()
+//	    // ...
+//	}
+type WorkflowRoleHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *WorkflowRoleHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// WorkflowHistoryIterator provides read access to a list of WorkflowHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflowHistory := iterator.Value()
+//	    // ...
+//	}
+type WorkflowHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *WorkflowHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

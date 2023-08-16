@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/4.2.0"
+	defaultUserAgent = "strongdm-sdk-go/4.3.1"
 )
 
 var _ = metadata.Pairs
@@ -69,6 +69,9 @@ type Client struct {
 	maxRetries                  int
 	baseRetryDelay              time.Duration
 	maxRetryDelay               time.Duration
+	accessRequests              *AccessRequests
+	accessRequestEventsHistory  *AccessRequestEventsHistory
+	accessRequestsHistory       *AccessRequestsHistory
 	accountAttachments          *AccountAttachments
 	accountAttachmentsHistory   *AccountAttachmentsHistory
 	accountGrants               *AccountGrants
@@ -101,6 +104,11 @@ type Client struct {
 	rolesHistory                *RolesHistory
 	secretStores                *SecretStores
 	secretStoresHistory         *SecretStoresHistory
+	workflows                   *Workflows
+	workflowApproversHistory    *WorkflowApproversHistory
+	workflowAssignmentsHistory  *WorkflowAssignmentsHistory
+	workflowRolesHistory        *WorkflowRolesHistory
+	workflowsHistory            *WorkflowsHistory
 }
 
 // New creates a new strongDM API client.
@@ -145,6 +153,18 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		return nil, convertErrorToPorcelain(fmt.Errorf("cannot dial API server: %w", err))
 	}
 	client.grpcConn = cc
+	client.accessRequests = &AccessRequests{
+		client: plumbing.NewAccessRequestsClient(client.grpcConn),
+		parent: client,
+	}
+	client.accessRequestEventsHistory = &AccessRequestEventsHistory{
+		client: plumbing.NewAccessRequestEventsHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.accessRequestsHistory = &AccessRequestsHistory{
+		client: plumbing.NewAccessRequestsHistoryClient(client.grpcConn),
+		parent: client,
+	}
 	client.accountAttachments = &AccountAttachments{
 		client: plumbing.NewAccountAttachmentsClient(client.grpcConn),
 		parent: client,
@@ -273,6 +293,26 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		client: plumbing.NewSecretStoresHistoryClient(client.grpcConn),
 		parent: client,
 	}
+	client.workflows = &Workflows{
+		client: plumbing.NewWorkflowsClient(client.grpcConn),
+		parent: client,
+	}
+	client.workflowApproversHistory = &WorkflowApproversHistory{
+		client: plumbing.NewWorkflowApproversHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.workflowAssignmentsHistory = &WorkflowAssignmentsHistory{
+		client: plumbing.NewWorkflowAssignmentsHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.workflowRolesHistory = &WorkflowRolesHistory{
+		client: plumbing.NewWorkflowRolesHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.workflowsHistory = &WorkflowsHistory{
+		client: plumbing.NewWorkflowsHistoryClient(client.grpcConn),
+		parent: client,
+	}
 	return client, nil
 }
 
@@ -334,6 +374,21 @@ func WithRateLimitRetries(enabled bool) ClientOption {
 	return func(c *Client) {
 		c.exposeRateLimitErrors = !enabled
 	}
+}
+
+// AccessRequests are requests for access to a resource that may match a Workflow.
+func (c *Client) AccessRequests() *AccessRequests {
+	return c.accessRequests
+}
+
+// AccessRequestEventsHistory provides records of all changes to the state of an AccessRequest.
+func (c *Client) AccessRequestEventsHistory() *AccessRequestEventsHistory {
+	return c.accessRequestEventsHistory
+}
+
+// AccessRequestsHistory provides records of all changes to the state of an AccessRequest.
+func (c *Client) AccessRequestsHistory() *AccessRequestsHistory {
+	return c.accessRequestsHistory
 }
 
 // AccountAttachments assign an account to a role.
@@ -512,6 +567,33 @@ func (c *Client) SecretStoresHistory() *SecretStoresHistory {
 	return c.secretStoresHistory
 }
 
+// Workflows are the collection of rules that define the resources to which access can be requested,
+// the users that can request that access, and the mechanism for approving those requests which can either
+// but automatic approval or a set of users authorized to approve the requests.
+func (c *Client) Workflows() *Workflows {
+	return c.workflows
+}
+
+// WorkflowApproversHistory provides records of all changes to the state of a WorkflowApprover.
+func (c *Client) WorkflowApproversHistory() *WorkflowApproversHistory {
+	return c.workflowApproversHistory
+}
+
+// WorkflowAssignmentsHistory provides records of all changes to the state of a WorkflowAssignment.
+func (c *Client) WorkflowAssignmentsHistory() *WorkflowAssignmentsHistory {
+	return c.workflowAssignmentsHistory
+}
+
+// WorkflowRolesHistory provides records of all changes to the state of a WorkflowRole
+func (c *Client) WorkflowRolesHistory() *WorkflowRolesHistory {
+	return c.workflowRolesHistory
+}
+
+// WorkflowsHistory provides records of all changes to the state of a Workflow.
+func (c *Client) WorkflowsHistory() *WorkflowsHistory {
+	return c.workflowsHistory
+}
+
 type SnapshotClient struct {
 	client *Client
 }
@@ -522,6 +604,10 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 	clientCopy := *c
 	snapshotClient := &SnapshotClient{&clientCopy}
 	snapshotClient.client.snapshotAt = t
+	snapshotClient.client.accessRequests = &AccessRequests{
+		client: plumbing.NewAccessRequestsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.accountAttachments = &AccountAttachments{
 		client: plumbing.NewAccountAttachmentsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -586,7 +672,16 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewSecretStoresClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.workflows = &Workflows{
+		client: plumbing.NewWorkflowsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	return snapshotClient
+}
+
+// AccessRequests are requests for access to a resource that may match a Workflow.
+func (c *SnapshotClient) AccessRequests() SnapshotAccessRequests {
+	return c.client.accessRequests
 }
 
 // AccountAttachments assign an account to a role.
@@ -678,6 +773,13 @@ func (c *SnapshotClient) Roles() SnapshotRoles {
 // SecretStores are servers where resource secrets (passwords, keys) are stored.
 func (c *SnapshotClient) SecretStores() SnapshotSecretStores {
 	return c.client.secretStores
+}
+
+// Workflows are the collection of rules that define the resources to which access can be requested,
+// the users that can request that access, and the mechanism for approving those requests which can either
+// but automatic approval or a set of users authorized to approve the requests.
+func (c *SnapshotClient) Workflows() SnapshotWorkflows {
+	return c.client.workflows
 }
 
 // Sign returns the signature for the given byte array
