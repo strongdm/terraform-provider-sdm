@@ -63,6 +63,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -138,6 +139,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -214,6 +216,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -295,6 +298,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -384,6 +388,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -470,6 +475,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"name": {
@@ -572,6 +578,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"name": {
@@ -668,6 +675,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"name": {
@@ -769,6 +777,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"name": {
@@ -1077,8 +1086,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1626,8 +1635,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2107,8 +2116,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2965,6 +2974,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"name": {
@@ -3047,6 +3057,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"name": {
@@ -3428,6 +3439,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -3503,6 +3515,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -3579,6 +3592,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -3660,6 +3674,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -3749,6 +3764,7 @@ func resourceResource() *schema.Resource {
 						"healthcheck_namespace": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
 						"hostname": {
@@ -3808,8 +3824,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3954,8 +3970,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4483,8 +4499,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4678,8 +4694,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5522,8 +5538,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5743,8 +5759,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5834,8 +5850,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5920,8 +5936,8 @@ func resourceResource() *schema.Resource {
 						},
 						"database": {
 							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Optional:    true,
+							Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,

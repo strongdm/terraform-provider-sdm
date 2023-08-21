@@ -1008,7 +1008,7 @@ type Athena struct {
 type AuroraMysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1130,7 +1130,7 @@ type AzureCertificate struct {
 type AzureMysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1339,7 +1339,7 @@ type Citus struct {
 type Clustrix struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2177,7 +2177,7 @@ type MTLSMysql struct {
 	ClientCertificate string `json:"clientCertificate"`
 	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2255,7 +2255,7 @@ type MTLSPostgres struct {
 type Maria struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2315,7 +2315,7 @@ type Memcached struct {
 type Memsql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2529,7 +2529,7 @@ type MongoShardedCluster struct {
 type Mysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -8052,7 +8052,7 @@ type RoleUpdateResponse struct {
 type SQLServer struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks, and used for clients if Override Default Database is true.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -8089,7 +8089,7 @@ type SQLServerAzureAD struct {
 	BindInterface string `json:"bindInterface"`
 	// The Azure AD application (client) ID with which to authenticate.
 	ClientID string `json:"clientId"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks, and used for clients if Override Default Database is true.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -8124,7 +8124,7 @@ type SQLServerAzureAD struct {
 type SQLServerKerberosAD struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks, and used for clients if Override Default Database is true.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -8594,7 +8594,7 @@ type Service struct {
 type SingleStore struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`

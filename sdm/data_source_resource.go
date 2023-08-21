@@ -1107,7 +1107,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -1658,7 +1658,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -2139,7 +2139,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3846,7 +3846,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3992,7 +3992,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4521,7 +4521,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -4716,7 +4716,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5560,7 +5560,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5782,7 +5782,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5873,7 +5873,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -5959,7 +5959,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,

@@ -229,7 +229,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* aurora_mysql:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -331,7 +331,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tenant_id` - The tenant ID to authenticate to.
 	* azure_mysql:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -420,7 +420,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - The username to authenticate with.
 	* clustrix:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -734,7 +734,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* maria:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -761,7 +761,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* memsql:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -859,7 +859,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `certificate_authority` - The CA to authenticate TLS connections with.
 		* `client_certificate` - The certificate to authenticate TLS connections with.
 		* `client_key` - The key to authenticate TLS connections with.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -895,7 +895,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - The username to authenticate with.
 	* mysql:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -1051,7 +1051,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - The username to authenticate with.
 	* single_store:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks. Does not affect client requests.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -1092,7 +1092,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* sql_server:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks, and used for clients if Override Default Database is true.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -1109,7 +1109,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* sql_server_azure_ad:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `client_id` - The Azure AD application (client) ID with which to authenticate.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks, and used for clients if Override Default Database is true.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
@@ -1125,7 +1125,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tenant_id` - The Azure AD directory (tenant) ID with which to authenticate.
 	* sql_server_kerberos_ad:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+		* `database` - The database for healthchecks, and used for clients if Override Default Database is true.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.

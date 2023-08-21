@@ -207,6 +207,7 @@ const (
 	ActivityVerbRelayUpdatedName                                 = "relay name updated"
 	ActivityVerbRelayDeleted                                     = "relay deleted"
 	ActivityVerbOrgPublicKeyUpdated                              = "public key updated"
+	ActivityVerbOrgDiscardReplaysUpdated                         = "discard replays updated"
 	ActivityVerbOrgEnforcePortOverridesUpdated                   = "port override enforcement updated"
 	ActivityVerbOrgServiceAutoConnectUpdated                     = "service account auto-connect updated"
 	ActivityVerbOrgSelfRegistrationActivated                     = "self-registration activated"

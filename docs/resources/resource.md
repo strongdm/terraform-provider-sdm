@@ -231,7 +231,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aurora_mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -326,7 +326,7 @@ The following arguments are supported by the Resource resource:
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The tenant ID to authenticate to.
 * azure_mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -409,7 +409,7 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * clustrix:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -701,7 +701,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * maria:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -726,7 +726,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * memsql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -818,7 +818,7 @@ The following arguments are supported by the Resource resource:
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `client_certificate` - (Required, either in plaintext, or as a secret store path) The certificate to authenticate TLS connections with.
 	* `client_key` - (Required, either in plaintext, or as a secret store path) The key to authenticate TLS connections with.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -852,7 +852,7 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -997,7 +997,7 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * single_store:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -1035,7 +1035,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * sql_server:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -1051,7 +1051,7 @@ The following arguments are supported by the Resource resource:
 * sql_server_azure_ad:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `client_id` - (Required, either in plaintext, or as a secret store path) The Azure AD application (client) ID with which to authenticate.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -1066,7 +1066,7 @@ The following arguments are supported by the Resource resource:
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The Azure AD directory (tenant) ID with which to authenticate.
 * sql_server_kerberos_ad:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `keytab` - (Required, either in plaintext, or as a secret store path) The keytab file in base64 format containing an entry with the principal name (username@realm) and key version number with which to authenticate.
