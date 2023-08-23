@@ -1034,6 +1034,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * sql_server:
+	* `allow_deprecated_encryption` - (Optional) Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1049,6 +1050,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * sql_server_azure_ad:
+	* `allow_deprecated_encryption` - (Optional) Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `client_id` - (Required, either in plaintext, or as a secret store path) The Azure AD application (client) ID with which to authenticate.
 	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
@@ -1065,6 +1067,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The Azure AD directory (tenant) ID with which to authenticate.
 * sql_server_kerberos_ad:
+	* `allow_deprecated_encryption` - (Optional) Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.

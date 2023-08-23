@@ -955,6 +955,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "sql_server",
 			pairs: [][2]string{
+				{"allow_deprecated_encryption", `true`},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
@@ -969,6 +970,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "sql_server_azure_ad",
 			pairs: [][2]string{
+				{"allow_deprecated_encryption", `true`},
 				{"client_id", `"client_id"`},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
@@ -984,6 +986,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "sql_server_kerberos_ad",
 			pairs: [][2]string{
+				{"allow_deprecated_encryption", `true`},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
@@ -2092,6 +2095,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "sql_server",
 			pairs: [][2]string{
+				{"allow_deprecated_encryption", `true`},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
@@ -2107,6 +2111,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "sql_server_azure_ad",
 			pairs: [][2]string{
+				{"allow_deprecated_encryption", `true`},
 				{"client_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
@@ -2123,6 +2128,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "sql_server_kerberos_ad",
 			pairs: [][2]string{
+				{"allow_deprecated_encryption", `true`},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},

@@ -10719,6 +10719,7 @@ func convertSQLServerToPorcelain(plumbing *proto.SQLServer) (*SQLServer, error) 
 		return nil, nil
 	}
 	porcelain := &SQLServer{}
+	porcelain.AllowDeprecatedEncryption = plumbing.AllowDeprecatedEncryption
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
@@ -10747,6 +10748,7 @@ func convertSQLServerToPlumbing(porcelain *SQLServer) *proto.SQLServer {
 		return nil
 	}
 	plumbing := &proto.SQLServer{}
+	plumbing.AllowDeprecatedEncryption = (porcelain.AllowDeprecatedEncryption)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
@@ -10794,6 +10796,7 @@ func convertSQLServerAzureADToPorcelain(plumbing *proto.SQLServerAzureAD) (*SQLS
 		return nil, nil
 	}
 	porcelain := &SQLServerAzureAD{}
+	porcelain.AllowDeprecatedEncryption = plumbing.AllowDeprecatedEncryption
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.ClientID = plumbing.ClientId
 	porcelain.Database = plumbing.Database
@@ -10823,6 +10826,7 @@ func convertSQLServerAzureADToPlumbing(porcelain *SQLServerAzureAD) *proto.SQLSe
 		return nil
 	}
 	plumbing := &proto.SQLServerAzureAD{}
+	plumbing.AllowDeprecatedEncryption = (porcelain.AllowDeprecatedEncryption)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.ClientId = (porcelain.ClientID)
 	plumbing.Database = (porcelain.Database)
@@ -10871,6 +10875,7 @@ func convertSQLServerKerberosADToPorcelain(plumbing *proto.SQLServerKerberosAD) 
 		return nil, nil
 	}
 	porcelain := &SQLServerKerberosAD{}
+	porcelain.AllowDeprecatedEncryption = plumbing.AllowDeprecatedEncryption
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
@@ -10902,6 +10907,7 @@ func convertSQLServerKerberosADToPlumbing(porcelain *SQLServerKerberosAD) *proto
 		return nil
 	}
 	plumbing := &proto.SQLServerKerberosAD{}
+	plumbing.AllowDeprecatedEncryption = (porcelain.AllowDeprecatedEncryption)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)

@@ -8050,6 +8050,9 @@ type RoleUpdateResponse struct {
 }
 
 type SQLServer struct {
+	// Whether to allow deprecated encryption protocols to be used for this resource. For example,
+	// TLS 1.0.
+	AllowDeprecatedEncryption bool `json:"allowDeprecatedEncryption"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks, and used for clients if Override Default Database is true.
@@ -8085,6 +8088,9 @@ type SQLServer struct {
 }
 
 type SQLServerAzureAD struct {
+	// Whether to allow deprecated encryption protocols to be used for this resource. For example,
+	// TLS 1.0.
+	AllowDeprecatedEncryption bool `json:"allowDeprecatedEncryption"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The Azure AD application (client) ID with which to authenticate.
@@ -8122,6 +8128,9 @@ type SQLServerAzureAD struct {
 }
 
 type SQLServerKerberosAD struct {
+	// Whether to allow deprecated encryption protocols to be used for this resource. For example,
+	// TLS 1.0.
+	AllowDeprecatedEncryption bool `json:"allowDeprecatedEncryption"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks, and used for clients if Override Default Database is true.
