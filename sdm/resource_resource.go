@@ -1782,7 +1782,7 @@ func resourceResource() *schema.Resource {
 						"username": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The username to authenticate with.",
+							Description: "The username to authenticate with. For Azure Postgres, this also will include the hostname of the target server for Azure Single Server compatibility. For Flexible servers, use the normal Postgres type.",
 						},
 					},
 				},

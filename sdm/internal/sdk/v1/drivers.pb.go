@@ -4828,7 +4828,7 @@ type AzurePostgres struct {
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
-	// The username to authenticate with.
+	// The username to authenticate with. For Azure Postgres, this also will include the hostname of the target server for Azure Single Server compatibility. For Flexible servers, use the normal Postgres type.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 }
 

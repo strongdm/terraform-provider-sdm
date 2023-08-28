@@ -1191,7 +1191,7 @@ type AzurePostgres struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-	// The username to authenticate with.
+	// The username to authenticate with. For Azure Postgres, this also will include the hostname of the target server for Azure Single Server compatibility. For Flexible servers, use the normal Postgres type.
 	Username string `json:"username"`
 }
 
