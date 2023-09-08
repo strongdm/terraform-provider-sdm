@@ -225,8 +225,6 @@ type AWS struct {
 	Tags Tags `json:"tags"`
 }
 
-// AWSConsole is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AWSConsole struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -262,8 +260,6 @@ type AWSConsole struct {
 	Tags Tags `json:"tags"`
 }
 
-// AWSConsoleStaticKeyPair is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AWSConsoleStaticKeyPair struct {
 	// The Access Key ID to authenticate with.
 	AccessKey string `json:"accessKey"`
@@ -1195,8 +1191,6 @@ type AzurePostgres struct {
 	Username string `json:"username"`
 }
 
-// AzurePostgresManagedIdentity is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AzurePostgresManagedIdentity struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -3185,6 +3179,8 @@ type RDP struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
+	LockRequired bool `json:"lockRequired"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The password to authenticate with.
@@ -8666,8 +8662,6 @@ type Snowflake struct {
 	Username string `json:"username"`
 }
 
-// Snowsight is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type Snowsight struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`

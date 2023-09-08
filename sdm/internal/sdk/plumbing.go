@@ -8507,6 +8507,7 @@ func convertRDPToPorcelain(plumbing *proto.RDP) (*RDP, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
@@ -8533,6 +8534,7 @@ func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)

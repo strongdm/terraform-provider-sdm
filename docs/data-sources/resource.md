@@ -1012,6 +1012,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `lock_required` - When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - The password to authenticate with.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.

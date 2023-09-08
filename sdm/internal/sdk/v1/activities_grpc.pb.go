@@ -34,6 +34,9 @@ type ActivitiesClient interface {
 	// Get reads one Activity by ID.
 	Get(ctx context.Context, in *ActivityGetRequest, opts ...grpc.CallOption) (*ActivityGetResponse, error)
 	// List gets a list of Activities matching a given set of criteria.
+	// The 'before' and 'after' filters can be used to control the time
+	// range of the output activities. If not provided, one week of back
+	// of activities will be returned.
 	List(ctx context.Context, in *ActivityListRequest, opts ...grpc.CallOption) (*ActivityListResponse, error)
 }
 
@@ -70,6 +73,9 @@ type ActivitiesServer interface {
 	// Get reads one Activity by ID.
 	Get(context.Context, *ActivityGetRequest) (*ActivityGetResponse, error)
 	// List gets a list of Activities matching a given set of criteria.
+	// The 'before' and 'after' filters can be used to control the time
+	// range of the output activities. If not provided, one week of back
+	// of activities will be returned.
 	List(context.Context, *ActivityListRequest) (*ActivityListResponse, error)
 	mustEmbedUnimplementedActivitiesServer()
 }

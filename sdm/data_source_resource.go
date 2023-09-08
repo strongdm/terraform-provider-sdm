@@ -5344,6 +5344,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
+									"lock_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -7777,6 +7782,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":             (v.EgressFilter),
 				"hostname":                  (v.Hostname),
 				"id":                        (v.ID),
+				"lock_required":             (v.LockRequired),
 				"name":                      (v.Name),
 				"password":                  (v.Password),
 				"port":                      (v.Port),

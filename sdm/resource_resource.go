@@ -1318,7 +1318,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AWSConsole is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -1402,7 +1402,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AWSConsoleStaticKeyPair is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"access_key": {
@@ -1791,7 +1791,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AzurePostgresManagedIdentity is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -5318,6 +5318,11 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
+						"lock_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -5689,7 +5694,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "Snowsight is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -10621,6 +10626,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			DowngradeNlaConnections: convertBoolToPlumbing(raw["downgrade_nla_connections"]),
 			EgressFilter:            convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                convertStringToPlumbing(raw["hostname"]),
+			LockRequired:            convertBoolToPlumbing(raw["lock_required"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
 			Password:                convertStringToPlumbing(raw["password"]),
 			Port:                    convertInt32ToPlumbing(raw["port"]),
@@ -12377,6 +12383,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"downgrade_nla_connections": (v.DowngradeNlaConnections),
 				"egress_filter":             (v.EgressFilter),
 				"hostname":                  (v.Hostname),
+				"lock_required":             (v.LockRequired),
 				"name":                      (v.Name),
 				"password":                  seValues["password"],
 				"port":                      (v.Port),
@@ -14655,6 +14662,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"downgrade_nla_connections": (v.DowngradeNlaConnections),
 				"egress_filter":             (v.EgressFilter),
 				"hostname":                  (v.Hostname),
+				"lock_required":             (v.LockRequired),
 				"name":                      (v.Name),
 				"password":                  seValues["password"],
 				"port":                      (v.Port),
