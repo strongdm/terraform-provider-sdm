@@ -232,6 +232,19 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "aurora_postgres_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"override_database", `true`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "aws",
 			pairs: [][2]string{
 				{"access_key", `"access_key"`},
@@ -893,6 +906,19 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "rds_postgres_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"override_database", `true`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "redis",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
@@ -1354,6 +1380,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"override_database", `true`},
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+		{
+			resource: "aurora_postgres_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"override_database", `true`},
+				{"port", `443`},
+				{"region", `"region"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
@@ -2024,6 +2064,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"name", `"secret_name"`},
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+		{
+			resource: "rds_postgres_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"override_database", `true`},
+				{"port", `443`},
+				{"region", `"region"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},

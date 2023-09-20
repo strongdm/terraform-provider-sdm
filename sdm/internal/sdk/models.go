@@ -1069,6 +1069,41 @@ type AuroraPostgres struct {
 	Username string `json:"username"`
 }
 
+// AuroraPostgresIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AuroraPostgresIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	OverrideDatabase bool `json:"overrideDatabase"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type Azure struct {
 	// The application ID to authenticate with.
 	AppID string `json:"appId"`
@@ -3199,6 +3234,41 @@ type RDP struct {
 	Username string `json:"username"`
 }
 
+// RDSPostgresIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type RDSPostgresIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	OverrideDatabase bool `json:"overrideDatabase"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type RabbitMQAMQP091 struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -4273,6 +4343,60 @@ func (m *AuroraPostgres) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AuroraPostgres.
 func (m *AuroraPostgres) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AuroraPostgresIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AuroraPostgresIAM.
+func (m *AuroraPostgresIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AWS) isOneOf_Resource() {}
@@ -7083,6 +7207,60 @@ func (m *RDP) GetBindInterface() string {
 func (m *RDP) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*RDSPostgresIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RDSPostgresIAM.
+func (m *RDSPostgresIAM) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Redis) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Redis.
@@ -8898,7 +9076,9 @@ type Workflow struct {
 	Description string `json:"description"`
 	// Optional enabled state for workflow. This setting may be overridden by the system if
 	// the workflow doesn't meet the requirements to be enabled or if other conditions prevent
-	// enabling the workflow.
+	// enabling the workflow. The requirements to enable a workflow are that the workflow must be
+	// either set up for with auto grant enabled or have one or more WorkflowApprovers created for
+	// the workflow.
 	Enabled bool `json:"enabled"`
 	// Unique identifier of the Workflow.
 	ID string `json:"id"`
@@ -8912,26 +9092,78 @@ type Workflow struct {
 type WorkflowApprover struct {
 	// The approver id.
 	ApproverID string `json:"approverId"`
+	// Unique identifier of the WorkflowApprover.
+	ID string `json:"id"`
 	// The workflow id.
 	WorkflowID string `json:"workflowId"`
 }
 
-// WorkflowApproverHistory records the state of a WorkflowApprover at a given point in time,
-// where every change (create, update and delete) to a WorkflowApprover produces an
-// WorkflowApproverHistory record.
+// WorkflowApproverGetResponse returns a requested WorkflowApprover.
+type WorkflowApproverGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested WorkflowApprover.
+	WorkflowApprover *WorkflowApprover `json:"workflowApprover"`
+}
+
+// WorkflowApproverHistory provides records of all changes to the state of a WorkflowApprover.
 type WorkflowApproverHistory struct {
-	// The unique identifier of the Activity that produced this change to the Workflow.
+	// The unique identifier of the Activity that produced this change to the WorkflowApprover.
 	// May be empty for some system-initiated updates.
 	ActivityID string `json:"activityId"`
-	// If this Workflow was deleted, the time it was deleted.
+	// If this WorkflowApprover was deleted, the time it was deleted.
 	DeletedAt time.Time `json:"deletedAt"`
-	// The time at which the Workflow state was recorded.
+	// The time at which the WorkflowApprover state was recorded.
 	Timestamp time.Time `json:"timestamp"`
 	// The complete WorkflowApprover state at this time.
 	WorkflowApprover *WorkflowApprover `json:"workflowApprover"`
 }
 
-// WorkflowAssignment links a Resource to a Workflow.
+// WorkflowApproversCreateRequest specifies the workflowID and approverID of a new
+// workflow approver to be created.
+type WorkflowApproversCreateRequest struct {
+	// Parameters to define the new WorkflowApprover.
+	WorkflowApprover *WorkflowApprover `json:"workflowApprover"`
+}
+
+// WorkflowApproversCreateResponse reports how the WorkflowApprover was created in the system.
+type WorkflowApproversCreateResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created workflow approver.
+	WorkflowApprover *WorkflowApprover `json:"workflowApprover"`
+}
+
+// WorkflowApproversDeleteRequest specifies the ID of a WorkflowApprover to be deleted.
+type WorkflowApproversDeleteRequest struct {
+	// The unique identifier of the WorkflowApprover to delete.
+	ID string `json:"id"`
+}
+
+// WorkflowApproversDeleteResponse reports how the WorkflowApprover was deleted in the system.
+type WorkflowApproversDeleteResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowApproversListRequest specifies criteria for retrieving a list of
+// WorkflowApprover records
+type WorkflowApproversListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// WorkflowApproversListResponse returns a list of WorkflowApprover records that meet
+// the criteria of a WorkflowApproversListRequest.
+type WorkflowApproversListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowAssignment links a Resource to a Workflow. The assigned resources are those that a user can request
+// access to via the workflow.
 type WorkflowAssignment struct {
 	// The resource id.
 	ResourceID string `json:"resourceId"`
@@ -8939,24 +9171,60 @@ type WorkflowAssignment struct {
 	WorkflowID string `json:"workflowId"`
 }
 
-// WorkflowAssignmentHistory records the state of a WorkflowAssignment at a given point in time,
-// where every change (create, update and delete) to a WorkflowAssignment produces an
-// WorkflowAssignmentHistory record.
+// WorkflowAssignmentsHistory provides records of all changes to the state of a WorkflowAssignment.
 type WorkflowAssignmentHistory struct {
-	// The unique identifier of the Activity that produced this change to the Workflow.
+	// The unique identifier of the Activity that produced this change to the WorkflowAssignment.
 	// May be empty for some system-initiated updates.
 	ActivityID string `json:"activityId"`
-	// If this Workflow was deleted, the time it was deleted.
+	// If this WorkflowAssignment was deleted, the time it was deleted.
 	DeletedAt time.Time `json:"deletedAt"`
-	// The time at which the Workflow state was recorded.
+	// The time at which the WorkflowAssignment state was recorded.
 	Timestamp time.Time `json:"timestamp"`
 	// The complete WorkflowAssignment state at this time.
 	WorkflowAssignment *WorkflowAssignment `json:"workflowAssignment"`
 }
 
-// WorkflowHistory records the state of a Workflow at a given point in time,
-// where every change (create, update and delete) to a Workflow produces an
-// WorkflowHistory record.
+// WorkflowAssignmentsListRequest specifies criteria for retrieving a list of
+// WorkflowAssignment records
+type WorkflowAssignmentsListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// WorkflowAssignmentsListResponse returns a list of WorkflowAssignment records that meet
+// the criteria of a WorkflowAssignmentsListRequest.
+type WorkflowAssignmentsListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowCreateResponse reports how the Workflow was created in the system.
+type WorkflowCreateResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created workflow.
+	Workflow *Workflow `json:"workflow"`
+}
+
+// WorkflowDeleteResponse returns information about a Workflow that was deleted.
+type WorkflowDeleteResponse struct {
+	// The deleted workflow id.
+	ID string `json:"id"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowGetResponse returns a requested Workflow.
+type WorkflowGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested Workflow.
+	Workflow *Workflow `json:"workflow"`
+}
+
+// WorkflowsHistory provides records of all changes to the state of a Workflow.
 type WorkflowHistory struct {
 	// The unique identifier of the Activity that produced this change to the Workflow.
 	// May be empty for some system-initiated updates.
@@ -8969,13 +9237,6 @@ type WorkflowHistory struct {
 	Workflow *Workflow `json:"workflow"`
 }
 
-// WorkflowListRequest specifies criteria for retrieving a list of
-// Workflow records
-type WorkflowListRequest struct {
-	// A human-readable filter query string.
-	Filter string `json:"filter"`
-}
-
 // WorkflowListResponse returns a list of Workflow records that meet
 // the criteria of a WorkflowListRequest.
 type WorkflowListResponse struct {
@@ -8983,27 +9244,88 @@ type WorkflowListResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// WorkflowRole links a Role to a Workflow.
+// WorkflowRole links a role to a workflow. The linked roles indicate which roles a user must be a part of
+// to request access to a resource via the workflow.
 type WorkflowRole struct {
+	// Unique identifier of the WorkflowRole.
+	ID string `json:"id"`
 	// The role id.
 	RoleID string `json:"roleId"`
 	// The workflow id.
 	WorkflowID string `json:"workflowId"`
 }
 
-// WorkflowRolesHistory records the state of a Workflow at a given point in time,
-// where every change (create, update and delete) to a WorkflowRole produces a
-// WorkflowRoleHistory record.
+// WorkflowRoleGetResponse returns a requested WorkflowRole.
+type WorkflowRoleGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested WorkflowRole.
+	WorkflowRole *WorkflowRole `json:"workflowRole"`
+}
+
+// WorkflowRolesHistory provides records of all changes to the state of a WorkflowRole
 type WorkflowRoleHistory struct {
-	// The unique identifier of the Activity that produced this change to the Workflow.
+	// The unique identifier of the Activity that produced this change to the WorkflowRole.
 	// May be empty for some system-initiated updates.
 	ActivityID string `json:"activityId"`
 	// If this WorkflowRole was deleted, the time it was deleted.
 	DeletedAt time.Time `json:"deletedAt"`
-	// The time at which the Workflow state was recorded.
+	// The time at which the WorkflowRole state was recorded.
 	Timestamp time.Time `json:"timestamp"`
 	// The complete WorkflowRole state at this time.
 	WorkflowRole *WorkflowRole `json:"workflowRole"`
+}
+
+// WorkflowRolesCreateRequest specifies the workflowID and roleID of a new
+// workflow role to be created.
+type WorkflowRolesCreateRequest struct {
+	// Parameters to define the new WorkflowRole.
+	WorkflowRole *WorkflowRole `json:"workflowRole"`
+}
+
+// WorkflowRolesCreateResponse reports how the WorkflowRole was created in the system.
+type WorkflowRolesCreateResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The created workflow role.
+	WorkflowRole *WorkflowRole `json:"workflowRole"`
+}
+
+// WorkflowRolesDeleteRequest specifies the ID of a WorkflowRole to be deleted.
+type WorkflowRolesDeleteRequest struct {
+	// The unique identifier of the WorkflowRole to delete.
+	ID string `json:"id"`
+}
+
+// WorkflowRolesDeleteResponse reports how the WorkflowRole was deleted in the system.
+type WorkflowRolesDeleteResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowRolesListRequest specifies criteria for retrieving a list of
+// WorkflowRole records
+type WorkflowRolesListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// WorkflowRolesListResponse returns a list of WorkflowRole records that meet
+// the criteria of a WorkflowRolesListRequest.
+type WorkflowRolesListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// WorkflowUpdateResponse returns the fields of a Workflow after it has been updated by
+// a WorkflowUpdateRequest.
+type WorkflowUpdateResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The updated workflow.
+	Workflow *Workflow `json:"workflow"`
 }
 
 // AccessRequestIterator provides read access to a list of AccessRequest.
@@ -9601,19 +9923,19 @@ type SecretStoreHistoryIterator interface {
 	Err() error
 }
 
-// WorkflowIterator provides read access to a list of Workflow.
+// WorkflowApproverIterator provides read access to a list of WorkflowApprover.
 // Use it like so:
 //
 //	for iterator.Next() {
-//	    workflow := iterator.Value()
+//	    workflowApprover := iterator.Value()
 //	    // ...
 //	}
-type WorkflowIterator interface {
+type WorkflowApproverIterator interface {
 	// Next advances the iterator to the next item in the list. It returns
 	// true if an item is available to retrieve via the `Value()` function.
 	Next() bool
 	// Value returns the current item, if one is available.
-	Value() *Workflow
+	Value() *WorkflowApprover
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }
@@ -9635,6 +9957,23 @@ type WorkflowApproverHistoryIterator interface {
 	Err() error
 }
 
+// WorkflowAssignmentIterator provides read access to a list of WorkflowAssignment.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflowAssignment := iterator.Value()
+//	    // ...
+//	}
+type WorkflowAssignmentIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *WorkflowAssignment
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
 // WorkflowAssignmentHistoryIterator provides read access to a list of WorkflowAssignmentHistory.
 // Use it like so:
 //
@@ -9652,6 +9991,23 @@ type WorkflowAssignmentHistoryIterator interface {
 	Err() error
 }
 
+// WorkflowRoleIterator provides read access to a list of WorkflowRole.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflowRole := iterator.Value()
+//	    // ...
+//	}
+type WorkflowRoleIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *WorkflowRole
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
 // WorkflowRoleHistoryIterator provides read access to a list of WorkflowRoleHistory.
 // Use it like so:
 //
@@ -9665,6 +10021,23 @@ type WorkflowRoleHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *WorkflowRoleHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// WorkflowIterator provides read access to a list of Workflow.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    workflow := iterator.Value()
+//	    // ...
+//	}
+type WorkflowIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *Workflow
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

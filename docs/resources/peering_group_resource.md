@@ -17,7 +17,7 @@ The following arguments are supported by the PeeringGroupResource resource:
 In addition to provided arguments above, the following attributes are returned by the PeeringGroupResource resource:
 * `id` - A unique identifier for the PeeringGroupResource resource.
 ## Import
-PeeringGroupResource can be imported using the id, e.g.,
+A PeeringGroupResource can be imported using the id, e.g.,
 
 ```
 $ terraform import sdm_peering_group_resource.example gr-12345678

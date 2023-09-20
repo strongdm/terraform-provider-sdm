@@ -1260,6 +1260,86 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"aurora_postgres_iam": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The AWS region to connect to.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
 						"aws": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -5394,6 +5474,86 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"rds_postgres_iam": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"override_database": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The AWS region to connect to.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
 						"redis": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -6925,6 +7085,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
 			})
+		case *sdm.AuroraPostgresIAM:
+			output[0]["aurora_postgres_iam"] = append(output[0]["aurora_postgres_iam"], entity{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          (v.Username),
+			})
 		case *sdm.AWS:
 			output[0]["aws"] = append(output[0]["aws"], entity{
 				"access_key":         (v.AccessKey),
@@ -7791,6 +7968,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":                 (v.Subdomain),
 				"tags":                      convertTagsToPorcelain(v.Tags),
 				"username":                  (v.Username),
+			})
+		case *sdm.RDSPostgresIAM:
+			output[0]["rds_postgres_iam"] = append(output[0]["rds_postgres_iam"], entity{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"id":                (v.ID),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          (v.Username),
 			})
 		case *sdm.Redis:
 			output[0]["redis"] = append(output[0]["redis"], entity{

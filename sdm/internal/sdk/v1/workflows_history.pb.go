@@ -162,9 +162,7 @@ func (x *WorkflowHistoryListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// WorkflowHistory records the state of a Workflow at a given point in time,
-// where every change (create, update and delete) to a Workflow produces an
-// WorkflowHistory record.
+// WorkflowsHistory provides records of all changes to the state of a Workflow.
 type WorkflowHistory struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

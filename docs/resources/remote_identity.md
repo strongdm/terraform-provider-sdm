@@ -28,7 +28,7 @@ The following arguments are supported by the RemoteIdentity resource:
 In addition to provided arguments above, the following attributes are returned by the RemoteIdentity resource:
 * `id` - A unique identifier for the RemoteIdentity resource.
 ## Import
-RemoteIdentity can be imported using the id, e.g.,
+A RemoteIdentity can be imported using the id, e.g.,
 
 ```
 $ terraform import sdm_remote_identity.example i-12345678

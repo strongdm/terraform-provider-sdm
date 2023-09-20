@@ -258,6 +258,20 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
+* aurora_postgres_iam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `override_database` - (Optional) If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `region` - (Required) The AWS region to connect to.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aws:
 	* `access_key` - (Required, either in plaintext, or as a secret store path) The Access Key ID to use to authenticate.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
@@ -969,6 +983,20 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
+* rds_postgres_iam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `override_database` - (Optional) If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `region` - (Required) The AWS region to connect to.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * redis:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1185,7 +1213,7 @@ In addition to provided arguments above, the following attributes are returned b
 * ssh:
 	* `public_key` - The public key to append to a server's authorized keys. This will be generated after resource creation.
 ## Import
-Resource can be imported using the id, e.g.,
+A Resource can be imported using the id, e.g.,
 
 ```
 $ terraform import sdm_resource.example rs-12345678

@@ -50,7 +50,7 @@ The following arguments are supported by the Role resource:
 In addition to provided arguments above, the following attributes are returned by the Role resource:
 * `id` - A unique identifier for the Role resource.
 ## Import
-Role can be imported using the id, e.g.,
+A Role can be imported using the id, e.g.,
 
 ```
 $ terraform import sdm_role.example r-12345678

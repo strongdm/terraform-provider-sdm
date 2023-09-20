@@ -56,7 +56,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	* `permission_level` - PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
 ## Import
-Account can be imported using the id, e.g.,
+A Account can be imported using the id, e.g.,
 
 ```
 $ terraform import sdm_account.example a-12345678

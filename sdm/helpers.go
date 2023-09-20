@@ -156,6 +156,13 @@ func convertInt32ToPlumbing(porcelain interface{}) int32 {
 	return int32(porcelain.(int))
 }
 
+func convertInt64ToPlumbing(porcelain interface{}) int64 {
+	if porcelain == nil {
+		return 0
+	}
+	return int64(porcelain.(int))
+}
+
 func convertBoolToPlumbing(porcelain interface{}) bool {
 	if porcelain == nil {
 		return false

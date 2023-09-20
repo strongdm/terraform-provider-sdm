@@ -23,7 +23,7 @@ const (
 	PermissionLevelDatabaseAdmin = "database-admin"
 	PermissionLevelTeamLeader    = "multi-team-leader"
 	PermissionLevelUser          = "user"
-	PermissionLevelReadOnlyAdmin = "read-only-admin"
+	PermissionLevelAuditor       = "auditor"
 	PermissionLevelRelay         = "relay"
 	PermissionLevelAdminToken    = "admin-token"
 	PermissionLevelSCIMToken     = "scim-token"

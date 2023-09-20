@@ -1238,6 +1238,86 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"aurora_postgres_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AuroraPostgresIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"aws": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -5371,6 +5451,86 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"rds_postgres_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "RDSPostgresIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"redis": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -7045,6 +7205,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("aurora_postgres_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8421,6 +8600,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("rds_postgres_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9207,6 +9405,34 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Password:         convertStringToPlumbing(raw["password"]),
 			Port:             convertInt32ToPlumbing(raw["port"]),
 			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("aurora_postgres_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AuroraPostgresIAM{}
+		}
+		out := &sdm.AuroraPostgresIAM{
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
+			Region:           convertStringToPlumbing(raw["region"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -10643,6 +10869,34 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("rds_postgres_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RDSPostgresIAM{}
+		}
+		out := &sdm.RDSPostgresIAM{
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			Database:         convertStringToPlumbing(raw["database"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase: convertBoolToPlumbing(raw["override_database"]),
+			Port:             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
+			Region:           convertStringToPlumbing(raw["region"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+			Username:         convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11365,6 +11619,26 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":          seValues["password"],
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
+			},
+		})
+	case *sdm.AuroraPostgresIAM:
+		localV, _ := localVersion.(*sdm.AuroraPostgresIAM)
+		_ = localV
+		d.Set("aurora_postgres_iam", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
@@ -12394,6 +12668,26 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":                  seValues["username"],
 			},
 		})
+	case *sdm.RDSPostgresIAM:
+		localV, _ := localVersion.(*sdm.RDSPostgresIAM)
+		_ = localV
+		d.Set("rds_postgres_iam", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
+			},
+		})
 	case *sdm.Redis:
 		localV, _ := localVersion.(*sdm.Redis)
 		_ = localV
@@ -13164,6 +13458,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"password":          seValues["password"],
 				"port":              (v.Port),
 				"port_override":     (v.PortOverride),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
+			},
+		})
+	case *sdm.AuroraPostgresIAM:
+		localV, ok := localVersion.(*sdm.AuroraPostgresIAM)
+		if !ok {
+			localV = &sdm.AuroraPostgresIAM{}
+		}
+		_ = localV
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("aurora_postgres_iam", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
@@ -14671,6 +14991,32 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":                 (v.Subdomain),
 				"tags":                      convertTagsToPorcelain(v.Tags),
 				"username":                  seValues["username"],
+			},
+		})
+	case *sdm.RDSPostgresIAM:
+		localV, ok := localVersion.(*sdm.RDSPostgresIAM)
+		if !ok {
+			localV = &sdm.RDSPostgresIAM{}
+		}
+		_ = localV
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("rds_postgres_iam", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"database":          (v.Database),
+				"egress_filter":     (v.EgressFilter),
+				"hostname":          (v.Hostname),
+				"name":              (v.Name),
+				"override_database": (v.OverrideDatabase),
+				"port":              (v.Port),
+				"port_override":     (v.PortOverride),
+				"region":            (v.Region),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+				"username":          seValues["username"],
 			},
 		})
 	case *sdm.Redis:

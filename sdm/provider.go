@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/5.3.2"
+const userAgent = "terraform-provider-sdm/6.0.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -55,6 +55,9 @@ func Provider() *schema.Provider {
 			"sdm_resource":               resourceResource(),
 			"sdm_role":                   resourceRole(),
 			"sdm_secret_store":           resourceSecretStore(),
+			"sdm_workflow_approver":      resourceWorkflowApprover(),
+			"sdm_workflow_role":          resourceWorkflowRole(),
+			"sdm_workflow":               resourceWorkflow(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"sdm_ssh_ca_pubkey":          dataSourceControlPanelSSHCAPublicKey(),
@@ -70,6 +73,9 @@ func Provider() *schema.Provider {
 			"sdm_resource":               dataSourceResource(),
 			"sdm_role":                   dataSourceRole(),
 			"sdm_secret_store":           dataSourceSecretStore(),
+			"sdm_workflow_approver":      dataSourceWorkflowApprover(),
+			"sdm_workflow_role":          dataSourceWorkflowRole(),
+			"sdm_workflow":               dataSourceWorkflow(),
 		},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			host := d.Get("host").(string)

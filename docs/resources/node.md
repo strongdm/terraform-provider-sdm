@@ -63,7 +63,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* `location` - Location is a read only network location uploaded by the gateway process when it comes online.
 	* `version` - Version is a read only sdm binary version uploaded by the gateway process when it comes online.
 ## Import
-Node can be imported using the id, e.g.,
+A Node can be imported using the id, e.g.,
 
 ```
 $ terraform import sdm_node.example n-12345678

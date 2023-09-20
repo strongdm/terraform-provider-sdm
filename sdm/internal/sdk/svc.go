@@ -4167,33 +4167,155 @@ func (svc *SecretStoresHistory) List(
 	), nil
 }
 
-// Workflows are the collection of rules that define the resources to which access can be requested,
-// the users that can request that access, and the mechanism for approving those requests which can either
-// but automatic approval or a set of users authorized to approve the requests.
-type Workflows struct {
-	client plumbing.WorkflowsClient
+// WorkflowApprovers is an account with the ability to approve requests bound to a workflow.
+type WorkflowApprovers struct {
+	client plumbing.WorkflowApproversClient
 	parent *Client
 }
 
-// A SnapshotWorkflows exposes the read only methods of the Workflows
+// A SnapshotWorkflowApprovers exposes the read only methods of the WorkflowApprovers
 // service for historical queries.
-type SnapshotWorkflows interface {
+type SnapshotWorkflowApprovers interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*WorkflowApproverGetResponse,
+		error)
 	List(
 		ctx context.Context,
 		filter string,
 		args ...interface{}) (
-		WorkflowIterator,
+		WorkflowApproverIterator,
 		error)
 }
 
-// Lists existing workflows.
-func (svc *Workflows) List(
+// Create creates a new workflow approver
+func (svc *WorkflowApprovers) Create(
+	ctx context.Context,
+	workflowApprover *WorkflowApprover) (
+	*WorkflowApproversCreateResponse,
+	error) {
+	req := &plumbing.WorkflowApproversCreateRequest{}
+
+	req.WorkflowApprover = convertWorkflowApproverToPlumbing(workflowApprover)
+	var plumbingResponse *plumbing.WorkflowApproversCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowApproversCreateResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowApproverToPorcelain(plumbingResponse.WorkflowApprover); err != nil {
+		return nil, err
+	} else {
+		resp.WorkflowApprover = v
+	}
+	return resp, nil
+}
+
+// Get reads one workflow approver by ID.
+func (svc *WorkflowApprovers) Get(
+	ctx context.Context,
+	id string) (
+	*WorkflowApproverGetResponse,
+	error) {
+	req := &plumbing.WorkflowApproverGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.WorkflowApproverGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowApproverGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowApproverToPorcelain(plumbingResponse.WorkflowApprover); err != nil {
+		return nil, err
+	} else {
+		resp.WorkflowApprover = v
+	}
+	return resp, nil
+}
+
+// Delete deletes a workflow approver
+func (svc *WorkflowApprovers) Delete(
+	ctx context.Context,
+	id string) (
+	*WorkflowApproversDeleteResponse,
+	error) {
+	req := &plumbing.WorkflowApproversDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.WorkflowApproversDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowApproversDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Lists existing workflow approvers.
+func (svc *WorkflowApprovers) List(
 	ctx context.Context,
 	filter string,
 	args ...interface{}) (
-	WorkflowIterator,
+	WorkflowApproverIterator,
 	error) {
-	req := &plumbing.WorkflowListRequest{}
+	req := &plumbing.WorkflowApproversListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4205,15 +4327,15 @@ func (svc *Workflows) List(
 		req.Meta.Limit = int32(svc.parent.pageLimit)
 	}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	return newWorkflowIteratorImpl(
+	return newWorkflowApproverIteratorImpl(
 		func() (
-			[]*Workflow,
+			[]*WorkflowApprover,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowListResponse
+			var plumbingResponse *plumbing.WorkflowApproversListResponse
 			var err error
 			i := 0
 			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Workflows.List"), req)
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.List"), req)
 				if err != nil {
 					if !svc.parent.shouldRetry(i, err) {
 						return nil, false, convertErrorToPorcelain(err)
@@ -4224,7 +4346,7 @@ func (svc *Workflows) List(
 				}
 				break
 			}
-			result, err := convertRepeatedWorkflowToPorcelain(plumbingResponse.Workflows)
+			result, err := convertRepeatedWorkflowApproverToPorcelain(plumbingResponse.WorkflowApprovers)
 			if err != nil {
 				return nil, false, err
 			}
@@ -4288,6 +4410,72 @@ func (svc *WorkflowApproversHistory) List(
 	), nil
 }
 
+// WorkflowAssignments links a Resource to a Workflow. The assigned resources are those that a user can request
+// access to via the workflow.
+type WorkflowAssignments struct {
+	client plumbing.WorkflowAssignmentsClient
+	parent *Client
+}
+
+// A SnapshotWorkflowAssignments exposes the read only methods of the WorkflowAssignments
+// service for historical queries.
+type SnapshotWorkflowAssignments interface {
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		WorkflowAssignmentIterator,
+		error)
+}
+
+// Lists existing workflow assignments.
+func (svc *WorkflowAssignments) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowAssignmentIterator,
+	error) {
+	req := &plumbing.WorkflowAssignmentsListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowAssignmentIteratorImpl(
+		func() (
+			[]*WorkflowAssignment,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowAssignmentsListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowAssignments.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowAssignmentToPorcelain(plumbingResponse.WorkflowAssignments)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // WorkflowAssignmentsHistory provides records of all changes to the state of a WorkflowAssignment.
 type WorkflowAssignmentsHistory struct {
 	client plumbing.WorkflowAssignmentsHistoryClient
@@ -4342,6 +4530,196 @@ func (svc *WorkflowAssignmentsHistory) List(
 	), nil
 }
 
+// WorkflowRole links a role to a workflow. The linked roles indicate which roles a user must be a part of
+// to request access to a resource via the workflow.
+type WorkflowRoles struct {
+	client plumbing.WorkflowRolesClient
+	parent *Client
+}
+
+// A SnapshotWorkflowRoles exposes the read only methods of the WorkflowRoles
+// service for historical queries.
+type SnapshotWorkflowRoles interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*WorkflowRoleGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		WorkflowRoleIterator,
+		error)
+}
+
+// Create creates a new workflow role
+func (svc *WorkflowRoles) Create(
+	ctx context.Context,
+	workflowRole *WorkflowRole) (
+	*WorkflowRolesCreateResponse,
+	error) {
+	req := &plumbing.WorkflowRolesCreateRequest{}
+
+	req.WorkflowRole = convertWorkflowRoleToPlumbing(workflowRole)
+	var plumbingResponse *plumbing.WorkflowRolesCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "WorkflowRoles.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowRolesCreateResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowRoleToPorcelain(plumbingResponse.WorkflowRole); err != nil {
+		return nil, err
+	} else {
+		resp.WorkflowRole = v
+	}
+	return resp, nil
+}
+
+// Get reads one workflow role by ID.
+func (svc *WorkflowRoles) Get(
+	ctx context.Context,
+	id string) (
+	*WorkflowRoleGetResponse,
+	error) {
+	req := &plumbing.WorkflowRoleGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.WorkflowRoleGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "WorkflowRoles.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowRoleGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowRoleToPorcelain(plumbingResponse.WorkflowRole); err != nil {
+		return nil, err
+	} else {
+		resp.WorkflowRole = v
+	}
+	return resp, nil
+}
+
+// Delete deletes a workflow role
+func (svc *WorkflowRoles) Delete(
+	ctx context.Context,
+	id string) (
+	*WorkflowRolesDeleteResponse,
+	error) {
+	req := &plumbing.WorkflowRolesDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.WorkflowRolesDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "WorkflowRoles.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowRolesDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Lists existing workflow roles.
+func (svc *WorkflowRoles) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowRoleIterator,
+	error) {
+	req := &plumbing.WorkflowRolesListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowRoleIteratorImpl(
+		func() (
+			[]*WorkflowRole,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowRolesListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowRoles.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowRoleToPorcelain(plumbingResponse.WorkflowRole)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // WorkflowRolesHistory provides records of all changes to the state of a WorkflowRole
 type WorkflowRolesHistory struct {
 	client plumbing.WorkflowRolesHistoryClient
@@ -4387,6 +4765,237 @@ func (svc *WorkflowRolesHistory) List(
 				break
 			}
 			result, err := convertRepeatedWorkflowRoleHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// Workflows are the collection of rules that define the resources to which access can be requested,
+// the users that can request that access, and the mechanism for approving those requests which can either
+// be automatic approval or a set of users authorized to approve the requests.
+type Workflows struct {
+	client plumbing.WorkflowsClient
+	parent *Client
+}
+
+// A SnapshotWorkflows exposes the read only methods of the Workflows
+// service for historical queries.
+type SnapshotWorkflows interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*WorkflowGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		WorkflowIterator,
+		error)
+}
+
+// Create creates a new workflow and requires a name for the workflow.
+func (svc *Workflows) Create(
+	ctx context.Context,
+	workflow *Workflow) (
+	*WorkflowCreateResponse,
+	error) {
+	req := &plumbing.WorkflowCreateRequest{}
+
+	req.Workflow = convertWorkflowToPlumbing(workflow)
+	var plumbingResponse *plumbing.WorkflowCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Workflows.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowCreateResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowToPorcelain(plumbingResponse.Workflow); err != nil {
+		return nil, err
+	} else {
+		resp.Workflow = v
+	}
+	return resp, nil
+}
+
+// Get reads one workflow by ID.
+func (svc *Workflows) Get(
+	ctx context.Context,
+	id string) (
+	*WorkflowGetResponse,
+	error) {
+	req := &plumbing.WorkflowGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.WorkflowGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Workflows.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowToPorcelain(plumbingResponse.Workflow); err != nil {
+		return nil, err
+	} else {
+		resp.Workflow = v
+	}
+	return resp, nil
+}
+
+// Delete deletes an existing workflow.
+func (svc *Workflows) Delete(
+	ctx context.Context,
+	id string) (
+	*WorkflowDeleteResponse,
+	error) {
+	req := &plumbing.WorkflowDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.WorkflowDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Workflows.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowDeleteResponse{}
+	resp.ID = (plumbingResponse.Id)
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update updates an existing workflow.
+func (svc *Workflows) Update(
+	ctx context.Context,
+	workflow *Workflow) (
+	*WorkflowUpdateResponse,
+	error) {
+	req := &plumbing.WorkflowUpdateRequest{}
+
+	req.Workflow = convertWorkflowToPlumbing(workflow)
+	var plumbingResponse *plumbing.WorkflowUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Workflows.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &WorkflowUpdateResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertWorkflowToPorcelain(plumbingResponse.Workflow); err != nil {
+		return nil, err
+	} else {
+		resp.Workflow = v
+	}
+	return resp, nil
+}
+
+// Lists existing workflows.
+func (svc *Workflows) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	WorkflowIterator,
+	error) {
+	req := &plumbing.WorkflowListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newWorkflowIteratorImpl(
+		func() (
+			[]*Workflow,
+			bool, error) {
+			var plumbingResponse *plumbing.WorkflowListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Workflows.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedWorkflowToPorcelain(plumbingResponse.Workflows)
 			if err != nil {
 				return nil, false, err
 			}

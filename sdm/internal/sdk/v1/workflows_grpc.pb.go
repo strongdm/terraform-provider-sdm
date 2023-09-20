@@ -31,6 +31,14 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WorkflowsClient interface {
+	// Create creates a new workflow and requires a name for the workflow.
+	Create(ctx context.Context, in *WorkflowCreateRequest, opts ...grpc.CallOption) (*WorkflowCreateResponse, error)
+	// Get reads one workflow by ID.
+	Get(ctx context.Context, in *WorkflowGetRequest, opts ...grpc.CallOption) (*WorkflowGetResponse, error)
+	// Delete deletes an existing workflow.
+	Delete(ctx context.Context, in *WorkflowDeleteRequest, opts ...grpc.CallOption) (*WorkflowDeleteResponse, error)
+	// Update updates an existing workflow.
+	Update(ctx context.Context, in *WorkflowUpdateRequest, opts ...grpc.CallOption) (*WorkflowUpdateResponse, error)
 	// Lists existing workflows.
 	List(ctx context.Context, in *WorkflowListRequest, opts ...grpc.CallOption) (*WorkflowListResponse, error)
 }
@@ -41,6 +49,42 @@ type workflowsClient struct {
 
 func NewWorkflowsClient(cc grpc.ClientConnInterface) WorkflowsClient {
 	return &workflowsClient{cc}
+}
+
+func (c *workflowsClient) Create(ctx context.Context, in *WorkflowCreateRequest, opts ...grpc.CallOption) (*WorkflowCreateResponse, error) {
+	out := new(WorkflowCreateResponse)
+	err := c.cc.Invoke(ctx, "/v1.Workflows/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowsClient) Get(ctx context.Context, in *WorkflowGetRequest, opts ...grpc.CallOption) (*WorkflowGetResponse, error) {
+	out := new(WorkflowGetResponse)
+	err := c.cc.Invoke(ctx, "/v1.Workflows/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowsClient) Delete(ctx context.Context, in *WorkflowDeleteRequest, opts ...grpc.CallOption) (*WorkflowDeleteResponse, error) {
+	out := new(WorkflowDeleteResponse)
+	err := c.cc.Invoke(ctx, "/v1.Workflows/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowsClient) Update(ctx context.Context, in *WorkflowUpdateRequest, opts ...grpc.CallOption) (*WorkflowUpdateResponse, error) {
+	out := new(WorkflowUpdateResponse)
+	err := c.cc.Invoke(ctx, "/v1.Workflows/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *workflowsClient) List(ctx context.Context, in *WorkflowListRequest, opts ...grpc.CallOption) (*WorkflowListResponse, error) {
@@ -56,6 +100,14 @@ func (c *workflowsClient) List(ctx context.Context, in *WorkflowListRequest, opt
 // All implementations must embed UnimplementedWorkflowsServer
 // for forward compatibility
 type WorkflowsServer interface {
+	// Create creates a new workflow and requires a name for the workflow.
+	Create(context.Context, *WorkflowCreateRequest) (*WorkflowCreateResponse, error)
+	// Get reads one workflow by ID.
+	Get(context.Context, *WorkflowGetRequest) (*WorkflowGetResponse, error)
+	// Delete deletes an existing workflow.
+	Delete(context.Context, *WorkflowDeleteRequest) (*WorkflowDeleteResponse, error)
+	// Update updates an existing workflow.
+	Update(context.Context, *WorkflowUpdateRequest) (*WorkflowUpdateResponse, error)
 	// Lists existing workflows.
 	List(context.Context, *WorkflowListRequest) (*WorkflowListResponse, error)
 	mustEmbedUnimplementedWorkflowsServer()
@@ -65,6 +117,18 @@ type WorkflowsServer interface {
 type UnimplementedWorkflowsServer struct {
 }
 
+func (UnimplementedWorkflowsServer) Create(context.Context, *WorkflowCreateRequest) (*WorkflowCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedWorkflowsServer) Get(context.Context, *WorkflowGetRequest) (*WorkflowGetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedWorkflowsServer) Delete(context.Context, *WorkflowDeleteRequest) (*WorkflowDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedWorkflowsServer) Update(context.Context, *WorkflowUpdateRequest) (*WorkflowUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
 func (UnimplementedWorkflowsServer) List(context.Context, *WorkflowListRequest) (*WorkflowListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
@@ -79,6 +143,78 @@ type UnsafeWorkflowsServer interface {
 
 func RegisterWorkflowsServer(s grpc.ServiceRegistrar, srv WorkflowsServer) {
 	s.RegisterService(&_Workflows_serviceDesc, srv)
+}
+
+func _Workflows_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WorkflowCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowsServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Workflows/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowsServer).Create(ctx, req.(*WorkflowCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Workflows_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WorkflowGetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowsServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Workflows/Get",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowsServer).Get(ctx, req.(*WorkflowGetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Workflows_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WorkflowDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowsServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Workflows/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowsServer).Delete(ctx, req.(*WorkflowDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Workflows_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WorkflowUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowsServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Workflows/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowsServer).Update(ctx, req.(*WorkflowUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Workflows_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -103,6 +239,22 @@ var _Workflows_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.Workflows",
 	HandlerType: (*WorkflowsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _Workflows_Create_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _Workflows_Get_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _Workflows_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _Workflows_Update_Handler,
+		},
 		{
 			MethodName: "List",
 			Handler:    _Workflows_List_Handler,
