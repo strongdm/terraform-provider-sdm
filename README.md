@@ -7,6 +7,7 @@ You can use the StrongDM Terraform provider to configure and manage your StrongD
 * Create, manage, and suspend users
 * Grant user and resource access
 * Manage roles
+* Manage access workflows
 
 For more detailed examples using the StrongDM provider and Amazon Web Services (AWS) or Microsoft Azure, check the following resources:
 
@@ -85,6 +86,7 @@ $ terraform apply
   - [Managing Gateways](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/4_managing_gateways)
   - [Managing Roles](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/3_managing_roles)
   - [Managing Accounts](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/2_managing_accounts)
+  - [Managing Access Workflows](https://github.com/strongdm/terraform-provider-sdm-examples/tree/master/5_managing_workflows)
   - [Quick Start StrongDM with Terraform and AWS](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-aws/)
   - [Quick Start StrongDM with Terraform and Azure](https://www.strongdm.com/docs/automation/configuration-management-tools/terraform/quick-start-azure/)
 
