@@ -9,6 +9,14 @@ sidebar_current: “docs-sdm-resource-workflow-role"
 
 WorkflowRole links a role to a workflow. The linked roles indicate which roles a user must be a part of
  to request access to a resource via the workflow.
+## Example Usage
+
+```hcl
+resource "sdm_workflow_role" "workflow_role_example" {
+    workflow_id = "aw-343865"
+    role_id = "r-243561"
+}
+```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Argument Reference
 The following arguments are supported by the WorkflowRole resource:

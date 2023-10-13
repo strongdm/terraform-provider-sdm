@@ -10,6 +10,14 @@ sidebar_current: “docs-sdm-datasource-workflow"
 Workflows are the collection of rules that define the resources to which access can be requested,
  the users that can request that access, and the mechanism for approving those requests which can either
  but automatic approval or a set of users authorized to approve the requests.
+## Example Usage
+
+```hcl
+data "sdm_workflow" "workflow_query" {
+    name = "workflow example"
+    auto_grant = true
+}
+```
 ## Argument Reference
 The following arguments are supported by a Workflows data source:
 * `auto_grant` - (Optional) Optional auto grant setting to automatically approve requests or not, defaults to false.

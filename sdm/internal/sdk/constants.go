@@ -18,18 +18,19 @@ package sdm
 
 // Permission Levels, shared by all entities capable of making authenticated requests against StrongDM.
 const (
-	PermissionLevelRootAdmin     = "root-admin"
-	PermissionLevelAdmin         = "admin"
-	PermissionLevelDatabaseAdmin = "database-admin"
-	PermissionLevelTeamLeader    = "multi-team-leader"
-	PermissionLevelUser          = "user"
-	PermissionLevelAuditor       = "auditor"
-	PermissionLevelRelay         = "relay"
-	PermissionLevelAdminToken    = "admin-token"
-	PermissionLevelSCIMToken     = "scim-token"
-	PermissionLevelService       = "service"
-	PermissionLevelSuspended     = "suspended"
-	PermissionLevelEmpty         = ""
+	PermissionLevelRootAdmin       = "root-admin"
+	PermissionLevelAdmin           = "admin"
+	PermissionLevelDatabaseAdmin   = "database-admin"
+	PermissionLevelTeamLeader      = "multi-team-leader"
+	PermissionLevelUser            = "user"
+	PermissionLevelAuditor         = "auditor"
+	PermissionLevelRelay           = "relay"
+	PermissionLevelAdminToken      = "admin-token"
+	PermissionLevelSCIMToken       = "scim-token"
+	PermissionLevelServiceNowToken = "servicenow-token"
+	PermissionLevelService         = "service"
+	PermissionLevelSuspended       = "suspended"
+	PermissionLevelEmpty           = ""
 )
 
 // Node Lifecycle States, defining whether a node was last reported online, offline, restarting, etc.

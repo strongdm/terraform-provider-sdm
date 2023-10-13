@@ -40,7 +40,7 @@ type SnapshotAccessRequests interface {
 		error)
 }
 
-// Lists existing workflows.
+// Lists existing access requests.
 func (svc *AccessRequests) List(
 	ctx context.Context,
 	filter string,

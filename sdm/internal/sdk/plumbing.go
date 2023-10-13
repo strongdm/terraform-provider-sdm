@@ -800,6 +800,57 @@ func convertRepeatedAccessRequestToPorcelain(plumbings []*proto.AccessRequest) (
 	}
 	return items, nil
 }
+func convertAccessRequestConfigToPorcelain(plumbing *proto.AccessRequestConfig) (*AccessRequestConfig, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccessRequestConfig{}
+	porcelain.Duration = plumbing.Duration
+	porcelain.Reason = plumbing.Reason
+	porcelain.ResourceID = plumbing.ResourceId
+	if v, err := convertTimestampToPorcelain(plumbing.StartFrom); err != nil {
+		return nil, fmt.Errorf("error converting field StartFrom: %v", err)
+	} else {
+		porcelain.StartFrom = v
+	}
+	return porcelain, nil
+}
+
+func convertAccessRequestConfigToPlumbing(porcelain *AccessRequestConfig) *proto.AccessRequestConfig {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccessRequestConfig{}
+	plumbing.Duration = (porcelain.Duration)
+	plumbing.Reason = (porcelain.Reason)
+	plumbing.ResourceId = (porcelain.ResourceID)
+	plumbing.StartFrom = convertTimestampToPlumbing(porcelain.StartFrom)
+	return plumbing
+}
+func convertRepeatedAccessRequestConfigToPlumbing(
+	porcelains []*AccessRequestConfig,
+) []*proto.AccessRequestConfig {
+	var items []*proto.AccessRequestConfig
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccessRequestConfigToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccessRequestConfigToPorcelain(plumbings []*proto.AccessRequestConfig) (
+	[]*AccessRequestConfig,
+	error,
+) {
+	var items []*AccessRequestConfig
+	for _, plumbing := range plumbings {
+		if v, err := convertAccessRequestConfigToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAccessRequestEventToPorcelain(plumbing *proto.AccessRequestEvent) (*AccessRequestEvent, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -3034,6 +3085,7 @@ func convertAuroraPostgresIAMToPorcelain(plumbing *proto.AuroraPostgresIAM) (*Au
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
+	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -3061,6 +3113,7 @@ func convertAuroraPostgresIAMToPlumbing(porcelain *AuroraPostgresIAM) *proto.Aur
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
+	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8658,6 +8711,7 @@ func convertRDSPostgresIAMToPorcelain(plumbing *proto.RDSPostgresIAM) (*RDSPostg
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
+	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8685,6 +8739,7 @@ func convertRDSPostgresIAMToPlumbing(porcelain *RDSPostgresIAM) *proto.RDSPostgr
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
+	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -9685,6 +9740,63 @@ func convertRepeatedReplayChunkEventToPorcelain(plumbings []*proto.ReplayChunkEv
 	var items []*ReplayChunkEvent
 	for _, plumbing := range plumbings {
 		if v, err := convertReplayChunkEventToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRequestableResourceToPorcelain(plumbing *proto.RequestableResource) (*RequestableResource, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RequestableResource{}
+	porcelain.Access = plumbing.Access
+	porcelain.Authentication = plumbing.Authentication
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Type = plumbing.Type
+	return porcelain, nil
+}
+
+func convertRequestableResourceToPlumbing(porcelain *RequestableResource) *proto.RequestableResource {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RequestableResource{}
+	plumbing.Access = (porcelain.Access)
+	plumbing.Authentication = (porcelain.Authentication)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Type = (porcelain.Type)
+	return plumbing
+}
+func convertRepeatedRequestableResourceToPlumbing(
+	porcelains []*RequestableResource,
+) []*proto.RequestableResource {
+	var items []*proto.RequestableResource
+	for _, porcelain := range porcelains {
+		items = append(items, convertRequestableResourceToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRequestableResourceToPorcelain(plumbings []*proto.RequestableResource) (
+	[]*RequestableResource,
+	error,
+) {
+	var items []*RequestableResource
+	for _, plumbing := range plumbings {
+		if v, err := convertRequestableResourceToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

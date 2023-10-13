@@ -31,7 +31,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccessRequestsClient interface {
-	// Lists existing workflows.
+	// Lists existing access requests.
 	List(ctx context.Context, in *AccessRequestListRequest, opts ...grpc.CallOption) (*AccessRequestListResponse, error)
 }
 
@@ -56,7 +56,7 @@ func (c *accessRequestsClient) List(ctx context.Context, in *AccessRequestListRe
 // All implementations must embed UnimplementedAccessRequestsServer
 // for forward compatibility
 type AccessRequestsServer interface {
-	// Lists existing workflows.
+	// Lists existing access requests.
 	List(context.Context, *AccessRequestListRequest) (*AccessRequestListResponse, error)
 	mustEmbedUnimplementedAccessRequestsServer()
 }

@@ -10,6 +10,33 @@ sidebar_current: “docs-sdm-resource-workflow"
 Workflows are the collection of rules that define the resources to which access can be requested,
  the users that can request that access, and the mechanism for approving those requests which can either
  but automatic approval or a set of users authorized to approve the requests.
+## Example Usage
+
+```hcl
+resource "sdm_workflow" "auto_grant_workflow" {
+    name = "auto grant workflow example"
+    auto_grant = true
+    enabled = true
+    access_rules = jsonencode([
+    {
+      "type" : "redis",
+      "tags" : { "region" : "us-east" }
+    }
+  ])
+}
+
+resource "sdm_workflow" "manual_approval_workflow" {
+    name = "manual approval workflow example"
+    auto_grant = false
+    access_rules = jsonencode([
+    {
+      "type" : "redis",
+      "tags" : { "region" : "us-east" }
+    }
+  ])
+}
+
+```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Argument Reference
 The following arguments are supported by the Workflow resource:

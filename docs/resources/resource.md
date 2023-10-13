@@ -268,6 +268,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `region` - (Required) The AWS region to connect to.
+	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -993,6 +994,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `region` - (Required) The AWS region to connect to.
+	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.

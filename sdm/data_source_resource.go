@@ -1316,6 +1316,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
+									"role_assumption_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -5530,6 +5535,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
+									"role_assumption_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
+									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -7087,20 +7097,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AuroraPostgresIAM:
 			output[0]["aurora_postgres_iam"] = append(output[0]["aurora_postgres_iam"], entity{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"region":            (v.Region),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          (v.Username),
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"id":                  (v.ID),
+				"name":                (v.Name),
+				"override_database":   (v.OverrideDatabase),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"username":            (v.Username),
 			})
 		case *sdm.AWS:
 			output[0]["aws"] = append(output[0]["aws"], entity{
@@ -7971,20 +7982,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.RDSPostgresIAM:
 			output[0]["rds_postgres_iam"] = append(output[0]["rds_postgres_iam"], entity{
-				"bind_interface":    (v.BindInterface),
-				"database":          (v.Database),
-				"egress_filter":     (v.EgressFilter),
-				"hostname":          (v.Hostname),
-				"id":                (v.ID),
-				"name":              (v.Name),
-				"override_database": (v.OverrideDatabase),
-				"port":              (v.Port),
-				"port_override":     (v.PortOverride),
-				"region":            (v.Region),
-				"secret_store_id":   (v.SecretStoreID),
-				"subdomain":         (v.Subdomain),
-				"tags":              convertTagsToPorcelain(v.Tags),
-				"username":          (v.Username),
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"id":                  (v.ID),
+				"name":                (v.Name),
+				"override_database":   (v.OverrideDatabase),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"username":            (v.Username),
 			})
 		case *sdm.Redis:
 			output[0]["redis"] = append(output[0]["redis"], entity{

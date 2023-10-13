@@ -9,6 +9,14 @@ sidebar_current: “docs-sdm-datasource-workflow-role"
 
 WorkflowRole links a role to a workflow. The linked roles indicate which roles a user must be a part of
  to request access to a resource via the workflow.
+## Example Usage
+
+```hcl
+data "sdm_workflow_role" "workflow_role_query" {
+    workflow_id = "aw-7935485"
+    role_id = "r-9862923"
+}
+```
 ## Argument Reference
 The following arguments are supported by a WorkflowRoles data source:
 * `id` - (Optional) Unique identifier of the WorkflowRole.

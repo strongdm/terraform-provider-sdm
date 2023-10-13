@@ -333,6 +333,18 @@ type AccessRequest struct {
 	WorkflowID string `json:"workflowId"`
 }
 
+// AccessRequestConfig holds the information required to request access to a resource
+type AccessRequestConfig struct {
+	// The time access should end, defaults to the next occurance of 5 pm
+	Duration string `json:"duration"`
+	// The reason for access
+	Reason string `json:"reason"`
+	// The resource for which access is being requested
+	ResourceID string `json:"resourceId"`
+	// The time access should start, defaults to now
+	StartFrom time.Time `json:"startFrom"`
+}
+
 // AccessRequestEvents hold information about events related to an access
 // request such as creation, approval and denial.
 type AccessRequestEvent struct {
@@ -385,7 +397,8 @@ type AccessRequestListRequest struct {
 	Filter string `json:"filter"`
 }
 
-// AccessRequestListResponse reports how the Workflow was created in the system.
+// AccessRequestListResponse returns a list of access requests records that meet
+// the criteria of a AccessRequestListRequest.
 type AccessRequestListResponse struct {
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
@@ -1094,6 +1107,8 @@ type AuroraPostgresIAM struct {
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
+	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	RoleAssumptionArn string `json:"roleAssumptionArn"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3259,6 +3274,8 @@ type RDSPostgresIAM struct {
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
+	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	RoleAssumptionArn string `json:"roleAssumptionArn"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3559,6 +3576,24 @@ type ReplayChunkEvent struct {
 	Data []byte `json:"data"`
 	// The time duration over which the data in this ReplayChunkEvent was transferred.
 	Duration time.Duration `json:"duration"`
+}
+
+// RequestableResource is a resource that can be requested via an AccessRequestConfig
+type RequestableResource struct {
+	// The current state of the user's access to the resources
+	Access string `json:"access"`
+	// The type of authentication for the resource
+	Authentication string `json:"authentication"`
+	// The health check status of the reasource
+	Healthy bool `json:"healthy"`
+	// The resource id.
+	ID string `json:"id"`
+	// The resource name.
+	Name string `json:"name"`
+	// Any tags attached to this resource
+	Tags Tags `json:"tags"`
+	// The resource type
+	Type string `json:"type"`
 }
 
 // A Resource is a database, server, cluster, website, or cloud that strongDM
