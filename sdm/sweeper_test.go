@@ -94,6 +94,12 @@ func testCheckDestroy(s *terraform.State) error {
 			_, err = client.Roles().Get(context.Background(), rs.Primary.ID)
 		case "sdm_secret_store":
 			_, err = client.SecretStores().Get(context.Background(), rs.Primary.ID)
+		case "sdm_workflow":
+			_, err = client.Workflows().Get(context.Background(), rs.Primary.ID)
+		case "sdm_workflow_approver":
+			_, err = client.WorkflowApprovers().Get(context.Background(), rs.Primary.ID)
+		case "sdm_workflow_role":
+			_, err = client.WorkflowRoles().Get(context.Background(), rs.Primary.ID)
 		default:
 			return fmt.Errorf("undefined resource type in testCheckDestroy: %s", rs.Type)
 		}

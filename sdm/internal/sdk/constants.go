@@ -263,6 +263,10 @@ const (
 	ActivityVerbResourceLocked                                   = "user locked a resource"
 	ActivityVerbResourceUnlocked                                 = "user unlocked a resource"
 	ActivityVerbResourceForceUnlocked                            = "admin force-unlocked a resource"
+	ActivityVerbOrgIntegrationInstalled                          = "org integration installed"
+	ActivityVerbUserIntegrationAuthorized                        = "user authorized integration"
+	ActivityVerbOrgIntegrationUninstalled                        = "org integration uninstalled"
+	ActivityVerbUserIntegrationDeauthorized                      = "user deauthorized integration"
 )
 
 // Permissions, all permissions that may be granted to an account.
@@ -346,6 +350,8 @@ const (
 	PermissionGrantWrite                             = "grant:write"
 	PermissionReportRead                             = "report:read"
 	PermissionBillingRead                            = "billing:read"
+	PermissionCredentialRead                         = "credential:read"
+	PermissionCredentialWrite                        = "credential:write"
 )
 
 // Query Categories, all the categories of resource against which queries are logged.
