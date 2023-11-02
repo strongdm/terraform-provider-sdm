@@ -3,7 +3,6 @@ package sdm
 import (
 	"context"
 	"fmt"
-	"strconv"
 	"testing"
 	"time"
 
@@ -44,22 +43,58 @@ func init() {
 
 func TestAccSDMWorkflow_Create(t *testing.T) {
 	initAcceptanceTest(t)
-	name := randomWithPrefix("wf-create")
-	weight := "10"
+	resourceName := randomWithPrefix("wf-create")
+	workflowName := randomWithPrefix("wf-create")
 	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMWorkflowConfig(name, name, weight),
+				Config: testAccSDMWorkflowConfig(resourceName, workflowName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdm_workflow."+name, "name", name),
-					resource.TestCheckResourceAttr("sdm_workflow."+name, "weight", weight),
-					doubleCheckWorkflow(name, weight),
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "name", workflowName),
+					doubleCheckWorkflow(resourceName, workflowName),
 				),
 			},
 			{
-				ResourceName:      "sdm_workflow." + name,
+				ResourceName:      "sdm_workflow." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccSDMWorkflow_Update(t *testing.T) {
+	initAcceptanceTest(t)
+	resourceName := randomWithPrefix("wf-create")
+	workflowName := randomWithPrefix("wf-create")
+	updatedWorkflowName := randomWithPrefix("wf-create-updated")
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMWorkflowConfig(resourceName, workflowName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "name", workflowName),
+					doubleCheckWorkflow(resourceName, workflowName),
+				),
+			},
+			{
+				ResourceName:      "sdm_workflow." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccSDMWorkflowConfig(resourceName, updatedWorkflowName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "name", updatedWorkflowName),
+					doubleCheckWorkflow(resourceName, updatedWorkflowName),
+				),
+			},
+			{
+				ResourceName:      "sdm_workflow." + resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
 			},
@@ -87,17 +122,16 @@ func createWorkflowsWithPrifix(prefix string, count int) ([]*sdm.Workflow, error
 	return workflows, nil
 }
 
-func testAccSDMWorkflowConfig(workflowName, sdmResourceName, weight string) string {
+func testAccSDMWorkflowConfig(workflowName, sdmResourceName string) string {
 	return fmt.Sprintf(`
 	resource "sdm_workflow" "%s" {
 		name = "%s"
-		weight = "%s"
-	}`, workflowName, sdmResourceName, weight)
+	}`, workflowName, sdmResourceName)
 }
 
-func doubleCheckWorkflow(name, weight string) func(s *terraform.State) error {
+func doubleCheckWorkflow(resourceName, workflowName string) func(s *terraform.State) error {
 	return func(s *terraform.State) error {
-		id, err := testCreatedID(s, "sdm_workflow", name)
+		id, err := testCreatedID(s, "sdm_workflow", resourceName)
 		if err != nil {
 			return err
 		}
@@ -108,15 +142,8 @@ func doubleCheckWorkflow(name, weight string) func(s *terraform.State) error {
 		if err != nil {
 			return fmt.Errorf("failed to get created resource: %w", err)
 		}
-		if resp.Workflow.Name != name {
-			return fmt.Errorf("unexpected name '%s', expected '%s'", resp.Workflow.Name, name)
-		}
-		w, err := strconv.ParseInt(weight, 10, 64)
-		if err != nil {
-			return &resource.TimeoutError{}
-		}
-		if resp.Workflow.Weight != w {
-			return fmt.Errorf("unexpected weight '%d', expected '%d'", resp.Workflow.Weight, w)
+		if resp.Workflow.Name != workflowName {
+			return fmt.Errorf("unexpected name '%s', expected '%s'", resp.Workflow.Name, workflowName)
 		}
 
 		return nil

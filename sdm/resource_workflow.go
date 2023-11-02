@@ -53,6 +53,7 @@ func resourceWorkflow() *schema.Resource {
 			"weight": {
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Computed:    true,
 				Description: "Optional weight for workflow to specify it's priority in matching a request.",
 			},
 		},
