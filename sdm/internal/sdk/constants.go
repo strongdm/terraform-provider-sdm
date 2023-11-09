@@ -217,6 +217,7 @@ const (
 	ActivityVerbOrgNameUpdated                                   = "organization name updated"
 	ActivityVerbOrgSettingUpdated                                = "organization setting updated"
 	ActivityVerbOrgLogSyncSettingUpdated                         = "organization log stream setting updated"
+	ActivityVerbOrgWorkflowSettingUpdated                        = "organization workflow setting updated"
 	ActivityVerbOrgCreated                                       = "organization created"
 	ActivityVerbOrgSCIMProvisioningUpdated                       = "SCIM provider set"
 	ActivityVerbOrgSCIMProvisioningDeleted                       = "SCIM provider deleted"
