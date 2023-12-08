@@ -22,11 +22,17 @@ func resourceWorkflowApprover() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
-			"approver_id": {
+			"account_id": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				ForceNew:    true,
-				Description: "The approver id.",
+				Description: "The approver account id.",
+			},
+			"role_id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "The approver role id",
 			},
 			"workflow_id": {
 				Type:        schema.TypeString,
@@ -43,7 +49,8 @@ func resourceWorkflowApprover() *schema.Resource {
 func convertWorkflowApproverToPlumbing(d *schema.ResourceData) *sdm.WorkflowApprover {
 	return &sdm.WorkflowApprover{
 		ID:         d.Id(),
-		ApproverID: convertStringToPlumbing(d.Get("approver_id")),
+		AccountID:  convertStringToPlumbing(d.Get("account_id")),
+		RoleID:     convertStringToPlumbing(d.Get("role_id")),
 		WorkflowID: convertStringToPlumbing(d.Get("workflow_id")),
 	}
 }
@@ -56,7 +63,8 @@ func resourceWorkflowApproverCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	d.SetId(resp.WorkflowApprover.ID)
 	v := resp.WorkflowApprover
-	d.Set("approver_id", (v.ApproverID))
+	d.Set("account_id", (v.AccountID))
+	d.Set("role_id", (v.RoleID))
 	d.Set("workflow_id", (v.WorkflowID))
 	return nil
 }
@@ -73,7 +81,8 @@ func resourceWorkflowApproverRead(ctx context.Context, d *schema.ResourceData, c
 		return fmt.Errorf("cannot read WorkflowApprover %s: %w", d.Id(), err)
 	}
 	v := resp.WorkflowApprover
-	d.Set("approver_id", (v.ApproverID))
+	d.Set("account_id", (v.AccountID))
+	d.Set("role_id", (v.RoleID))
 	d.Set("workflow_id", (v.WorkflowID))
 	return nil
 }

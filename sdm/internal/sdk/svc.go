@@ -4167,7 +4167,7 @@ func (svc *SecretStoresHistory) List(
 	), nil
 }
 
-// WorkflowApprovers is an account with the ability to approve requests bound to a workflow.
+// WorkflowApprovers is an account or a role with the ability to approve requests bound to a workflow.
 type WorkflowApprovers struct {
 	client plumbing.WorkflowApproversClient
 	parent *Client

@@ -9119,12 +9119,14 @@ type Workflow struct {
 	Weight int64 `json:"weight"`
 }
 
-// WorkflowApprover is an account with the ability to approve requests bound to a workflow.
+// WorkflowApprover is an account or a role with the ability to approve requests bound to a workflow.
 type WorkflowApprover struct {
-	// The approver id.
-	ApproverID string `json:"approverId"`
+	// The approver account id.
+	AccountID string `json:"accountId"`
 	// Unique identifier of the WorkflowApprover.
 	ID string `json:"id"`
+	// The approver role id
+	RoleID string `json:"roleId"`
 	// The workflow id.
 	WorkflowID string `json:"workflowId"`
 }

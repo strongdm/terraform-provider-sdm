@@ -22,15 +22,20 @@ func dataSourceWorkflowApprover() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"approver_id": {
+			"account_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The approver id.",
+				Description: "The approver account id.",
 			},
 			"id": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "Unique identifier of the WorkflowApprover.",
+			},
+			"role_id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The approver role id",
 			},
 			"workflow_id": {
 				Type:        schema.TypeString,
@@ -43,15 +48,20 @@ func dataSourceWorkflowApprover() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"approver_id": {
+						"account_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The approver id.",
+							Description: "The approver account id.",
 						},
 						"id": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "Unique identifier of the WorkflowApprover.",
+						},
+						"role_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The approver role id",
 						},
 						"workflow_id": {
 							Type:        schema.TypeString,
@@ -71,12 +81,16 @@ func dataSourceWorkflowApprover() *schema.Resource {
 func convertWorkflowApproverFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
-	if v, ok := d.GetOkExists("approver_id"); ok {
-		filter += "approverid:? "
+	if v, ok := d.GetOkExists("account_id"); ok {
+		filter += "accountid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("role_id"); ok {
+		filter += "roleid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("workflow_id"); ok {
@@ -100,8 +114,9 @@ func dataSourceWorkflowApproverList(ctx context.Context, d *schema.ResourceData,
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"approver_id": (v.ApproverID),
+				"account_id":  (v.AccountID),
 				"id":          (v.ID),
+				"role_id":     (v.RoleID),
 				"workflow_id": (v.WorkflowID),
 			})
 	}

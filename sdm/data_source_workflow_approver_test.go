@@ -7,25 +7,52 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccSDMWorkflowApprovers_Get(t *testing.T) {
+func TestAccSDMWorkflowApprovers_GetAccounts(t *testing.T) {
 	initAcceptanceTest(t)
 
-	workflowApprovers, err := createWorkflowApproversWithPrefix("wa-test-get", 1)
+	workflowApprovers, err := createWorkflowApproverAccountsWithPrefix("wa-test-get-account", 1)
 	if err != nil {
 		t.Fatal("failed to create workflow approvers: ", err)
 	}
 
 	workflowID := workflowApprovers[0].WorkflowID
-	approverID := workflowApprovers[0].ApproverID
-	workflowApproverName := randomWithPrefix("wa-test-get")
+	approverID := workflowApprovers[0].AccountID
+	workflowApproverName := randomWithPrefix("wa-test-get-account")
 	resource.Test(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMWorkflowApproverGetFilterConfig(workflowApproverName, workflowID, approverID),
+				Config: testAccSDMWorkflowApproverAccountGetFilterConfig(workflowApproverName, workflowID, approverID),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.0.workflow_id", workflowID),
-					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.0.approver_id", approverID),
+					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.0.account_id", approverID),
+					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.#", "1"),
+					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "ids.#", "1"),
+				),
+			},
+		},
+	})
+}
+
+func TestAccSDMWorkflowApprovers_GetRoles(t *testing.T) {
+	initAcceptanceTest(t)
+
+	workflowApprovers, err := createWorkflowApproverRolesWithPrefix("wa-test-get-role", 1)
+	if err != nil {
+		t.Fatal("failed to create workflow approvers: ", err)
+	}
+
+	workflowID := workflowApprovers[0].WorkflowID
+	approverID := workflowApprovers[0].RoleID
+	workflowApproverName := randomWithPrefix("wa-test-get-role")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMWorkflowApproverRoleGetFilterConfig(workflowApproverName, workflowID, approverID),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.0.workflow_id", workflowID),
+					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.0.role_id", approverID),
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.#", "1"),
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "ids.#", "1"),
 				),
@@ -37,7 +64,7 @@ func TestAccSDMWorkflowApprovers_Get(t *testing.T) {
 func TestAccSDMWorkflowApprovers_GetNone(t *testing.T) {
 	initAcceptanceTest(t)
 
-	_, err := createWorkflowApproversWithPrefix("wa-test-get-none", 1)
+	_, err := createWorkflowApproverAccountsWithPrefix("wa-test-get-none", 1)
 	if err != nil {
 		t.Fatal("failed to create workflow approvers: ", err)
 	}
@@ -48,7 +75,7 @@ func TestAccSDMWorkflowApprovers_GetNone(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMWorkflowApproverGetFilterConfig(workflowApproverName, "", approverID),
+				Config: testAccSDMWorkflowApproverAccountGetFilterConfig(workflowApproverName, "", approverID),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.#", "0"),
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "ids.#", "0"),
@@ -61,7 +88,7 @@ func TestAccSDMWorkflowApprovers_GetNone(t *testing.T) {
 func TestAccSDMWorkflowApprovers_GetMulti(t *testing.T) {
 	initAcceptanceTest(t)
 
-	workflowApprovers, err := createWorkflowApproversWithPrefix("wa-test-get-multi", 3)
+	workflowApprovers, err := createWorkflowApproverAccountsWithPrefix("wa-test-get-multi", 3)
 	if err != nil {
 		t.Fatal("failed to create workflow approvers: ", err)
 	}
@@ -72,7 +99,7 @@ func TestAccSDMWorkflowApprovers_GetMulti(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMWorkflowApproverGetFilterConfig(workflowApproverName, workflowID, ""),
+				Config: testAccSDMWorkflowApproverAccountGetFilterConfig(workflowApproverName, workflowID, ""),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "workflow_approvers.#", "3"),
 					resource.TestCheckResourceAttr("data.sdm_workflow_approver."+workflowApproverName, "ids.#", "3"),
@@ -82,12 +109,25 @@ func TestAccSDMWorkflowApprovers_GetMulti(t *testing.T) {
 	})
 }
 
-func testAccSDMWorkflowApproverGetFilterConfig(workflowApproverDataSourceName, workflowID, approverID string) string {
+func testAccSDMWorkflowApproverAccountGetFilterConfig(workflowApproverDataSourceName, workflowID, approverID string) string {
 	return fmt.Sprintf(
 		`
 	data "sdm_workflow_approver" "%s" {
 		workflow_id = "%s"
-		approver_id = "%s"
+		account_id = "%s"
+	}`,
+		workflowApproverDataSourceName,
+		workflowID,
+		approverID,
+	)
+}
+
+func testAccSDMWorkflowApproverRoleGetFilterConfig(workflowApproverDataSourceName, workflowID, approverID string) string {
+	return fmt.Sprintf(
+		`
+	data "sdm_workflow_approver" "%s" {
+		workflow_id = "%s"
+		role_id = "%s"
 	}`,
 		workflowApproverDataSourceName,
 		workflowID,

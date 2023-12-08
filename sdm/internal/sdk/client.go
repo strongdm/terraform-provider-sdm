@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/5.0.5"
+	defaultUserAgent = "strongdm-sdk-go/6.0.0"
 	defaultPageLimit = 50
 )
 
@@ -595,7 +595,7 @@ func (c *Client) SecretStoresHistory() *SecretStoresHistory {
 	return c.secretStoresHistory
 }
 
-// WorkflowApprovers is an account with the ability to approve requests bound to a workflow.
+// WorkflowApprovers is an account or a role with the ability to approve requests bound to a workflow.
 func (c *Client) WorkflowApprovers() *WorkflowApprovers {
 	return c.workflowApprovers
 }
@@ -832,7 +832,7 @@ func (c *SnapshotClient) SecretStores() SnapshotSecretStores {
 	return c.client.secretStores
 }
 
-// WorkflowApprovers is an account with the ability to approve requests bound to a workflow.
+// WorkflowApprovers is an account or a role with the ability to approve requests bound to a workflow.
 func (c *SnapshotClient) WorkflowApprovers() SnapshotWorkflowApprovers {
 	return c.client.workflowApprovers
 }

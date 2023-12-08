@@ -68,7 +68,7 @@ func TestAccSDMWorkflowApprover_Create(t *testing.T) {
 						if err != nil {
 							return err
 						}
-						approver2ID, err = testCreatedID(s, "sdm_account", approver2Name)
+						approver2ID, err = testCreatedID(s, "sdm_role", approver2Name)
 						if err != nil {
 							return err
 						}
@@ -79,13 +79,13 @@ func TestAccSDMWorkflowApprover_Create(t *testing.T) {
 						if err := resource.TestCheckResourceAttr("sdm_workflow_approver."+rs1Name, "workflow_id", workflowID)(s); err != nil {
 							return err
 						}
-						if err := resource.TestCheckResourceAttr("sdm_workflow_approver."+rs1Name, "approver_id", approver1ID)(s); err != nil {
+						if err := resource.TestCheckResourceAttr("sdm_workflow_approver."+rs1Name, "account_id", approver1ID)(s); err != nil {
 							return err
 						}
 						if err := resource.TestCheckResourceAttr("sdm_workflow_approver."+rs2Name, "workflow_id", workflowID)(s); err != nil {
 							return err
 						}
-						if err := resource.TestCheckResourceAttr("sdm_workflow_approver."+rs2Name, "approver_id", approver2ID)(s); err != nil {
+						if err := resource.TestCheckResourceAttr("sdm_workflow_approver."+rs2Name, "role_id", approver2ID)(s); err != nil {
 							return err
 						}
 						return nil
@@ -113,8 +113,11 @@ func TestAccSDMWorkflowApprover_Create(t *testing.T) {
 							if resp.WorkflowApprover.WorkflowID != workflowID {
 								return fmt.Errorf("unexpected workflowID '%s', expected '%s'", resp.WorkflowApprover.WorkflowID, workflowID)
 							}
-							if resp.WorkflowApprover.ApproverID != approverID {
-								return fmt.Errorf("unexpected approverID '%s', expected '%s'", resp.WorkflowApprover.ApproverID, approverID)
+							if workflowApproverID == id1 && resp.WorkflowApprover.AccountID != approverID {
+								return fmt.Errorf("unexpected accountID '%s', expected '%s'", resp.WorkflowApprover.AccountID, approverID)
+							}
+							if workflowApproverID == id2 && resp.WorkflowApprover.RoleID != approverID {
+								return fmt.Errorf("unexpected roleID '%s', expected '%s'", resp.WorkflowApprover.RoleID, approverID)
 							}
 						}
 						return nil
@@ -135,7 +138,7 @@ func TestAccSDMWorkflowApprover_Create(t *testing.T) {
 	})
 }
 
-func createWorkflowApproversWithPrefix(prefix string, count int) ([]*sdm.WorkflowApprover, error) {
+func createWorkflowApproverAccountsWithPrefix(prefix string, count int) ([]*sdm.WorkflowApprover, error) {
 	approvers, err := createUsersWithPrefix(prefix, count)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create approvers: %w", err)
@@ -144,14 +147,14 @@ func createWorkflowApproversWithPrefix(prefix string, count int) ([]*sdm.Workflo
 	if err != nil {
 		return nil, fmt.Errorf("failed to create workflow: %w", err)
 	}
-	workflowApprovers, err := addApproversToWorkflow(approvers, workflows[0])
+	workflowApprovers, err := addApproverAccountsToWorkflow(approvers, workflows[0])
 	if err != nil {
 		return nil, fmt.Errorf("failed to add approvers: %w", err)
 	}
 	return workflowApprovers, nil
 }
 
-func addApproversToWorkflow(approvers []sdm.Account, workflow *sdm.Workflow) ([]*sdm.WorkflowApprover, error) {
+func addApproverAccountsToWorkflow(approvers []sdm.Account, workflow *sdm.Workflow) ([]*sdm.WorkflowApprover, error) {
 	client, err := preTestClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create test client: %w", err)
@@ -162,7 +165,44 @@ func addApproversToWorkflow(approvers []sdm.Account, workflow *sdm.Workflow) ([]
 	for _, a := range approvers {
 		createResp, err := client.WorkflowApprovers().Create(ctx, &sdm.WorkflowApprover{
 			WorkflowID: workflow.ID,
-			ApproverID: a.GetID(),
+			AccountID:  a.GetID(),
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create workflow approver: %w", err)
+		}
+		workflowApprovers = append(workflowApprovers, createResp.WorkflowApprover)
+	}
+	return workflowApprovers, nil
+}
+
+func createWorkflowApproverRolesWithPrefix(prefix string, count int) ([]*sdm.WorkflowApprover, error) {
+	approvers, err := createRolesWithPrefix(prefix, count)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create approvers: %w", err)
+	}
+	workflows, err := createWorkflowsWithPrifix(prefix, 1)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create workflow: %w", err)
+	}
+	workflowApprovers, err := addApproverRolesToWorkflow(approvers, workflows[0])
+	if err != nil {
+		return nil, fmt.Errorf("failed to add approvers: %w", err)
+	}
+	return workflowApprovers, nil
+}
+
+func addApproverRolesToWorkflow(approvers []*sdm.Role, workflow *sdm.Workflow) ([]*sdm.WorkflowApprover, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	workflowApprovers := []*sdm.WorkflowApprover{}
+	for _, a := range approvers {
+		createResp, err := client.WorkflowApprovers().Create(ctx, &sdm.WorkflowApprover{
+			WorkflowID: workflow.ID,
+			RoleID:     a.ID,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to create workflow approver: %w", err)
@@ -188,22 +228,18 @@ func testAccSDMWorkflowApproversConfig(name1, name2, workflowName, approver1Name
 		}
 	}
 
-	resource "sdm_account" "%[7]s" {
-		user {
-			first_name = "%[8]s"
-			last_name = "%[9]s"
-			email = "%[10]s"
-		}
+	resource "sdm_role" "%[7]s" {
+		name = "%[8]s"
 	}
 
-	resource "sdm_workflow_approver" "%[11]s" {
+	resource "sdm_workflow_approver" "%[9]s" {
 		workflow_id = sdm_workflow.%[1]s.id
-		approver_id = sdm_account.%[3]s.id
+		account_id = sdm_account.%[3]s.id
 	}
 
-	resource "sdm_workflow_approver" "%[12]s" {
+	resource "sdm_workflow_approver" "%[10]s" {
 		workflow_id = sdm_workflow.%[1]s.id
-		approver_id = sdm_account.%[7]s.id
+		role_id = sdm_role.%[7]s.id
 	}
 	`,
 		workflowName,
@@ -213,9 +249,7 @@ func testAccSDMWorkflowApproversConfig(name1, name2, workflowName, approver1Name
 		randomWithPrefix("last-name"),
 		randomWithPrefix("email"),
 		approver2Name,
-		randomWithPrefix("first-name"),
-		randomWithPrefix("last-name"),
-		randomWithPrefix("email"),
+		randomWithPrefix("name"),
 		name1,
 		name2,
 	)
