@@ -33,6 +33,8 @@ const _ = grpc.SupportPackageIsVersion7
 type ControlPanelClient interface {
 	// GetSSHCAPublicKey retrieves the SSH CA public key.
 	GetSSHCAPublicKey(ctx context.Context, in *ControlPanelGetSSHCAPublicKeyRequest, opts ...grpc.CallOption) (*ControlPanelGetSSHCAPublicKeyResponse, error)
+	// GetRDPCAPublicKey retrieves the RDP CA public key.
+	GetRDPCAPublicKey(ctx context.Context, in *ControlPanelGetRDPCAPublicKeyRequest, opts ...grpc.CallOption) (*ControlPanelGetRDPCAPublicKeyResponse, error)
 	// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
 	VerifyJWT(ctx context.Context, in *ControlPanelVerifyJWTRequest, opts ...grpc.CallOption) (*ControlPanelVerifyJWTResponse, error)
 }
@@ -54,6 +56,15 @@ func (c *controlPanelClient) GetSSHCAPublicKey(ctx context.Context, in *ControlP
 	return out, nil
 }
 
+func (c *controlPanelClient) GetRDPCAPublicKey(ctx context.Context, in *ControlPanelGetRDPCAPublicKeyRequest, opts ...grpc.CallOption) (*ControlPanelGetRDPCAPublicKeyResponse, error) {
+	out := new(ControlPanelGetRDPCAPublicKeyResponse)
+	err := c.cc.Invoke(ctx, "/v1.ControlPanel/GetRDPCAPublicKey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *controlPanelClient) VerifyJWT(ctx context.Context, in *ControlPanelVerifyJWTRequest, opts ...grpc.CallOption) (*ControlPanelVerifyJWTResponse, error) {
 	out := new(ControlPanelVerifyJWTResponse)
 	err := c.cc.Invoke(ctx, "/v1.ControlPanel/VerifyJWT", in, out, opts...)
@@ -69,6 +80,8 @@ func (c *controlPanelClient) VerifyJWT(ctx context.Context, in *ControlPanelVeri
 type ControlPanelServer interface {
 	// GetSSHCAPublicKey retrieves the SSH CA public key.
 	GetSSHCAPublicKey(context.Context, *ControlPanelGetSSHCAPublicKeyRequest) (*ControlPanelGetSSHCAPublicKeyResponse, error)
+	// GetRDPCAPublicKey retrieves the RDP CA public key.
+	GetRDPCAPublicKey(context.Context, *ControlPanelGetRDPCAPublicKeyRequest) (*ControlPanelGetRDPCAPublicKeyResponse, error)
 	// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
 	VerifyJWT(context.Context, *ControlPanelVerifyJWTRequest) (*ControlPanelVerifyJWTResponse, error)
 	mustEmbedUnimplementedControlPanelServer()
@@ -80,6 +93,9 @@ type UnimplementedControlPanelServer struct {
 
 func (UnimplementedControlPanelServer) GetSSHCAPublicKey(context.Context, *ControlPanelGetSSHCAPublicKeyRequest) (*ControlPanelGetSSHCAPublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSSHCAPublicKey not implemented")
+}
+func (UnimplementedControlPanelServer) GetRDPCAPublicKey(context.Context, *ControlPanelGetRDPCAPublicKeyRequest) (*ControlPanelGetRDPCAPublicKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRDPCAPublicKey not implemented")
 }
 func (UnimplementedControlPanelServer) VerifyJWT(context.Context, *ControlPanelVerifyJWTRequest) (*ControlPanelVerifyJWTResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyJWT not implemented")
@@ -115,6 +131,24 @@ func _ControlPanel_GetSSHCAPublicKey_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ControlPanel_GetRDPCAPublicKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlPanelGetRDPCAPublicKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControlPanelServer).GetRDPCAPublicKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.ControlPanel/GetRDPCAPublicKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControlPanelServer).GetRDPCAPublicKey(ctx, req.(*ControlPanelGetRDPCAPublicKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ControlPanel_VerifyJWT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ControlPanelVerifyJWTRequest)
 	if err := dec(in); err != nil {
@@ -140,6 +174,10 @@ var _ControlPanel_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSSHCAPublicKey",
 			Handler:    _ControlPanel_GetSSHCAPublicKey_Handler,
+		},
+		{
+			MethodName: "GetRDPCAPublicKey",
+			Handler:    _ControlPanel_GetRDPCAPublicKey_Handler,
 		},
 		{
 			MethodName: "VerifyJWT",

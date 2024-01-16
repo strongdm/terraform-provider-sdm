@@ -43,6 +43,10 @@ type ResourcesClient interface {
 	Delete(ctx context.Context, in *ResourceDeleteRequest, opts ...grpc.CallOption) (*ResourceDeleteResponse, error)
 	// List gets a list of Resources matching a given set of criteria.
 	List(ctx context.Context, in *ResourceListRequest, opts ...grpc.CallOption) (*ResourceListResponse, error)
+	// Healthcheck triggers a remote healthcheck. It may take minutes to propagate across a
+	// large network of Nodes. The call will return immediately, and the updated health of the
+	// Resource can be retrieved via Get or List.
+	Healthcheck(ctx context.Context, in *ResourceHealthcheckRequest, opts ...grpc.CallOption) (*ResourceHealthcheckResponse, error)
 }
 
 type resourcesClient struct {
@@ -107,6 +111,15 @@ func (c *resourcesClient) List(ctx context.Context, in *ResourceListRequest, opt
 	return out, nil
 }
 
+func (c *resourcesClient) Healthcheck(ctx context.Context, in *ResourceHealthcheckRequest, opts ...grpc.CallOption) (*ResourceHealthcheckResponse, error) {
+	out := new(ResourceHealthcheckResponse)
+	err := c.cc.Invoke(ctx, "/v1.Resources/Healthcheck", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourcesServer is the server API for Resources service.
 // All implementations must embed UnimplementedResourcesServer
 // for forward compatibility
@@ -123,6 +136,10 @@ type ResourcesServer interface {
 	Delete(context.Context, *ResourceDeleteRequest) (*ResourceDeleteResponse, error)
 	// List gets a list of Resources matching a given set of criteria.
 	List(context.Context, *ResourceListRequest) (*ResourceListResponse, error)
+	// Healthcheck triggers a remote healthcheck. It may take minutes to propagate across a
+	// large network of Nodes. The call will return immediately, and the updated health of the
+	// Resource can be retrieved via Get or List.
+	Healthcheck(context.Context, *ResourceHealthcheckRequest) (*ResourceHealthcheckResponse, error)
 	mustEmbedUnimplementedResourcesServer()
 }
 
@@ -147,6 +164,9 @@ func (UnimplementedResourcesServer) Delete(context.Context, *ResourceDeleteReque
 }
 func (UnimplementedResourcesServer) List(context.Context, *ResourceListRequest) (*ResourceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedResourcesServer) Healthcheck(context.Context, *ResourceHealthcheckRequest) (*ResourceHealthcheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Healthcheck not implemented")
 }
 func (UnimplementedResourcesServer) mustEmbedUnimplementedResourcesServer() {}
 
@@ -269,6 +289,24 @@ func _Resources_List_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Resources_Healthcheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResourceHealthcheckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourcesServer).Healthcheck(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Resources/Healthcheck",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourcesServer).Healthcheck(ctx, req.(*ResourceHealthcheckRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Resources_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.Resources",
 	HandlerType: (*ResourcesServer)(nil),
@@ -296,6 +334,10 @@ var _Resources_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _Resources_List_Handler,
+		},
+		{
+			MethodName: "Healthcheck",
+			Handler:    _Resources_Healthcheck_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
