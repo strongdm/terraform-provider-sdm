@@ -2405,6 +2405,26 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "vault_approle_cert_ssh",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+				{"ssh_mount_point", `"ssh_mount_point"`},
+			},
+		},
+		{
+			resource: "vault_approle_cert_x509",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"pki_mount_point", `"pki_mount_point"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+			},
+		},
+		{
 			resource: "vault_tls",
 			pairs: [][2]string{
 				{"ca_cert_path", `"ca_cert_path"`},
@@ -2416,11 +2436,57 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "vault_tls_cert_ssh",
+			pairs: [][2]string{
+				{"ca_cert_path", `"ca_cert_path"`},
+				{"client_cert_path", `"client_cert_path"`},
+				{"client_key_path", `"client_key_path"`},
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+				{"ssh_mount_point", `"ssh_mount_point"`},
+			},
+		},
+		{
+			resource: "vault_tls_cert_x509",
+			pairs: [][2]string{
+				{"ca_cert_path", `"ca_cert_path"`},
+				{"client_cert_path", `"client_cert_path"`},
+				{"client_key_path", `"client_key_path"`},
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"pki_mount_point", `"pki_mount_point"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+			},
+		},
+		{
 			resource: "vault_token",
 			pairs: [][2]string{
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"server_address", `"server_address"`},
+			},
+		},
+		{
+			resource: "vault_token_cert_ssh",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+				{"ssh_mount_point", `"ssh_mount_point"`},
+			},
+		},
+		{
+			resource: "vault_token_cert_x509",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"pki_mount_point", `"pki_mount_point"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
 			},
 		},
 	}

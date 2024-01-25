@@ -62,6 +62,22 @@ In addition to provided arguments above, the following attributes are returned b
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
 		* `tags` - Tags is a map of key, value pairs.
+	* vault_approle_cert_ssh:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `ssh_mount_point` - The mount point of the SSH engine configured with the desired CA
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_approle_cert_x509:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
 		* `ca_cert_path` - A path to a CA file accessible by a Node
 		* `client_cert_path` - A path to a client certificate file accessible by a Node
@@ -71,9 +87,47 @@ In addition to provided arguments above, the following attributes are returned b
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
 		* `tags` - Tags is a map of key, value pairs.
+	* vault_tls_cert_ssh:
+		* `ca_cert_path` - A path to a CA file accessible by a Node
+		* `client_cert_path` - A path to a client certificate file accessible by a Node
+		* `client_key_path` - A path to a client key file accessible by a Node
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `ssh_mount_point` - The mount point of the SSH engine configured with the desired CA
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_tls_cert_x509:
+		* `ca_cert_path` - A path to a CA file accessible by a Node
+		* `client_cert_path` - A path to a client certificate file accessible by a Node
+		* `client_key_path` - A path to a client key file accessible by a Node
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_token:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_token_cert_ssh:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `ssh_mount_point` - The mount point of the SSH engine configured with the desired CA
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_token_cert_x509:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
 		* `tags` - Tags is a map of key, value pairs.

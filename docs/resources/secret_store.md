@@ -46,6 +46,20 @@ The following arguments are supported by the SecretStore resource:
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_approle_cert_ssh:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_approle_cert_x509:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_tls:
 	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
 	* `client_cert_path` - (Required) A path to a client certificate file accessible by a Node
@@ -54,10 +68,44 @@ The following arguments are supported by the SecretStore resource:
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_tls_cert_ssh:
+	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
+	* `client_cert_path` - (Required) A path to a client certificate file accessible by a Node
+	* `client_key_path` - (Required) A path to a client key file accessible by a Node
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_tls_cert_x509:
+	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
+	* `client_cert_path` - (Required) A path to a client certificate file accessible by a Node
+	* `client_key_path` - (Required) A path to a client key file accessible by a Node
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_token:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_token_cert_ssh:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_token_cert_x509:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the SecretStore resource:

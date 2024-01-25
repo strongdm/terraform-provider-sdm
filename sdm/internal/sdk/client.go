@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/6.2.0"
+	defaultUserAgent = "strongdm-sdk-go/6.3.1"
 	defaultPageLimit = 50
 )
 
@@ -103,6 +103,7 @@ type Client struct {
 	roleResourcesHistory        *RoleResourcesHistory
 	roles                       *Roles
 	rolesHistory                *RolesHistory
+	secretStoreHealths          *SecretStoreHealths
 	secretStores                *SecretStores
 	secretStoresHistory         *SecretStoresHistory
 	workflowApprovers           *WorkflowApprovers
@@ -288,6 +289,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.rolesHistory = &RolesHistory{
 		client: plumbing.NewRolesHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.secretStoreHealths = &SecretStoreHealths{
+		client: plumbing.NewSecretStoreHealthsClient(client.grpcConn),
 		parent: client,
 	}
 	client.secretStores = &SecretStores{
@@ -585,6 +590,11 @@ func (c *Client) RolesHistory() *RolesHistory {
 	return c.rolesHistory
 }
 
+// SecretStoreHealths exposes health states for secret stores.
+func (c *Client) SecretStoreHealths() *SecretStoreHealths {
+	return c.secretStoreHealths
+}
+
 // SecretStores are servers where resource secrets (passwords, keys) are stored.
 func (c *Client) SecretStores() *SecretStores {
 	return c.secretStores
@@ -677,22 +687,6 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewNodesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
-	snapshotClient.client.peeringGroupNodes = &PeeringGroupNodes{
-		client: plumbing.NewPeeringGroupNodesClient(snapshotClient.client.grpcConn),
-		parent: snapshotClient.client,
-	}
-	snapshotClient.client.peeringGroupPeers = &PeeringGroupPeers{
-		client: plumbing.NewPeeringGroupPeersClient(snapshotClient.client.grpcConn),
-		parent: snapshotClient.client,
-	}
-	snapshotClient.client.peeringGroupResources = &PeeringGroupResources{
-		client: plumbing.NewPeeringGroupResourcesClient(snapshotClient.client.grpcConn),
-		parent: snapshotClient.client,
-	}
-	snapshotClient.client.peeringGroups = &PeeringGroups{
-		client: plumbing.NewPeeringGroupsClient(snapshotClient.client.grpcConn),
-		parent: snapshotClient.client,
-	}
 	snapshotClient.client.remoteIdentities = &RemoteIdentities{
 		client: plumbing.NewRemoteIdentitiesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -775,26 +769,6 @@ func (c *SnapshotClient) Accounts() SnapshotAccounts {
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
 func (c *SnapshotClient) Nodes() SnapshotNodes {
 	return c.client.nodes
-}
-
-// PeeringGroupNodes provides the building blocks necessary to obtain attach a node to a peering group.
-func (c *SnapshotClient) PeeringGroupNodes() SnapshotPeeringGroupNodes {
-	return c.client.peeringGroupNodes
-}
-
-// PeeringGroupPeers provides the building blocks necessary to link two peering groups.
-func (c *SnapshotClient) PeeringGroupPeers() SnapshotPeeringGroupPeers {
-	return c.client.peeringGroupPeers
-}
-
-// PeeringGroupResources provides the building blocks necessary to obtain attach a resource to a peering group.
-func (c *SnapshotClient) PeeringGroupResources() SnapshotPeeringGroupResources {
-	return c.client.peeringGroupResources
-}
-
-// PeeringGroups provides the building blocks necessary to obtain explicit network topology and routing.
-func (c *SnapshotClient) PeeringGroups() SnapshotPeeringGroups {
-	return c.client.peeringGroups
 }
 
 // RemoteIdentities assign a resource directly to an account, giving the account the permission to connect to that resource.

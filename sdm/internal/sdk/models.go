@@ -8716,6 +8716,54 @@ func (m *VaultAppRoleStore) GetName() string {
 func (m *VaultAppRoleStore) SetName(v string) {
 	m.Name = v
 }
+func (*VaultAppRoleCertSSHStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAppRoleCertSSHStore.
+func (m *VaultAppRoleCertSSHStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAppRoleCertSSHStore.
+func (m *VaultAppRoleCertSSHStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAppRoleCertSSHStore.
+func (m *VaultAppRoleCertSSHStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAppRoleCertSSHStore.
+func (m *VaultAppRoleCertSSHStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAppRoleCertSSHStore.
+func (m *VaultAppRoleCertSSHStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultAppRoleCertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAppRoleCertX509Store.
+func (m *VaultAppRoleCertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAppRoleCertX509Store.
+func (m *VaultAppRoleCertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAppRoleCertX509Store.
+func (m *VaultAppRoleCertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAppRoleCertX509Store.
+func (m *VaultAppRoleCertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAppRoleCertX509Store.
+func (m *VaultAppRoleCertX509Store) SetName(v string) {
+	m.Name = v
+}
 func (*VaultTLSStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultTLSStore.
@@ -8740,6 +8788,54 @@ func (m *VaultTLSStore) GetName() string {
 func (m *VaultTLSStore) SetName(v string) {
 	m.Name = v
 }
+func (*VaultTLSCertSSHStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultTLSCertSSHStore.
+func (m *VaultTLSCertSSHStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultTLSCertSSHStore.
+func (m *VaultTLSCertSSHStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultTLSCertSSHStore.
+func (m *VaultTLSCertSSHStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultTLSCertSSHStore.
+func (m *VaultTLSCertSSHStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultTLSCertSSHStore.
+func (m *VaultTLSCertSSHStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultTLSCertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultTLSCertX509Store.
+func (m *VaultTLSCertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultTLSCertX509Store.
+func (m *VaultTLSCertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultTLSCertX509Store.
+func (m *VaultTLSCertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultTLSCertX509Store.
+func (m *VaultTLSCertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultTLSCertX509Store.
+func (m *VaultTLSCertX509Store) SetName(v string) {
+	m.Name = v
+}
 func (*VaultTokenStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultTokenStore.
@@ -8762,6 +8858,54 @@ func (m *VaultTokenStore) GetName() string {
 
 // SetName sets the name of the VaultTokenStore.
 func (m *VaultTokenStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultTokenCertSSHStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultTokenCertSSHStore.
+func (m *VaultTokenCertSSHStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultTokenCertSSHStore.
+func (m *VaultTokenCertSSHStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultTokenCertSSHStore.
+func (m *VaultTokenCertSSHStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultTokenCertSSHStore.
+func (m *VaultTokenCertSSHStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultTokenCertSSHStore.
+func (m *VaultTokenCertSSHStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultTokenCertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultTokenCertX509Store.
+func (m *VaultTokenCertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultTokenCertX509Store.
+func (m *VaultTokenCertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultTokenCertX509Store.
+func (m *VaultTokenCertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultTokenCertX509Store.
+func (m *VaultTokenCertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultTokenCertX509Store.
+func (m *VaultTokenCertX509Store) SetName(v string) {
 	m.Name = v
 }
 
@@ -8791,6 +8935,38 @@ type SecretStoreGetResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 	// The requested SecretStore.
 	SecretStore SecretStore `json:"secretStore"`
+}
+
+// SecretStoreHealth denotes a secret store's health status. Note a secret store is not
+// healthy in terms of a simple boolean, but rather healthy with respect to a particular node
+// or set of nodes.
+type SecretStoreHealth struct {
+	// The time when the status last changed
+	ChangedAt time.Time `json:"changedAt"`
+	// The time when the status was last checked by the node
+	CheckedAt time.Time `json:"checkedAt"`
+	// The error associated with this health check, if it occurred after reachability checks succeeded.
+	Error string `json:"error"`
+	// Any specific status or error flags associated with this health check.
+	Flags []string `json:"flags"`
+	// Associated node id for this health
+	NodeID string `json:"nodeId"`
+	// The error associated with this health check, if it occurred during reachability checks.
+	Reachability string `json:"reachability"`
+	// Associated secret store for this health
+	SecretStoreID string `json:"secretStoreId"`
+	// The status of the link between the node and secret store
+	Status string `json:"status"`
+}
+
+type SecretStoreHealthListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type SecretStoreHealthcheckResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // SecretStoreHistory records the state of a SecretStore at a given point in time,
@@ -9077,6 +9253,44 @@ type User struct {
 	Tags Tags `json:"tags"`
 }
 
+// VaultAppRoleCertSSHStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAppRoleCertSSHStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// The mount point of the SSH engine configured with the desired CA
+	SshMountPoint string `json:"sshMountPoint"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultAppRoleCertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAppRoleCertX509Store struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The mount point of the PKI engine configured with the desired CA
+	PkiMountPoint string `json:"pkiMountPoint"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type VaultAppRoleStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -9086,6 +9300,56 @@ type VaultAppRoleStore struct {
 	Namespace string `json:"namespace"`
 	// The URL of the Vault to target
 	ServerAddress string `json:"serverAddress"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultTLSCertSSHStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultTLSCertSSHStore struct {
+	// A path to a CA file accessible by a Node
+	CACertPath string `json:"caCertPath"`
+	// A path to a client certificate file accessible by a Node
+	ClientCertPath string `json:"clientCertPath"`
+	// A path to a client key file accessible by a Node
+	ClientKeyPath string `json:"clientKeyPath"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// The mount point of the SSH engine configured with the desired CA
+	SshMountPoint string `json:"sshMountPoint"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultTLSCertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultTLSCertX509Store struct {
+	// A path to a CA file accessible by a Node
+	CACertPath string `json:"caCertPath"`
+	// A path to a client certificate file accessible by a Node
+	ClientCertPath string `json:"clientCertPath"`
+	// A path to a client key file accessible by a Node
+	ClientKeyPath string `json:"clientKeyPath"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The mount point of the PKI engine configured with the desired CA
+	PkiMountPoint string `json:"pkiMountPoint"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -9105,6 +9369,44 @@ type VaultTLSStore struct {
 	Namespace string `json:"namespace"`
 	// The URL of the Vault to target
 	ServerAddress string `json:"serverAddress"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultTokenCertSSHStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultTokenCertSSHStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// The mount point of the SSH engine configured with the desired CA
+	SshMountPoint string `json:"sshMountPoint"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultTokenCertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultTokenCertX509Store struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The mount point of the PKI engine configured with the desired CA
+	PkiMountPoint string `json:"pkiMountPoint"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -9945,6 +10247,23 @@ type RoleHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *RoleHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// SecretStoreHealthIterator provides read access to a list of SecretStoreHealth.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    secretStoreHealth := iterator.Value()
+//	    // ...
+//	}
+type SecretStoreHealthIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *SecretStoreHealth
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }
