@@ -8748,6 +8748,77 @@ func convertRepeatedRDPToPorcelain(plumbings []*proto.RDP) (
 	}
 	return items, nil
 }
+func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RDPCert{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
+	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RDPCert{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
+	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedRDPCertToPlumbing(
+	porcelains []*RDPCert,
+) []*proto.RDPCert {
+	var items []*proto.RDPCert
+	for _, porcelain := range porcelains {
+		items = append(items, convertRDPCertToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRDPCertToPorcelain(plumbings []*proto.RDPCert) (
+	[]*RDPCert,
+	error,
+) {
+	var items []*RDPCert
+	for _, plumbing := range plumbings {
+		if v, err := convertRDPCertToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertRDSPostgresIAMToPorcelain(plumbing *proto.RDSPostgresIAM) (*RDSPostgresIAM, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -9998,6 +10069,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_RawTcp{RawTcp: convertRawTCPToPlumbing(v)}
 	case *RDP:
 		plumbing.Resource = &proto.Resource_Rdp{Rdp: convertRDPToPlumbing(v)}
+	case *RDPCert:
+		plumbing.Resource = &proto.Resource_RdpCert{RdpCert: convertRDPCertToPlumbing(v)}
 	case *RDSPostgresIAM:
 		plumbing.Resource = &proto.Resource_RdsPostgresIam{RdsPostgresIam: convertRDSPostgresIAMToPlumbing(v)}
 	case *Redis:
@@ -10235,6 +10308,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetRdp() != nil {
 		return convertRDPToPorcelain(plumbing.GetRdp())
+	}
+	if plumbing.GetRdpCert() != nil {
+		return convertRDPCertToPorcelain(plumbing.GetRdpCert())
 	}
 	if plumbing.GetRdsPostgresIam() != nil {
 		return convertRDSPostgresIAMToPorcelain(plumbing.GetRdsPostgresIam())

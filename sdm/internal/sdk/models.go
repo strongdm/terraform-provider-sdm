@@ -3259,6 +3259,37 @@ type RDP struct {
 	Username string `json:"username"`
 }
 
+type RDPCert struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// The ID of the remote identity group to use for remote identity connections.
+	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
+	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
+	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type RDSPostgresIAM struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -7248,6 +7279,60 @@ func (m *RDP) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the RDP.
 func (m *RDP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*RDPCert) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RDPCert.
+func (m *RDPCert) GetID() string { return m.ID }
+
+// GetName returns the name of the RDPCert.
+func (m *RDPCert) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RDPCert.
+func (m *RDPCert) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RDPCert.
+func (m *RDPCert) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RDPCert.
+func (m *RDPCert) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RDPCert.
+func (m *RDPCert) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RDPCert.
+func (m *RDPCert) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RDPCert.
+func (m *RDPCert) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RDPCert.
+func (m *RDPCert) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RDPCert.
+func (m *RDPCert) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RDPCert.
+func (m *RDPCert) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*RDSPostgresIAM) isOneOf_Resource() {}

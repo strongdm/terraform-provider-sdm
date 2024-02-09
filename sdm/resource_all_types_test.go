@@ -907,6 +907,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "rdp_cert",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"port", `443`},
+				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "rds_postgres_iam",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1167,6 +1178,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
+
+	// NOTE: resources and secretstores must have matching CredentialType properties.
 	resp, err := client.SecretStores().Create(ctx, &sdm.VaultTokenStore{
 		Name:          "all-resources-test-store",
 		ServerAddress: "allresourcestestaddr",
@@ -1176,6 +1189,30 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	}
 
 	seID := resp.SecretStore.(*sdm.VaultTokenStore).ID
+
+	respSSHCert, err := client.SecretStores().Create(ctx, &sdm.VaultTokenCertSSHStore{
+		Name:          "all-resources-test-cert-ssh-store",
+		ServerAddress: "allresourcestestaddr",
+		SigningRole:   "allresourcessigningrole",
+		SshMountPoint: "allresourcessshmountpoint",
+	})
+	if err != nil {
+		t.Fatalf("failed to create cert ssh secret store: %v", err)
+	}
+
+	seSSHID := respSSHCert.SecretStore.(*sdm.VaultTokenCertSSHStore).ID
+
+	respRDPCert, err := client.SecretStores().Create(ctx, &sdm.VaultTokenCertX509Store{
+		Name:          "all-resources-test-cert-rdp-store",
+		ServerAddress: "allresourcestestaddr",
+		SigningRole:   "allresourcessigningrole",
+		PkiMountPoint: "allresourcespkimountpoint",
+	})
+	if err != nil {
+		t.Fatalf("failed to create cert pki secret store: %v", err)
+	}
+
+	seRDPID := respRDPCert.SecretStore.(*sdm.VaultTokenCertX509Store).ID
 
 	type testCase struct {
 		resource string
@@ -2072,6 +2109,18 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			},
 		},
 		{
+			resource: "rdp_cert",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"port", `443`},
+				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
+				{"secret_store_id", `"` + seRDPID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+		{
 			resource: "rds_postgres_iam",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -2229,7 +2278,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"port", `443`},
 				{"port_forwarding", `true`},
 				{"remote_identity_healthcheck_username", `"remote_identity_healthcheck_username"`},
-				{"secret_store_id", `"` + seID + `"`},
+				{"secret_store_id", `"` + seSSHID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},

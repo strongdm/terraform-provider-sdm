@@ -5456,6 +5456,81 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"rdp_cert": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"remote_identity_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The ID of the remote identity group to use for remote identity connections.",
+						},
+						"remote_identity_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to use for healthchecks, when clients otherwise connect with their own remote identity username.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"rds_postgres_iam": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -8610,6 +8685,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("rdp_cert").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("rds_postgres_iam").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10880,6 +10974,33 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("rdp_cert").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RDPCert{}
+		}
+		out := &sdm.RDPCert{
+			ID:                                d.Id(),
+			BindInterface:                     convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                      convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                          convertStringToPlumbing(raw["hostname"]),
+			Name:                              convertStringToPlumbing(raw["name"]),
+			Port:                              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                      convertInt32ToPlumbing(raw["port_override"]),
+			RemoteIdentityGroupID:             convertStringToPlumbing(raw["remote_identity_group_id"]),
+			RemoteIdentityHealthcheckUsername: convertStringToPlumbing(raw["remote_identity_healthcheck_username"]),
+			SecretStoreID:                     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:                         convertStringToPlumbing(raw["subdomain"]),
+			Tags:                              convertTagsToPlumbing(raw["tags"]),
+			Username:                          convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("rds_postgres_iam").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12679,6 +12800,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":                 (v.Subdomain),
 				"tags":                      convertTagsToPorcelain(v.Tags),
 				"username":                  seValues["username"],
+			},
+		})
+	case *sdm.RDPCert:
+		localV, _ := localVersion.(*sdm.RDPCert)
+		_ = localV
+		d.Set("rdp_cert", []map[string]interface{}{
+			{
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"username":                             seValues["username"],
 			},
 		})
 	case *sdm.RDSPostgresIAM:
@@ -15006,6 +15146,31 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":                 (v.Subdomain),
 				"tags":                      convertTagsToPorcelain(v.Tags),
 				"username":                  seValues["username"],
+			},
+		})
+	case *sdm.RDPCert:
+		localV, ok := localVersion.(*sdm.RDPCert)
+		if !ok {
+			localV = &sdm.RDPCert{}
+		}
+		_ = localV
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("rdp_cert", []map[string]interface{}{
+			{
+				"bind_interface":                       (v.BindInterface),
+				"egress_filter":                        (v.EgressFilter),
+				"hostname":                             (v.Hostname),
+				"name":                                 (v.Name),
+				"port":                                 (v.Port),
+				"port_override":                        (v.PortOverride),
+				"remote_identity_group_id":             (v.RemoteIdentityGroupID),
+				"remote_identity_healthcheck_username": (v.RemoteIdentityHealthcheckUsername),
+				"secret_store_id":                      (v.SecretStoreID),
+				"subdomain":                            (v.Subdomain),
+				"tags":                                 convertTagsToPorcelain(v.Tags),
+				"username":                             seValues["username"],
 			},
 		})
 	case *sdm.RDSPostgresIAM:
