@@ -210,6 +210,47 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"gcp_cert_x_509_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "GCPCertX509Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"ca_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The ID of the target CA",
+						},
+						"ca_pool_id": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The ID of the target CA pool",
+						},
+						"location": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The Region for the CA in GCP format e.g. us-west1",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"project_id": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The GCP project ID to target.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"vault_approle": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -693,6 +734,22 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("gcp_cert_x_509_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.GCPCertX509Store{}
+		}
+		out := &sdm.GCPCertX509Store{
+			ID:        d.Id(),
+			CaID:      convertStringToPlumbing(raw["ca_id"]),
+			CaPoolID:  convertStringToPlumbing(raw["ca_pool_id"]),
+			Location:  convertStringToPlumbing(raw["location"]),
+			Name:      convertStringToPlumbing(raw["name"]),
+			ProjectID: convertStringToPlumbing(raw["project_id"]),
+			Tags:      convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("vault_approle").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -922,6 +979,19 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":       convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.GCPCertX509Store:
+		localV, _ := localVersion.(*sdm.GCPCertX509Store)
+		_ = localV
+		d.Set("gcp_cert_x_509_store", []map[string]interface{}{
+			{
+				"ca_id":      (v.CaID),
+				"ca_pool_id": (v.CaPoolID),
+				"location":   (v.Location),
+				"name":       (v.Name),
+				"project_id": (v.ProjectID),
+				"tags":       convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.VaultAppRoleStore:
 		localV, _ := localVersion.(*sdm.VaultAppRoleStore)
 		_ = localV
@@ -1145,6 +1215,22 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 		_ = localV
 		d.Set("gcp_store", []map[string]interface{}{
 			{
+				"name":       (v.Name),
+				"project_id": (v.ProjectID),
+				"tags":       convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.GCPCertX509Store:
+		localV, ok := localVersion.(*sdm.GCPCertX509Store)
+		if !ok {
+			localV = &sdm.GCPCertX509Store{}
+		}
+		_ = localV
+		d.Set("gcp_cert_x_509_store", []map[string]interface{}{
+			{
+				"ca_id":      (v.CaID),
+				"ca_pool_id": (v.CaPoolID),
+				"location":   (v.Location),
 				"name":       (v.Name),
 				"project_id": (v.ProjectID),
 				"tags":       convertTagsToPorcelain(v.Tags),

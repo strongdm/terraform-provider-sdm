@@ -41,6 +41,13 @@ The following arguments are supported by the SecretStore resource:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `project_id` - (Required) The GCP project ID to target.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* gcp_cert_x_509_store:
+	* `ca_id` - (Optional) The ID of the target CA
+	* `ca_pool_id` - (Required) The ID of the target CA pool
+	* `location` - (Required) The Region for the CA in GCP format e.g. us-west1
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `project_id` - (Required) The GCP project ID to target.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_approle:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within

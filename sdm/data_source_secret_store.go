@@ -258,6 +258,51 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"gcp_cert_x_509_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"ca_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the target CA",
+									},
+									"ca_pool_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the target CA pool",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"location": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The Region for the CA in GCP format e.g. us-west1",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"project_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The GCP project ID to target.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"vault_approle": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -774,6 +819,16 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 		case *sdm.GCPStore:
 			output[0]["gcp_store"] = append(output[0]["gcp_store"], entity{
 				"id":         (v.ID),
+				"name":       (v.Name),
+				"project_id": (v.ProjectID),
+				"tags":       convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.GCPCertX509Store:
+			output[0]["gcp_cert_x_509_store"] = append(output[0]["gcp_cert_x_509_store"], entity{
+				"ca_id":      (v.CaID),
+				"ca_pool_id": (v.CaPoolID),
+				"id":         (v.ID),
+				"location":   (v.Location),
 				"name":       (v.Name),
 				"project_id": (v.ProjectID),
 				"tags":       convertTagsToPorcelain(v.Tags),

@@ -56,6 +56,14 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `project_id` - The GCP project ID to target.
 		* `tags` - Tags is a map of key, value pairs.
+	* gcp_cert_x_509_store:
+		* `ca_id` - The ID of the target CA
+		* `ca_pool_id` - The ID of the target CA pool
+		* `id` - Unique identifier of the SecretStore.
+		* `location` - The Region for the CA in GCP format e.g. us-west1
+		* `name` - Unique human-readable name of the SecretStore.
+		* `project_id` - The GCP project ID to target.
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_approle:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.

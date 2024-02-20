@@ -1811,6 +1811,25 @@ type GCP struct {
 	Tags Tags `json:"tags"`
 }
 
+// GCPCertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type GCPCertX509Store struct {
+	// The ID of the target CA
+	CaID string `json:"caId"`
+	// The ID of the target CA pool
+	CaPoolID string `json:"caPoolId"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// The Region for the CA in GCP format e.g. us-west1
+	Location string `json:"location"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The GCP project ID to target.
+	ProjectID string `json:"projectId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type GCPStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -8775,6 +8794,30 @@ func (m *GCPStore) GetName() string {
 
 // SetName sets the name of the GCPStore.
 func (m *GCPStore) SetName(v string) {
+	m.Name = v
+}
+func (*GCPCertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the GCPCertX509Store.
+func (m *GCPCertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the GCPCertX509Store.
+func (m *GCPCertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GCPCertX509Store.
+func (m *GCPCertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the GCPCertX509Store.
+func (m *GCPCertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GCPCertX509Store.
+func (m *GCPCertX509Store) SetName(v string) {
 	m.Name = v
 }
 func (*VaultAppRoleStore) isOneOf_SecretStore() {}

@@ -4991,6 +4991,63 @@ func convertRepeatedGCPToPorcelain(plumbings []*proto.GCP) (
 	}
 	return items, nil
 }
+func convertGCPCertX509StoreToPorcelain(plumbing *proto.GCPCertX509Store) (*GCPCertX509Store, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GCPCertX509Store{}
+	porcelain.CaID = plumbing.CaID
+	porcelain.CaPoolID = plumbing.CaPoolID
+	porcelain.ID = plumbing.Id
+	porcelain.Location = plumbing.Location
+	porcelain.Name = plumbing.Name
+	porcelain.ProjectID = plumbing.ProjectID
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertGCPCertX509StoreToPlumbing(porcelain *GCPCertX509Store) *proto.GCPCertX509Store {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GCPCertX509Store{}
+	plumbing.CaID = (porcelain.CaID)
+	plumbing.CaPoolID = (porcelain.CaPoolID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Location = (porcelain.Location)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ProjectID = (porcelain.ProjectID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedGCPCertX509StoreToPlumbing(
+	porcelains []*GCPCertX509Store,
+) []*proto.GCPCertX509Store {
+	var items []*proto.GCPCertX509Store
+	for _, porcelain := range porcelains {
+		items = append(items, convertGCPCertX509StoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGCPCertX509StoreToPorcelain(plumbings []*proto.GCPCertX509Store) (
+	[]*GCPCertX509Store,
+	error,
+) {
+	var items []*GCPCertX509Store
+	for _, plumbing := range plumbings {
+		if v, err := convertGCPCertX509StoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertGCPStoreToPorcelain(plumbing *proto.GCPStore) (*GCPStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -11690,6 +11747,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Delinea{Delinea: convertDelineaStoreToPlumbing(v)}
 	case *GCPStore:
 		plumbing.SecretStore = &proto.SecretStore_Gcp{Gcp: convertGCPStoreToPlumbing(v)}
+	case *GCPCertX509Store:
+		plumbing.SecretStore = &proto.SecretStore_GcpCertX_509{GcpCertX_509: convertGCPCertX509StoreToPlumbing(v)}
 	case *VaultAppRoleStore:
 		plumbing.SecretStore = &proto.SecretStore_VaultAppRole{VaultAppRole: convertVaultAppRoleStoreToPlumbing(v)}
 	case *VaultAppRoleCertSSHStore:
@@ -11733,6 +11792,9 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetGcp() != nil {
 		return convertGCPStoreToPorcelain(plumbing.GetGcp())
+	}
+	if plumbing.GetGcpCertX_509() != nil {
+		return convertGCPCertX509StoreToPorcelain(plumbing.GetGcpCertX_509())
 	}
 	if plumbing.GetVaultAppRole() != nil {
 		return convertVaultAppRoleStoreToPorcelain(plumbing.GetVaultAppRole())

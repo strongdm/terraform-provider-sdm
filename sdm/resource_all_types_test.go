@@ -2446,6 +2446,16 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "gcp_cert_x_509_store",
+			pairs: [][2]string{
+				{"ca_id", `"ca_id"`},
+				{"ca_pool_id", `"ca_pool_id"`},
+				{"location", `"location"`},
+				{"name", `"all_secrets_name"`},
+				{"project_id", `"project_id"`},
+			},
+		},
+		{
 			resource: "vault_approle",
 			pairs: [][2]string{
 				{"name", `"all_secrets_name"`},
