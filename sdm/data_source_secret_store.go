@@ -73,6 +73,56 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"aws_cert_x509": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"ca_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ARN of the CA in AWS Private CA",
+									},
+									"certificate_template_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The AWS region to target e.g. us-east-1",
+									},
+									"signing_algo": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"azure_store": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -779,6 +829,17 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"name":   (v.Name),
 				"region": (v.Region),
 				"tags":   convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.AWSCertX509Store:
+			output[0]["aws_cert_x509"] = append(output[0]["aws_cert_x509"], entity{
+				"ca_arn":                   (v.CaArn),
+				"certificate_template_arn": (v.CertificateTemplateArn),
+				"id":                       (v.ID),
+				"issued_cert_ttl_minutes":  (v.IssuedCertTTLMinutes),
+				"name":                     (v.Name),
+				"region":                   (v.Region),
+				"signing_algo":             (v.SigningAlgo),
+				"tags":                     convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AzureStore:
 			output[0]["azure_store"] = append(output[0]["azure_store"], entity{

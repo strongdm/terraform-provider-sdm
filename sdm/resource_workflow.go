@@ -30,6 +30,11 @@ func resourceWorkflow() *schema.Resource {
 				DiffSuppressFunc: accessRulesDiffSuppress,
 				Description:      "AccessRules is a list of access rules defining the resources this Workflow provides access to.",
 			},
+			"approval_flow_id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Optional approval flow ID identifies an approval flow that linked to the workflow",
+			},
 			"auto_grant": {
 				Type:        schema.TypeBool,
 				Optional:    true,
@@ -64,13 +69,14 @@ func resourceWorkflow() *schema.Resource {
 }
 func convertWorkflowToPlumbing(d *schema.ResourceData) *sdm.Workflow {
 	return &sdm.Workflow{
-		ID:          d.Id(),
-		AccessRules: convertAccessRulesToPlumbing(d.Get("access_rules")),
-		AutoGrant:   convertBoolToPlumbing(d.Get("auto_grant")),
-		Description: convertStringToPlumbing(d.Get("description")),
-		Enabled:     convertBoolToPlumbing(d.Get("enabled")),
-		Name:        convertStringToPlumbing(d.Get("name")),
-		Weight:      convertInt64ToPlumbing(d.Get("weight")),
+		ID:             d.Id(),
+		AccessRules:    convertAccessRulesToPlumbing(d.Get("access_rules")),
+		ApprovalFlowID: convertStringToPlumbing(d.Get("approval_flow_id")),
+		AutoGrant:      convertBoolToPlumbing(d.Get("auto_grant")),
+		Description:    convertStringToPlumbing(d.Get("description")),
+		Enabled:        convertBoolToPlumbing(d.Get("enabled")),
+		Name:           convertStringToPlumbing(d.Get("name")),
+		Weight:         convertInt64ToPlumbing(d.Get("weight")),
 	}
 }
 
@@ -83,6 +89,7 @@ func resourceWorkflowCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	d.SetId(resp.Workflow.ID)
 	v := resp.Workflow
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
+	d.Set("approval_flow_id", (v.ApprovalFlowID))
 	d.Set("auto_grant", (v.AutoGrant))
 	d.Set("description", (v.Description))
 	d.Set("enabled", (v.Enabled))
@@ -104,6 +111,7 @@ func resourceWorkflowRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 	}
 	v := resp.Workflow
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
+	d.Set("approval_flow_id", (v.ApprovalFlowID))
 	d.Set("auto_grant", (v.AutoGrant))
 	d.Set("description", (v.Description))
 	d.Set("enabled", (v.Enabled))

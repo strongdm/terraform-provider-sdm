@@ -41,6 +41,7 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 ## Argument Reference
 The following arguments are supported by the Workflow resource:
 * `access_rules` - (Optional) AccessRules is a list of access rules defining the resources this Workflow provides access to.
+* `approval_flow_id` - (Optional) Optional approval flow ID identifies an approval flow that linked to the workflow
 * `auto_grant` - (Optional) Optional auto grant setting to automatically approve requests or not, defaults to false.
 * `description` - (Optional) Optional description of the Workflow.
 * `enabled` - (Optional) Optional enabled state for workflow. This setting may be overridden by the system if the workflow doesn't meet the requirements to be enabled or if other conditions prevent enabling the workflow. The requirements to enable a workflow are that the workflow must be either set up for with auto grant enabled or have one or more WorkflowApprovers created for the workflow.

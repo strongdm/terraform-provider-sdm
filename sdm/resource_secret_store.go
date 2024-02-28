@@ -49,6 +49,52 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"aws_cert_x509": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AWSCertX509Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"ca_arn": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The ARN of the CA in AWS Private CA",
+						},
+						"certificate_template_arn": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR",
+						},
+						"issued_cert_ttl_minutes": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to target e.g. us-east-1",
+						},
+						"signing_algo": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"azure_store": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -655,6 +701,23 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("aws_cert_x509").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWSCertX509Store{}
+		}
+		out := &sdm.AWSCertX509Store{
+			ID:                     d.Id(),
+			CaArn:                  convertStringToPlumbing(raw["ca_arn"]),
+			CertificateTemplateArn: convertStringToPlumbing(raw["certificate_template_arn"]),
+			IssuedCertTTLMinutes:   convertStringToPlumbing(raw["issued_cert_ttl_minutes"]),
+			Name:                   convertStringToPlumbing(raw["name"]),
+			Region:                 convertStringToPlumbing(raw["region"]),
+			SigningAlgo:            convertStringToPlumbing(raw["signing_algo"]),
+			Tags:                   convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("azure_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -918,6 +981,20 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":   convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.AWSCertX509Store:
+		localV, _ := localVersion.(*sdm.AWSCertX509Store)
+		_ = localV
+		d.Set("aws_cert_x509", []map[string]interface{}{
+			{
+				"ca_arn":                   (v.CaArn),
+				"certificate_template_arn": (v.CertificateTemplateArn),
+				"issued_cert_ttl_minutes":  (v.IssuedCertTTLMinutes),
+				"name":                     (v.Name),
+				"region":                   (v.Region),
+				"signing_algo":             (v.SigningAlgo),
+				"tags":                     convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AzureStore:
 		localV, _ := localVersion.(*sdm.AzureStore)
 		_ = localV
@@ -1139,6 +1216,23 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"name":   (v.Name),
 				"region": (v.Region),
 				"tags":   convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AWSCertX509Store:
+		localV, ok := localVersion.(*sdm.AWSCertX509Store)
+		if !ok {
+			localV = &sdm.AWSCertX509Store{}
+		}
+		_ = localV
+		d.Set("aws_cert_x509", []map[string]interface{}{
+			{
+				"ca_arn":                   (v.CaArn),
+				"certificate_template_arn": (v.CertificateTemplateArn),
+				"issued_cert_ttl_minutes":  (v.IssuedCertTTLMinutes),
+				"name":                     (v.Name),
+				"region":                   (v.Region),
+				"signing_algo":             (v.SigningAlgo),
+				"tags":                     convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AzureStore:

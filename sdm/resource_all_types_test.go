@@ -2403,6 +2403,17 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "aws_cert_x509",
+			pairs: [][2]string{
+				{"ca_arn", `"ca_arn"`},
+				{"certificate_template_arn", `"certificate_template_arn"`},
+				{"issued_cert_ttl_minutes", `"issued_cert_ttl_minutes"`},
+				{"name", `"all_secrets_name"`},
+				{"region", `"region"`},
+				{"signing_algo", `"signing_algo"`},
+			},
+		},
+		{
 			resource: "azure_store",
 			pairs: [][2]string{
 				{"name", `"all_secrets_name"`},

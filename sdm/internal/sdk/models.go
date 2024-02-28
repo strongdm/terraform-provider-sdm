@@ -225,6 +225,27 @@ type AWS struct {
 	Tags Tags `json:"tags"`
 }
 
+// AWSCertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AWSCertX509Store struct {
+	// The ARN of the CA in AWS Private CA
+	CaArn string `json:"caArn"`
+	// The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR
+	CertificateTemplateArn string `json:"certificateTemplateArn"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.
+	IssuedCertTTLMinutes string `json:"issuedCertTtlMinutes"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The AWS region to target e.g. us-east-1
+	Region string `json:"region"`
+	// The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA
+	SigningAlgo string `json:"signingAlgo"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type AWSConsole struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -8652,6 +8673,30 @@ func (m *AWSStore) GetName() string {
 func (m *AWSStore) SetName(v string) {
 	m.Name = v
 }
+func (*AWSCertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the AWSCertX509Store.
+func (m *AWSCertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the AWSCertX509Store.
+func (m *AWSCertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AWSCertX509Store.
+func (m *AWSCertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the AWSCertX509Store.
+func (m *AWSCertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWSCertX509Store.
+func (m *AWSCertX509Store) SetName(v string) {
+	m.Name = v
+}
 func (*AzureStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the AzureStore.
@@ -9558,6 +9603,8 @@ type VaultTokenStore struct {
 type Workflow struct {
 	// AccessRules is a list of access rules defining the resources this Workflow provides access to.
 	AccessRules AccessRules `json:"accessRules"`
+	// Optional approval flow ID identifies an approval flow that linked to the workflow
+	ApprovalFlowID string `json:"approvalFlowId"`
 	// Optional auto grant setting to automatically approve requests or not, defaults to false.
 	AutoGrant bool `json:"autoGrant"`
 	// Optional description of the Workflow.

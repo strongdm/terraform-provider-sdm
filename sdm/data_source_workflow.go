@@ -22,6 +22,11 @@ func dataSourceWorkflow() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
+			"approval_flow_id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Optional approval flow ID identifies an approval flow that linked to the workflow",
+			},
 			"auto_grant": {
 				Type:        schema.TypeBool,
 				Optional:    true,
@@ -62,6 +67,11 @@ func dataSourceWorkflow() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "AccessRules is a list of access rules defining the resources this Workflow provides access to.",
+						},
+						"approval_flow_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Optional approval flow ID identifies an approval flow that linked to the workflow",
 						},
 						"auto_grant": {
 							Type:        schema.TypeBool,
@@ -110,6 +120,10 @@ func convertWorkflowFilterToPlumbing(d *schema.ResourceData) (string, []interfac
 		filter += "accessrules:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("approval_flow_id"); ok {
+		filter += "approvalflowid:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("auto_grant"); ok {
 		filter += "autogrant:? "
 		args = append(args, v)
@@ -151,13 +165,14 @@ func dataSourceWorkflowList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"access_rules": convertAccessRulesToPorcelain(v.AccessRules),
-				"auto_grant":   (v.AutoGrant),
-				"description":  (v.Description),
-				"enabled":      (v.Enabled),
-				"id":           (v.ID),
-				"name":         (v.Name),
-				"weight":       (v.Weight),
+				"access_rules":     convertAccessRulesToPorcelain(v.AccessRules),
+				"approval_flow_id": (v.ApprovalFlowID),
+				"auto_grant":       (v.AutoGrant),
+				"description":      (v.Description),
+				"enabled":          (v.Enabled),
+				"id":               (v.ID),
+				"name":             (v.Name),
+				"weight":           (v.Weight),
 			})
 	}
 	if resp.Err() != nil {

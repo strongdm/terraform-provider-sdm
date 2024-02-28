@@ -526,6 +526,65 @@ func convertRepeatedAWSToPorcelain(plumbings []*proto.AWS) (
 	}
 	return items, nil
 }
+func convertAWSCertX509StoreToPorcelain(plumbing *proto.AWSCertX509Store) (*AWSCertX509Store, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AWSCertX509Store{}
+	porcelain.CaArn = plumbing.CaArn
+	porcelain.CertificateTemplateArn = plumbing.CertificateTemplateArn
+	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
+	porcelain.Name = plumbing.Name
+	porcelain.Region = plumbing.Region
+	porcelain.SigningAlgo = plumbing.SigningAlgo
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAWSCertX509StoreToPlumbing(porcelain *AWSCertX509Store) *proto.AWSCertX509Store {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AWSCertX509Store{}
+	plumbing.CaArn = (porcelain.CaArn)
+	plumbing.CertificateTemplateArn = (porcelain.CertificateTemplateArn)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Region = (porcelain.Region)
+	plumbing.SigningAlgo = (porcelain.SigningAlgo)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAWSCertX509StoreToPlumbing(
+	porcelains []*AWSCertX509Store,
+) []*proto.AWSCertX509Store {
+	var items []*proto.AWSCertX509Store
+	for _, porcelain := range porcelains {
+		items = append(items, convertAWSCertX509StoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAWSCertX509StoreToPorcelain(plumbings []*proto.AWSCertX509Store) (
+	[]*AWSCertX509Store,
+	error,
+) {
+	var items []*AWSCertX509Store
+	for _, plumbing := range plumbings {
+		if v, err := convertAWSCertX509StoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -11735,6 +11794,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 	switch v := porcelain.(type) {
 	case *AWSStore:
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
+	case *AWSCertX509Store:
+		plumbing.SecretStore = &proto.SecretStore_AwsCertX_509{AwsCertX_509: convertAWSCertX509StoreToPlumbing(v)}
 	case *AzureStore:
 		plumbing.SecretStore = &proto.SecretStore_Azure{Azure: convertAzureStoreToPlumbing(v)}
 	case *CyberarkConjurStore:
@@ -11774,6 +11835,9 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, error) {
 	if plumbing.GetAws() != nil {
 		return convertAWSStoreToPorcelain(plumbing.GetAws())
+	}
+	if plumbing.GetAwsCertX_509() != nil {
+		return convertAWSCertX509StoreToPorcelain(plumbing.GetAwsCertX_509())
 	}
 	if plumbing.GetAzure() != nil {
 		return convertAzureStoreToPorcelain(plumbing.GetAzure())
@@ -13495,6 +13559,7 @@ func convertWorkflowToPorcelain(plumbing *proto.Workflow) (*Workflow, error) {
 	} else {
 		porcelain.AccessRules = v
 	}
+	porcelain.ApprovalFlowID = plumbing.ApprovalFlowId
 	porcelain.AutoGrant = plumbing.AutoGrant
 	porcelain.Description = plumbing.Description
 	porcelain.Enabled = plumbing.Enabled
@@ -13510,6 +13575,7 @@ func convertWorkflowToPlumbing(porcelain *Workflow) *proto.Workflow {
 	}
 	plumbing := &proto.Workflow{}
 	plumbing.AccessRules = convertAccessRulesToPlumbing(porcelain.AccessRules)
+	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
 	plumbing.AutoGrant = (porcelain.AutoGrant)
 	plumbing.Description = (porcelain.Description)
 	plumbing.Enabled = (porcelain.Enabled)

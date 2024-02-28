@@ -16,6 +16,14 @@ The following arguments are supported by the SecretStore resource:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `region` - (Required) The AWS region to target e.g. us-east-1
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* aws_cert_x509:
+	* `ca_arn` - (Required) The ARN of the CA in AWS Private CA
+	* `certificate_template_arn` - (Required) The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR
+	* `issued_cert_ttl_minutes` - (Optional) The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `region` - (Required) The AWS region to target e.g. us-east-1
+	* `signing_algo` - (Required) The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * azure_store:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
