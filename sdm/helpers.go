@@ -149,6 +149,25 @@ func convertStringToPlumbing(porcelain interface{}) string {
 	return porcelain.(string)
 }
 
+func convertRepeatedStringToPlumbing(porcelain interface{}) []string {
+	if porcelain == nil {
+		return nil
+	}
+	interfaces, ok := porcelain.([]interface{})
+	if !ok {
+		return nil
+	}
+	strs := make([]string, 0, len(interfaces))
+	for _, interf := range interfaces {
+		str, ok := interf.(string)
+		if !ok {
+			return nil
+		}
+		strs = append(strs, str)
+	}
+	return strs
+}
+
 func convertInt32ToPlumbing(porcelain interface{}) int32 {
 	if porcelain == nil {
 		return 0

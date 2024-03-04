@@ -1016,6 +1016,194 @@ type AmazonMQAMQP091 struct {
 	Username string `json:"username"`
 }
 
+// ApprovalWorkflows are the mechanism by which requests for access can be viewed by authorized
+// approvers and be approved or denied.
+type ApprovalWorkflow struct {
+	// Approval mode of the ApprovalWorkflow
+	ApprovalMode string `json:"approvalMode"`
+	// Optional description of the ApprovalWorkflow.
+	Description string `json:"description"`
+	// Unique identifier of the ApprovalWorkflow.
+	ID string `json:"id"`
+	// Unique human-readable name of the ApprovalWorkflow.
+	Name string `json:"name"`
+}
+
+// ApprovalWorkflowApprover links an approval workflow approver to an ApprovalWorkflowStep
+type ApprovalWorkflowApprover struct {
+	// The approver account id.
+	AccountID string `json:"accountId"`
+	// The approval flow id specified the approval workflow that this approver belongs to
+	ApprovalFlowID string `json:"approvalFlowId"`
+	// The approval step id specified the approval flow step that this approver belongs to
+	ApprovalStepID string `json:"approvalStepId"`
+	// Unique identifier of the ApprovalWorkflowApprover.
+	ID string `json:"id"`
+	// The approver role id
+	RoleID string `json:"roleId"`
+}
+
+// ApprovalWorkflowApproverCreateResponse reports how the ApprovalWorkflowApprover was created in the system.
+type ApprovalWorkflowApproverCreateResponse struct {
+	// The created approval workflow approver.
+	ApprovalWorkflowApprover *ApprovalWorkflowApprover `json:"approvalWorkflowApprover"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowApproverDeleteResponse returns information about an ApprovalWorkflowApprover that was deleted.
+type ApprovalWorkflowApproverDeleteResponse struct {
+	// The deleted approval workflow approver id.
+	ID string `json:"id"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowApproverGetResponse returns a requested ApprovalWorkflowApprover.
+type ApprovalWorkflowApproverGetResponse struct {
+	// The requested ApprovalWorkflowApprover.
+	ApprovalWorkflowApprover *ApprovalWorkflowApprover `json:"approvalWorkflowApprover"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowApproverHistory records the state of an ApprovalWorkflowApprover at a given point in time,
+// where every change (create or delete) to an ApprovalWorkflowApprover produces an
+// ApprovalWorkflowApproverHistory record.
+type ApprovalWorkflowApproverHistory struct {
+	// The unique identifier of the Activity that produced this change to the ApprovalWorkflowApprover.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// The complete ApprovalWorkflowApprover state at this time.
+	ApprovalWorkflowApprover *ApprovalWorkflowApprover `json:"approvalWorkflowApprover"`
+	// If this ApprovalWorkflowApprover was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the ApprovalWorkflowApprover state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// ApprovalWorkflowApproverListResponse returns a list of ApprovalWorkflowApprover records that meet
+// the criteria of an ApprovalWorkflowApproverListRequest.
+type ApprovalWorkflowApproverListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowCreateResponse reports how the ApprovalWorkflow was created in the system.
+type ApprovalWorkflowCreateResponse struct {
+	// The created approval workflow.
+	ApprovalWorkflow *ApprovalWorkflow `json:"approvalWorkflow"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowDeleteResponse returns information about an ApprovalWorkflow that was deleted.
+type ApprovalWorkflowDeleteResponse struct {
+	// The deleted approval workflow id.
+	ID string `json:"id"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowGetResponse returns a requested ApprovalWorkflow.
+type ApprovalWorkflowGetResponse struct {
+	// The requested ApprovalWorkflow.
+	ApprovalWorkflow *ApprovalWorkflow `json:"approvalWorkflow"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowHistory records the state of an ApprovalWorkflow at a given point in time,
+// where every change (create, update and delete) to an ApprovalWorkflow produces an
+// ApprovalWorkflowHistory record.
+type ApprovalWorkflowHistory struct {
+	// The unique identifier of the Activity that produced this change to the ApprovalWorkflow.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// The complete ApprovalWorkflow state at this time.
+	ApprovalWorkflow *ApprovalWorkflow `json:"approvalWorkflow"`
+	// If this ApprovalWorkflow was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the ApprovalWorkflow state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// ApprovalWorkflowListResponse returns a list of ApprovalWorkflow records that meet
+// the criteria of an ApprovalWorkflowListRequest.
+type ApprovalWorkflowListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowStep links an approval workflow step to an ApprovalWorkflow
+type ApprovalWorkflowStep struct {
+	// The approval flow id specified the approval workfflow that this step belongs to
+	ApprovalFlowID string `json:"approvalFlowId"`
+	// Unique identifier of the ApprovalWorkflowStep.
+	ID string `json:"id"`
+}
+
+// ApprovalWorkflowStepCreateResponse reports how the ApprovalWorkflowStep was created in the system.
+type ApprovalWorkflowStepCreateResponse struct {
+	// The created approval workflow step.
+	ApprovalWorkflowStep *ApprovalWorkflowStep `json:"approvalWorkflowStep"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowStepDeleteResponse returns information about an ApprovalWorkflowStep that was deleted.
+type ApprovalWorkflowStepDeleteResponse struct {
+	// The deleted approval workflow step id.
+	ID string `json:"id"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowStepGetResponse returns a requested ApprovalWorkflowStep.
+type ApprovalWorkflowStepGetResponse struct {
+	// The requested ApprovalWorkflowStep.
+	ApprovalWorkflowStep *ApprovalWorkflowStep `json:"approvalWorkflowStep"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowStepHistory records the state of an ApprovalWorkflowStep at a given point in time,
+// where every change (create or delete) to an ApprovalWorkflowStep produces an
+// ApprovalWorkflowStepHistory record.
+type ApprovalWorkflowStepHistory struct {
+	// The unique identifier of the Activity that produced this change to the ApprovalWorkflowStep.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// The complete ApprovalWorkflowStep state at this time.
+	ApprovalWorkflowStep *ApprovalWorkflowStep `json:"approvalWorkflowStep"`
+	// If this ApprovalWorkflowStep was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the ApprovalWorkflowStep state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// ApprovalWorkflowStepListResponse returns a list of ApprovalWorkflowStep records that meet
+// the criteria of an ApprovalWorkflowStepListRequest.
+type ApprovalWorkflowStepListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ApprovalWorkflowUpdateResponse returns the fields of an ApprovalWorkflow after it has been updated by
+// an ApprovalWorkflowUpdateRequest.
+type ApprovalWorkflowUpdateResponse struct {
+	// The updated approval workflow.
+	ApprovalWorkflow *ApprovalWorkflow `json:"approvalWorkflow"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 type Athena struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
@@ -10122,6 +10310,108 @@ type ActivityIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *Activity
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ApprovalWorkflowApproverIterator provides read access to a list of ApprovalWorkflowApprover.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    approvalWorkflowApprover := iterator.Value()
+//	    // ...
+//	}
+type ApprovalWorkflowApproverIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ApprovalWorkflowApprover
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ApprovalWorkflowApproverHistoryIterator provides read access to a list of ApprovalWorkflowApproverHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    approvalWorkflowApproverHistory := iterator.Value()
+//	    // ...
+//	}
+type ApprovalWorkflowApproverHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ApprovalWorkflowApproverHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ApprovalWorkflowStepIterator provides read access to a list of ApprovalWorkflowStep.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    approvalWorkflowStep := iterator.Value()
+//	    // ...
+//	}
+type ApprovalWorkflowStepIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ApprovalWorkflowStep
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ApprovalWorkflowStepHistoryIterator provides read access to a list of ApprovalWorkflowStepHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    approvalWorkflowStepHistory := iterator.Value()
+//	    // ...
+//	}
+type ApprovalWorkflowStepHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ApprovalWorkflowStepHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ApprovalWorkflowIterator provides read access to a list of ApprovalWorkflow.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    approvalWorkflow := iterator.Value()
+//	    // ...
+//	}
+type ApprovalWorkflowIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ApprovalWorkflow
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ApprovalWorkflowHistoryIterator provides read access to a list of ApprovalWorkflowHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    approvalWorkflowHistory := iterator.Value()
+//	    // ...
+//	}
+type ApprovalWorkflowHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ApprovalWorkflowHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

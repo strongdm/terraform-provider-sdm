@@ -100,6 +100,12 @@ func testCheckDestroy(s *terraform.State) error {
 			_, err = client.WorkflowApprovers().Get(context.Background(), rs.Primary.ID)
 		case "sdm_workflow_role":
 			_, err = client.WorkflowRoles().Get(context.Background(), rs.Primary.ID)
+		case "sdm_approval_workflow":
+			_, err = client.ApprovalWorkflows().Get(context.Background(), rs.Primary.ID)
+		case "sdm_approval_workflow_step":
+			_, err = client.ApprovalWorkflowSteps().Get(context.Background(), rs.Primary.ID)
+		case "sdm_approval_workflow_approver":
+			_, err = client.ApprovalWorkflowApprovers().Get(context.Background(), rs.Primary.ID)
 		default:
 			return fmt.Errorf("undefined resource type in testCheckDestroy: %s", rs.Type)
 		}

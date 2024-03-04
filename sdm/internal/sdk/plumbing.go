@@ -2958,6 +2958,973 @@ func convertRepeatedAmazonMQAMQP091ToPorcelain(plumbings []*proto.AmazonMQAMQP09
 	}
 	return items, nil
 }
+func convertApprovalWorkflowToPorcelain(plumbing *proto.ApprovalWorkflow) (*ApprovalWorkflow, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflow{}
+	porcelain.ApprovalMode = plumbing.ApprovalMode
+	porcelain.Description = plumbing.Description
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowToPlumbing(porcelain *ApprovalWorkflow) *proto.ApprovalWorkflow {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflow{}
+	plumbing.ApprovalMode = (porcelain.ApprovalMode)
+	plumbing.Description = (porcelain.Description)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowToPlumbing(
+	porcelains []*ApprovalWorkflow,
+) []*proto.ApprovalWorkflow {
+	var items []*proto.ApprovalWorkflow
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowToPorcelain(plumbings []*proto.ApprovalWorkflow) (
+	[]*ApprovalWorkflow,
+	error,
+) {
+	var items []*ApprovalWorkflow
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowApproverToPorcelain(plumbing *proto.ApprovalWorkflowApprover) (*ApprovalWorkflowApprover, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowApprover{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.ApprovalFlowID = plumbing.ApprovalFlowId
+	porcelain.ApprovalStepID = plumbing.ApprovalStepId
+	porcelain.ID = plumbing.Id
+	porcelain.RoleID = plumbing.RoleId
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowApproverToPlumbing(porcelain *ApprovalWorkflowApprover) *proto.ApprovalWorkflowApprover {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowApprover{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
+	plumbing.ApprovalStepId = (porcelain.ApprovalStepID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.RoleId = (porcelain.RoleID)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowApproverToPlumbing(
+	porcelains []*ApprovalWorkflowApprover,
+) []*proto.ApprovalWorkflowApprover {
+	var items []*proto.ApprovalWorkflowApprover
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowApproverToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowApproverToPorcelain(plumbings []*proto.ApprovalWorkflowApprover) (
+	[]*ApprovalWorkflowApprover,
+	error,
+) {
+	var items []*ApprovalWorkflowApprover
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowApproverToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowApproverCreateResponseToPorcelain(plumbing *proto.ApprovalWorkflowApproverCreateResponse) (*ApprovalWorkflowApproverCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowApproverCreateResponse{}
+	if v, err := convertApprovalWorkflowApproverToPorcelain(plumbing.ApprovalWorkflowApprover); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowApprover: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowApprover = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowApproverCreateResponseToPlumbing(porcelain *ApprovalWorkflowApproverCreateResponse) *proto.ApprovalWorkflowApproverCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowApproverCreateResponse{}
+	plumbing.ApprovalWorkflowApprover = convertApprovalWorkflowApproverToPlumbing(porcelain.ApprovalWorkflowApprover)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowApproverCreateResponseToPlumbing(
+	porcelains []*ApprovalWorkflowApproverCreateResponse,
+) []*proto.ApprovalWorkflowApproverCreateResponse {
+	var items []*proto.ApprovalWorkflowApproverCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowApproverCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowApproverCreateResponseToPorcelain(plumbings []*proto.ApprovalWorkflowApproverCreateResponse) (
+	[]*ApprovalWorkflowApproverCreateResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowApproverCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowApproverCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowApproverDeleteResponseToPorcelain(plumbing *proto.ApprovalWorkflowApproverDeleteResponse) (*ApprovalWorkflowApproverDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowApproverDeleteResponse{}
+	porcelain.ID = plumbing.Id
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowApproverDeleteResponseToPlumbing(porcelain *ApprovalWorkflowApproverDeleteResponse) *proto.ApprovalWorkflowApproverDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowApproverDeleteResponse{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowApproverDeleteResponseToPlumbing(
+	porcelains []*ApprovalWorkflowApproverDeleteResponse,
+) []*proto.ApprovalWorkflowApproverDeleteResponse {
+	var items []*proto.ApprovalWorkflowApproverDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowApproverDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowApproverDeleteResponseToPorcelain(plumbings []*proto.ApprovalWorkflowApproverDeleteResponse) (
+	[]*ApprovalWorkflowApproverDeleteResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowApproverDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowApproverDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowApproverGetResponseToPorcelain(plumbing *proto.ApprovalWorkflowApproverGetResponse) (*ApprovalWorkflowApproverGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowApproverGetResponse{}
+	if v, err := convertApprovalWorkflowApproverToPorcelain(plumbing.ApprovalWorkflowApprover); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowApprover: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowApprover = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowApproverGetResponseToPlumbing(porcelain *ApprovalWorkflowApproverGetResponse) *proto.ApprovalWorkflowApproverGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowApproverGetResponse{}
+	plumbing.ApprovalWorkflowApprover = convertApprovalWorkflowApproverToPlumbing(porcelain.ApprovalWorkflowApprover)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowApproverGetResponseToPlumbing(
+	porcelains []*ApprovalWorkflowApproverGetResponse,
+) []*proto.ApprovalWorkflowApproverGetResponse {
+	var items []*proto.ApprovalWorkflowApproverGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowApproverGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowApproverGetResponseToPorcelain(plumbings []*proto.ApprovalWorkflowApproverGetResponse) (
+	[]*ApprovalWorkflowApproverGetResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowApproverGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowApproverGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowApproverHistoryToPorcelain(plumbing *proto.ApprovalWorkflowApproverHistory) (*ApprovalWorkflowApproverHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowApproverHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertApprovalWorkflowApproverToPorcelain(plumbing.ApprovalWorkflowApprover); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowApprover: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowApprover = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowApproverHistoryToPlumbing(porcelain *ApprovalWorkflowApproverHistory) *proto.ApprovalWorkflowApproverHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowApproverHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.ApprovalWorkflowApprover = convertApprovalWorkflowApproverToPlumbing(porcelain.ApprovalWorkflowApprover)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowApproverHistoryToPlumbing(
+	porcelains []*ApprovalWorkflowApproverHistory,
+) []*proto.ApprovalWorkflowApproverHistory {
+	var items []*proto.ApprovalWorkflowApproverHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowApproverHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowApproverHistoryToPorcelain(plumbings []*proto.ApprovalWorkflowApproverHistory) (
+	[]*ApprovalWorkflowApproverHistory,
+	error,
+) {
+	var items []*ApprovalWorkflowApproverHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowApproverHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowApproverListResponseToPorcelain(plumbing *proto.ApprovalWorkflowApproverListResponse) (*ApprovalWorkflowApproverListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowApproverListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowApproverListResponseToPlumbing(porcelain *ApprovalWorkflowApproverListResponse) *proto.ApprovalWorkflowApproverListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowApproverListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowApproverListResponseToPlumbing(
+	porcelains []*ApprovalWorkflowApproverListResponse,
+) []*proto.ApprovalWorkflowApproverListResponse {
+	var items []*proto.ApprovalWorkflowApproverListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowApproverListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowApproverListResponseToPorcelain(plumbings []*proto.ApprovalWorkflowApproverListResponse) (
+	[]*ApprovalWorkflowApproverListResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowApproverListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowApproverListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowCreateResponseToPorcelain(plumbing *proto.ApprovalWorkflowCreateResponse) (*ApprovalWorkflowCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowCreateResponse{}
+	if v, err := convertApprovalWorkflowToPorcelain(plumbing.ApprovalWorkflow); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflow: %v", err)
+	} else {
+		porcelain.ApprovalWorkflow = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowCreateResponseToPlumbing(porcelain *ApprovalWorkflowCreateResponse) *proto.ApprovalWorkflowCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowCreateResponse{}
+	plumbing.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(porcelain.ApprovalWorkflow)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowCreateResponseToPlumbing(
+	porcelains []*ApprovalWorkflowCreateResponse,
+) []*proto.ApprovalWorkflowCreateResponse {
+	var items []*proto.ApprovalWorkflowCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowCreateResponseToPorcelain(plumbings []*proto.ApprovalWorkflowCreateResponse) (
+	[]*ApprovalWorkflowCreateResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowDeleteResponseToPorcelain(plumbing *proto.ApprovalWorkflowDeleteResponse) (*ApprovalWorkflowDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowDeleteResponse{}
+	porcelain.ID = plumbing.Id
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowDeleteResponseToPlumbing(porcelain *ApprovalWorkflowDeleteResponse) *proto.ApprovalWorkflowDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowDeleteResponse{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowDeleteResponseToPlumbing(
+	porcelains []*ApprovalWorkflowDeleteResponse,
+) []*proto.ApprovalWorkflowDeleteResponse {
+	var items []*proto.ApprovalWorkflowDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowDeleteResponseToPorcelain(plumbings []*proto.ApprovalWorkflowDeleteResponse) (
+	[]*ApprovalWorkflowDeleteResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowGetResponseToPorcelain(plumbing *proto.ApprovalWorkflowGetResponse) (*ApprovalWorkflowGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowGetResponse{}
+	if v, err := convertApprovalWorkflowToPorcelain(plumbing.ApprovalWorkflow); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflow: %v", err)
+	} else {
+		porcelain.ApprovalWorkflow = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowGetResponseToPlumbing(porcelain *ApprovalWorkflowGetResponse) *proto.ApprovalWorkflowGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowGetResponse{}
+	plumbing.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(porcelain.ApprovalWorkflow)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowGetResponseToPlumbing(
+	porcelains []*ApprovalWorkflowGetResponse,
+) []*proto.ApprovalWorkflowGetResponse {
+	var items []*proto.ApprovalWorkflowGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowGetResponseToPorcelain(plumbings []*proto.ApprovalWorkflowGetResponse) (
+	[]*ApprovalWorkflowGetResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowHistoryToPorcelain(plumbing *proto.ApprovalWorkflowHistory) (*ApprovalWorkflowHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertApprovalWorkflowToPorcelain(plumbing.ApprovalWorkflow); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflow: %v", err)
+	} else {
+		porcelain.ApprovalWorkflow = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowHistoryToPlumbing(porcelain *ApprovalWorkflowHistory) *proto.ApprovalWorkflowHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(porcelain.ApprovalWorkflow)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowHistoryToPlumbing(
+	porcelains []*ApprovalWorkflowHistory,
+) []*proto.ApprovalWorkflowHistory {
+	var items []*proto.ApprovalWorkflowHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowHistoryToPorcelain(plumbings []*proto.ApprovalWorkflowHistory) (
+	[]*ApprovalWorkflowHistory,
+	error,
+) {
+	var items []*ApprovalWorkflowHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowListResponseToPorcelain(plumbing *proto.ApprovalWorkflowListResponse) (*ApprovalWorkflowListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowListResponseToPlumbing(porcelain *ApprovalWorkflowListResponse) *proto.ApprovalWorkflowListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowListResponseToPlumbing(
+	porcelains []*ApprovalWorkflowListResponse,
+) []*proto.ApprovalWorkflowListResponse {
+	var items []*proto.ApprovalWorkflowListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowListResponseToPorcelain(plumbings []*proto.ApprovalWorkflowListResponse) (
+	[]*ApprovalWorkflowListResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowStepToPorcelain(plumbing *proto.ApprovalWorkflowStep) (*ApprovalWorkflowStep, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowStep{}
+	porcelain.ApprovalFlowID = plumbing.ApprovalFlowId
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowStepToPlumbing(porcelain *ApprovalWorkflowStep) *proto.ApprovalWorkflowStep {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowStep{}
+	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowStepToPlumbing(
+	porcelains []*ApprovalWorkflowStep,
+) []*proto.ApprovalWorkflowStep {
+	var items []*proto.ApprovalWorkflowStep
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowStepToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowStepToPorcelain(plumbings []*proto.ApprovalWorkflowStep) (
+	[]*ApprovalWorkflowStep,
+	error,
+) {
+	var items []*ApprovalWorkflowStep
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowStepToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowStepCreateResponseToPorcelain(plumbing *proto.ApprovalWorkflowStepCreateResponse) (*ApprovalWorkflowStepCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowStepCreateResponse{}
+	if v, err := convertApprovalWorkflowStepToPorcelain(plumbing.ApprovalWorkflowStep); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowStep: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowStep = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowStepCreateResponseToPlumbing(porcelain *ApprovalWorkflowStepCreateResponse) *proto.ApprovalWorkflowStepCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowStepCreateResponse{}
+	plumbing.ApprovalWorkflowStep = convertApprovalWorkflowStepToPlumbing(porcelain.ApprovalWorkflowStep)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowStepCreateResponseToPlumbing(
+	porcelains []*ApprovalWorkflowStepCreateResponse,
+) []*proto.ApprovalWorkflowStepCreateResponse {
+	var items []*proto.ApprovalWorkflowStepCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowStepCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowStepCreateResponseToPorcelain(plumbings []*proto.ApprovalWorkflowStepCreateResponse) (
+	[]*ApprovalWorkflowStepCreateResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowStepCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowStepCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowStepDeleteResponseToPorcelain(plumbing *proto.ApprovalWorkflowStepDeleteResponse) (*ApprovalWorkflowStepDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowStepDeleteResponse{}
+	porcelain.ID = plumbing.Id
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowStepDeleteResponseToPlumbing(porcelain *ApprovalWorkflowStepDeleteResponse) *proto.ApprovalWorkflowStepDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowStepDeleteResponse{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowStepDeleteResponseToPlumbing(
+	porcelains []*ApprovalWorkflowStepDeleteResponse,
+) []*proto.ApprovalWorkflowStepDeleteResponse {
+	var items []*proto.ApprovalWorkflowStepDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowStepDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowStepDeleteResponseToPorcelain(plumbings []*proto.ApprovalWorkflowStepDeleteResponse) (
+	[]*ApprovalWorkflowStepDeleteResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowStepDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowStepDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowStepGetResponseToPorcelain(plumbing *proto.ApprovalWorkflowStepGetResponse) (*ApprovalWorkflowStepGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowStepGetResponse{}
+	if v, err := convertApprovalWorkflowStepToPorcelain(plumbing.ApprovalWorkflowStep); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowStep: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowStep = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowStepGetResponseToPlumbing(porcelain *ApprovalWorkflowStepGetResponse) *proto.ApprovalWorkflowStepGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowStepGetResponse{}
+	plumbing.ApprovalWorkflowStep = convertApprovalWorkflowStepToPlumbing(porcelain.ApprovalWorkflowStep)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowStepGetResponseToPlumbing(
+	porcelains []*ApprovalWorkflowStepGetResponse,
+) []*proto.ApprovalWorkflowStepGetResponse {
+	var items []*proto.ApprovalWorkflowStepGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowStepGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowStepGetResponseToPorcelain(plumbings []*proto.ApprovalWorkflowStepGetResponse) (
+	[]*ApprovalWorkflowStepGetResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowStepGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowStepGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowStepHistoryToPorcelain(plumbing *proto.ApprovalWorkflowStepHistory) (*ApprovalWorkflowStepHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowStepHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertApprovalWorkflowStepToPorcelain(plumbing.ApprovalWorkflowStep); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowStep: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowStep = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowStepHistoryToPlumbing(porcelain *ApprovalWorkflowStepHistory) *proto.ApprovalWorkflowStepHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowStepHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.ApprovalWorkflowStep = convertApprovalWorkflowStepToPlumbing(porcelain.ApprovalWorkflowStep)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowStepHistoryToPlumbing(
+	porcelains []*ApprovalWorkflowStepHistory,
+) []*proto.ApprovalWorkflowStepHistory {
+	var items []*proto.ApprovalWorkflowStepHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowStepHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowStepHistoryToPorcelain(plumbings []*proto.ApprovalWorkflowStepHistory) (
+	[]*ApprovalWorkflowStepHistory,
+	error,
+) {
+	var items []*ApprovalWorkflowStepHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowStepHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowStepListResponseToPorcelain(plumbing *proto.ApprovalWorkflowStepListResponse) (*ApprovalWorkflowStepListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowStepListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowStepListResponseToPlumbing(porcelain *ApprovalWorkflowStepListResponse) *proto.ApprovalWorkflowStepListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowStepListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowStepListResponseToPlumbing(
+	porcelains []*ApprovalWorkflowStepListResponse,
+) []*proto.ApprovalWorkflowStepListResponse {
+	var items []*proto.ApprovalWorkflowStepListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowStepListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowStepListResponseToPorcelain(plumbings []*proto.ApprovalWorkflowStepListResponse) (
+	[]*ApprovalWorkflowStepListResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowStepListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowStepListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalWorkflowUpdateResponseToPorcelain(plumbing *proto.ApprovalWorkflowUpdateResponse) (*ApprovalWorkflowUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalWorkflowUpdateResponse{}
+	if v, err := convertApprovalWorkflowToPorcelain(plumbing.ApprovalWorkflow); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflow: %v", err)
+	} else {
+		porcelain.ApprovalWorkflow = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalWorkflowUpdateResponseToPlumbing(porcelain *ApprovalWorkflowUpdateResponse) *proto.ApprovalWorkflowUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalWorkflowUpdateResponse{}
+	plumbing.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(porcelain.ApprovalWorkflow)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedApprovalWorkflowUpdateResponseToPlumbing(
+	porcelains []*ApprovalWorkflowUpdateResponse,
+) []*proto.ApprovalWorkflowUpdateResponse {
+	var items []*proto.ApprovalWorkflowUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalWorkflowUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalWorkflowUpdateResponseToPorcelain(plumbings []*proto.ApprovalWorkflowUpdateResponse) (
+	[]*ApprovalWorkflowUpdateResponse,
+	error,
+) {
+	var items []*ApprovalWorkflowUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalWorkflowUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAthenaToPorcelain(plumbing *proto.Athena) (*Athena, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -15656,6 +16623,276 @@ func (a *activityIteratorImpl) Value() *Activity {
 }
 
 func (a *activityIteratorImpl) Err() error {
+	return a.err
+}
+
+type approvalWorkflowApproverIteratorImplFetchFunc func() (
+	[]*ApprovalWorkflowApprover,
+	bool, error)
+type approvalWorkflowApproverIteratorImpl struct {
+	buffer      []*ApprovalWorkflowApprover
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       approvalWorkflowApproverIteratorImplFetchFunc
+}
+
+func newApprovalWorkflowApproverIteratorImpl(f approvalWorkflowApproverIteratorImplFetchFunc) *approvalWorkflowApproverIteratorImpl {
+	return &approvalWorkflowApproverIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *approvalWorkflowApproverIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *approvalWorkflowApproverIteratorImpl) Value() *ApprovalWorkflowApprover {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *approvalWorkflowApproverIteratorImpl) Err() error {
+	return a.err
+}
+
+type approvalWorkflowApproverHistoryIteratorImplFetchFunc func() (
+	[]*ApprovalWorkflowApproverHistory,
+	bool, error)
+type approvalWorkflowApproverHistoryIteratorImpl struct {
+	buffer      []*ApprovalWorkflowApproverHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       approvalWorkflowApproverHistoryIteratorImplFetchFunc
+}
+
+func newApprovalWorkflowApproverHistoryIteratorImpl(f approvalWorkflowApproverHistoryIteratorImplFetchFunc) *approvalWorkflowApproverHistoryIteratorImpl {
+	return &approvalWorkflowApproverHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *approvalWorkflowApproverHistoryIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *approvalWorkflowApproverHistoryIteratorImpl) Value() *ApprovalWorkflowApproverHistory {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *approvalWorkflowApproverHistoryIteratorImpl) Err() error {
+	return a.err
+}
+
+type approvalWorkflowStepIteratorImplFetchFunc func() (
+	[]*ApprovalWorkflowStep,
+	bool, error)
+type approvalWorkflowStepIteratorImpl struct {
+	buffer      []*ApprovalWorkflowStep
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       approvalWorkflowStepIteratorImplFetchFunc
+}
+
+func newApprovalWorkflowStepIteratorImpl(f approvalWorkflowStepIteratorImplFetchFunc) *approvalWorkflowStepIteratorImpl {
+	return &approvalWorkflowStepIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *approvalWorkflowStepIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *approvalWorkflowStepIteratorImpl) Value() *ApprovalWorkflowStep {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *approvalWorkflowStepIteratorImpl) Err() error {
+	return a.err
+}
+
+type approvalWorkflowStepHistoryIteratorImplFetchFunc func() (
+	[]*ApprovalWorkflowStepHistory,
+	bool, error)
+type approvalWorkflowStepHistoryIteratorImpl struct {
+	buffer      []*ApprovalWorkflowStepHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       approvalWorkflowStepHistoryIteratorImplFetchFunc
+}
+
+func newApprovalWorkflowStepHistoryIteratorImpl(f approvalWorkflowStepHistoryIteratorImplFetchFunc) *approvalWorkflowStepHistoryIteratorImpl {
+	return &approvalWorkflowStepHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *approvalWorkflowStepHistoryIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *approvalWorkflowStepHistoryIteratorImpl) Value() *ApprovalWorkflowStepHistory {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *approvalWorkflowStepHistoryIteratorImpl) Err() error {
+	return a.err
+}
+
+type approvalWorkflowIteratorImplFetchFunc func() (
+	[]*ApprovalWorkflow,
+	bool, error)
+type approvalWorkflowIteratorImpl struct {
+	buffer      []*ApprovalWorkflow
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       approvalWorkflowIteratorImplFetchFunc
+}
+
+func newApprovalWorkflowIteratorImpl(f approvalWorkflowIteratorImplFetchFunc) *approvalWorkflowIteratorImpl {
+	return &approvalWorkflowIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *approvalWorkflowIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *approvalWorkflowIteratorImpl) Value() *ApprovalWorkflow {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *approvalWorkflowIteratorImpl) Err() error {
+	return a.err
+}
+
+type approvalWorkflowHistoryIteratorImplFetchFunc func() (
+	[]*ApprovalWorkflowHistory,
+	bool, error)
+type approvalWorkflowHistoryIteratorImpl struct {
+	buffer      []*ApprovalWorkflowHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       approvalWorkflowHistoryIteratorImplFetchFunc
+}
+
+func newApprovalWorkflowHistoryIteratorImpl(f approvalWorkflowHistoryIteratorImplFetchFunc) *approvalWorkflowHistoryIteratorImpl {
+	return &approvalWorkflowHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *approvalWorkflowHistoryIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *approvalWorkflowHistoryIteratorImpl) Value() *ApprovalWorkflowHistory {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *approvalWorkflowHistoryIteratorImpl) Err() error {
 	return a.err
 }
 

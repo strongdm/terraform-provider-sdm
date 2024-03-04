@@ -1293,6 +1293,778 @@ func (svc *Activities) List(
 	), nil
 }
 
+// ApprovalWorkflowApprovers link approval workflow approvers to an ApprovalWorkflowStep
+type ApprovalWorkflowApprovers struct {
+	client plumbing.ApprovalWorkflowApproversClient
+	parent *Client
+}
+
+// A SnapshotApprovalWorkflowApprovers exposes the read only methods of the ApprovalWorkflowApprovers
+// service for historical queries.
+type SnapshotApprovalWorkflowApprovers interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*ApprovalWorkflowApproverGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		ApprovalWorkflowApproverIterator,
+		error)
+}
+
+// Create creates a new approval workflow approver.
+func (svc *ApprovalWorkflowApprovers) Create(
+	ctx context.Context,
+	approvalWorkflowApprover *ApprovalWorkflowApprover) (
+	*ApprovalWorkflowApproverCreateResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowApproverCreateRequest{}
+
+	req.ApprovalWorkflowApprover = convertApprovalWorkflowApproverToPlumbing(approvalWorkflowApprover)
+	var plumbingResponse *plumbing.ApprovalWorkflowApproverCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowApproverCreateResponse{}
+	if v, err := convertApprovalWorkflowApproverToPorcelain(plumbingResponse.ApprovalWorkflowApprover); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflowApprover = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one approval workflow approver by ID.
+func (svc *ApprovalWorkflowApprovers) Get(
+	ctx context.Context,
+	id string) (
+	*ApprovalWorkflowApproverGetResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowApproverGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.ApprovalWorkflowApproverGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowApproverGetResponse{}
+	if v, err := convertApprovalWorkflowApproverToPorcelain(plumbingResponse.ApprovalWorkflowApprover); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflowApprover = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete deletes an existing approval workflow approver.
+func (svc *ApprovalWorkflowApprovers) Delete(
+	ctx context.Context,
+	id string) (
+	*ApprovalWorkflowApproverDeleteResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowApproverDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.ApprovalWorkflowApproverDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowApproverDeleteResponse{}
+	resp.ID = (plumbingResponse.Id)
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Lists existing approval workflow approvers.
+func (svc *ApprovalWorkflowApprovers) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ApprovalWorkflowApproverIterator,
+	error) {
+	req := &plumbing.ApprovalWorkflowApproverListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newApprovalWorkflowApproverIteratorImpl(
+		func() (
+			[]*ApprovalWorkflowApprover,
+			bool, error) {
+			var plumbingResponse *plumbing.ApprovalWorkflowApproverListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedApprovalWorkflowApproverToPorcelain(plumbingResponse.ApprovalWorkflowApprovers)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// ApprovalWorkflowApproversHistory records all changes to the state of an ApprovalWorkflowApprover.
+type ApprovalWorkflowApproversHistory struct {
+	client plumbing.ApprovalWorkflowApproversHistoryClient
+	parent *Client
+}
+
+// List gets a list of ApprovalWorkflowApproverHistory records matching a given set of criteria.
+func (svc *ApprovalWorkflowApproversHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ApprovalWorkflowApproverHistoryIterator,
+	error) {
+	req := &plumbing.ApprovalWorkflowApproverHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newApprovalWorkflowApproverHistoryIteratorImpl(
+		func() (
+			[]*ApprovalWorkflowApproverHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.ApprovalWorkflowApproverHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApproversHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedApprovalWorkflowApproverHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// ApprovalWorkflowSteps link approval workflow steps to an ApprovalWorkflow
+type ApprovalWorkflowSteps struct {
+	client plumbing.ApprovalWorkflowStepsClient
+	parent *Client
+}
+
+// A SnapshotApprovalWorkflowSteps exposes the read only methods of the ApprovalWorkflowSteps
+// service for historical queries.
+type SnapshotApprovalWorkflowSteps interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*ApprovalWorkflowStepGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		ApprovalWorkflowStepIterator,
+		error)
+}
+
+// Create creates a new approval workflow step.
+func (svc *ApprovalWorkflowSteps) Create(
+	ctx context.Context,
+	approvalWorkflowStep *ApprovalWorkflowStep) (
+	*ApprovalWorkflowStepCreateResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowStepCreateRequest{}
+
+	req.ApprovalWorkflowStep = convertApprovalWorkflowStepToPlumbing(approvalWorkflowStep)
+	var plumbingResponse *plumbing.ApprovalWorkflowStepCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowStepCreateResponse{}
+	if v, err := convertApprovalWorkflowStepToPorcelain(plumbingResponse.ApprovalWorkflowStep); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflowStep = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one approval workflow step by ID.
+func (svc *ApprovalWorkflowSteps) Get(
+	ctx context.Context,
+	id string) (
+	*ApprovalWorkflowStepGetResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowStepGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.ApprovalWorkflowStepGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowStepGetResponse{}
+	if v, err := convertApprovalWorkflowStepToPorcelain(plumbingResponse.ApprovalWorkflowStep); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflowStep = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete deletes an existing approval workflow step.
+func (svc *ApprovalWorkflowSteps) Delete(
+	ctx context.Context,
+	id string) (
+	*ApprovalWorkflowStepDeleteResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowStepDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.ApprovalWorkflowStepDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowStepDeleteResponse{}
+	resp.ID = (plumbingResponse.Id)
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Lists existing approval workflow steps.
+func (svc *ApprovalWorkflowSteps) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ApprovalWorkflowStepIterator,
+	error) {
+	req := &plumbing.ApprovalWorkflowStepListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newApprovalWorkflowStepIteratorImpl(
+		func() (
+			[]*ApprovalWorkflowStep,
+			bool, error) {
+			var plumbingResponse *plumbing.ApprovalWorkflowStepListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedApprovalWorkflowStepToPorcelain(plumbingResponse.ApprovalWorkflowSteps)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// ApprovalWorkflowStepsHistory records all changes to the state of an ApprovalWorkflowStep.
+type ApprovalWorkflowStepsHistory struct {
+	client plumbing.ApprovalWorkflowStepsHistoryClient
+	parent *Client
+}
+
+// List gets a list of ApprovalWorkflowStepHistory records matching a given set of criteria.
+func (svc *ApprovalWorkflowStepsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ApprovalWorkflowStepHistoryIterator,
+	error) {
+	req := &plumbing.ApprovalWorkflowStepHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newApprovalWorkflowStepHistoryIteratorImpl(
+		func() (
+			[]*ApprovalWorkflowStepHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.ApprovalWorkflowStepHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowStepsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedApprovalWorkflowStepHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// ApprovalWorkflows are the mechanism by which requests for access can be viewed by authorized
+// approvers and be approved or denied.
+type ApprovalWorkflows struct {
+	client plumbing.ApprovalWorkflowsClient
+	parent *Client
+}
+
+// A SnapshotApprovalWorkflows exposes the read only methods of the ApprovalWorkflows
+// service for historical queries.
+type SnapshotApprovalWorkflows interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*ApprovalWorkflowGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		ApprovalWorkflowIterator,
+		error)
+}
+
+// Create creates a new approval workflow and requires a name and approval mode for the approval workflow.
+func (svc *ApprovalWorkflows) Create(
+	ctx context.Context,
+	approvalWorkflow *ApprovalWorkflow) (
+	*ApprovalWorkflowCreateResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowCreateRequest{}
+
+	req.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(approvalWorkflow)
+	var plumbingResponse *plumbing.ApprovalWorkflowCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowCreateResponse{}
+	if v, err := convertApprovalWorkflowToPorcelain(plumbingResponse.ApprovalWorkflow); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflow = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one approval workflow by ID.
+func (svc *ApprovalWorkflows) Get(
+	ctx context.Context,
+	id string) (
+	*ApprovalWorkflowGetResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.ApprovalWorkflowGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowGetResponse{}
+	if v, err := convertApprovalWorkflowToPorcelain(plumbingResponse.ApprovalWorkflow); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflow = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete deletes an existing approval workflow.
+func (svc *ApprovalWorkflows) Delete(
+	ctx context.Context,
+	id string) (
+	*ApprovalWorkflowDeleteResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.ApprovalWorkflowDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowDeleteResponse{}
+	resp.ID = (plumbingResponse.Id)
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update updates an existing approval workflow.
+func (svc *ApprovalWorkflows) Update(
+	ctx context.Context,
+	approvalWorkflow *ApprovalWorkflow) (
+	*ApprovalWorkflowUpdateResponse,
+	error) {
+	req := &plumbing.ApprovalWorkflowUpdateRequest{}
+
+	req.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(approvalWorkflow)
+	var plumbingResponse *plumbing.ApprovalWorkflowUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ApprovalWorkflowUpdateResponse{}
+	if v, err := convertApprovalWorkflowToPorcelain(plumbingResponse.ApprovalWorkflow); err != nil {
+		return nil, err
+	} else {
+		resp.ApprovalWorkflow = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Lists existing approval workflows.
+func (svc *ApprovalWorkflows) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ApprovalWorkflowIterator,
+	error) {
+	req := &plumbing.ApprovalWorkflowListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newApprovalWorkflowIteratorImpl(
+		func() (
+			[]*ApprovalWorkflow,
+			bool, error) {
+			var plumbingResponse *plumbing.ApprovalWorkflowListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedApprovalWorkflowToPorcelain(plumbingResponse.ApprovalWorkflows)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// ApprovalWorkflowsHistory records all changes to the state of an ApprovalWorkflow.
+type ApprovalWorkflowsHistory struct {
+	client plumbing.ApprovalWorkflowsHistoryClient
+	parent *Client
+}
+
+// List gets a list of ApprovalWorkflowHistory records matching a given set of criteria.
+func (svc *ApprovalWorkflowsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ApprovalWorkflowHistoryIterator,
+	error) {
+	req := &plumbing.ApprovalWorkflowHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newApprovalWorkflowHistoryIteratorImpl(
+		func() (
+			[]*ApprovalWorkflowHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.ApprovalWorkflowHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedApprovalWorkflowHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // ControlPanel contains all administrative controls.
 type ControlPanel struct {
 	client plumbing.ControlPanelClient

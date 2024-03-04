@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2021-08-23"
-	defaultUserAgent = "strongdm-sdk-go/6.8.0"
+	defaultUserAgent = "strongdm-sdk-go/6.9.0"
 	defaultPageLimit = 50
 )
 
@@ -67,53 +67,59 @@ type Client struct {
 
 	grpcConn *grpc.ClientConn
 
-	maxRetries                  int
-	baseRetryDelay              time.Duration
-	maxRetryDelay               time.Duration
-	accessRequests              *AccessRequests
-	accessRequestEventsHistory  *AccessRequestEventsHistory
-	accessRequestsHistory       *AccessRequestsHistory
-	accountAttachments          *AccountAttachments
-	accountAttachmentsHistory   *AccountAttachmentsHistory
-	accountGrants               *AccountGrants
-	accountGrantsHistory        *AccountGrantsHistory
-	accountPermissions          *AccountPermissions
-	accountResources            *AccountResources
-	accountResourcesHistory     *AccountResourcesHistory
-	accounts                    *Accounts
-	accountsHistory             *AccountsHistory
-	activities                  *Activities
-	controlPanel                *ControlPanel
-	nodes                       *Nodes
-	nodesHistory                *NodesHistory
-	organizationHistory         *OrganizationHistory
-	peeringGroupNodes           *PeeringGroupNodes
-	peeringGroupPeers           *PeeringGroupPeers
-	peeringGroupResources       *PeeringGroupResources
-	peeringGroups               *PeeringGroups
-	queries                     *Queries
-	remoteIdentities            *RemoteIdentities
-	remoteIdentitiesHistory     *RemoteIdentitiesHistory
-	remoteIdentityGroups        *RemoteIdentityGroups
-	remoteIdentityGroupsHistory *RemoteIdentityGroupsHistory
-	replays                     *Replays
-	resources                   *Resources
-	resourcesHistory            *ResourcesHistory
-	roleResources               *RoleResources
-	roleResourcesHistory        *RoleResourcesHistory
-	roles                       *Roles
-	rolesHistory                *RolesHistory
-	secretStoreHealths          *SecretStoreHealths
-	secretStores                *SecretStores
-	secretStoresHistory         *SecretStoresHistory
-	workflowApprovers           *WorkflowApprovers
-	workflowApproversHistory    *WorkflowApproversHistory
-	workflowAssignments         *WorkflowAssignments
-	workflowAssignmentsHistory  *WorkflowAssignmentsHistory
-	workflowRoles               *WorkflowRoles
-	workflowRolesHistory        *WorkflowRolesHistory
-	workflows                   *Workflows
-	workflowsHistory            *WorkflowsHistory
+	maxRetries                       int
+	baseRetryDelay                   time.Duration
+	maxRetryDelay                    time.Duration
+	accessRequests                   *AccessRequests
+	accessRequestEventsHistory       *AccessRequestEventsHistory
+	accessRequestsHistory            *AccessRequestsHistory
+	accountAttachments               *AccountAttachments
+	accountAttachmentsHistory        *AccountAttachmentsHistory
+	accountGrants                    *AccountGrants
+	accountGrantsHistory             *AccountGrantsHistory
+	accountPermissions               *AccountPermissions
+	accountResources                 *AccountResources
+	accountResourcesHistory          *AccountResourcesHistory
+	accounts                         *Accounts
+	accountsHistory                  *AccountsHistory
+	activities                       *Activities
+	approvalWorkflowApprovers        *ApprovalWorkflowApprovers
+	approvalWorkflowApproversHistory *ApprovalWorkflowApproversHistory
+	approvalWorkflowSteps            *ApprovalWorkflowSteps
+	approvalWorkflowStepsHistory     *ApprovalWorkflowStepsHistory
+	approvalWorkflows                *ApprovalWorkflows
+	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
+	controlPanel                     *ControlPanel
+	nodes                            *Nodes
+	nodesHistory                     *NodesHistory
+	organizationHistory              *OrganizationHistory
+	peeringGroupNodes                *PeeringGroupNodes
+	peeringGroupPeers                *PeeringGroupPeers
+	peeringGroupResources            *PeeringGroupResources
+	peeringGroups                    *PeeringGroups
+	queries                          *Queries
+	remoteIdentities                 *RemoteIdentities
+	remoteIdentitiesHistory          *RemoteIdentitiesHistory
+	remoteIdentityGroups             *RemoteIdentityGroups
+	remoteIdentityGroupsHistory      *RemoteIdentityGroupsHistory
+	replays                          *Replays
+	resources                        *Resources
+	resourcesHistory                 *ResourcesHistory
+	roleResources                    *RoleResources
+	roleResourcesHistory             *RoleResourcesHistory
+	roles                            *Roles
+	rolesHistory                     *RolesHistory
+	secretStoreHealths               *SecretStoreHealths
+	secretStores                     *SecretStores
+	secretStoresHistory              *SecretStoresHistory
+	workflowApprovers                *WorkflowApprovers
+	workflowApproversHistory         *WorkflowApproversHistory
+	workflowAssignments              *WorkflowAssignments
+	workflowAssignmentsHistory       *WorkflowAssignmentsHistory
+	workflowRoles                    *WorkflowRoles
+	workflowRolesHistory             *WorkflowRolesHistory
+	workflows                        *Workflows
+	workflowsHistory                 *WorkflowsHistory
 }
 
 // New creates a new strongDM API client.
@@ -209,6 +215,30 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.activities = &Activities{
 		client: plumbing.NewActivitiesClient(client.grpcConn),
+		parent: client,
+	}
+	client.approvalWorkflowApprovers = &ApprovalWorkflowApprovers{
+		client: plumbing.NewApprovalWorkflowApproversClient(client.grpcConn),
+		parent: client,
+	}
+	client.approvalWorkflowApproversHistory = &ApprovalWorkflowApproversHistory{
+		client: plumbing.NewApprovalWorkflowApproversHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.approvalWorkflowSteps = &ApprovalWorkflowSteps{
+		client: plumbing.NewApprovalWorkflowStepsClient(client.grpcConn),
+		parent: client,
+	}
+	client.approvalWorkflowStepsHistory = &ApprovalWorkflowStepsHistory{
+		client: plumbing.NewApprovalWorkflowStepsHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.approvalWorkflows = &ApprovalWorkflows{
+		client: plumbing.NewApprovalWorkflowsClient(client.grpcConn),
+		parent: client,
+	}
+	client.approvalWorkflowsHistory = &ApprovalWorkflowsHistory{
+		client: plumbing.NewApprovalWorkflowsHistoryClient(client.grpcConn),
 		parent: client,
 	}
 	client.controlPanel = &ControlPanel{
@@ -480,6 +510,37 @@ func (c *Client) Activities() *Activities {
 	return c.activities
 }
 
+// ApprovalWorkflowApprovers link approval workflow approvers to an ApprovalWorkflowStep
+func (c *Client) ApprovalWorkflowApprovers() *ApprovalWorkflowApprovers {
+	return c.approvalWorkflowApprovers
+}
+
+// ApprovalWorkflowApproversHistory records all changes to the state of an ApprovalWorkflowApprover.
+func (c *Client) ApprovalWorkflowApproversHistory() *ApprovalWorkflowApproversHistory {
+	return c.approvalWorkflowApproversHistory
+}
+
+// ApprovalWorkflowSteps link approval workflow steps to an ApprovalWorkflow
+func (c *Client) ApprovalWorkflowSteps() *ApprovalWorkflowSteps {
+	return c.approvalWorkflowSteps
+}
+
+// ApprovalWorkflowStepsHistory records all changes to the state of an ApprovalWorkflowStep.
+func (c *Client) ApprovalWorkflowStepsHistory() *ApprovalWorkflowStepsHistory {
+	return c.approvalWorkflowStepsHistory
+}
+
+// ApprovalWorkflows are the mechanism by which requests for access can be viewed by authorized
+// approvers and be approved or denied.
+func (c *Client) ApprovalWorkflows() *ApprovalWorkflows {
+	return c.approvalWorkflows
+}
+
+// ApprovalWorkflowsHistory records all changes to the state of an ApprovalWorkflow.
+func (c *Client) ApprovalWorkflowsHistory() *ApprovalWorkflowsHistory {
+	return c.approvalWorkflowsHistory
+}
+
 // ControlPanel contains all administrative controls.
 func (c *Client) ControlPanel() *ControlPanel {
 	return c.controlPanel
@@ -683,6 +744,18 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewAccountsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.approvalWorkflowApprovers = &ApprovalWorkflowApprovers{
+		client: plumbing.NewApprovalWorkflowApproversClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.approvalWorkflowSteps = &ApprovalWorkflowSteps{
+		client: plumbing.NewApprovalWorkflowStepsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.approvalWorkflows = &ApprovalWorkflows{
+		client: plumbing.NewApprovalWorkflowsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.nodes = &Nodes{
 		client: plumbing.NewNodesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -762,6 +835,22 @@ func (c *SnapshotClient) AccountResources() SnapshotAccountResources {
 // 2. **Service Accounts:** machines that are authenticated using a service token.
 func (c *SnapshotClient) Accounts() SnapshotAccounts {
 	return c.client.accounts
+}
+
+// ApprovalWorkflowApprovers link approval workflow approvers to an ApprovalWorkflowStep
+func (c *SnapshotClient) ApprovalWorkflowApprovers() SnapshotApprovalWorkflowApprovers {
+	return c.client.approvalWorkflowApprovers
+}
+
+// ApprovalWorkflowSteps link approval workflow steps to an ApprovalWorkflow
+func (c *SnapshotClient) ApprovalWorkflowSteps() SnapshotApprovalWorkflowSteps {
+	return c.client.approvalWorkflowSteps
+}
+
+// ApprovalWorkflows are the mechanism by which requests for access can be viewed by authorized
+// approvers and be approved or denied.
+func (c *SnapshotClient) ApprovalWorkflows() SnapshotApprovalWorkflows {
+	return c.client.approvalWorkflows
 }
 
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
