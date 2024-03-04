@@ -716,6 +716,20 @@ type AccountUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// ActiveDirectoryStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type ActiveDirectoryStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Hostname of server that is hosting NDES (Network Device Enrollment Services).
+	// Often this is the same host as Active Directory Certificate Services
+	ServerAddress string `json:"serverAddress"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 // An Activity is a record of an action taken against a strongDM deployment, e.g.
 // a user creation, resource deletion, sso configuration change, etc.
 type Activity struct {
@@ -3191,6 +3205,8 @@ type Query struct {
 	// For queries against SSH, Kubernetes, and RDP resources, this contains additional information
 	// about the captured query.
 	Capture *QueryCapture `json:"capture"`
+	// The IP address the Query was performed from, as detected at the StrongDM control plane.
+	ClientIP string `json:"clientIp"`
 	// The time at which the Query was completed.
 	// Empty if this record indicates the start of a long-running query.
 	CompletedAt time.Time `json:"completedAt"`
@@ -8649,6 +8665,30 @@ type SecretStore interface {
 	isOneOf_SecretStore()
 }
 
+func (*ActiveDirectoryStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the ActiveDirectoryStore.
+func (m *ActiveDirectoryStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the ActiveDirectoryStore.
+func (m *ActiveDirectoryStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ActiveDirectoryStore.
+func (m *ActiveDirectoryStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the ActiveDirectoryStore.
+func (m *ActiveDirectoryStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ActiveDirectoryStore.
+func (m *ActiveDirectoryStore) SetName(v string) {
+	m.Name = v
+}
 func (*AWSStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the AWSStore.

@@ -12,6 +12,10 @@ A SecretStore is a server where resource secrets (passwords, keys) are stored.
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Argument Reference
 The following arguments are supported by the SecretStore resource:
+* active_directory_store:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `server_address` - (Required) Hostname of server that is hosting NDES (Network Device Enrollment Services).  Often this is the same host as Active Directory Certificate Services
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aws:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `region` - (Required) The AWS region to target e.g. us-east-1

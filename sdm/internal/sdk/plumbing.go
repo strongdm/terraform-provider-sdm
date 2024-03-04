@@ -2221,6 +2221,57 @@ func convertRepeatedAccountUpdateResponseToPorcelain(plumbings []*proto.AccountU
 	}
 	return items, nil
 }
+func convertActiveDirectoryStoreToPorcelain(plumbing *proto.ActiveDirectoryStore) (*ActiveDirectoryStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ActiveDirectoryStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.ServerAddress = plumbing.ServerAddress
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertActiveDirectoryStoreToPlumbing(porcelain *ActiveDirectoryStore) *proto.ActiveDirectoryStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ActiveDirectoryStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedActiveDirectoryStoreToPlumbing(
+	porcelains []*ActiveDirectoryStore,
+) []*proto.ActiveDirectoryStore {
+	var items []*proto.ActiveDirectoryStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertActiveDirectoryStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedActiveDirectoryStoreToPorcelain(plumbings []*proto.ActiveDirectoryStore) (
+	[]*ActiveDirectoryStore,
+	error,
+) {
+	var items []*ActiveDirectoryStore
+	for _, plumbing := range plumbings {
+		if v, err := convertActiveDirectoryStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertActivityToPorcelain(plumbing *proto.Activity) (*Activity, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -8634,6 +8685,7 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	} else {
 		porcelain.Capture = v
 	}
+	porcelain.ClientIP = plumbing.ClientIp
 	if v, err := convertTimestampToPorcelain(plumbing.CompletedAt); err != nil {
 		return nil, fmt.Errorf("error converting field CompletedAt: %v", err)
 	} else {
@@ -8682,6 +8734,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.AccountLastName = (porcelain.AccountLastName)
 	plumbing.AccountTags = convertTagsToPlumbing(porcelain.AccountTags)
 	plumbing.Capture = convertQueryCaptureToPlumbing(porcelain.Capture)
+	plumbing.ClientIp = (porcelain.ClientIP)
 	plumbing.CompletedAt = convertTimestampToPlumbing(porcelain.CompletedAt)
 	plumbing.Duration = convertDurationToPlumbing(porcelain.Duration)
 	plumbing.EgressNodeId = (porcelain.EgressNodeID)
@@ -11792,6 +11845,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 	plumbing := &proto.SecretStore{}
 
 	switch v := porcelain.(type) {
+	case *ActiveDirectoryStore:
+		plumbing.SecretStore = &proto.SecretStore_ActiveDirectory{ActiveDirectory: convertActiveDirectoryStoreToPlumbing(v)}
 	case *AWSStore:
 		plumbing.SecretStore = &proto.SecretStore_Aws{Aws: convertAWSStoreToPlumbing(v)}
 	case *AWSCertX509Store:
@@ -11833,6 +11888,9 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 }
 
 func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, error) {
+	if plumbing.GetActiveDirectory() != nil {
+		return convertActiveDirectoryStoreToPorcelain(plumbing.GetActiveDirectory())
+	}
 	if plumbing.GetAws() != nil {
 		return convertAWSStoreToPorcelain(plumbing.GetAws())
 	}

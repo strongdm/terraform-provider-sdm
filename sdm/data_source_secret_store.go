@@ -43,6 +43,36 @@ func dataSourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"active_directory_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Hostname of server that is hosting NDES (Network Device Enrollment Services).  Often this is the same host as Active Directory Certificate Services",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"aws": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -818,11 +848,18 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"aws": {},
+		"active_directory_store": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
+		case *sdm.ActiveDirectoryStore:
+			output[0]["active_directory_store"] = append(output[0]["active_directory_store"], entity{
+				"id":             (v.ID),
+				"name":           (v.Name),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
+			})
 		case *sdm.AWSStore:
 			output[0]["aws"] = append(output[0]["aws"], entity{
 				"id":     (v.ID),

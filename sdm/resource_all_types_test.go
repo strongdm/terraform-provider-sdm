@@ -2396,6 +2396,13 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 	}
 	tcs := []testCase{
 		{
+			resource: "active_directory_store",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"server_address", `"server_address"`},
+			},
+		},
+		{
 			resource: "aws",
 			pairs: [][2]string{
 				{"name", `"all_secrets_name"`},

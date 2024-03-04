@@ -23,6 +23,32 @@ func resourceSecretStore() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"active_directory_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "ActiveDirectoryStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Hostname of server that is hosting NDES (Network Device Enrollment Services).  Often this is the same host as Active Directory Certificate Services",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"aws": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -688,6 +714,19 @@ func resourceSecretStore() *schema.Resource {
 	}
 }
 func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
+	if list := d.Get("active_directory_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.ActiveDirectoryStore{}
+		}
+		out := &sdm.ActiveDirectoryStore{
+			ID:            d.Id(),
+			Name:          convertStringToPlumbing(raw["name"]),
+			ServerAddress: convertStringToPlumbing(raw["server_address"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("aws").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -971,6 +1010,16 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 	}
 	d.SetId(resp.SecretStore.GetID())
 	switch v := resp.SecretStore.(type) {
+	case *sdm.ActiveDirectoryStore:
+		localV, _ := localVersion.(*sdm.ActiveDirectoryStore)
+		_ = localV
+		d.Set("active_directory_store", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AWSStore:
 		localV, _ := localVersion.(*sdm.AWSStore)
 		_ = localV
@@ -1205,6 +1254,19 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 		return fmt.Errorf("cannot read SecretStore %s: %w", d.Id(), err)
 	}
 	switch v := resp.SecretStore.(type) {
+	case *sdm.ActiveDirectoryStore:
+		localV, ok := localVersion.(*sdm.ActiveDirectoryStore)
+		if !ok {
+			localV = &sdm.ActiveDirectoryStore{}
+		}
+		_ = localV
+		d.Set("active_directory_store", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AWSStore:
 		localV, ok := localVersion.(*sdm.AWSStore)
 		if !ok {
