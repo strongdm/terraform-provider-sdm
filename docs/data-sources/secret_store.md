@@ -23,7 +23,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* active_directory_store:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
-		* `server_address` - Hostname of server that is hosting NDES (Network Device Enrollment Services).  Often this is the same host as Active Directory Certificate Services
+		* `server_address` - Hostname of server that is hosting NDES (Network Device Enrollment Services). Often this is the same host as Active Directory Certificate Services
 		* `tags` - Tags is a map of key, value pairs.
 	* aws:
 		* `id` - Unique identifier of the SecretStore.
@@ -34,7 +34,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `ca_arn` - The ARN of the CA in AWS Private CA
 		* `certificate_template_arn` - The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR
 		* `id` - Unique identifier of the SecretStore.
-		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `region` - The AWS region to target e.g. us-east-1
 		* `signing_algo` - The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA
@@ -74,6 +74,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `ca_id` - The ID of the target CA
 		* `ca_pool_id` - The ID of the target CA pool
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
 		* `location` - The Region for the CA in GCP format e.g. us-west1
 		* `name` - Unique human-readable name of the SecretStore.
 		* `project_id` - The GCP project ID to target.
@@ -86,6 +87,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_approle_cert_ssh:
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
@@ -94,6 +96,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_approle_cert_x509:
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
@@ -114,6 +117,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `client_cert_path` - A path to a client certificate file accessible by a Node
 		* `client_key_path` - A path to a client key file accessible by a Node
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
@@ -125,6 +129,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `client_cert_path` - A path to a client certificate file accessible by a Node
 		* `client_key_path` - A path to a client key file accessible by a Node
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
@@ -139,6 +144,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_token_cert_ssh:
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
@@ -147,6 +153,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_token_cert_x509:
 		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA

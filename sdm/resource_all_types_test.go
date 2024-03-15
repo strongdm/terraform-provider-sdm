@@ -1191,10 +1191,11 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	seID := resp.SecretStore.(*sdm.VaultTokenStore).ID
 
 	respSSHCert, err := client.SecretStores().Create(ctx, &sdm.VaultTokenCertSSHStore{
-		Name:          "all-resources-test-cert-ssh-store",
-		ServerAddress: "allresourcestestaddr",
-		SigningRole:   "allresourcessigningrole",
-		SshMountPoint: "allresourcessshmountpoint",
+		Name:                 "all-resources-test-cert-ssh-store",
+		ServerAddress:        "allresourcestestaddr",
+		SigningRole:          "allresourcessigningrole",
+		SshMountPoint:        "allresourcessshmountpoint",
+		IssuedCertTTLMinutes: 5,
 	})
 	if err != nil {
 		t.Fatalf("failed to create cert ssh secret store: %v", err)
@@ -1203,10 +1204,11 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 	seSSHID := respSSHCert.SecretStore.(*sdm.VaultTokenCertSSHStore).ID
 
 	respRDPCert, err := client.SecretStores().Create(ctx, &sdm.VaultTokenCertX509Store{
-		Name:          "all-resources-test-cert-rdp-store",
-		ServerAddress: "allresourcestestaddr",
-		SigningRole:   "allresourcessigningrole",
-		PkiMountPoint: "allresourcespkimountpoint",
+		Name:                 "all-resources-test-cert-rdp-store",
+		ServerAddress:        "allresourcestestaddr",
+		SigningRole:          "allresourcessigningrole",
+		PkiMountPoint:        "allresourcespkimountpoint",
+		IssuedCertTTLMinutes: 5,
 	})
 	if err != nil {
 		t.Fatalf("failed to create cert pki secret store: %v", err)
@@ -2414,7 +2416,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"ca_arn", `"ca_arn"`},
 				{"certificate_template_arn", `"certificate_template_arn"`},
-				{"issued_cert_ttl_minutes", `"issued_cert_ttl_minutes"`},
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"region", `"region"`},
 				{"signing_algo", `"signing_algo"`},
@@ -2468,6 +2470,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"ca_id", `"ca_id"`},
 				{"ca_pool_id", `"ca_pool_id"`},
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"location", `"location"`},
 				{"name", `"all_secrets_name"`},
 				{"project_id", `"project_id"`},
@@ -2484,6 +2487,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "vault_approle_cert_ssh",
 			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"server_address", `"server_address"`},
@@ -2494,6 +2498,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "vault_approle_cert_x509",
 			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"pki_mount_point", `"pki_mount_point"`},
@@ -2518,6 +2523,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 				{"ca_cert_path", `"ca_cert_path"`},
 				{"client_cert_path", `"client_cert_path"`},
 				{"client_key_path", `"client_key_path"`},
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"server_address", `"server_address"`},
@@ -2531,6 +2537,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 				{"ca_cert_path", `"ca_cert_path"`},
 				{"client_cert_path", `"client_cert_path"`},
 				{"client_key_path", `"client_key_path"`},
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"pki_mount_point", `"pki_mount_point"`},
@@ -2549,6 +2556,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "vault_token_cert_ssh",
 			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"server_address", `"server_address"`},
@@ -2559,6 +2567,7 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "vault_token_cert_x509",
 			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
 				{"name", `"all_secrets_name"`},
 				{"namespace", `"namespace"`},
 				{"pki_mount_point", `"pki_mount_point"`},

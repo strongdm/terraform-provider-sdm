@@ -14,7 +14,7 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 The following arguments are supported by the SecretStore resource:
 * active_directory_store:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
-	* `server_address` - (Required) Hostname of server that is hosting NDES (Network Device Enrollment Services).  Often this is the same host as Active Directory Certificate Services
+	* `server_address` - (Required) Hostname of server that is hosting NDES (Network Device Enrollment Services). Often this is the same host as Active Directory Certificate Services
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aws:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
@@ -23,7 +23,7 @@ The following arguments are supported by the SecretStore resource:
 * aws_cert_x509:
 	* `ca_arn` - (Required) The ARN of the CA in AWS Private CA
 	* `certificate_template_arn` - (Required) The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR
-	* `issued_cert_ttl_minutes` - (Optional) The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `region` - (Required) The AWS region to target e.g. us-east-1
 	* `signing_algo` - (Required) The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA
@@ -56,6 +56,7 @@ The following arguments are supported by the SecretStore resource:
 * gcp_cert_x_509_store:
 	* `ca_id` - (Optional) The ID of the target CA
 	* `ca_pool_id` - (Required) The ID of the target CA pool
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
 	* `location` - (Required) The Region for the CA in GCP format e.g. us-west1
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `project_id` - (Required) The GCP project ID to target.
@@ -66,6 +67,7 @@ The following arguments are supported by the SecretStore resource:
 	* `server_address` - (Required) The URL of the Vault to target
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_approle_cert_ssh:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
@@ -73,6 +75,7 @@ The following arguments are supported by the SecretStore resource:
 	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_approle_cert_x509:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
@@ -91,6 +94,7 @@ The following arguments are supported by the SecretStore resource:
 	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
 	* `client_cert_path` - (Required) A path to a client certificate file accessible by a Node
 	* `client_key_path` - (Required) A path to a client key file accessible by a Node
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
@@ -101,6 +105,7 @@ The following arguments are supported by the SecretStore resource:
 	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
 	* `client_cert_path` - (Required) A path to a client certificate file accessible by a Node
 	* `client_key_path` - (Required) A path to a client key file accessible by a Node
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
@@ -113,6 +118,7 @@ The following arguments are supported by the SecretStore resource:
 	* `server_address` - (Required) The URL of the Vault to target
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_token_cert_ssh:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
@@ -120,6 +126,7 @@ The following arguments are supported by the SecretStore resource:
 	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_token_cert_x509:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA

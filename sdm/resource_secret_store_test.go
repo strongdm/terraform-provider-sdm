@@ -90,6 +90,69 @@ func TestAccSDMSecretStore_Create(t *testing.T) {
 	})
 }
 
+func TestAccSDMSecretStoreCA_Create(t *testing.T) {
+	initAcceptanceTest(t)
+	name := randomWithPrefix("ca-test")
+	address := randomWithPrefix("ca-test")
+	mountPoint := randomWithPrefix("ca-test")
+	signingRole := randomWithPrefix("ca-test")
+	ttlMinutes := 5
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMSecretStoreVaultTokenCertSSHConfig(name, name, address, mountPoint, signingRole, ttlMinutes),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_secret_store."+name, "vault_token_cert_ssh.0.name", name),
+					resource.TestCheckResourceAttr("sdm_secret_store."+name, "vault_token_cert_ssh.0.server_address", address),
+					resource.TestCheckResourceAttr("sdm_secret_store."+name, "vault_token_cert_ssh.0.ssh_mount_point", mountPoint),
+					resource.TestCheckResourceAttr("sdm_secret_store."+name, "vault_token_cert_ssh.0.signing_role", signingRole),
+					resource.TestCheckResourceAttr("sdm_secret_store."+name, "vault_token_cert_ssh.0.issued_cert_ttl_minutes", fmt.Sprint(ttlMinutes)),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_secret_store", name)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.SecretStores().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.SecretStore.(*sdm.VaultTokenCertSSHStore).Name != name {
+							return fmt.Errorf("unexpected name '%s', expected '%s'", resp.SecretStore.(*sdm.VaultTokenCertSSHStore).Name, name)
+						}
+						if resp.SecretStore.(*sdm.VaultTokenCertSSHStore).ServerAddress != address {
+							return fmt.Errorf("unexpected address '%s', expected '%s'", resp.SecretStore.(*sdm.VaultTokenCertSSHStore).ServerAddress, address)
+						}
+						if resp.SecretStore.(*sdm.VaultTokenCertSSHStore).SshMountPoint != mountPoint {
+							return fmt.Errorf("unexpected SshMountPoint '%s', expected '%s'", resp.SecretStore.(*sdm.VaultTokenCertSSHStore).SshMountPoint, mountPoint)
+						}
+						if resp.SecretStore.(*sdm.VaultTokenCertSSHStore).SigningRole != signingRole {
+							return fmt.Errorf("unexpected SigningRole '%s', expected '%s'", resp.SecretStore.(*sdm.VaultTokenCertSSHStore).SigningRole, signingRole)
+						}
+						if resp.SecretStore.(*sdm.VaultTokenCertSSHStore).IssuedCertTTLMinutes != int32(ttlMinutes) {
+							return fmt.Errorf("unexpected IssuedCertTTLMinutes '%d', expected '%d'", resp.SecretStore.(*sdm.VaultTokenCertSSHStore).IssuedCertTTLMinutes, ttlMinutes)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_secret_store." + name,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func TestAccSDMSecretStore_Tags(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
@@ -262,6 +325,20 @@ func testAccSDMSecretStoreVaultTokenConfig(resourceName, sdmResourceName, addres
 		}
 	}
 	`, resourceName, sdmResourceName, address)
+}
+
+func testAccSDMSecretStoreVaultTokenCertSSHConfig(resourceName, sdmResourceName, address, mountPoint, signingRole string, ttlMinutes int) string {
+	return fmt.Sprintf(`
+	resource "sdm_secret_store" "%s" {
+		vault_token_cert_ssh {
+			name = "%s"
+			server_address = "%s"
+			ssh_mount_point = "%s"
+			signing_role = "%s"
+			issued_cert_ttl_minutes = %d
+		}
+	}
+	`, resourceName, sdmResourceName, address, mountPoint, signingRole, ttlMinutes)
 }
 
 func testAccSDMSecretStoreTagsConfig(resourceName, sdmResourceName, address string, tags sdm.Tags) string {

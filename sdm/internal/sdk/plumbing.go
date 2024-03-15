@@ -6076,6 +6076,7 @@ func convertGCPCertX509StoreToPorcelain(plumbing *proto.GCPCertX509Store) (*GCPC
 	porcelain.CaID = plumbing.CaID
 	porcelain.CaPoolID = plumbing.CaPoolID
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Location = plumbing.Location
 	porcelain.Name = plumbing.Name
 	porcelain.ProjectID = plumbing.ProjectID
@@ -6095,6 +6096,7 @@ func convertGCPCertX509StoreToPlumbing(porcelain *GCPCertX509Store) *proto.GCPCe
 	plumbing.CaID = (porcelain.CaID)
 	plumbing.CaPoolID = (porcelain.CaPoolID)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Location = (porcelain.Location)
 	plumbing.Name = (porcelain.Name)
 	plumbing.ProjectID = (porcelain.ProjectID)
@@ -14061,6 +14063,7 @@ func convertVaultAppRoleCertSSHStoreToPorcelain(plumbing *proto.VaultAppRoleCert
 	}
 	porcelain := &VaultAppRoleCertSSHStore{}
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Name = plumbing.Name
 	porcelain.Namespace = plumbing.Namespace
 	porcelain.ServerAddress = plumbing.ServerAddress
@@ -14080,6 +14083,7 @@ func convertVaultAppRoleCertSSHStoreToPlumbing(porcelain *VaultAppRoleCertSSHSto
 	}
 	plumbing := &proto.VaultAppRoleCertSSHStore{}
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.ServerAddress = (porcelain.ServerAddress)
@@ -14118,6 +14122,7 @@ func convertVaultAppRoleCertX509StoreToPorcelain(plumbing *proto.VaultAppRoleCer
 	}
 	porcelain := &VaultAppRoleCertX509Store{}
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Name = plumbing.Name
 	porcelain.Namespace = plumbing.Namespace
 	porcelain.PkiMountPoint = plumbing.PkiMountPoint
@@ -14137,6 +14142,7 @@ func convertVaultAppRoleCertX509StoreToPlumbing(porcelain *VaultAppRoleCertX509S
 	}
 	plumbing := &proto.VaultAppRoleCertX509Store{}
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.PkiMountPoint = (porcelain.PkiMountPoint)
@@ -14231,6 +14237,7 @@ func convertVaultTLSCertSSHStoreToPorcelain(plumbing *proto.VaultTLSCertSSHStore
 	porcelain.ClientCertPath = plumbing.ClientCertPath
 	porcelain.ClientKeyPath = plumbing.ClientKeyPath
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Name = plumbing.Name
 	porcelain.Namespace = plumbing.Namespace
 	porcelain.ServerAddress = plumbing.ServerAddress
@@ -14253,6 +14260,7 @@ func convertVaultTLSCertSSHStoreToPlumbing(porcelain *VaultTLSCertSSHStore) *pro
 	plumbing.ClientCertPath = (porcelain.ClientCertPath)
 	plumbing.ClientKeyPath = (porcelain.ClientKeyPath)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.ServerAddress = (porcelain.ServerAddress)
@@ -14294,6 +14302,7 @@ func convertVaultTLSCertX509StoreToPorcelain(plumbing *proto.VaultTLSCertX509Sto
 	porcelain.ClientCertPath = plumbing.ClientCertPath
 	porcelain.ClientKeyPath = plumbing.ClientKeyPath
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Name = plumbing.Name
 	porcelain.Namespace = plumbing.Namespace
 	porcelain.PkiMountPoint = plumbing.PkiMountPoint
@@ -14316,6 +14325,7 @@ func convertVaultTLSCertX509StoreToPlumbing(porcelain *VaultTLSCertX509Store) *p
 	plumbing.ClientCertPath = (porcelain.ClientCertPath)
 	plumbing.ClientKeyPath = (porcelain.ClientKeyPath)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.PkiMountPoint = (porcelain.PkiMountPoint)
@@ -14413,6 +14423,7 @@ func convertVaultTokenCertSSHStoreToPorcelain(plumbing *proto.VaultTokenCertSSHS
 	}
 	porcelain := &VaultTokenCertSSHStore{}
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Name = plumbing.Name
 	porcelain.Namespace = plumbing.Namespace
 	porcelain.ServerAddress = plumbing.ServerAddress
@@ -14432,6 +14443,7 @@ func convertVaultTokenCertSSHStoreToPlumbing(porcelain *VaultTokenCertSSHStore) 
 	}
 	plumbing := &proto.VaultTokenCertSSHStore{}
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.ServerAddress = (porcelain.ServerAddress)
@@ -14470,6 +14482,7 @@ func convertVaultTokenCertX509StoreToPorcelain(plumbing *proto.VaultTokenCertX50
 	}
 	porcelain := &VaultTokenCertX509Store{}
 	porcelain.ID = plumbing.Id
+	porcelain.IssuedCertTTLMinutes = plumbing.IssuedCertTTLMinutes
 	porcelain.Name = plumbing.Name
 	porcelain.Namespace = plumbing.Namespace
 	porcelain.PkiMountPoint = plumbing.PkiMountPoint
@@ -14489,6 +14502,7 @@ func convertVaultTokenCertX509StoreToPlumbing(porcelain *VaultTokenCertX509Store
 	}
 	plumbing := &proto.VaultTokenCertX509Store{}
 	plumbing.Id = (porcelain.ID)
+	plumbing.IssuedCertTTLMinutes = (porcelain.IssuedCertTTLMinutes)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Namespace = (porcelain.Namespace)
 	plumbing.PkiMountPoint = (porcelain.PkiMountPoint)

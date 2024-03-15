@@ -62,7 +62,7 @@ func dataSourceSecretStore() *schema.Resource {
 									"server_address": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Hostname of server that is hosting NDES (Network Device Enrollment Services).  Often this is the same host as Active Directory Certificate Services",
+										Description: "Hostname of server that is hosting NDES (Network Device Enrollment Services). Often this is the same host as Active Directory Certificate Services",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -125,9 +125,9 @@ func dataSourceSecretStore() *schema.Resource {
 										Description: "Unique identifier of the SecretStore.",
 									},
 									"issued_cert_ttl_minutes": {
-										Type:        schema.TypeString,
+										Type:        schema.TypeInt,
 										Optional:    true,
-										Description: "The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.",
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -359,6 +359,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
 									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
+									},
 									"location": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -429,6 +434,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
 									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -473,6 +483,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -584,6 +599,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
 									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -643,6 +663,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -724,6 +749,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
 									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -768,6 +798,11 @@ func dataSourceSecretStore() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -923,13 +958,14 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 			})
 		case *sdm.GCPCertX509Store:
 			output[0]["gcp_cert_x_509_store"] = append(output[0]["gcp_cert_x_509_store"], entity{
-				"ca_id":      (v.CaID),
-				"ca_pool_id": (v.CaPoolID),
-				"id":         (v.ID),
-				"location":   (v.Location),
-				"name":       (v.Name),
-				"project_id": (v.ProjectID),
-				"tags":       convertTagsToPorcelain(v.Tags),
+				"ca_id":                   (v.CaID),
+				"ca_pool_id":              (v.CaPoolID),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"location":                (v.Location),
+				"name":                    (v.Name),
+				"project_id":              (v.ProjectID),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultAppRoleStore:
 			output[0]["vault_approle"] = append(output[0]["vault_approle"], entity{
@@ -941,23 +977,25 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 			})
 		case *sdm.VaultAppRoleCertSSHStore:
 			output[0]["vault_approle_cert_ssh"] = append(output[0]["vault_approle_cert_ssh"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"namespace":       (v.Namespace),
-				"server_address":  (v.ServerAddress),
-				"signing_role":    (v.SigningRole),
-				"ssh_mount_point": (v.SshMountPoint),
-				"tags":            convertTagsToPorcelain(v.Tags),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultAppRoleCertX509Store:
 			output[0]["vault_approle_cert_x509"] = append(output[0]["vault_approle_cert_x509"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"namespace":       (v.Namespace),
-				"pki_mount_point": (v.PkiMountPoint),
-				"server_address":  (v.ServerAddress),
-				"signing_role":    (v.SigningRole),
-				"tags":            convertTagsToPorcelain(v.Tags),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{
@@ -972,29 +1010,31 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 			})
 		case *sdm.VaultTLSCertSSHStore:
 			output[0]["vault_tls_cert_ssh"] = append(output[0]["vault_tls_cert_ssh"], entity{
-				"ca_cert_path":     (v.CACertPath),
-				"client_cert_path": (v.ClientCertPath),
-				"client_key_path":  (v.ClientKeyPath),
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"namespace":        (v.Namespace),
-				"server_address":   (v.ServerAddress),
-				"signing_role":     (v.SigningRole),
-				"ssh_mount_point":  (v.SshMountPoint),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"ca_cert_path":            (v.CACertPath),
+				"client_cert_path":        (v.ClientCertPath),
+				"client_key_path":         (v.ClientKeyPath),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTLSCertX509Store:
 			output[0]["vault_tls_cert_x509"] = append(output[0]["vault_tls_cert_x509"], entity{
-				"ca_cert_path":     (v.CACertPath),
-				"client_cert_path": (v.ClientCertPath),
-				"client_key_path":  (v.ClientKeyPath),
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"namespace":        (v.Namespace),
-				"pki_mount_point":  (v.PkiMountPoint),
-				"server_address":   (v.ServerAddress),
-				"signing_role":     (v.SigningRole),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"ca_cert_path":            (v.CACertPath),
+				"client_cert_path":        (v.ClientCertPath),
+				"client_key_path":         (v.ClientKeyPath),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTokenStore:
 			output[0]["vault_token"] = append(output[0]["vault_token"], entity{
@@ -1006,23 +1046,25 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 			})
 		case *sdm.VaultTokenCertSSHStore:
 			output[0]["vault_token_cert_ssh"] = append(output[0]["vault_token_cert_ssh"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"namespace":       (v.Namespace),
-				"server_address":  (v.ServerAddress),
-				"signing_role":    (v.SigningRole),
-				"ssh_mount_point": (v.SshMountPoint),
-				"tags":            convertTagsToPorcelain(v.Tags),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTokenCertX509Store:
 			output[0]["vault_token_cert_x509"] = append(output[0]["vault_token_cert_x509"], entity{
-				"id":              (v.ID),
-				"name":            (v.Name),
-				"namespace":       (v.Namespace),
-				"pki_mount_point": (v.PkiMountPoint),
-				"server_address":  (v.ServerAddress),
-				"signing_role":    (v.SigningRole),
-				"tags":            convertTagsToPorcelain(v.Tags),
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		}
 	}

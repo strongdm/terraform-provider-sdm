@@ -225,8 +225,6 @@ type AWS struct {
 	Tags Tags `json:"tags"`
 }
 
-// AWSCertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AWSCertX509Store struct {
 	// The ARN of the CA in AWS Private CA
 	CaArn string `json:"caArn"`
@@ -234,8 +232,8 @@ type AWSCertX509Store struct {
 	CertificateTemplateArn string `json:"certificateTemplateArn"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
-	// The lifetime of certificates issued by this CA represented in minutes e.g. 600 (for 10 hours). Defaults to 8 hours if not provided.
-	IssuedCertTTLMinutes string `json:"issuedCertTtlMinutes"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The AWS region to target e.g. us-east-1
@@ -716,8 +714,6 @@ type AccountUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// ActiveDirectoryStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type ActiveDirectoryStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -2034,8 +2030,6 @@ type GCP struct {
 	Tags Tags `json:"tags"`
 }
 
-// GCPCertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type GCPCertX509Store struct {
 	// The ID of the target CA
 	CaID string `json:"caId"`
@@ -2043,6 +2037,8 @@ type GCPCertX509Store struct {
 	CaPoolID string `json:"caPoolId"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// The Region for the CA in GCP format e.g. us-west1
 	Location string `json:"location"`
 	// Unique human-readable name of the SecretStore.
@@ -9654,11 +9650,11 @@ type User struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAppRoleCertSSHStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAppRoleCertSSHStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The namespace to make requests within
@@ -9673,11 +9669,11 @@ type VaultAppRoleCertSSHStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAppRoleCertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAppRoleCertX509Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The namespace to make requests within
@@ -9705,8 +9701,6 @@ type VaultAppRoleStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultTLSCertSSHStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultTLSCertSSHStore struct {
 	// A path to a CA file accessible by a Node
 	CACertPath string `json:"caCertPath"`
@@ -9716,6 +9710,8 @@ type VaultTLSCertSSHStore struct {
 	ClientKeyPath string `json:"clientKeyPath"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The namespace to make requests within
@@ -9730,8 +9726,6 @@ type VaultTLSCertSSHStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultTLSCertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultTLSCertX509Store struct {
 	// A path to a CA file accessible by a Node
 	CACertPath string `json:"caCertPath"`
@@ -9741,6 +9735,8 @@ type VaultTLSCertX509Store struct {
 	ClientKeyPath string `json:"clientKeyPath"`
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The namespace to make requests within
@@ -9774,11 +9770,11 @@ type VaultTLSStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultTokenCertSSHStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultTokenCertSSHStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The namespace to make requests within
@@ -9793,11 +9789,11 @@ type VaultTokenCertSSHStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultTokenCertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultTokenCertX509Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// The namespace to make requests within
