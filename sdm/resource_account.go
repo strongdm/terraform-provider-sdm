@@ -88,13 +88,14 @@ func resourceAccount() *schema.Resource {
 						},
 						"permission_level": {
 							Type:        schema.TypeString,
+							Optional:    true,
 							Computed:    true,
-							Description: "PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.",
+							Description: "PermissionLevel is the user's permission level e.g. admin, DBA, user.",
 						},
 						"suspended": {
 							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "The User's suspended state.",
+							Computed:    true,
+							Description: "Suspended is a read only field for the User's suspended state.",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -131,13 +132,13 @@ func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 			return &sdm.User{}
 		}
 		out := &sdm.User{
-			ID:         d.Id(),
-			Email:      convertStringToPlumbing(raw["email"]),
-			ExternalID: convertStringToPlumbing(raw["external_id"]),
-			FirstName:  convertStringToPlumbing(raw["first_name"]),
-			LastName:   convertStringToPlumbing(raw["last_name"]),
-			Suspended:  convertBoolToPlumbing(raw["suspended"]),
-			Tags:       convertTagsToPlumbing(raw["tags"]),
+			ID:              d.Id(),
+			Email:           convertStringToPlumbing(raw["email"]),
+			ExternalID:      convertStringToPlumbing(raw["external_id"]),
+			FirstName:       convertStringToPlumbing(raw["first_name"]),
+			LastName:        convertStringToPlumbing(raw["last_name"]),
+			PermissionLevel: convertStringToPlumbing(raw["permission_level"]),
+			Tags:            convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}

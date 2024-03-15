@@ -49,6 +49,10 @@ func dataSourceAccount() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"permission_level": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"suspended": {
 				Type:     schema.TypeBool,
 				Optional: true,
@@ -131,13 +135,13 @@ func dataSourceAccount() *schema.Resource {
 									},
 									"permission_level": {
 										Type:        schema.TypeString,
-										Computed:    true,
-										Description: "PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.",
+										Optional:    true,
+										Description: "PermissionLevel is the user's permission level e.g. admin, DBA, user.",
 									},
 									"suspended": {
 										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "The User's suspended state.",
+										Computed:    true,
+										Description: "Suspended is a read only field for the User's suspended state.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -193,12 +197,16 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("permission_level"); ok {
-		filter += "permissionlevel:? "
+	if v, ok := d.GetOkExists("permission_levelRW"); ok {
+		filter += "permissionlevelrw:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("suspended"); ok {
 		filter += "suspended:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("suspendedRO"); ok {
+		filter += "suspendedro:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("tags"); ok {

@@ -9646,9 +9646,9 @@ type User struct {
 	LastName string `json:"lastName"`
 	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	ManagedBy string `json:"managedBy"`
-	// PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
+	// PermissionLevel is the user's permission level e.g. admin, DBA, user.
 	PermissionLevel string `json:"permissionLevel"`
-	// The User's suspended state.
+	// Suspended is a read only field for the User's suspended state.
 	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`

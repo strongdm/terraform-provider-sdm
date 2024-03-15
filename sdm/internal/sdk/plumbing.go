@@ -14005,8 +14005,8 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.LastName = plumbing.LastName
 	porcelain.ManagedBy = plumbing.ManagedBy
-	porcelain.PermissionLevel = plumbing.PermissionLevel
-	porcelain.Suspended = plumbing.Suspended
+	porcelain.PermissionLevel = plumbing.PermissionLevelRW
+	porcelain.Suspended = plumbing.SuspendedRO
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
 	} else {
@@ -14026,8 +14026,8 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 	plumbing.Id = (porcelain.ID)
 	plumbing.LastName = (porcelain.LastName)
 	plumbing.ManagedBy = (porcelain.ManagedBy)
-	plumbing.PermissionLevel = (porcelain.PermissionLevel)
-	plumbing.Suspended = (porcelain.Suspended)
+	plumbing.PermissionLevelRW = (porcelain.PermissionLevel)
+	plumbing.SuspendedRO = (porcelain.Suspended)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing
 }

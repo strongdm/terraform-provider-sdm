@@ -23,7 +23,7 @@ data "sdm_resource" "mysql_datasources" {
 ```
 ## Argument Reference
 The following arguments are supported by a Resources data source:
-* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters for more information.
+* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters) for more information.
 * `hostname` - (Optional) The host to dial to initiate a connection from the egress node to this resource.
 * `id` - (Optional) Unique identifier of the Resource.
 * `name` - (Optional) Unique human-readable name of the Resource.

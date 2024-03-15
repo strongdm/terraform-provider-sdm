@@ -122,13 +122,18 @@ func createUserWithSuspension(t *testing.T, name string, suspended bool) *sdm.Us
 		t.Fatalf("failed to create test client: %v", err)
 	}
 
+	wantPermissionLevel := sdm.PermissionLevelUser
+	if suspended {
+		wantPermissionLevel = sdm.PermissionLevelSuspended
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	createResp, err := client.Accounts().Create(ctx, &sdm.User{
-		Suspended: suspended,
-		FirstName: name,
-		LastName:  name,
-		Email:     name,
+		FirstName:       name,
+		LastName:        name,
+		Email:           name,
+		PermissionLevel: wantPermissionLevel,
 	})
 	if err != nil {
 		t.Fatalf("failed to create account: %v", err)

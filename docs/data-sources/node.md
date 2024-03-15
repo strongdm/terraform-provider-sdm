@@ -24,7 +24,7 @@ data "sdm_node" "gateway_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a Nodes data source:
-* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters for more information.
+* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/automation/getting-started/filters) for more information.
 * `bind_address` - (Optional) The hostname/port tuple which the gateway daemon will bind to. If not provided on create, set to "0.0.0.0:listen_address_port".
 * `id` - (Optional) Unique identifier of the Relay.
 * `listen_address` - (Optional) The public hostname/port tuple at which the gateway will be accessible to clients.

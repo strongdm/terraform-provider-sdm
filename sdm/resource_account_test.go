@@ -100,16 +100,18 @@ func TestAccSDMAccount_UserCreate(t *testing.T) {
 	firstName := randomWithPrefix("ursula")
 	lastName := randomWithPrefix("leguin")
 	email := randomWithPrefix("testsuites@strongdm.com")
+	permissionLevel := sdm.PermissionLevelTeamLeader
 	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMAccountUserConfig(rsName, firstName, lastName, email),
+				Config: testAccSDMAccountUserPermissionLevelConfig(rsName, firstName, lastName, email, permissionLevel),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.first_name", firstName),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.last_name", lastName),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.email", email),
+					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.permission_level", permissionLevel),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.#", "1"),
 					func(s *terraform.State) error {
 						// retrieve the resource by name from state
@@ -155,10 +157,12 @@ func TestAccSDMAccount_Update(t *testing.T) {
 	firstName := randomWithPrefix("ursula")
 	lastName := randomWithPrefix("leguin")
 	email := randomWithPrefix("testsuites@strongdm.com")
+	permissionLevel := sdm.PermissionLevelUser
 
 	firstName2 := randomWithPrefix("cheese")
 	lastName2 := randomWithPrefix("cake")
 	email2 := randomWithPrefix("testsuites+1@strongdm.com")
+	permissionLevel2 := sdm.PermissionLevelDatabaseAdmin
 	resource.Test(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
@@ -169,6 +173,7 @@ func TestAccSDMAccount_Update(t *testing.T) {
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.first_name", firstName),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.last_name", lastName),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.email", email),
+					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.permission_level", permissionLevel),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.#", "1"),
 				),
 			},
@@ -178,11 +183,12 @@ func TestAccSDMAccount_Update(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccSDMAccountUserConfig(rsName, firstName2, lastName2, email2),
+				Config: testAccSDMAccountUserPermissionLevelConfig(rsName, firstName2, lastName2, email2, permissionLevel2),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.first_name", firstName2),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.last_name", lastName2),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.email", email2),
+					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.0.permission_level", permissionLevel2),
 					resource.TestCheckResourceAttr("sdm_account."+rsName, "user.#", "1"),
 					func(s *terraform.State) error {
 						// retrieve the resource by name from state
@@ -331,6 +337,20 @@ func testAccSDMAccountUserConfig(resourceName, firstName, lastName, email string
 		}
 	}
 	`, resourceName, firstName, lastName, email)
+}
+
+func testAccSDMAccountUserPermissionLevelConfig(resourceName, firstName, lastName, email, permission_level string) string {
+
+	return fmt.Sprintf(`
+	resource "sdm_account" "%s" {
+		user {
+			first_name = "%s"
+			last_name = "%s"
+			email = "%s"
+			permission_level = "%s"
+		}
+	}
+	`, resourceName, firstName, lastName, email, permission_level)
 }
 
 func testAccSDMAccountServiceConfig(resourceName, serviceName string) string {
