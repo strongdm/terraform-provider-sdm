@@ -423,9 +423,10 @@ type AccessRequestListResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// Accounts are users that have access to strongDM. There are two types of accounts:
+// Accounts are users that have access to strongDM. The types of accounts are:
 // 1. **Users:** humans who are authenticated through username and password or SSO.
 // 2. **Service Accounts:** machines that are authenticated using a service token.
+// 3. **Tokens** are access keys with permissions that can be used for authentication.
 type Account interface {
 	// GetID returns the unique identifier of the Account.
 	GetID() string
@@ -462,6 +463,30 @@ func (m *Service) GetTags() Tags {
 
 // SetTags sets the tags of the Service.
 func (m *Service) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+func (*Token) isOneOf_Account() {}
+
+// GetID returns the unique identifier of the Token.
+func (m *Token) GetID() string { return m.ID }
+
+// IsSuspended returns whether the Token is suspended.
+func (m *Token) IsSuspended() bool {
+	return m.Suspended
+}
+
+// SetSuspended sets the suspended of the Token.
+func (m *Token) SetSuspended(v bool) {
+	m.Suspended = v
+}
+
+// GetTags returns the tags of the Token.
+func (m *Token) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Token.
+func (m *Token) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 func (*User) isOneOf_Account() {}
@@ -544,12 +569,16 @@ type AccountAttachmentHistory struct {
 
 // AccountCreateResponse reports how the Accounts were created in the system.
 type AccountCreateResponse struct {
+	// ID part of the API key.
+	AccessKey string `json:"accessKey"`
 	// The created Account.
 	Account Account `json:"account"`
 	// Reserved for future use.
 	Meta *CreateResponseMetadata `json:"meta"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// Secret part of the API key.
+	SecretKey string `json:"secretKey"`
 	// The auth token generated for the Account. The Account will use this token to
 	// authenticate with the strongDM API.
 	Token string `json:"token"`
@@ -9588,6 +9617,29 @@ type Teradata struct {
 	Tags Tags `json:"tags"`
 	// The username to authenticate with.
 	Username string `json:"username"`
+}
+
+// A Token is an account providing tokenized access for automation or integration use.
+// Tokens include admin tokens, API keys, and SCIM tokens.
+type Token struct {
+	// Corresponds to the type of token, e.g. api or admin-token.
+	AccountType string `json:"accountType"`
+	// The timestamp when the Token will expire.
+	Deadline time.Time `json:"deadline"`
+	// Duration from token creation to expiration.
+	Duration time.Duration `json:"duration"`
+	// Unique identifier of the Token.
+	ID string `json:"id"`
+	// Unique human-readable name of the Token.
+	Name string `json:"name"`
+	// Permissions assigned to the token, e.g. role:create.
+	Permissions []string `json:"permissions"`
+	// The timestamp when the Token was last rekeyed.
+	Rekeyed time.Time `json:"rekeyed"`
+	// Reserved for future use.  Always false for tokens.
+	Suspended bool `json:"suspended"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 // Trino is currently unstable, and its API may change, or it may be removed,

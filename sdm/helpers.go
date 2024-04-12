@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -187,4 +188,28 @@ func convertBoolToPlumbing(porcelain interface{}) bool {
 		return false
 	}
 	return porcelain.(bool)
+}
+
+func convertTimestampToPorcelain(t time.Time) interface{} {
+	return t.UTC().Format(time.RFC3339)
+}
+
+func convertTimestampToPlumbing(porcelain interface{}) time.Time {
+	if porcelain == nil {
+		return time.Time{}
+	}
+	t, _ := time.Parse(time.RFC3339, porcelain.(string))
+	return t.UTC()
+}
+
+func convertDurationToPorcelain(d time.Duration) interface{} {
+	return d.String()
+}
+
+func convertDurationToPlumbing(porcelain interface{}) time.Duration {
+	if porcelain == nil {
+		return time.Duration(0)
+	}
+	d, _ := time.ParseDuration(porcelain.(string))
+	return d
 }

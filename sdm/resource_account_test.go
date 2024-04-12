@@ -384,3 +384,46 @@ func createUsersWithPrefix(prefix string, count int) ([]sdm.Account, error) {
 	}
 	return accounts, nil
 }
+
+func createTokensWithPrefix(prefix string, accountType string, count int) ([]sdm.Account, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	accounts := []sdm.Account{}
+	for i := 0; i < count; i++ {
+		createResp, err := client.Accounts().Create(ctx, &sdm.Token{
+			AccountType: accountType,
+			Duration:    time.Hour,
+			Permissions: []string{sdm.PermissionDatasourceList, sdm.PermissionUserList},
+			Name:        randomWithPrefix(prefix),
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create account: %w", err)
+		}
+		accounts = append(accounts, createResp.Account)
+	}
+	return accounts, nil
+}
+
+func createServicesWithPrefix(prefix string, count int) ([]sdm.Account, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	accounts := []sdm.Account{}
+	for i := 0; i < count; i++ {
+		createResp, err := client.Accounts().Create(ctx, &sdm.Service{
+			Name: randomWithPrefix(prefix),
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create account: %w", err)
+		}
+		accounts = append(accounts, createResp.Account)
+	}
+	return accounts, nil
+}

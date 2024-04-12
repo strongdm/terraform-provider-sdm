@@ -7,9 +7,10 @@ sidebar_current: “docs-sdm-resource-account"
 ---
 # Resource: sdm_account
 
-Accounts are users that have access to strongDM. There are two types of accounts:
+Accounts are users that have access to strongDM. The types of accounts are:
  1. **Users:** humans who are authenticated through username and password or SSO.
  2. **Service Accounts:** machines that are authenticated using a service token.
+ 3. **Tokens** are access keys with permissions that can be used for authentication.
 ## Example Usage
 
 ```hcl
@@ -42,6 +43,7 @@ The following arguments are supported by the Account resource:
 	* `name` - (Required) Unique human-readable name of the Service.
 	* `suspended` - (Optional) The Service's suspended state.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+
 * user:
 	* `email` - (Required) The User's email address. Must be unique.
 	* `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
@@ -52,6 +54,7 @@ The following arguments are supported by the Account resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Account resource:
 * `id` - A unique identifier for the Account resource.
+
 * user:
 	* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	* `suspended` - Suspended is a read only field for the User's suspended state.

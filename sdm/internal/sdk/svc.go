@@ -891,6 +891,7 @@ func (svc *AccountResourcesHistory) List(
 // Accounts are users that have access to strongDM. There are two types of accounts:
 // 1. **Users:** humans who are authenticated through username and password or SSO.
 // 2. **Service Accounts:** machines that are authenticated using a service token.
+// 3. **Tokens** are access keys with permissions that can be used for authentication.
 type Accounts struct {
 	client plumbing.AccountsClient
 	parent *Client
@@ -938,6 +939,7 @@ func (svc *Accounts) Create(
 	}
 
 	resp := &AccountCreateResponse{}
+	resp.AccessKey = (plumbingResponse.AccessKey)
 	if v, err := convertAccountToPorcelain(plumbingResponse.Account); err != nil {
 		return nil, err
 	} else {
@@ -953,6 +955,7 @@ func (svc *Accounts) Create(
 	} else {
 		resp.RateLimit = v
 	}
+	resp.SecretKey = (plumbingResponse.SecretKey)
 	resp.Token = (plumbingResponse.Token)
 	return resp, nil
 }

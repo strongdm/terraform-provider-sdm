@@ -189,6 +189,56 @@ func TestAccSDMAccount_GetNone(t *testing.T) {
 	})
 }
 
+func TestAccSDMAccount_GetMultipleTypes(t *testing.T) {
+	initAcceptanceTest(t)
+	_, err := createUsersWithPrefix("account-multi-type", 2)
+	if err != nil {
+		t.Fatal("failed to create users in setup: ", err)
+	}
+	_, err = createServicesWithPrefix("account-multi-type", 2)
+	if err != nil {
+		t.Fatal("failed to create services in setup: ", err)
+	}
+	_, err = createTokensWithPrefix("account-multi-type", "api", 2)
+	if err != nil {
+		t.Fatal("failed to create api tokens in setup: ", err)
+	}
+	_, err = createTokensWithPrefix("account-multi-type", "admin-token", 2)
+	if err != nil {
+		t.Fatal("failed to create admin-token tokens in setup: ", err)
+	}
+
+	dsName := randomWithPrefix("ac_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMAccountGetFilterNameConfig(dsName, "account-multi-type*"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "ids.#", "8"),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.#", "2"),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.service.#", "2"),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.token.#", "4"),
+				),
+			},
+		},
+	})
+
+	dsName2 := randomWithPrefix("ac_test_query")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMAccountGetFilterNameTypeConfig(dsName2, "account-multi-type*", "api"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName2, "ids.#", "2"),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName2, "accounts.0.token.#", "2"),
+				),
+			},
+		},
+	})
+}
+
 func testAccSDMAccountGetFilterConfig(accountDataSourceName, firstNameFilter string) string {
 	return fmt.Sprintf(`
 	data "sdm_account" "%s" {
@@ -202,4 +252,19 @@ func testAccSDMAccountGetFilterSuspendedConfig(dsName, firstNameFilter string, s
 		first_name = "%s"
 		suspended = %t
 	}`, dsName, firstNameFilter, suspendedFilter)
+}
+
+func testAccSDMAccountGetFilterNameConfig(dsName, nameFilter string) string {
+	return fmt.Sprintf(`
+	data "sdm_account" "%s" {
+		name = "%s"
+	}`, dsName, nameFilter)
+}
+
+func testAccSDMAccountGetFilterNameTypeConfig(dsName, nameFilter, typeFilter string) string {
+	return fmt.Sprintf(`
+	data "sdm_account" "%s" {
+		name = "%s"
+		type = "%s"
+	}`, dsName, nameFilter, typeFilter)
 }

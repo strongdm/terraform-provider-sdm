@@ -54,6 +54,7 @@ func resourceAccount() *schema.Resource {
 					},
 				},
 			},
+
 			"user": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -126,6 +127,7 @@ func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 		}
 		return out
 	}
+
 	if list := d.Get("user").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -164,6 +166,7 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"token":     resp.Token,
 			},
 		})
+
 	case *sdm.User:
 		localV, _ := localVersion.(*sdm.User)
 		_ = localV
@@ -209,6 +212,7 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 				"token":     d.Get("service.0.token"),
 			},
 		})
+
 	case *sdm.User:
 		localV, ok := localVersion.(*sdm.User)
 		if !ok {

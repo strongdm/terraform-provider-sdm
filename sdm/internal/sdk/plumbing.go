@@ -1172,6 +1172,8 @@ func convertAccountToPlumbing(porcelain Account) *proto.Account {
 	switch v := porcelain.(type) {
 	case *Service:
 		plumbing.Account = &proto.Account_Service{Service: convertServiceToPlumbing(v)}
+	case *Token:
+		plumbing.Account = &proto.Account_Token{Token: convertTokenToPlumbing(v)}
 	case *User:
 		plumbing.Account = &proto.Account_User{User: convertUserToPlumbing(v)}
 	}
@@ -1181,6 +1183,9 @@ func convertAccountToPlumbing(porcelain Account) *proto.Account {
 func convertAccountToPorcelain(plumbing *proto.Account) (Account, error) {
 	if plumbing.GetService() != nil {
 		return convertServiceToPorcelain(plumbing.GetService())
+	}
+	if plumbing.GetToken() != nil {
+		return convertTokenToPorcelain(plumbing.GetToken())
 	}
 	if plumbing.GetUser() != nil {
 		return convertUserToPorcelain(plumbing.GetUser())
@@ -1485,6 +1490,7 @@ func convertAccountCreateResponseToPorcelain(plumbing *proto.AccountCreateRespon
 		return nil, nil
 	}
 	porcelain := &AccountCreateResponse{}
+	porcelain.AccessKey = plumbing.AccessKey
 	if v, err := convertAccountToPorcelain(plumbing.Account); err != nil {
 		return nil, fmt.Errorf("error converting field Account: %v", err)
 	} else {
@@ -1500,6 +1506,7 @@ func convertAccountCreateResponseToPorcelain(plumbing *proto.AccountCreateRespon
 	} else {
 		porcelain.RateLimit = v
 	}
+	porcelain.SecretKey = plumbing.SecretKey
 	porcelain.Token = plumbing.Token
 	return porcelain, nil
 }
@@ -1509,9 +1516,11 @@ func convertAccountCreateResponseToPlumbing(porcelain *AccountCreateResponse) *p
 		return nil
 	}
 	plumbing := &proto.AccountCreateResponse{}
+	plumbing.AccessKey = (porcelain.AccessKey)
 	plumbing.Account = convertAccountToPlumbing(porcelain.Account)
 	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
 	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretKey = (porcelain.SecretKey)
 	plumbing.Token = (porcelain.Token)
 	return plumbing
 }
@@ -13879,6 +13888,79 @@ func convertRepeatedTeradataToPorcelain(plumbings []*proto.Teradata) (
 	var items []*Teradata
 	for _, plumbing := range plumbings {
 		if v, err := convertTeradataToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertTokenToPorcelain(plumbing *proto.Token) (*Token, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Token{}
+	porcelain.AccountType = plumbing.AccountType
+	if v, err := convertTimestampToPorcelain(plumbing.Deadline); err != nil {
+		return nil, fmt.Errorf("error converting field Deadline: %v", err)
+	} else {
+		porcelain.Deadline = v
+	}
+	if v, err := convertDurationToPorcelain(plumbing.Duration); err != nil {
+		return nil, fmt.Errorf("error converting field Duration: %v", err)
+	} else {
+		porcelain.Duration = v
+	}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Permissions = plumbing.Permissions
+	if v, err := convertTimestampToPorcelain(plumbing.Rekeyed); err != nil {
+		return nil, fmt.Errorf("error converting field Rekeyed: %v", err)
+	} else {
+		porcelain.Rekeyed = v
+	}
+	porcelain.Suspended = plumbing.Suspended
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertTokenToPlumbing(porcelain *Token) *proto.Token {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Token{}
+	plumbing.AccountType = (porcelain.AccountType)
+	plumbing.Deadline = convertTimestampToPlumbing(porcelain.Deadline)
+	plumbing.Duration = convertDurationToPlumbing(porcelain.Duration)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Permissions = (porcelain.Permissions)
+	plumbing.Rekeyed = convertTimestampToPlumbing(porcelain.Rekeyed)
+	plumbing.Suspended = (porcelain.Suspended)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedTokenToPlumbing(
+	porcelains []*Token,
+) []*proto.Token {
+	var items []*proto.Token
+	for _, porcelain := range porcelains {
+		items = append(items, convertTokenToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedTokenToPorcelain(plumbings []*proto.Token) (
+	[]*Token,
+	error,
+) {
+	var items []*Token
+	for _, plumbing := range plumbings {
+		if v, err := convertTokenToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

@@ -25,6 +25,10 @@ func dataSourceAccount() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"account_type": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"email": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -50,6 +54,10 @@ func dataSourceAccount() *schema.Resource {
 				Optional: true,
 			},
 			"permission_level": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"permissions": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -87,6 +95,64 @@ func dataSourceAccount() *schema.Resource {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Description: "The Service's suspended state.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"token": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "A Token is an account providing tokenized access for automation or integration use. Tokens include admin tokens, API keys, and SCIM tokens.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"account_type": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Corresponds to the type of token, e.g. api or admin-token.",
+									},
+									"deadline": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The timestamp when the Token will expire.",
+									},
+									"duration": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Duration from token creation to expiration.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Token.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Token.",
+									},
+									"permissions": {
+										Type: schema.TypeList,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										Optional:    true,
+										Description: "Permissions assigned to the token, e.g. role:create.",
+									},
+									"rekeyed": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The timestamp when the Token was last rekeyed.",
+									},
+									"suspended": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "Reserved for future use.  Always false for tokens.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -169,6 +235,18 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		filter += "type:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("account_type"); ok {
+		filter += "accounttype:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("deadline"); ok {
+		filter += "deadline:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("duration"); ok {
+		filter += "duration:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("email"); ok {
 		filter += "email:? "
 		args = append(args, v)
@@ -199,6 +277,14 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 	}
 	if v, ok := d.GetOkExists("permission_levelRW"); ok {
 		filter += "permissionlevelrw:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("permissions"); ok {
+		filter += "permissions:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("rekeyed"); ok {
+		filter += "rekeyed:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("suspended"); ok {
@@ -240,6 +326,18 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"name":      (v.Name),
 				"suspended": (v.Suspended),
 				"tags":      convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.Token:
+			output[0]["token"] = append(output[0]["token"], entity{
+				"account_type": (v.AccountType),
+				"deadline":     convertTimestampToPorcelain(v.Deadline),
+				"duration":     convertDurationToPorcelain(v.Duration),
+				"id":           (v.ID),
+				"name":         (v.Name),
+				"permissions":  (v.Permissions),
+				"rekeyed":      convertTimestampToPorcelain(v.Rekeyed),
+				"suspended":    (v.Suspended),
+				"tags":         convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.User:
 			output[0]["user"] = append(output[0]["user"], entity{
