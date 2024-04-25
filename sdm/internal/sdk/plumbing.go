@@ -6723,6 +6723,75 @@ func convertRepeatedHTTPNoAuthToPorcelain(plumbings []*proto.HTTPNoAuth) (
 	}
 	return items, nil
 }
+func convertKeyfactorX509StoreToPorcelain(plumbing *proto.KeyfactorX509Store) (*KeyfactorX509Store, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &KeyfactorX509Store{}
+	porcelain.CaFilePath = plumbing.CaFilePath
+	porcelain.CertificateFilePath = plumbing.CertificateFilePath
+	porcelain.DefaultCertificateAuthorityName = plumbing.DefaultCertificateAuthorityName
+	porcelain.DefaultCertificateProfileName = plumbing.DefaultCertificateProfileName
+	porcelain.DefaultEndEntityProfileName = plumbing.DefaultEndEntityProfileName
+	porcelain.EnrollmentCodeEnvVar = plumbing.EnrollmentCodeEnvVar
+	porcelain.EnrollmentUsernameEnvVar = plumbing.EnrollmentUsernameEnvVar
+	porcelain.ID = plumbing.Id
+	porcelain.KeyFilePath = plumbing.KeyFilePath
+	porcelain.KeyPasswordEnvVar = plumbing.KeyPasswordEnvVar
+	porcelain.Name = plumbing.Name
+	porcelain.ServerAddress = plumbing.ServerAddress
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertKeyfactorX509StoreToPlumbing(porcelain *KeyfactorX509Store) *proto.KeyfactorX509Store {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KeyfactorX509Store{}
+	plumbing.CaFilePath = (porcelain.CaFilePath)
+	plumbing.CertificateFilePath = (porcelain.CertificateFilePath)
+	plumbing.DefaultCertificateAuthorityName = (porcelain.DefaultCertificateAuthorityName)
+	plumbing.DefaultCertificateProfileName = (porcelain.DefaultCertificateProfileName)
+	plumbing.DefaultEndEntityProfileName = (porcelain.DefaultEndEntityProfileName)
+	plumbing.EnrollmentCodeEnvVar = (porcelain.EnrollmentCodeEnvVar)
+	plumbing.EnrollmentUsernameEnvVar = (porcelain.EnrollmentUsernameEnvVar)
+	plumbing.Id = (porcelain.ID)
+	plumbing.KeyFilePath = (porcelain.KeyFilePath)
+	plumbing.KeyPasswordEnvVar = (porcelain.KeyPasswordEnvVar)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedKeyfactorX509StoreToPlumbing(
+	porcelains []*KeyfactorX509Store,
+) []*proto.KeyfactorX509Store {
+	var items []*proto.KeyfactorX509Store
+	for _, porcelain := range porcelains {
+		items = append(items, convertKeyfactorX509StoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKeyfactorX509StoreToPorcelain(plumbings []*proto.KeyfactorX509Store) (
+	[]*KeyfactorX509Store,
+	error,
+) {
+	var items []*KeyfactorX509Store
+	for _, plumbing := range plumbings {
+		if v, err := convertKeyfactorX509StoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -12843,6 +12912,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Gcp{Gcp: convertGCPStoreToPlumbing(v)}
 	case *GCPCertX509Store:
 		plumbing.SecretStore = &proto.SecretStore_GcpCertX_509{GcpCertX_509: convertGCPCertX509StoreToPlumbing(v)}
+	case *KeyfactorX509Store:
+		plumbing.SecretStore = &proto.SecretStore_KeyfactorX_509{KeyfactorX_509: convertKeyfactorX509StoreToPlumbing(v)}
 	case *VaultAppRoleStore:
 		plumbing.SecretStore = &proto.SecretStore_VaultAppRole{VaultAppRole: convertVaultAppRoleStoreToPlumbing(v)}
 	case *VaultAppRoleCertSSHStore:
@@ -12895,6 +12966,9 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetGcpCertX_509() != nil {
 		return convertGCPCertX509StoreToPorcelain(plumbing.GetGcpCertX_509())
+	}
+	if plumbing.GetKeyfactorX_509() != nil {
+		return convertKeyfactorX509StoreToPorcelain(plumbing.GetKeyfactorX_509())
 	}
 	if plumbing.GetVaultAppRole() != nil {
 		return convertVaultAppRoleStoreToPorcelain(plumbing.GetVaultAppRole())
