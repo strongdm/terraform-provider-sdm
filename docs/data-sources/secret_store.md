@@ -79,6 +79,19 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `project_id` - The GCP project ID to target.
 		* `tags` - Tags is a map of key, value pairs.
+	* keyfactor_ssh_store:
+		* `ca_file_path` - Path to the root CA that signed the certificate passed to the client for HTTPS connection. This is not required if the CA is trusted by the host operating system. This should be a PEM formatted certificate, and doesn't necessarily have to be the CA that signed CertificateFile.
+		* `certificate_file_path` - Path to client certificate in PEM format. This certificate must contain a client certificate that is recognized by the EJBCA instance represented by Hostname. This PEM file may also contain the private key associated with the certificate, but KeyFile can also be set to configure the private key.
+		* `default_certificate_authority_name` - Name of EJBCA certificate authority that will enroll CSR.
+		* `default_certificate_profile_name` - Certificate profile name that EJBCA will enroll the CSR with.
+		* `default_end_entity_profile_name` - End entity profile that EJBCA will enroll the CSR with.
+		* `enrollment_code_env_var` - code used by EJBCA during enrollment. May be left blank if no code is required.
+		* `enrollment_username_env_var` - username that used by the EJBCA during enrollment. This can be left out.  If so, the username must be auto-generated on the Keyfactor side.
+		* `id` - Unique identifier of the SecretStore.
+		* `key_file_path` - Path to private key in PEM format. This file should contain the private key associated with the client certificate configured in CertificateFile.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `server_address` - the host of the Key Factor CA
+		* `tags` - Tags is a map of key, value pairs.
 	* keyfactor_x_509_store:
 		* `ca_file_path` - Path to the root CA that signed the certificate passed to the client for HTTPS connection. This is not required if the CA is trusted by the host operating system. This should be a PEM formatted certificate, and doesn't necessarily have to be the CA that signed CertificateFile.
 		* `certificate_file_path` - Path to client certificate in PEM format. This certificate must contain a client certificate that is recognized by the EJBCA instance represented by Hostname. This PEM file may also contain the private key associated with the certificate, but KeyFile can also be set to configure the private key.
@@ -89,7 +102,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `enrollment_username_env_var` - username that used by the EJBCA during enrollment. This can be left out.  If so, the username must be auto-generated on the Keyfactor side.
 		* `id` - Unique identifier of the SecretStore.
 		* `key_file_path` - Path to private key in PEM format. This file should contain the private key associated with the client certificate configured in CertificateFile.
-		* `key_password_env_var` - optional environment variable housing the password that is used to decrypt the key file.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `server_address` - the host of the Key Factor CA
 		* `tags` - Tags is a map of key, value pairs.

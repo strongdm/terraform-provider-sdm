@@ -2324,6 +2324,39 @@ type HTTPNoAuth struct {
 	Url string `json:"url"`
 }
 
+type KeyfactorSSHStore struct {
+	// Path to the root CA that signed the certificate passed to the client for HTTPS connection.
+	// This is not required if the CA is trusted by the host operating system. This should be a PEM
+	// formatted certificate, and doesn't necessarily have to be the CA that signed CertificateFile.
+	CaFilePath string `json:"caFilePath"`
+	// Path to client certificate in PEM format. This certificate must contain a client certificate that
+	// is recognized by the EJBCA instance represented by Hostname. This PEM file may also contain the private
+	// key associated with the certificate, but KeyFile can also be set to configure the private key.
+	CertificateFilePath string `json:"certificateFilePath"`
+	// Name of EJBCA certificate authority that will enroll CSR.
+	DefaultCertificateAuthorityName string `json:"defaultCertificateAuthorityName"`
+	// Certificate profile name that EJBCA will enroll the CSR with.
+	DefaultCertificateProfileName string `json:"defaultCertificateProfileName"`
+	// End entity profile that EJBCA will enroll the CSR with.
+	DefaultEndEntityProfileName string `json:"defaultEndEntityProfileName"`
+	// code used by EJBCA during enrollment. May be left blank if no code is required.
+	EnrollmentCodeEnvVar string `json:"enrollmentCodeEnvVar"`
+	// username that used by the EJBCA during enrollment. This can be left out.
+	// If so, the username must be auto-generated on the Keyfactor side.
+	EnrollmentUsernameEnvVar string `json:"enrollmentUsernameEnvVar"`
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Path to private key in PEM format. This file should contain the private key associated with the
+	// client certificate configured in CertificateFile.
+	KeyFilePath string `json:"keyFilePath"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// the host of the Key Factor CA
+	ServerAddress string `json:"serverAddress"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type KeyfactorX509Store struct {
 	// Path to the root CA that signed the certificate passed to the client for HTTPS connection.
 	// This is not required if the CA is trusted by the host operating system. This should be a PEM
@@ -2349,8 +2382,6 @@ type KeyfactorX509Store struct {
 	// Path to private key in PEM format. This file should contain the private key associated with the
 	// client certificate configured in CertificateFile.
 	KeyFilePath string `json:"keyFilePath"`
-	// optional environment variable housing the password that is used to decrypt the key file.
-	KeyPasswordEnvVar string `json:"keyPasswordEnvVar"`
 	// Unique human-readable name of the SecretStore.
 	Name string `json:"name"`
 	// the host of the Key Factor CA
@@ -9151,6 +9182,30 @@ func (m *GCPCertX509Store) GetName() string {
 
 // SetName sets the name of the GCPCertX509Store.
 func (m *GCPCertX509Store) SetName(v string) {
+	m.Name = v
+}
+func (*KeyfactorSSHStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the KeyfactorSSHStore.
+func (m *KeyfactorSSHStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the KeyfactorSSHStore.
+func (m *KeyfactorSSHStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KeyfactorSSHStore.
+func (m *KeyfactorSSHStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the KeyfactorSSHStore.
+func (m *KeyfactorSSHStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the KeyfactorSSHStore.
+func (m *KeyfactorSSHStore) SetName(v string) {
 	m.Name = v
 }
 func (*KeyfactorX509Store) isOneOf_SecretStore() {}

@@ -6723,6 +6723,73 @@ func convertRepeatedHTTPNoAuthToPorcelain(plumbings []*proto.HTTPNoAuth) (
 	}
 	return items, nil
 }
+func convertKeyfactorSSHStoreToPorcelain(plumbing *proto.KeyfactorSSHStore) (*KeyfactorSSHStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &KeyfactorSSHStore{}
+	porcelain.CaFilePath = plumbing.CaFilePath
+	porcelain.CertificateFilePath = plumbing.CertificateFilePath
+	porcelain.DefaultCertificateAuthorityName = plumbing.DefaultCertificateAuthorityName
+	porcelain.DefaultCertificateProfileName = plumbing.DefaultCertificateProfileName
+	porcelain.DefaultEndEntityProfileName = plumbing.DefaultEndEntityProfileName
+	porcelain.EnrollmentCodeEnvVar = plumbing.EnrollmentCodeEnvVar
+	porcelain.EnrollmentUsernameEnvVar = plumbing.EnrollmentUsernameEnvVar
+	porcelain.ID = plumbing.Id
+	porcelain.KeyFilePath = plumbing.KeyFilePath
+	porcelain.Name = plumbing.Name
+	porcelain.ServerAddress = plumbing.ServerAddress
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertKeyfactorSSHStoreToPlumbing(porcelain *KeyfactorSSHStore) *proto.KeyfactorSSHStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KeyfactorSSHStore{}
+	plumbing.CaFilePath = (porcelain.CaFilePath)
+	plumbing.CertificateFilePath = (porcelain.CertificateFilePath)
+	plumbing.DefaultCertificateAuthorityName = (porcelain.DefaultCertificateAuthorityName)
+	plumbing.DefaultCertificateProfileName = (porcelain.DefaultCertificateProfileName)
+	plumbing.DefaultEndEntityProfileName = (porcelain.DefaultEndEntityProfileName)
+	plumbing.EnrollmentCodeEnvVar = (porcelain.EnrollmentCodeEnvVar)
+	plumbing.EnrollmentUsernameEnvVar = (porcelain.EnrollmentUsernameEnvVar)
+	plumbing.Id = (porcelain.ID)
+	plumbing.KeyFilePath = (porcelain.KeyFilePath)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedKeyfactorSSHStoreToPlumbing(
+	porcelains []*KeyfactorSSHStore,
+) []*proto.KeyfactorSSHStore {
+	var items []*proto.KeyfactorSSHStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertKeyfactorSSHStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKeyfactorSSHStoreToPorcelain(plumbings []*proto.KeyfactorSSHStore) (
+	[]*KeyfactorSSHStore,
+	error,
+) {
+	var items []*KeyfactorSSHStore
+	for _, plumbing := range plumbings {
+		if v, err := convertKeyfactorSSHStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertKeyfactorX509StoreToPorcelain(plumbing *proto.KeyfactorX509Store) (*KeyfactorX509Store, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6737,7 +6804,6 @@ func convertKeyfactorX509StoreToPorcelain(plumbing *proto.KeyfactorX509Store) (*
 	porcelain.EnrollmentUsernameEnvVar = plumbing.EnrollmentUsernameEnvVar
 	porcelain.ID = plumbing.Id
 	porcelain.KeyFilePath = plumbing.KeyFilePath
-	porcelain.KeyPasswordEnvVar = plumbing.KeyPasswordEnvVar
 	porcelain.Name = plumbing.Name
 	porcelain.ServerAddress = plumbing.ServerAddress
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6762,7 +6828,6 @@ func convertKeyfactorX509StoreToPlumbing(porcelain *KeyfactorX509Store) *proto.K
 	plumbing.EnrollmentUsernameEnvVar = (porcelain.EnrollmentUsernameEnvVar)
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyFilePath = (porcelain.KeyFilePath)
-	plumbing.KeyPasswordEnvVar = (porcelain.KeyPasswordEnvVar)
 	plumbing.Name = (porcelain.Name)
 	plumbing.ServerAddress = (porcelain.ServerAddress)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -12912,6 +12977,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_Gcp{Gcp: convertGCPStoreToPlumbing(v)}
 	case *GCPCertX509Store:
 		plumbing.SecretStore = &proto.SecretStore_GcpCertX_509{GcpCertX_509: convertGCPCertX509StoreToPlumbing(v)}
+	case *KeyfactorSSHStore:
+		plumbing.SecretStore = &proto.SecretStore_KeyfactorSsh{KeyfactorSsh: convertKeyfactorSSHStoreToPlumbing(v)}
 	case *KeyfactorX509Store:
 		plumbing.SecretStore = &proto.SecretStore_KeyfactorX_509{KeyfactorX_509: convertKeyfactorX509StoreToPlumbing(v)}
 	case *VaultAppRoleStore:
@@ -12966,6 +13033,9 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetGcpCertX_509() != nil {
 		return convertGCPCertX509StoreToPorcelain(plumbing.GetGcpCertX_509())
+	}
+	if plumbing.GetKeyfactorSsh() != nil {
+		return convertKeyfactorSSHStoreToPorcelain(plumbing.GetKeyfactorSsh())
 	}
 	if plumbing.GetKeyfactorX_509() != nil {
 		return convertKeyfactorX509StoreToPorcelain(plumbing.GetKeyfactorX_509())

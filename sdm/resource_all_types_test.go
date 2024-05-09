@@ -2477,6 +2477,21 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "keyfactor_ssh_store",
+			pairs: [][2]string{
+				{"ca_file_path", `"ca_file_path"`},
+				{"certificate_file_path", `"certificate_file_path"`},
+				{"default_certificate_authority_name", `"default_certificate_authority_name"`},
+				{"default_certificate_profile_name", `"default_certificate_profile_name"`},
+				{"default_end_entity_profile_name", `"default_end_entity_profile_name"`},
+				{"enrollment_code_env_var", `"enrollment_code_env_var"`},
+				{"enrollment_username_env_var", `"enrollment_username_env_var"`},
+				{"key_file_path", `"key_file_path"`},
+				{"name", `"all_secrets_name"`},
+				{"server_address", `"server_address"`},
+			},
+		},
+		{
 			resource: "keyfactor_x_509_store",
 			pairs: [][2]string{
 				{"ca_file_path", `"ca_file_path"`},
@@ -2487,7 +2502,6 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 				{"enrollment_code_env_var", `"enrollment_code_env_var"`},
 				{"enrollment_username_env_var", `"enrollment_username_env_var"`},
 				{"key_file_path", `"key_file_path"`},
-				{"key_password_env_var", `"key_password_env_var"`},
 				{"name", `"all_secrets_name"`},
 				{"server_address", `"server_address"`},
 			},

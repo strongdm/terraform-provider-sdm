@@ -328,7 +328,7 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
-			"keyfactor_x_509_store": {
+			"keyfactor_ssh_store": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -375,10 +375,71 @@ func resourceSecretStore() *schema.Resource {
 							Optional:    true,
 							Description: "Path to private key in PEM format. This file should contain the private key associated with the client certificate configured in CertificateFile.",
 						},
-						"key_password_env_var": {
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "the host of the Key Factor CA",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"keyfactor_x_509_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"ca_file_path": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "optional environment variable housing the password that is used to decrypt the key file.",
+							Description: "Path to the root CA that signed the certificate passed to the client for HTTPS connection. This is not required if the CA is trusted by the host operating system. This should be a PEM formatted certificate, and doesn't necessarily have to be the CA that signed CertificateFile.",
+						},
+						"certificate_file_path": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Path to client certificate in PEM format. This certificate must contain a client certificate that is recognized by the EJBCA instance represented by Hostname. This PEM file may also contain the private key associated with the certificate, but KeyFile can also be set to configure the private key.",
+						},
+						"default_certificate_authority_name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Name of EJBCA certificate authority that will enroll CSR.",
+						},
+						"default_certificate_profile_name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Certificate profile name that EJBCA will enroll the CSR with.",
+						},
+						"default_end_entity_profile_name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "End entity profile that EJBCA will enroll the CSR with.",
+						},
+						"enrollment_code_env_var": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "code used by EJBCA during enrollment. May be left blank if no code is required.",
+						},
+						"enrollment_username_env_var": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "username that used by the EJBCA during enrollment. This can be left out.  If so, the username must be auto-generated on the Keyfactor side.",
+						},
+						"key_file_path": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Path to private key in PEM format. This file should contain the private key associated with the client certificate configured in CertificateFile.",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -959,6 +1020,27 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("keyfactor_ssh_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.KeyfactorSSHStore{}
+		}
+		out := &sdm.KeyfactorSSHStore{
+			ID:                              d.Id(),
+			CaFilePath:                      convertStringToPlumbing(raw["ca_file_path"]),
+			CertificateFilePath:             convertStringToPlumbing(raw["certificate_file_path"]),
+			DefaultCertificateAuthorityName: convertStringToPlumbing(raw["default_certificate_authority_name"]),
+			DefaultCertificateProfileName:   convertStringToPlumbing(raw["default_certificate_profile_name"]),
+			DefaultEndEntityProfileName:     convertStringToPlumbing(raw["default_end_entity_profile_name"]),
+			EnrollmentCodeEnvVar:            convertStringToPlumbing(raw["enrollment_code_env_var"]),
+			EnrollmentUsernameEnvVar:        convertStringToPlumbing(raw["enrollment_username_env_var"]),
+			KeyFilePath:                     convertStringToPlumbing(raw["key_file_path"]),
+			Name:                            convertStringToPlumbing(raw["name"]),
+			ServerAddress:                   convertStringToPlumbing(raw["server_address"]),
+			Tags:                            convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("keyfactor_x_509_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -974,7 +1056,6 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 			EnrollmentCodeEnvVar:            convertStringToPlumbing(raw["enrollment_code_env_var"]),
 			EnrollmentUsernameEnvVar:        convertStringToPlumbing(raw["enrollment_username_env_var"]),
 			KeyFilePath:                     convertStringToPlumbing(raw["key_file_path"]),
-			KeyPasswordEnvVar:               convertStringToPlumbing(raw["key_password_env_var"]),
 			Name:                            convertStringToPlumbing(raw["name"]),
 			ServerAddress:                   convertStringToPlumbing(raw["server_address"]),
 			Tags:                            convertTagsToPlumbing(raw["tags"]),
@@ -1254,6 +1335,24 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":                    convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.KeyfactorSSHStore:
+		localV, _ := localVersion.(*sdm.KeyfactorSSHStore)
+		_ = localV
+		d.Set("keyfactor_ssh_store", []map[string]interface{}{
+			{
+				"ca_file_path":                       (v.CaFilePath),
+				"certificate_file_path":              (v.CertificateFilePath),
+				"default_certificate_authority_name": (v.DefaultCertificateAuthorityName),
+				"default_certificate_profile_name":   (v.DefaultCertificateProfileName),
+				"default_end_entity_profile_name":    (v.DefaultEndEntityProfileName),
+				"enrollment_code_env_var":            (v.EnrollmentCodeEnvVar),
+				"enrollment_username_env_var":        (v.EnrollmentUsernameEnvVar),
+				"key_file_path":                      (v.KeyFilePath),
+				"name":                               (v.Name),
+				"server_address":                     (v.ServerAddress),
+				"tags":                               convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.KeyfactorX509Store:
 		localV, _ := localVersion.(*sdm.KeyfactorX509Store)
 		_ = localV
@@ -1267,7 +1366,6 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"enrollment_code_env_var":            (v.EnrollmentCodeEnvVar),
 				"enrollment_username_env_var":        (v.EnrollmentUsernameEnvVar),
 				"key_file_path":                      (v.KeyFilePath),
-				"key_password_env_var":               (v.KeyPasswordEnvVar),
 				"name":                               (v.Name),
 				"server_address":                     (v.ServerAddress),
 				"tags":                               convertTagsToPorcelain(v.Tags),
@@ -1554,6 +1652,27 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"tags":                    convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.KeyfactorSSHStore:
+		localV, ok := localVersion.(*sdm.KeyfactorSSHStore)
+		if !ok {
+			localV = &sdm.KeyfactorSSHStore{}
+		}
+		_ = localV
+		d.Set("keyfactor_ssh_store", []map[string]interface{}{
+			{
+				"ca_file_path":                       (v.CaFilePath),
+				"certificate_file_path":              (v.CertificateFilePath),
+				"default_certificate_authority_name": (v.DefaultCertificateAuthorityName),
+				"default_certificate_profile_name":   (v.DefaultCertificateProfileName),
+				"default_end_entity_profile_name":    (v.DefaultEndEntityProfileName),
+				"enrollment_code_env_var":            (v.EnrollmentCodeEnvVar),
+				"enrollment_username_env_var":        (v.EnrollmentUsernameEnvVar),
+				"key_file_path":                      (v.KeyFilePath),
+				"name":                               (v.Name),
+				"server_address":                     (v.ServerAddress),
+				"tags":                               convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.KeyfactorX509Store:
 		localV, ok := localVersion.(*sdm.KeyfactorX509Store)
 		if !ok {
@@ -1570,7 +1689,6 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"enrollment_code_env_var":            (v.EnrollmentCodeEnvVar),
 				"enrollment_username_env_var":        (v.EnrollmentUsernameEnvVar),
 				"key_file_path":                      (v.KeyFilePath),
-				"key_password_env_var":               (v.KeyPasswordEnvVar),
 				"name":                               (v.Name),
 				"server_address":                     (v.ServerAddress),
 				"tags":                               convertTagsToPorcelain(v.Tags),
