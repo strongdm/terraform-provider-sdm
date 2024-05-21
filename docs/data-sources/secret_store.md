@@ -129,6 +129,18 @@ In addition to provided arguments above, the following attributes are returned b
 		* `server_address` - The URL of the Vault to target
 		* `signing_role` - The signing role to be used for signing certificates
 		* `tags` - Tags is a map of key, value pairs.
+	* vault_aws_ec2:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_aws_iam:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
 		* `ca_cert_path` - A path to a CA file accessible by a Node
 		* `client_cert_path` - A path to a client certificate file accessible by a Node

@@ -583,6 +583,68 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"vault_aws_ec2": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "VaultAWSEC2Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The namespace to make requests within",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL of the Vault to target",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"vault_aws_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "VaultAWSIAMStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The namespace to make requests within",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL of the Vault to target",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"vault_tls": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -1110,6 +1172,34 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("vault_aws_ec2").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAWSEC2Store{}
+		}
+		out := &sdm.VaultAWSEC2Store{
+			ID:            d.Id(),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Namespace:     convertStringToPlumbing(raw["namespace"]),
+			ServerAddress: convertStringToPlumbing(raw["server_address"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("vault_aws_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAWSIAMStore{}
+		}
+		out := &sdm.VaultAWSIAMStore{
+			ID:            d.Id(),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Namespace:     convertStringToPlumbing(raw["namespace"]),
+			ServerAddress: convertStringToPlumbing(raw["server_address"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("vault_tls").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -1408,6 +1498,28 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"server_address":          (v.ServerAddress),
 				"signing_role":            (v.SigningRole),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSEC2Store:
+		localV, _ := localVersion.(*sdm.VaultAWSEC2Store)
+		_ = localV
+		d.Set("vault_aws_ec2", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSIAMStore:
+		localV, _ := localVersion.(*sdm.VaultAWSIAMStore)
+		_ = localV
+		d.Set("vault_aws_iam", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTLSStore:
@@ -1740,6 +1852,34 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"server_address":          (v.ServerAddress),
 				"signing_role":            (v.SigningRole),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSEC2Store:
+		localV, ok := localVersion.(*sdm.VaultAWSEC2Store)
+		if !ok {
+			localV = &sdm.VaultAWSEC2Store{}
+		}
+		_ = localV
+		d.Set("vault_aws_ec2", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSIAMStore:
+		localV, ok := localVersion.(*sdm.VaultAWSIAMStore)
+		if !ok {
+			localV = &sdm.VaultAWSIAMStore{}
+		}
+		_ = localV
+		d.Set("vault_aws_iam", []map[string]interface{}{
+			{
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTLSStore:

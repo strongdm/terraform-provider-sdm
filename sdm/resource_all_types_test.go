@@ -2537,6 +2537,22 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "vault_aws_ec2",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+			},
+		},
+		{
+			resource: "vault_aws_iam",
+			pairs: [][2]string{
+				{"name", `"all_secrets_name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+			},
+		},
+		{
 			resource: "vault_tls",
 			pairs: [][2]string{
 				{"ca_cert_path", `"ca_cert_path"`},

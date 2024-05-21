@@ -106,6 +106,16 @@ The following arguments are supported by the SecretStore resource:
 	* `server_address` - (Required) The URL of the Vault to target
 	* `signing_role` - (Required) The signing role to be used for signing certificates
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_aws_ec2:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_aws_iam:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_tls:
 	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
 	* `client_cert_path` - (Required) A path to a client certificate file accessible by a Node

@@ -663,6 +663,76 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"vault_aws_ec2": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The namespace to make requests within",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The URL of the Vault to target",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"vault_aws_iam": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The namespace to make requests within",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The URL of the Vault to target",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"vault_tls": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -1166,6 +1236,22 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"server_address":          (v.ServerAddress),
 				"signing_role":            (v.SigningRole),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.VaultAWSEC2Store:
+			output[0]["vault_aws_ec2"] = append(output[0]["vault_aws_ec2"], entity{
+				"id":             (v.ID),
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.VaultAWSIAMStore:
+			output[0]["vault_aws_iam"] = append(output[0]["vault_aws_iam"], entity{
+				"id":             (v.ID),
+				"name":           (v.Name),
+				"namespace":      (v.Namespace),
+				"server_address": (v.ServerAddress),
+				"tags":           convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{

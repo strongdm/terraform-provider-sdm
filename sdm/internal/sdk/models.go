@@ -9304,6 +9304,54 @@ func (m *VaultAppRoleCertX509Store) GetName() string {
 func (m *VaultAppRoleCertX509Store) SetName(v string) {
 	m.Name = v
 }
+func (*VaultAWSEC2Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAWSEC2Store.
+func (m *VaultAWSEC2Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAWSEC2Store.
+func (m *VaultAWSEC2Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAWSEC2Store.
+func (m *VaultAWSEC2Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAWSEC2Store.
+func (m *VaultAWSEC2Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAWSEC2Store.
+func (m *VaultAWSEC2Store) SetName(v string) {
+	m.Name = v
+}
+func (*VaultAWSIAMStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAWSIAMStore.
+func (m *VaultAWSIAMStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAWSIAMStore.
+func (m *VaultAWSIAMStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAWSIAMStore.
+func (m *VaultAWSIAMStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAWSIAMStore.
+func (m *VaultAWSIAMStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAWSIAMStore.
+func (m *VaultAWSIAMStore) SetName(v string) {
+	m.Name = v
+}
 func (*VaultTLSStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultTLSStore.
@@ -9812,6 +9860,36 @@ type User struct {
 	PermissionLevel string `json:"permissionLevel"`
 	// Suspended is a read only field for the User's suspended state.
 	Suspended bool `json:"suspended"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultAWSEC2Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAWSEC2Store struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultAWSIAMStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAWSIAMStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }

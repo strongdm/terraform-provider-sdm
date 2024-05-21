@@ -12987,6 +12987,10 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_VaultAppRoleCertSsh{VaultAppRoleCertSsh: convertVaultAppRoleCertSSHStoreToPlumbing(v)}
 	case *VaultAppRoleCertX509Store:
 		plumbing.SecretStore = &proto.SecretStore_VaultAppRoleCertX_509{VaultAppRoleCertX_509: convertVaultAppRoleCertX509StoreToPlumbing(v)}
+	case *VaultAWSEC2Store:
+		plumbing.SecretStore = &proto.SecretStore_VaultAwsec_2{VaultAwsec_2: convertVaultAWSEC2StoreToPlumbing(v)}
+	case *VaultAWSIAMStore:
+		plumbing.SecretStore = &proto.SecretStore_VaultAwsiam{VaultAwsiam: convertVaultAWSIAMStoreToPlumbing(v)}
 	case *VaultTLSStore:
 		plumbing.SecretStore = &proto.SecretStore_VaultTls{VaultTls: convertVaultTLSStoreToPlumbing(v)}
 	case *VaultTLSCertSSHStore:
@@ -13048,6 +13052,12 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetVaultAppRoleCertX_509() != nil {
 		return convertVaultAppRoleCertX509StoreToPorcelain(plumbing.GetVaultAppRoleCertX_509())
+	}
+	if plumbing.GetVaultAwsec_2() != nil {
+		return convertVaultAWSEC2StoreToPorcelain(plumbing.GetVaultAwsec_2())
+	}
+	if plumbing.GetVaultAwsiam() != nil {
+		return convertVaultAWSIAMStoreToPorcelain(plumbing.GetVaultAwsiam())
 	}
 	if plumbing.GetVaultTls() != nil {
 		return convertVaultTLSStoreToPorcelain(plumbing.GetVaultTls())
@@ -14276,6 +14286,112 @@ func convertRepeatedUserToPorcelain(plumbings []*proto.User) (
 	var items []*User
 	for _, plumbing := range plumbings {
 		if v, err := convertUserToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertVaultAWSEC2StoreToPorcelain(plumbing *proto.VaultAWSEC2Store) (*VaultAWSEC2Store, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &VaultAWSEC2Store{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Namespace = plumbing.Namespace
+	porcelain.ServerAddress = plumbing.ServerAddress
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertVaultAWSEC2StoreToPlumbing(porcelain *VaultAWSEC2Store) *proto.VaultAWSEC2Store {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.VaultAWSEC2Store{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Namespace = (porcelain.Namespace)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedVaultAWSEC2StoreToPlumbing(
+	porcelains []*VaultAWSEC2Store,
+) []*proto.VaultAWSEC2Store {
+	var items []*proto.VaultAWSEC2Store
+	for _, porcelain := range porcelains {
+		items = append(items, convertVaultAWSEC2StoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedVaultAWSEC2StoreToPorcelain(plumbings []*proto.VaultAWSEC2Store) (
+	[]*VaultAWSEC2Store,
+	error,
+) {
+	var items []*VaultAWSEC2Store
+	for _, plumbing := range plumbings {
+		if v, err := convertVaultAWSEC2StoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertVaultAWSIAMStoreToPorcelain(plumbing *proto.VaultAWSIAMStore) (*VaultAWSIAMStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &VaultAWSIAMStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Namespace = plumbing.Namespace
+	porcelain.ServerAddress = plumbing.ServerAddress
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertVaultAWSIAMStoreToPlumbing(porcelain *VaultAWSIAMStore) *proto.VaultAWSIAMStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.VaultAWSIAMStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Namespace = (porcelain.Namespace)
+	plumbing.ServerAddress = (porcelain.ServerAddress)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedVaultAWSIAMStoreToPlumbing(
+	porcelains []*VaultAWSIAMStore,
+) []*proto.VaultAWSIAMStore {
+	var items []*proto.VaultAWSIAMStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertVaultAWSIAMStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedVaultAWSIAMStoreToPorcelain(plumbings []*proto.VaultAWSIAMStore) (
+	[]*VaultAWSIAMStore,
+	error,
+) {
+	var items []*VaultAWSIAMStore
+	for _, plumbing := range plumbings {
+		if v, err := convertVaultAWSIAMStoreToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
