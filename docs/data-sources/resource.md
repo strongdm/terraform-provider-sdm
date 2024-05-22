@@ -44,11 +44,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
@@ -72,11 +72,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
@@ -118,11 +118,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `endpoint` - The endpoint to dial.
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
 		* `region` - The AWS region to connect to e.g. us-east-1.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `role_arn` - The role to assume after logging in.
 		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `secret_access_key` - The Secret Access Key to use to authenticate.
@@ -137,11 +137,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `endpoint` - The endpoint to dial.
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
 		* `region` - The AWS region to connect to e.g. us-east-1.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `role_arn` - The role to assume after logging in.
 		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -158,8 +158,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
 		* `region` - The AWS region to connect to e.g. us-east-1.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `role_arn` - The role to assume after logging in.
 		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -293,11 +291,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `enable_env_variables` - If true, prefer environment variables to authenticate connection even if EC2 roles are configured.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
 		* `region` - The AWS region to connect to.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `role_arn` - The role to assume after logging in.
 		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -309,11 +307,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
 		* `region` - The AWS region to connect to.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `role_arn` - The role to assume after logging in.
 		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `secret_access_key` - The Secret Access Key to authenticate with.
@@ -596,10 +594,10 @@ In addition to provided arguments above, the following attributes are returned b
 		* `endpoint` - The endpoint to dial.
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `service_account_key` - The service account key to authenticate with.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -683,11 +681,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
@@ -711,11 +709,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
@@ -1042,11 +1040,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
@@ -1214,13 +1212,13 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `key_type` - The key type to use e.g. rsa-2048 or ed25519
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_forwarding` - Whether port forwarding is allowed through this server.
 		* `port_override` - The local port used by clients to connect to this resource.
-		* `remote_identity_group_id` - The ID of the remote identity group to use for remote identity connections.
-		* `remote_identity_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.

@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/8.4.0"
+	defaultUserAgent = "strongdm-sdk-go/9.0.0"
 	defaultPageLimit = 50
 )
 
@@ -90,6 +90,10 @@ type Client struct {
 	approvalWorkflows                *ApprovalWorkflows
 	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
 	controlPanel                     *ControlPanel
+	identityAliases                  *IdentityAliases
+	identityAliasesHistory           *IdentityAliasesHistory
+	identitySets                     *IdentitySets
+	identitySetsHistory              *IdentitySetsHistory
 	nodes                            *Nodes
 	nodesHistory                     *NodesHistory
 	organizationHistory              *OrganizationHistory
@@ -243,6 +247,22 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.controlPanel = &ControlPanel{
 		client: plumbing.NewControlPanelClient(client.grpcConn),
+		parent: client,
+	}
+	client.identityAliases = &IdentityAliases{
+		client: plumbing.NewIdentityAliasesClient(client.grpcConn),
+		parent: client,
+	}
+	client.identityAliasesHistory = &IdentityAliasesHistory{
+		client: plumbing.NewIdentityAliasesHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.identitySets = &IdentitySets{
+		client: plumbing.NewIdentitySetsClient(client.grpcConn),
+		parent: client,
+	}
+	client.identitySetsHistory = &IdentitySetsHistory{
+		client: plumbing.NewIdentitySetsHistoryClient(client.grpcConn),
 		parent: client,
 	}
 	client.nodes = &Nodes{
@@ -547,6 +567,28 @@ func (c *Client) ControlPanel() *ControlPanel {
 	return c.controlPanel
 }
 
+// IdentityAliases assign an alias to an account within an IdentitySet.
+// The alias is used as the username when connecting to a identity supported resource.
+func (c *Client) IdentityAliases() *IdentityAliases {
+	return c.identityAliases
+}
+
+// IdentityAliasesHistory records all changes to the state of a IdentityAlias.
+func (c *Client) IdentityAliasesHistory() *IdentityAliasesHistory {
+	return c.identityAliasesHistory
+}
+
+// A IdentitySet is a named grouping of Identity Aliases for Accounts.
+// An Account's relationship to a IdentitySet is defined via IdentityAlias objects.
+func (c *Client) IdentitySets() *IdentitySets {
+	return c.identitySets
+}
+
+// IdentitySetsHistory records all changes to the state of a IdentitySet.
+func (c *Client) IdentitySetsHistory() *IdentitySetsHistory {
+	return c.identitySetsHistory
+}
+
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
 // - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
@@ -757,6 +799,14 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewApprovalWorkflowsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.identityAliases = &IdentityAliases{
+		client: plumbing.NewIdentityAliasesClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.identitySets = &IdentitySets{
+		client: plumbing.NewIdentitySetsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.nodes = &Nodes{
 		client: plumbing.NewNodesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -853,6 +903,18 @@ func (c *SnapshotClient) ApprovalWorkflowSteps() SnapshotApprovalWorkflowSteps {
 // approvers and be approved or denied.
 func (c *SnapshotClient) ApprovalWorkflows() SnapshotApprovalWorkflows {
 	return c.client.approvalWorkflows
+}
+
+// IdentityAliases assign an alias to an account within an IdentitySet.
+// The alias is used as the username when connecting to a identity supported resource.
+func (c *SnapshotClient) IdentityAliases() SnapshotIdentityAliases {
+	return c.client.identityAliases
+}
+
+// A IdentitySet is a named grouping of Identity Aliases for Accounts.
+// An Account's relationship to a IdentitySet is defined via IdentityAlias objects.
+func (c *SnapshotClient) IdentitySets() SnapshotIdentitySets {
+	return c.client.identitySets
 }
 
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:

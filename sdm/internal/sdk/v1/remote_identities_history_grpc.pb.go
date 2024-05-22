@@ -30,6 +30,8 @@ const _ = grpc.SupportPackageIsVersion7
 // RemoteIdentitiesHistoryClient is the client API for RemoteIdentitiesHistory service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type RemoteIdentitiesHistoryClient interface {
 	// List gets a list of RemoteIdentityHistory records matching a given set of criteria.
 	List(ctx context.Context, in *RemoteIdentityHistoryListRequest, opts ...grpc.CallOption) (*RemoteIdentityHistoryListResponse, error)
@@ -39,6 +41,7 @@ type remoteIdentitiesHistoryClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewRemoteIdentitiesHistoryClient(cc grpc.ClientConnInterface) RemoteIdentitiesHistoryClient {
 	return &remoteIdentitiesHistoryClient{cc}
 }
@@ -55,6 +58,8 @@ func (c *remoteIdentitiesHistoryClient) List(ctx context.Context, in *RemoteIden
 // RemoteIdentitiesHistoryServer is the server API for RemoteIdentitiesHistory service.
 // All implementations must embed UnimplementedRemoteIdentitiesHistoryServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type RemoteIdentitiesHistoryServer interface {
 	// List gets a list of RemoteIdentityHistory records matching a given set of criteria.
 	List(context.Context, *RemoteIdentityHistoryListRequest) (*RemoteIdentityHistoryListResponse, error)
@@ -78,6 +83,7 @@ type UnsafeRemoteIdentitiesHistoryServer interface {
 	mustEmbedUnimplementedRemoteIdentitiesHistoryServer()
 }
 
+// Deprecated: Do not use.
 func RegisterRemoteIdentitiesHistoryServer(s grpc.ServiceRegistrar, srv RemoteIdentitiesHistoryServer) {
 	s.RegisterService(&_RemoteIdentitiesHistory_serviceDesc, srv)
 }

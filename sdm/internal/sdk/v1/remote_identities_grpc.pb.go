@@ -30,6 +30,8 @@ const _ = grpc.SupportPackageIsVersion7
 // RemoteIdentitiesClient is the client API for RemoteIdentities service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type RemoteIdentitiesClient interface {
 	// Create registers a new RemoteIdentity.
 	Create(ctx context.Context, in *RemoteIdentityCreateRequest, opts ...grpc.CallOption) (*RemoteIdentityCreateResponse, error)
@@ -47,6 +49,7 @@ type remoteIdentitiesClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewRemoteIdentitiesClient(cc grpc.ClientConnInterface) RemoteIdentitiesClient {
 	return &remoteIdentitiesClient{cc}
 }
@@ -99,6 +102,8 @@ func (c *remoteIdentitiesClient) List(ctx context.Context, in *RemoteIdentityLis
 // RemoteIdentitiesServer is the server API for RemoteIdentities service.
 // All implementations must embed UnimplementedRemoteIdentitiesServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type RemoteIdentitiesServer interface {
 	// Create registers a new RemoteIdentity.
 	Create(context.Context, *RemoteIdentityCreateRequest) (*RemoteIdentityCreateResponse, error)
@@ -141,6 +146,7 @@ type UnsafeRemoteIdentitiesServer interface {
 	mustEmbedUnimplementedRemoteIdentitiesServer()
 }
 
+// Deprecated: Do not use.
 func RegisterRemoteIdentitiesServer(s grpc.ServiceRegistrar, srv RemoteIdentitiesServer) {
 	s.RegisterService(&_RemoteIdentities_serviceDesc, srv)
 }

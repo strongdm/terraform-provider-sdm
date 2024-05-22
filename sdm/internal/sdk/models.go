@@ -50,16 +50,16 @@ type AKS struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -112,16 +112,16 @@ type AKSServiceAccount struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -255,16 +255,16 @@ type AWSConsole struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
 	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -290,16 +290,16 @@ type AWSConsoleStaticKeyPair struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
 	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -836,16 +836,16 @@ type AmazonEKS struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
 	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -877,16 +877,16 @@ type AmazonEKSInstanceProfile struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
 	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -922,10 +922,6 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	PortOverride int32 `json:"portOverride"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
 	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -2151,14 +2147,14 @@ type GoogleGKE struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// The service account key to authenticate with.
@@ -2324,6 +2320,106 @@ type HTTPNoAuth struct {
 	Url string `json:"url"`
 }
 
+// IdentityAliases define the username to be used for a specific account
+// when connecting to a remote resource using that identity set.
+type IdentityAlias struct {
+	// The account for this identity alias.
+	AccountID string `json:"accountId"`
+	// Unique identifier of the IdentityAlias.
+	ID string `json:"id"`
+	// The identity set.
+	IdentitySetID string `json:"identitySetId"`
+	// The username to be used as the identity alias for this account.
+	Username string `json:"username"`
+}
+
+// IdentityAliasCreateResponse reports how the IdentityAliases were created in the system.
+type IdentityAliasCreateResponse struct {
+	// The created IdentityAlias.
+	IdentityAlias *IdentityAlias `json:"identityAlias"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// IdentityAliasDeleteResponse returns information about a IdentityAlias that was deleted.
+type IdentityAliasDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// IdentityAliasGetResponse returns a requested IdentityAlias.
+type IdentityAliasGetResponse struct {
+	// The requested IdentityAlias.
+	IdentityAlias *IdentityAlias `json:"identityAlias"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// IdentityAliasHistory records the state of a IdentityAlias at a given point in time,
+// where every change (create, update and delete) to a IdentityAlias produces an
+// IdentityAliasHistory record.
+type IdentityAliasHistory struct {
+	// The unique identifier of the Activity that produced this change to the IdentityAlias.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this IdentityAlias was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The complete IdentityAlias state at this time.
+	IdentityAlias *IdentityAlias `json:"identityAlias"`
+	// The time at which the IdentityAlias state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// IdentityAliasUpdateResponse returns the fields of a IdentityAlias after it has been updated by
+// a IdentityAliasUpdateRequest.
+type IdentityAliasUpdateResponse struct {
+	// The updated IdentityAlias.
+	IdentityAlias *IdentityAlias `json:"identityAlias"`
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// A IdentitySet defines a group of identity aliases.
+type IdentitySet struct {
+	// Unique identifier of the IdentitySet.
+	ID string `json:"id"`
+	// Unique human-readable name of the IdentitySet.
+	Name string `json:"name"`
+}
+
+// IdentitySetGetResponse returns a requested IdentitySet.
+type IdentitySetGetResponse struct {
+	// The requested IdentitySet.
+	IdentitySet *IdentitySet `json:"identitySet"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// IdentitySetHistory records the state of a IdentitySet at a given point in time,
+// where every change (create, update and delete) to a IdentitySet produces an
+// IdentitySetHistory record.
+type IdentitySetHistory struct {
+	// The unique identifier of the Activity that produced this change to the IdentitySet.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this IdentitySet was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The complete IdentitySet state at this time.
+	IdentitySet *IdentitySet `json:"identitySet"`
+	// The time at which the IdentitySet state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
 type KeyfactorSSHStore struct {
 	// Path to the root CA that signed the certificate passed to the client for HTTPS connection.
 	// This is not required if the CA is trusted by the host operating system. This should be a PEM
@@ -2409,16 +2505,16 @@ type Kubernetes struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2471,16 +2567,16 @@ type KubernetesServiceAccount struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3605,16 +3701,16 @@ type RDPCert struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -8871,6 +8967,10 @@ type SSHCert struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// The key type to use e.g. rsa-2048 or ed25519
 	KeyType string `json:"keyType"`
 	// Unique human-readable name of the Resource.
@@ -8881,10 +8981,6 @@ type SSHCert struct {
 	PortForwarding bool `json:"portForwarding"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The ID of the remote identity group to use for remote identity connections.
-	RemoteIdentityGroupID string `json:"remoteIdentityGroupId"`
-	// The username to use for healthchecks, when clients otherwise connect with their own remote identity username.
-	RemoteIdentityHealthcheckUsername string `json:"remoteIdentityHealthcheckUsername"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -10652,6 +10748,74 @@ type ApprovalWorkflowHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *ApprovalWorkflowHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// IdentityAliasIterator provides read access to a list of IdentityAlias.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    identityAlias := iterator.Value()
+//	    // ...
+//	}
+type IdentityAliasIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *IdentityAlias
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// IdentityAliasHistoryIterator provides read access to a list of IdentityAliasHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    identityAliasHistory := iterator.Value()
+//	    // ...
+//	}
+type IdentityAliasHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *IdentityAliasHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// IdentitySetIterator provides read access to a list of IdentitySet.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    identitySet := iterator.Value()
+//	    // ...
+//	}
+type IdentitySetIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *IdentitySet
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// IdentitySetHistoryIterator provides read access to a list of IdentitySetHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    identitySetHistory := iterator.Value()
+//	    // ...
+//	}
+type IdentitySetHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *IdentitySetHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

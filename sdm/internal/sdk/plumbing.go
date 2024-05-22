@@ -106,11 +106,11 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -135,11 +135,11 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -251,11 +251,11 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -278,11 +278,11 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -595,11 +595,11 @@ func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, erro
 	porcelain.EnableEnvVariables = plumbing.EnableEnvVariables
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -623,11 +623,11 @@ func convertAWSConsoleToPlumbing(porcelain *AWSConsole) *proto.AWSConsole {
 	plumbing.EnableEnvVariables = (porcelain.EnableEnvVariables)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -670,11 +670,11 @@ func convertAWSConsoleStaticKeyPairToPorcelain(plumbing *proto.AWSConsoleStaticK
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretAccessKey = plumbing.SecretAccessKey
@@ -699,11 +699,11 @@ func convertAWSConsoleStaticKeyPairToPlumbing(porcelain *AWSConsoleStaticKeyPair
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
@@ -2517,11 +2517,11 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) 
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretAccessKey = plumbing.SecretAccessKey
@@ -2549,11 +2549,11 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
@@ -2599,11 +2599,11 @@ func convertAmazonEKSInstanceProfileToPorcelain(plumbing *proto.AmazonEKSInstanc
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -2629,11 +2629,11 @@ func convertAmazonEKSInstanceProfileToPlumbing(porcelain *AmazonEKSInstanceProfi
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -2681,8 +2681,6 @@ func convertAmazonEKSInstanceProfileUserImpersonationToPorcelain(plumbing *proto
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.Region = plumbing.Region
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -2711,8 +2709,6 @@ func convertAmazonEKSInstanceProfileUserImpersonationToPlumbing(porcelain *Amazo
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.Region = (porcelain.Region)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -6307,10 +6303,10 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServiceAccountKey = plumbing.ServiceAccountKey
 	porcelain.Subdomain = plumbing.Subdomain
@@ -6334,10 +6330,10 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -6723,6 +6719,493 @@ func convertRepeatedHTTPNoAuthToPorcelain(plumbings []*proto.HTTPNoAuth) (
 	}
 	return items, nil
 }
+func convertIdentityAliasToPorcelain(plumbing *proto.IdentityAlias) (*IdentityAlias, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentityAlias{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.ID = plumbing.Id
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertIdentityAliasToPlumbing(porcelain *IdentityAlias) *proto.IdentityAlias {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentityAlias{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedIdentityAliasToPlumbing(
+	porcelains []*IdentityAlias,
+) []*proto.IdentityAlias {
+	var items []*proto.IdentityAlias
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentityAliasToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentityAliasToPorcelain(plumbings []*proto.IdentityAlias) (
+	[]*IdentityAlias,
+	error,
+) {
+	var items []*IdentityAlias
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentityAliasToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentityAliasCreateResponseToPorcelain(plumbing *proto.IdentityAliasCreateResponse) (*IdentityAliasCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentityAliasCreateResponse{}
+	if v, err := convertIdentityAliasToPorcelain(plumbing.IdentityAlias); err != nil {
+		return nil, fmt.Errorf("error converting field IdentityAlias: %v", err)
+	} else {
+		porcelain.IdentityAlias = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentityAliasCreateResponseToPlumbing(porcelain *IdentityAliasCreateResponse) *proto.IdentityAliasCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentityAliasCreateResponse{}
+	plumbing.IdentityAlias = convertIdentityAliasToPlumbing(porcelain.IdentityAlias)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentityAliasCreateResponseToPlumbing(
+	porcelains []*IdentityAliasCreateResponse,
+) []*proto.IdentityAliasCreateResponse {
+	var items []*proto.IdentityAliasCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentityAliasCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentityAliasCreateResponseToPorcelain(plumbings []*proto.IdentityAliasCreateResponse) (
+	[]*IdentityAliasCreateResponse,
+	error,
+) {
+	var items []*IdentityAliasCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentityAliasCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentityAliasDeleteResponseToPorcelain(plumbing *proto.IdentityAliasDeleteResponse) (*IdentityAliasDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentityAliasDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentityAliasDeleteResponseToPlumbing(porcelain *IdentityAliasDeleteResponse) *proto.IdentityAliasDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentityAliasDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentityAliasDeleteResponseToPlumbing(
+	porcelains []*IdentityAliasDeleteResponse,
+) []*proto.IdentityAliasDeleteResponse {
+	var items []*proto.IdentityAliasDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentityAliasDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentityAliasDeleteResponseToPorcelain(plumbings []*proto.IdentityAliasDeleteResponse) (
+	[]*IdentityAliasDeleteResponse,
+	error,
+) {
+	var items []*IdentityAliasDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentityAliasDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentityAliasGetResponseToPorcelain(plumbing *proto.IdentityAliasGetResponse) (*IdentityAliasGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentityAliasGetResponse{}
+	if v, err := convertIdentityAliasToPorcelain(plumbing.IdentityAlias); err != nil {
+		return nil, fmt.Errorf("error converting field IdentityAlias: %v", err)
+	} else {
+		porcelain.IdentityAlias = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentityAliasGetResponseToPlumbing(porcelain *IdentityAliasGetResponse) *proto.IdentityAliasGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentityAliasGetResponse{}
+	plumbing.IdentityAlias = convertIdentityAliasToPlumbing(porcelain.IdentityAlias)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentityAliasGetResponseToPlumbing(
+	porcelains []*IdentityAliasGetResponse,
+) []*proto.IdentityAliasGetResponse {
+	var items []*proto.IdentityAliasGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentityAliasGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentityAliasGetResponseToPorcelain(plumbings []*proto.IdentityAliasGetResponse) (
+	[]*IdentityAliasGetResponse,
+	error,
+) {
+	var items []*IdentityAliasGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentityAliasGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentityAliasHistoryToPorcelain(plumbing *proto.IdentityAliasHistory) (*IdentityAliasHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentityAliasHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertIdentityAliasToPorcelain(plumbing.IdentityAlias); err != nil {
+		return nil, fmt.Errorf("error converting field IdentityAlias: %v", err)
+	} else {
+		porcelain.IdentityAlias = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentityAliasHistoryToPlumbing(porcelain *IdentityAliasHistory) *proto.IdentityAliasHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentityAliasHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.IdentityAlias = convertIdentityAliasToPlumbing(porcelain.IdentityAlias)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedIdentityAliasHistoryToPlumbing(
+	porcelains []*IdentityAliasHistory,
+) []*proto.IdentityAliasHistory {
+	var items []*proto.IdentityAliasHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentityAliasHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentityAliasHistoryToPorcelain(plumbings []*proto.IdentityAliasHistory) (
+	[]*IdentityAliasHistory,
+	error,
+) {
+	var items []*IdentityAliasHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentityAliasHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentityAliasUpdateResponseToPorcelain(plumbing *proto.IdentityAliasUpdateResponse) (*IdentityAliasUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentityAliasUpdateResponse{}
+	if v, err := convertIdentityAliasToPorcelain(plumbing.IdentityAlias); err != nil {
+		return nil, fmt.Errorf("error converting field IdentityAlias: %v", err)
+	} else {
+		porcelain.IdentityAlias = v
+	}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentityAliasUpdateResponseToPlumbing(porcelain *IdentityAliasUpdateResponse) *proto.IdentityAliasUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentityAliasUpdateResponse{}
+	plumbing.IdentityAlias = convertIdentityAliasToPlumbing(porcelain.IdentityAlias)
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentityAliasUpdateResponseToPlumbing(
+	porcelains []*IdentityAliasUpdateResponse,
+) []*proto.IdentityAliasUpdateResponse {
+	var items []*proto.IdentityAliasUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentityAliasUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentityAliasUpdateResponseToPorcelain(plumbings []*proto.IdentityAliasUpdateResponse) (
+	[]*IdentityAliasUpdateResponse,
+	error,
+) {
+	var items []*IdentityAliasUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentityAliasUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentitySetToPorcelain(plumbing *proto.IdentitySet) (*IdentitySet, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentitySet{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	return porcelain, nil
+}
+
+func convertIdentitySetToPlumbing(porcelain *IdentitySet) *proto.IdentitySet {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentitySet{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	return plumbing
+}
+func convertRepeatedIdentitySetToPlumbing(
+	porcelains []*IdentitySet,
+) []*proto.IdentitySet {
+	var items []*proto.IdentitySet
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentitySetToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentitySetToPorcelain(plumbings []*proto.IdentitySet) (
+	[]*IdentitySet,
+	error,
+) {
+	var items []*IdentitySet
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentitySetToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentitySetGetResponseToPorcelain(plumbing *proto.IdentitySetGetResponse) (*IdentitySetGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentitySetGetResponse{}
+	if v, err := convertIdentitySetToPorcelain(plumbing.IdentitySet); err != nil {
+		return nil, fmt.Errorf("error converting field IdentitySet: %v", err)
+	} else {
+		porcelain.IdentitySet = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentitySetGetResponseToPlumbing(porcelain *IdentitySetGetResponse) *proto.IdentitySetGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentitySetGetResponse{}
+	plumbing.IdentitySet = convertIdentitySetToPlumbing(porcelain.IdentitySet)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentitySetGetResponseToPlumbing(
+	porcelains []*IdentitySetGetResponse,
+) []*proto.IdentitySetGetResponse {
+	var items []*proto.IdentitySetGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentitySetGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentitySetGetResponseToPorcelain(plumbings []*proto.IdentitySetGetResponse) (
+	[]*IdentitySetGetResponse,
+	error,
+) {
+	var items []*IdentitySetGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentitySetGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentitySetHistoryToPorcelain(plumbing *proto.IdentitySetHistory) (*IdentitySetHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentitySetHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertIdentitySetToPorcelain(plumbing.IdentitySet); err != nil {
+		return nil, fmt.Errorf("error converting field IdentitySet: %v", err)
+	} else {
+		porcelain.IdentitySet = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentitySetHistoryToPlumbing(porcelain *IdentitySetHistory) *proto.IdentitySetHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentitySetHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.IdentitySet = convertIdentitySetToPlumbing(porcelain.IdentitySet)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedIdentitySetHistoryToPlumbing(
+	porcelains []*IdentitySetHistory,
+) []*proto.IdentitySetHistory {
+	var items []*proto.IdentitySetHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentitySetHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentitySetHistoryToPorcelain(plumbings []*proto.IdentitySetHistory) (
+	[]*IdentitySetHistory,
+	error,
+) {
+	var items []*IdentitySetHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentitySetHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertKeyfactorSSHStoreToPorcelain(plumbing *proto.KeyfactorSSHStore) (*KeyfactorSSHStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6871,11 +7354,11 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6900,11 +7383,11 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7016,11 +7499,11 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7043,11 +7526,11 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -10039,11 +10522,11 @@ func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -10065,11 +10548,11 @@ func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -12811,13 +13294,13 @@ func convertSSHCertToPorcelain(plumbing *proto.SSHCert) (*SSHCert, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.KeyType = plumbing.KeyType
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.RemoteIdentityGroupID = plumbing.RemoteIdentityGroupId
-	porcelain.RemoteIdentityHealthcheckUsername = plumbing.RemoteIdentityHealthcheckUsername
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -12840,13 +13323,13 @@ func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.KeyType = (porcelain.KeyType)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.RemoteIdentityGroupId = (porcelain.RemoteIdentityGroupID)
-	plumbing.RemoteIdentityHealthcheckUsername = (porcelain.RemoteIdentityHealthcheckUsername)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -17250,6 +17733,186 @@ func (a *approvalWorkflowHistoryIteratorImpl) Value() *ApprovalWorkflowHistory {
 
 func (a *approvalWorkflowHistoryIteratorImpl) Err() error {
 	return a.err
+}
+
+type identityAliasIteratorImplFetchFunc func() (
+	[]*IdentityAlias,
+	bool, error)
+type identityAliasIteratorImpl struct {
+	buffer      []*IdentityAlias
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       identityAliasIteratorImplFetchFunc
+}
+
+func newIdentityAliasIteratorImpl(f identityAliasIteratorImplFetchFunc) *identityAliasIteratorImpl {
+	return &identityAliasIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (i *identityAliasIteratorImpl) Next() bool {
+	if i.index < len(i.buffer)-1 {
+		i.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !i.hasNextPage {
+		return false
+	}
+
+	i.index = 0
+	i.buffer, i.hasNextPage, i.err = i.fetch()
+	return len(i.buffer) > 0
+}
+
+func (i *identityAliasIteratorImpl) Value() *IdentityAlias {
+	if i.index >= len(i.buffer) {
+		return nil
+	}
+	return i.buffer[i.index]
+}
+
+func (i *identityAliasIteratorImpl) Err() error {
+	return i.err
+}
+
+type identityAliasHistoryIteratorImplFetchFunc func() (
+	[]*IdentityAliasHistory,
+	bool, error)
+type identityAliasHistoryIteratorImpl struct {
+	buffer      []*IdentityAliasHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       identityAliasHistoryIteratorImplFetchFunc
+}
+
+func newIdentityAliasHistoryIteratorImpl(f identityAliasHistoryIteratorImplFetchFunc) *identityAliasHistoryIteratorImpl {
+	return &identityAliasHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (i *identityAliasHistoryIteratorImpl) Next() bool {
+	if i.index < len(i.buffer)-1 {
+		i.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !i.hasNextPage {
+		return false
+	}
+
+	i.index = 0
+	i.buffer, i.hasNextPage, i.err = i.fetch()
+	return len(i.buffer) > 0
+}
+
+func (i *identityAliasHistoryIteratorImpl) Value() *IdentityAliasHistory {
+	if i.index >= len(i.buffer) {
+		return nil
+	}
+	return i.buffer[i.index]
+}
+
+func (i *identityAliasHistoryIteratorImpl) Err() error {
+	return i.err
+}
+
+type identitySetIteratorImplFetchFunc func() (
+	[]*IdentitySet,
+	bool, error)
+type identitySetIteratorImpl struct {
+	buffer      []*IdentitySet
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       identitySetIteratorImplFetchFunc
+}
+
+func newIdentitySetIteratorImpl(f identitySetIteratorImplFetchFunc) *identitySetIteratorImpl {
+	return &identitySetIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (i *identitySetIteratorImpl) Next() bool {
+	if i.index < len(i.buffer)-1 {
+		i.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !i.hasNextPage {
+		return false
+	}
+
+	i.index = 0
+	i.buffer, i.hasNextPage, i.err = i.fetch()
+	return len(i.buffer) > 0
+}
+
+func (i *identitySetIteratorImpl) Value() *IdentitySet {
+	if i.index >= len(i.buffer) {
+		return nil
+	}
+	return i.buffer[i.index]
+}
+
+func (i *identitySetIteratorImpl) Err() error {
+	return i.err
+}
+
+type identitySetHistoryIteratorImplFetchFunc func() (
+	[]*IdentitySetHistory,
+	bool, error)
+type identitySetHistoryIteratorImpl struct {
+	buffer      []*IdentitySetHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       identitySetHistoryIteratorImplFetchFunc
+}
+
+func newIdentitySetHistoryIteratorImpl(f identitySetHistoryIteratorImplFetchFunc) *identitySetHistoryIteratorImpl {
+	return &identitySetHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (i *identitySetHistoryIteratorImpl) Next() bool {
+	if i.index < len(i.buffer)-1 {
+		i.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !i.hasNextPage {
+		return false
+	}
+
+	i.index = 0
+	i.buffer, i.hasNextPage, i.err = i.fetch()
+	return len(i.buffer) > 0
+}
+
+func (i *identitySetHistoryIteratorImpl) Value() *IdentitySetHistory {
+	if i.index >= len(i.buffer) {
+		return nil
+	}
+	return i.buffer[i.index]
+}
+
+func (i *identitySetHistoryIteratorImpl) Err() error {
+	return i.err
 }
 
 type nodeIteratorImplFetchFunc func() (

@@ -263,8 +263,8 @@ func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.hostname", sshCert.Hostname),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.port", fmt.Sprintf("%d", sshCert.Port)),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "ids.0", sshCert.ID),
-					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.remote_identity_group_id", group.ID),
-					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.remote_identity_healthcheck_username", "healthcheck"),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.identity_set_id", group.ID),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.identity_alias_healthcheck_username", "healthcheck"),
 				),
 			},
 		},
@@ -289,12 +289,12 @@ func createSSHCertsWithPrefix(prefix string, group sdm.RemoteIdentityGroup, coun
 	for i := 0; i < count; i++ {
 		port := portOverride.Count()
 		createResp, err := client.Resources().Create(ctx, &sdm.SSHCert{
-			Name:                              randomWithPrefix(prefix),
-			Hostname:                          randomWithPrefix(prefix),
-			Username:                          randomWithPrefix(prefix),
-			Port:                              port,
-			RemoteIdentityGroupID:             group.ID,
-			RemoteIdentityHealthcheckUsername: "healthcheck",
+			Name:                             randomWithPrefix(prefix),
+			Hostname:                         randomWithPrefix(prefix),
+			Username:                         randomWithPrefix(prefix),
+			Port:                             port,
+			IdentitySetID:                    group.ID,
+			IdentityAliasHealthcheckUsername: "healthcheck",
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to create ssh: %w", err)

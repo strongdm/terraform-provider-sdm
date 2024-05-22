@@ -30,6 +30,8 @@ const _ = grpc.SupportPackageIsVersion7
 // RemoteIdentityGroupsClient is the client API for RemoteIdentityGroups service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type RemoteIdentityGroupsClient interface {
 	// Get reads one RemoteIdentityGroup by ID.
 	Get(ctx context.Context, in *RemoteIdentityGroupGetRequest, opts ...grpc.CallOption) (*RemoteIdentityGroupGetResponse, error)
@@ -41,6 +43,7 @@ type remoteIdentityGroupsClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewRemoteIdentityGroupsClient(cc grpc.ClientConnInterface) RemoteIdentityGroupsClient {
 	return &remoteIdentityGroupsClient{cc}
 }
@@ -66,6 +69,8 @@ func (c *remoteIdentityGroupsClient) List(ctx context.Context, in *RemoteIdentit
 // RemoteIdentityGroupsServer is the server API for RemoteIdentityGroups service.
 // All implementations must embed UnimplementedRemoteIdentityGroupsServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type RemoteIdentityGroupsServer interface {
 	// Get reads one RemoteIdentityGroup by ID.
 	Get(context.Context, *RemoteIdentityGroupGetRequest) (*RemoteIdentityGroupGetResponse, error)
@@ -93,6 +98,7 @@ type UnsafeRemoteIdentityGroupsServer interface {
 	mustEmbedUnimplementedRemoteIdentityGroupsServer()
 }
 
+// Deprecated: Do not use.
 func RegisterRemoteIdentityGroupsServer(s grpc.ServiceRegistrar, srv RemoteIdentityGroupsServer) {
 	s.RegisterService(&_RemoteIdentityGroups_serviceDesc, srv)
 }

@@ -2190,6 +2190,475 @@ func (svc *ControlPanel) VerifyJWT(
 	return resp, nil
 }
 
+// IdentityAliases assign an alias to an account within an IdentitySet.
+// The alias is used as the username when connecting to a identity supported resource.
+type IdentityAliases struct {
+	client plumbing.IdentityAliasesClient
+	parent *Client
+}
+
+// A SnapshotIdentityAliases exposes the read only methods of the IdentityAliases
+// service for historical queries.
+type SnapshotIdentityAliases interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*IdentityAliasGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		IdentityAliasIterator,
+		error)
+}
+
+// Create registers a new IdentityAlias.
+func (svc *IdentityAliases) Create(
+	ctx context.Context,
+	identityAlias *IdentityAlias) (
+	*IdentityAliasCreateResponse,
+	error) {
+	req := &plumbing.IdentityAliasCreateRequest{}
+
+	req.IdentityAlias = convertIdentityAliasToPlumbing(identityAlias)
+	var plumbingResponse *plumbing.IdentityAliasCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "IdentityAliases.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentityAliasCreateResponse{}
+	if v, err := convertIdentityAliasToPorcelain(plumbingResponse.IdentityAlias); err != nil {
+		return nil, err
+	} else {
+		resp.IdentityAlias = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one IdentityAlias by ID.
+func (svc *IdentityAliases) Get(
+	ctx context.Context,
+	id string) (
+	*IdentityAliasGetResponse,
+	error) {
+	req := &plumbing.IdentityAliasGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.IdentityAliasGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "IdentityAliases.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentityAliasGetResponse{}
+	if v, err := convertIdentityAliasToPorcelain(plumbingResponse.IdentityAlias); err != nil {
+		return nil, err
+	} else {
+		resp.IdentityAlias = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a IdentityAlias by ID.
+func (svc *IdentityAliases) Update(
+	ctx context.Context,
+	identityAlias *IdentityAlias) (
+	*IdentityAliasUpdateResponse,
+	error) {
+	req := &plumbing.IdentityAliasUpdateRequest{}
+
+	req.IdentityAlias = convertIdentityAliasToPlumbing(identityAlias)
+	var plumbingResponse *plumbing.IdentityAliasUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "IdentityAliases.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentityAliasUpdateResponse{}
+	if v, err := convertIdentityAliasToPorcelain(plumbingResponse.IdentityAlias); err != nil {
+		return nil, err
+	} else {
+		resp.IdentityAlias = v
+	}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a IdentityAlias by ID.
+func (svc *IdentityAliases) Delete(
+	ctx context.Context,
+	id string) (
+	*IdentityAliasDeleteResponse,
+	error) {
+	req := &plumbing.IdentityAliasDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.IdentityAliasDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "IdentityAliases.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentityAliasDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of IdentityAliases matching a given set of criteria.
+func (svc *IdentityAliases) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	IdentityAliasIterator,
+	error) {
+	req := &plumbing.IdentityAliasListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newIdentityAliasIteratorImpl(
+		func() (
+			[]*IdentityAlias,
+			bool, error) {
+			var plumbingResponse *plumbing.IdentityAliasListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentityAliases.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedIdentityAliasToPorcelain(plumbingResponse.IdentityAliases)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// IdentityAliasesHistory records all changes to the state of a IdentityAlias.
+type IdentityAliasesHistory struct {
+	client plumbing.IdentityAliasesHistoryClient
+	parent *Client
+}
+
+// List gets a list of IdentityAliasHistory records matching a given set of criteria.
+func (svc *IdentityAliasesHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	IdentityAliasHistoryIterator,
+	error) {
+	req := &plumbing.IdentityAliasHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newIdentityAliasHistoryIteratorImpl(
+		func() (
+			[]*IdentityAliasHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.IdentityAliasHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentityAliasesHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedIdentityAliasHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// A IdentitySet is a named grouping of Identity Aliases for Accounts.
+// An Account's relationship to a IdentitySet is defined via IdentityAlias objects.
+type IdentitySets struct {
+	client plumbing.IdentitySetsClient
+	parent *Client
+}
+
+// A SnapshotIdentitySets exposes the read only methods of the IdentitySets
+// service for historical queries.
+type SnapshotIdentitySets interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*IdentitySetGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		IdentitySetIterator,
+		error)
+}
+
+// Get reads one IdentitySet by ID.
+func (svc *IdentitySets) Get(
+	ctx context.Context,
+	id string) (
+	*IdentitySetGetResponse,
+	error) {
+	req := &plumbing.IdentitySetGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.IdentitySetGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "IdentitySets.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentitySetGetResponse{}
+	if v, err := convertIdentitySetToPorcelain(plumbingResponse.IdentitySet); err != nil {
+		return nil, err
+	} else {
+		resp.IdentitySet = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of IdentitySets matching a given set of criteria.
+func (svc *IdentitySets) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	IdentitySetIterator,
+	error) {
+	req := &plumbing.IdentitySetListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newIdentitySetIteratorImpl(
+		func() (
+			[]*IdentitySet,
+			bool, error) {
+			var plumbingResponse *plumbing.IdentitySetListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentitySets.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedIdentitySetToPorcelain(plumbingResponse.IdentitySets)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// IdentitySetsHistory records all changes to the state of a IdentitySet.
+type IdentitySetsHistory struct {
+	client plumbing.IdentitySetsHistoryClient
+	parent *Client
+}
+
+// List gets a list of IdentitySetHistory records matching a given set of criteria.
+func (svc *IdentitySetsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	IdentitySetHistoryIterator,
+	error) {
+	req := &plumbing.IdentitySetHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newIdentitySetHistoryIteratorImpl(
+		func() (
+			[]*IdentitySetHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.IdentitySetHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentitySetsHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedIdentitySetHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
 // - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.

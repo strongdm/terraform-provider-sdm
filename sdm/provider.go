@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/9.4.0"
+const userAgent = "terraform-provider-sdm/10.0.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -49,6 +49,7 @@ func Provider() *schema.Provider {
 			"sdm_approval_workflow_approver": resourceApprovalWorkflowApprover(),
 			"sdm_approval_workflow_step":     resourceApprovalWorkflowStep(),
 			"sdm_approval_workflow":          resourceApprovalWorkflow(),
+			"sdm_identity_alias":             resourceIdentityAlias(),
 			"sdm_node":                       resourceNode(),
 			"sdm_peering_group_node":         resourcePeeringGroupNode(),
 			"sdm_peering_group_peer":         resourcePeeringGroupPeer(),
@@ -69,6 +70,8 @@ func Provider() *schema.Provider {
 			"sdm_approval_workflow_approver": dataSourceApprovalWorkflowApprover(),
 			"sdm_approval_workflow_step":     dataSourceApprovalWorkflowStep(),
 			"sdm_approval_workflow":          dataSourceApprovalWorkflow(),
+			"sdm_identity_alias":             dataSourceIdentityAlias(),
+			"sdm_identity_set":               dataSourceIdentitySet(),
 			"sdm_node":                       dataSourceNode(),
 			"sdm_peering_group_node":         dataSourcePeeringGroupNode(),
 			"sdm_peering_group_peer":         dataSourcePeeringGroupPeer(),
