@@ -31,8 +31,14 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IdentitySetsClient interface {
+	// Create registers a new IdentitySet.
+	Create(ctx context.Context, in *IdentitySetCreateRequest, opts ...grpc.CallOption) (*IdentitySetCreateResponse, error)
 	// Get reads one IdentitySet by ID.
 	Get(ctx context.Context, in *IdentitySetGetRequest, opts ...grpc.CallOption) (*IdentitySetGetResponse, error)
+	// Update replaces all the fields of a IdentitySet by ID.
+	Update(ctx context.Context, in *IdentitySetUpdateRequest, opts ...grpc.CallOption) (*IdentitySetUpdateResponse, error)
+	// Delete removes a IdentitySet by ID.
+	Delete(ctx context.Context, in *IdentitySetDeleteRequest, opts ...grpc.CallOption) (*IdentitySetDeleteResponse, error)
 	// List gets a list of IdentitySets matching a given set of criteria.
 	List(ctx context.Context, in *IdentitySetListRequest, opts ...grpc.CallOption) (*IdentitySetListResponse, error)
 }
@@ -45,9 +51,36 @@ func NewIdentitySetsClient(cc grpc.ClientConnInterface) IdentitySetsClient {
 	return &identitySetsClient{cc}
 }
 
+func (c *identitySetsClient) Create(ctx context.Context, in *IdentitySetCreateRequest, opts ...grpc.CallOption) (*IdentitySetCreateResponse, error) {
+	out := new(IdentitySetCreateResponse)
+	err := c.cc.Invoke(ctx, "/v1.IdentitySets/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *identitySetsClient) Get(ctx context.Context, in *IdentitySetGetRequest, opts ...grpc.CallOption) (*IdentitySetGetResponse, error) {
 	out := new(IdentitySetGetResponse)
 	err := c.cc.Invoke(ctx, "/v1.IdentitySets/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identitySetsClient) Update(ctx context.Context, in *IdentitySetUpdateRequest, opts ...grpc.CallOption) (*IdentitySetUpdateResponse, error) {
+	out := new(IdentitySetUpdateResponse)
+	err := c.cc.Invoke(ctx, "/v1.IdentitySets/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identitySetsClient) Delete(ctx context.Context, in *IdentitySetDeleteRequest, opts ...grpc.CallOption) (*IdentitySetDeleteResponse, error) {
+	out := new(IdentitySetDeleteResponse)
+	err := c.cc.Invoke(ctx, "/v1.IdentitySets/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -67,8 +100,14 @@ func (c *identitySetsClient) List(ctx context.Context, in *IdentitySetListReques
 // All implementations must embed UnimplementedIdentitySetsServer
 // for forward compatibility
 type IdentitySetsServer interface {
+	// Create registers a new IdentitySet.
+	Create(context.Context, *IdentitySetCreateRequest) (*IdentitySetCreateResponse, error)
 	// Get reads one IdentitySet by ID.
 	Get(context.Context, *IdentitySetGetRequest) (*IdentitySetGetResponse, error)
+	// Update replaces all the fields of a IdentitySet by ID.
+	Update(context.Context, *IdentitySetUpdateRequest) (*IdentitySetUpdateResponse, error)
+	// Delete removes a IdentitySet by ID.
+	Delete(context.Context, *IdentitySetDeleteRequest) (*IdentitySetDeleteResponse, error)
 	// List gets a list of IdentitySets matching a given set of criteria.
 	List(context.Context, *IdentitySetListRequest) (*IdentitySetListResponse, error)
 	mustEmbedUnimplementedIdentitySetsServer()
@@ -78,8 +117,17 @@ type IdentitySetsServer interface {
 type UnimplementedIdentitySetsServer struct {
 }
 
+func (UnimplementedIdentitySetsServer) Create(context.Context, *IdentitySetCreateRequest) (*IdentitySetCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
 func (UnimplementedIdentitySetsServer) Get(context.Context, *IdentitySetGetRequest) (*IdentitySetGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedIdentitySetsServer) Update(context.Context, *IdentitySetUpdateRequest) (*IdentitySetUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedIdentitySetsServer) Delete(context.Context, *IdentitySetDeleteRequest) (*IdentitySetDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedIdentitySetsServer) List(context.Context, *IdentitySetListRequest) (*IdentitySetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -97,6 +145,24 @@ func RegisterIdentitySetsServer(s grpc.ServiceRegistrar, srv IdentitySetsServer)
 	s.RegisterService(&_IdentitySets_serviceDesc, srv)
 }
 
+func _IdentitySets_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentitySetCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentitySetsServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.IdentitySets/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentitySetsServer).Create(ctx, req.(*IdentitySetCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _IdentitySets_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IdentitySetGetRequest)
 	if err := dec(in); err != nil {
@@ -111,6 +177,42 @@ func _IdentitySets_Get_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IdentitySetsServer).Get(ctx, req.(*IdentitySetGetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentitySets_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentitySetUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentitySetsServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.IdentitySets/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentitySetsServer).Update(ctx, req.(*IdentitySetUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentitySets_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentitySetDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentitySetsServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.IdentitySets/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentitySetsServer).Delete(ctx, req.(*IdentitySetDeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -138,8 +240,20 @@ var _IdentitySets_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*IdentitySetsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "Create",
+			Handler:    _IdentitySets_Create_Handler,
+		},
+		{
 			MethodName: "Get",
 			Handler:    _IdentitySets_Get_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _IdentitySets_Update_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _IdentitySets_Delete_Handler,
 		},
 		{
 			MethodName: "List",

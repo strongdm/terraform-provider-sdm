@@ -7090,6 +7090,114 @@ func convertRepeatedIdentitySetToPorcelain(plumbings []*proto.IdentitySet) (
 	}
 	return items, nil
 }
+func convertIdentitySetCreateResponseToPorcelain(plumbing *proto.IdentitySetCreateResponse) (*IdentitySetCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentitySetCreateResponse{}
+	if v, err := convertIdentitySetToPorcelain(plumbing.IdentitySet); err != nil {
+		return nil, fmt.Errorf("error converting field IdentitySet: %v", err)
+	} else {
+		porcelain.IdentitySet = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentitySetCreateResponseToPlumbing(porcelain *IdentitySetCreateResponse) *proto.IdentitySetCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentitySetCreateResponse{}
+	plumbing.IdentitySet = convertIdentitySetToPlumbing(porcelain.IdentitySet)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentitySetCreateResponseToPlumbing(
+	porcelains []*IdentitySetCreateResponse,
+) []*proto.IdentitySetCreateResponse {
+	var items []*proto.IdentitySetCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentitySetCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentitySetCreateResponseToPorcelain(plumbings []*proto.IdentitySetCreateResponse) (
+	[]*IdentitySetCreateResponse,
+	error,
+) {
+	var items []*IdentitySetCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentitySetCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentitySetDeleteResponseToPorcelain(plumbing *proto.IdentitySetDeleteResponse) (*IdentitySetDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentitySetDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentitySetDeleteResponseToPlumbing(porcelain *IdentitySetDeleteResponse) *proto.IdentitySetDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentitySetDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentitySetDeleteResponseToPlumbing(
+	porcelains []*IdentitySetDeleteResponse,
+) []*proto.IdentitySetDeleteResponse {
+	var items []*proto.IdentitySetDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentitySetDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentitySetDeleteResponseToPorcelain(plumbings []*proto.IdentitySetDeleteResponse) (
+	[]*IdentitySetDeleteResponse,
+	error,
+) {
+	var items []*IdentitySetDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentitySetDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertIdentitySetGetResponseToPorcelain(plumbing *proto.IdentitySetGetResponse) (*IdentitySetGetResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7199,6 +7307,63 @@ func convertRepeatedIdentitySetHistoryToPorcelain(plumbings []*proto.IdentitySet
 	var items []*IdentitySetHistory
 	for _, plumbing := range plumbings {
 		if v, err := convertIdentitySetHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertIdentitySetUpdateResponseToPorcelain(plumbing *proto.IdentitySetUpdateResponse) (*IdentitySetUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &IdentitySetUpdateResponse{}
+	if v, err := convertIdentitySetToPorcelain(plumbing.IdentitySet); err != nil {
+		return nil, fmt.Errorf("error converting field IdentitySet: %v", err)
+	} else {
+		porcelain.IdentitySet = v
+	}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertIdentitySetUpdateResponseToPlumbing(porcelain *IdentitySetUpdateResponse) *proto.IdentitySetUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.IdentitySetUpdateResponse{}
+	plumbing.IdentitySet = convertIdentitySetToPlumbing(porcelain.IdentitySet)
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedIdentitySetUpdateResponseToPlumbing(
+	porcelains []*IdentitySetUpdateResponse,
+) []*proto.IdentitySetUpdateResponse {
+	var items []*proto.IdentitySetUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertIdentitySetUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedIdentitySetUpdateResponseToPorcelain(plumbings []*proto.IdentitySetUpdateResponse) (
+	[]*IdentitySetUpdateResponse,
+	error,
+) {
+	var items []*IdentitySetUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertIdentitySetUpdateResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

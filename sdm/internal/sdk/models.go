@@ -2395,6 +2395,25 @@ type IdentitySet struct {
 	Name string `json:"name"`
 }
 
+// IdentitySetCreateResponse reports how the IdentitySets were created in the system. It can
+// communicate partial successes or failures.
+type IdentitySetCreateResponse struct {
+	// The created IdentitySet.
+	IdentitySet *IdentitySet `json:"identitySet"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// IdentitySetDeleteResponse returns information about a IdentitySet that was deleted.
+type IdentitySetDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 // IdentitySetGetResponse returns a requested IdentitySet.
 type IdentitySetGetResponse struct {
 	// The requested IdentitySet.
@@ -2418,6 +2437,17 @@ type IdentitySetHistory struct {
 	IdentitySet *IdentitySet `json:"identitySet"`
 	// The time at which the IdentitySet state was recorded.
 	Timestamp time.Time `json:"timestamp"`
+}
+
+// IdentitySetUpdateResponse returns the fields of a IdentitySet after it has been updated by
+// a IdentitySetUpdateRequest.
+type IdentitySetUpdateResponse struct {
+	// The updated IdentitySet.
+	IdentitySet *IdentitySet `json:"identitySet"`
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 type KeyfactorSSHStore struct {

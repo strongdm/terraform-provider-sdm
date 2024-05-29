@@ -2511,6 +2511,50 @@ type SnapshotIdentitySets interface {
 		error)
 }
 
+// Create registers a new IdentitySet.
+func (svc *IdentitySets) Create(
+	ctx context.Context,
+	identitySet *IdentitySet) (
+	*IdentitySetCreateResponse,
+	error) {
+	req := &plumbing.IdentitySetCreateRequest{}
+
+	req.IdentitySet = convertIdentitySetToPlumbing(identitySet)
+	var plumbingResponse *plumbing.IdentitySetCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "IdentitySets.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentitySetCreateResponse{}
+	if v, err := convertIdentitySetToPorcelain(plumbingResponse.IdentitySet); err != nil {
+		return nil, err
+	} else {
+		resp.IdentitySet = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
 // Get reads one IdentitySet by ID.
 func (svc *IdentitySets) Get(
 	ctx context.Context,
@@ -2545,6 +2589,89 @@ func (svc *IdentitySets) Get(
 		resp.IdentitySet = v
 	}
 	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a IdentitySet by ID.
+func (svc *IdentitySets) Update(
+	ctx context.Context,
+	identitySet *IdentitySet) (
+	*IdentitySetUpdateResponse,
+	error) {
+	req := &plumbing.IdentitySetUpdateRequest{}
+
+	req.IdentitySet = convertIdentitySetToPlumbing(identitySet)
+	var plumbingResponse *plumbing.IdentitySetUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "IdentitySets.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentitySetUpdateResponse{}
+	if v, err := convertIdentitySetToPorcelain(plumbingResponse.IdentitySet); err != nil {
+		return nil, err
+	} else {
+		resp.IdentitySet = v
+	}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a IdentitySet by ID.
+func (svc *IdentitySets) Delete(
+	ctx context.Context,
+	id string) (
+	*IdentitySetDeleteResponse,
+	error) {
+	req := &plumbing.IdentitySetDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.IdentitySetDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "IdentitySets.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &IdentitySetDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
 		return nil, err
 	} else {
 		resp.Meta = v
