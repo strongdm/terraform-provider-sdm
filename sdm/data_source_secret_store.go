@@ -36,6 +36,7 @@ func dataSourceSecretStore() *schema.Resource {
 			"tags": {
 				Type:     schema.TypeMap,
 				Optional: true,
+				Elem:     tagsElemType,
 			},
 			"secret_stores": {
 				Type:     schema.TypeList,

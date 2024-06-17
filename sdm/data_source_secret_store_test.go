@@ -37,6 +37,7 @@ func TestAccSDMSecretStore_Get(t *testing.T) {
 	})
 }
 
+// lintignore:AT012
 func TestAccSDMSecretStoreDataSource_GetByTags(t *testing.T) {
 	initAcceptanceTest(t)
 

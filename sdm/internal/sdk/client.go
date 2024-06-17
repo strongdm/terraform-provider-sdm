@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/9.2.0"
+	defaultUserAgent = "strongdm-sdk-go/9.3.0"
 	defaultPageLimit = 50
 )
 
@@ -1058,7 +1058,9 @@ func (c *Client) shouldRetry(iter int, err error) bool {
 				if waitFor < 0 || waitFor > time.Minute {
 					waitFor = time.Minute
 				}
-				time.Sleep(waitFor)
+				// TODO: use resource.Retry instead of time.Sleep in Terraform provider
+				// see https://github.com/bflad/tfproviderlint/tree/main/passes/R018
+				time.Sleep(waitFor) //lintignore:R018
 			}
 			return true
 		}

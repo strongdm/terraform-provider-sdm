@@ -8,6 +8,7 @@ if ! which errcheck > /dev/null; then
     go get -u github.com/kisielk/errcheck
 fi
 
+# shellcheck disable=SC2046
 err_files=$(errcheck -ignoretests \
                      -ignore 'github.com/hashicorp/terraform/helper/schema:Set' \
                      -ignore 'bytes:.*' \

@@ -38,6 +38,7 @@ func TestAccSDMNode_Get(t *testing.T) {
 	})
 }
 
+// lintignore:AT012
 func TestAccSDMNodeDataSource_GetByTags(t *testing.T) {
 	initAcceptanceTest(t)
 

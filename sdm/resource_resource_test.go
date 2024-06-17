@@ -540,6 +540,7 @@ func TestAccSDMResource_Update(t *testing.T) {
 	})
 }
 
+// lintignore:AT003
 func TestAccSDMImportMongoLegacyReplicaSet(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
@@ -574,6 +575,7 @@ func TestAccSDMImportMongoLegacyReplicaSet(t *testing.T) {
 	})
 }
 
+// lintignore:AT006
 func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
 	initAcceptanceTest(t)
 	t.Run("present->present", func(t *testing.T) {

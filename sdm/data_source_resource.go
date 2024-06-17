@@ -44,6 +44,7 @@ func dataSourceResource() *schema.Resource {
 			"tags": {
 				Type:     schema.TypeMap,
 				Optional: true,
+				Elem:     tagsElemType,
 			},
 			"username": {
 				Type:     schema.TypeString,

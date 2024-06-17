@@ -90,6 +90,7 @@ func TestAccSDMSecretStore_Create(t *testing.T) {
 	})
 }
 
+// lintignore:AT012
 func TestAccSDMSecretStoreCA_Create(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("ca-test")

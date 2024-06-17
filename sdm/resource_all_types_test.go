@@ -2388,6 +2388,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		})
 	}
 }
+
+// lintignore:AT012
 func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 	initAcceptanceTest(t)
 	type testCase struct {

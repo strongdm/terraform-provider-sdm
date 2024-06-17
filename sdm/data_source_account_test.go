@@ -41,6 +41,7 @@ func TestAccSDMAccount_Get(t *testing.T) {
 	})
 }
 
+// lintignore:AT012
 func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
 	initAcceptanceTest(t)
 
@@ -189,6 +190,7 @@ func TestAccSDMAccount_GetNone(t *testing.T) {
 	})
 }
 
+// lintignore:AT006
 func TestAccSDMAccount_GetMultipleTypes(t *testing.T) {
 	initAcceptanceTest(t)
 	_, err := createUsersWithPrefix("account-multi-type", 2)

@@ -44,6 +44,7 @@ func dataSourceNode() *schema.Resource {
 			"tags": {
 				Type:     schema.TypeMap,
 				Optional: true,
+				Elem:     tagsElemType,
 			},
 			"nodes": {
 				Type:     schema.TypeList,

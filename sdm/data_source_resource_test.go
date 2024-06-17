@@ -39,6 +39,7 @@ func TestAccSDMResource_Get(t *testing.T) {
 	})
 }
 
+// lintignore:AT012
 func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
 	initAcceptanceTest(t)
 
@@ -241,6 +242,7 @@ func TestAccSDMResource_GetTags(t *testing.T) {
 
 }
 
+// lintignore:AT012
 func TestAccSDMResourceWithIdentitySet_Get(t *testing.T) {
 	initAcceptanceTest(t)
 
