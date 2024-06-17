@@ -85,6 +85,16 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -235,6 +245,16 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -487,6 +507,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The name of the cluster to connect to.",
 									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -588,6 +618,16 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The name of the cluster to connect to.",
+									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -3059,6 +3099,16 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3533,6 +3583,16 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3683,6 +3743,16 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -6916,6 +6986,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"certificate_authority":               (v.CertificateAuthority),
 				"client_certificate":                  (v.ClientCertificate),
 				"client_key":                          (v.ClientKey),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -6948,6 +7020,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AKSServiceAccount:
 			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
 				"bind_interface":                      (v.BindInterface),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -7000,6 +7074,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"cluster_name":                        (v.ClusterName),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -7021,6 +7097,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"cluster_name":                        (v.ClusterName),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -7540,6 +7618,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -7639,6 +7719,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"certificate_authority":               (v.CertificateAuthority),
 				"client_certificate":                  (v.ClientCertificate),
 				"client_key":                          (v.ClientKey),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -7671,6 +7753,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
 				"bind_interface":                      (v.BindInterface),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),

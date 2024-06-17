@@ -47,6 +47,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"certificate_authority", certificateAuthority},
 				{"client_certificate", certificateAuthority},
 				{"client_key", `"key"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -70,6 +72,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "aks_service_account",
 			pairs: [][2]string{
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -109,6 +113,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"access_key", `"access_key"`},
 				{"certificate_authority", certificateAuthority},
 				{"cluster_name", `"cluster_name"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"endpoint", `"endpoint"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
@@ -125,6 +131,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
 				{"cluster_name", `"cluster_name"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"endpoint", `"endpoint"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
@@ -519,6 +527,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "google_gke",
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"endpoint", `"endpoint"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
@@ -598,6 +608,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
 				{"client_certificate", certificateAuthority},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -621,6 +633,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "kubernetes_service_account",
 			pairs: [][2]string{
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -1226,6 +1240,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_certificate", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_key", `"path/to/secret?key=key&encoding=base64"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -1251,6 +1267,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "aks_service_account",
 			pairs: [][2]string{
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -1293,6 +1311,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"access_key", `"path/to/secret?key=key&encoding=base64"`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"cluster_name", `"cluster_name"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"endpoint", `"endpoint"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
@@ -1310,6 +1330,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			pairs: [][2]string{
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"cluster_name", `"cluster_name"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"endpoint", `"endpoint"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
@@ -1735,6 +1757,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			resource: "google_gke",
 			pairs: [][2]string{
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"endpoint", `"endpoint"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
@@ -1807,6 +1831,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_certificate", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_key", `"path/to/secret?key=key&encoding=base64"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -1832,6 +1858,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "kubernetes_service_account",
 			pairs: [][2]string{
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},

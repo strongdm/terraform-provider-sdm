@@ -55,6 +55,16 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "The key to authenticate TLS connections with.",
 						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -207,6 +217,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -462,6 +482,16 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "The name of the cluster to connect to.",
 						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -564,6 +594,16 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "The name of the cluster to connect to.",
+						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3036,6 +3076,16 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "The CA to authenticate TLS connections with.",
 						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3506,6 +3556,16 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "The key to authenticate TLS connections with.",
 						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3658,6 +3718,16 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"discovery_enabled": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, configures discovery of a cluster to be run from a node.",
+						},
+						"discovery_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -9117,6 +9187,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:                convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:                        convertStringToPlumbing(raw["client_key"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:                         convertStringToPlumbing(raw["hostname"]),
@@ -9171,6 +9243,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AKSServiceAccount{
 			ID:                               d.Id(),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:                         convertStringToPlumbing(raw["hostname"]),
@@ -9256,6 +9330,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClusterName:                      convertStringToPlumbing(raw["cluster_name"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:                         convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
@@ -9288,6 +9364,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClusterName:                      convertStringToPlumbing(raw["cluster_name"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:                         convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
@@ -10148,6 +10226,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ID:                               d.Id(),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			Endpoint:                         convertStringToPlumbing(raw["endpoint"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
@@ -10298,6 +10378,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:                convertStringToPlumbing(raw["client_certificate"]),
 			ClientKey:                        convertStringToPlumbing(raw["client_key"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:                         convertStringToPlumbing(raw["hostname"]),
@@ -10352,6 +10434,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.KubernetesServiceAccount{
 			ID:                               d.Id(),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
+			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
+			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
 			Hostname:                         convertStringToPlumbing(raw["hostname"]),
@@ -11462,6 +11546,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
 				"client_key":                          seValues["client_key"],
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -11500,6 +11586,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
 				"bind_interface":                      (v.BindInterface),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -11561,6 +11649,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -11585,6 +11675,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -12197,6 +12289,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 			{
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -12314,6 +12408,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
 				"client_key":                          seValues["client_key"],
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -12352,6 +12448,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
 				"bind_interface":                      (v.BindInterface),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -13170,6 +13268,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
 				"client_key":                          seValues["client_key"],
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -13223,6 +13323,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
 				"bind_interface":                      (v.BindInterface),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -13320,6 +13422,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -13356,6 +13460,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -14286,6 +14392,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			{
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"endpoint":                            (v.Endpoint),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
@@ -14451,6 +14559,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
 				"client_key":                          seValues["client_key"],
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),
@@ -14504,6 +14614,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
 				"bind_interface":                      (v.BindInterface),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"hostname":                            (v.Hostname),

@@ -101,6 +101,8 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -130,6 +132,8 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -246,6 +250,8 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 	}
 	porcelain := &AKSServiceAccount{}
 	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -273,6 +279,8 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 	}
 	plumbing := &proto.AKSServiceAccount{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -2512,6 +2520,8 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) 
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClusterName = plumbing.ClusterName
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
@@ -2544,6 +2554,8 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClusterName = (porcelain.ClusterName)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
@@ -2594,6 +2606,8 @@ func convertAmazonEKSInstanceProfileToPorcelain(plumbing *proto.AmazonEKSInstanc
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClusterName = plumbing.ClusterName
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
@@ -2624,6 +2638,8 @@ func convertAmazonEKSInstanceProfileToPlumbing(porcelain *AmazonEKSInstanceProfi
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClusterName = (porcelain.ClusterName)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
@@ -6298,6 +6314,8 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 	porcelain := &GoogleGKE{}
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Endpoint = plumbing.Endpoint
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
@@ -6325,6 +6343,8 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 	plumbing := &proto.GoogleGKE{}
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Endpoint = (porcelain.Endpoint)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
@@ -7514,6 +7534,8 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
 	porcelain.ClientKey = plumbing.ClientKey
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -7543,6 +7565,8 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
 	plumbing.ClientKey = (porcelain.ClientKey)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
@@ -7659,6 +7683,8 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 	}
 	porcelain := &KubernetesServiceAccount{}
 	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -7686,6 +7712,8 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 	}
 	plumbing := &proto.KubernetesServiceAccount{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)

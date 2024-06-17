@@ -54,6 +54,8 @@ The following arguments are supported by the Resource resource:
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `client_certificate` - (Optional) The certificate to authenticate TLS connections with.
 	* `client_key` - (Optional) The key to authenticate TLS connections with.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
@@ -80,6 +82,8 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aks_service_account:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
@@ -123,6 +127,8 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `cluster_name` - (Required) The name of the cluster to connect to.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) The endpoint to dial.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
@@ -141,6 +147,8 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `cluster_name` - (Required) The name of the cluster to connect to.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) The endpoint to dial.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
@@ -567,6 +575,8 @@ The following arguments are supported by the Resource resource:
 * google_gke:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `endpoint` - (Required) The endpoint to dial.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
@@ -648,6 +658,8 @@ The following arguments are supported by the Resource resource:
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `client_certificate` - (Optional) The certificate to authenticate TLS connections with.
 	* `client_key` - (Optional) The key to authenticate TLS connections with.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
@@ -674,6 +686,8 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * kubernetes_service_account:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.

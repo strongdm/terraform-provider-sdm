@@ -40,6 +40,11 @@ type AKS struct {
 	ClientCertificate string `json:"clientCertificate"`
 	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -102,6 +107,11 @@ type AKSBasicAuth struct {
 type AKSServiceAccount struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -826,6 +836,11 @@ type AmazonEKS struct {
 	CertificateAuthority string `json:"certificateAuthority"`
 	// The name of the cluster to connect to.
 	ClusterName string `json:"clusterName"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The endpoint to dial.
@@ -867,6 +882,11 @@ type AmazonEKSInstanceProfile struct {
 	CertificateAuthority string `json:"certificateAuthority"`
 	// The name of the cluster to connect to.
 	ClusterName string `json:"clusterName"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The endpoint to dial.
@@ -2137,6 +2157,11 @@ type GoogleGKE struct {
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The endpoint to dial.
@@ -2525,6 +2550,11 @@ type Kubernetes struct {
 	ClientCertificate string `json:"clientCertificate"`
 	// The key to authenticate TLS connections with.
 	ClientKey string `json:"clientKey"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
@@ -2587,6 +2617,11 @@ type KubernetesBasicAuth struct {
 type KubernetesServiceAccount struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.
