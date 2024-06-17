@@ -88,6 +88,10 @@ func testCheckDestroy(s *terraform.State) error {
 			_, err = client.Nodes().Get(context.Background(), rs.Primary.ID)
 		case "sdm_remote_identity":
 			_, err = client.RemoteIdentities().Get(context.Background(), rs.Primary.ID)
+		case "sdm_identity_alias":
+			_, err = client.IdentityAliases().Get(context.Background(), rs.Primary.ID)
+		case "sdm_identity_set":
+			_, err = client.IdentitySets().Get(context.Background(), rs.Primary.ID)
 		case "sdm_resource":
 			_, err = client.Resources().Get(context.Background(), rs.Primary.ID)
 		case "sdm_role":

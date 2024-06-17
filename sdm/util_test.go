@@ -1,12 +1,14 @@
 package sdm
 
 import (
+	"context"
 	"os"
 	"sync"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 // randomWithPrefix is used for sweeper clean up.
@@ -45,4 +47,19 @@ func (c *AtomicCounter) Count() int32 {
 	count := c.count
 	c.count++
 	return count
+}
+
+func createIdentitySet(t testing.TB) *sdm.IdentitySet {
+	t.Helper()
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
+	createResp, err := client.IdentitySets().Create(context.Background(), &sdm.IdentitySet{
+		Name: acctest.RandomWithPrefix("test-identity-set"),
+	})
+	if err != nil {
+		t.Fatalf("failed to create test identity set: %v", err)
+	}
+	return createResp.IdentitySet
 }

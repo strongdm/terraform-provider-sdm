@@ -107,6 +107,8 @@ const (
 	ActivityEntityTypeSecretStore          = "secretstore"
 	ActivityEntityTypeRemoteIdentityGroup  = "remote_identity_group"
 	ActivityEntityTypeRemoteIdentity       = "remote_identity"
+	ActivityEntityTypeIdentitySet          = "identity_set"
+	ActivityEntityTypeIdentityAlias        = "identity_alias"
 	ActivityEntityTypeAccessRequest        = "access_request"
 	ActivityEntityTypeWorkflow             = "workflow"
 	ActivityEntityTypeNode                 = "node"
@@ -242,11 +244,17 @@ const (
 	ActivityVerbRemoteIdentityGroupCreated                       = "remote identity group created"
 	ActivityVerbRemoteIdentityGroupUpdated                       = "remote identity group updated"
 	ActivityVerbRemoteIdentityGroupDeleted                       = "remote identity group deleted"
+	ActivityVerbIdentitySetCreated                               = "identity set created"
+	ActivityVerbIdentitySetUpdated                               = "identity set updated"
+	ActivityVerbIdentitySetDeleted                               = "identity set deleted"
 	ActivityVerbIdentitySetProvisioningEnabled                   = "identity set provisioning enabled"
 	ActivityVerbIdentitySetProvisioningDisabled                  = "identity set provisioning disabled"
 	ActivityVerbRemoteIdentityCreated                            = "remote identity created"
 	ActivityVerbRemoteIdentityUpdated                            = "remote identity updated"
 	ActivityVerbRemoteIdentityDeleted                            = "remote identity deleted"
+	ActivityVerbIdentityAliasCreated                             = "identity alias created"
+	ActivityVerbIdentityAliasUpdated                             = "identity alias updated"
+	ActivityVerbIdentityAliasDeleted                             = "identity alias deleted"
 	ActivityVerbIdentityAliasProvisioningEnabled                 = "identity alias provisioning enabled"
 	ActivityVerbIdentityAliasProvisioningDisabled                = "identity alias provisioning disabled"
 	ActivityVerbAccessRequestedToResource                        = "access requested to resource"
@@ -441,7 +449,8 @@ const (
 
 // Providers responsible for device posture enforcement
 const (
-	DevicePostureProviderNone        = ""
-	DevicePostureProviderSentinelOne = "sentinelone"
-	DevicePostureProviderCrowdStrike = "crowdstrike"
+	DevicePostureProviderNone              = ""
+	DevicePostureProviderSentinelOne       = "sentinelone"
+	DevicePostureProviderCrowdStrike       = "crowdstrike"
+	DevicePostureProviderMicrosoftDefender = "microsoftdefender"
 )

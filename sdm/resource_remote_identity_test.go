@@ -16,7 +16,7 @@ func TestAccSDMRemoteIdentity_Create(t *testing.T) {
 		t.Fatalf("failed to create account in setup: %v", err)
 	}
 	account := accounts[0].(*sdm.User)
-	group := getDefaultRemoteIdentityGroup(t)
+	group := createIdentitySet(t)
 	username := randomWithPrefix("test-username")
 
 	rsName := randomWithPrefix("test-remote-identity-resource")
@@ -54,7 +54,7 @@ func TestAccSDMRemoteIdentity_Update(t *testing.T) {
 		t.Fatalf("failed to create account in setup: %v", err)
 	}
 	account := accounts[0].(*sdm.User)
-	group := getDefaultRemoteIdentityGroup(t)
+	group := createIdentitySet(t)
 	username := randomWithPrefix("test-username")
 
 	rsName := randomWithPrefix("test-remote-identity-resource")

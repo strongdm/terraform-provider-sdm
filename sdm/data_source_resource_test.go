@@ -241,12 +241,11 @@ func TestAccSDMResource_GetTags(t *testing.T) {
 
 }
 
-func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
+func TestAccSDMResourceWithIdentitySet_Get(t *testing.T) {
 	initAcceptanceTest(t)
 
-	group := getDefaultRemoteIdentityGroup(t)
-
-	resources, err := createSSHCertsWithPrefix("resource-remote-identity-get-test", *group, 1)
+	identitySet := createIdentitySet(t)
+	resources, err := createSSHCertsWithPrefix("resource-identity-get-test", *identitySet, 1)
 	if err != nil {
 		t.Fatal("failed to create redis in setup: ", err)
 	}
@@ -257,13 +256,13 @@ func TestAccSDMResourceWithRemoteIdentity_Get(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMResourceFilterConfig(dsName, "resource-remote-identity-get-test*"),
+				Config: testAccSDMResourceFilterConfig(dsName, "resource-identity-get-test*"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.name", sshCert.Name),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.hostname", sshCert.Hostname),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.port", fmt.Sprintf("%d", sshCert.Port)),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "ids.0", sshCert.ID),
-					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.identity_set_id", group.ID),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.identity_set_id", identitySet.ID),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.ssh_cert.0.identity_alias_healthcheck_username", "healthcheck"),
 				),
 			},
@@ -278,7 +277,7 @@ func testAccSDMResourceFilterConfig(resourceDataSourceName, nameFilter string) s
 		}`, resourceDataSourceName, nameFilter)
 }
 
-func createSSHCertsWithPrefix(prefix string, group sdm.RemoteIdentityGroup, count int) ([]sdm.Resource, error) {
+func createSSHCertsWithPrefix(prefix string, identitySet sdm.IdentitySet, count int) ([]sdm.Resource, error) {
 	client, err := preTestClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create test client: %w", err)
@@ -293,7 +292,7 @@ func createSSHCertsWithPrefix(prefix string, group sdm.RemoteIdentityGroup, coun
 			Hostname:                         randomWithPrefix(prefix),
 			Username:                         randomWithPrefix(prefix),
 			Port:                             port,
-			IdentitySetID:                    group.ID,
+			IdentitySetID:                    identitySet.ID,
 			IdentityAliasHealthcheckUsername: "healthcheck",
 		})
 		if err != nil {

@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/9.1.0"
+	defaultUserAgent = "strongdm-sdk-go/9.2.0"
 	defaultPageLimit = 50
 )
 
