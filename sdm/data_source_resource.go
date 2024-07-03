@@ -6629,6 +6629,87 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"ssh_password": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"allow_deprecated_key_exchanges": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The password to authenticate with.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_forwarding": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "Whether port forwarding is allowed through this server.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
 						"sybase": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -8352,6 +8433,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_forwarding":                (v.PortForwarding),
 				"port_override":                  (v.PortOverride),
 				"private_key":                    (v.PrivateKey),
+				"secret_store_id":                (v.SecretStoreID),
+				"subdomain":                      (v.Subdomain),
+				"tags":                           convertTagsToPorcelain(v.Tags),
+				"username":                       (v.Username),
+			})
+		case *sdm.SSHPassword:
+			output[0]["ssh_password"] = append(output[0]["ssh_password"], entity{
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
+				"egress_filter":                  (v.EgressFilter),
+				"hostname":                       (v.Hostname),
+				"id":                             (v.ID),
+				"name":                           (v.Name),
+				"password":                       (v.Password),
+				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"secret_store_id":                (v.SecretStoreID),
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),

@@ -813,7 +813,7 @@ type User struct {
 	Suspended bool `protobuf:"varint,5,opt,name=suspended,proto3" json:"suspended,omitempty"`
 	// Tags is a map of key, value pairs.
 	Tags *Tags `protobuf:"bytes,6,opt,name=tags,proto3" json:"tags,omitempty"`
-	// PermissionLevel is a read only field for the user's permission level e.g. admin, DBA, user.
+	// PermissionLevel is a read only field for the user's permission level, one of the PermissionLevel constants.
 	PermissionLevel string `protobuf:"bytes,7,opt,name=permission_level,json=permissionLevel,proto3" json:"permission_level,omitempty"`
 	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	ManagedBy string `protobuf:"bytes,8,opt,name=managed_by,json=managedBy,proto3" json:"managed_by,omitempty"`

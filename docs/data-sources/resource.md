@@ -1252,6 +1252,21 @@ In addition to provided arguments above, the following attributes are returned b
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - The username to authenticate with.
+	* ssh_password:
+		* `allow_deprecated_key_exchanges` - Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port` - The port to dial to initiate a connection from the egress node to this resource.
+		* `port_forwarding` - Whether port forwarding is allowed through this server.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - The username to authenticate with.
 	* sybase:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.

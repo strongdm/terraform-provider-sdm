@@ -56,7 +56,7 @@ func createIdentitySet(t testing.TB) *sdm.IdentitySet {
 		t.Fatalf("failed to create test client: %v", err)
 	}
 	createResp, err := client.IdentitySets().Create(context.Background(), &sdm.IdentitySet{
-		Name: acctest.RandomWithPrefix("test-identity-set"),
+		Name: randomWithPrefix("test-identity-set"),
 	})
 	if err != nil {
 		t.Fatalf("failed to create test identity set: %v", err)

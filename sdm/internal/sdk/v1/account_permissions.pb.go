@@ -173,8 +173,7 @@ type AccountPermission struct {
 	// The most recent time at which the permission was granted. If a permission was
 	// granted, revoked, and granted again, this will reflect the later time.
 	GrantedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=granted_at,json=grantedAt,proto3" json:"granted_at,omitempty"`
-	// The value of this permission, split into vertical and action e.g.
-	// 'secretstore:List', 'role:update'
+	// The value of this permission, split into vertical and action, one of the Permission constants.
 	Permission string `protobuf:"bytes,3,opt,name=permission,proto3" json:"permission,omitempty"`
 	// The scope of this permission. A global scope means this action can be taken
 	// on any entity; otherwise the action can only be taken on or in the scope of

@@ -295,7 +295,7 @@ type Activity struct {
 
 	// Unique identifier of the Activity.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The kind of activity which has taken place.
+	// The kind of activity which has taken place, one of the ActivityVerb constants.
 	Verb string `protobuf:"bytes,2,opt,name=verb,proto3" json:"verb,omitempty"`
 	// A humanized description of the activity.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
@@ -411,7 +411,7 @@ type ActivityEntity struct {
 
 	// The unique identifier of the entity this activity affected.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The type of entity affected, one of the Activity Entities constants.
+	// The type of entity affected, one of the ActivityEntityType constants.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// A display name representing the affected entity.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`

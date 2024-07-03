@@ -4539,7 +4539,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "MongoShardedCluster is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"auth_database": {
@@ -6579,6 +6579,87 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "The private key used to authenticate with the server.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
+			"ssh_password": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "SSHPassword is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"allow_deprecated_key_exchanges": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_forwarding": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "Whether port forwarding is allowed through this server.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -9076,6 +9157,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username":    convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("ssh_password").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11417,6 +11524,34 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("ssh_password").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.SSHPassword{}
+		}
+		out := &sdm.SSHPassword{
+			ID:                          d.Id(),
+			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                    convertStringToPlumbing(raw["hostname"]),
+			Name:                        convertStringToPlumbing(raw["name"]),
+			Password:                    convertStringToPlumbing(raw["password"]),
+			Port:                        convertInt32ToPlumbing(raw["port"]),
+			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
+			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
+			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:                   convertStringToPlumbing(raw["subdomain"]),
+			Tags:                        convertTagsToPlumbing(raw["tags"]),
+			Username:                    convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("sybase").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -13148,6 +13283,26 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_forwarding":                (v.PortForwarding),
 				"port_override":                  (v.PortOverride),
 				"private_key":                    seValues["private_key"],
+				"secret_store_id":                (v.SecretStoreID),
+				"subdomain":                      (v.Subdomain),
+				"tags":                           convertTagsToPorcelain(v.Tags),
+				"username":                       seValues["username"],
+			},
+		})
+	case *sdm.SSHPassword:
+		localV, _ := localVersion.(*sdm.SSHPassword)
+		_ = localV
+		d.Set("ssh_password", []map[string]interface{}{
+			{
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
+				"egress_filter":                  (v.EgressFilter),
+				"hostname":                       (v.Hostname),
+				"name":                           (v.Name),
+				"password":                       seValues["password"],
+				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"secret_store_id":                (v.SecretStoreID),
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),
@@ -15620,6 +15775,35 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_forwarding":                (v.PortForwarding),
 				"port_override":                  (v.PortOverride),
 				"private_key":                    seValues["private_key"],
+				"secret_store_id":                (v.SecretStoreID),
+				"subdomain":                      (v.Subdomain),
+				"tags":                           convertTagsToPorcelain(v.Tags),
+				"username":                       seValues["username"],
+			},
+		})
+	case *sdm.SSHPassword:
+		localV, ok := localVersion.(*sdm.SSHPassword)
+		if !ok {
+			localV = &sdm.SSHPassword{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("ssh_password", []map[string]interface{}{
+			{
+				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                 (v.BindInterface),
+				"egress_filter":                  (v.EgressFilter),
+				"hostname":                       (v.Hostname),
+				"name":                           (v.Name),
+				"password":                       seValues["password"],
+				"port":                           (v.Port),
+				"port_forwarding":                (v.PortForwarding),
+				"port_override":                  (v.PortOverride),
 				"secret_store_id":                (v.SecretStoreID),
 				"subdomain":                      (v.Subdomain),
 				"tags":                           convertTagsToPorcelain(v.Tags),

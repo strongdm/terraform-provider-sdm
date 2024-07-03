@@ -505,7 +505,7 @@ type QueryCapture struct {
 	Command string `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	// The environment variables for an SSH or Kubernetes session.
 	Env map[string]string `protobuf:"bytes,4,rep,name=env,proto3" json:"env,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// The CaptureType of this query capture.
+	// The CaptureType of this query capture, one of the CaptureType constants.
 	Type string `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
 	// The remote file name of an SCP operation.
 	FileName string `protobuf:"bytes,6,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`

@@ -691,8 +691,7 @@ type AccountPermission struct {
 	// The most recent time at which the permission was granted. If a permission was
 	// granted, revoked, and granted again, this will reflect the later time.
 	GrantedAt time.Time `json:"grantedAt"`
-	// The value of this permission, split into vertical and action e.g.
-	// 'secretstore:List', 'role:update'
+	// The value of this permission, split into vertical and action, one of the Permission constants.
 	Permission string `json:"permission"`
 	// The scope of this permission. A global scope means this action can be taken
 	// on any entity; otherwise the action can only be taken on or in the scope of
@@ -787,7 +786,7 @@ type Activity struct {
 	// The User Agent present when this request was executed. Generally a client type and version
 	// like strongdm-cli/55.66.77
 	UserAgent string `json:"userAgent"`
-	// The kind of activity which has taken place.
+	// The kind of activity which has taken place, one of the ActivityVerb constants.
 	Verb string `json:"verb"`
 }
 
@@ -813,7 +812,7 @@ type ActivityEntity struct {
 	ID string `json:"id"`
 	// A display name representing the affected entity.
 	Name string `json:"name"`
-	// The type of entity affected, one of the Activity Entities constants.
+	// The type of entity affected, one of the ActivityEntityType constants.
 	Type string `json:"type"`
 }
 
@@ -3041,8 +3040,6 @@ type MongoReplicaSet struct {
 	Username string `json:"username"`
 }
 
-// MongoShardedCluster is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type MongoShardedCluster struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
@@ -3343,23 +3340,27 @@ type Oracle struct {
 }
 
 type Organization struct {
-	// The Organization's authentication provider.
+	// The Organization's authentication provider, one of the AuthProvider constants.
 	AuthProvider string `json:"authProvider"`
 	// The time at which the Organization was created.
 	CreatedAt time.Time `json:"createdAt"`
+	// Indicates if the Organization has device trust enabled.
+	DeviceTrustEnabled bool `json:"deviceTrustEnabled"`
+	// The Organization's device trust provider, one of the DeviceTrustProvider constants.
+	DeviceTrustProvider string `json:"deviceTrustProvider"`
 	// The Organization's idle timeout, if enabled.
 	IdleTimeout time.Duration `json:"idleTimeout"`
 	// Indicates if the Organization has idle timeouts enabled.
 	IdleTimeoutEnabled bool `json:"idleTimeoutEnabled"`
-	// The Organization's type.
+	// The Organization's type, one of the OrgKind constants.
 	Kind string `json:"kind"`
-	// The Organization's local log encryption encoder.
+	// The Organization's local log encryption encoder, one of the LogLocalEncoder constants.
 	LogLocalEncoder string `json:"logLocalEncoder"`
-	// The Organization's local log format.
+	// The Organization's local log format, one of the LogLocalFormat constants.
 	LogLocalFormat string `json:"logLocalFormat"`
-	// The Organization's local log storage.
+	// The Organization's local log storage, one of the LogLocalStorage constants.
 	LogLocalStorage string `json:"logLocalStorage"`
-	// The Organization's remote log encryption encoder.
+	// The Organization's remote log encryption encoder, one of the LogRemoteEncoder constants.
 	LogRemoteEncoder string `json:"logRemoteEncoder"`
 	// The Organization's socket path for Socket local log storage.
 	LogSocketPath string `json:"logSocketPath"`
@@ -3367,7 +3368,7 @@ type Organization struct {
 	LogTCPAddress string `json:"logTcpAddress"`
 	// Indicates if the Organization has multi-factor authentication enabled.
 	MFAEnabled bool `json:"mfaEnabled"`
-	// The Organization's multi-factor authentication provider, if enabled.
+	// The Organization's multi-factor authentication provider, one of the MFAProvider constants.
 	MFAProvider string `json:"mfaProvider"`
 	// The Organization's name.
 	Name string `json:"name"`
@@ -3375,7 +3376,7 @@ type Organization struct {
 	RequireSecretStore bool `json:"requireSecretStore"`
 	// The Organization's URL for SAML metadata.
 	SAMLMetadataURL string `json:"samlMetadataUrl"`
-	// The Organization's SCIM provider.
+	// The Organization's SCIM provider, one of the SCIMProvider constants.
 	SCIMProvider string `json:"scimProvider"`
 	// The Organization's label for sensitive resources.
 	SensitiveLabel string `json:"sensitiveLabel"`
@@ -3718,7 +3719,7 @@ type QueryCapture struct {
 	RequestMethod string `json:"requestMethod"`
 	// The HTTP request URI of a Kubernetes operation.
 	RequestURI string `json:"requestUri"`
-	// The CaptureType of this query capture.
+	// The CaptureType of this query capture, one of the CaptureType constants.
 	Type string `json:"type"`
 	// The width of the terminal or window for SSH, Kubernetes, and RDP interactive sessions.
 	Width int32 `json:"width"`
@@ -3986,9 +3987,7 @@ type Relay struct {
 	MaintenanceWindows []*NodeMaintenanceWindow `json:"maintenanceWindows"`
 	// Unique human-readable name of the Relay. Node names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.
 	Name string `json:"name"`
-	// The current state of the relay. One of: "new", "verifying_restart",
-	// "awaiting_restart", "restarting", "started", "stopped", "dead",
-	// "unknown".
+	// The current state of the relay, one of the NodeState constants.
 	State string `json:"state"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
@@ -8481,6 +8480,60 @@ func (m *SSHCustomerKey) GetBindInterface() string {
 func (m *SSHCustomerKey) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*SSHPassword) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the SSHPassword.
+func (m *SSHPassword) GetID() string { return m.ID }
+
+// GetName returns the name of the SSHPassword.
+func (m *SSHPassword) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SSHPassword.
+func (m *SSHPassword) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SSHPassword.
+func (m *SSHPassword) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SSHPassword.
+func (m *SSHPassword) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the SSHPassword.
+func (m *SSHPassword) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the SSHPassword.
+func (m *SSHPassword) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the SSHPassword.
+func (m *SSHPassword) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the SSHPassword.
+func (m *SSHPassword) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the SSHPassword.
+func (m *SSHPassword) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the SSHPassword.
+func (m *SSHPassword) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Sybase) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Sybase.
@@ -9081,6 +9134,41 @@ type SSHCustomerKey struct {
 	PortOverride int32 `json:"portOverride"`
 	// The private key used to authenticate with the server.
 	PrivateKey string `json:"privateKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+// SSHPassword is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type SSHPassword struct {
+	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
+	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// Whether port forwarding is allowed through this server.
+	PortForwarding bool `json:"portForwarding"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)

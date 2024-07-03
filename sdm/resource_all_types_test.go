@@ -1095,6 +1095,19 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "ssh_password",
+			pairs: [][2]string{
+				{"allow_deprecated_key_exchanges", `true`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"port_forwarding", `true`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "sybase",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
@@ -2320,6 +2333,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"port", `443`},
 				{"port_forwarding", `true`},
 				{"private_key", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+		{
+			resource: "ssh_password",
+			pairs: [][2]string{
+				{"allow_deprecated_key_exchanges", `true`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"port_forwarding", `true`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},

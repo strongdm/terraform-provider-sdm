@@ -9321,6 +9321,8 @@ func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization
 	} else {
 		porcelain.CreatedAt = v
 	}
+	porcelain.DeviceTrustEnabled = plumbing.DeviceTrustEnabled
+	porcelain.DeviceTrustProvider = plumbing.DeviceTrustProvider
 	if v, err := convertDurationToPorcelain(plumbing.IdleTimeout); err != nil {
 		return nil, fmt.Errorf("error converting field IdleTimeout: %v", err)
 	} else {
@@ -9369,6 +9371,8 @@ func convertOrganizationToPlumbing(porcelain *Organization) *proto.Organization 
 	plumbing := &proto.Organization{}
 	plumbing.AuthProvider = (porcelain.AuthProvider)
 	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
+	plumbing.DeviceTrustEnabled = (porcelain.DeviceTrustEnabled)
+	plumbing.DeviceTrustProvider = (porcelain.DeviceTrustProvider)
 	plumbing.IdleTimeout = convertDurationToPlumbing(porcelain.IdleTimeout)
 	plumbing.IdleTimeoutEnabled = (porcelain.IdleTimeoutEnabled)
 	plumbing.Kind = (porcelain.Kind)
@@ -12054,6 +12058,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_SshCert{SshCert: convertSSHCertToPlumbing(v)}
 	case *SSHCustomerKey:
 		plumbing.Resource = &proto.Resource_SshCustomerKey{SshCustomerKey: convertSSHCustomerKeyToPlumbing(v)}
+	case *SSHPassword:
+		plumbing.Resource = &proto.Resource_SshPassword{SshPassword: convertSSHPasswordToPlumbing(v)}
 	case *Sybase:
 		plumbing.Resource = &proto.Resource_Sybase{Sybase: convertSybaseToPlumbing(v)}
 	case *SybaseIQ:
@@ -12306,6 +12312,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetSshCustomerKey() != nil {
 		return convertSSHCustomerKeyToPorcelain(plumbing.GetSshCustomerKey())
+	}
+	if plumbing.GetSshPassword() != nil {
+		return convertSSHPasswordToPorcelain(plumbing.GetSshPassword())
 	}
 	if plumbing.GetSybase() != nil {
 		return convertSybaseToPorcelain(plumbing.GetSybase())
@@ -13621,6 +13630,79 @@ func convertRepeatedSSHCustomerKeyToPorcelain(plumbings []*proto.SSHCustomerKey)
 	var items []*SSHCustomerKey
 	for _, plumbing := range plumbings {
 		if v, err := convertSSHCustomerKeyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSSHPasswordToPorcelain(plumbing *proto.SSHPassword) (*SSHPassword, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SSHPassword{}
+	porcelain.AllowDeprecatedKeyExchanges = plumbing.AllowDeprecatedKeyExchanges
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortForwarding = plumbing.PortForwarding
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertSSHPasswordToPlumbing(porcelain *SSHPassword) *proto.SSHPassword {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SSHPassword{}
+	plumbing.AllowDeprecatedKeyExchanges = (porcelain.AllowDeprecatedKeyExchanges)
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortForwarding = (porcelain.PortForwarding)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSSHPasswordToPlumbing(
+	porcelains []*SSHPassword,
+) []*proto.SSHPassword {
+	var items []*proto.SSHPassword
+	for _, porcelain := range porcelains {
+		items = append(items, convertSSHPasswordToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSSHPasswordToPorcelain(plumbings []*proto.SSHPassword) (
+	[]*SSHPassword,
+	error,
+) {
+	var items []*SSHPassword
+	for _, plumbing := range plumbings {
+		if v, err := convertSSHPasswordToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

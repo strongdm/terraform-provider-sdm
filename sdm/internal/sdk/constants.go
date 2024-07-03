@@ -447,10 +447,10 @@ const (
 	CaptureTypeSSHPortForward = "ssh-portForward"
 )
 
-// Providers responsible for device posture enforcement
+// Providers responsible for device trust enforcement
 const (
-	DevicePostureProviderNone              = ""
-	DevicePostureProviderSentinelOne       = "sentinelone"
-	DevicePostureProviderCrowdStrike       = "crowdstrike"
-	DevicePostureProviderMicrosoftDefender = "microsoftdefender"
+	DeviceTrustProviderNone              = ""
+	DeviceTrustProviderSentinelOne       = "sentinelone"
+	DeviceTrustProviderCrowdStrike       = "crowdstrike"
+	DeviceTrustProviderMicrosoftDefender = "microsoftdefender"
 )
