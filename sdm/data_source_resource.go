@@ -4343,11 +4343,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource.",
 									},
-									"replica_set": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The name of the mongo replicaset.",
-									},
 									"secret_store_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -7959,7 +7954,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":        (v.Password),
 				"port":            (v.Port),
 				"port_override":   (v.PortOverride),
-				"replica_set":     (v.ReplicaSet),
 				"secret_store_id": (v.SecretStoreID),
 				"subdomain":       (v.Subdomain),
 				"tags":            convertTagsToPorcelain(v.Tags),

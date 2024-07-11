@@ -2950,8 +2950,6 @@ type MongoLegacyHost struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
-	// The name of the mongo replicaset.
-	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3366,6 +3364,8 @@ type Organization struct {
 	LogSocketPath string `json:"logSocketPath"`
 	// The Organization's TCP address for TCP or Syslog local log storage.
 	LogTCPAddress string `json:"logTcpAddress"`
+	// The Organization's loopback range.
+	LoopbackRange string `json:"loopbackRange"`
 	// Indicates if the Organization has multi-factor authentication enabled.
 	MFAEnabled bool `json:"mfaEnabled"`
 	// The Organization's multi-factor authentication provider, one of the MFAProvider constants.

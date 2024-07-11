@@ -8363,7 +8363,6 @@ func convertMongoLegacyHostToPorcelain(plumbing *proto.MongoLegacyHost) (*MongoL
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8391,7 +8390,6 @@ func convertMongoLegacyHostToPlumbing(porcelain *MongoLegacyHost) *proto.MongoLe
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -9336,6 +9334,7 @@ func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization
 	porcelain.LogRemoteEncoder = plumbing.LogRemoteEncoder
 	porcelain.LogSocketPath = plumbing.LogSocketPath
 	porcelain.LogTCPAddress = plumbing.LogTcpAddress
+	porcelain.LoopbackRange = plumbing.LoopbackRange
 	porcelain.MFAEnabled = plumbing.MfaEnabled
 	porcelain.MFAProvider = plumbing.MfaProvider
 	porcelain.Name = plumbing.Name
@@ -9382,6 +9381,7 @@ func convertOrganizationToPlumbing(porcelain *Organization) *proto.Organization 
 	plumbing.LogRemoteEncoder = (porcelain.LogRemoteEncoder)
 	plumbing.LogSocketPath = (porcelain.LogSocketPath)
 	plumbing.LogTcpAddress = (porcelain.LogTCPAddress)
+	plumbing.LoopbackRange = (porcelain.LoopbackRange)
 	plumbing.MfaEnabled = (porcelain.MFAEnabled)
 	plumbing.MfaProvider = (porcelain.MFAProvider)
 	plumbing.Name = (porcelain.Name)

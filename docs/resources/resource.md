@@ -789,7 +789,6 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
-	* `replica_set` - (Optional) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
