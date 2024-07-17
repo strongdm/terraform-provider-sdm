@@ -2894,8 +2894,6 @@ type Memsql struct {
 	Username string `json:"username"`
 }
 
-// MongoHost is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type MongoHost struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
@@ -2929,6 +2927,8 @@ type MongoHost struct {
 	Username string `json:"username"`
 }
 
+// MongoLegacyHost is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type MongoLegacyHost struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
@@ -2962,6 +2962,8 @@ type MongoLegacyHost struct {
 	Username string `json:"username"`
 }
 
+// MongoLegacyReplicaset is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type MongoLegacyReplicaset struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
@@ -2999,8 +3001,6 @@ type MongoLegacyReplicaset struct {
 	Username string `json:"username"`
 }
 
-// MongoReplicaSet is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type MongoReplicaSet struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
