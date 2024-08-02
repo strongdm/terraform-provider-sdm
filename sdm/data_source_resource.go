@@ -62,6 +62,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -241,6 +246,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -491,6 +501,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -603,6 +618,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3088,6 +3108,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3560,6 +3585,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -3739,6 +3769,11 @@ func dataSourceResource() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
 									"bind_interface": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -7058,6 +7093,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		switch v := resp.Value().(type) {
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"client_certificate":                  (v.ClientCertificate),
@@ -7095,6 +7131,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AKSServiceAccount:
 			output[0]["aks_service_account"] = append(output[0]["aks_service_account"], entity{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
 				"discovery_username":                  (v.DiscoveryUsername),
@@ -7147,6 +7184,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.AmazonEKS:
 			output[0]["amazon_eks"] = append(output[0]["amazon_eks"], entity{
 				"access_key":                          (v.AccessKey),
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"cluster_name":                        (v.ClusterName),
@@ -7170,6 +7208,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.AmazonEKSInstanceProfile:
 			output[0]["amazon_eks_instance_profile"] = append(output[0]["amazon_eks_instance_profile"], entity{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"cluster_name":                        (v.ClusterName),
@@ -7692,6 +7731,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
@@ -7791,6 +7831,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.Kubernetes:
 			output[0]["kubernetes"] = append(output[0]["kubernetes"], entity{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
 				"client_certificate":                  (v.ClientCertificate),
@@ -7828,6 +7869,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
 				"discovery_username":                  (v.DiscoveryUsername),

@@ -3872,6 +3872,289 @@ func (svc *PeeringGroups) List(
 	), nil
 }
 
+// Policies are the collection of one or more statements that enforce fine-grained access
+// control for the users of an organization.
+type Policies struct {
+	client plumbing.PoliciesClient
+	parent *Client
+}
+
+// A SnapshotPolicies exposes the read only methods of the Policies
+// service for historical queries.
+type SnapshotPolicies interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*PolicyGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		PolicyIterator,
+		error)
+}
+
+// Create creates a new Policy.
+func (svc *Policies) Create(
+	ctx context.Context,
+	policy *Policy) (
+	*PolicyCreateResponse,
+	error) {
+	req := &plumbing.PolicyCreateRequest{}
+
+	req.Policy = convertPolicyToPlumbing(policy)
+	var plumbingResponse *plumbing.PolicyCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Policies.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PolicyCreateResponse{}
+	if v, err := convertPolicyToPorcelain(plumbingResponse.Policy); err != nil {
+		return nil, err
+	} else {
+		resp.Policy = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a Policy by ID.
+func (svc *Policies) Delete(
+	ctx context.Context,
+	id string) (
+	*PolicyDeleteResponse,
+	error) {
+	req := &plumbing.PolicyDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.PolicyDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Policies.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PolicyDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a Policy by ID.
+func (svc *Policies) Update(
+	ctx context.Context,
+	policy *Policy) (
+	*PolicyUpdateResponse,
+	error) {
+	req := &plumbing.PolicyUpdateRequest{}
+
+	req.Policy = convertPolicyToPlumbing(policy)
+	var plumbingResponse *plumbing.PolicyUpdateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Policies.Update"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PolicyUpdateResponse{}
+	if v, err := convertPolicyToPorcelain(plumbingResponse.Policy); err != nil {
+		return nil, err
+	} else {
+		resp.Policy = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one Policy by ID.
+func (svc *Policies) Get(
+	ctx context.Context,
+	id string) (
+	*PolicyGetResponse,
+	error) {
+	req := &plumbing.PolicyGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.PolicyGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Policies.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &PolicyGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertPolicyToPorcelain(plumbingResponse.Policy); err != nil {
+		return nil, err
+	} else {
+		resp.Policy = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of Policy matching a given set of criteria
+func (svc *Policies) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	PolicyIterator,
+	error) {
+	req := &plumbing.PolicyListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newPolicyIteratorImpl(
+		func() (
+			[]*Policy,
+			bool, error) {
+			var plumbingResponse *plumbing.PolicyListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Policies.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedPolicyToPorcelain(plumbingResponse.Policies)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// PoliciesHistory records all changes to the state of a Policy.
+type PoliciesHistory struct {
+	client plumbing.PoliciesHistoryClient
+	parent *Client
+}
+
+// List gets a list of PolicyHistory records matching a given set of criteria.
+func (svc *PoliciesHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	PolicyHistoryIterator,
+	error) {
+	req := &plumbing.PoliciesHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newPolicyHistoryIteratorImpl(
+		func() (
+			[]*PolicyHistory,
+			bool, error) {
+			var plumbingResponse *plumbing.PoliciesHistoryListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PoliciesHistory.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedPolicyHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.

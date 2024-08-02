@@ -32,6 +32,9 @@ func (t Tags) clone() Tags {
 }
 
 type AKS struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
@@ -105,6 +108,9 @@ type AKSBasicAuth struct {
 }
 
 type AKSServiceAccount struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// If true, configures discovery of a cluster to be run from a node.
@@ -829,6 +835,9 @@ type ActivityGetResponse struct {
 type AmazonEKS struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
@@ -875,6 +884,9 @@ type AmazonEKS struct {
 }
 
 type AmazonEKSInstanceProfile struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
@@ -2152,6 +2164,9 @@ type GetResponseMetadata struct {
 }
 
 type GoogleGKE struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
@@ -2541,6 +2556,9 @@ type KeyfactorX509Store struct {
 }
 
 type Kubernetes struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
@@ -2614,6 +2632,9 @@ type KubernetesBasicAuth struct {
 }
 
 type KubernetesServiceAccount struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
 	// If true, configures discovery of a cluster to be run from a node.
@@ -3553,6 +3574,74 @@ type PeeringGroupResourceGetResponse struct {
 	Meta *GetResponseMetadata `json:"meta"`
 	// The requested PeeringGroupResource.
 	PeeringGroupResource *PeeringGroupResource `json:"peeringGroupResource"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// Policy is a collection of one or more statements that enforce fine-grained access control
+// for the users of an organization.
+type Policy struct {
+	// Optional description of the Policy.
+	Description string `json:"description"`
+	// Unique identifier of the Policy.
+	ID string `json:"id"`
+	// Unique human-readable name of the Policy.
+	Name string `json:"name"`
+	// The content of the Policy, in Cedar policy language.
+	Policy string `json:"policy"`
+}
+
+// PolicyCreateResponse reports how the Policy was created in the system.
+type PolicyCreateResponse struct {
+	// The created Policy.
+	Policy *Policy `json:"policy"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PolicyDeleteResponse returns information about a Policy that was deleted.
+type PolicyDeleteResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PolicyGetResponse returns a requested Policy.
+type PolicyGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested Policy.
+	Policy *Policy `json:"policy"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PolicyHistory records the state of a Policy at a given point in time,
+// where every change (create, update and delete) to a Policy produces a
+// PolicyHistory record.
+type PolicyHistory struct {
+	// The unique identifier of the Activity that produced this change to the Policy.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Policy was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The complete Policy state at this time.
+	Policy *Policy `json:"policy"`
+	// The time at which the Policy state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// PolicyListResponse returns a list of Policy records that meet
+// the criteria of a PolicyListRequest.
+type PolicyListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// PolicyUpdateResponse returns the fields of a Policy after it has been updated by
+// a PolicyUpdateRequest.
+type PolicyUpdateResponse struct {
+	// The updated Policy.
+	Policy *Policy `json:"policy"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
@@ -11090,6 +11179,40 @@ type PeeringGroupIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *PeeringGroup
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// PolicyIterator provides read access to a list of Policy.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    policy := iterator.Value()
+//	    // ...
+//	}
+type PolicyIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *Policy
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// PolicyHistoryIterator provides read access to a list of PolicyHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    policyHistory := iterator.Value()
+//	    // ...
+//	}
+type PolicyHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *PolicyHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

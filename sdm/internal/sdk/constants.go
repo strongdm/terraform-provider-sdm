@@ -342,6 +342,7 @@ const (
 	PermissionOrgAuditWorkflows                      = "audit:workflows"
 	PermissionOrgAuditApprovalFlows                  = "audit:approvalflows"
 	PermissionOrgAuditAccessRequests                 = "audit:accessrequests"
+	PermissionOrgAuditPolicies                       = "audit:policies"
 	PermissionWorkflowList                           = "workflow:list"
 	PermissionWorkflowEdit                           = "workflow:edit"
 	PermissionAccessRequestEdit                      = "accessrequest:edit"
@@ -453,4 +454,5 @@ const (
 	DeviceTrustProviderSentinelOne       = "sentinelone"
 	DeviceTrustProviderCrowdStrike       = "crowdstrike"
 	DeviceTrustProviderMicrosoftDefender = "microsoftdefender"
+	DeviceTrustProviderDuo               = "duo"
 )

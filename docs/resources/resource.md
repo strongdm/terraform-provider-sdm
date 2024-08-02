@@ -50,6 +50,7 @@ All credentials must be either raw or Secret Store paths, depending on whether t
 ## Argument Reference
 The following arguments are supported by the Resource resource:
 * aks:
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `client_certificate` - (Optional) The certificate to authenticate TLS connections with.
@@ -81,6 +82,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aks_service_account:
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
 	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
@@ -124,6 +126,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks:
 	* `access_key` - (Required, either in plaintext, or as a secret store path) The Access Key ID to use to authenticate.
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `cluster_name` - (Required) The name of the cluster to connect to.
@@ -144,6 +147,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_instance_profile:
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `cluster_name` - (Required) The name of the cluster to connect to.
@@ -573,6 +577,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke:
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
@@ -654,6 +659,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `url` - (Required) The base address of your website without the path.
 * kubernetes:
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Optional) The CA to authenticate TLS connections with.
 	* `client_certificate` - (Optional) The certificate to authenticate TLS connections with.
@@ -685,6 +691,7 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * kubernetes_service_account:
+	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
 	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.

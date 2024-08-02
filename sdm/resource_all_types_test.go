@@ -44,6 +44,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "aks",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
 				{"client_certificate", certificateAuthority},
 				{"client_key", `"key"`},
@@ -72,6 +73,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "aks_service_account",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
@@ -111,6 +113,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "amazon_eks",
 			pairs: [][2]string{
 				{"access_key", `"access_key"`},
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
 				{"cluster_name", `"cluster_name"`},
 				{"discovery_enabled", `true`},
@@ -129,6 +132,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "amazon_eks_instance_profile",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
 				{"cluster_name", `"cluster_name"`},
 				{"discovery_enabled", `true`},
@@ -526,6 +530,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "google_gke",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
@@ -606,6 +611,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "kubernetes",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
 				{"client_certificate", certificateAuthority},
 				{"discovery_enabled", `true`},
@@ -633,6 +639,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "kubernetes_service_account",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
@@ -1249,6 +1256,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "aks",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_certificate", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_key", `"path/to/secret?key=key&encoding=base64"`},
@@ -1279,6 +1287,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "aks_service_account",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
@@ -1321,6 +1330,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			resource: "amazon_eks",
 			pairs: [][2]string{
 				{"access_key", `"path/to/secret?key=key&encoding=base64"`},
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"cluster_name", `"cluster_name"`},
 				{"discovery_enabled", `true`},
@@ -1340,6 +1350,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "amazon_eks_instance_profile",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"cluster_name", `"cluster_name"`},
 				{"discovery_enabled", `true`},
@@ -1768,6 +1779,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "google_gke",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
@@ -1840,6 +1852,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "kubernetes",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_certificate", `"path/to/secret?key=key&encoding=base64"`},
 				{"client_key", `"path/to/secret?key=key&encoding=base64"`},
@@ -1870,6 +1883,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "kubernetes_service_account",
 			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},

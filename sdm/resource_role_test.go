@@ -273,7 +273,7 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 				ImportState:       true,
 				ImportStateVerify: true,
 			},
-			// dbtype-based access rules
+			// driver-type-based access rules
 			{
 				Config: testAccSDMRoleAccessRulesConfig(
 					resourceName,

@@ -97,6 +97,7 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 		return nil, nil
 	}
 	porcelain := &AKS{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
@@ -128,6 +129,7 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 		return nil
 	}
 	plumbing := &proto.AKS{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
@@ -249,6 +251,7 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 		return nil, nil
 	}
 	porcelain := &AKSServiceAccount{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
 	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
@@ -278,6 +281,7 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 		return nil
 	}
 	plumbing := &proto.AKSServiceAccount{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
 	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
@@ -2517,6 +2521,7 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) 
 	}
 	porcelain := &AmazonEKS{}
 	porcelain.AccessKey = plumbing.AccessKey
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClusterName = plumbing.ClusterName
@@ -2551,6 +2556,7 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	}
 	plumbing := &proto.AmazonEKS{}
 	plumbing.AccessKey = (porcelain.AccessKey)
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClusterName = (porcelain.ClusterName)
@@ -2603,6 +2609,7 @@ func convertAmazonEKSInstanceProfileToPorcelain(plumbing *proto.AmazonEKSInstanc
 		return nil, nil
 	}
 	porcelain := &AmazonEKSInstanceProfile{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClusterName = plumbing.ClusterName
@@ -2635,6 +2642,7 @@ func convertAmazonEKSInstanceProfileToPlumbing(porcelain *AmazonEKSInstanceProfi
 		return nil
 	}
 	plumbing := &proto.AmazonEKSInstanceProfile{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClusterName = (porcelain.ClusterName)
@@ -6312,6 +6320,7 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 		return nil, nil
 	}
 	porcelain := &GoogleGKE{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
@@ -6341,6 +6350,7 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 		return nil
 	}
 	plumbing := &proto.GoogleGKE{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
@@ -7530,6 +7540,7 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 		return nil, nil
 	}
 	porcelain := &Kubernetes{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
 	porcelain.ClientCertificate = plumbing.ClientCertificate
@@ -7561,6 +7572,7 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 		return nil
 	}
 	plumbing := &proto.Kubernetes{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
 	plumbing.ClientCertificate = (porcelain.ClientCertificate)
@@ -7682,6 +7694,7 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 		return nil, nil
 	}
 	porcelain := &KubernetesServiceAccount{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
 	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
@@ -7711,6 +7724,7 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 		return nil
 	}
 	plumbing := &proto.KubernetesServiceAccount{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
 	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
@@ -10305,6 +10319,361 @@ func convertRepeatedPeeringGroupResourceGetResponseToPorcelain(plumbings []*prot
 	var items []*PeeringGroupResourceGetResponse
 	for _, plumbing := range plumbings {
 		if v, err := convertPeeringGroupResourceGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyToPorcelain(plumbing *proto.Policy) (*Policy, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Policy{}
+	porcelain.Description = plumbing.Description
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Policy = plumbing.Policy
+	return porcelain, nil
+}
+
+func convertPolicyToPlumbing(porcelain *Policy) *proto.Policy {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Policy{}
+	plumbing.Description = (porcelain.Description)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Policy = (porcelain.Policy)
+	return plumbing
+}
+func convertRepeatedPolicyToPlumbing(
+	porcelains []*Policy,
+) []*proto.Policy {
+	var items []*proto.Policy
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyToPorcelain(plumbings []*proto.Policy) (
+	[]*Policy,
+	error,
+) {
+	var items []*Policy
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyCreateResponseToPorcelain(plumbing *proto.PolicyCreateResponse) (*PolicyCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PolicyCreateResponse{}
+	if v, err := convertPolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertPolicyCreateResponseToPlumbing(porcelain *PolicyCreateResponse) *proto.PolicyCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PolicyCreateResponse{}
+	plumbing.Policy = convertPolicyToPlumbing(porcelain.Policy)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedPolicyCreateResponseToPlumbing(
+	porcelains []*PolicyCreateResponse,
+) []*proto.PolicyCreateResponse {
+	var items []*proto.PolicyCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyCreateResponseToPorcelain(plumbings []*proto.PolicyCreateResponse) (
+	[]*PolicyCreateResponse,
+	error,
+) {
+	var items []*PolicyCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyDeleteResponseToPorcelain(plumbing *proto.PolicyDeleteResponse) (*PolicyDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PolicyDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertPolicyDeleteResponseToPlumbing(porcelain *PolicyDeleteResponse) *proto.PolicyDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PolicyDeleteResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedPolicyDeleteResponseToPlumbing(
+	porcelains []*PolicyDeleteResponse,
+) []*proto.PolicyDeleteResponse {
+	var items []*proto.PolicyDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyDeleteResponseToPorcelain(plumbings []*proto.PolicyDeleteResponse) (
+	[]*PolicyDeleteResponse,
+	error,
+) {
+	var items []*PolicyDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyGetResponseToPorcelain(plumbing *proto.PolicyGetResponse) (*PolicyGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PolicyGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertPolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertPolicyGetResponseToPlumbing(porcelain *PolicyGetResponse) *proto.PolicyGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PolicyGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.Policy = convertPolicyToPlumbing(porcelain.Policy)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedPolicyGetResponseToPlumbing(
+	porcelains []*PolicyGetResponse,
+) []*proto.PolicyGetResponse {
+	var items []*proto.PolicyGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyGetResponseToPorcelain(plumbings []*proto.PolicyGetResponse) (
+	[]*PolicyGetResponse,
+	error,
+) {
+	var items []*PolicyGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyHistoryToPorcelain(plumbing *proto.PolicyHistory) (*PolicyHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PolicyHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertPolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertPolicyHistoryToPlumbing(porcelain *PolicyHistory) *proto.PolicyHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PolicyHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Policy = convertPolicyToPlumbing(porcelain.Policy)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedPolicyHistoryToPlumbing(
+	porcelains []*PolicyHistory,
+) []*proto.PolicyHistory {
+	var items []*proto.PolicyHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyHistoryToPorcelain(plumbings []*proto.PolicyHistory) (
+	[]*PolicyHistory,
+	error,
+) {
+	var items []*PolicyHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyListResponseToPorcelain(plumbing *proto.PolicyListResponse) (*PolicyListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PolicyListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertPolicyListResponseToPlumbing(porcelain *PolicyListResponse) *proto.PolicyListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PolicyListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedPolicyListResponseToPlumbing(
+	porcelains []*PolicyListResponse,
+) []*proto.PolicyListResponse {
+	var items []*proto.PolicyListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyListResponseToPorcelain(plumbings []*proto.PolicyListResponse) (
+	[]*PolicyListResponse,
+	error,
+) {
+	var items []*PolicyListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertPolicyUpdateResponseToPorcelain(plumbing *proto.PolicyUpdateResponse) (*PolicyUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PolicyUpdateResponse{}
+	if v, err := convertPolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertPolicyUpdateResponseToPlumbing(porcelain *PolicyUpdateResponse) *proto.PolicyUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PolicyUpdateResponse{}
+	plumbing.Policy = convertPolicyToPlumbing(porcelain.Policy)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedPolicyUpdateResponseToPlumbing(
+	porcelains []*PolicyUpdateResponse,
+) []*proto.PolicyUpdateResponse {
+	var items []*proto.PolicyUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertPolicyUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPolicyUpdateResponseToPorcelain(plumbings []*proto.PolicyUpdateResponse) (
+	[]*PolicyUpdateResponse,
+	error,
+) {
+	var items []*PolicyUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertPolicyUpdateResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -18504,6 +18873,96 @@ func (p *peeringGroupIteratorImpl) Value() *PeeringGroup {
 }
 
 func (p *peeringGroupIteratorImpl) Err() error {
+	return p.err
+}
+
+type policyIteratorImplFetchFunc func() (
+	[]*Policy,
+	bool, error)
+type policyIteratorImpl struct {
+	buffer      []*Policy
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       policyIteratorImplFetchFunc
+}
+
+func newPolicyIteratorImpl(f policyIteratorImplFetchFunc) *policyIteratorImpl {
+	return &policyIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (p *policyIteratorImpl) Next() bool {
+	if p.index < len(p.buffer)-1 {
+		p.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !p.hasNextPage {
+		return false
+	}
+
+	p.index = 0
+	p.buffer, p.hasNextPage, p.err = p.fetch()
+	return len(p.buffer) > 0
+}
+
+func (p *policyIteratorImpl) Value() *Policy {
+	if p.index >= len(p.buffer) {
+		return nil
+	}
+	return p.buffer[p.index]
+}
+
+func (p *policyIteratorImpl) Err() error {
+	return p.err
+}
+
+type policyHistoryIteratorImplFetchFunc func() (
+	[]*PolicyHistory,
+	bool, error)
+type policyHistoryIteratorImpl struct {
+	buffer      []*PolicyHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       policyHistoryIteratorImplFetchFunc
+}
+
+func newPolicyHistoryIteratorImpl(f policyHistoryIteratorImplFetchFunc) *policyHistoryIteratorImpl {
+	return &policyHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (p *policyHistoryIteratorImpl) Next() bool {
+	if p.index < len(p.buffer)-1 {
+		p.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !p.hasNextPage {
+		return false
+	}
+
+	p.index = 0
+	p.buffer, p.hasNextPage, p.err = p.fetch()
+	return len(p.buffer) > 0
+}
+
+func (p *policyHistoryIteratorImpl) Value() *PolicyHistory {
+	if p.index >= len(p.buffer) {
+		return nil
+	}
+	return p.buffer[p.index]
+}
+
+func (p *policyHistoryIteratorImpl) Err() error {
 	return p.err
 }
 

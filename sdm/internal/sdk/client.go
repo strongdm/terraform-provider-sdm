@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/11.1.0"
+	defaultUserAgent = "strongdm-sdk-go/11.3.0"
 	defaultPageLimit = 50
 )
 
@@ -101,6 +101,8 @@ type Client struct {
 	peeringGroupPeers                *PeeringGroupPeers
 	peeringGroupResources            *PeeringGroupResources
 	peeringGroups                    *PeeringGroups
+	policies                         *Policies
+	policiesHistory                  *PoliciesHistory
 	queries                          *Queries
 	remoteIdentities                 *RemoteIdentities
 	remoteIdentitiesHistory          *RemoteIdentitiesHistory
@@ -291,6 +293,14 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.peeringGroups = &PeeringGroups{
 		client: plumbing.NewPeeringGroupsClient(client.grpcConn),
+		parent: client,
+	}
+	client.policies = &Policies{
+		client: plumbing.NewPoliciesClient(client.grpcConn),
+		parent: client,
+	}
+	client.policiesHistory = &PoliciesHistory{
+		client: plumbing.NewPoliciesHistoryClient(client.grpcConn),
 		parent: client,
 	}
 	client.queries = &Queries{
@@ -626,6 +636,17 @@ func (c *Client) PeeringGroups() *PeeringGroups {
 	return c.peeringGroups
 }
 
+// Policies are the collection of one or more statements that enforce fine-grained access
+// control for the users of an organization.
+func (c *Client) Policies() *Policies {
+	return c.policies
+}
+
+// PoliciesHistory records all changes to the state of a Policy.
+func (c *Client) PoliciesHistory() *PoliciesHistory {
+	return c.policiesHistory
+}
+
 // A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.
@@ -811,6 +832,10 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewNodesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.policies = &Policies{
+		client: plumbing.NewPoliciesClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.remoteIdentities = &RemoteIdentities{
 		client: plumbing.NewRemoteIdentitiesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -922,6 +947,12 @@ func (c *SnapshotClient) IdentitySets() SnapshotIdentitySets {
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
 func (c *SnapshotClient) Nodes() SnapshotNodes {
 	return c.client.nodes
+}
+
+// Policies are the collection of one or more statements that enforce fine-grained access
+// control for the users of an organization.
+func (c *SnapshotClient) Policies() SnapshotPolicies {
+	return c.client.policies
 }
 
 // RemoteIdentities assign a resource directly to an account, giving the account the permission to connect to that resource.

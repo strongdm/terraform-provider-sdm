@@ -31,6 +31,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -212,6 +217,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -465,6 +475,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "The Access Key ID to use to authenticate.",
 						},
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -578,6 +593,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3064,6 +3084,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3532,6 +3557,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -3713,6 +3743,11 @@ func resourceResource() *schema.Resource {
 				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
 						"bind_interface": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -9285,6 +9320,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKS{
 			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:                convertStringToPlumbing(raw["client_certificate"]),
@@ -9344,6 +9380,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AKSServiceAccount{
 			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
 			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
@@ -9429,6 +9466,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.AmazonEKS{
 			ID:                               d.Id(),
 			AccessKey:                        convertStringToPlumbing(raw["access_key"]),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClusterName:                      convertStringToPlumbing(raw["cluster_name"]),
@@ -9463,6 +9501,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.AmazonEKSInstanceProfile{
 			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClusterName:                      convertStringToPlumbing(raw["cluster_name"]),
@@ -10326,6 +10365,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.GoogleGKE{
 			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
@@ -10476,6 +10516,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.Kubernetes{
 			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
 			ClientCertificate:                convertStringToPlumbing(raw["client_certificate"]),
@@ -10535,6 +10576,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		}
 		out := &sdm.KubernetesServiceAccount{
 			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
 			DiscoveryEnabled:                 convertBoolToPlumbing(raw["discovery_enabled"]),
 			DiscoveryUsername:                convertStringToPlumbing(raw["discovery_username"]),
@@ -11671,6 +11713,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
@@ -11714,6 +11757,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
 				"discovery_username":                  (v.DiscoveryUsername),
@@ -11775,6 +11819,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
@@ -11801,6 +11846,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
@@ -12416,6 +12462,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("google_gke", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"discovery_enabled":                   (v.DiscoveryEnabled),
@@ -12533,6 +12580,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
@@ -12576,6 +12624,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
 				"discovery_username":                  (v.DiscoveryUsername),
@@ -13412,6 +13461,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("aks", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
@@ -13470,6 +13520,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("aks_service_account", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
 				"discovery_username":                  (v.DiscoveryUsername),
@@ -13567,6 +13618,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("amazon_eks", []map[string]interface{}{
 			{
 				"access_key":                          seValues["access_key"],
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
@@ -13605,6 +13657,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("amazon_eks_instance_profile", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"cluster_name":                        (v.ClusterName),
@@ -14538,6 +14591,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("google_gke", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"discovery_enabled":                   (v.DiscoveryEnabled),
@@ -14703,6 +14757,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("kubernetes", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               seValues["certificate_authority"],
 				"client_certificate":                  seValues["client_certificate"],
@@ -14761,6 +14816,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("kubernetes_service_account", []map[string]interface{}{
 			{
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"discovery_enabled":                   (v.DiscoveryEnabled),
 				"discovery_username":                  (v.DiscoveryUsername),
