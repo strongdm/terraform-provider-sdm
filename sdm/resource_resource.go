@@ -137,7 +137,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "AKSBasicAuth is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -3663,7 +3663,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "KubernetesBasicAuth is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {

@@ -76,6 +76,8 @@ type AKS struct {
 	Tags Tags `json:"tags"`
 }
 
+// AKSBasicAuth is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type AKSBasicAuth struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -2600,6 +2602,8 @@ type Kubernetes struct {
 	Tags Tags `json:"tags"`
 }
 
+// KubernetesBasicAuth is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type KubernetesBasicAuth struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
