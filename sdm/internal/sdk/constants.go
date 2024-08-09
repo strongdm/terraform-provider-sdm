@@ -284,6 +284,7 @@ const (
 	ActivityVerbApprovalFlowUpdated                              = "approval workflow updated"
 	ActivityVerbApprovalFlowStepAdded                            = "approval workflow step added"
 	ActivityVerbApprovalFlowStepDeleted                          = "approval workflow step deleted"
+	ActivityVerbApprovalFlowStepUpdated                          = "approval workflow step updated"
 	ActivityVerbApprovalFlowApproverAdded                        = "approval workflow approver added"
 	ActivityVerbApprovalFlowApproverDeleted                      = "approval workflow approver deleted"
 	ActivityVerbOrgVNMSubnetUpdated                              = "organization VNM subnet updated"

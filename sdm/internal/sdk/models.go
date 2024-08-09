@@ -3736,6 +3736,8 @@ type Query struct {
 	// The tags of the account accessed, at the time the query was executed. If the account
 	// tags are later changed, that change will not be reflected via this field.
 	AccountTags Tags `json:"accountTags"`
+	// Authorization metadata associated with this query.
+	AuthzJSON string `json:"authzJson"`
 	// For queries against SSH, Kubernetes, and RDP resources, this contains additional information
 	// about the captured query.
 	Capture *QueryCapture `json:"capture"`
@@ -3784,6 +3786,8 @@ type Query struct {
 	ResourceType string `json:"resourceType"`
 	// The IP address the Query was performed from, as detected at the ingress gateway.
 	SourceIP string `json:"sourceIp"`
+	// The target destination of the query, in host:port format.
+	Target string `json:"target"`
 	// The time at which the Query was started.
 	Timestamp time.Time `json:"timestamp"`
 }

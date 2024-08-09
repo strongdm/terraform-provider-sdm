@@ -10841,6 +10841,7 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	} else {
 		porcelain.AccountTags = v
 	}
+	porcelain.AuthzJSON = plumbing.AuthzJson
 	if v, err := convertQueryCaptureToPorcelain(plumbing.Capture); err != nil {
 		return nil, fmt.Errorf("error converting field Capture: %v", err)
 	} else {
@@ -10877,6 +10878,7 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	}
 	porcelain.ResourceType = plumbing.ResourceType
 	porcelain.SourceIP = plumbing.SourceIp
+	porcelain.Target = plumbing.Target
 	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
 		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
 	} else {
@@ -10895,6 +10897,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.AccountId = (porcelain.AccountID)
 	plumbing.AccountLastName = (porcelain.AccountLastName)
 	plumbing.AccountTags = convertTagsToPlumbing(porcelain.AccountTags)
+	plumbing.AuthzJson = (porcelain.AuthzJSON)
 	plumbing.Capture = convertQueryCaptureToPlumbing(porcelain.Capture)
 	plumbing.ClientIp = (porcelain.ClientIP)
 	plumbing.CompletedAt = convertTimestampToPlumbing(porcelain.CompletedAt)
@@ -10915,6 +10918,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.ResourceTags = convertTagsToPlumbing(porcelain.ResourceTags)
 	plumbing.ResourceType = (porcelain.ResourceType)
 	plumbing.SourceIp = (porcelain.SourceIP)
+	plumbing.Target = (porcelain.Target)
 	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
 	return plumbing
 }
