@@ -15,7 +15,7 @@ Workflows are the collection of rules that define the resources to which access 
 ```hcl
 data "sdm_workflow" "workflow_query" {
     name = "workflow example"
-    auto_grant = true
+    approval_mode = "automatic"
 }
 ```
 ## Argument Reference

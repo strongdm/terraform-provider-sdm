@@ -349,6 +349,8 @@ type AWSStore struct {
 type AccessRequest struct {
 	// The account that initiated the request.
 	AccountID string `json:"accountId"`
+	// Duration of the access request.
+	Duration int64 `json:"duration"`
 	// The account grant created, if it exists.
 	GrantID string `json:"grantId"`
 	// The access request id.
@@ -2159,6 +2161,11 @@ type Gateway struct {
 	// Version is a read only sdm binary version uploaded by the gateway process
 	// when it comes online.
 	Version string `json:"version"`
+}
+
+// GenericResponseMetadata contains common headers for generic request
+// responses.
+type GenericResponseMetadata struct {
 }
 
 // GetResponseMetadata is reserved for future use.
@@ -11446,23 +11453,6 @@ type RoleHistoryIterator interface {
 	Err() error
 }
 
-// SecretStoreHealthIterator provides read access to a list of SecretStoreHealth.
-// Use it like so:
-//
-//	for iterator.Next() {
-//	    secretStoreHealth := iterator.Value()
-//	    // ...
-//	}
-type SecretStoreHealthIterator interface {
-	// Next advances the iterator to the next item in the list. It returns
-	// true if an item is available to retrieve via the `Value()` function.
-	Next() bool
-	// Value returns the current item, if one is available.
-	Value() *SecretStoreHealth
-	// Err returns the first error encountered during iteration, if any.
-	Err() error
-}
-
 // SecretStoreIterator provides read access to a list of SecretStore.
 // Use it like so:
 //
@@ -11476,6 +11466,23 @@ type SecretStoreIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() SecretStore
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// SecretStoreHealthIterator provides read access to a list of SecretStoreHealth.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    secretStoreHealth := iterator.Value()
+//	    // ...
+//	}
+type SecretStoreHealthIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *SecretStoreHealth
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

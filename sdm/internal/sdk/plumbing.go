@@ -806,6 +806,7 @@ func convertAccessRequestToPorcelain(plumbing *proto.AccessRequest) (*AccessRequ
 	}
 	porcelain := &AccessRequest{}
 	porcelain.AccountID = plumbing.AccountId
+	porcelain.Duration = plumbing.Duration
 	porcelain.GrantID = plumbing.GrantId
 	porcelain.ID = plumbing.Id
 	porcelain.Reason = plumbing.Reason
@@ -836,6 +837,7 @@ func convertAccessRequestToPlumbing(porcelain *AccessRequest) *proto.AccessReque
 	}
 	plumbing := &proto.AccessRequest{}
 	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Duration = (porcelain.Duration)
 	plumbing.GrantId = (porcelain.GrantID)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Reason = (porcelain.Reason)
@@ -6269,6 +6271,45 @@ func convertRepeatedGatewayToPorcelain(plumbings []*proto.Gateway) (
 	var items []*Gateway
 	for _, plumbing := range plumbings {
 		if v, err := convertGatewayToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGenericResponseMetadataToPorcelain(plumbing *proto.GenericResponseMetadata) (*GenericResponseMetadata, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GenericResponseMetadata{}
+	return porcelain, nil
+}
+
+func convertGenericResponseMetadataToPlumbing(porcelain *GenericResponseMetadata) *proto.GenericResponseMetadata {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GenericResponseMetadata{}
+	return plumbing
+}
+func convertRepeatedGenericResponseMetadataToPlumbing(
+	porcelains []*GenericResponseMetadata,
+) []*proto.GenericResponseMetadata {
+	var items []*proto.GenericResponseMetadata
+	for _, porcelain := range porcelains {
+		items = append(items, convertGenericResponseMetadataToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGenericResponseMetadataToPorcelain(plumbings []*proto.GenericResponseMetadata) (
+	[]*GenericResponseMetadata,
+	error,
+) {
+	var items []*GenericResponseMetadata
+	for _, plumbing := range plumbings {
+		if v, err := convertGenericResponseMetadataToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -19555,51 +19596,6 @@ func (r *roleHistoryIteratorImpl) Err() error {
 	return r.err
 }
 
-type secretStoreHealthIteratorImplFetchFunc func() (
-	[]*SecretStoreHealth,
-	bool, error)
-type secretStoreHealthIteratorImpl struct {
-	buffer      []*SecretStoreHealth
-	index       int
-	hasNextPage bool
-	err         error
-	fetch       secretStoreHealthIteratorImplFetchFunc
-}
-
-func newSecretStoreHealthIteratorImpl(f secretStoreHealthIteratorImplFetchFunc) *secretStoreHealthIteratorImpl {
-	return &secretStoreHealthIteratorImpl{
-		hasNextPage: true,
-		fetch:       f,
-	}
-}
-
-func (s *secretStoreHealthIteratorImpl) Next() bool {
-	if s.index < len(s.buffer)-1 {
-		s.index++
-		return true
-	}
-
-	// reached end of buffer
-	if !s.hasNextPage {
-		return false
-	}
-
-	s.index = 0
-	s.buffer, s.hasNextPage, s.err = s.fetch()
-	return len(s.buffer) > 0
-}
-
-func (s *secretStoreHealthIteratorImpl) Value() *SecretStoreHealth {
-	if s.index >= len(s.buffer) {
-		return nil
-	}
-	return s.buffer[s.index]
-}
-
-func (s *secretStoreHealthIteratorImpl) Err() error {
-	return s.err
-}
-
 type secretStoreIteratorImplFetchFunc func() (
 	[]SecretStore,
 	bool, error)
@@ -19642,6 +19638,51 @@ func (s *secretStoreIteratorImpl) Value() SecretStore {
 }
 
 func (s *secretStoreIteratorImpl) Err() error {
+	return s.err
+}
+
+type secretStoreHealthIteratorImplFetchFunc func() (
+	[]*SecretStoreHealth,
+	bool, error)
+type secretStoreHealthIteratorImpl struct {
+	buffer      []*SecretStoreHealth
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       secretStoreHealthIteratorImplFetchFunc
+}
+
+func newSecretStoreHealthIteratorImpl(f secretStoreHealthIteratorImplFetchFunc) *secretStoreHealthIteratorImpl {
+	return &secretStoreHealthIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (s *secretStoreHealthIteratorImpl) Next() bool {
+	if s.index < len(s.buffer)-1 {
+		s.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !s.hasNextPage {
+		return false
+	}
+
+	s.index = 0
+	s.buffer, s.hasNextPage, s.err = s.fetch()
+	return len(s.buffer) > 0
+}
+
+func (s *secretStoreHealthIteratorImpl) Value() *SecretStoreHealth {
+	if s.index >= len(s.buffer) {
+		return nil
+	}
+	return s.buffer[s.index]
+}
+
+func (s *secretStoreHealthIteratorImpl) Err() error {
 	return s.err
 }
 

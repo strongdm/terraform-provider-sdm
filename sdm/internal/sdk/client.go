@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/11.7.0"
+	defaultUserAgent = "strongdm-sdk-go/11.8.0"
 	defaultPageLimit = 50
 )
 
@@ -115,8 +115,8 @@ type Client struct {
 	roleResourcesHistory             *RoleResourcesHistory
 	roles                            *Roles
 	rolesHistory                     *RolesHistory
-	secretStoreHealths               *SecretStoreHealths
 	secretStores                     *SecretStores
+	secretStoreHealths               *SecretStoreHealths
 	secretStoresHistory              *SecretStoresHistory
 	workflowApprovers                *WorkflowApprovers
 	workflowApproversHistory         *WorkflowApproversHistory
@@ -351,12 +351,12 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		client: plumbing.NewRolesHistoryClient(client.grpcConn),
 		parent: client,
 	}
-	client.secretStoreHealths = &SecretStoreHealths{
-		client: plumbing.NewSecretStoreHealthsClient(client.grpcConn),
-		parent: client,
-	}
 	client.secretStores = &SecretStores{
 		client: plumbing.NewSecretStoresClient(client.grpcConn),
+		parent: client,
+	}
+	client.secretStoreHealths = &SecretStoreHealths{
+		client: plumbing.NewSecretStoreHealthsClient(client.grpcConn),
 		parent: client,
 	}
 	client.secretStoresHistory = &SecretStoresHistory{
@@ -715,14 +715,14 @@ func (c *Client) RolesHistory() *RolesHistory {
 	return c.rolesHistory
 }
 
-// SecretStoreHealths exposes health states for secret stores.
-func (c *Client) SecretStoreHealths() *SecretStoreHealths {
-	return c.secretStoreHealths
-}
-
 // SecretStores are servers where resource secrets (passwords, keys) are stored.
 func (c *Client) SecretStores() *SecretStores {
 	return c.secretStores
+}
+
+// SecretStoreHealths exposes health states for secret stores.
+func (c *Client) SecretStoreHealths() *SecretStoreHealths {
+	return c.secretStoreHealths
 }
 
 // SecretStoresHistory records all changes to the state of a SecretStore.

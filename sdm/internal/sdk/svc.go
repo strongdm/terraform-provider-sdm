@@ -5540,96 +5540,6 @@ func (svc *RolesHistory) List(
 	), nil
 }
 
-// SecretStoreHealths exposes health states for secret stores.
-type SecretStoreHealths struct {
-	client plumbing.SecretStoreHealthsClient
-	parent *Client
-}
-
-// List reports the health status of node to secret store pairs.
-func (svc *SecretStoreHealths) List(
-	ctx context.Context,
-	filter string,
-	args ...interface{}) (
-	SecretStoreHealthIterator,
-	error) {
-	req := &plumbing.SecretStoreHealthListRequest{}
-
-	var filterErr error
-	req.Filter, filterErr = quoteFilterArgs(filter, args...)
-	if filterErr != nil {
-		return nil, filterErr
-	}
-	req.Meta = &plumbing.ListRequestMetadata{}
-	if svc.parent.pageLimit > 0 {
-		req.Meta.Limit = int32(svc.parent.pageLimit)
-	}
-	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	return newSecretStoreHealthIteratorImpl(
-		func() (
-			[]*SecretStoreHealth,
-			bool, error) {
-			var plumbingResponse *plumbing.SecretStoreHealthListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "SecretStoreHealths.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
-			}
-			result, err := convertRepeatedSecretStoreHealthToPorcelain(plumbingResponse.SecretStoreHealths)
-			if err != nil {
-				return nil, false, err
-			}
-			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
-			return result, req.Meta.Cursor != "", nil
-		},
-	), nil
-}
-
-// Healthcheck triggers a remote healthcheck request for a secret store. It may take minutes
-// to propagate across a large network of Nodes. The call will return immediately, and the
-// updated health of the Secret Store can be retrieved via List.
-func (svc *SecretStoreHealths) Healthcheck(
-	ctx context.Context,
-	secretStoreId string) (
-	*SecretStoreHealthcheckResponse,
-	error) {
-	req := &plumbing.SecretStoreHealthcheckRequest{}
-
-	req.SecretStoreId = (secretStoreId)
-	var plumbingResponse *plumbing.SecretStoreHealthcheckResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Healthcheck(svc.parent.wrapContext(ctx, req, "SecretStoreHealths.Healthcheck"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
-	}
-
-	resp := &SecretStoreHealthcheckResponse{}
-	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
-		return nil, err
-	} else {
-		resp.RateLimit = v
-	}
-	return resp, nil
-}
-
 // SecretStores are servers where resource secrets (passwords, keys) are stored.
 type SecretStores struct {
 	client plumbing.SecretStoresClient
@@ -5870,6 +5780,96 @@ func (svc *SecretStores) List(
 			return result, req.Meta.Cursor != "", nil
 		},
 	), nil
+}
+
+// SecretStoreHealths exposes health states for secret stores.
+type SecretStoreHealths struct {
+	client plumbing.SecretStoreHealthsClient
+	parent *Client
+}
+
+// List reports the health status of node to secret store pairs.
+func (svc *SecretStoreHealths) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	SecretStoreHealthIterator,
+	error) {
+	req := &plumbing.SecretStoreHealthListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newSecretStoreHealthIteratorImpl(
+		func() (
+			[]*SecretStoreHealth,
+			bool, error) {
+			var plumbingResponse *plumbing.SecretStoreHealthListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "SecretStoreHealths.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedSecretStoreHealthToPorcelain(plumbingResponse.SecretStoreHealths)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// Healthcheck triggers a remote healthcheck request for a secret store. It may take minutes
+// to propagate across a large network of Nodes. The call will return immediately, and the
+// updated health of the Secret Store can be retrieved via List.
+func (svc *SecretStoreHealths) Healthcheck(
+	ctx context.Context,
+	secretStoreId string) (
+	*SecretStoreHealthcheckResponse,
+	error) {
+	req := &plumbing.SecretStoreHealthcheckRequest{}
+
+	req.SecretStoreId = (secretStoreId)
+	var plumbingResponse *plumbing.SecretStoreHealthcheckResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Healthcheck(svc.parent.wrapContext(ctx, req, "SecretStoreHealths.Healthcheck"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &SecretStoreHealthcheckResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
 }
 
 // SecretStoresHistory records all changes to the state of a SecretStore.

@@ -18,12 +18,13 @@ package sdm
 
 // Permission Levels, shared by all entities capable of making authenticated requests against StrongDM.
 const (
-	PermissionLevelRootAdmin       = "root-admin"
-	PermissionLevelAdmin           = "admin"
-	PermissionLevelDatabaseAdmin   = "database-admin"
-	PermissionLevelTeamLeader      = "multi-team-leader"
-	PermissionLevelUser            = "user"
-	PermissionLevelAuditor         = "auditor"
+	PermissionLevelRootAdmin     = "root-admin"
+	PermissionLevelAdmin         = "admin"
+	PermissionLevelDatabaseAdmin = "database-admin"
+	PermissionLevelTeamLeader    = "multi-team-leader"
+	PermissionLevelUser          = "user"
+	PermissionLevelAuditor       = "auditor"
+	// Deprecated: Use permissions.CheckNode()
 	PermissionLevelRelay           = "relay"
 	PermissionLevelAdminToken      = "admin-token"
 	PermissionLevelSCIMToken       = "scim-token"
@@ -86,6 +87,7 @@ const (
 	AuthProviderOneLoginSAML    = "onelogin-saml"
 	AuthProviderGenericSAML     = "generic-saml"
 	AuthProviderPingIDSAML      = "ping-identity-saml"
+	AuthProviderPingIDOIDC      = "ping-identity-oidc"
 )
 
 // Providers responsible for multi-factor authentication
@@ -105,6 +107,7 @@ const (
 	ActivityEntityTypeOrganization         = "organization"
 	ActivityEntityTypeInstallation         = "installation"
 	ActivityEntityTypeSecretStore          = "secretstore"
+	ActivityEntityTypeSecretEngine         = "secretengine"
 	ActivityEntityTypeRemoteIdentityGroup  = "remote_identity_group"
 	ActivityEntityTypeRemoteIdentity       = "remote_identity"
 	ActivityEntityTypeIdentitySet          = "identity_set"
@@ -114,6 +117,7 @@ const (
 	ActivityEntityTypeApprovalFlow         = "approval_flow"
 	ActivityEntityTypeApprovalFlowStep     = "approval_flow_step"
 	ActivityEntityTypeApprovalFlowApprover = "approval_flow_approver"
+	ActivityEntityTypeManagedSecret        = "managed_secret"
 	ActivityEntityTypeNode                 = "node"
 	ActivityEntityTypePeeringGroup         = "peering_group"
 	ActivityEntityTypePeeringGroupNode     = "peering_group_node"
@@ -244,6 +248,9 @@ const (
 	ActivityVerbSecretStoreAdded                                 = "secret store added"
 	ActivityVerbSecretStoreUpdated                               = "secret store updated"
 	ActivityVerbSecretStoreDeleted                               = "secret store deleted"
+	ActivityVerbSecretEngineAdded                                = "secret engine added"
+	ActivityVerbSecretEngineUpdated                              = "secret engine updated"
+	ActivityVerbSecretEngineDeleted                              = "secret engine deleted"
 	ActivityVerbRemoteIdentityGroupCreated                       = "remote identity group created"
 	ActivityVerbRemoteIdentityGroupUpdated                       = "remote identity group updated"
 	ActivityVerbRemoteIdentityGroupDeleted                       = "remote identity group deleted"
@@ -313,6 +320,10 @@ const (
 	ActivityVerbUserIntegrationDeauthorized                      = "user deauthorized integration"
 	ActivityVerbServiceNowTokenAdded                             = "ServiceNow token created"
 	ActivityVerbServiceNowTokenDeleted                           = "ServiceNow token deleted"
+	ActivityVerbManagedSecretCreated                             = "managed secret created"
+	ActivityVerbManagedSecretUpdated                             = "managed secret updated"
+	ActivityVerbManagedSecretExpirationTimeUpdated               = "managed secret expiration time updated"
+	ActivityVerbManagedSecretDeleted                             = "managed secret deleted"
 )
 
 // Permissions, all permissions that may be granted to an account.
@@ -327,6 +338,11 @@ const (
 	PermissionDatasourceUpdate                       = "datasource:update"
 	PermissionResourceLockDelete                     = "resourcelock:delete"
 	PermissionResourceLockList                       = "resourcelock:list"
+	PermissionSecretEngineCreate                     = "secretengine:create"
+	PermissionSecretEngineList                       = "secretengine:list"
+	PermissionSecretEngineDelete                     = "secretengine:delete"
+	PermissionSecretEngineUpdate                     = "secretengine:update"
+	PermissionSecretEngineStatus                     = "secretengine:status"
 	PermissionSecretStoreCreate                      = "secretstore:create"
 	PermissionSecretStoreList                        = "secretstore:list"
 	PermissionSecretStoreDelete                      = "secretstore:delete"
@@ -370,6 +386,7 @@ const (
 	PermissionOrgAuditOrg                            = "audit:organization"
 	PermissionOrgAuditRemoteIdentities               = "audit:remoteidentities"
 	PermissionOrgAuditRemoteIdentityGroups           = "audit:remoteidentitygroups"
+	PermissionOrgAuditSecretEngines                  = "audit:secretengines"
 	PermissionOrgAuditSecretStores                   = "audit:secretstores"
 	PermissionOrgAuditWorkflows                      = "audit:workflows"
 	PermissionOrgAuditApprovalFlows                  = "audit:approvalflows"
@@ -402,6 +419,11 @@ const (
 	PermissionBillingRead                            = "billing:read"
 	PermissionCredentialRead                         = "credential:read"
 	PermissionCredentialWrite                        = "credential:write"
+	PermissionManagedSecretCreate                    = "managedsecret:create"
+	PermissionManagedSecretList                      = "managedsecret:list"
+	PermissionManagedSecretDelete                    = "managedsecret:delete"
+	PermissionManagedSecretUpdate                    = "managedsecret:update"
+	PermissionManagedSecretRead                      = "managedsecret:read"
 )
 
 // Query Categories, all the categories of resource against which queries are logged.

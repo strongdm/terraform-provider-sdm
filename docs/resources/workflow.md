@@ -13,9 +13,9 @@ Workflows are the collection of rules that define the resources to which access 
 ## Example Usage
 
 ```hcl
-resource "sdm_workflow" "auto_grant_workflow" {
+resource "sdm_workflow" "auto_grant_approval_workflow" {
     name = "auto grant workflow example"
-    auto_grant = true
+    approval_mode = "automatic"
     enabled = true
     access_rules = jsonencode([
     {
@@ -27,7 +27,7 @@ resource "sdm_workflow" "auto_grant_workflow" {
 
 resource "sdm_workflow" "manual_approval_workflow" {
     name = "manual approval workflow example"
-    auto_grant = false
+    approval_mode = "manual"
     access_rules = jsonencode([
     {
       "type" : "redis",
