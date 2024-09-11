@@ -475,6 +475,33 @@ In addition to provided arguments above, the following attributes are returned b
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - The username to authenticate with.
+	* couchbase_database:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+		* `id` - Unique identifier of the Resource.
+		* `n_1_ql_port` - The port number for N1QL queries. Default HTTP is 8093. Default HTTPS is 18093.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port` - The port to dial to initiate a connection from the egress node to this resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - If set, TLS must be used to connect to this resource.
+		* `username` - The username to authenticate with.
+	* couchbase_web_ui:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `url` - The base address of your website without the path.
+		* `username` - The username to authenticate with.
 	* db_2_i:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.

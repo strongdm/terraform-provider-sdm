@@ -2403,6 +2403,152 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"couchbase_database": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"n_1_ql_port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The port number for N1QL queries. Default HTTP is 8093. Default HTTPS is 18093.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, TLS must be used to connect to this resource.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
+			"couchbase_web_ui": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"url": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The base address of your website without the path.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"db_2_i": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -7853,6 +7999,58 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("couchbase_database").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
+	if list := d.Get("couchbase_web_ui").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10117,6 +10315,59 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("couchbase_database").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.CouchbaseDatabase{}
+		}
+		out := &sdm.CouchbaseDatabase{
+			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:      convertStringToPlumbing(raw["hostname"]),
+			N1QlPort:      convertInt32ToPlumbing(raw["n_1_ql_port"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			Port:          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:     convertStringToPlumbing(raw["subdomain"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:   convertBoolToPlumbing(raw["tls_required"]),
+			Username:      convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("couchbase_web_ui").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.CouchbaseWebUI{}
+		}
+		out := &sdm.CouchbaseWebUI{
+			ID:            d.Id(),
+			BindInterface: convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:  convertStringToPlumbing(raw["egress_filter"]),
+			Name:          convertStringToPlumbing(raw["name"]),
+			Password:      convertStringToPlumbing(raw["password"]),
+			PortOverride:  convertInt32ToPlumbing(raw["port_override"]),
+			SecretStoreID: convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:     convertStringToPlumbing(raw["subdomain"]),
+			Tags:          convertTagsToPlumbing(raw["tags"]),
+			Url:           convertStringToPlumbing(raw["url"]),
+			Username:      convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12288,6 +12539,43 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":          seValues["username"],
 			},
 		})
+	case *sdm.CouchbaseDatabase:
+		localV, _ := localVersion.(*sdm.CouchbaseDatabase)
+		_ = localV
+		d.Set("couchbase_database", []map[string]interface{}{
+			{
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"n_1_ql_port":     (v.N1QlPort),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
+			},
+		})
+	case *sdm.CouchbaseWebUI:
+		localV, _ := localVersion.(*sdm.CouchbaseWebUI)
+		_ = localV
+		d.Set("couchbase_web_ui", []map[string]interface{}{
+			{
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"url":             (v.Url),
+				"username":        seValues["username"],
+			},
+		})
 	case *sdm.DB2I:
 		localV, _ := localVersion.(*sdm.DB2I)
 		_ = localV
@@ -14322,6 +14610,61 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          seValues["username"],
+			},
+		})
+	case *sdm.CouchbaseDatabase:
+		localV, ok := localVersion.(*sdm.CouchbaseDatabase)
+		if !ok {
+			localV = &sdm.CouchbaseDatabase{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("couchbase_database", []map[string]interface{}{
+			{
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"n_1_ql_port":     (v.N1QlPort),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        seValues["username"],
+			},
+		})
+	case *sdm.CouchbaseWebUI:
+		localV, ok := localVersion.(*sdm.CouchbaseWebUI)
+		if !ok {
+			localV = &sdm.CouchbaseWebUI{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("couchbase_web_ui", []map[string]interface{}{
+			{
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"name":            (v.Name),
+				"password":        seValues["password"],
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"url":             (v.Url),
+				"username":        seValues["username"],
 			},
 		})
 	case *sdm.DB2I:

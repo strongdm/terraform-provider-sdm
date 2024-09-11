@@ -2428,6 +2428,153 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"couchbase_database": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"n_1_ql_port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port number for N1QL queries. Default HTTP is 8093. Default HTTPS is 18093.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The password to authenticate with.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, TLS must be used to connect to this resource.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
+						"couchbase_web_ui": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The password to authenticate with.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"url": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The base address of your website without the path.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
 						"db_2_i": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -7586,6 +7733,37 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          (v.Username),
+			})
+		case *sdm.CouchbaseDatabase:
+			output[0]["couchbase_database"] = append(output[0]["couchbase_database"], entity{
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"hostname":        (v.Hostname),
+				"id":              (v.ID),
+				"n_1_ql_port":     (v.N1QlPort),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port":            (v.Port),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"tls_required":    (v.TlsRequired),
+				"username":        (v.Username),
+			})
+		case *sdm.CouchbaseWebUI:
+			output[0]["couchbase_web_ui"] = append(output[0]["couchbase_web_ui"], entity{
+				"bind_interface":  (v.BindInterface),
+				"egress_filter":   (v.EgressFilter),
+				"id":              (v.ID),
+				"name":            (v.Name),
+				"password":        (v.Password),
+				"port_override":   (v.PortOverride),
+				"secret_store_id": (v.SecretStoreID),
+				"subdomain":       (v.Subdomain),
+				"tags":            convertTagsToPorcelain(v.Tags),
+				"url":             (v.Url),
+				"username":        (v.Username),
 			})
 		case *sdm.DB2I:
 			output[0]["db_2_i"] = append(output[0]["db_2_i"], entity{

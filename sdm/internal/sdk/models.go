@@ -1759,6 +1759,66 @@ type ControlPanelVerifyJWTResponse struct {
 	ValID bool `json:"valid"`
 }
 
+type CouchbaseDatabase struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// The port number for N1QL queries. Default HTTP is 8093. Default HTTPS is 18093.
+	N1QlPort int32 `json:"n1QlPort"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+type CouchbaseWebUI struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The base address of your website without the path.
+	Url string `json:"url"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 // CreateResponseMetadata is reserved for future use.
 type CreateResponseMetadata struct {
 }
@@ -5774,6 +5834,114 @@ func (m *Cockroach) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the Cockroach.
 func (m *Cockroach) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*CouchbaseDatabase) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) GetID() string { return m.ID }
+
+// GetName returns the name of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the CouchbaseDatabase.
+func (m *CouchbaseDatabase) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*CouchbaseWebUI) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) GetID() string { return m.ID }
+
+// GetName returns the name of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the CouchbaseWebUI.
+func (m *CouchbaseWebUI) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*DB2I) isOneOf_Resource() {}

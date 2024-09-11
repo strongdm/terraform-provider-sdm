@@ -422,6 +422,30 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "couchbase_database",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"n_1_ql_port", `443`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"tls_required", `true`},
+				{"username", `"username"`},
+			},
+		},
+		{
+			resource: "couchbase_web_ui",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"subdomain", `"subdomain"`},
+				{"url", `"https://app.strongdm.com"`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "db_2_i",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
@@ -1658,6 +1682,32 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+		{
+			resource: "couchbase_database",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"n_1_ql_port", `443`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"tls_required", `true`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+		{
+			resource: "couchbase_web_ui",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"subdomain", `"subdomain"`},
+				{"url", `"https://app.strongdm.com"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},

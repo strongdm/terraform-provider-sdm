@@ -5180,6 +5180,146 @@ func convertRepeatedControlPanelVerifyJWTResponseToPorcelain(plumbings []*proto.
 	}
 	return items, nil
 }
+func convertCouchbaseDatabaseToPorcelain(plumbing *proto.CouchbaseDatabase) (*CouchbaseDatabase, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CouchbaseDatabase{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.N1QlPort = plumbing.N1QlPort
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TlsRequired = plumbing.TlsRequired
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertCouchbaseDatabaseToPlumbing(porcelain *CouchbaseDatabase) *proto.CouchbaseDatabase {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CouchbaseDatabase{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.N1QlPort = (porcelain.N1QlPort)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedCouchbaseDatabaseToPlumbing(
+	porcelains []*CouchbaseDatabase,
+) []*proto.CouchbaseDatabase {
+	var items []*proto.CouchbaseDatabase
+	for _, porcelain := range porcelains {
+		items = append(items, convertCouchbaseDatabaseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCouchbaseDatabaseToPorcelain(plumbings []*proto.CouchbaseDatabase) (
+	[]*CouchbaseDatabase,
+	error,
+) {
+	var items []*CouchbaseDatabase
+	for _, plumbing := range plumbings {
+		if v, err := convertCouchbaseDatabaseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertCouchbaseWebUIToPorcelain(plumbing *proto.CouchbaseWebUI) (*CouchbaseWebUI, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CouchbaseWebUI{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Url = plumbing.Url
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertCouchbaseWebUIToPlumbing(porcelain *CouchbaseWebUI) *proto.CouchbaseWebUI {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CouchbaseWebUI{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedCouchbaseWebUIToPlumbing(
+	porcelains []*CouchbaseWebUI,
+) []*proto.CouchbaseWebUI {
+	var items []*proto.CouchbaseWebUI
+	for _, porcelain := range porcelains {
+		items = append(items, convertCouchbaseWebUIToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCouchbaseWebUIToPorcelain(plumbings []*proto.CouchbaseWebUI) (
+	[]*CouchbaseWebUI,
+	error,
+) {
+	var items []*CouchbaseWebUI
+	for _, plumbing := range plumbings {
+		if v, err := convertCouchbaseWebUIToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertCreateResponseMetadataToPorcelain(plumbing *proto.CreateResponseMetadata) (*CreateResponseMetadata, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -12368,6 +12508,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Clustrix{Clustrix: convertClustrixToPlumbing(v)}
 	case *Cockroach:
 		plumbing.Resource = &proto.Resource_Cockroach{Cockroach: convertCockroachToPlumbing(v)}
+	case *CouchbaseDatabase:
+		plumbing.Resource = &proto.Resource_CouchbaseDatabase{CouchbaseDatabase: convertCouchbaseDatabaseToPlumbing(v)}
+	case *CouchbaseWebUI:
+		plumbing.Resource = &proto.Resource_CouchbaseWebUi{CouchbaseWebUi: convertCouchbaseWebUIToPlumbing(v)}
 	case *DB2I:
 		plumbing.Resource = &proto.Resource_Db_2I{Db_2I: convertDB2IToPlumbing(v)}
 	case *DB2LUW:
@@ -12570,6 +12714,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetCockroach() != nil {
 		return convertCockroachToPorcelain(plumbing.GetCockroach())
+	}
+	if plumbing.GetCouchbaseDatabase() != nil {
+		return convertCouchbaseDatabaseToPorcelain(plumbing.GetCouchbaseDatabase())
+	}
+	if plumbing.GetCouchbaseWebUi() != nil {
+		return convertCouchbaseWebUIToPorcelain(plumbing.GetCouchbaseWebUi())
 	}
 	if plumbing.GetDb_2I() != nil {
 		return convertDB2IToPorcelain(plumbing.GetDb_2I())
