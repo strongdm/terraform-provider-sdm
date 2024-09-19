@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/11.9.0"
+const userAgent = "terraform-provider-sdm/11.11.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -57,6 +57,7 @@ func Provider() *schema.Provider {
 			"sdm_peering_group_resource":     resourcePeeringGroupResource(),
 			"sdm_peering_group":              resourcePeeringGroup(),
 			"sdm_policy":                     resourcePolicy(),
+			"sdm_proxy_cluster_key":          resourceProxyClusterKey(),
 			"sdm_remote_identity":            resourceRemoteIdentity(),
 			"sdm_resource":                   resourceResource(),
 			"sdm_role":                       resourceRole(),
@@ -80,6 +81,7 @@ func Provider() *schema.Provider {
 			"sdm_peering_group_resource":     dataSourcePeeringGroupResource(),
 			"sdm_peering_group":              dataSourcePeeringGroup(),
 			"sdm_policy":                     dataSourcePolicy(),
+			"sdm_proxy_cluster_key":          dataSourceProxyClusterKey(),
 			"sdm_remote_identity":            dataSourceRemoteIdentity(),
 			"sdm_remote_identity_group":      dataSourceRemoteIdentityGroup(),
 			"sdm_resource":                   dataSourceResource(),

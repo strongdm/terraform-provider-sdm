@@ -113,6 +113,42 @@ func dataSourceNode() *schema.Resource {
 								},
 							},
 						},
+						"proxy_cluster": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "ProxyCluster represents a cluster of StrongDM proxies.",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The public hostname/port tuple at which the proxy cluster will be accessible to clients.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Proxy Cluster.",
+									},
+									"maintenance_window": {
+										Type:        schema.TypeList,
+										Elem:        nodeMaintenanceWindowElemType,
+										Optional:    true,
+										Description: "Maintenance Windows define when this node is allowed to restart. If a node is requested to restart, it will check each window to determine if any of them permit it to restart, and if any do, it will. This check is repeated per window until the restart is successfully completed.  If not set here, may be set on the command line or via an environment variable on the process itself; any server setting will take precedence over local settings. This setting is ineffective for nodes below version 38.44.0.  If this setting is not applied via this remote configuration or via local configuration, the default setting is used: always allow restarts if serving no connections, and allow a restart even if serving connections between 7-8 UTC, any day.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the proxy cluster. Names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"relay": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -234,6 +270,14 @@ func dataSourceNodeList(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 				"name":               (v.Name),
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"version":            (v.Version),
+			})
+		case *sdm.ProxyCluster:
+			output[0]["proxy_cluster"] = append(output[0]["proxy_cluster"], entity{
+				"address":            (v.Address),
+				"id":                 (v.ID),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Relay:
 			output[0]["relay"] = append(output[0]["relay"], entity{

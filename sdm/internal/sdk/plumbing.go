@@ -9065,6 +9065,8 @@ func convertNodeToPlumbing(porcelain Node) *proto.Node {
 	switch v := porcelain.(type) {
 	case *Gateway:
 		plumbing.Node = &proto.Node_Gateway{Gateway: convertGatewayToPlumbing(v)}
+	case *ProxyCluster:
+		plumbing.Node = &proto.Node_ProxyCluster{ProxyCluster: convertProxyClusterToPlumbing(v)}
 	case *Relay:
 		plumbing.Node = &proto.Node_Relay{Relay: convertRelayToPlumbing(v)}
 	}
@@ -9074,6 +9076,9 @@ func convertNodeToPlumbing(porcelain Node) *proto.Node {
 func convertNodeToPorcelain(plumbing *proto.Node) (Node, error) {
 	if plumbing.GetGateway() != nil {
 		return convertGatewayToPorcelain(plumbing.GetGateway())
+	}
+	if plumbing.GetProxyCluster() != nil {
+		return convertProxyClusterToPorcelain(plumbing.GetProxyCluster())
 	}
 	if plumbing.GetRelay() != nil {
 		return convertRelayToPorcelain(plumbing.GetRelay())
@@ -9516,6 +9521,7 @@ func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization
 	}
 	porcelain.DeviceTrustEnabled = plumbing.DeviceTrustEnabled
 	porcelain.DeviceTrustProvider = plumbing.DeviceTrustProvider
+	porcelain.EnforceSingleSession = plumbing.EnforceSingleSession
 	if v, err := convertDurationToPorcelain(plumbing.IdleTimeout); err != nil {
 		return nil, fmt.Errorf("error converting field IdleTimeout: %v", err)
 	} else {
@@ -9567,6 +9573,7 @@ func convertOrganizationToPlumbing(porcelain *Organization) *proto.Organization 
 	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
 	plumbing.DeviceTrustEnabled = (porcelain.DeviceTrustEnabled)
 	plumbing.DeviceTrustProvider = (porcelain.DeviceTrustProvider)
+	plumbing.EnforceSingleSession = (porcelain.EnforceSingleSession)
 	plumbing.IdleTimeout = convertDurationToPlumbing(porcelain.IdleTimeout)
 	plumbing.IdleTimeoutEnabled = (porcelain.IdleTimeoutEnabled)
 	plumbing.Kind = (porcelain.Kind)
@@ -11001,6 +11008,285 @@ func convertRepeatedPrestoToPorcelain(plumbings []*proto.Presto) (
 	var items []*Presto
 	for _, plumbing := range plumbings {
 		if v, err := convertPrestoToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertProxyClusterToPorcelain(plumbing *proto.ProxyCluster) (*ProxyCluster, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ProxyCluster{}
+	porcelain.Address = plumbing.Address
+	porcelain.ID = plumbing.Id
+	if v, err := convertRepeatedNodeMaintenanceWindowToPorcelain(plumbing.MaintenanceWindows); err != nil {
+		return nil, fmt.Errorf("error converting field MaintenanceWindows: %v", err)
+	} else {
+		porcelain.MaintenanceWindows = v
+	}
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertProxyClusterToPlumbing(porcelain *ProxyCluster) *proto.ProxyCluster {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ProxyCluster{}
+	plumbing.Address = (porcelain.Address)
+	plumbing.Id = (porcelain.ID)
+	plumbing.MaintenanceWindows = convertRepeatedNodeMaintenanceWindowToPlumbing(porcelain.MaintenanceWindows)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedProxyClusterToPlumbing(
+	porcelains []*ProxyCluster,
+) []*proto.ProxyCluster {
+	var items []*proto.ProxyCluster
+	for _, porcelain := range porcelains {
+		items = append(items, convertProxyClusterToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedProxyClusterToPorcelain(plumbings []*proto.ProxyCluster) (
+	[]*ProxyCluster,
+	error,
+) {
+	var items []*ProxyCluster
+	for _, plumbing := range plumbings {
+		if v, err := convertProxyClusterToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertProxyClusterKeyToPorcelain(plumbing *proto.ProxyClusterKey) (*ProxyClusterKey, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ProxyClusterKey{}
+	if v, err := convertTimestampToPorcelain(plumbing.CreatedAt); err != nil {
+		return nil, fmt.Errorf("error converting field CreatedAt: %v", err)
+	} else {
+		porcelain.CreatedAt = v
+	}
+	porcelain.ID = plumbing.Id
+	if v, err := convertTimestampToPorcelain(plumbing.LastUsedAt); err != nil {
+		return nil, fmt.Errorf("error converting field LastUsedAt: %v", err)
+	} else {
+		porcelain.LastUsedAt = v
+	}
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	return porcelain, nil
+}
+
+func convertProxyClusterKeyToPlumbing(porcelain *ProxyClusterKey) *proto.ProxyClusterKey {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ProxyClusterKey{}
+	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
+	plumbing.Id = (porcelain.ID)
+	plumbing.LastUsedAt = convertTimestampToPlumbing(porcelain.LastUsedAt)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	return plumbing
+}
+func convertRepeatedProxyClusterKeyToPlumbing(
+	porcelains []*ProxyClusterKey,
+) []*proto.ProxyClusterKey {
+	var items []*proto.ProxyClusterKey
+	for _, porcelain := range porcelains {
+		items = append(items, convertProxyClusterKeyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedProxyClusterKeyToPorcelain(plumbings []*proto.ProxyClusterKey) (
+	[]*ProxyClusterKey,
+	error,
+) {
+	var items []*ProxyClusterKey
+	for _, plumbing := range plumbings {
+		if v, err := convertProxyClusterKeyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertProxyClusterKeyCreateResponseToPorcelain(plumbing *proto.ProxyClusterKeyCreateResponse) (*ProxyClusterKeyCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ProxyClusterKeyCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertProxyClusterKeyToPorcelain(plumbing.ProxyClusterKey); err != nil {
+		return nil, fmt.Errorf("error converting field ProxyClusterKey: %v", err)
+	} else {
+		porcelain.ProxyClusterKey = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	porcelain.SecretKey = plumbing.SecretKey
+	return porcelain, nil
+}
+
+func convertProxyClusterKeyCreateResponseToPlumbing(porcelain *ProxyClusterKeyCreateResponse) *proto.ProxyClusterKeyCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ProxyClusterKeyCreateResponse{}
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.ProxyClusterKey = convertProxyClusterKeyToPlumbing(porcelain.ProxyClusterKey)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretKey = (porcelain.SecretKey)
+	return plumbing
+}
+func convertRepeatedProxyClusterKeyCreateResponseToPlumbing(
+	porcelains []*ProxyClusterKeyCreateResponse,
+) []*proto.ProxyClusterKeyCreateResponse {
+	var items []*proto.ProxyClusterKeyCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertProxyClusterKeyCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedProxyClusterKeyCreateResponseToPorcelain(plumbings []*proto.ProxyClusterKeyCreateResponse) (
+	[]*ProxyClusterKeyCreateResponse,
+	error,
+) {
+	var items []*ProxyClusterKeyCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertProxyClusterKeyCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertProxyClusterKeyDeleteResponseToPorcelain(plumbing *proto.ProxyClusterKeyDeleteResponse) (*ProxyClusterKeyDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ProxyClusterKeyDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertProxyClusterKeyDeleteResponseToPlumbing(porcelain *ProxyClusterKeyDeleteResponse) *proto.ProxyClusterKeyDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ProxyClusterKeyDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedProxyClusterKeyDeleteResponseToPlumbing(
+	porcelains []*ProxyClusterKeyDeleteResponse,
+) []*proto.ProxyClusterKeyDeleteResponse {
+	var items []*proto.ProxyClusterKeyDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertProxyClusterKeyDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedProxyClusterKeyDeleteResponseToPorcelain(plumbings []*proto.ProxyClusterKeyDeleteResponse) (
+	[]*ProxyClusterKeyDeleteResponse,
+	error,
+) {
+	var items []*ProxyClusterKeyDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertProxyClusterKeyDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertProxyClusterKeyGetResponseToPorcelain(plumbing *proto.ProxyClusterKeyGetResponse) (*ProxyClusterKeyGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ProxyClusterKeyGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertProxyClusterKeyToPorcelain(plumbing.ProxyClusterKey); err != nil {
+		return nil, fmt.Errorf("error converting field ProxyClusterKey: %v", err)
+	} else {
+		porcelain.ProxyClusterKey = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertProxyClusterKeyGetResponseToPlumbing(porcelain *ProxyClusterKeyGetResponse) *proto.ProxyClusterKeyGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ProxyClusterKeyGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.ProxyClusterKey = convertProxyClusterKeyToPlumbing(porcelain.ProxyClusterKey)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedProxyClusterKeyGetResponseToPlumbing(
+	porcelains []*ProxyClusterKeyGetResponse,
+) []*proto.ProxyClusterKeyGetResponse {
+	var items []*proto.ProxyClusterKeyGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertProxyClusterKeyGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedProxyClusterKeyGetResponseToPorcelain(plumbings []*proto.ProxyClusterKeyGetResponse) (
+	[]*ProxyClusterKeyGetResponse,
+	error,
+) {
+	var items []*ProxyClusterKeyGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertProxyClusterKeyGetResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -15567,6 +15853,7 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.LastName = plumbing.LastName
 	porcelain.ManagedBy = plumbing.ManagedBy
+	porcelain.Password = plumbing.Password
 	porcelain.PermissionLevel = plumbing.PermissionLevelRW
 	porcelain.Suspended = plumbing.SuspendedRO
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15588,6 +15875,7 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 	plumbing.Id = (porcelain.ID)
 	plumbing.LastName = (porcelain.LastName)
 	plumbing.ManagedBy = (porcelain.ManagedBy)
+	plumbing.Password = (porcelain.Password)
 	plumbing.PermissionLevelRW = (porcelain.PermissionLevel)
 	plumbing.SuspendedRO = (porcelain.Suspended)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -19158,6 +19446,51 @@ func (p *policyHistoryIteratorImpl) Value() *PolicyHistory {
 }
 
 func (p *policyHistoryIteratorImpl) Err() error {
+	return p.err
+}
+
+type proxyClusterKeyIteratorImplFetchFunc func() (
+	[]*ProxyClusterKey,
+	bool, error)
+type proxyClusterKeyIteratorImpl struct {
+	buffer      []*ProxyClusterKey
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       proxyClusterKeyIteratorImplFetchFunc
+}
+
+func newProxyClusterKeyIteratorImpl(f proxyClusterKeyIteratorImplFetchFunc) *proxyClusterKeyIteratorImpl {
+	return &proxyClusterKeyIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (p *proxyClusterKeyIteratorImpl) Next() bool {
+	if p.index < len(p.buffer)-1 {
+		p.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !p.hasNextPage {
+		return false
+	}
+
+	p.index = 0
+	p.buffer, p.hasNextPage, p.err = p.fetch()
+	return len(p.buffer) > 0
+}
+
+func (p *proxyClusterKeyIteratorImpl) Value() *ProxyClusterKey {
+	if p.index >= len(p.buffer) {
+		return nil
+	}
+	return p.buffer[p.index]
+}
+
+func (p *proxyClusterKeyIteratorImpl) Err() error {
 	return p.err
 }
 

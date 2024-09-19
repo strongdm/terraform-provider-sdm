@@ -89,6 +89,40 @@ func resourceNode() *schema.Resource {
 					},
 				},
 			},
+			"proxy_cluster": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "ProxyCluster represents a cluster of StrongDM proxies.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							ForceNew:    true,
+							Description: "The public hostname/port tuple at which the proxy cluster will be accessible to clients.",
+						},
+						"maintenance_window": {
+							Type:        schema.TypeList,
+							Elem:        nodeMaintenanceWindowElemType,
+							Optional:    true,
+							Description: "Maintenance Windows define when this node is allowed to restart. If a node is requested to restart, it will check each window to determine if any of them permit it to restart, and if any do, it will. This check is repeated per window until the restart is successfully completed.  If not set here, may be set on the command line or via an environment variable on the process itself; any server setting will take precedence over local settings. This setting is ineffective for nodes below version 38.44.0.  If this setting is not applied via this remote configuration or via local configuration, the default setting is used: always allow restarts if serving no connections, and allow a restart even if serving connections between 7-8 UTC, any day.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Unique human-readable name of the proxy cluster. Names must include only letters, numbers, and hyphens (no spaces, underscores, or other special characters). Generated if not provided on create.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"relay": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -165,6 +199,20 @@ func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 		}
 		return out
 	}
+	if list := d.Get("proxy_cluster").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.ProxyCluster{}
+		}
+		out := &sdm.ProxyCluster{
+			ID:                 d.Id(),
+			Address:            convertStringToPlumbing(raw["address"]),
+			MaintenanceWindows: convertRepeatedNodeMaintenanceWindowToPlumbing(raw["maintenance_window"]),
+			Name:               convertStringToPlumbing(raw["name"]),
+			Tags:               convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("relay").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -205,6 +253,17 @@ func resourceNodeCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"version":            (v.Version),
 				"token":              resp.Token,
+			},
+		})
+	case *sdm.ProxyCluster:
+		localV, _ := localVersion.(*sdm.ProxyCluster)
+		_ = localV
+		d.Set("proxy_cluster", []map[string]interface{}{
+			{
+				"address":            (v.Address),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Relay:
@@ -256,6 +315,20 @@ func resourceNodeRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"version":            (v.Version),
 				"token":              d.Get("gateway.0.token"),
+			},
+		})
+	case *sdm.ProxyCluster:
+		localV, ok := localVersion.(*sdm.ProxyCluster)
+		if !ok {
+			localV = &sdm.ProxyCluster{}
+		}
+		_ = localV
+		d.Set("proxy_cluster", []map[string]interface{}{
+			{
+				"address":            (v.Address),
+				"maintenance_window": convertRepeatedNodeMaintenanceWindowToPorcelain(v.MaintenanceWindows),
+				"name":               (v.Name),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Relay:

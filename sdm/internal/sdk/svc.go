@@ -4155,6 +4155,208 @@ func (svc *PoliciesHistory) List(
 	), nil
 }
 
+// Proxy Cluster Keys are authentication keys for all proxies within a cluster.
+// The proxies within a cluster share the same key. One cluster can have
+// multiple keys in order to facilitate key rotation.
+type ProxyClusterKeys struct {
+	client plumbing.ProxyClusterKeysClient
+	parent *Client
+}
+
+// A SnapshotProxyClusterKeys exposes the read only methods of the ProxyClusterKeys
+// service for historical queries.
+type SnapshotProxyClusterKeys interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*ProxyClusterKeyGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		ProxyClusterKeyIterator,
+		error)
+}
+
+// Create registers a new ProxyClusterKey.
+func (svc *ProxyClusterKeys) Create(
+	ctx context.Context,
+	proxyClusterKey *ProxyClusterKey) (
+	*ProxyClusterKeyCreateResponse,
+	error) {
+	req := &plumbing.ProxyClusterKeyCreateRequest{}
+
+	req.ProxyClusterKey = convertProxyClusterKeyToPlumbing(proxyClusterKey)
+	var plumbingResponse *plumbing.ProxyClusterKeyCreateResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.Create"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ProxyClusterKeyCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertProxyClusterKeyToPorcelain(plumbingResponse.ProxyClusterKey); err != nil {
+		return nil, err
+	} else {
+		resp.ProxyClusterKey = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	resp.SecretKey = (plumbingResponse.SecretKey)
+	return resp, nil
+}
+
+// Get reads one ProxyClusterKey by ID.
+func (svc *ProxyClusterKeys) Get(
+	ctx context.Context,
+	id string) (
+	*ProxyClusterKeyGetResponse,
+	error) {
+	req := &plumbing.ProxyClusterKeyGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	var plumbingResponse *plumbing.ProxyClusterKeyGetResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.Get"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ProxyClusterKeyGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertProxyClusterKeyToPorcelain(plumbingResponse.ProxyClusterKey); err != nil {
+		return nil, err
+	} else {
+		resp.ProxyClusterKey = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a ProxyClusterKey by ID.
+func (svc *ProxyClusterKeys) Delete(
+	ctx context.Context,
+	id string) (
+	*ProxyClusterKeyDeleteResponse,
+	error) {
+	req := &plumbing.ProxyClusterKeyDeleteRequest{}
+
+	req.Id = (id)
+	var plumbingResponse *plumbing.ProxyClusterKeyDeleteResponse
+	var err error
+	i := 0
+	for {
+		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.Delete"), req)
+		if err != nil {
+			if !svc.parent.shouldRetry(i, err) {
+				return nil, convertErrorToPorcelain(err)
+			}
+			i++
+			svc.parent.jitterSleep(i)
+			continue
+		}
+		break
+	}
+
+	resp := &ProxyClusterKeyDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of ProxyClusterKeys matching a given set of criteria.
+func (svc *ProxyClusterKeys) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ProxyClusterKeyIterator,
+	error) {
+	req := &plumbing.ProxyClusterKeyListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newProxyClusterKeyIteratorImpl(
+		func() (
+			[]*ProxyClusterKey,
+			bool, error) {
+			var plumbingResponse *plumbing.ProxyClusterKeyListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedProxyClusterKeyToPorcelain(plumbingResponse.ProxyClusterKeys)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.

@@ -3298,6 +3298,30 @@ func (m *Gateway) GetName() string {
 func (m *Gateway) SetName(v string) {
 	m.Name = v
 }
+func (*ProxyCluster) isOneOf_Node() {}
+
+// GetID returns the unique identifier of the ProxyCluster.
+func (m *ProxyCluster) GetID() string { return m.ID }
+
+// GetTags returns the tags of the ProxyCluster.
+func (m *ProxyCluster) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ProxyCluster.
+func (m *ProxyCluster) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the ProxyCluster.
+func (m *ProxyCluster) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ProxyCluster.
+func (m *ProxyCluster) SetName(v string) {
+	m.Name = v
+}
 func (*Relay) isOneOf_Node() {}
 
 // GetID returns the unique identifier of the Relay.
@@ -3438,6 +3462,8 @@ type Organization struct {
 	DeviceTrustEnabled bool `json:"deviceTrustEnabled"`
 	// The Organization's device trust provider, one of the DeviceTrustProvider constants.
 	DeviceTrustProvider string `json:"deviceTrustProvider"`
+	// Indicates if the Organization enforces a single session per user for the CLI and AdminUI.
+	EnforceSingleSession bool `json:"enforceSingleSession"`
 	// The Organization's idle timeout, if enabled.
 	IdleTimeout time.Duration `json:"idleTimeout"`
 	// Indicates if the Organization has idle timeouts enabled.
@@ -3781,6 +3807,79 @@ type Presto struct {
 	TlsRequired bool `json:"tlsRequired"`
 	// The username to authenticate with.
 	Username string `json:"username"`
+}
+
+// ProxyCluster represents a cluster of StrongDM proxies.
+type ProxyCluster struct {
+	// The public hostname/port tuple at which the proxy cluster will be
+	// accessible to clients.
+	Address string `json:"address"`
+	// Unique identifier of the Proxy Cluster.
+	ID string `json:"id"`
+	// Maintenance Windows define when this node is allowed to restart. If a node
+	// is requested to restart, it will check each window to determine if any of
+	// them permit it to restart, and if any do, it will. This check is repeated
+	// per window until the restart is successfully completed.
+	//
+	// If not set here, may be set on the command line or via an environment variable
+	// on the process itself; any server setting will take precedence over local
+	// settings. This setting is ineffective for nodes below version 38.44.0.
+	//
+	// If this setting is not applied via this remote configuration or via local
+	// configuration, the default setting is used: always allow restarts if serving
+	// no connections, and allow a restart even if serving connections between 7-8 UTC, any day.
+	MaintenanceWindows []*NodeMaintenanceWindow `json:"maintenanceWindows"`
+	// Unique human-readable name of the proxy cluster. Names must
+	// include only letters, numbers, and hyphens (no spaces, underscores, or
+	// other special characters). Generated if not provided on create.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// Proxy Cluster Keys are authentication keys for all proxies within a cluster.
+// The proxies within a cluster share the same key. One cluster can have
+// multiple keys in order to facilitate key rotation.
+type ProxyClusterKey struct {
+	// The timestamp when this key was created.
+	CreatedAt time.Time `json:"createdAt"`
+	// Unique identifier of the Relay.
+	ID string `json:"id"`
+	// The timestamp when this key was last used, if at all.
+	LastUsedAt time.Time `json:"lastUsedAt"`
+	// The ID of the proxy cluster which this key authenticates to.
+	ProxyClusterID string `json:"proxyClusterId"`
+}
+
+// ProxyClusterKeyCreateResponse reports how the ProxyClusterKeys were created in the system.
+type ProxyClusterKeyCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// The created ProxyClusterKey.
+	ProxyClusterKey *ProxyClusterKey `json:"proxyClusterKey"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The secret key component of this key. It must be saved upon creation
+	// because it will not be available for retrieval later.
+	SecretKey string `json:"secretKey"`
+}
+
+// ProxyClusterKeyDeleteResponse returns information about a ProxyClusterKey that was deleted.
+type ProxyClusterKeyDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ProxyClusterKeyGetResponse returns a requested ProxyClusterKey.
+type ProxyClusterKeyGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The requested ProxyClusterKey.
+	ProxyClusterKey *ProxyClusterKey `json:"proxyClusterKey"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // A Query is a record of a single client request to a resource, such as a SQL query.
@@ -10379,6 +10478,9 @@ type User struct {
 	LastName string `json:"lastName"`
 	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	ManagedBy string `json:"managedBy"`
+	// Password is a write-only field that can be used to set the user's password.
+	// Currently only supported for update.
+	Password string `json:"password"`
 	// PermissionLevel is the user's permission level e.g. admin, DBA, user.
 	PermissionLevel string `json:"permissionLevel"`
 	// Suspended is a read only field for the User's suspended state.
@@ -11396,6 +11498,23 @@ type PolicyHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *PolicyHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ProxyClusterKeyIterator provides read access to a list of ProxyClusterKey.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    proxyClusterKey := iterator.Value()
+//	    // ...
+//	}
+type ProxyClusterKeyIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ProxyClusterKey
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

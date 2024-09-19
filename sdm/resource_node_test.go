@@ -822,3 +822,20 @@ func createRelaysWithPrefix(prefix string, count int) ([]sdm.Node, error) {
 	}
 	return nodes, nil
 }
+
+func createProxyClusterWithPrefix(prefix string) (*sdm.ProxyCluster, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	createResp, err := client.Nodes().Create(ctx, &sdm.ProxyCluster{
+		Name:    randomWithPrefix(prefix),
+		Address: "proxy:8443",
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to create proxy cluster: %w", err)
+	}
+	return createResp.Node.(*sdm.ProxyCluster), nil
+}

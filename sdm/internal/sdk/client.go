@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/11.9.0"
+	defaultUserAgent = "strongdm-sdk-go/11.11.0"
 	defaultPageLimit = 50
 )
 
@@ -103,6 +103,7 @@ type Client struct {
 	peeringGroups                    *PeeringGroups
 	policies                         *Policies
 	policiesHistory                  *PoliciesHistory
+	proxyClusterKeys                 *ProxyClusterKeys
 	queries                          *Queries
 	remoteIdentities                 *RemoteIdentities
 	remoteIdentitiesHistory          *RemoteIdentitiesHistory
@@ -301,6 +302,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.policiesHistory = &PoliciesHistory{
 		client: plumbing.NewPoliciesHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.proxyClusterKeys = &ProxyClusterKeys{
+		client: plumbing.NewProxyClusterKeysClient(client.grpcConn),
 		parent: client,
 	}
 	client.queries = &Queries{
@@ -647,6 +652,13 @@ func (c *Client) PoliciesHistory() *PoliciesHistory {
 	return c.policiesHistory
 }
 
+// Proxy Cluster Keys are authentication keys for all proxies within a cluster.
+// The proxies within a cluster share the same key. One cluster can have
+// multiple keys in order to facilitate key rotation.
+func (c *Client) ProxyClusterKeys() *ProxyClusterKeys {
+	return c.proxyClusterKeys
+}
+
 // A Query is a record of a single client request to a resource, such as a SQL query.
 // Long-running SSH, RDP, or Kubernetes interactive sessions also count as queries.
 // The Queries service is read-only.
@@ -836,6 +848,10 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewPoliciesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.proxyClusterKeys = &ProxyClusterKeys{
+		client: plumbing.NewProxyClusterKeysClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.remoteIdentities = &RemoteIdentities{
 		client: plumbing.NewRemoteIdentitiesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -953,6 +969,13 @@ func (c *SnapshotClient) Nodes() SnapshotNodes {
 // control for the users of an organization.
 func (c *SnapshotClient) Policies() SnapshotPolicies {
 	return c.client.policies
+}
+
+// Proxy Cluster Keys are authentication keys for all proxies within a cluster.
+// The proxies within a cluster share the same key. One cluster can have
+// multiple keys in order to facilitate key rotation.
+func (c *SnapshotClient) ProxyClusterKeys() SnapshotProxyClusterKeys {
+	return c.client.proxyClusterKeys
 }
 
 // RemoteIdentities assign a resource directly to an account, giving the account the permission to connect to that resource.
