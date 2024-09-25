@@ -99,7 +99,6 @@ func resourceNode() *schema.Resource {
 						"address": {
 							Type:        schema.TypeString,
 							Required:    true,
-							ForceNew:    true,
 							Description: "The public hostname/port tuple at which the proxy cluster will be accessible to clients.",
 						},
 						"maintenance_window": {
