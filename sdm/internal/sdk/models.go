@@ -68,6 +68,8 @@ type AKS struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -99,6 +101,8 @@ type AKSBasicAuth struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -140,6 +144,8 @@ type AKSServiceAccount struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -169,6 +175,8 @@ type AKSServiceAccountUserImpersonation struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -204,6 +212,8 @@ type AKSUserImpersonation struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -229,6 +239,8 @@ type AWS struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The role to assume after logging in.
 	RoleArn string `json:"roleArn"`
 	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -281,6 +293,8 @@ type AWSConsole struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -316,6 +330,8 @@ type AWSConsoleStaticKeyPair struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -871,6 +887,8 @@ type AmazonEKS struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -920,6 +938,8 @@ type AmazonEKSInstanceProfile struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -955,6 +975,8 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -992,6 +1014,8 @@ type AmazonEKSUserImpersonation struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -1025,6 +1049,8 @@ type AmazonES struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -1060,6 +1086,8 @@ type AmazonMQAMQP091 struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1277,6 +1305,8 @@ type Athena struct {
 	Output string `json:"output"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -1314,6 +1344,8 @@ type AuroraMysql struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -1351,6 +1383,8 @@ type AuroraPostgres struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1382,6 +1416,8 @@ type AuroraPostgresIAM struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
 	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
@@ -1413,6 +1449,8 @@ type Azure struct {
 	Password string `json:"password"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1440,6 +1478,8 @@ type AzureCertificate struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1471,6 +1511,8 @@ type AzureMysql struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -1508,6 +1550,8 @@ type AzurePostgres struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1541,6 +1585,8 @@ type AzurePostgresManagedIdentity struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1583,6 +1629,8 @@ type BigQuery struct {
 	PrivateKey string `json:"privateKey"`
 	// The project to connect to.
 	Project string `json:"project"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1612,6 +1660,8 @@ type Cassandra struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1647,6 +1697,8 @@ type Citus struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1678,6 +1730,8 @@ type Clustrix struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -1715,6 +1769,8 @@ type Cockroach struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1780,6 +1836,8 @@ type CouchbaseDatabase struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1807,6 +1865,8 @@ type CouchbaseWebUI struct {
 	Password string `json:"password"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1877,6 +1937,8 @@ type DB2I struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1910,6 +1972,8 @@ type DB2LUW struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1958,6 +2022,8 @@ type DocumentDBHost struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1989,6 +2055,8 @@ type DocumentDBReplicaSet struct {
 	Password string `json:"password"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -2020,6 +2088,8 @@ type Druid struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2047,6 +2117,8 @@ type DynamoDB struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The region to authenticate requests against e.g. us-east-1
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -2082,6 +2154,8 @@ type Elastic struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2113,6 +2187,8 @@ type ElasticacheRedis struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2140,6 +2216,8 @@ type GCP struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Space separated scopes that this login should assume into when authenticating.
 	Scopes string `json:"scopes"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -2263,6 +2341,8 @@ type GoogleGKE struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// The service account key to authenticate with.
@@ -2292,6 +2372,8 @@ type GoogleGKEUserImpersonation struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// The service account key to authenticate with.
@@ -2325,6 +2407,8 @@ type Greenplum struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2356,6 +2440,8 @@ type HTTPAuth struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2387,6 +2473,8 @@ type HTTPBasicAuth struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2418,6 +2506,8 @@ type HTTPNoAuth struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2661,6 +2751,8 @@ type Kubernetes struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2692,6 +2784,8 @@ type KubernetesBasicAuth struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2733,6 +2827,8 @@ type KubernetesServiceAccount struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2762,6 +2858,8 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2797,6 +2895,8 @@ type KubernetesUserImpersonation struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2834,6 +2934,8 @@ type MTLSMysql struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -2879,6 +2981,8 @@ type MTLSPostgres struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Server name for TLS verification (unverified by StrongDM if empty)
@@ -2912,6 +3016,8 @@ type Maria struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -2943,6 +3049,8 @@ type Memcached struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2972,6 +3080,8 @@ type Memsql struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -3007,6 +3117,8 @@ type MongoHost struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3042,6 +3154,8 @@ type MongoLegacyHost struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3079,6 +3193,8 @@ type MongoLegacyReplicaset struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -3116,6 +3232,8 @@ type MongoReplicaSet struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The name of the mongo replicaset.
 	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -3149,6 +3267,8 @@ type MongoShardedCluster struct {
 	Password string `json:"password"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3182,6 +3302,8 @@ type Mysql struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -3213,6 +3335,8 @@ type Neptune struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3240,6 +3364,8 @@ type NeptuneIAM struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
 	// The role to assume after logging in.
@@ -3441,6 +3567,8 @@ type Oracle struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3766,6 +3894,8 @@ type Postgres struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -3797,6 +3927,8 @@ type Presto struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -4011,6 +4143,8 @@ type RDP struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -4042,6 +4176,8 @@ type RDPCert struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -4073,6 +4209,8 @@ type RDSPostgresIAM struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The AWS region to connect to.
 	Region string `json:"region"`
 	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
@@ -4106,6 +4244,8 @@ type RabbitMQAMQP091 struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -4150,6 +4290,8 @@ type RawTCP struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -4177,6 +4319,8 @@ type Redis struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -4212,6 +4356,8 @@ type Redshift struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -9314,6 +9460,8 @@ type SQLServer struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The Schema to use to direct initial requests.
 	Schema string `json:"schema"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -9352,6 +9500,8 @@ type SQLServerAzureAD struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The Schema to use to direct initial requests.
 	Schema string `json:"schema"`
 	// The Azure AD client secret (application password) with which to authenticate.
@@ -9394,6 +9544,8 @@ type SQLServerKerberosAD struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The Active Directory domain (realm) to which the configured username belongs.
 	Realm string `json:"realm"`
 	// The Schema to use to direct initial requests.
@@ -9433,6 +9585,8 @@ type SSH struct {
 	PortForwarding bool `json:"portForwarding"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The public key to append to a server's authorized keys. This will be generated after resource creation.
 	PublicKey string `json:"publicKey"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -9472,6 +9626,8 @@ type SSHCert struct {
 	PortForwarding bool `json:"portForwarding"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -9505,6 +9661,8 @@ type SSHCustomerKey struct {
 	PortOverride int32 `json:"portOverride"`
 	// The private key used to authenticate with the server.
 	PrivateKey string `json:"privateKey"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -9540,6 +9698,8 @@ type SSHPassword struct {
 	PortForwarding bool `json:"portForwarding"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -10239,6 +10399,8 @@ type SingleStore struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -10272,6 +10434,8 @@ type Snowflake struct {
 	Password string `json:"password"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The schema to provide on authentication.
 	Schema string `json:"schema"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -10299,6 +10463,8 @@ type Snowsight struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// The Metadata for your snowflake IDP integration
 	SamlMetadata string `json:"samlMetadata"`
 	// ID of the secret store containing credentials for this resource, if any.
@@ -10328,6 +10494,8 @@ type Sybase struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -10357,6 +10525,8 @@ type SybaseIQ struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -10393,6 +10563,8 @@ type Teradata struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -10449,6 +10621,8 @@ type Trino struct {
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)

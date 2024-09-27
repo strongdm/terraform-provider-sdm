@@ -65,6 +65,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -77,6 +78,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -94,6 +96,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -106,6 +109,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -121,6 +125,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -139,6 +144,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to e.g. us-east-1.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -160,6 +166,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to e.g. us-east-1.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -175,6 +182,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to e.g. us-east-1.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -191,6 +199,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to e.g. us-east-1.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -205,6 +214,7 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Optional) The endpoint to dial e.g. search-?.region.es.amazonaws.com"
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to e.g. us-east-1.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -220,6 +230,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -232,6 +243,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `output` - (Required) The AWS S3 output location.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Optional) The AWS region to connect to e.g. us-east-1.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -248,6 +260,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -264,6 +277,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -277,6 +291,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -290,6 +305,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_region` - (Required) The AWS region healthcheck requests should attempt to connect to.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
@@ -304,6 +320,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to.
 	* `role_arn` - (Required, either in plaintext, or as a secret store path) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -319,6 +336,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to.
 	* `role_arn` - (Required, either in plaintext, or as a secret store path) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -334,6 +352,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -345,6 +364,7 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -358,6 +378,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -374,6 +395,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -388,6 +410,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -401,6 +424,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `private_key` - (Required, either in plaintext, or as a secret store path) The JSON Private key to authenticate with.
 	* `project` - (Required) The project to connect to.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -413,6 +437,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -428,6 +453,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -441,6 +467,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -457,6 +484,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -470,6 +498,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -481,6 +510,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -494,6 +524,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -508,6 +539,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -521,6 +553,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -534,6 +567,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Optional) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `replica_set` - (Required) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -547,6 +581,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -558,6 +593,7 @@ The following arguments are supported by the Resource resource:
 	* `endpoint` - (Required) The endpoint to dial e.g. dynamodb.region.amazonaws.com
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The region to authenticate requests against e.g. us-east-1
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -573,6 +609,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -586,6 +623,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -597,6 +635,7 @@ The following arguments are supported by the Resource resource:
 	* `keyfile` - (Required, either in plaintext, or as a secret store path) The service account keyfile to authenticate with.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `scopes` - (Required) Space separated scopes that this login should assume into when authenticating.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -614,6 +653,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `service_account_key` - (Required, either in plaintext, or as a secret store path) The service account key to authenticate with.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -626,6 +666,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `service_account_key` - (Required, either in plaintext, or as a secret store path) The service account key to authenticate with.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -640,6 +681,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -653,6 +695,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_path` - (Required) This path will be used to check the health of your site.
 	* `host_override` - (Optional) The host header will be overwritten with this field if provided.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -666,6 +709,7 @@ The following arguments are supported by the Resource resource:
 	* `host_override` - (Optional) The host header will be overwritten with this field if provided.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Optional) The password to authenticate with.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -679,6 +723,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_path` - (Required) This path will be used to check the health of your site.
 	* `host_override` - (Optional) The host header will be overwritten with this field if provided.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -699,6 +744,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -711,6 +757,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -728,6 +775,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -740,6 +788,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -755,6 +804,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -767,6 +817,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -780,6 +831,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -792,6 +844,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -807,6 +860,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -821,6 +875,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -836,6 +891,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `replica_set` - (Required) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -852,6 +908,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `replica_set` - (Required) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -866,6 +923,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Optional) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -883,6 +941,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) Server name for TLS verification (unverified by StrongDM if empty)
@@ -903,6 +962,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) Server name for TLS verification (unverified by StrongDM if empty)
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -917,6 +977,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -930,6 +991,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -941,6 +1003,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to.
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
@@ -957,6 +1020,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -972,6 +1036,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -985,6 +1050,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -998,6 +1064,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1010,6 +1077,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1023,6 +1091,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1036,6 +1105,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1049,6 +1119,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -1063,6 +1134,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1078,6 +1150,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1091,6 +1164,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1105,6 +1179,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `schema` - (Optional) The schema to provide on authentication.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1116,6 +1191,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_username` - (Required) The StrongDM user email to use for healthchecks.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `saml_metadata` - (Required, either in plaintext, or as a secret store path) The Metadata for your snowflake IDP integration
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1131,6 +1207,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1147,6 +1224,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret` - (Required, either in plaintext, or as a secret store path) The Azure AD client secret (application password) with which to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -1165,6 +1243,7 @@ The following arguments are supported by the Resource resource:
 	* `override_database` - (Optional) If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `realm` - (Required, either in plaintext, or as a secret store path) The Active Directory domain (realm) to which the configured username belongs.
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -1182,6 +1261,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1198,6 +1278,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1212,6 +1293,7 @@ The following arguments are supported by the Resource resource:
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `private_key` - (Required, either in plaintext, or as a secret store path) The private key used to authenticate with the server.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1226,6 +1308,7 @@ The following arguments are supported by the Resource resource:
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1238,6 +1321,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1250,6 +1334,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1262,6 +1347,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -1275,6 +1361,7 @@ The following arguments are supported by the Resource resource:
 	* `password` - (Optional) The password to authenticate with.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.

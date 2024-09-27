@@ -114,6 +114,7 @@ func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -146,6 +147,7 @@ func convertAKSToPlumbing(porcelain *AKS) *proto.AKS {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -190,6 +192,7 @@ func convertAKSBasicAuthToPorcelain(plumbing *proto.AKSBasicAuth) (*AKSBasicAuth
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -216,6 +219,7 @@ func convertAKSBasicAuthToPlumbing(porcelain *AKSBasicAuth) *proto.AKSBasicAuth 
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -265,6 +269,7 @@ func convertAKSServiceAccountToPorcelain(plumbing *proto.AKSServiceAccount) (*AK
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -295,6 +300,7 @@ func convertAKSServiceAccountToPlumbing(porcelain *AKSServiceAccount) *proto.AKS
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -339,6 +345,7 @@ func convertAKSServiceAccountUserImpersonationToPorcelain(plumbing *proto.AKSSer
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -364,6 +371,7 @@ func convertAKSServiceAccountUserImpersonationToPlumbing(porcelain *AKSServiceAc
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -411,6 +419,7 @@ func convertAKSUserImpersonationToPorcelain(plumbing *proto.AKSUserImpersonation
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -438,6 +447,7 @@ func convertAKSUserImpersonationToPlumbing(porcelain *AKSUserImpersonation) *pro
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -480,6 +490,7 @@ func convertAWSToPorcelain(plumbing *proto.AWS) (*AWS, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
 	porcelain.SecretAccessKey = plumbing.SecretAccessKey
@@ -506,6 +517,7 @@ func convertAWSToPlumbing(porcelain *AWS) *proto.AWS {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
 	plumbing.SecretAccessKey = (porcelain.SecretAccessKey)
@@ -611,6 +623,7 @@ func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, erro
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -639,6 +652,7 @@ func convertAWSConsoleToPlumbing(porcelain *AWSConsole) *proto.AWSConsole {
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -686,6 +700,7 @@ func convertAWSConsoleStaticKeyPairToPorcelain(plumbing *proto.AWSConsoleStaticK
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -715,6 +730,7 @@ func convertAWSConsoleStaticKeyPairToPlumbing(porcelain *AWSConsoleStaticKeyPair
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -2538,6 +2554,7 @@ func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) 
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -2573,6 +2590,7 @@ func convertAmazonEKSToPlumbing(porcelain *AmazonEKS) *proto.AmazonEKS {
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -2626,6 +2644,7 @@ func convertAmazonEKSInstanceProfileToPorcelain(plumbing *proto.AmazonEKSInstanc
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -2659,6 +2678,7 @@ func convertAmazonEKSInstanceProfileToPlumbing(porcelain *AmazonEKSInstanceProfi
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -2706,6 +2726,7 @@ func convertAmazonEKSInstanceProfileUserImpersonationToPorcelain(plumbing *proto
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -2734,6 +2755,7 @@ func convertAmazonEKSInstanceProfileUserImpersonationToPlumbing(porcelain *Amazo
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -2782,6 +2804,7 @@ func convertAmazonEKSUserImpersonationToPorcelain(plumbing *proto.AmazonEKSUserI
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -2812,6 +2835,7 @@ func convertAmazonEKSUserImpersonationToPlumbing(porcelain *AmazonEKSUserImperso
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -2858,6 +2882,7 @@ func convertAmazonESToPorcelain(plumbing *proto.AmazonES) (*AmazonES, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -2885,6 +2910,7 @@ func convertAmazonESToPlumbing(porcelain *AmazonES) *proto.AmazonES {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -2932,6 +2958,7 @@ func convertAmazonMQAMQP091ToPorcelain(plumbing *proto.AmazonMQAMQP091) (*Amazon
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -2958,6 +2985,7 @@ func convertAmazonMQAMQP091ToPlumbing(porcelain *AmazonMQAMQP091) *proto.AmazonM
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -3969,6 +3997,7 @@ func convertAthenaToPorcelain(plumbing *proto.Athena) (*Athena, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Output = plumbing.Output
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -3996,6 +4025,7 @@ func convertAthenaToPlumbing(porcelain *Athena) *proto.Athena {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Output = (porcelain.Output)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -4044,6 +4074,7 @@ func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) (*AuroraMysql, e
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -4072,6 +4103,7 @@ func convertAuroraMysqlToPlumbing(porcelain *AuroraMysql) *proto.AuroraMysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -4120,6 +4152,7 @@ func convertAuroraPostgresToPorcelain(plumbing *proto.AuroraPostgres) (*AuroraPo
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4147,6 +4180,7 @@ func convertAuroraPostgresToPlumbing(porcelain *AuroraPostgres) *proto.AuroraPos
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4192,6 +4226,7 @@ func convertAuroraPostgresIAMToPorcelain(plumbing *proto.AuroraPostgresIAM) (*Au
 	porcelain.OverrideDatabase = plumbing.OverrideDatabase
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -4220,6 +4255,7 @@ func convertAuroraPostgresIAMToPlumbing(porcelain *AuroraPostgresIAM) *proto.Aur
 	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -4265,6 +4301,7 @@ func convertAzureToPorcelain(plumbing *proto.Azure) (*Azure, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4289,6 +4326,7 @@ func convertAzureToPlumbing(porcelain *Azure) *proto.Azure {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4332,6 +4370,7 @@ func convertAzureCertificateToPorcelain(plumbing *proto.AzureCertificate) (*Azur
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4356,6 +4395,7 @@ func convertAzureCertificateToPlumbing(porcelain *AzureCertificate) *proto.Azure
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4401,6 +4441,7 @@ func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, erro
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -4429,6 +4470,7 @@ func convertAzureMysqlToPlumbing(porcelain *AzureMysql) *proto.AzureMysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -4477,6 +4519,7 @@ func convertAzurePostgresToPorcelain(plumbing *proto.AzurePostgres) (*AzurePostg
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4504,6 +4547,7 @@ func convertAzurePostgresToPlumbing(porcelain *AzurePostgres) *proto.AzurePostgr
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4550,6 +4594,7 @@ func convertAzurePostgresManagedIdentityToPorcelain(plumbing *proto.AzurePostgre
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4578,6 +4623,7 @@ func convertAzurePostgresManagedIdentityToPlumbing(porcelain *AzurePostgresManag
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4674,6 +4720,7 @@ func convertBigQueryToPorcelain(plumbing *proto.BigQuery) (*BigQuery, error) {
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.PrivateKey = plumbing.PrivateKey
 	porcelain.Project = plumbing.Project
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4699,6 +4746,7 @@ func convertBigQueryToPlumbing(porcelain *BigQuery) *proto.BigQuery {
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.PrivateKey = (porcelain.PrivateKey)
 	plumbing.Project = (porcelain.Project)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4743,6 +4791,7 @@ func convertCassandraToPorcelain(plumbing *proto.Cassandra) (*Cassandra, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4769,6 +4818,7 @@ func convertCassandraToPlumbing(porcelain *Cassandra) *proto.Cassandra {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4816,6 +4866,7 @@ func convertCitusToPorcelain(plumbing *proto.Citus) (*Citus, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4843,6 +4894,7 @@ func convertCitusToPlumbing(porcelain *Citus) *proto.Citus {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -4888,6 +4940,7 @@ func convertClustrixToPorcelain(plumbing *proto.Clustrix) (*Clustrix, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -4916,6 +4969,7 @@ func convertClustrixToPlumbing(porcelain *Clustrix) *proto.Clustrix {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -4964,6 +5018,7 @@ func convertCockroachToPorcelain(plumbing *proto.Cockroach) (*Cockroach, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -4991,6 +5046,7 @@ func convertCockroachToPlumbing(porcelain *Cockroach) *proto.Cockroach {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5195,6 +5251,7 @@ func convertCouchbaseDatabaseToPorcelain(plumbing *proto.CouchbaseDatabase) (*Co
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5222,6 +5279,7 @@ func convertCouchbaseDatabaseToPlumbing(porcelain *CouchbaseDatabase) *proto.Cou
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5265,6 +5323,7 @@ func convertCouchbaseWebUIToPorcelain(plumbing *proto.CouchbaseWebUI) (*Couchbas
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5289,6 +5348,7 @@ func convertCouchbaseWebUIToPlumbing(porcelain *CouchbaseWebUI) *proto.Couchbase
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5526,6 +5586,7 @@ func convertDB2IToPorcelain(plumbing *proto.DB2I) (*DB2I, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5552,6 +5613,7 @@ func convertDB2IToPlumbing(porcelain *DB2I) *proto.DB2I {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5598,6 +5660,7 @@ func convertDB2LUWToPorcelain(plumbing *proto.DB2LUW) (*DB2LUW, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5624,6 +5687,7 @@ func convertDB2LUWToPlumbing(porcelain *DB2LUW) *proto.DB2LUW {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5761,6 +5825,7 @@ func convertDocumentDBHostToPorcelain(plumbing *proto.DocumentDBHost) (*Document
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5787,6 +5852,7 @@ func convertDocumentDBHostToPlumbing(porcelain *DocumentDBHost) *proto.DocumentD
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5832,6 +5898,7 @@ func convertDocumentDBReplicaSetToPorcelain(plumbing *proto.DocumentDBReplicaSet
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -5859,6 +5926,7 @@ func convertDocumentDBReplicaSetToPlumbing(porcelain *DocumentDBReplicaSet) *pro
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -5904,6 +5972,7 @@ func convertDruidToPorcelain(plumbing *proto.Druid) (*Druid, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -5929,6 +5998,7 @@ func convertDruidToPlumbing(porcelain *Druid) *proto.Druid {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -5972,6 +6042,7 @@ func convertDynamoDBToPorcelain(plumbing *proto.DynamoDB) (*DynamoDB, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -5999,6 +6070,7 @@ func convertDynamoDBToPlumbing(porcelain *DynamoDB) *proto.DynamoDB {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -6046,6 +6118,7 @@ func convertElasticToPorcelain(plumbing *proto.Elastic) (*Elastic, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6072,6 +6145,7 @@ func convertElasticToPlumbing(porcelain *Elastic) *proto.Elastic {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -6117,6 +6191,7 @@ func convertElasticacheRedisToPorcelain(plumbing *proto.ElasticacheRedis) (*Elas
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6143,6 +6218,7 @@ func convertElasticacheRedisToPlumbing(porcelain *ElasticacheRedis) *proto.Elast
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -6186,6 +6262,7 @@ func convertGCPToPorcelain(plumbing *proto.GCP) (*GCP, error) {
 	porcelain.Keyfile = plumbing.Keyfile
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Scopes = plumbing.Scopes
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -6209,6 +6286,7 @@ func convertGCPToPlumbing(porcelain *GCP) *proto.GCP {
 	plumbing.Keyfile = (porcelain.Keyfile)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Scopes = (porcelain.Scopes)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -6515,6 +6593,7 @@ func convertGoogleGKEToPorcelain(plumbing *proto.GoogleGKE) (*GoogleGKE, error) 
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServiceAccountKey = plumbing.ServiceAccountKey
 	porcelain.Subdomain = plumbing.Subdomain
@@ -6545,6 +6624,7 @@ func convertGoogleGKEToPlumbing(porcelain *GoogleGKE) *proto.GoogleGKE {
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -6589,6 +6669,7 @@ func convertGoogleGKEUserImpersonationToPorcelain(plumbing *proto.GoogleGKEUserI
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServiceAccountKey = plumbing.ServiceAccountKey
 	porcelain.Subdomain = plumbing.Subdomain
@@ -6614,6 +6695,7 @@ func convertGoogleGKEUserImpersonationToPlumbing(porcelain *GoogleGKEUserImperso
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServiceAccountKey = (porcelain.ServiceAccountKey)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -6660,6 +6742,7 @@ func convertGreenplumToPorcelain(plumbing *proto.Greenplum) (*Greenplum, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6687,6 +6770,7 @@ func convertGreenplumToPlumbing(porcelain *Greenplum) *proto.Greenplum {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -6732,6 +6816,7 @@ func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6758,6 +6843,7 @@ func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -6803,6 +6889,7 @@ func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) (*HTTPBasicA
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6830,6 +6917,7 @@ func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAu
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -6875,6 +6963,7 @@ func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) (*HTTPNoAuth, erro
 	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -6900,6 +6989,7 @@ func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
 	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7738,6 +7828,7 @@ func convertKubernetesToPorcelain(plumbing *proto.Kubernetes) (*Kubernetes, erro
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7770,6 +7861,7 @@ func convertKubernetesToPlumbing(porcelain *Kubernetes) *proto.Kubernetes {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7814,6 +7906,7 @@ func convertKubernetesBasicAuthToPorcelain(plumbing *proto.KubernetesBasicAuth) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7840,6 +7933,7 @@ func convertKubernetesBasicAuthToPlumbing(porcelain *KubernetesBasicAuth) *proto
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7889,6 +7983,7 @@ func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServic
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7919,6 +8014,7 @@ func convertKubernetesServiceAccountToPlumbing(porcelain *KubernetesServiceAccou
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -7963,6 +8059,7 @@ func convertKubernetesServiceAccountUserImpersonationToPorcelain(plumbing *proto
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -7988,6 +8085,7 @@ func convertKubernetesServiceAccountUserImpersonationToPlumbing(porcelain *Kuber
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8035,6 +8133,7 @@ func convertKubernetesUserImpersonationToPorcelain(plumbing *proto.KubernetesUse
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8062,6 +8161,7 @@ func convertKubernetesUserImpersonationToPlumbing(porcelain *KubernetesUserImper
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8109,6 +8209,7 @@ func convertMTLSMysqlToPorcelain(plumbing *proto.MTLSMysql) (*MTLSMysql, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServerName = plumbing.ServerName
@@ -8141,6 +8242,7 @@ func convertMTLSMysqlToPlumbing(porcelain *MTLSMysql) *proto.MTLSMysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServerName = (porcelain.ServerName)
@@ -8193,6 +8295,7 @@ func convertMTLSPostgresToPorcelain(plumbing *proto.MTLSPostgres) (*MTLSPostgres
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.ServerName = plumbing.ServerName
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8224,6 +8327,7 @@ func convertMTLSPostgresToPlumbing(porcelain *MTLSPostgres) *proto.MTLSPostgres 
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.ServerName = (porcelain.ServerName)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8270,6 +8374,7 @@ func convertMariaToPorcelain(plumbing *proto.Maria) (*Maria, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8298,6 +8403,7 @@ func convertMariaToPlumbing(porcelain *Maria) *proto.Maria {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8343,6 +8449,7 @@ func convertMemcachedToPorcelain(plumbing *proto.Memcached) (*Memcached, error) 
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8366,6 +8473,7 @@ func convertMemcachedToPlumbing(porcelain *Memcached) *proto.Memcached {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8410,6 +8518,7 @@ func convertMemsqlToPorcelain(plumbing *proto.Memsql) (*Memsql, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8438,6 +8547,7 @@ func convertMemsqlToPlumbing(porcelain *Memsql) *proto.Memsql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8485,6 +8595,7 @@ func convertMongoHostToPorcelain(plumbing *proto.MongoHost) (*MongoHost, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8512,6 +8623,7 @@ func convertMongoHostToPlumbing(porcelain *MongoHost) *proto.MongoHost {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8558,6 +8670,7 @@ func convertMongoLegacyHostToPorcelain(plumbing *proto.MongoLegacyHost) (*MongoL
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8585,6 +8698,7 @@ func convertMongoLegacyHostToPlumbing(porcelain *MongoLegacyHost) *proto.MongoLe
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8632,6 +8746,7 @@ func convertMongoLegacyReplicasetToPorcelain(plumbing *proto.MongoLegacyReplicas
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8661,6 +8776,7 @@ func convertMongoLegacyReplicasetToPlumbing(porcelain *MongoLegacyReplicaset) *p
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8709,6 +8825,7 @@ func convertMongoReplicaSetToPorcelain(plumbing *proto.MongoReplicaSet) (*MongoR
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8738,6 +8855,7 @@ func convertMongoReplicaSetToPlumbing(porcelain *MongoReplicaSet) *proto.MongoRe
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8784,6 +8902,7 @@ func convertMongoShardedClusterToPorcelain(plumbing *proto.MongoShardedCluster) 
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8810,6 +8929,7 @@ func convertMongoShardedClusterToPlumbing(porcelain *MongoShardedCluster) *proto
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8856,6 +8976,7 @@ func convertMysqlToPorcelain(plumbing *proto.Mysql) (*Mysql, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8884,6 +9005,7 @@ func convertMysqlToPlumbing(porcelain *Mysql) *proto.Mysql {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8929,6 +9051,7 @@ func convertNeptuneToPorcelain(plumbing *proto.Neptune) (*Neptune, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8952,6 +9075,7 @@ func convertNeptuneToPlumbing(porcelain *Neptune) *proto.Neptune {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -8995,6 +9119,7 @@ func convertNeptuneIAMToPorcelain(plumbing *proto.NeptuneIAM) (*NeptuneIAM, erro
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleArn = plumbing.RoleArn
 	porcelain.RoleExternalID = plumbing.RoleExternalId
@@ -9023,6 +9148,7 @@ func convertNeptuneIAMToPlumbing(porcelain *NeptuneIAM) *proto.NeptuneIAM {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleArn = (porcelain.RoleArn)
 	plumbing.RoleExternalId = (porcelain.RoleExternalID)
@@ -9450,6 +9576,7 @@ func convertOracleToPorcelain(plumbing *proto.Oracle) (*Oracle, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -9477,6 +9604,7 @@ func convertOracleToPlumbing(porcelain *Oracle) *proto.Oracle {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -10885,6 +11013,7 @@ func convertPostgresToPorcelain(plumbing *proto.Postgres) (*Postgres, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -10912,6 +11041,7 @@ func convertPostgresToPlumbing(porcelain *Postgres) *proto.Postgres {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -10957,6 +11087,7 @@ func convertPrestoToPorcelain(plumbing *proto.Presto) (*Presto, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -10984,6 +11115,7 @@ func convertPrestoToPlumbing(porcelain *Presto) *proto.Presto {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -11494,6 +11626,7 @@ func convertRDPToPorcelain(plumbing *proto.RDP) (*RDP, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -11521,6 +11654,7 @@ func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -11566,6 +11700,7 @@ func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -11592,6 +11727,7 @@ func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -11637,6 +11773,7 @@ func convertRDSPostgresIAMToPorcelain(plumbing *proto.RDSPostgresIAM) (*RDSPostg
 	porcelain.OverrideDatabase = plumbing.OverrideDatabase
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Region = plumbing.Region
 	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -11665,6 +11802,7 @@ func convertRDSPostgresIAMToPlumbing(porcelain *RDSPostgresIAM) *proto.RDSPostgr
 	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Region = (porcelain.Region)
 	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -11711,6 +11849,7 @@ func convertRabbitMQAMQP091ToPorcelain(plumbing *proto.RabbitMQAMQP091) (*Rabbit
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -11737,6 +11876,7 @@ func convertRabbitMQAMQP091ToPlumbing(porcelain *RabbitMQAMQP091) *proto.RabbitM
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -11832,6 +11972,7 @@ func convertRawTCPToPorcelain(plumbing *proto.RawTCP) (*RawTCP, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -11855,6 +11996,7 @@ func convertRawTCPToPlumbing(porcelain *RawTCP) *proto.RawTCP {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -11898,6 +12040,7 @@ func convertRedisToPorcelain(plumbing *proto.Redis) (*Redis, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -11924,6 +12067,7 @@ func convertRedisToPlumbing(porcelain *Redis) *proto.Redis {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -11971,6 +12115,7 @@ func convertRedshiftToPorcelain(plumbing *proto.Redshift) (*Redshift, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -11998,6 +12143,7 @@ func convertRedshiftToPlumbing(porcelain *Redshift) *proto.Redshift {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -14040,6 +14186,7 @@ func convertSQLServerToPorcelain(plumbing *proto.SQLServer) (*SQLServer, error) 
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Schema = plumbing.Schema
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -14069,6 +14216,7 @@ func convertSQLServerToPlumbing(porcelain *SQLServer) *proto.SQLServer {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Schema = (porcelain.Schema)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -14117,6 +14265,7 @@ func convertSQLServerAzureADToPorcelain(plumbing *proto.SQLServerAzureAD) (*SQLS
 	porcelain.OverrideDatabase = plumbing.OverrideDatabase
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Schema = plumbing.Schema
 	porcelain.Secret = plumbing.Secret
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -14147,6 +14296,7 @@ func convertSQLServerAzureADToPlumbing(porcelain *SQLServerAzureAD) *proto.SQLSe
 	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Schema = (porcelain.Schema)
 	plumbing.Secret = (porcelain.Secret)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -14197,6 +14347,7 @@ func convertSQLServerKerberosADToPorcelain(plumbing *proto.SQLServerKerberosAD) 
 	porcelain.OverrideDatabase = plumbing.OverrideDatabase
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Realm = plumbing.Realm
 	porcelain.Schema = plumbing.Schema
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -14229,6 +14380,7 @@ func convertSQLServerKerberosADToPlumbing(porcelain *SQLServerKerberosAD) *proto
 	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Realm = (porcelain.Realm)
 	plumbing.Schema = (porcelain.Schema)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -14278,6 +14430,7 @@ func convertSSHToPorcelain(plumbing *proto.SSH) (*SSH, error) {
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.PublicKey = plumbing.PublicKey
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -14306,6 +14459,7 @@ func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.PublicKey = (porcelain.PublicKey)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -14355,6 +14509,7 @@ func convertSSHCertToPorcelain(plumbing *proto.SSHCert) (*SSHCert, error) {
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -14384,6 +14539,7 @@ func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -14430,6 +14586,7 @@ func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) (*SSHCusto
 	porcelain.PortForwarding = plumbing.PortForwarding
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.PrivateKey = plumbing.PrivateKey
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -14457,6 +14614,7 @@ func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustom
 	plumbing.PortForwarding = (porcelain.PortForwarding)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.PrivateKey = (porcelain.PrivateKey)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -14503,6 +14661,7 @@ func convertSSHPasswordToPorcelain(plumbing *proto.SSHPassword) (*SSHPassword, e
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -14530,6 +14689,7 @@ func convertSSHPasswordToPlumbing(porcelain *SSHPassword) *proto.SSHPassword {
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -15213,6 +15373,7 @@ func convertSingleStoreToPorcelain(plumbing *proto.SingleStore) (*SingleStore, e
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -15241,6 +15402,7 @@ func convertSingleStoreToPlumbing(porcelain *SingleStore) *proto.SingleStore {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -15287,6 +15449,7 @@ func convertSnowflakeToPorcelain(plumbing *proto.Snowflake) (*Snowflake, error) 
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Schema = plumbing.Schema
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -15313,6 +15476,7 @@ func convertSnowflakeToPlumbing(porcelain *Snowflake) *proto.Snowflake {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Schema = (porcelain.Schema)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -15356,6 +15520,7 @@ func convertSnowsightToPorcelain(plumbing *proto.Snowsight) (*Snowsight, error) 
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SamlMetadata = plumbing.SamlMetadata
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -15379,6 +15544,7 @@ func convertSnowsightToPlumbing(porcelain *Snowsight) *proto.Snowsight {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SamlMetadata = (porcelain.SamlMetadata)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -15423,6 +15589,7 @@ func convertSybaseToPorcelain(plumbing *proto.Sybase) (*Sybase, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15448,6 +15615,7 @@ func convertSybaseToPlumbing(porcelain *Sybase) *proto.Sybase {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -15492,6 +15660,7 @@ func convertSybaseIQToPorcelain(plumbing *proto.SybaseIQ) (*SybaseIQ, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15517,6 +15686,7 @@ func convertSybaseIQToPlumbing(porcelain *SybaseIQ) *proto.SybaseIQ {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -15604,6 +15774,7 @@ func convertTeradataToPorcelain(plumbing *proto.Teradata) (*Teradata, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15629,6 +15800,7 @@ func convertTeradataToPlumbing(porcelain *Teradata) *proto.Teradata {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -15747,6 +15919,7 @@ func convertTrinoToPorcelain(plumbing *proto.Trino) (*Trino, error) {
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15773,6 +15946,7 @@ func convertTrinoToPlumbing(porcelain *Trino) *proto.Trino {
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
