@@ -7647,7 +7647,7 @@ func convertResourceFilterToPlumbing(d *schema.ResourceData) (string, []interfac
 	if v, ok := d.GetOkExists("tags"); ok {
 		tags := convertTagsToPlumbing(v)
 		for kk, vv := range tags {
-			filter += "tag:?=?"
+			filter += "tag:?=? "
 			args = append(args, kk, vv)
 		}
 	}

@@ -57,7 +57,8 @@ func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
 		Hostname:     "hostname",
 		PortOverride: portOverride.Count(),
 		Tags: sdm.Tags{
-			"testTag": tagValue,
+			"testTag":  tagValue,
+			"testTag2": tagValue,
 		},
 	})
 	if err != nil {
@@ -71,14 +72,16 @@ func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: fmt.Sprintf(`
-					data "sdm_resource" "%s" {
+					data "sdm_resource" "%[1]s" {
 						tags = {
-							"testTag" = "%s"
+							"testTag" = "%[2]s"
+							"testTag2" = "%[2]s"
 						}
 					}`, dsName, tagValue),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.name", name),
 					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.tags.testTag", tagValue),
+					resource.TestCheckResourceAttr("data.sdm_resource."+dsName, "resources.0.redis.0.tags.testTag2", tagValue),
 				),
 			},
 		},
