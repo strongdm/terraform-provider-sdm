@@ -152,6 +152,8 @@ func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 }
 
 func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertAccountToPlumbing(d)
 	resp, err := cc.Accounts().Create(ctx, localVersion)
 	if err != nil {
@@ -191,6 +193,8 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 }
 
 func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertAccountToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.Accounts().Get(ctx, d.Id())
@@ -239,6 +243,8 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 	return nil
 }
 func resourceAccountUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.Accounts().Update(ctx, convertAccountToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Account %s: %w", d.Id(), err)
@@ -247,6 +253,8 @@ func resourceAccountUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 	return resourceAccountRead(ctx, d, cc)
 }
 func resourceAccountDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Accounts().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

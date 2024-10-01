@@ -58,6 +58,8 @@ func convertIdentityAliasToPlumbing(d *schema.ResourceData) *sdm.IdentityAlias {
 }
 
 func resourceIdentityAliasCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertIdentityAliasToPlumbing(d)
 	resp, err := cc.IdentityAliases().Create(ctx, localVersion)
 	if err != nil {
@@ -72,6 +74,8 @@ func resourceIdentityAliasCreate(ctx context.Context, d *schema.ResourceData, cc
 }
 
 func resourceIdentityAliasRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertIdentityAliasToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.IdentityAliases().Get(ctx, d.Id())
@@ -89,6 +93,8 @@ func resourceIdentityAliasRead(ctx context.Context, d *schema.ResourceData, cc *
 	return nil
 }
 func resourceIdentityAliasUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.IdentityAliases().Update(ctx, convertIdentityAliasToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update IdentityAlias %s: %w", d.Id(), err)
@@ -97,6 +103,8 @@ func resourceIdentityAliasUpdate(ctx context.Context, d *schema.ResourceData, cc
 	return resourceIdentityAliasRead(ctx, d, cc)
 }
 func resourceIdentityAliasDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.IdentityAliases().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

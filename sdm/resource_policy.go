@@ -58,6 +58,8 @@ func convertPolicyToPlumbing(d *schema.ResourceData) *sdm.Policy {
 }
 
 func resourcePolicyCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertPolicyToPlumbing(d)
 	resp, err := cc.Policies().Create(ctx, localVersion)
 	if err != nil {
@@ -72,6 +74,8 @@ func resourcePolicyCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 }
 
 func resourcePolicyRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertPolicyToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.Policies().Get(ctx, d.Id())
@@ -89,6 +93,8 @@ func resourcePolicyRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 	return nil
 }
 func resourcePolicyUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.Policies().Update(ctx, convertPolicyToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Policy %s: %w", d.Id(), err)
@@ -97,6 +103,8 @@ func resourcePolicyUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 	return resourcePolicyRead(ctx, d, cc)
 }
 func resourcePolicyDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Policies().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

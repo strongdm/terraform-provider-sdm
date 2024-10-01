@@ -67,6 +67,8 @@ func convertRoleToPlumbing(d *schema.ResourceData) *sdm.Role {
 }
 
 func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertRoleToPlumbing(d)
 	resp, err := cc.Roles().Create(ctx, localVersion)
 	if err != nil {
@@ -82,6 +84,8 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 }
 
 func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertRoleToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.Roles().Get(ctx, d.Id())
@@ -100,6 +104,8 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Clien
 	return nil
 }
 func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.Roles().Update(ctx, convertRoleToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Role %s: %w", d.Id(), err)
@@ -108,6 +114,8 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Cli
 	return resourceRoleRead(ctx, d, cc)
 }
 func resourceRoleDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Roles().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

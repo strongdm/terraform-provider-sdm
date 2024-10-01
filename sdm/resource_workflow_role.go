@@ -52,6 +52,8 @@ func convertWorkflowRoleToPlumbing(d *schema.ResourceData) *sdm.WorkflowRole {
 }
 
 func resourceWorkflowRoleCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertWorkflowRoleToPlumbing(d)
 	resp, err := cc.WorkflowRoles().Create(ctx, localVersion)
 	if err != nil {
@@ -65,6 +67,8 @@ func resourceWorkflowRoleCreate(ctx context.Context, d *schema.ResourceData, cc 
 }
 
 func resourceWorkflowRoleRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertWorkflowRoleToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.WorkflowRoles().Get(ctx, d.Id())
@@ -81,6 +85,8 @@ func resourceWorkflowRoleRead(ctx context.Context, d *schema.ResourceData, cc *s
 	return nil
 }
 func resourceWorkflowRoleDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.WorkflowRoles().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

@@ -85,6 +85,8 @@ func convertWorkflowToPlumbing(d *schema.ResourceData) *sdm.Workflow {
 }
 
 func resourceWorkflowCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertWorkflowToPlumbing(d)
 	resp, err := cc.Workflows().Create(ctx, localVersion)
 	if err != nil {
@@ -103,6 +105,8 @@ func resourceWorkflowCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 }
 
 func resourceWorkflowRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertWorkflowToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.Workflows().Get(ctx, d.Id())
@@ -124,6 +128,8 @@ func resourceWorkflowRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 	return nil
 }
 func resourceWorkflowUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.Workflows().Update(ctx, convertWorkflowToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update Workflow %s: %w", d.Id(), err)
@@ -132,6 +138,8 @@ func resourceWorkflowUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	return resourceWorkflowRead(ctx, d, cc)
 }
 func resourceWorkflowDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Workflows().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

@@ -52,6 +52,8 @@ func convertAccountAttachmentToPlumbing(d *schema.ResourceData) *sdm.AccountAtta
 }
 
 func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertAccountAttachmentToPlumbing(d)
 	resp, err := cc.AccountAttachments().Create(ctx, localVersion)
 	if err != nil {
@@ -65,6 +67,8 @@ func resourceAccountAttachmentCreate(ctx context.Context, d *schema.ResourceData
 }
 
 func resourceAccountAttachmentRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertAccountAttachmentToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.AccountAttachments().Get(ctx, d.Id())
@@ -81,6 +85,8 @@ func resourceAccountAttachmentRead(ctx context.Context, d *schema.ResourceData, 
 	return nil
 }
 func resourceAccountAttachmentDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.AccountAttachments().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

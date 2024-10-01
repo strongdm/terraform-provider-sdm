@@ -12474,6 +12474,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 }
 
 func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertResourceToPlumbing(d)
 	seValues, err := secretStoreValuesForResource(d)
 	if err != nil {
@@ -14330,6 +14332,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 }
 
 func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertResourceToPlumbing(d)
 	_ = localVersion
 	seValues, err := secretStoreValuesForResource(d)
@@ -17011,6 +17015,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 	return nil
 }
 func resourceResourceUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	_, err := secretStoreValuesForResource(d)
 	if err != nil {
 		return fmt.Errorf("cannot update Resource %s: %w", d.Id(), err)
@@ -17023,6 +17029,8 @@ func resourceResourceUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	return resourceResourceRead(ctx, d, cc)
 }
 func resourceResourceDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.Resources().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

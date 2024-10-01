@@ -58,6 +58,8 @@ func convertRemoteIdentityToPlumbing(d *schema.ResourceData) *sdm.RemoteIdentity
 }
 
 func resourceRemoteIdentityCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertRemoteIdentityToPlumbing(d)
 	resp, err := cc.RemoteIdentities().Create(ctx, localVersion)
 	if err != nil {
@@ -72,6 +74,8 @@ func resourceRemoteIdentityCreate(ctx context.Context, d *schema.ResourceData, c
 }
 
 func resourceRemoteIdentityRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertRemoteIdentityToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.RemoteIdentities().Get(ctx, d.Id())
@@ -89,6 +93,8 @@ func resourceRemoteIdentityRead(ctx context.Context, d *schema.ResourceData, cc 
 	return nil
 }
 func resourceRemoteIdentityUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.RemoteIdentities().Update(ctx, convertRemoteIdentityToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update RemoteIdentity %s: %w", d.Id(), err)
@@ -97,6 +103,8 @@ func resourceRemoteIdentityUpdate(ctx context.Context, d *schema.ResourceData, c
 	return resourceRemoteIdentityRead(ctx, d, cc)
 }
 func resourceRemoteIdentityDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.RemoteIdentities().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

@@ -1313,6 +1313,8 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 }
 
 func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertSecretStoreToPlumbing(d)
 	resp, err := cc.SecretStores().Create(ctx, localVersion)
 	if err != nil {
@@ -1618,6 +1620,8 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 }
 
 func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertSecretStoreToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.SecretStores().Get(ctx, d.Id())
@@ -1995,6 +1999,8 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 	return nil
 }
 func resourceSecretStoreUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.SecretStores().Update(ctx, convertSecretStoreToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update SecretStore %s: %w", d.Id(), err)
@@ -2003,6 +2009,8 @@ func resourceSecretStoreUpdate(ctx context.Context, d *schema.ResourceData, cc *
 	return resourceSecretStoreRead(ctx, d, cc)
 }
 func resourceSecretStoreDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.SecretStores().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

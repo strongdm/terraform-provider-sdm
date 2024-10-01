@@ -50,6 +50,8 @@ func convertProxyClusterKeyToPlumbing(d *schema.ResourceData) *sdm.ProxyClusterK
 }
 
 func resourceProxyClusterKeyCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertProxyClusterKeyToPlumbing(d)
 	resp, err := cc.ProxyClusterKeys().Create(ctx, localVersion)
 	if err != nil {
@@ -63,6 +65,8 @@ func resourceProxyClusterKeyCreate(ctx context.Context, d *schema.ResourceData, 
 }
 
 func resourceProxyClusterKeyRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertProxyClusterKeyToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.ProxyClusterKeys().Get(ctx, d.Id())
@@ -78,6 +82,8 @@ func resourceProxyClusterKeyRead(ctx context.Context, d *schema.ResourceData, cc
 	return nil
 }
 func resourceProxyClusterKeyDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.ProxyClusterKeys().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

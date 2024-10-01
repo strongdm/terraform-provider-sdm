@@ -66,6 +66,8 @@ func convertApprovalWorkflowApproverToPlumbing(d *schema.ResourceData) *sdm.Appr
 }
 
 func resourceApprovalWorkflowApproverCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertApprovalWorkflowApproverToPlumbing(d)
 	resp, err := cc.ApprovalWorkflowApprovers().Create(ctx, localVersion)
 	if err != nil {
@@ -81,6 +83,8 @@ func resourceApprovalWorkflowApproverCreate(ctx context.Context, d *schema.Resou
 }
 
 func resourceApprovalWorkflowApproverRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertApprovalWorkflowApproverToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.ApprovalWorkflowApprovers().Get(ctx, d.Id())
@@ -99,6 +103,8 @@ func resourceApprovalWorkflowApproverRead(ctx context.Context, d *schema.Resourc
 	return nil
 }
 func resourceApprovalWorkflowApproverDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.ApprovalWorkflowApprovers().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

@@ -58,6 +58,8 @@ func convertApprovalWorkflowToPlumbing(d *schema.ResourceData) *sdm.ApprovalWork
 }
 
 func resourceApprovalWorkflowCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertApprovalWorkflowToPlumbing(d)
 	resp, err := cc.ApprovalWorkflows().Create(ctx, localVersion)
 	if err != nil {
@@ -72,6 +74,8 @@ func resourceApprovalWorkflowCreate(ctx context.Context, d *schema.ResourceData,
 }
 
 func resourceApprovalWorkflowRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertApprovalWorkflowToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.ApprovalWorkflows().Get(ctx, d.Id())
@@ -89,6 +93,8 @@ func resourceApprovalWorkflowRead(ctx context.Context, d *schema.ResourceData, c
 	return nil
 }
 func resourceApprovalWorkflowUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.ApprovalWorkflows().Update(ctx, convertApprovalWorkflowToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update ApprovalWorkflow %s: %w", d.Id(), err)
@@ -97,6 +103,8 @@ func resourceApprovalWorkflowUpdate(ctx context.Context, d *schema.ResourceData,
 	return resourceApprovalWorkflowRead(ctx, d, cc)
 }
 func resourceApprovalWorkflowDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.ApprovalWorkflows().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

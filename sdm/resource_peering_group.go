@@ -46,6 +46,8 @@ func convertPeeringGroupToPlumbing(d *schema.ResourceData) *sdm.PeeringGroup {
 }
 
 func resourcePeeringGroupCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertPeeringGroupToPlumbing(d)
 	resp, err := cc.PeeringGroups().Create(ctx, localVersion)
 	if err != nil {
@@ -58,6 +60,8 @@ func resourcePeeringGroupCreate(ctx context.Context, d *schema.ResourceData, cc 
 }
 
 func resourcePeeringGroupRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertPeeringGroupToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.PeeringGroups().Get(ctx, d.Id())
@@ -73,6 +77,8 @@ func resourcePeeringGroupRead(ctx context.Context, d *schema.ResourceData, cc *s
 	return nil
 }
 func resourcePeeringGroupDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.PeeringGroups().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {

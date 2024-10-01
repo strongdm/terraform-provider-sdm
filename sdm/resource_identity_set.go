@@ -46,6 +46,8 @@ func convertIdentitySetToPlumbing(d *schema.ResourceData) *sdm.IdentitySet {
 }
 
 func resourceIdentitySetCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutCreate))
+	defer cancel()
 	localVersion := convertIdentitySetToPlumbing(d)
 	resp, err := cc.IdentitySets().Create(ctx, localVersion)
 	if err != nil {
@@ -58,6 +60,8 @@ func resourceIdentitySetCreate(ctx context.Context, d *schema.ResourceData, cc *
 }
 
 func resourceIdentitySetRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutRead))
+	defer cancel()
 	localVersion := convertIdentitySetToPlumbing(d)
 	_ = localVersion
 	resp, err := cc.IdentitySets().Get(ctx, d.Id())
@@ -73,6 +77,8 @@ func resourceIdentitySetRead(ctx context.Context, d *schema.ResourceData, cc *sd
 	return nil
 }
 func resourceIdentitySetUpdate(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutUpdate))
+	defer cancel()
 	resp, err := cc.IdentitySets().Update(ctx, convertIdentitySetToPlumbing(d))
 	if err != nil {
 		return fmt.Errorf("cannot update IdentitySet %s: %w", d.Id(), err)
@@ -81,6 +87,8 @@ func resourceIdentitySetUpdate(ctx context.Context, d *schema.ResourceData, cc *
 	return resourceIdentitySetRead(ctx, d, cc)
 }
 func resourceIdentitySetDelete(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	ctx, cancel := context.WithTimeout(ctx, d.Timeout(schema.TimeoutDelete))
+	defer cancel()
 	var errNotFound *sdm.NotFoundError
 	_, err := cc.IdentitySets().Delete(ctx, d.Id())
 	if err != nil && errors.As(err, &errNotFound) {
