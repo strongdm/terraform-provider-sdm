@@ -39,6 +39,9 @@ func resourcePeeringGroupPeer() *schema.Resource {
 		},
 		Timeouts: &schema.ResourceTimeout{
 			Default: schema.DefaultTimeout(60 * time.Second),
+			Create:  schema.DefaultTimeout(60 * time.Second),
+			Read:    schema.DefaultTimeout(60 * time.Second),
+			Delete:  schema.DefaultTimeout(60 * time.Second),
 		},
 	}
 }
