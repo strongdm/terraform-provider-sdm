@@ -90,3 +90,4 @@ resource "sdm_node" "example_gateway" {
 
 * `api_access_key` - (Required) Your StrongDM API access key. It can also be sourced from the SDM_API_ACCESS_KEY environment variable.
 * `api_secret_key` - (Required) Your StrongDM API secret key. It can also be sourced from the SDM_API_SECRET_KEY environment variable.
+* `host` - Your StrongDM API host. It can also be sourced from the SDM_API_HOST environment variable.

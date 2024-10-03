@@ -111,7 +111,7 @@ func testAccSDMProxyClusterKeyConfig(proxyClusterName string, proxyClusterKeyNam
 	resource "sdm_node" "%[1]s" {
 		proxy_cluster {
 			name = "%[1]s"
-			address = "proxy:8433"
+			address = "proxy:8443"
 		}
 	}
 
