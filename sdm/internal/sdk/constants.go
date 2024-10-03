@@ -515,3 +515,9 @@ const (
 	DeviceTrustProviderMicrosoftDefender = "microsoftdefender"
 	DeviceTrustProviderDuo               = "duo"
 )
+
+// APIHost defines the API host for various control planes.
+const (
+	APIHostUS = "api.strongdm.com:443"
+	APIHostUK = "api.uk.strongdm.com:443"
+)
