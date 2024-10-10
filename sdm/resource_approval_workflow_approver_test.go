@@ -232,7 +232,7 @@ func createApprovalWorkflowApproversWithPrifix(prefix string, count int) ([]*sdm
 	}
 	step := createResp.ApprovalWorkflowStep
 
-	approval_workflow_approvers := []*sdm.ApprovalWorkflowApprover{}
+	approvalWorkflowApprovers := []*sdm.ApprovalWorkflowApprover{}
 	for i := 0; i < count; i++ {
 		createResp, err := client.ApprovalWorkflowApprovers().Create(ctx, &sdm.ApprovalWorkflowApprover{
 			ApprovalFlowID: workflows[0].ID,
@@ -242,9 +242,9 @@ func createApprovalWorkflowApproversWithPrifix(prefix string, count int) ([]*sdm
 		if err != nil {
 			return nil, fmt.Errorf("failed to create approval workflow approver: %w", err)
 		}
-		approval_workflow_approvers = append(approval_workflow_approvers, createResp.ApprovalWorkflowApprover)
+		approvalWorkflowApprovers = append(approvalWorkflowApprovers, createResp.ApprovalWorkflowApprover)
 	}
-	return approval_workflow_approvers, nil
+	return approvalWorkflowApprovers, nil
 }
 
 func testAccSDMApprovalWorkflowApproverConfig(workflowResourceName, workflowName, stepResourceName, accountName, roleName, approver1Name, approver2Name string) string {

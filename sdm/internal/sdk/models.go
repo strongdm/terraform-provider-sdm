@@ -4106,6 +4106,10 @@ type QueryCapture struct {
 	FileSize int64 `json:"fileSize"`
 	// The height of the terminal or window for SSH, Kubernetes, and RDP interactive sessions.
 	Height int32 `json:"height"`
+	// The impersonation groups of a Kubernetes operation.
+	ImpersonationGroups []string `json:"impersonationGroups"`
+	// The impersonation user of a Kubernetes operation.
+	ImpersonationUser string `json:"impersonationUser"`
 	// The target pod of a Kubernetes operation.
 	Pod string `json:"pod"`
 	// The HTTP request body of a Kubernetes operation.

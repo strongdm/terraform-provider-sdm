@@ -38,6 +38,18 @@ resource "sdm_resource" "postgres-test" {
         }
     }
 }
+
+resource "sdm_resource" "aurora-mysql-test" {
+    aurora_mysql {
+        name = "aurora-mysql-test"
+        hostname = "example.com"
+        database = "my-db"
+        port = 3306
+        secret_store_id = "se-109564346"
+        username = "path/to/credential?key=optionalKeyName"
+        password = "path/to/credential?key=optionalKeyName"
+    }
+}
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Providing Credentials

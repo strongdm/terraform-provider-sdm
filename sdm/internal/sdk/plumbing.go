@@ -11557,6 +11557,8 @@ func convertQueryCaptureToPorcelain(plumbing *proto.QueryCapture) (*QueryCapture
 	porcelain.FileName = plumbing.FileName
 	porcelain.FileSize = plumbing.FileSize
 	porcelain.Height = plumbing.Height
+	porcelain.ImpersonationGroups = plumbing.ImpersonationGroups
+	porcelain.ImpersonationUser = plumbing.ImpersonationUser
 	porcelain.Pod = plumbing.Pod
 	porcelain.RequestBody = plumbing.RequestBody
 	porcelain.RequestMethod = plumbing.RequestMethod
@@ -11578,6 +11580,8 @@ func convertQueryCaptureToPlumbing(porcelain *QueryCapture) *proto.QueryCapture 
 	plumbing.FileName = (porcelain.FileName)
 	plumbing.FileSize = (porcelain.FileSize)
 	plumbing.Height = (porcelain.Height)
+	plumbing.ImpersonationGroups = (porcelain.ImpersonationGroups)
+	plumbing.ImpersonationUser = (porcelain.ImpersonationUser)
 	plumbing.Pod = (porcelain.Pod)
 	plumbing.RequestBody = (porcelain.RequestBody)
 	plumbing.RequestMethod = (porcelain.RequestMethod)

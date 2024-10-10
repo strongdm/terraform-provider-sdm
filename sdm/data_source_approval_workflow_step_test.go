@@ -13,7 +13,7 @@ func TestAccSDMApprovalWorkflowStep_Get(t *testing.T) {
 	if err != nil {
 		t.Fatal("failed to create approval workflow step: ", err)
 	}
-	flowId := step.ApprovalFlowID
+	flowID := step.ApprovalFlowID
 
 	dsName := randomWithPrefix("af-test-query")
 	resource.Test(t, resource.TestCase{
@@ -21,9 +21,9 @@ func TestAccSDMApprovalWorkflowStep_Get(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMApprovalWorkflowStepDataSourceGetFilterConfig(dsName, flowId),
+				Config: testAccSDMApprovalWorkflowStepDataSourceGetFilterConfig(dsName, flowID),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.sdm_approval_workflow_step."+dsName, "approval_workflow_steps.0.approval_flow_id", flowId),
+					resource.TestCheckResourceAttr("data.sdm_approval_workflow_step."+dsName, "approval_workflow_steps.0.approval_flow_id", flowID),
 					resource.TestCheckResourceAttr("data.sdm_approval_workflow_step."+dsName, "approval_workflow_steps.#", "1"),
 				),
 			},
@@ -56,9 +56,9 @@ func TestAccSDMApprovalWorkflowStep_GetNone(t *testing.T) {
 	})
 }
 
-func testAccSDMApprovalWorkflowStepDataSourceGetFilterConfig(stepSourceName, flowId string) string {
+func testAccSDMApprovalWorkflowStepDataSourceGetFilterConfig(stepSourceName, flowID string) string {
 	return fmt.Sprintf(`
 	data "sdm_approval_workflow_step" "%s" {
 		approval_flow_id = "%s"
-	}`, stepSourceName, flowId)
+	}`, stepSourceName, flowID)
 }

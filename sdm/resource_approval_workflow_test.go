@@ -109,7 +109,7 @@ func createApprovalWorkflowsWithPrifix(prefix, approvalMode string, count int) (
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
-	approval_workflows := []*sdm.ApprovalWorkflow{}
+	approvalWorkflows := []*sdm.ApprovalWorkflow{}
 	for i := 0; i < count; i++ {
 		createResp, err := client.ApprovalWorkflows().Create(ctx, &sdm.ApprovalWorkflow{
 			Name:         randomWithPrefix(prefix),
@@ -118,9 +118,9 @@ func createApprovalWorkflowsWithPrifix(prefix, approvalMode string, count int) (
 		if err != nil {
 			return nil, fmt.Errorf("failed to create approval_workflow: %w", err)
 		}
-		approval_workflows = append(approval_workflows, createResp.ApprovalWorkflow)
+		approvalWorkflows = append(approvalWorkflows, createResp.ApprovalWorkflow)
 	}
-	return approval_workflows, nil
+	return approvalWorkflows, nil
 }
 
 func testAccSDMApprovalWorkflowConfig(resourceName, workflowName string) string {

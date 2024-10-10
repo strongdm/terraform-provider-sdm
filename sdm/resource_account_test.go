@@ -339,7 +339,7 @@ func testAccSDMAccountUserConfig(resourceName, firstName, lastName, email string
 	`, resourceName, firstName, lastName, email)
 }
 
-func testAccSDMAccountUserPermissionLevelConfig(resourceName, firstName, lastName, email, permission_level string) string {
+func testAccSDMAccountUserPermissionLevelConfig(resourceName, firstName, lastName, email, permissionLevel string) string {
 
 	return fmt.Sprintf(`
 	resource "sdm_account" "%s" {
@@ -350,7 +350,7 @@ func testAccSDMAccountUserPermissionLevelConfig(resourceName, firstName, lastNam
 			permission_level = "%s"
 		}
 	}
-	`, resourceName, firstName, lastName, email, permission_level)
+	`, resourceName, firstName, lastName, email, permissionLevel)
 }
 
 func testAccSDMAccountServiceConfig(resourceName, serviceName string) string {
