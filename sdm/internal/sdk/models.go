@@ -9677,8 +9677,6 @@ type SSHCustomerKey struct {
 	Username string `json:"username"`
 }
 
-// SSHPassword is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type SSHPassword struct {
 	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
