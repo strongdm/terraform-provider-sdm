@@ -350,6 +350,37 @@ type AWSConsoleStaticKeyPair struct {
 	Tags Tags `json:"tags"`
 }
 
+type AWSInstanceProfile struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// If true, prefer environment variables to authenticate connection even if EC2 roles are configured.
+	EnableEnvVariables bool `json:"enableEnvVariables"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// The role to assume after logging in.
+	RoleArn string `json:"roleArn"`
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	RoleExternalID string `json:"roleExternalId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type AWSStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -2516,6 +2547,33 @@ type HTTPNoAuth struct {
 	Tags Tags `json:"tags"`
 	// The base address of your website without the path.
 	Url string `json:"url"`
+}
+
+// Healthcheck defines the status of the link between a node and a resource
+type Healthcheck struct {
+	// The error if unhealthy
+	ErrorMsg string `json:"errorMsg"`
+	// Whether the healthcheck succeeded.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the healthcheck.
+	ID string `json:"id"`
+	// Unique identifier of the healthcheck node.
+	NodeID string `json:"nodeId"`
+	// The name of the node.
+	NodeName string `json:"nodeName"`
+	// Unique identifier of the healthcheck resource.
+	ResourceID string `json:"resourceId"`
+	// The name of the resource.
+	ResourceName string `json:"resourceName"`
+	// The time at which the healthcheck state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// HealthcheckListResponse returns a list of Healthchecks that meet the criteria of a
+// HealthcheckListRequest.
+type HealthcheckListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // IdentityAliases define the username to be used for a specific account
@@ -5543,6 +5601,60 @@ func (m *AWSConsoleStaticKeyPair) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AWSConsoleStaticKeyPair.
 func (m *AWSConsoleStaticKeyPair) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AWSInstanceProfile) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) GetID() string { return m.ID }
+
+// GetName returns the name of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AWSInstanceProfile.
+func (m *AWSInstanceProfile) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Azure) isOneOf_Resource() {}
@@ -11453,6 +11565,23 @@ type ApprovalWorkflowHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *ApprovalWorkflowHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// HealthcheckIterator provides read access to a list of Healthcheck.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    healthcheck := iterator.Value()
+//	    // ...
+//	}
+type HealthcheckIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *Healthcheck
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

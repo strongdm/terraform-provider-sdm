@@ -1713,6 +1713,81 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"aws_instance_profile": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"enable_env_variables": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, prefer environment variables to authenticate connection even if EC2 roles are configured.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The role to assume after logging in.",
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"azure": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -8171,6 +8246,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
+	if list := d.Get("aws_instance_profile").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"role_arn":         convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id": convertStringToPlumbing(raw["role_external_id"]),
+		}, nil
+	}
 	if list := d.Get("azure").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10490,6 +10591,33 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SessionExpiry:                    convertInt32ToPlumbing(raw["session_expiry"]),
 			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
 			Tags:                             convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("aws_instance_profile").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AWSInstanceProfile{}
+		}
+		out := &sdm.AWSInstanceProfile{
+			ID:                 d.Id(),
+			BindInterface:      convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:       convertStringToPlumbing(raw["egress_filter"]),
+			EnableEnvVariables: convertBoolToPlumbing(raw["enable_env_variables"]),
+			Name:               convertStringToPlumbing(raw["name"]),
+			PortOverride:       convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:     convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:             convertStringToPlumbing(raw["region"]),
+			RoleArn:            convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID:     convertStringToPlumbing(raw["role_external_id"]),
+			SecretStoreID:      convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:          convertStringToPlumbing(raw["subdomain"]),
+			Tags:               convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -12891,6 +13019,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.AWSInstanceProfile:
+		localV, _ := localVersion.(*sdm.AWSInstanceProfile)
+		_ = localV
+		d.Set("aws_instance_profile", []map[string]interface{}{
+			{
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"enable_env_variables": (v.EnableEnvVariables),
+				"name":                 (v.Name),
+				"port_override":        (v.PortOverride),
+				"proxy_cluster_id":     (v.ProxyClusterID),
+				"region":               (v.Region),
+				"role_arn":             seValues["role_arn"],
+				"role_external_id":     seValues["role_external_id"],
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.Azure:
 		localV, _ := localVersion.(*sdm.Azure)
 		_ = localV
@@ -14958,6 +15105,34 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"session_expiry":                      (v.SessionExpiry),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AWSInstanceProfile:
+		localV, ok := localVersion.(*sdm.AWSInstanceProfile)
+		if !ok {
+			localV = &sdm.AWSInstanceProfile{}
+		}
+		_ = localV
+		if v.RoleArn != "" {
+			seValues["role_arn"] = v.RoleArn
+		}
+		if v.RoleExternalID != "" {
+			seValues["role_external_id"] = v.RoleExternalID
+		}
+		d.Set("aws_instance_profile", []map[string]interface{}{
+			{
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"enable_env_variables": (v.EnableEnvVariables),
+				"name":                 (v.Name),
+				"port_override":        (v.PortOverride),
+				"proxy_cluster_id":     (v.ProxyClusterID),
+				"region":               (v.Region),
+				"role_arn":             seValues["role_arn"],
+				"role_external_id":     seValues["role_external_id"],
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Azure:

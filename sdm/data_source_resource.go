@@ -1738,6 +1738,81 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"aws_instance_profile": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"enable_env_variables": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, prefer environment variables to authenticate connection even if EC2 roles are configured.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The AWS region to connect to.",
+									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The role to assume after logging in.",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"azure": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -8022,6 +8097,22 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"session_expiry":                      (v.SessionExpiry),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.AWSInstanceProfile:
+			output[0]["aws_instance_profile"] = append(output[0]["aws_instance_profile"], entity{
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"enable_env_variables": (v.EnableEnvVariables),
+				"id":                   (v.ID),
+				"name":                 (v.Name),
+				"port_override":        (v.PortOverride),
+				"proxy_cluster_id":     (v.ProxyClusterID),
+				"region":               (v.Region),
+				"role_arn":             (v.RoleArn),
+				"role_external_id":     (v.RoleExternalID),
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Azure:
 			output[0]["azure"] = append(output[0]["azure"], entity{

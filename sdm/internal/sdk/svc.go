@@ -2190,6 +2190,61 @@ func (svc *ControlPanel) VerifyJWT(
 	return resp, nil
 }
 
+// HealthChecks lists the last healthcheck between each node and resource.
+// Note the unconventional capitalization here is to prevent having a collision with GRPC
+type HealthChecks struct {
+	client plumbing.HealthChecksClient
+	parent *Client
+}
+
+// List gets a list of Healthchecks matching a given set of criteria.
+func (svc *HealthChecks) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	HealthcheckIterator,
+	error) {
+	req := &plumbing.HealthcheckListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newHealthcheckIteratorImpl(
+		func() (
+			[]*Healthcheck,
+			bool, error) {
+			var plumbingResponse *plumbing.HealthcheckListResponse
+			var err error
+			i := 0
+			for {
+				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "HealthChecks.List"), req)
+				if err != nil {
+					if !svc.parent.shouldRetry(i, err) {
+						return nil, false, convertErrorToPorcelain(err)
+					}
+					i++
+					svc.parent.jitterSleep(i)
+					continue
+				}
+				break
+			}
+			result, err := convertRepeatedHealthcheckToPorcelain(plumbingResponse.Healthchecks)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // IdentityAliases assign an alias to an account within an IdentitySet.
 // The alias is used as the username when connecting to a identity supported resource.
 type IdentityAliases struct {

@@ -298,6 +298,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "aws_instance_profile",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"enable_env_variables", `true`},
+				{"name", `"name"`},
+				{"region", `"region"`},
+				{"role_arn", `"role_arn"`},
+				{"role_external_id", `"role_external_id"`},
+			},
+		},
+		{
 			resource: "azure",
 			pairs: [][2]string{
 				{"app_id", `"app_id"`},
@@ -1549,6 +1560,18 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"session_expiry", `20000`},
 				{"subdomain", `"subdomain"`},
+			},
+		},
+		{
+			resource: "aws_instance_profile",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"enable_env_variables", `true`},
+				{"name", `"secret_name"`},
+				{"region", `"region"`},
+				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
+				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
 		{

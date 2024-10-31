@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/11.15.0"
+	defaultUserAgent = "strongdm-sdk-go/11.17.0"
 	defaultPageLimit = 50
 )
 
@@ -90,6 +90,7 @@ type Client struct {
 	approvalWorkflows                *ApprovalWorkflows
 	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
 	controlPanel                     *ControlPanel
+	healthChecks                     *HealthChecks
 	identityAliases                  *IdentityAliases
 	identityAliasesHistory           *IdentityAliasesHistory
 	identitySets                     *IdentitySets
@@ -250,6 +251,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.controlPanel = &ControlPanel{
 		client: plumbing.NewControlPanelClient(client.grpcConn),
+		parent: client,
+	}
+	client.healthChecks = &HealthChecks{
+		client: plumbing.NewHealthChecksClient(client.grpcConn),
 		parent: client,
 	}
 	client.identityAliases = &IdentityAliases{
@@ -580,6 +585,12 @@ func (c *Client) ApprovalWorkflowsHistory() *ApprovalWorkflowsHistory {
 // ControlPanel contains all administrative controls.
 func (c *Client) ControlPanel() *ControlPanel {
 	return c.controlPanel
+}
+
+// HealthChecks lists the last healthcheck between each node and resource.
+// Note the unconventional capitalization here is to prevent having a collision with GRPC
+func (c *Client) HealthChecks() *HealthChecks {
+	return c.healthChecks
 }
 
 // IdentityAliases assign an alias to an account within an IdentitySet.
