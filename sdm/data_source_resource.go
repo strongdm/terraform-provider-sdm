@@ -3519,6 +3519,171 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"gcp_console": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"identity_alias_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"session_expiry": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The length of time in seconds console sessions will live before needing to reauthenticate.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"workforce_pool_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the Workforce Identity Pool in GCP to use for federated authentication.",
+									},
+									"workforce_provider_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the Workforce Identity Provider in GCP to use for federated authentication.",
+									},
+								},
+							},
+						},
+						"gcpwif": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"identity_alias_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"scopes": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Space separated scopes that this login should assume into when authenticating.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"session_expiry": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The length of time in seconds console sessions will live before needing to reauthenticate.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"workforce_pool_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the Workforce Identity Pool in GCP to use for federated authentication.",
+									},
+									"workforce_provider_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the Workforce Identity Provider in GCP to use for federated authentication.",
+									},
+								},
+							},
+						},
 						"google_gke": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -8471,6 +8636,41 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.GCPConsole:
+			output[0]["gcp_console"] = append(output[0]["gcp_console"], entity{
+				"bind_interface":                      (v.BindInterface),
+				"egress_filter":                       (v.EgressFilter),
+				"id":                                  (v.ID),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"session_expiry":                      (v.SessionExpiry),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"workforce_pool_id":                   (v.WorkforcePoolID),
+				"workforce_provider_id":               (v.WorkforceProviderID),
+			})
+		case *sdm.GCPWIF:
+			output[0]["gcpwif"] = append(output[0]["gcpwif"], entity{
+				"bind_interface":                      (v.BindInterface),
+				"egress_filter":                       (v.EgressFilter),
+				"id":                                  (v.ID),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"scopes":                              (v.Scopes),
+				"secret_store_id":                     (v.SecretStoreID),
+				"session_expiry":                      (v.SessionExpiry),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"workforce_pool_id":                   (v.WorkforcePoolID),
+				"workforce_provider_id":               (v.WorkforceProviderID),
 			})
 		case *sdm.GoogleGKE:
 			output[0]["google_gke"] = append(output[0]["google_gke"], entity{

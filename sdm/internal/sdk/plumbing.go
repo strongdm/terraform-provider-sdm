@@ -6447,6 +6447,79 @@ func convertRepeatedGCPCertX509StoreToPorcelain(plumbings []*proto.GCPCertX509St
 	}
 	return items, nil
 }
+func convertGCPConsoleToPorcelain(plumbing *proto.GCPConsole) (*GCPConsole, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GCPConsole{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SessionExpiry = plumbing.SessionExpiry
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.WorkforcePoolID = plumbing.WorkforcePoolId
+	porcelain.WorkforceProviderID = plumbing.WorkforceProviderId
+	return porcelain, nil
+}
+
+func convertGCPConsoleToPlumbing(porcelain *GCPConsole) *proto.GCPConsole {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GCPConsole{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SessionExpiry = (porcelain.SessionExpiry)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.WorkforcePoolId = (porcelain.WorkforcePoolID)
+	plumbing.WorkforceProviderId = (porcelain.WorkforceProviderID)
+	return plumbing
+}
+func convertRepeatedGCPConsoleToPlumbing(
+	porcelains []*GCPConsole,
+) []*proto.GCPConsole {
+	var items []*proto.GCPConsole
+	for _, porcelain := range porcelains {
+		items = append(items, convertGCPConsoleToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGCPConsoleToPorcelain(plumbings []*proto.GCPConsole) (
+	[]*GCPConsole,
+	error,
+) {
+	var items []*GCPConsole
+	for _, plumbing := range plumbings {
+		if v, err := convertGCPConsoleToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertGCPStoreToPorcelain(plumbing *proto.GCPStore) (*GCPStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6491,6 +6564,81 @@ func convertRepeatedGCPStoreToPorcelain(plumbings []*proto.GCPStore) (
 	var items []*GCPStore
 	for _, plumbing := range plumbings {
 		if v, err := convertGCPStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGCPWIFToPorcelain(plumbing *proto.GCPWIF) (*GCPWIF, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GCPWIF{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Scopes = plumbing.Scopes
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SessionExpiry = plumbing.SessionExpiry
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.WorkforcePoolID = plumbing.WorkforcePoolId
+	porcelain.WorkforceProviderID = plumbing.WorkforceProviderId
+	return porcelain, nil
+}
+
+func convertGCPWIFToPlumbing(porcelain *GCPWIF) *proto.GCPWIF {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GCPWIF{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Scopes = (porcelain.Scopes)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SessionExpiry = (porcelain.SessionExpiry)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.WorkforcePoolId = (porcelain.WorkforcePoolID)
+	plumbing.WorkforceProviderId = (porcelain.WorkforceProviderID)
+	return plumbing
+}
+func convertRepeatedGCPWIFToPlumbing(
+	porcelains []*GCPWIF,
+) []*proto.GCPWIF {
+	var items []*proto.GCPWIF
+	for _, porcelain := range porcelains {
+		items = append(items, convertGCPWIFToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGCPWIFToPorcelain(plumbings []*proto.GCPWIF) (
+	[]*GCPWIF,
+	error,
+) {
+	var items []*GCPWIF
+	for _, plumbing := range plumbings {
+		if v, err := convertGCPWIFToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -13143,6 +13291,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_ElasticacheRedis{ElasticacheRedis: convertElasticacheRedisToPlumbing(v)}
 	case *GCP:
 		plumbing.Resource = &proto.Resource_Gcp{Gcp: convertGCPToPlumbing(v)}
+	case *GCPConsole:
+		plumbing.Resource = &proto.Resource_GcpConsole{GcpConsole: convertGCPConsoleToPlumbing(v)}
+	case *GCPWIF:
+		plumbing.Resource = &proto.Resource_Gcpwif{Gcpwif: convertGCPWIFToPlumbing(v)}
 	case *GoogleGKE:
 		plumbing.Resource = &proto.Resource_GoogleGke{GoogleGke: convertGoogleGKEToPlumbing(v)}
 	case *GoogleGKEUserImpersonation:
@@ -13363,6 +13515,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetGcp() != nil {
 		return convertGCPToPorcelain(plumbing.GetGcp())
+	}
+	if plumbing.GetGcpConsole() != nil {
+		return convertGCPConsoleToPorcelain(plumbing.GetGcpConsole())
+	}
+	if plumbing.GetGcpwif() != nil {
+		return convertGCPWIFToPorcelain(plumbing.GetGcpwif())
 	}
 	if plumbing.GetGoogleGke() != nil {
 		return convertGoogleGKEToPorcelain(plumbing.GetGoogleGke())

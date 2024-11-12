@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/11.17.0"
+const userAgent = "terraform-provider-sdm/11.18.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {

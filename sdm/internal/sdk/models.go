@@ -2278,6 +2278,41 @@ type GCPCertX509Store struct {
 	Tags Tags `json:"tags"`
 }
 
+// GCPConsole is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type GCPConsole struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// The length of time in seconds console sessions will live before needing to reauthenticate.
+	SessionExpiry int32 `json:"sessionExpiry"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The ID of the Workforce Identity Pool in GCP to use for federated authentication.
+	WorkforcePoolID string `json:"workforcePoolId"`
+	// The ID of the Workforce Identity Provider in GCP to use for federated authentication.
+	WorkforceProviderID string `json:"workforceProviderId"`
+}
+
 type GCPStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -2287,6 +2322,43 @@ type GCPStore struct {
 	ProjectID string `json:"projectId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+// GCPWIF is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type GCPWIF struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// Space separated scopes that this login should assume into when authenticating.
+	Scopes string `json:"scopes"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// The length of time in seconds console sessions will live before needing to reauthenticate.
+	SessionExpiry int32 `json:"sessionExpiry"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The ID of the Workforce Identity Pool in GCP to use for federated authentication.
+	WorkforcePoolID string `json:"workforcePoolId"`
+	// The ID of the Workforce Identity Provider in GCP to use for federated authentication.
+	WorkforceProviderID string `json:"workforceProviderId"`
 }
 
 // Gateway represents a StrongDM CLI installation running in gateway mode.
@@ -6789,6 +6861,114 @@ func (m *GCP) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the GCP.
 func (m *GCP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*GCPConsole) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GCPConsole.
+func (m *GCPConsole) GetID() string { return m.ID }
+
+// GetName returns the name of the GCPConsole.
+func (m *GCPConsole) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GCPConsole.
+func (m *GCPConsole) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GCPConsole.
+func (m *GCPConsole) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GCPConsole.
+func (m *GCPConsole) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GCPConsole.
+func (m *GCPConsole) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GCPConsole.
+func (m *GCPConsole) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GCPConsole.
+func (m *GCPConsole) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GCPConsole.
+func (m *GCPConsole) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the GCPConsole.
+func (m *GCPConsole) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GCPConsole.
+func (m *GCPConsole) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*GCPWIF) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GCPWIF.
+func (m *GCPWIF) GetID() string { return m.ID }
+
+// GetName returns the name of the GCPWIF.
+func (m *GCPWIF) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GCPWIF.
+func (m *GCPWIF) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GCPWIF.
+func (m *GCPWIF) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GCPWIF.
+func (m *GCPWIF) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GCPWIF.
+func (m *GCPWIF) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GCPWIF.
+func (m *GCPWIF) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GCPWIF.
+func (m *GCPWIF) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GCPWIF.
+func (m *GCPWIF) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the GCPWIF.
+func (m *GCPWIF) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GCPWIF.
+func (m *GCPWIF) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*GoogleGKE) isOneOf_Resource() {}

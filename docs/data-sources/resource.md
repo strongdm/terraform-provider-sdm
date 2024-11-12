@@ -679,6 +679,37 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+	* gcp_console:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `session_expiry` - The length of time in seconds console sessions will live before needing to reauthenticate.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `workforce_pool_id` - The ID of the Workforce Identity Pool in GCP to use for federated authentication.
+		* `workforce_provider_id` - The ID of the Workforce Identity Provider in GCP to use for federated authentication.
+	* gcpwif:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `scopes` - Space separated scopes that this login should assume into when authenticating.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `session_expiry` - The length of time in seconds console sessions will live before needing to reauthenticate.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `workforce_pool_id` - The ID of the Workforce Identity Pool in GCP to use for federated authentication.
+		* `workforce_provider_id` - The ID of the Workforce Identity Provider in GCP to use for federated authentication.
 	* google_gke:
 		* `allow_resource_role_bypass` - If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.

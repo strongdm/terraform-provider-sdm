@@ -563,6 +563,30 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "gcp_console",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
+				{"name", `"name"`},
+				{"session_expiry", `20000`},
+				{"subdomain", `"subdomain"`},
+				{"workforce_pool_id", `"workforce_pool_id"`},
+				{"workforce_provider_id", `"workforce_provider_id"`},
+			},
+		},
+		{
+			resource: "gcpwif",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
+				{"name", `"name"`},
+				{"scopes", `"scopes"`},
+				{"session_expiry", `20000`},
+				{"workforce_pool_id", `"workforce_pool_id"`},
+				{"workforce_provider_id", `"workforce_provider_id"`},
+			},
+		},
+		{
 			resource: "google_gke",
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
