@@ -702,6 +702,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource.
+		* `project_id` - When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `scopes` - Space separated scopes that this login should assume into when authenticating.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
@@ -1203,6 +1204,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
 		* `identity_set_id` - The ID of the identity set to use for identity connections.
+		* `lock_required` - When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource.

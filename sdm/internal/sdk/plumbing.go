@@ -897,7 +897,17 @@ func convertAccessRequestToPorcelain(plumbing *proto.AccessRequest) (*AccessRequ
 	porcelain.GrantID = plumbing.GrantId
 	porcelain.ID = plumbing.Id
 	porcelain.Reason = plumbing.Reason
+	if v, err := convertDurationToPorcelain(plumbing.RequestedDuration); err != nil {
+		return nil, fmt.Errorf("error converting field RequestedDuration: %v", err)
+	} else {
+		porcelain.RequestedDuration = v
+	}
 	porcelain.ResourceID = plumbing.ResourceId
+	if v, err := convertDurationToPorcelain(plumbing.ResultDuration); err != nil {
+		return nil, fmt.Errorf("error converting field ResultDuration: %v", err)
+	} else {
+		porcelain.ResultDuration = v
+	}
 	if v, err := convertTimestampToPorcelain(plumbing.StartFrom); err != nil {
 		return nil, fmt.Errorf("error converting field StartFrom: %v", err)
 	} else {
@@ -928,7 +938,9 @@ func convertAccessRequestToPlumbing(porcelain *AccessRequest) *proto.AccessReque
 	plumbing.GrantId = (porcelain.GrantID)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Reason = (porcelain.Reason)
+	plumbing.RequestedDuration = convertDurationToPlumbing(porcelain.RequestedDuration)
 	plumbing.ResourceId = (porcelain.ResourceID)
+	plumbing.ResultDuration = convertDurationToPlumbing(porcelain.ResultDuration)
 	plumbing.StartFrom = convertTimestampToPlumbing(porcelain.StartFrom)
 	plumbing.Status = (porcelain.Status)
 	plumbing.StatusAt = convertTimestampToPlumbing(porcelain.StatusAt)
@@ -6584,6 +6596,7 @@ func convertGCPWIFToPorcelain(plumbing *proto.GCPWIF) (*GCPWIF, error) {
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProjectID = plumbing.ProjectId
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Scopes = plumbing.Scopes
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -6612,6 +6625,7 @@ func convertGCPWIFToPlumbing(porcelain *GCPWIF) *proto.GCPWIF {
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProjectId = (porcelain.ProjectID)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Scopes = (porcelain.Scopes)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -12024,6 +12038,7 @@ func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
 	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
@@ -12051,6 +12066,7 @@ func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
 	plumbing.Id = (porcelain.ID)
 	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)

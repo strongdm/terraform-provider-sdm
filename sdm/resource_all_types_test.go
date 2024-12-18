@@ -580,6 +580,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
 				{"name", `"name"`},
+				{"project_id", `"project_id"`},
 				{"scopes", `"scopes"`},
 				{"session_expiry", `20000`},
 				{"workforce_pool_id", `"workforce_pool_id"`},
@@ -990,6 +991,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
+				{"lock_required", `true`},
 				{"name", `"name"`},
 				{"port", `443`},
 				{"username", `"username"`},
@@ -1312,6 +1314,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		pairs    [][2]string
 	}
 	tcs := []testCase{
+
 		{
 			resource: "aks",
 			pairs: [][2]string{
@@ -1330,6 +1333,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "aks_basic_auth",
 			pairs: [][2]string{
@@ -1343,6 +1347,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "aks_service_account",
 			pairs: [][2]string{
@@ -1359,6 +1364,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"token", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "aks_service_account_user_impersonation",
 			pairs: [][2]string{
@@ -1371,6 +1377,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"token", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "aks_user_impersonation",
 			pairs: [][2]string{
@@ -1385,6 +1392,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "amazon_eks",
 			pairs: [][2]string{
@@ -1406,6 +1414,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "amazon_eks_instance_profile",
 			pairs: [][2]string{
@@ -1425,6 +1434,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "amazon_eks_instance_profile_user_impersonation",
 			pairs: [][2]string{
@@ -1440,6 +1450,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "amazon_eks_user_impersonation",
 			pairs: [][2]string{
@@ -1457,6 +1468,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "amazon_es",
 			pairs: [][2]string{
@@ -1471,6 +1483,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "amazonmq_amqp_091",
 			pairs: [][2]string{
@@ -1484,6 +1497,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "athena",
 			pairs: [][2]string{
@@ -1498,6 +1512,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "aurora_mysql",
 			pairs: [][2]string{
@@ -1513,6 +1528,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "aurora_postgres",
 			pairs: [][2]string{
@@ -1527,6 +1543,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "aurora_postgres_iam",
 			pairs: [][2]string{
@@ -1542,6 +1559,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "aws",
 			pairs: [][2]string{
@@ -1555,6 +1573,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "aws_console",
 			pairs: [][2]string{
@@ -1570,6 +1589,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"subdomain", `"subdomain"`},
 			},
 		},
+
 		{
 			resource: "aws_console_static_key_pair",
 			pairs: [][2]string{
@@ -1586,6 +1606,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"subdomain", `"subdomain"`},
 			},
 		},
+
 		{
 			resource: "aws_instance_profile",
 			pairs: [][2]string{
@@ -1598,6 +1619,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "azure",
 			pairs: [][2]string{
@@ -1609,6 +1631,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"tenant_id", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "azure_certificate",
 			pairs: [][2]string{
@@ -1620,6 +1643,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"tenant_id", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "azure_mysql",
 			pairs: [][2]string{
@@ -1635,6 +1659,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "azure_postgres",
 			pairs: [][2]string{
@@ -1649,6 +1674,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "azure_postgres_managed_identity",
 			pairs: [][2]string{
@@ -1664,6 +1690,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "big_query",
 			pairs: [][2]string{
@@ -1676,6 +1703,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"username"`},
 			},
 		},
+
 		{
 			resource: "cassandra",
 			pairs: [][2]string{
@@ -1689,6 +1717,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "citus",
 			pairs: [][2]string{
@@ -1703,6 +1732,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "clustrix",
 			pairs: [][2]string{
@@ -1718,6 +1748,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "cockroach",
 			pairs: [][2]string{
@@ -1732,6 +1763,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "couchbase_database",
 			pairs: [][2]string{
@@ -1746,6 +1778,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "couchbase_web_ui",
 			pairs: [][2]string{
@@ -1758,6 +1791,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "db_2_i",
 			pairs: [][2]string{
@@ -1771,6 +1805,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "db_2_luw",
 			pairs: [][2]string{
@@ -1784,6 +1819,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "document_db_host",
 			pairs: [][2]string{
@@ -1797,6 +1833,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "document_db_replica_set",
 			pairs: [][2]string{
@@ -1811,6 +1848,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "druid",
 			pairs: [][2]string{
@@ -1823,6 +1861,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "dynamo_db",
 			pairs: [][2]string{
@@ -1837,6 +1876,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "elastic",
 			pairs: [][2]string{
@@ -1850,6 +1890,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "elasticache_redis",
 			pairs: [][2]string{
@@ -1863,6 +1904,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "gcp",
 			pairs: [][2]string{
@@ -1873,6 +1915,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "google_gke",
 			pairs: [][2]string{
@@ -1889,6 +1932,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"service_account_key", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "google_gke_user_impersonation",
 			pairs: [][2]string{
@@ -1901,6 +1945,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"service_account_key", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "greenplum",
 			pairs: [][2]string{
@@ -1915,6 +1960,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "http_auth",
 			pairs: [][2]string{
@@ -1930,6 +1976,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"url", `"https://app.strongdm.com"`},
 			},
 		},
+
 		{
 			resource: "http_basic_auth",
 			pairs: [][2]string{
@@ -1946,6 +1993,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "kubernetes",
 			pairs: [][2]string{
@@ -1964,6 +2012,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "kubernetes_basic_auth",
 			pairs: [][2]string{
@@ -1977,6 +2026,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "kubernetes_service_account",
 			pairs: [][2]string{
@@ -1993,6 +2043,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"token", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "kubernetes_service_account_user_impersonation",
 			pairs: [][2]string{
@@ -2005,6 +2056,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"token", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "kubernetes_user_impersonation",
 			pairs: [][2]string{
@@ -2019,6 +2071,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "maria",
 			pairs: [][2]string{
@@ -2034,6 +2087,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "memsql",
 			pairs: [][2]string{
@@ -2049,6 +2103,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mongo_host",
 			pairs: [][2]string{
@@ -2063,6 +2118,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mongo_legacy_host",
 			pairs: [][2]string{
@@ -2077,6 +2133,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mongo_legacy_replicaset",
 			pairs: [][2]string{
@@ -2093,6 +2150,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mongo_replica_set",
 			pairs: [][2]string{
@@ -2109,6 +2167,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mongo_sharded_cluster",
 			pairs: [][2]string{
@@ -2122,6 +2181,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mtls_mysql",
 			pairs: [][2]string{
@@ -2141,6 +2201,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mtls_postgres",
 			pairs: [][2]string{
@@ -2159,6 +2220,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "mysql",
 			pairs: [][2]string{
@@ -2174,6 +2236,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "neptune_iam",
 			pairs: [][2]string{
@@ -2189,6 +2252,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
+
 		{
 			resource: "oracle",
 			pairs: [][2]string{
@@ -2203,6 +2267,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "postgres",
 			pairs: [][2]string{
@@ -2217,6 +2282,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "presto",
 			pairs: [][2]string{
@@ -2231,6 +2297,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"username"`},
 			},
 		},
+
 		{
 			resource: "rabbitmq_amqp_091",
 			pairs: [][2]string{
@@ -2244,6 +2311,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "rdp",
 			pairs: [][2]string{
@@ -2258,18 +2326,21 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "rdp_cert",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
+				{"lock_required", `true`},
 				{"name", `"secret_name"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seRDPID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "rds_postgres_iam",
 			pairs: [][2]string{
@@ -2285,6 +2356,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "redis",
 			pairs: [][2]string{
@@ -2298,6 +2370,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "redshift",
 			pairs: [][2]string{
@@ -2312,6 +2385,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "single_store",
 			pairs: [][2]string{
@@ -2327,6 +2401,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "snowflake",
 			pairs: [][2]string{
@@ -2340,6 +2415,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "snowsight",
 			pairs: [][2]string{
@@ -2351,6 +2427,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"subdomain", `"subdomain"`},
 			},
 		},
+
 		{
 			resource: "sql_server",
 			pairs: [][2]string{
@@ -2367,6 +2444,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "sql_server_azure_ad",
 			pairs: [][2]string{
@@ -2384,6 +2462,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"tenant_id", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "sql_server_kerberos_ad",
 			pairs: [][2]string{
@@ -2403,6 +2482,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "ssh",
 			pairs: [][2]string{
@@ -2417,6 +2497,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "ssh_cert",
 			pairs: [][2]string{
@@ -2432,6 +2513,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "ssh_customer_key",
 			pairs: [][2]string{
@@ -2446,6 +2528,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "ssh_password",
 			pairs: [][2]string{
@@ -2460,6 +2543,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "sybase",
 			pairs: [][2]string{
@@ -2472,6 +2556,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "sybase_iq",
 			pairs: [][2]string{
@@ -2484,6 +2569,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "teradata",
 			pairs: [][2]string{
@@ -2496,6 +2582,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
+
 		{
 			resource: "trino",
 			pairs: [][2]string{

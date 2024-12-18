@@ -3640,6 +3640,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource.",
 									},
+									"project_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients",
+									},
 									"proxy_cluster_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -6338,6 +6343,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
+									"lock_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -8663,6 +8673,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"identity_set_id":                     (v.IdentitySetID),
 				"name":                                (v.Name),
 				"port_override":                       (v.PortOverride),
+				"project_id":                          (v.ProjectID),
 				"proxy_cluster_id":                    (v.ProxyClusterID),
 				"scopes":                              (v.Scopes),
 				"secret_store_id":                     (v.SecretStoreID),
@@ -9226,6 +9237,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                                  (v.ID),
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_override":                       (v.PortOverride),

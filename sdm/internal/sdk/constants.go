@@ -276,6 +276,7 @@ const (
 	ActivityVerbAccessRequestToResourceGranted                   = "access request to resource granted"
 	ActivityVerbAccessRequestToResourceGrantedAutomatically      = "access request to resource granted automatically"
 	ActivityVerbAccessRequestToResourceApprovedViaServiceNow     = "access request to resource approved via ServiceNow"
+	ActivityVerbAccessRequestToResourceApprovedViaJira           = "access request to resource approved via Jira"
 	ActivityVerbWorkflowDeleted                                  = "workflow deleted"
 	ActivityVerbWorkflowAdded                                    = "workflow added"
 	ActivityVerbDeprecatedWorkflowResourceAssigned               = "resource assigned to workflow"
@@ -289,6 +290,7 @@ const (
 	ActivityVerbWorkflowNameUpdated                              = "workflow name updated"
 	ActivityVerbWorkflowDescriptionUpdated                       = "workflow description updated"
 	ActivityVerbWorkflowRequiresReasonUpdated                    = "workflow requires reason updated"
+	ActivityVerbWorkflowSettingsUpdated                          = "workflow settings updated"
 	ActivityVerbWorkflowAccessRulesUpdated                       = "workflow access rules updated"
 	ActivityVerbWorkflowAccessRulesDeleted                       = "workflow access rules deleted"
 	ActivityVerbWorkflowAccessRulesCreated                       = "workflow access rules created"
@@ -325,6 +327,7 @@ const (
 	ActivityVerbManagedSecretCreated                             = "managed secret created"
 	ActivityVerbManagedSecretUpdated                             = "managed secret updated"
 	ActivityVerbManagedSecretExpirationTimeUpdated               = "managed secret expiration time updated"
+	ActivityVerbManagedSecretConfigUpdated                       = "managed secret config updated"
 	ActivityVerbManagedSecretDeleted                             = "managed secret deleted"
 )
 

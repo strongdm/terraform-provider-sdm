@@ -397,6 +397,7 @@ type AccessRequest struct {
 	// The account that initiated the request.
 	AccountID string `json:"accountId"`
 	// Duration of the access request.
+	// Deprecated: use requested/result duration instead
 	Duration int64 `json:"duration"`
 	// The account grant created, if it exists.
 	GrantID string `json:"grantId"`
@@ -404,8 +405,12 @@ type AccessRequest struct {
 	ID string `json:"id"`
 	// The reason the access was requested.
 	Reason string `json:"reason"`
+	// The duration that access was requested for, if any.
+	RequestedDuration time.Duration `json:"requestedDuration"`
 	// The resource id.
 	ResourceID string `json:"resourceId"`
+	// The duration that results from an approved request.
+	ResultDuration time.Duration `json:"resultDuration"`
 	// The timestamp when the requested access will be granted.
 	// If this field is not specified it will default to the current time.
 	StartFrom time.Time `json:"startFrom"`
@@ -2343,6 +2348,8 @@ type GCPWIF struct {
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.
 	PortOverride int32 `json:"portOverride"`
+	// When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients
+	ProjectID string `json:"projectId"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
 	// Space separated scopes that this login should assume into when authenticating.
@@ -4304,6 +4311,8 @@ type RDPCert struct {
 	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetID string `json:"identitySetId"`
+	// When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
+	LockRequired bool `json:"lockRequired"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.

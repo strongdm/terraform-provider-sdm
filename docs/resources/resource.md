@@ -686,6 +686,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `project_id` - (Optional) When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `scopes` - (Required) Space separated scopes that this login should assume into when authenticating.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -1156,6 +1157,7 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
+	* `lock_required` - (Optional) When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
