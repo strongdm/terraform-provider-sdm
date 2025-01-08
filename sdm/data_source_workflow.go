@@ -22,6 +22,16 @@ func dataSourceWorkflow() *schema.Resource {
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
+			"access_request_fixed_duration": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
+			},
+			"access_request_max_duration": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
+			},
 			"approval_flow_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -63,6 +73,16 @@ func dataSourceWorkflow() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
+						"access_request_fixed_duration": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
+						},
+						"access_request_max_duration": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
+						},
 						"access_rules": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -116,6 +136,14 @@ func dataSourceWorkflow() *schema.Resource {
 func convertWorkflowFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
+	if v, ok := d.GetOkExists("access_request_fixed_duration"); ok {
+		filter += "accessrequestfixedduration:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("access_request_max_duration"); ok {
+		filter += "accessrequestmaxduration:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("access_rules"); ok {
 		filter += "accessrules:? "
 		args = append(args, v)
@@ -165,14 +193,16 @@ func dataSourceWorkflowList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		ids = append(ids, v.ID)
 		output = append(output,
 			entity{
-				"access_rules":     convertAccessRulesToPorcelain(v.AccessRules),
-				"approval_flow_id": (v.ApprovalFlowID),
-				"auto_grant":       (v.AutoGrant),
-				"description":      (v.Description),
-				"enabled":          (v.Enabled),
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"weight":           (v.Weight),
+				"access_request_fixed_duration": convertDurationToPorcelain(v.AccessRequestFixedDuration),
+				"access_request_max_duration":   convertDurationToPorcelain(v.AccessRequestMaxDuration),
+				"access_rules":                  convertAccessRulesToPorcelain(v.AccessRules),
+				"approval_flow_id":              (v.ApprovalFlowID),
+				"auto_grant":                    (v.AutoGrant),
+				"description":                   (v.Description),
+				"enabled":                       (v.Enabled),
+				"id":                            (v.ID),
+				"name":                          (v.Name),
+				"weight":                        (v.Weight),
 			})
 	}
 	if resp.Err() != nil {

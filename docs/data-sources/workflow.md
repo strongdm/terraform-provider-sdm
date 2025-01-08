@@ -32,6 +32,8 @@ In addition to provided arguments above, the following attributes are returned b
 * `id` - a generated id representing this request, unrelated to input id and sdm_workflow ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `workflows` - A list where each element has the following attributes:
+	* `access_request_fixed_duration` - Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.
+	* `access_request_max_duration` - Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.
 	* `access_rules` - AccessRules is a list of access rules defining the resources this Workflow provides access to.
 	* `approval_flow_id` - Optional approval flow ID identifies an approval flow that linked to the workflow
 	* `auto_grant` - Optional auto grant setting to automatically approve requests or not, defaults to false.

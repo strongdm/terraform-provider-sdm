@@ -17081,6 +17081,16 @@ func convertWorkflowToPorcelain(plumbing *proto.Workflow) (*Workflow, error) {
 		return nil, nil
 	}
 	porcelain := &Workflow{}
+	if v, err := convertDurationToPorcelain(plumbing.AccessRequestFixedDuration); err != nil {
+		return nil, fmt.Errorf("error converting field AccessRequestFixedDuration: %v", err)
+	} else {
+		porcelain.AccessRequestFixedDuration = v
+	}
+	if v, err := convertDurationToPorcelain(plumbing.AccessRequestMaxDuration); err != nil {
+		return nil, fmt.Errorf("error converting field AccessRequestMaxDuration: %v", err)
+	} else {
+		porcelain.AccessRequestMaxDuration = v
+	}
 	if v, err := convertAccessRulesToPorcelain(plumbing.AccessRules); err != nil {
 		return nil, fmt.Errorf("error converting field AccessRules: %v", err)
 	} else {
@@ -17101,6 +17111,8 @@ func convertWorkflowToPlumbing(porcelain *Workflow) *proto.Workflow {
 		return nil
 	}
 	plumbing := &proto.Workflow{}
+	plumbing.AccessRequestFixedDuration = convertDurationToPlumbing(porcelain.AccessRequestFixedDuration)
+	plumbing.AccessRequestMaxDuration = convertDurationToPlumbing(porcelain.AccessRequestMaxDuration)
 	plumbing.AccessRules = convertAccessRulesToPlumbing(porcelain.AccessRules)
 	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
 	plumbing.AutoGrant = (porcelain.AutoGrant)

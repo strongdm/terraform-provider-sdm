@@ -102,6 +102,48 @@ func TestAccSDMWorkflow_Update(t *testing.T) {
 	})
 }
 
+func TestAccSDMWorkflow_Settings(t *testing.T) {
+	initAcceptanceTest(t)
+	resourceName := randomWithPrefix("wf-create")
+	workflowName := randomWithPrefix("wf-create")
+	maxDuration := "1h30m0s"
+	fixedDuration := "1h45m0s"
+	resource.Test(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMWorkflowConfigWithSettings(resourceName, workflowName, maxDuration, ""),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "name", workflowName),
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "access_request_max_duration", maxDuration),
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "access_request_fixed_duration", "0s"),
+					doubleCheckWorkflow(resourceName, workflowName),
+				),
+			},
+			{
+				ResourceName:      "sdm_workflow." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccSDMWorkflowConfigWithSettings(resourceName, workflowName, "", fixedDuration),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "name", workflowName),
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "access_request_max_duration", "0s"),
+					resource.TestCheckResourceAttr("sdm_workflow."+resourceName, "access_request_fixed_duration", fixedDuration),
+					doubleCheckWorkflow(resourceName, workflowName),
+				),
+			},
+			{
+				ResourceName:      "sdm_workflow." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func createWorkflowsWithPrifix(prefix string, count int) ([]*sdm.Workflow, error) {
 	client, err := preTestClient()
 	if err != nil {
@@ -127,6 +169,20 @@ func testAccSDMWorkflowConfig(workflowName, sdmResourceName string) string {
 	resource "sdm_workflow" "%s" {
 		name = "%s"
 	}`, workflowName, sdmResourceName)
+}
+
+func testAccSDMWorkflowConfigWithSettings(workflowName, sdmResourceName, maxDuration, fixedDuration string) string {
+	value := fmt.Sprintf(`
+	resource "sdm_workflow" "%s" {
+		name = "%s"`, workflowName, sdmResourceName) + "\n"
+	if maxDuration != "" {
+		value += fmt.Sprintf(`access_request_max_duration = "%s"`, maxDuration) + "\n"
+	}
+	if fixedDuration != "" {
+		value += fmt.Sprintf(`access_request_fixed_duration = "%s"`, fixedDuration) + "\n"
+	}
+	value += `}`
+	return value
 }
 
 func doubleCheckWorkflow(resourceName, workflowName string) func(s *terraform.State) error {

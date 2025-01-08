@@ -11173,6 +11173,12 @@ type VaultTokenStore struct {
 // the users that can request that access, and the mechanism for approving those requests which can either
 // but automatic approval or a set of users authorized to approve the requests.
 type Workflow struct {
+	// Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty.
+	// If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.
+	AccessRequestFixedDuration time.Duration `json:"accessRequestFixedDuration"`
+	// Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty.
+	// If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.
+	AccessRequestMaxDuration time.Duration `json:"accessRequestMaxDuration"`
 	// AccessRules is a list of access rules defining the resources this Workflow provides access to.
 	AccessRules AccessRules `json:"accessRules"`
 	// Optional approval flow ID identifies an approval flow that linked to the workflow

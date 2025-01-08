@@ -23,6 +23,18 @@ func resourceWorkflow() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"access_request_fixed_duration": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "0s",
+				Description: "Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
+			},
+			"access_request_max_duration": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "0s",
+				Description: "Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
+			},
 			"access_rules": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -73,14 +85,16 @@ func resourceWorkflow() *schema.Resource {
 }
 func convertWorkflowToPlumbing(d *schema.ResourceData) *sdm.Workflow {
 	return &sdm.Workflow{
-		ID:             d.Id(),
-		AccessRules:    convertAccessRulesToPlumbing(d.Get("access_rules")),
-		ApprovalFlowID: convertStringToPlumbing(d.Get("approval_flow_id")),
-		AutoGrant:      convertBoolToPlumbing(d.Get("auto_grant")),
-		Description:    convertStringToPlumbing(d.Get("description")),
-		Enabled:        convertBoolToPlumbing(d.Get("enabled")),
-		Name:           convertStringToPlumbing(d.Get("name")),
-		Weight:         convertInt64ToPlumbing(d.Get("weight")),
+		ID:                         d.Id(),
+		AccessRequestFixedDuration: convertDurationToPlumbing(d.Get("access_request_fixed_duration")),
+		AccessRequestMaxDuration:   convertDurationToPlumbing(d.Get("access_request_max_duration")),
+		AccessRules:                convertAccessRulesToPlumbing(d.Get("access_rules")),
+		ApprovalFlowID:             convertStringToPlumbing(d.Get("approval_flow_id")),
+		AutoGrant:                  convertBoolToPlumbing(d.Get("auto_grant")),
+		Description:                convertStringToPlumbing(d.Get("description")),
+		Enabled:                    convertBoolToPlumbing(d.Get("enabled")),
+		Name:                       convertStringToPlumbing(d.Get("name")),
+		Weight:                     convertInt64ToPlumbing(d.Get("weight")),
 	}
 }
 
@@ -94,6 +108,8 @@ func resourceWorkflowCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	}
 	d.SetId(resp.Workflow.ID)
 	v := resp.Workflow
+	d.Set("access_request_fixed_duration", convertDurationToPorcelain(v.AccessRequestFixedDuration))
+	d.Set("access_request_max_duration", convertDurationToPorcelain(v.AccessRequestMaxDuration))
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
 	d.Set("approval_flow_id", (v.ApprovalFlowID))
 	d.Set("auto_grant", (v.AutoGrant))
@@ -118,6 +134,8 @@ func resourceWorkflowRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		return fmt.Errorf("cannot read Workflow %s: %w", d.Id(), err)
 	}
 	v := resp.Workflow
+	d.Set("access_request_fixed_duration", convertDurationToPorcelain(v.AccessRequestFixedDuration))
+	d.Set("access_request_max_duration", convertDurationToPorcelain(v.AccessRequestMaxDuration))
 	d.Set("access_rules", convertAccessRulesToPorcelain(v.AccessRules))
 	d.Set("approval_flow_id", (v.ApprovalFlowID))
 	d.Set("auto_grant", (v.AutoGrant))
