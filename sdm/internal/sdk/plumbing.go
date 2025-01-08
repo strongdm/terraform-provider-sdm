@@ -13080,6 +13080,7 @@ func convertReplayChunkToPorcelain(plumbing *proto.ReplayChunk) (*ReplayChunk, e
 	} else {
 		porcelain.Events = v
 	}
+	porcelain.SymmetricKey = plumbing.SymmetricKey
 	return porcelain, nil
 }
 
@@ -13090,6 +13091,7 @@ func convertReplayChunkToPlumbing(porcelain *ReplayChunk) *proto.ReplayChunk {
 	plumbing := &proto.ReplayChunk{}
 	plumbing.Data = (porcelain.Data)
 	plumbing.Events = convertRepeatedReplayChunkEventToPlumbing(porcelain.Events)
+	plumbing.SymmetricKey = (porcelain.SymmetricKey)
 	return plumbing
 }
 func convertRepeatedReplayChunkToPlumbing(

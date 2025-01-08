@@ -4655,6 +4655,8 @@ type ReplayChunk struct {
 	// The list of events of the ReplayChunk. If the Query is encrypted, this field is always empty
 	// and the events can be obtained by decrypting the data using the QueryKey returned with the Query.
 	Events []*ReplayChunkEvent `json:"events"`
+	// If the data is encrypted, this contains the encrypted symmetric key
+	SymmetricKey string `json:"symmetricKey"`
 }
 
 // A ReplayChunkEvent represents a single event within a query replay.
