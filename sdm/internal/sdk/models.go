@@ -1396,6 +1396,43 @@ type AuroraMysql struct {
 	Username string `json:"username"`
 }
 
+// AuroraMysqlIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AuroraMysqlIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The database for healthchecks. Does not affect client requests
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	RoleAssumptionArn string `json:"roleAssumptionArn"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type AuroraPostgres struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -5414,6 +5451,60 @@ func (m *AuroraMysql) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AuroraMysql.
 func (m *AuroraMysql) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AuroraMysqlIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AuroraMysqlIAM.
+func (m *AuroraMysqlIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AuroraPostgres) isOneOf_Resource() {}

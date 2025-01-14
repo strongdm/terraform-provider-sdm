@@ -4219,6 +4219,81 @@ func convertRepeatedAuroraMysqlToPorcelain(plumbings []*proto.AuroraMysql) (
 	}
 	return items, nil
 }
+func convertAuroraMysqlIAMToPorcelain(plumbing *proto.AuroraMysqlIAM) (*AuroraMysqlIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AuroraMysqlIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertAuroraMysqlIAMToPlumbing(porcelain *AuroraMysqlIAM) *proto.AuroraMysqlIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AuroraMysqlIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAuroraMysqlIAMToPlumbing(
+	porcelains []*AuroraMysqlIAM,
+) []*proto.AuroraMysqlIAM {
+	var items []*proto.AuroraMysqlIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertAuroraMysqlIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAuroraMysqlIAMToPorcelain(plumbings []*proto.AuroraMysqlIAM) (
+	[]*AuroraMysqlIAM,
+	error,
+) {
+	var items []*AuroraMysqlIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertAuroraMysqlIAMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAuroraPostgresToPorcelain(plumbing *proto.AuroraPostgres) (*AuroraPostgres, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -13255,6 +13330,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Athena{Athena: convertAthenaToPlumbing(v)}
 	case *AuroraMysql:
 		plumbing.Resource = &proto.Resource_AuroraMysql{AuroraMysql: convertAuroraMysqlToPlumbing(v)}
+	case *AuroraMysqlIAM:
+		plumbing.Resource = &proto.Resource_AuroraMysqlIam{AuroraMysqlIam: convertAuroraMysqlIAMToPlumbing(v)}
 	case *AuroraPostgres:
 		plumbing.Resource = &proto.Resource_AuroraPostgres{AuroraPostgres: convertAuroraPostgresToPlumbing(v)}
 	case *AuroraPostgresIAM:
@@ -13452,6 +13529,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAuroraMysql() != nil {
 		return convertAuroraMysqlToPorcelain(plumbing.GetAuroraMysql())
+	}
+	if plumbing.GetAuroraMysqlIam() != nil {
+		return convertAuroraMysqlIAMToPorcelain(plumbing.GetAuroraMysqlIam())
 	}
 	if plumbing.GetAuroraPostgres() != nil {
 		return convertAuroraPostgresToPorcelain(plumbing.GetAuroraPostgres())

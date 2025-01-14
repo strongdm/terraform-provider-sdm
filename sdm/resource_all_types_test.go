@@ -230,6 +230,19 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "aurora_mysql_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"role_assumption_arn", `"role_assumption_arn"`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "aurora_postgres",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1525,6 +1538,21 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"require_native_auth", `true`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"use_azure_single_server_usernames", `true`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "aurora_mysql_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"role_assumption_arn", `"role_assumption_arn"`},
+				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},

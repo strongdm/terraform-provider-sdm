@@ -251,6 +251,7 @@ const (
 	ActivityVerbSecretStoreDeleted                               = "secret store deleted"
 	ActivityVerbSecretEngineAdded                                = "secret engine added"
 	ActivityVerbSecretEngineUpdated                              = "secret engine updated"
+	ActivityVerbSecretEngineRotated                              = "secret engine's credentials updated"
 	ActivityVerbSecretEngineDeleted                              = "secret engine deleted"
 	ActivityVerbRemoteIdentityGroupCreated                       = "remote identity group created"
 	ActivityVerbRemoteIdentityGroupUpdated                       = "remote identity group updated"

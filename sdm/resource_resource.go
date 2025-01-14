@@ -1272,6 +1272,91 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"aurora_mysql_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AuroraMysqlIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"role_assumption_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"aurora_postgres": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -8269,6 +8354,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("aurora_mysql_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("aurora_postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10639,6 +10743,35 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:                          convertTagsToPlumbing(raw["tags"]),
 			UseAzureSingleServerUsernames: convertBoolToPlumbing(raw["use_azure_single_server_usernames"]),
 			Username:                      convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("aurora_mysql_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AuroraMysqlIAM{}
+		}
+		out := &sdm.AuroraMysqlIAM{
+			ID:                d.Id(),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
+			Database:          convertStringToPlumbing(raw["database"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:          convertStringToPlumbing(raw["hostname"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			Port:              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:      convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:    convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:            convertStringToPlumbing(raw["region"]),
+			RoleAssumptionArn: convertStringToPlumbing(raw["role_assumption_arn"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
+			Username:          convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -13166,6 +13299,27 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":                          seValues["username"],
 			},
 		})
+	case *sdm.AuroraMysqlIAM:
+		localV, _ := localVersion.(*sdm.AuroraMysqlIAM)
+		_ = localV
+		d.Set("aurora_mysql_iam", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"username":            seValues["username"],
+			},
+		})
 	case *sdm.AuroraPostgres:
 		localV, _ := localVersion.(*sdm.AuroraPostgres)
 		_ = localV
@@ -15241,6 +15395,33 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"tags":                              convertTagsToPorcelain(v.Tags),
 				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
 				"username":                          seValues["username"],
+			},
+		})
+	case *sdm.AuroraMysqlIAM:
+		localV, ok := localVersion.(*sdm.AuroraMysqlIAM)
+		if !ok {
+			localV = &sdm.AuroraMysqlIAM{}
+		}
+		_ = localV
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("aurora_mysql_iam", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"username":            seValues["username"],
 			},
 		})
 	case *sdm.AuroraPostgres:
