@@ -2526,6 +2526,248 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"click_house_http": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"url": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
+			"click_house_my_sql": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"require_native_auth": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
+			"click_house_tcp": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, TLS must be used to connect to this resource.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"clustrix": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -3102,6 +3344,76 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"document_db_host_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"document_db_replica_set": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -3328,6 +3640,81 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "The Secret Access Key to use to authenticate.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"dynamo_dbiam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "DynamoDBIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"endpoint": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The endpoint to dial e.g. dynamodb.region.amazonaws.com",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The region to authenticate requests against e.g. us-east-1",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The role to assume after logging in.",
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -8765,6 +9152,84 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("click_house_http").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
+	if list := d.Get("click_house_my_sql").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
+	if list := d.Get("click_house_tcp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -8947,6 +9412,17 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("document_db_host_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
 	if list := d.Get("document_db_replica_set").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9037,6 +9513,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"role_arn":          convertStringToPlumbing(raw["role_arn"]),
 			"role_external_id":  convertStringToPlumbing(raw["role_external_id"]),
 			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
+		}, nil
+	}
+	if list := d.Get("dynamo_dbiam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"role_arn":         convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id": convertStringToPlumbing(raw["role_external_id"]),
 		}, nil
 	}
 	if list := d.Get("elastic").([]interface{}); len(list) > 0 {
@@ -11180,6 +11682,90 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("click_house_http").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.ClickHouseHTTP{}
+		}
+		out := &sdm.ClickHouseHTTP{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			Database:       convertStringToPlumbing(raw["database"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Password:       convertStringToPlumbing(raw["password"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+			Url:            convertStringToPlumbing(raw["url"]),
+			Username:       convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("click_house_my_sql").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.ClickHouseMySQL{}
+		}
+		out := &sdm.ClickHouseMySQL{
+			ID:                d.Id(),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
+			Database:          convertStringToPlumbing(raw["database"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:          convertStringToPlumbing(raw["hostname"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			Password:          convertStringToPlumbing(raw["password"]),
+			Port:              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:      convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:    convertStringToPlumbing(raw["proxy_cluster_id"]),
+			RequireNativeAuth: convertBoolToPlumbing(raw["require_native_auth"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
+			Username:          convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("click_house_tcp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.ClickHouseTCP{}
+		}
+		out := &sdm.ClickHouseTCP{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			Database:       convertStringToPlumbing(raw["database"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Password:       convertStringToPlumbing(raw["password"]),
+			Port:           convertInt32ToPlumbing(raw["port"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:    convertBoolToPlumbing(raw["tls_required"]),
+			Username:       convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("clustrix").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11378,6 +11964,32 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("document_db_host_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DocumentDBHostIAM{}
+		}
+		out := &sdm.DocumentDBHostIAM{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Port:           convertInt32ToPlumbing(raw["port"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:         convertStringToPlumbing(raw["region"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("document_db_replica_set").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11455,6 +12067,33 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:       convertStringToPlumbing(raw["subdomain"]),
 			Tags:            convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("dynamo_dbiam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DynamoDBIAM{}
+		}
+		out := &sdm.DynamoDBIAM{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:       convertStringToPlumbing(raw["endpoint"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:         convertStringToPlumbing(raw["region"]),
+			RoleArn:        convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID: convertStringToPlumbing(raw["role_external_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -13608,6 +14247,66 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":          seValues["username"],
 			},
 		})
+	case *sdm.ClickHouseHTTP:
+		localV, _ := localVersion.(*sdm.ClickHouseHTTP)
+		_ = localV
+		d.Set("click_house_http", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
+				"egress_filter":    (v.EgressFilter),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
+				"username":         seValues["username"],
+			},
+		})
+	case *sdm.ClickHouseMySQL:
+		localV, _ := localVersion.(*sdm.ClickHouseMySQL)
+		_ = localV
+		d.Set("click_house_my_sql", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"password":            seValues["password"],
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"require_native_auth": (v.RequireNativeAuth),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"username":            seValues["username"],
+			},
+		})
+	case *sdm.ClickHouseTCP:
+		localV, _ := localVersion.(*sdm.ClickHouseTCP)
+		_ = localV
+		d.Set("click_house_tcp", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         seValues["username"],
+			},
+		})
 	case *sdm.Clustrix:
 		localV, _ := localVersion.(*sdm.Clustrix)
 		_ = localV
@@ -13750,6 +14449,24 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.DocumentDBHostIAM:
+		localV, _ := localVersion.(*sdm.DocumentDBHostIAM)
+		_ = localV
+		d.Set("document_db_host_iam", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.DocumentDBReplicaSet:
 		localV, _ := localVersion.(*sdm.DocumentDBReplicaSet)
 		_ = localV
@@ -13809,6 +14526,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.DynamoDBIAM:
+		localV, _ := localVersion.(*sdm.DynamoDBIAM)
+		_ = localV
+		d.Set("dynamo_dbiam", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"endpoint":         (v.Endpoint),
+				"name":             (v.Name),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
+				"role_arn":         seValues["role_arn"],
+				"role_external_id": seValues["role_external_id"],
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Elastic:
@@ -15850,6 +16586,93 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":          seValues["username"],
 			},
 		})
+	case *sdm.ClickHouseHTTP:
+		localV, ok := localVersion.(*sdm.ClickHouseHTTP)
+		if !ok {
+			localV = &sdm.ClickHouseHTTP{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("click_house_http", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
+				"egress_filter":    (v.EgressFilter),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
+				"username":         seValues["username"],
+			},
+		})
+	case *sdm.ClickHouseMySQL:
+		localV, ok := localVersion.(*sdm.ClickHouseMySQL)
+		if !ok {
+			localV = &sdm.ClickHouseMySQL{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("click_house_my_sql", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"password":            seValues["password"],
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"require_native_auth": (v.RequireNativeAuth),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"username":            seValues["username"],
+			},
+		})
+	case *sdm.ClickHouseTCP:
+		localV, ok := localVersion.(*sdm.ClickHouseTCP)
+		if !ok {
+			localV = &sdm.ClickHouseTCP{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("click_house_tcp", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         seValues["username"],
+			},
+		})
 	case *sdm.Clustrix:
 		localV, ok := localVersion.(*sdm.Clustrix)
 		if !ok {
@@ -16055,6 +16878,27 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.DocumentDBHostIAM:
+		localV, ok := localVersion.(*sdm.DocumentDBHostIAM)
+		if !ok {
+			localV = &sdm.DocumentDBHostIAM{}
+		}
+		_ = localV
+		d.Set("document_db_host_iam", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.DocumentDBReplicaSet:
 		localV, ok := localVersion.(*sdm.DocumentDBReplicaSet)
 		if !ok {
@@ -16147,6 +16991,34 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.DynamoDBIAM:
+		localV, ok := localVersion.(*sdm.DynamoDBIAM)
+		if !ok {
+			localV = &sdm.DynamoDBIAM{}
+		}
+		_ = localV
+		if v.RoleArn != "" {
+			seValues["role_arn"] = v.RoleArn
+		}
+		if v.RoleExternalID != "" {
+			seValues["role_external_id"] = v.RoleExternalID
+		}
+		d.Set("dynamo_dbiam", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"endpoint":         (v.Endpoint),
+				"name":             (v.Name),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
+				"role_arn":         seValues["role_arn"],
+				"role_external_id": seValues["role_external_id"],
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Elastic:

@@ -271,6 +271,7 @@ const (
 	ActivityVerbIdentityAliasProvisioningDisabled                = "identity alias provisioning disabled"
 	ActivityVerbAccessRequestedToResource                        = "access requested to resource"
 	ActivityVerbAccessRequestToResourceApprovalAdded             = "access request to resource approval added"
+	ActivityVerbAccessRequestToResourceStepSkipped               = "access request to resource step skipped"
 	ActivityVerbAccessRequestToResourceCanceled                  = "access request to resource canceled"
 	ActivityVerbAccessRequestToResourceDenied                    = "access request to resource denied"
 	ActivityVerbAccessRequestToResourceTimedOut                  = "access request to resource timed out"

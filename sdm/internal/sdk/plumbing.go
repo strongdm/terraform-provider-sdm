@@ -5083,6 +5083,225 @@ func convertRepeatedCitusToPorcelain(plumbings []*proto.Citus) (
 	}
 	return items, nil
 }
+func convertClickHouseHTTPToPorcelain(plumbing *proto.ClickHouseHTTP) (*ClickHouseHTTP, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ClickHouseHTTP{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Url = plumbing.Url
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertClickHouseHTTPToPlumbing(porcelain *ClickHouseHTTP) *proto.ClickHouseHTTP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ClickHouseHTTP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedClickHouseHTTPToPlumbing(
+	porcelains []*ClickHouseHTTP,
+) []*proto.ClickHouseHTTP {
+	var items []*proto.ClickHouseHTTP
+	for _, porcelain := range porcelains {
+		items = append(items, convertClickHouseHTTPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedClickHouseHTTPToPorcelain(plumbings []*proto.ClickHouseHTTP) (
+	[]*ClickHouseHTTP,
+	error,
+) {
+	var items []*ClickHouseHTTP
+	for _, plumbing := range plumbings {
+		if v, err := convertClickHouseHTTPToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertClickHouseMySQLToPorcelain(plumbing *proto.ClickHouseMySQL) (*ClickHouseMySQL, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ClickHouseMySQL{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.RequireNativeAuth = plumbing.RequireNativeAuth
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertClickHouseMySQLToPlumbing(porcelain *ClickHouseMySQL) *proto.ClickHouseMySQL {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ClickHouseMySQL{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.RequireNativeAuth = (porcelain.RequireNativeAuth)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedClickHouseMySQLToPlumbing(
+	porcelains []*ClickHouseMySQL,
+) []*proto.ClickHouseMySQL {
+	var items []*proto.ClickHouseMySQL
+	for _, porcelain := range porcelains {
+		items = append(items, convertClickHouseMySQLToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedClickHouseMySQLToPorcelain(plumbings []*proto.ClickHouseMySQL) (
+	[]*ClickHouseMySQL,
+	error,
+) {
+	var items []*ClickHouseMySQL
+	for _, plumbing := range plumbings {
+		if v, err := convertClickHouseMySQLToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertClickHouseTCPToPorcelain(plumbing *proto.ClickHouseTCP) (*ClickHouseTCP, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ClickHouseTCP{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TlsRequired = plumbing.TlsRequired
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertClickHouseTCPToPlumbing(porcelain *ClickHouseTCP) *proto.ClickHouseTCP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ClickHouseTCP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedClickHouseTCPToPlumbing(
+	porcelains []*ClickHouseTCP,
+) []*proto.ClickHouseTCP {
+	var items []*proto.ClickHouseTCP
+	for _, porcelain := range porcelains {
+		items = append(items, convertClickHouseTCPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedClickHouseTCPToPorcelain(plumbings []*proto.ClickHouseTCP) (
+	[]*ClickHouseTCP,
+	error,
+) {
+	var items []*ClickHouseTCP
+	for _, plumbing := range plumbings {
+		if v, err := convertClickHouseTCPToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertClustrixToPorcelain(plumbing *proto.Clustrix) (*Clustrix, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6041,6 +6260,75 @@ func convertRepeatedDocumentDBHostToPorcelain(plumbings []*proto.DocumentDBHost)
 	}
 	return items, nil
 }
+func convertDocumentDBHostIAMToPorcelain(plumbing *proto.DocumentDBHostIAM) (*DocumentDBHostIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &DocumentDBHostIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertDocumentDBHostIAMToPlumbing(porcelain *DocumentDBHostIAM) *proto.DocumentDBHostIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DocumentDBHostIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedDocumentDBHostIAMToPlumbing(
+	porcelains []*DocumentDBHostIAM,
+) []*proto.DocumentDBHostIAM {
+	var items []*proto.DocumentDBHostIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertDocumentDBHostIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDocumentDBHostIAMToPorcelain(plumbings []*proto.DocumentDBHostIAM) (
+	[]*DocumentDBHostIAM,
+	error,
+) {
+	var items []*DocumentDBHostIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertDocumentDBHostIAMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertDocumentDBReplicaSetToPorcelain(plumbing *proto.DocumentDBReplicaSet) (*DocumentDBReplicaSet, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6255,6 +6543,77 @@ func convertRepeatedDynamoDBToPorcelain(plumbings []*proto.DynamoDB) (
 	var items []*DynamoDB
 	for _, plumbing := range plumbings {
 		if v, err := convertDynamoDBToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertDynamoDBIAMToPorcelain(plumbing *proto.DynamoDBIAM) (*DynamoDBIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &DynamoDBIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Endpoint = plumbing.Endpoint
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertDynamoDBIAMToPlumbing(porcelain *DynamoDBIAM) *proto.DynamoDBIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DynamoDBIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedDynamoDBIAMToPlumbing(
+	porcelains []*DynamoDBIAM,
+) []*proto.DynamoDBIAM {
+	var items []*proto.DynamoDBIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertDynamoDBIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDynamoDBIAMToPorcelain(plumbings []*proto.DynamoDBIAM) (
+	[]*DynamoDBIAM,
+	error,
+) {
+	var items []*DynamoDBIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertDynamoDBIAMToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -13360,6 +13719,12 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Cassandra{Cassandra: convertCassandraToPlumbing(v)}
 	case *Citus:
 		plumbing.Resource = &proto.Resource_Citus{Citus: convertCitusToPlumbing(v)}
+	case *ClickHouseHTTP:
+		plumbing.Resource = &proto.Resource_ClickHouseHttp{ClickHouseHttp: convertClickHouseHTTPToPlumbing(v)}
+	case *ClickHouseMySQL:
+		plumbing.Resource = &proto.Resource_ClickHouseMySql{ClickHouseMySql: convertClickHouseMySQLToPlumbing(v)}
+	case *ClickHouseTCP:
+		plumbing.Resource = &proto.Resource_ClickHouseTcp{ClickHouseTcp: convertClickHouseTCPToPlumbing(v)}
 	case *Clustrix:
 		plumbing.Resource = &proto.Resource_Clustrix{Clustrix: convertClustrixToPlumbing(v)}
 	case *Cockroach:
@@ -13374,12 +13739,16 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Db_2Luw{Db_2Luw: convertDB2LUWToPlumbing(v)}
 	case *DocumentDBHost:
 		plumbing.Resource = &proto.Resource_DocumentDbHost{DocumentDbHost: convertDocumentDBHostToPlumbing(v)}
+	case *DocumentDBHostIAM:
+		plumbing.Resource = &proto.Resource_DocumentDbHostIam{DocumentDbHostIam: convertDocumentDBHostIAMToPlumbing(v)}
 	case *DocumentDBReplicaSet:
 		plumbing.Resource = &proto.Resource_DocumentDbReplicaSet{DocumentDbReplicaSet: convertDocumentDBReplicaSetToPlumbing(v)}
 	case *Druid:
 		plumbing.Resource = &proto.Resource_Druid{Druid: convertDruidToPlumbing(v)}
 	case *DynamoDB:
 		plumbing.Resource = &proto.Resource_DynamoDb{DynamoDb: convertDynamoDBToPlumbing(v)}
+	case *DynamoDBIAM:
+		plumbing.Resource = &proto.Resource_DynamoDbiam{DynamoDbiam: convertDynamoDBIAMToPlumbing(v)}
 	case *Elastic:
 		plumbing.Resource = &proto.Resource_Elastic{Elastic: convertElasticToPlumbing(v)}
 	case *ElasticacheRedis:
@@ -13575,6 +13944,15 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	if plumbing.GetCitus() != nil {
 		return convertCitusToPorcelain(plumbing.GetCitus())
 	}
+	if plumbing.GetClickHouseHttp() != nil {
+		return convertClickHouseHTTPToPorcelain(plumbing.GetClickHouseHttp())
+	}
+	if plumbing.GetClickHouseMySql() != nil {
+		return convertClickHouseMySQLToPorcelain(plumbing.GetClickHouseMySql())
+	}
+	if plumbing.GetClickHouseTcp() != nil {
+		return convertClickHouseTCPToPorcelain(plumbing.GetClickHouseTcp())
+	}
 	if plumbing.GetClustrix() != nil {
 		return convertClustrixToPorcelain(plumbing.GetClustrix())
 	}
@@ -13596,6 +13974,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	if plumbing.GetDocumentDbHost() != nil {
 		return convertDocumentDBHostToPorcelain(plumbing.GetDocumentDbHost())
 	}
+	if plumbing.GetDocumentDbHostIam() != nil {
+		return convertDocumentDBHostIAMToPorcelain(plumbing.GetDocumentDbHostIam())
+	}
 	if plumbing.GetDocumentDbReplicaSet() != nil {
 		return convertDocumentDBReplicaSetToPorcelain(plumbing.GetDocumentDbReplicaSet())
 	}
@@ -13604,6 +13985,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetDynamoDb() != nil {
 		return convertDynamoDBToPorcelain(plumbing.GetDynamoDb())
+	}
+	if plumbing.GetDynamoDbiam() != nil {
+		return convertDynamoDBIAMToPorcelain(plumbing.GetDynamoDbiam())
 	}
 	if plumbing.GetElastic() != nil {
 		return convertElasticToPorcelain(plumbing.GetElastic())

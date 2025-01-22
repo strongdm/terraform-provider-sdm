@@ -1782,6 +1782,105 @@ type Citus struct {
 	Username string `json:"username"`
 }
 
+type ClickHouseHTTP struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The URL to dial to initiate a connection from the egress node to this resource.
+	Url string `json:"url"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+type ClickHouseMySQL struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The database for healthchecks. Does not affect client requests.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
+	RequireNativeAuth bool `json:"requireNativeAuth"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+type ClickHouseTCP struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type Clustrix struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -2107,6 +2206,35 @@ type DocumentDBHost struct {
 	Username string `json:"username"`
 }
 
+type DocumentDBHostIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type DocumentDBReplicaSet struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
@@ -2200,6 +2328,39 @@ type DynamoDB struct {
 	RoleExternalID string `json:"roleExternalId"`
 	// The Secret Access Key to use to authenticate.
 	SecretAccessKey string `json:"secretAccessKey"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// DynamoDBIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type DynamoDBIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The endpoint to dial e.g. dynamodb.region.amazonaws.com
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The region to authenticate requests against e.g. us-east-1
+	Region string `json:"region"`
+	// The role to assume after logging in.
+	RoleArn string `json:"roleArn"`
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	RoleExternalID string `json:"roleExternalId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -6259,6 +6420,168 @@ func (m *Citus) GetBindInterface() string {
 func (m *Citus) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*ClickHouseHTTP) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) GetID() string { return m.ID }
+
+// GetName returns the name of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the ClickHouseHTTP.
+func (m *ClickHouseHTTP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*ClickHouseMySQL) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) GetID() string { return m.ID }
+
+// GetName returns the name of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the ClickHouseMySQL.
+func (m *ClickHouseMySQL) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*ClickHouseTCP) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the ClickHouseTCP.
+func (m *ClickHouseTCP) GetID() string { return m.ID }
+
+// GetName returns the name of the ClickHouseTCP.
+func (m *ClickHouseTCP) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ClickHouseTCP.
+func (m *ClickHouseTCP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ClickHouseTCP.
+func (m *ClickHouseTCP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ClickHouseTCP.
+func (m *ClickHouseTCP) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the ClickHouseTCP.
+func (m *ClickHouseTCP) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the ClickHouseTCP.
+func (m *ClickHouseTCP) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the ClickHouseTCP.
+func (m *ClickHouseTCP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the ClickHouseTCP.
+func (m *ClickHouseTCP) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the ClickHouseTCP.
+func (m *ClickHouseTCP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the ClickHouseTCP.
+func (m *ClickHouseTCP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Clustrix) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Clustrix.
@@ -6637,6 +6960,60 @@ func (m *DocumentDBHost) GetBindInterface() string {
 func (m *DocumentDBHost) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*DocumentDBHostIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DocumentDBHostIAM.
+func (m *DocumentDBHostIAM) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*DocumentDBReplicaSet) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the DocumentDBReplicaSet.
@@ -6797,6 +7174,60 @@ func (m *DynamoDB) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the DynamoDB.
 func (m *DynamoDB) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*DynamoDBIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the DynamoDBIAM.
+func (m *DynamoDBIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the DynamoDBIAM.
+func (m *DynamoDBIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DynamoDBIAM.
+func (m *DynamoDBIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the DynamoDBIAM.
+func (m *DynamoDBIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DynamoDBIAM.
+func (m *DynamoDBIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the DynamoDBIAM.
+func (m *DynamoDBIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the DynamoDBIAM.
+func (m *DynamoDBIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DynamoDBIAM.
+func (m *DynamoDBIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DynamoDBIAM.
+func (m *DynamoDBIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the DynamoDBIAM.
+func (m *DynamoDBIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DynamoDBIAM.
+func (m *DynamoDBIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Elastic) isOneOf_Resource() {}

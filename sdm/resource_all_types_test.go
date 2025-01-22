@@ -419,6 +419,43 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "click_house_http",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"url", `"https://app.strongdm.com"`},
+				{"username", `"username"`},
+			},
+		},
+		{
+			resource: "click_house_my_sql",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"require_native_auth", `true`},
+				{"username", `"username"`},
+			},
+		},
+		{
+			resource: "click_house_tcp",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"tls_required", `true`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "clustrix",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -506,6 +543,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "document_db_host_iam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"port", `443`},
+				{"region", `"region"`},
+			},
+		},
+		{
 			resource: "document_db_replica_set",
 			pairs: [][2]string{
 				{"auth_database", `"auth_database"`},
@@ -540,6 +587,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"role_arn", `"role_arn"`},
 				{"role_external_id", `"role_external_id"`},
 				{"secret_access_key", `"secret_access_key"`},
+			},
+		},
+		{
+			resource: "dynamo_dbiam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"endpoint", `"endpoint"`},
+				{"name", `"name"`},
+				{"region", `"region"`},
+				{"role_arn", `"role_arn"`},
+				{"role_external_id", `"role_external_id"`},
 			},
 		},
 		{
@@ -1762,6 +1820,49 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		},
 
 		{
+			resource: "click_house_http",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"url", `"https://app.strongdm.com"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "click_house_my_sql",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"require_native_auth", `true`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "click_house_tcp",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"tls_required", `true`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
 			resource: "clustrix",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1901,6 +2002,19 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
 				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_access_key", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+			},
+		},
+
+		{
+			resource: "dynamo_dbiam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"endpoint", `"endpoint"`},
+				{"name", `"secret_name"`},
+				{"region", `"region"`},
+				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
+				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},

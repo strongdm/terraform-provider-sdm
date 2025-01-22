@@ -498,6 +498,48 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
+* click_house_http:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `database` - (Optional) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
+* click_house_my_sql:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
+	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
+* click_house_tcp:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `database` - (Optional) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
+	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * clustrix:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
@@ -598,6 +640,18 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
+* document_db_host_iam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `region` - (Required) The AWS region to connect to.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * document_db_replica_set:
 	* `auth_database` - (Required) The authentication database to use.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
@@ -638,6 +692,19 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* dynamo_dbiam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) The endpoint to dial e.g. dynamodb.region.amazonaws.com
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `region` - (Required) The region to authenticate requests against e.g. us-east-1
+	* `role_arn` - (Optional) The role to assume after logging in.
+	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
