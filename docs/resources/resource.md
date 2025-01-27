@@ -263,6 +263,19 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* athena_iam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `output` - (Required) The AWS S3 output location.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `region` - (Optional) The AWS region to connect to e.g. us-east-1.
+	* `role_arn` - (Optional) The role to assume after logging in.
+	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aurora_mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Optional) The database for healthchecks. Does not affect client requests

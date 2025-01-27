@@ -4142,6 +4142,77 @@ func convertRepeatedAthenaToPorcelain(plumbings []*proto.Athena) (
 	}
 	return items, nil
 }
+func convertAthenaIAMToPorcelain(plumbing *proto.AthenaIAM) (*AthenaIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AthenaIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Output = plumbing.Output
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAthenaIAMToPlumbing(porcelain *AthenaIAM) *proto.AthenaIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AthenaIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Output = (porcelain.Output)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAthenaIAMToPlumbing(
+	porcelains []*AthenaIAM,
+) []*proto.AthenaIAM {
+	var items []*proto.AthenaIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertAthenaIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAthenaIAMToPorcelain(plumbings []*proto.AthenaIAM) (
+	[]*AthenaIAM,
+	error,
+) {
+	var items []*AthenaIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertAthenaIAMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAuroraMysqlToPorcelain(plumbing *proto.AuroraMysql) (*AuroraMysql, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -13687,6 +13758,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AmazonMqamqp_091{AmazonMqamqp_091: convertAmazonMQAMQP091ToPlumbing(v)}
 	case *Athena:
 		plumbing.Resource = &proto.Resource_Athena{Athena: convertAthenaToPlumbing(v)}
+	case *AthenaIAM:
+		plumbing.Resource = &proto.Resource_AthenaIam{AthenaIam: convertAthenaIAMToPlumbing(v)}
 	case *AuroraMysql:
 		plumbing.Resource = &proto.Resource_AuroraMysql{AuroraMysql: convertAuroraMysqlToPlumbing(v)}
 	case *AuroraMysqlIAM:
@@ -13895,6 +13968,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAthena() != nil {
 		return convertAthenaToPorcelain(plumbing.GetAthena())
+	}
+	if plumbing.GetAthenaIam() != nil {
+		return convertAthenaIAMToPorcelain(plumbing.GetAthenaIam())
 	}
 	if plumbing.GetAuroraMysql() != nil {
 		return convertAuroraMysqlToPorcelain(plumbing.GetAuroraMysql())

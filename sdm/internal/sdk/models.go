@@ -1359,6 +1359,39 @@ type Athena struct {
 	Tags Tags `json:"tags"`
 }
 
+// AthenaIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AthenaIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The AWS S3 output location.
+	Output string `json:"output"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to connect to e.g. us-east-1.
+	Region string `json:"region"`
+	// The role to assume after logging in.
+	RoleArn string `json:"roleArn"`
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	RoleExternalID string `json:"roleExternalId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type AuroraMysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -1396,8 +1429,6 @@ type AuroraMysql struct {
 	Username string `json:"username"`
 }
 
-// AuroraMysqlIAM is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AuroraMysqlIAM struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -5552,6 +5583,60 @@ func (m *Athena) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the Athena.
 func (m *Athena) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AthenaIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AthenaIAM.
+func (m *AthenaIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the AthenaIAM.
+func (m *AthenaIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AthenaIAM.
+func (m *AthenaIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AthenaIAM.
+func (m *AthenaIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AthenaIAM.
+func (m *AthenaIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AthenaIAM.
+func (m *AthenaIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AthenaIAM.
+func (m *AthenaIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AthenaIAM.
+func (m *AthenaIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AthenaIAM.
+func (m *AthenaIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AthenaIAM.
+func (m *AthenaIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AthenaIAM.
+func (m *AthenaIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AuroraMysql) isOneOf_Resource() {}

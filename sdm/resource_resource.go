@@ -1181,6 +1181,81 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"athena_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AthenaIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"output": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS S3 output location.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The AWS region to connect to e.g. us-east-1.",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The role to assume after logging in.",
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"aurora_mysql": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -1276,7 +1351,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AuroraMysqlIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -8715,6 +8790,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"secret_access_key": convertStringToPlumbing(raw["secret_access_key"]),
 		}, nil
 	}
+	if list := d.Get("athena_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential role_external_id was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"role_arn":         convertStringToPlumbing(raw["role_arn"]),
+			"role_external_id": convertStringToPlumbing(raw["role_external_id"]),
+		}, nil
+	}
 	if list := d.Get("aurora_mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11215,6 +11316,33 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:       convertStringToPlumbing(raw["subdomain"]),
 			Tags:            convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("athena_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AthenaIAM{}
+		}
+		out := &sdm.AthenaIAM{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Output:         convertStringToPlumbing(raw["output"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:         convertStringToPlumbing(raw["region"]),
+			RoleArn:        convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID: convertStringToPlumbing(raw["role_external_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -13916,6 +14044,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.AthenaIAM:
+		localV, _ := localVersion.(*sdm.AthenaIAM)
+		_ = localV
+		d.Set("athena_iam", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"name":             (v.Name),
+				"output":           (v.Output),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
+				"role_arn":         seValues["role_arn"],
+				"role_external_id": seValues["role_external_id"],
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AuroraMysql:
 		localV, _ := localVersion.(*sdm.AuroraMysql)
 		_ = localV
@@ -16100,6 +16247,34 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.AthenaIAM:
+		localV, ok := localVersion.(*sdm.AthenaIAM)
+		if !ok {
+			localV = &sdm.AthenaIAM{}
+		}
+		_ = localV
+		if v.RoleArn != "" {
+			seValues["role_arn"] = v.RoleArn
+		}
+		if v.RoleExternalID != "" {
+			seValues["role_external_id"] = v.RoleExternalID
+		}
+		d.Set("athena_iam", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"name":             (v.Name),
+				"output":           (v.Output),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
+				"role_arn":         seValues["role_arn"],
+				"role_external_id": seValues["role_external_id"],
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AuroraMysql:

@@ -216,6 +216,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "athena_iam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"name", `"name"`},
+				{"output", `"output"`},
+				{"region", `"region"`},
+				{"role_arn", `"role_arn"`},
+				{"role_external_id", `"role_external_id"`},
+			},
+		},
+		{
 			resource: "aurora_mysql",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1580,6 +1591,19 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
 				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_access_key", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+			},
+		},
+
+		{
+			resource: "athena_iam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"name", `"secret_name"`},
+				{"output", `"output"`},
+				{"region", `"region"`},
+				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
+				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
