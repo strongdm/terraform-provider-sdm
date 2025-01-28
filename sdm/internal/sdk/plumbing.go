@@ -12402,6 +12402,7 @@ func convertQueryCaptureToPorcelain(plumbing *proto.QueryCapture) (*QueryCapture
 	porcelain.ImpersonationGroups = plumbing.ImpersonationGroups
 	porcelain.ImpersonationUser = plumbing.ImpersonationUser
 	porcelain.Pod = plumbing.Pod
+	porcelain.PrivilegeGroups = plumbing.PrivilegeGroups
 	porcelain.RequestBody = plumbing.RequestBody
 	porcelain.RequestMethod = plumbing.RequestMethod
 	porcelain.RequestURI = plumbing.RequestUri
@@ -12425,6 +12426,7 @@ func convertQueryCaptureToPlumbing(porcelain *QueryCapture) *proto.QueryCapture 
 	plumbing.ImpersonationGroups = (porcelain.ImpersonationGroups)
 	plumbing.ImpersonationUser = (porcelain.ImpersonationUser)
 	plumbing.Pod = (porcelain.Pod)
+	plumbing.PrivilegeGroups = (porcelain.PrivilegeGroups)
 	plumbing.RequestBody = (porcelain.RequestBody)
 	plumbing.RequestMethod = (porcelain.RequestMethod)
 	plumbing.RequestUri = (porcelain.RequestURI)

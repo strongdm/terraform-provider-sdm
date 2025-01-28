@@ -4472,6 +4472,8 @@ type QueryCapture struct {
 	ImpersonationUser string `json:"impersonationUser"`
 	// The target pod of a Kubernetes operation.
 	Pod string `json:"pod"`
+	// The additional impersonation groups, as granted by privilege levels, of a Kubernetes operation.
+	PrivilegeGroups []string `json:"privilegeGroups"`
 	// The HTTP request body of a Kubernetes operation.
 	RequestBody []byte `json:"requestBody"`
 	// The HTTP request method of a Kubernetes operation.
