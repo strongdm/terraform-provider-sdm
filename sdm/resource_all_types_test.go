@@ -191,6 +191,18 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "amazon_esiam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"endpoint", `"endpoint"`},
+				{"name", `"name"`},
+				{"region", `"region"`},
+				{"role_arn", `"role_arn"`},
+				{"role_external_id", `"role_external_id"`},
+				{"tls_required", `true`},
+			},
+		},
+		{
 			resource: "amazonmq_amqp_091",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
@@ -1563,6 +1575,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_access_key", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
+			},
+		},
+
+		{
+			resource: "amazon_esiam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"endpoint", `"endpoint"`},
+				{"name", `"secret_name"`},
+				{"region", `"region"`},
+				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
+				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"tls_required", `true`},
 			},
 		},
 

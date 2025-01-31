@@ -218,6 +218,21 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+	* amazon_esiam:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `endpoint` - The endpoint to dial e.g. search-?.region.es.amazonaws.com"
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `region` - The AWS region to connect to.
+		* `role_arn` - The role to assume after logging in.
+		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - Use TLS to connect to the OpenSearch server
 	* amazonmq_amqp_091:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.

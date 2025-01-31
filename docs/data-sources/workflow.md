@@ -20,6 +20,8 @@ data "sdm_workflow" "workflow_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a Workflows data source:
+* `access_request_fixed_duration` - (Optional) Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.
+* `access_request_max_duration` - (Optional) Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.
 * `approval_flow_id` - (Optional) Optional approval flow ID identifies an approval flow that linked to the workflow
 * `auto_grant` - (Optional) Optional auto grant setting to automatically approve requests or not, defaults to false.
 * `description` - (Optional) Optional description of the Workflow.

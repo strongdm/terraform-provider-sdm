@@ -3027,6 +3027,79 @@ func convertRepeatedAmazonESToPorcelain(plumbings []*proto.AmazonES) (
 	}
 	return items, nil
 }
+func convertAmazonESIAMToPorcelain(plumbing *proto.AmazonESIAM) (*AmazonESIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AmazonESIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Endpoint = plumbing.Endpoint
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.RoleArn = plumbing.RoleArn
+	porcelain.RoleExternalID = plumbing.RoleExternalId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TlsRequired = plumbing.TlsRequired
+	return porcelain, nil
+}
+
+func convertAmazonESIAMToPlumbing(porcelain *AmazonESIAM) *proto.AmazonESIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AmazonESIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleArn = (porcelain.RoleArn)
+	plumbing.RoleExternalId = (porcelain.RoleExternalID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	return plumbing
+}
+func convertRepeatedAmazonESIAMToPlumbing(
+	porcelains []*AmazonESIAM,
+) []*proto.AmazonESIAM {
+	var items []*proto.AmazonESIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertAmazonESIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAmazonESIAMToPorcelain(plumbings []*proto.AmazonESIAM) (
+	[]*AmazonESIAM,
+	error,
+) {
+	var items []*AmazonESIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertAmazonESIAMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAmazonMQAMQP091ToPorcelain(plumbing *proto.AmazonMQAMQP091) (*AmazonMQAMQP091, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -13756,6 +13829,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AmazonEksUserImpersonation{AmazonEksUserImpersonation: convertAmazonEKSUserImpersonationToPlumbing(v)}
 	case *AmazonES:
 		plumbing.Resource = &proto.Resource_AmazonEs{AmazonEs: convertAmazonESToPlumbing(v)}
+	case *AmazonESIAM:
+		plumbing.Resource = &proto.Resource_AmazonEsiam{AmazonEsiam: convertAmazonESIAMToPlumbing(v)}
 	case *AmazonMQAMQP091:
 		plumbing.Resource = &proto.Resource_AmazonMqamqp_091{AmazonMqamqp_091: convertAmazonMQAMQP091ToPlumbing(v)}
 	case *Athena:
@@ -13964,6 +14039,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAmazonEs() != nil {
 		return convertAmazonESToPorcelain(plumbing.GetAmazonEs())
+	}
+	if plumbing.GetAmazonEsiam() != nil {
+		return convertAmazonESIAMToPorcelain(plumbing.GetAmazonEsiam())
 	}
 	if plumbing.GetAmazonMqamqp_091() != nil {
 		return convertAmazonMQAMQP091ToPorcelain(plumbing.GetAmazonMqamqp_091())

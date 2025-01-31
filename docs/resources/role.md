@@ -46,6 +46,7 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 The following arguments are supported by the Role resource:
 * `access_rules` - (Optional) AccessRules is a list of access rules defining the resources this Role has access to.
 * `name` - (Required) Unique human-readable name of the Role.
+* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Role resource:
 * `id` - A unique identifier for the Role resource.

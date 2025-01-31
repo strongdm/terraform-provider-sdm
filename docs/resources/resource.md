@@ -234,6 +234,20 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* amazon_esiam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `endpoint` - (Required) The endpoint to dial e.g. search-?.region.es.amazonaws.com"
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `region` - (Required) The AWS region to connect to.
+	* `role_arn` - (Optional) The role to assume after logging in.
+	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) Use TLS to connect to the OpenSearch server
 * amazonmq_amqp_091:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
