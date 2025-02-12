@@ -28,3 +28,13 @@ func convertAccessRulesToPorcelain(rules string) (AccessRules, error) {
 func convertAccessRulesToPlumbing(rules AccessRules) string {
 	return string(rules)
 }
+
+type AccessRule string
+
+func convertAccessRuleToPorcelain(rule string) (AccessRule, error) {
+	return AccessRule(rule), nil
+}
+
+func convertAccessRuleToPlumbing(rule AccessRule) string {
+	return string(rule)
+}

@@ -1774,6 +1774,11 @@ func convertAccountGrantToPorcelain(plumbing *proto.AccountGrant) (*AccountGrant
 		return nil, nil
 	}
 	porcelain := &AccountGrant{}
+	if v, err := convertAccessRuleToPorcelain(plumbing.AccessRule); err != nil {
+		return nil, fmt.Errorf("error converting field AccessRule: %v", err)
+	} else {
+		porcelain.AccessRule = v
+	}
 	porcelain.AccountID = plumbing.AccountId
 	porcelain.ID = plumbing.Id
 	porcelain.ResourceID = plumbing.ResourceId
@@ -1795,6 +1800,7 @@ func convertAccountGrantToPlumbing(porcelain *AccountGrant) *proto.AccountGrant 
 		return nil
 	}
 	plumbing := &proto.AccountGrant{}
+	plumbing.AccessRule = convertAccessRuleToPlumbing(porcelain.AccessRule)
 	plumbing.AccountId = (porcelain.AccountID)
 	plumbing.Id = (porcelain.ID)
 	plumbing.ResourceId = (porcelain.ResourceID)

@@ -47,7 +47,7 @@ func (svc *AccessRequests) List(
 	args ...interface{}) (
 	AccessRequestIterator,
 	error) {
-	req := &plumbing.AccessRequestListRequest{}
+	req := plumbing.AccessRequestListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -63,20 +63,15 @@ func (svc *AccessRequests) List(
 		func() (
 			[]*AccessRequest,
 			bool, error) {
-			var plumbingResponse *plumbing.AccessRequestListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccessRequests.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccessRequestListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccessRequests.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccessRequestToPorcelain(plumbingResponse.AccessRequests)
 			if err != nil {
@@ -101,7 +96,7 @@ func (svc *AccessRequestEventsHistory) List(
 	args ...interface{}) (
 	AccessRequestEventHistoryIterator,
 	error) {
-	req := &plumbing.AccessRequestEventHistoryListRequest{}
+	req := plumbing.AccessRequestEventHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -117,20 +112,15 @@ func (svc *AccessRequestEventsHistory) List(
 		func() (
 			[]*AccessRequestEventHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.AccessRequestEventHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccessRequestEventsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccessRequestEventHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccessRequestEventsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccessRequestEventHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -155,7 +145,7 @@ func (svc *AccessRequestsHistory) List(
 	args ...interface{}) (
 	AccessRequestHistoryIterator,
 	error) {
-	req := &plumbing.AccessRequestHistoryListRequest{}
+	req := plumbing.AccessRequestHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -171,20 +161,15 @@ func (svc *AccessRequestsHistory) List(
 		func() (
 			[]*AccessRequestHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.AccessRequestHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccessRequestsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccessRequestHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccessRequestsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccessRequestHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -224,23 +209,19 @@ func (svc *AccountAttachments) Create(
 	accountAttachment *AccountAttachment) (
 	*AccountAttachmentCreateResponse,
 	error) {
-	req := &plumbing.AccountAttachmentCreateRequest{}
+	req := plumbing.AccountAttachmentCreateRequest{}
 
 	req.AccountAttachment = convertAccountAttachmentToPlumbing(accountAttachment)
-	var plumbingResponse *plumbing.AccountAttachmentCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "AccountAttachments.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountAttachmentCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "AccountAttachments.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountAttachmentCreateResponse{}
@@ -268,25 +249,20 @@ func (svc *AccountAttachments) Get(
 	id string) (
 	*AccountAttachmentGetResponse,
 	error) {
-	req := &plumbing.AccountAttachmentGetRequest{}
+	req := plumbing.AccountAttachmentGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.AccountAttachmentGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "AccountAttachments.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountAttachmentGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "AccountAttachments.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountAttachmentGetResponse{}
@@ -314,23 +290,19 @@ func (svc *AccountAttachments) Delete(
 	id string) (
 	*AccountAttachmentDeleteResponse,
 	error) {
-	req := &plumbing.AccountAttachmentDeleteRequest{}
+	req := plumbing.AccountAttachmentDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.AccountAttachmentDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "AccountAttachments.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountAttachmentDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "AccountAttachments.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountAttachmentDeleteResponse{}
@@ -354,7 +326,7 @@ func (svc *AccountAttachments) List(
 	args ...interface{}) (
 	AccountAttachmentIterator,
 	error) {
-	req := &plumbing.AccountAttachmentListRequest{}
+	req := plumbing.AccountAttachmentListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -370,20 +342,15 @@ func (svc *AccountAttachments) List(
 		func() (
 			[]*AccountAttachment,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountAttachmentListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountAttachments.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountAttachmentListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountAttachments.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountAttachmentToPorcelain(plumbingResponse.AccountAttachments)
 			if err != nil {
@@ -408,7 +375,7 @@ func (svc *AccountAttachmentsHistory) List(
 	args ...interface{}) (
 	AccountAttachmentHistoryIterator,
 	error) {
-	req := &plumbing.AccountAttachmentHistoryListRequest{}
+	req := plumbing.AccountAttachmentHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -424,20 +391,15 @@ func (svc *AccountAttachmentsHistory) List(
 		func() (
 			[]*AccountAttachmentHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountAttachmentHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountAttachmentsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountAttachmentHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountAttachmentsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountAttachmentHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -477,23 +439,19 @@ func (svc *AccountGrants) Create(
 	accountGrant *AccountGrant) (
 	*AccountGrantCreateResponse,
 	error) {
-	req := &plumbing.AccountGrantCreateRequest{}
+	req := plumbing.AccountGrantCreateRequest{}
 
 	req.AccountGrant = convertAccountGrantToPlumbing(accountGrant)
-	var plumbingResponse *plumbing.AccountGrantCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "AccountGrants.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGrantCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "AccountGrants.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountGrantCreateResponse{}
@@ -521,25 +479,20 @@ func (svc *AccountGrants) Get(
 	id string) (
 	*AccountGrantGetResponse,
 	error) {
-	req := &plumbing.AccountGrantGetRequest{}
+	req := plumbing.AccountGrantGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.AccountGrantGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "AccountGrants.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGrantGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "AccountGrants.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountGrantGetResponse{}
@@ -567,23 +520,19 @@ func (svc *AccountGrants) Delete(
 	id string) (
 	*AccountGrantDeleteResponse,
 	error) {
-	req := &plumbing.AccountGrantDeleteRequest{}
+	req := plumbing.AccountGrantDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.AccountGrantDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "AccountGrants.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGrantDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "AccountGrants.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountGrantDeleteResponse{}
@@ -607,7 +556,7 @@ func (svc *AccountGrants) List(
 	args ...interface{}) (
 	AccountGrantIterator,
 	error) {
-	req := &plumbing.AccountGrantListRequest{}
+	req := plumbing.AccountGrantListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -623,20 +572,15 @@ func (svc *AccountGrants) List(
 		func() (
 			[]*AccountGrant,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountGrantListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountGrants.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountGrantListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountGrants.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountGrantToPorcelain(plumbingResponse.AccountGrants)
 			if err != nil {
@@ -661,7 +605,7 @@ func (svc *AccountGrantsHistory) List(
 	args ...interface{}) (
 	AccountGrantHistoryIterator,
 	error) {
-	req := &plumbing.AccountGrantHistoryListRequest{}
+	req := plumbing.AccountGrantHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -677,20 +621,15 @@ func (svc *AccountGrantsHistory) List(
 		func() (
 			[]*AccountGrantHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountGrantHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountGrantsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountGrantHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountGrantsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountGrantHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -727,7 +666,7 @@ func (svc *AccountPermissions) List(
 	args ...interface{}) (
 	AccountPermissionIterator,
 	error) {
-	req := &plumbing.AccountPermissionListRequest{}
+	req := plumbing.AccountPermissionListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -743,20 +682,15 @@ func (svc *AccountPermissions) List(
 		func() (
 			[]*AccountPermission,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountPermissionListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountPermissions.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountPermissionListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountPermissions.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountPermissionToPorcelain(plumbingResponse.Permissions)
 			if err != nil {
@@ -793,7 +727,7 @@ func (svc *AccountResources) List(
 	args ...interface{}) (
 	AccountResourceIterator,
 	error) {
-	req := &plumbing.AccountResourceListRequest{}
+	req := plumbing.AccountResourceListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -809,20 +743,15 @@ func (svc *AccountResources) List(
 		func() (
 			[]*AccountResource,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountResourceListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountResources.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountResourceListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountResources.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountResourceToPorcelain(plumbingResponse.AccountResources)
 			if err != nil {
@@ -847,7 +776,7 @@ func (svc *AccountResourcesHistory) List(
 	args ...interface{}) (
 	AccountResourceHistoryIterator,
 	error) {
-	req := &plumbing.AccountResourceHistoryListRequest{}
+	req := plumbing.AccountResourceHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -863,20 +792,15 @@ func (svc *AccountResourcesHistory) List(
 		func() (
 			[]*AccountResourceHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountResourceHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountResourcesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountResourceHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountResourcesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountResourceHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -919,23 +843,19 @@ func (svc *Accounts) Create(
 	account Account) (
 	*AccountCreateResponse,
 	error) {
-	req := &plumbing.AccountCreateRequest{}
+	req := plumbing.AccountCreateRequest{}
 
 	req.Account = convertAccountToPlumbing(account)
-	var plumbingResponse *plumbing.AccountCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Accounts.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Accounts.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountCreateResponse{}
@@ -966,25 +886,20 @@ func (svc *Accounts) Get(
 	id string) (
 	*AccountGetResponse,
 	error) {
-	req := &plumbing.AccountGetRequest{}
+	req := plumbing.AccountGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.AccountGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Accounts.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Accounts.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountGetResponse{}
@@ -1012,23 +927,19 @@ func (svc *Accounts) Update(
 	account Account) (
 	*AccountUpdateResponse,
 	error) {
-	req := &plumbing.AccountUpdateRequest{}
+	req := plumbing.AccountUpdateRequest{}
 
 	req.Account = convertAccountToPlumbing(account)
-	var plumbingResponse *plumbing.AccountUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Accounts.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Accounts.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountUpdateResponse{}
@@ -1056,23 +967,19 @@ func (svc *Accounts) Delete(
 	id string) (
 	*AccountDeleteResponse,
 	error) {
-	req := &plumbing.AccountDeleteRequest{}
+	req := plumbing.AccountDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.AccountDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Accounts.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Accounts.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &AccountDeleteResponse{}
@@ -1096,7 +1003,7 @@ func (svc *Accounts) List(
 	args ...interface{}) (
 	AccountIterator,
 	error) {
-	req := &plumbing.AccountListRequest{}
+	req := plumbing.AccountListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1112,20 +1019,15 @@ func (svc *Accounts) List(
 		func() (
 			[]Account,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Accounts.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Accounts.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountToPorcelain(plumbingResponse.Accounts)
 			if err != nil {
@@ -1150,7 +1052,7 @@ func (svc *AccountsHistory) List(
 	args ...interface{}) (
 	AccountHistoryIterator,
 	error) {
-	req := &plumbing.AccountHistoryListRequest{}
+	req := plumbing.AccountHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1166,20 +1068,15 @@ func (svc *AccountsHistory) List(
 		func() (
 			[]*AccountHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.AccountHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "AccountsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedAccountHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -1205,25 +1102,20 @@ func (svc *Activities) Get(
 	id string) (
 	*ActivityGetResponse,
 	error) {
-	req := &plumbing.ActivityGetRequest{}
+	req := plumbing.ActivityGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.ActivityGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Activities.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ActivityGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Activities.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ActivityGetResponse{}
@@ -1255,7 +1147,7 @@ func (svc *Activities) List(
 	args ...interface{}) (
 	ActivityIterator,
 	error) {
-	req := &plumbing.ActivityListRequest{}
+	req := plumbing.ActivityListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1271,20 +1163,15 @@ func (svc *Activities) List(
 		func() (
 			[]*Activity,
 			bool, error) {
-			var plumbingResponse *plumbing.ActivityListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Activities.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ActivityListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Activities.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedActivityToPorcelain(plumbingResponse.Activities)
 			if err != nil {
@@ -1324,23 +1211,19 @@ func (svc *ApprovalWorkflowApprovers) Create(
 	approvalWorkflowApprover *ApprovalWorkflowApprover) (
 	*ApprovalWorkflowApproverCreateResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowApproverCreateRequest{}
+	req := plumbing.ApprovalWorkflowApproverCreateRequest{}
 
 	req.ApprovalWorkflowApprover = convertApprovalWorkflowApproverToPlumbing(approvalWorkflowApprover)
-	var plumbingResponse *plumbing.ApprovalWorkflowApproverCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowApproverCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowApprovers.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowApproverCreateResponse{}
@@ -1363,25 +1246,20 @@ func (svc *ApprovalWorkflowApprovers) Get(
 	id string) (
 	*ApprovalWorkflowApproverGetResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowApproverGetRequest{}
+	req := plumbing.ApprovalWorkflowApproverGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.ApprovalWorkflowApproverGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowApproverGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowApprovers.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowApproverGetResponse{}
@@ -1409,23 +1287,19 @@ func (svc *ApprovalWorkflowApprovers) Delete(
 	id string) (
 	*ApprovalWorkflowApproverDeleteResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowApproverDeleteRequest{}
+	req := plumbing.ApprovalWorkflowApproverDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.ApprovalWorkflowApproverDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowApproverDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowApprovers.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowApproverDeleteResponse{}
@@ -1445,7 +1319,7 @@ func (svc *ApprovalWorkflowApprovers) List(
 	args ...interface{}) (
 	ApprovalWorkflowApproverIterator,
 	error) {
-	req := &plumbing.ApprovalWorkflowApproverListRequest{}
+	req := plumbing.ApprovalWorkflowApproverListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1461,20 +1335,15 @@ func (svc *ApprovalWorkflowApprovers) List(
 		func() (
 			[]*ApprovalWorkflowApprover,
 			bool, error) {
-			var plumbingResponse *plumbing.ApprovalWorkflowApproverListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApprovers.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ApprovalWorkflowApproverListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowApprovers.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedApprovalWorkflowApproverToPorcelain(plumbingResponse.ApprovalWorkflowApprovers)
 			if err != nil {
@@ -1499,7 +1368,7 @@ func (svc *ApprovalWorkflowApproversHistory) List(
 	args ...interface{}) (
 	ApprovalWorkflowApproverHistoryIterator,
 	error) {
-	req := &plumbing.ApprovalWorkflowApproverHistoryListRequest{}
+	req := plumbing.ApprovalWorkflowApproverHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1515,20 +1384,15 @@ func (svc *ApprovalWorkflowApproversHistory) List(
 		func() (
 			[]*ApprovalWorkflowApproverHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.ApprovalWorkflowApproverHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowApproversHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ApprovalWorkflowApproverHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowApproversHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedApprovalWorkflowApproverHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -1568,23 +1432,19 @@ func (svc *ApprovalWorkflowSteps) Create(
 	approvalWorkflowStep *ApprovalWorkflowStep) (
 	*ApprovalWorkflowStepCreateResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowStepCreateRequest{}
+	req := plumbing.ApprovalWorkflowStepCreateRequest{}
 
 	req.ApprovalWorkflowStep = convertApprovalWorkflowStepToPlumbing(approvalWorkflowStep)
-	var plumbingResponse *plumbing.ApprovalWorkflowStepCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowStepCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowSteps.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowStepCreateResponse{}
@@ -1607,25 +1467,20 @@ func (svc *ApprovalWorkflowSteps) Get(
 	id string) (
 	*ApprovalWorkflowStepGetResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowStepGetRequest{}
+	req := plumbing.ApprovalWorkflowStepGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.ApprovalWorkflowStepGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowStepGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowSteps.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowStepGetResponse{}
@@ -1653,23 +1508,19 @@ func (svc *ApprovalWorkflowSteps) Delete(
 	id string) (
 	*ApprovalWorkflowStepDeleteResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowStepDeleteRequest{}
+	req := plumbing.ApprovalWorkflowStepDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.ApprovalWorkflowStepDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowStepDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowSteps.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowStepDeleteResponse{}
@@ -1689,7 +1540,7 @@ func (svc *ApprovalWorkflowSteps) List(
 	args ...interface{}) (
 	ApprovalWorkflowStepIterator,
 	error) {
-	req := &plumbing.ApprovalWorkflowStepListRequest{}
+	req := plumbing.ApprovalWorkflowStepListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1705,20 +1556,15 @@ func (svc *ApprovalWorkflowSteps) List(
 		func() (
 			[]*ApprovalWorkflowStep,
 			bool, error) {
-			var plumbingResponse *plumbing.ApprovalWorkflowStepListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowSteps.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ApprovalWorkflowStepListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowSteps.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedApprovalWorkflowStepToPorcelain(plumbingResponse.ApprovalWorkflowSteps)
 			if err != nil {
@@ -1743,7 +1589,7 @@ func (svc *ApprovalWorkflowStepsHistory) List(
 	args ...interface{}) (
 	ApprovalWorkflowStepHistoryIterator,
 	error) {
-	req := &plumbing.ApprovalWorkflowStepHistoryListRequest{}
+	req := plumbing.ApprovalWorkflowStepHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1759,20 +1605,15 @@ func (svc *ApprovalWorkflowStepsHistory) List(
 		func() (
 			[]*ApprovalWorkflowStepHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.ApprovalWorkflowStepHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowStepsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ApprovalWorkflowStepHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowStepsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedApprovalWorkflowStepHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -1813,23 +1654,19 @@ func (svc *ApprovalWorkflows) Create(
 	approvalWorkflow *ApprovalWorkflow) (
 	*ApprovalWorkflowCreateResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowCreateRequest{}
+	req := plumbing.ApprovalWorkflowCreateRequest{}
 
 	req.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(approvalWorkflow)
-	var plumbingResponse *plumbing.ApprovalWorkflowCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflows.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowCreateResponse{}
@@ -1852,25 +1689,20 @@ func (svc *ApprovalWorkflows) Get(
 	id string) (
 	*ApprovalWorkflowGetResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowGetRequest{}
+	req := plumbing.ApprovalWorkflowGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.ApprovalWorkflowGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflows.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowGetResponse{}
@@ -1898,23 +1730,19 @@ func (svc *ApprovalWorkflows) Delete(
 	id string) (
 	*ApprovalWorkflowDeleteResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowDeleteRequest{}
+	req := plumbing.ApprovalWorkflowDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.ApprovalWorkflowDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflows.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowDeleteResponse{}
@@ -1933,23 +1761,19 @@ func (svc *ApprovalWorkflows) Update(
 	approvalWorkflow *ApprovalWorkflow) (
 	*ApprovalWorkflowUpdateResponse,
 	error) {
-	req := &plumbing.ApprovalWorkflowUpdateRequest{}
+	req := plumbing.ApprovalWorkflowUpdateRequest{}
 
 	req.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(approvalWorkflow)
-	var plumbingResponse *plumbing.ApprovalWorkflowUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ApprovalWorkflowUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflows.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ApprovalWorkflowUpdateResponse{}
@@ -1973,7 +1797,7 @@ func (svc *ApprovalWorkflows) List(
 	args ...interface{}) (
 	ApprovalWorkflowIterator,
 	error) {
-	req := &plumbing.ApprovalWorkflowListRequest{}
+	req := plumbing.ApprovalWorkflowListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -1989,20 +1813,15 @@ func (svc *ApprovalWorkflows) List(
 		func() (
 			[]*ApprovalWorkflow,
 			bool, error) {
-			var plumbingResponse *plumbing.ApprovalWorkflowListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflows.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ApprovalWorkflowListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflows.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedApprovalWorkflowToPorcelain(plumbingResponse.ApprovalWorkflows)
 			if err != nil {
@@ -2027,7 +1846,7 @@ func (svc *ApprovalWorkflowsHistory) List(
 	args ...interface{}) (
 	ApprovalWorkflowHistoryIterator,
 	error) {
-	req := &plumbing.ApprovalWorkflowHistoryListRequest{}
+	req := plumbing.ApprovalWorkflowHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -2043,20 +1862,15 @@ func (svc *ApprovalWorkflowsHistory) List(
 		func() (
 			[]*ApprovalWorkflowHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.ApprovalWorkflowHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ApprovalWorkflowsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ApprovalWorkflowHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ApprovalWorkflowsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedApprovalWorkflowHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -2079,22 +1893,18 @@ func (svc *ControlPanel) GetSSHCAPublicKey(
 	ctx context.Context) (
 	*ControlPanelGetSSHCAPublicKeyResponse,
 	error) {
-	req := &plumbing.ControlPanelGetSSHCAPublicKeyRequest{}
+	req := plumbing.ControlPanelGetSSHCAPublicKeyRequest{}
 
-	var plumbingResponse *plumbing.ControlPanelGetSSHCAPublicKeyResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.GetSSHCAPublicKey(svc.parent.wrapContext(ctx, req, "ControlPanel.GetSSHCAPublicKey"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.GetRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ControlPanelGetSSHCAPublicKeyResponse, error) {
+			return svc.client.GetSSHCAPublicKey(svc.parent.wrapContext(ctx, &req, "ControlPanel.GetSSHCAPublicKey"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ControlPanelGetSSHCAPublicKeyResponse{}
@@ -2117,22 +1927,18 @@ func (svc *ControlPanel) GetRDPCAPublicKey(
 	ctx context.Context) (
 	*ControlPanelGetRDPCAPublicKeyResponse,
 	error) {
-	req := &plumbing.ControlPanelGetRDPCAPublicKeyRequest{}
+	req := plumbing.ControlPanelGetRDPCAPublicKeyRequest{}
 
-	var plumbingResponse *plumbing.ControlPanelGetRDPCAPublicKeyResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.GetRDPCAPublicKey(svc.parent.wrapContext(ctx, req, "ControlPanel.GetRDPCAPublicKey"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.GetRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ControlPanelGetRDPCAPublicKeyResponse, error) {
+			return svc.client.GetRDPCAPublicKey(svc.parent.wrapContext(ctx, &req, "ControlPanel.GetRDPCAPublicKey"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ControlPanelGetRDPCAPublicKeyResponse{}
@@ -2156,23 +1962,19 @@ func (svc *ControlPanel) VerifyJWT(
 	token string) (
 	*ControlPanelVerifyJWTResponse,
 	error) {
-	req := &plumbing.ControlPanelVerifyJWTRequest{}
+	req := plumbing.ControlPanelVerifyJWTRequest{}
 
 	req.Token = (token)
-	var plumbingResponse *plumbing.ControlPanelVerifyJWTResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.VerifyJWT(svc.parent.wrapContext(ctx, req, "ControlPanel.VerifyJWT"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.GetRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ControlPanelVerifyJWTResponse, error) {
+			return svc.client.VerifyJWT(svc.parent.wrapContext(ctx, &req, "ControlPanel.VerifyJWT"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ControlPanelVerifyJWTResponse{}
@@ -2204,7 +2006,7 @@ func (svc *HealthChecks) List(
 	args ...interface{}) (
 	HealthcheckIterator,
 	error) {
-	req := &plumbing.HealthcheckListRequest{}
+	req := plumbing.HealthcheckListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -2220,20 +2022,15 @@ func (svc *HealthChecks) List(
 		func() (
 			[]*Healthcheck,
 			bool, error) {
-			var plumbingResponse *plumbing.HealthcheckListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "HealthChecks.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.HealthcheckListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "HealthChecks.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedHealthcheckToPorcelain(plumbingResponse.Healthchecks)
 			if err != nil {
@@ -2274,23 +2071,19 @@ func (svc *IdentityAliases) Create(
 	identityAlias *IdentityAlias) (
 	*IdentityAliasCreateResponse,
 	error) {
-	req := &plumbing.IdentityAliasCreateRequest{}
+	req := plumbing.IdentityAliasCreateRequest{}
 
 	req.IdentityAlias = convertIdentityAliasToPlumbing(identityAlias)
-	var plumbingResponse *plumbing.IdentityAliasCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "IdentityAliases.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentityAliasCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "IdentityAliases.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentityAliasCreateResponse{}
@@ -2318,25 +2111,20 @@ func (svc *IdentityAliases) Get(
 	id string) (
 	*IdentityAliasGetResponse,
 	error) {
-	req := &plumbing.IdentityAliasGetRequest{}
+	req := plumbing.IdentityAliasGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.IdentityAliasGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "IdentityAliases.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentityAliasGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "IdentityAliases.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentityAliasGetResponse{}
@@ -2364,23 +2152,19 @@ func (svc *IdentityAliases) Update(
 	identityAlias *IdentityAlias) (
 	*IdentityAliasUpdateResponse,
 	error) {
-	req := &plumbing.IdentityAliasUpdateRequest{}
+	req := plumbing.IdentityAliasUpdateRequest{}
 
 	req.IdentityAlias = convertIdentityAliasToPlumbing(identityAlias)
-	var plumbingResponse *plumbing.IdentityAliasUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "IdentityAliases.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentityAliasUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "IdentityAliases.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentityAliasUpdateResponse{}
@@ -2408,23 +2192,19 @@ func (svc *IdentityAliases) Delete(
 	id string) (
 	*IdentityAliasDeleteResponse,
 	error) {
-	req := &plumbing.IdentityAliasDeleteRequest{}
+	req := plumbing.IdentityAliasDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.IdentityAliasDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "IdentityAliases.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentityAliasDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "IdentityAliases.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentityAliasDeleteResponse{}
@@ -2448,7 +2228,7 @@ func (svc *IdentityAliases) List(
 	args ...interface{}) (
 	IdentityAliasIterator,
 	error) {
-	req := &plumbing.IdentityAliasListRequest{}
+	req := plumbing.IdentityAliasListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -2464,20 +2244,15 @@ func (svc *IdentityAliases) List(
 		func() (
 			[]*IdentityAlias,
 			bool, error) {
-			var plumbingResponse *plumbing.IdentityAliasListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentityAliases.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.IdentityAliasListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "IdentityAliases.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedIdentityAliasToPorcelain(plumbingResponse.IdentityAliases)
 			if err != nil {
@@ -2502,7 +2277,7 @@ func (svc *IdentityAliasesHistory) List(
 	args ...interface{}) (
 	IdentityAliasHistoryIterator,
 	error) {
-	req := &plumbing.IdentityAliasHistoryListRequest{}
+	req := plumbing.IdentityAliasHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -2518,20 +2293,15 @@ func (svc *IdentityAliasesHistory) List(
 		func() (
 			[]*IdentityAliasHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.IdentityAliasHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentityAliasesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.IdentityAliasHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "IdentityAliasesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedIdentityAliasHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -2572,23 +2342,19 @@ func (svc *IdentitySets) Create(
 	identitySet *IdentitySet) (
 	*IdentitySetCreateResponse,
 	error) {
-	req := &plumbing.IdentitySetCreateRequest{}
+	req := plumbing.IdentitySetCreateRequest{}
 
 	req.IdentitySet = convertIdentitySetToPlumbing(identitySet)
-	var plumbingResponse *plumbing.IdentitySetCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "IdentitySets.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentitySetCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "IdentitySets.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentitySetCreateResponse{}
@@ -2616,25 +2382,20 @@ func (svc *IdentitySets) Get(
 	id string) (
 	*IdentitySetGetResponse,
 	error) {
-	req := &plumbing.IdentitySetGetRequest{}
+	req := plumbing.IdentitySetGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.IdentitySetGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "IdentitySets.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentitySetGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "IdentitySets.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentitySetGetResponse{}
@@ -2662,23 +2423,19 @@ func (svc *IdentitySets) Update(
 	identitySet *IdentitySet) (
 	*IdentitySetUpdateResponse,
 	error) {
-	req := &plumbing.IdentitySetUpdateRequest{}
+	req := plumbing.IdentitySetUpdateRequest{}
 
 	req.IdentitySet = convertIdentitySetToPlumbing(identitySet)
-	var plumbingResponse *plumbing.IdentitySetUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "IdentitySets.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentitySetUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "IdentitySets.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentitySetUpdateResponse{}
@@ -2706,23 +2463,19 @@ func (svc *IdentitySets) Delete(
 	id string) (
 	*IdentitySetDeleteResponse,
 	error) {
-	req := &plumbing.IdentitySetDeleteRequest{}
+	req := plumbing.IdentitySetDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.IdentitySetDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "IdentitySets.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.IdentitySetDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "IdentitySets.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &IdentitySetDeleteResponse{}
@@ -2746,7 +2499,7 @@ func (svc *IdentitySets) List(
 	args ...interface{}) (
 	IdentitySetIterator,
 	error) {
-	req := &plumbing.IdentitySetListRequest{}
+	req := plumbing.IdentitySetListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -2762,20 +2515,15 @@ func (svc *IdentitySets) List(
 		func() (
 			[]*IdentitySet,
 			bool, error) {
-			var plumbingResponse *plumbing.IdentitySetListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentitySets.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.IdentitySetListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "IdentitySets.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedIdentitySetToPorcelain(plumbingResponse.IdentitySets)
 			if err != nil {
@@ -2800,7 +2548,7 @@ func (svc *IdentitySetsHistory) List(
 	args ...interface{}) (
 	IdentitySetHistoryIterator,
 	error) {
-	req := &plumbing.IdentitySetHistoryListRequest{}
+	req := plumbing.IdentitySetHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -2816,20 +2564,15 @@ func (svc *IdentitySetsHistory) List(
 		func() (
 			[]*IdentitySetHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.IdentitySetHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "IdentitySetsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.IdentitySetHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "IdentitySetsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedIdentitySetHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -2871,23 +2614,19 @@ func (svc *Nodes) Create(
 	node Node) (
 	*NodeCreateResponse,
 	error) {
-	req := &plumbing.NodeCreateRequest{}
+	req := plumbing.NodeCreateRequest{}
 
 	req.Node = convertNodeToPlumbing(node)
-	var plumbingResponse *plumbing.NodeCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Nodes.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.NodeCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Nodes.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &NodeCreateResponse{}
@@ -2916,25 +2655,20 @@ func (svc *Nodes) Get(
 	id string) (
 	*NodeGetResponse,
 	error) {
-	req := &plumbing.NodeGetRequest{}
+	req := plumbing.NodeGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.NodeGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Nodes.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.NodeGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Nodes.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &NodeGetResponse{}
@@ -2962,23 +2696,19 @@ func (svc *Nodes) Update(
 	node Node) (
 	*NodeUpdateResponse,
 	error) {
-	req := &plumbing.NodeUpdateRequest{}
+	req := plumbing.NodeUpdateRequest{}
 
 	req.Node = convertNodeToPlumbing(node)
-	var plumbingResponse *plumbing.NodeUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Nodes.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.NodeUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Nodes.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &NodeUpdateResponse{}
@@ -3006,23 +2736,19 @@ func (svc *Nodes) Delete(
 	id string) (
 	*NodeDeleteResponse,
 	error) {
-	req := &plumbing.NodeDeleteRequest{}
+	req := plumbing.NodeDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.NodeDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Nodes.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.NodeDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Nodes.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &NodeDeleteResponse{}
@@ -3046,7 +2772,7 @@ func (svc *Nodes) List(
 	args ...interface{}) (
 	NodeIterator,
 	error) {
-	req := &plumbing.NodeListRequest{}
+	req := plumbing.NodeListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3062,20 +2788,15 @@ func (svc *Nodes) List(
 		func() (
 			[]Node,
 			bool, error) {
-			var plumbingResponse *plumbing.NodeListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Nodes.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.NodeListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Nodes.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedNodeToPorcelain(plumbingResponse.Nodes)
 			if err != nil {
@@ -3100,7 +2821,7 @@ func (svc *NodesHistory) List(
 	args ...interface{}) (
 	NodeHistoryIterator,
 	error) {
-	req := &plumbing.NodeHistoryListRequest{}
+	req := plumbing.NodeHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3116,20 +2837,15 @@ func (svc *NodesHistory) List(
 		func() (
 			[]*NodeHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.NodeHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "NodesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.NodeHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "NodesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedNodeHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -3154,7 +2870,7 @@ func (svc *OrganizationHistory) List(
 	args ...interface{}) (
 	OrganizationHistoryRecordIterator,
 	error) {
-	req := &plumbing.OrganizationHistoryListRequest{}
+	req := plumbing.OrganizationHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3170,20 +2886,15 @@ func (svc *OrganizationHistory) List(
 		func() (
 			[]*OrganizationHistoryRecord,
 			bool, error) {
-			var plumbingResponse *plumbing.OrganizationHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "OrganizationHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.OrganizationHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "OrganizationHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedOrganizationHistoryRecordToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -3207,23 +2918,19 @@ func (svc *PeeringGroupNodes) Create(
 	peeringGroupNode *PeeringGroupNode) (
 	*PeeringGroupNodeCreateResponse,
 	error) {
-	req := &plumbing.PeeringGroupNodeCreateRequest{}
+	req := plumbing.PeeringGroupNodeCreateRequest{}
 
 	req.PeeringGroupNode = convertPeeringGroupNodeToPlumbing(peeringGroupNode)
-	var plumbingResponse *plumbing.PeeringGroupNodeCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupNodeCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "PeeringGroupNodes.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupNodeCreateResponse{}
@@ -3251,23 +2958,19 @@ func (svc *PeeringGroupNodes) Delete(
 	id string) (
 	*PeeringGroupNodeDeleteResponse,
 	error) {
-	req := &plumbing.PeeringGroupNodeDeleteRequest{}
+	req := plumbing.PeeringGroupNodeDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.PeeringGroupNodeDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupNodeDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "PeeringGroupNodes.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupNodeDeleteResponse{}
@@ -3290,25 +2993,20 @@ func (svc *PeeringGroupNodes) Get(
 	id string) (
 	*PeeringGroupNodeGetResponse,
 	error) {
-	req := &plumbing.PeeringGroupNodeGetRequest{}
+	req := plumbing.PeeringGroupNodeGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.PeeringGroupNodeGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupNodeGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "PeeringGroupNodes.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupNodeGetResponse{}
@@ -3337,7 +3035,7 @@ func (svc *PeeringGroupNodes) List(
 	args ...interface{}) (
 	PeeringGroupNodeIterator,
 	error) {
-	req := &plumbing.PeeringGroupNodeListRequest{}
+	req := plumbing.PeeringGroupNodeListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3353,20 +3051,15 @@ func (svc *PeeringGroupNodes) List(
 		func() (
 			[]*PeeringGroupNode,
 			bool, error) {
-			var plumbingResponse *plumbing.PeeringGroupNodeListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroupNodes.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.PeeringGroupNodeListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "PeeringGroupNodes.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedPeeringGroupNodeToPorcelain(plumbingResponse.PeeringGroupNodes)
 			if err != nil {
@@ -3390,23 +3083,19 @@ func (svc *PeeringGroupPeers) Create(
 	peeringGroupPeer *PeeringGroupPeer) (
 	*PeeringGroupPeerCreateResponse,
 	error) {
-	req := &plumbing.PeeringGroupPeerCreateRequest{}
+	req := plumbing.PeeringGroupPeerCreateRequest{}
 
 	req.PeeringGroupPeer = convertPeeringGroupPeerToPlumbing(peeringGroupPeer)
-	var plumbingResponse *plumbing.PeeringGroupPeerCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupPeerCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "PeeringGroupPeers.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupPeerCreateResponse{}
@@ -3434,23 +3123,19 @@ func (svc *PeeringGroupPeers) Delete(
 	id string) (
 	*PeeringGroupPeerDeleteResponse,
 	error) {
-	req := &plumbing.PeeringGroupPeerDeleteRequest{}
+	req := plumbing.PeeringGroupPeerDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.PeeringGroupPeerDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupPeerDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "PeeringGroupPeers.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupPeerDeleteResponse{}
@@ -3473,25 +3158,20 @@ func (svc *PeeringGroupPeers) Get(
 	id string) (
 	*PeeringGroupPeerGetResponse,
 	error) {
-	req := &plumbing.PeeringGroupPeerGetRequest{}
+	req := plumbing.PeeringGroupPeerGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.PeeringGroupPeerGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupPeerGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "PeeringGroupPeers.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupPeerGetResponse{}
@@ -3520,7 +3200,7 @@ func (svc *PeeringGroupPeers) List(
 	args ...interface{}) (
 	PeeringGroupPeerIterator,
 	error) {
-	req := &plumbing.PeeringGroupPeerListRequest{}
+	req := plumbing.PeeringGroupPeerListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3536,20 +3216,15 @@ func (svc *PeeringGroupPeers) List(
 		func() (
 			[]*PeeringGroupPeer,
 			bool, error) {
-			var plumbingResponse *plumbing.PeeringGroupPeerListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroupPeers.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.PeeringGroupPeerListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "PeeringGroupPeers.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedPeeringGroupPeerToPorcelain(plumbingResponse.PeeringGroupPeers)
 			if err != nil {
@@ -3573,23 +3248,19 @@ func (svc *PeeringGroupResources) Create(
 	peeringGroupResource *PeeringGroupResource) (
 	*PeeringGroupResourceCreateResponse,
 	error) {
-	req := &plumbing.PeeringGroupResourceCreateRequest{}
+	req := plumbing.PeeringGroupResourceCreateRequest{}
 
 	req.PeeringGroupResource = convertPeeringGroupResourceToPlumbing(peeringGroupResource)
-	var plumbingResponse *plumbing.PeeringGroupResourceCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupResourceCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "PeeringGroupResources.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupResourceCreateResponse{}
@@ -3617,23 +3288,19 @@ func (svc *PeeringGroupResources) Delete(
 	id string) (
 	*PeeringGroupResourceDeleteResponse,
 	error) {
-	req := &plumbing.PeeringGroupResourceDeleteRequest{}
+	req := plumbing.PeeringGroupResourceDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.PeeringGroupResourceDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupResourceDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "PeeringGroupResources.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupResourceDeleteResponse{}
@@ -3656,25 +3323,20 @@ func (svc *PeeringGroupResources) Get(
 	id string) (
 	*PeeringGroupResourceGetResponse,
 	error) {
-	req := &plumbing.PeeringGroupResourceGetRequest{}
+	req := plumbing.PeeringGroupResourceGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.PeeringGroupResourceGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupResourceGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "PeeringGroupResources.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupResourceGetResponse{}
@@ -3703,7 +3365,7 @@ func (svc *PeeringGroupResources) List(
 	args ...interface{}) (
 	PeeringGroupResourceIterator,
 	error) {
-	req := &plumbing.PeeringGroupResourceListRequest{}
+	req := plumbing.PeeringGroupResourceListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3719,20 +3381,15 @@ func (svc *PeeringGroupResources) List(
 		func() (
 			[]*PeeringGroupResource,
 			bool, error) {
-			var plumbingResponse *plumbing.PeeringGroupResourceListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroupResources.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.PeeringGroupResourceListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "PeeringGroupResources.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedPeeringGroupResourceToPorcelain(plumbingResponse.PeeringGroupResources)
 			if err != nil {
@@ -3756,23 +3413,19 @@ func (svc *PeeringGroups) Create(
 	peeringGroup *PeeringGroup) (
 	*PeeringGroupCreateResponse,
 	error) {
-	req := &plumbing.PeeringGroupCreateRequest{}
+	req := plumbing.PeeringGroupCreateRequest{}
 
 	req.PeeringGroup = convertPeeringGroupToPlumbing(peeringGroup)
-	var plumbingResponse *plumbing.PeeringGroupCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "PeeringGroups.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "PeeringGroups.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupCreateResponse{}
@@ -3800,23 +3453,19 @@ func (svc *PeeringGroups) Delete(
 	id string) (
 	*PeeringGroupDeleteResponse,
 	error) {
-	req := &plumbing.PeeringGroupDeleteRequest{}
+	req := plumbing.PeeringGroupDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.PeeringGroupDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "PeeringGroups.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "PeeringGroups.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupDeleteResponse{}
@@ -3839,25 +3488,20 @@ func (svc *PeeringGroups) Get(
 	id string) (
 	*PeeringGroupGetResponse,
 	error) {
-	req := &plumbing.PeeringGroupGetRequest{}
+	req := plumbing.PeeringGroupGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.PeeringGroupGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "PeeringGroups.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PeeringGroupGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "PeeringGroups.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PeeringGroupGetResponse{}
@@ -3886,7 +3530,7 @@ func (svc *PeeringGroups) List(
 	args ...interface{}) (
 	PeeringGroupIterator,
 	error) {
-	req := &plumbing.PeeringGroupListRequest{}
+	req := plumbing.PeeringGroupListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -3902,20 +3546,15 @@ func (svc *PeeringGroups) List(
 		func() (
 			[]*PeeringGroup,
 			bool, error) {
-			var plumbingResponse *plumbing.PeeringGroupListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PeeringGroups.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.PeeringGroupListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "PeeringGroups.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedPeeringGroupToPorcelain(plumbingResponse.PeeringGroups)
 			if err != nil {
@@ -3956,23 +3595,19 @@ func (svc *Policies) Create(
 	policy *Policy) (
 	*PolicyCreateResponse,
 	error) {
-	req := &plumbing.PolicyCreateRequest{}
+	req := plumbing.PolicyCreateRequest{}
 
 	req.Policy = convertPolicyToPlumbing(policy)
-	var plumbingResponse *plumbing.PolicyCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Policies.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PolicyCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Policies.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PolicyCreateResponse{}
@@ -3995,23 +3630,19 @@ func (svc *Policies) Delete(
 	id string) (
 	*PolicyDeleteResponse,
 	error) {
-	req := &plumbing.PolicyDeleteRequest{}
+	req := plumbing.PolicyDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.PolicyDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Policies.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PolicyDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Policies.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PolicyDeleteResponse{}
@@ -4029,23 +3660,19 @@ func (svc *Policies) Update(
 	policy *Policy) (
 	*PolicyUpdateResponse,
 	error) {
-	req := &plumbing.PolicyUpdateRequest{}
+	req := plumbing.PolicyUpdateRequest{}
 
 	req.Policy = convertPolicyToPlumbing(policy)
-	var plumbingResponse *plumbing.PolicyUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Policies.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PolicyUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Policies.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PolicyUpdateResponse{}
@@ -4068,25 +3695,20 @@ func (svc *Policies) Get(
 	id string) (
 	*PolicyGetResponse,
 	error) {
-	req := &plumbing.PolicyGetRequest{}
+	req := plumbing.PolicyGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.PolicyGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Policies.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.PolicyGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Policies.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &PolicyGetResponse{}
@@ -4115,7 +3737,7 @@ func (svc *Policies) List(
 	args ...interface{}) (
 	PolicyIterator,
 	error) {
-	req := &plumbing.PolicyListRequest{}
+	req := plumbing.PolicyListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4131,20 +3753,15 @@ func (svc *Policies) List(
 		func() (
 			[]*Policy,
 			bool, error) {
-			var plumbingResponse *plumbing.PolicyListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Policies.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.PolicyListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Policies.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedPolicyToPorcelain(plumbingResponse.Policies)
 			if err != nil {
@@ -4169,7 +3786,7 @@ func (svc *PoliciesHistory) List(
 	args ...interface{}) (
 	PolicyHistoryIterator,
 	error) {
-	req := &plumbing.PoliciesHistoryListRequest{}
+	req := plumbing.PoliciesHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4185,20 +3802,15 @@ func (svc *PoliciesHistory) List(
 		func() (
 			[]*PolicyHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.PoliciesHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "PoliciesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.PoliciesHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "PoliciesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedPolicyHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -4240,23 +3852,19 @@ func (svc *ProxyClusterKeys) Create(
 	proxyClusterKey *ProxyClusterKey) (
 	*ProxyClusterKeyCreateResponse,
 	error) {
-	req := &plumbing.ProxyClusterKeyCreateRequest{}
+	req := plumbing.ProxyClusterKeyCreateRequest{}
 
 	req.ProxyClusterKey = convertProxyClusterKeyToPlumbing(proxyClusterKey)
-	var plumbingResponse *plumbing.ProxyClusterKeyCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ProxyClusterKeyCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "ProxyClusterKeys.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ProxyClusterKeyCreateResponse{}
@@ -4285,25 +3893,20 @@ func (svc *ProxyClusterKeys) Get(
 	id string) (
 	*ProxyClusterKeyGetResponse,
 	error) {
-	req := &plumbing.ProxyClusterKeyGetRequest{}
+	req := plumbing.ProxyClusterKeyGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.ProxyClusterKeyGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ProxyClusterKeyGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "ProxyClusterKeys.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ProxyClusterKeyGetResponse{}
@@ -4331,23 +3934,19 @@ func (svc *ProxyClusterKeys) Delete(
 	id string) (
 	*ProxyClusterKeyDeleteResponse,
 	error) {
-	req := &plumbing.ProxyClusterKeyDeleteRequest{}
+	req := plumbing.ProxyClusterKeyDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.ProxyClusterKeyDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ProxyClusterKeyDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "ProxyClusterKeys.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ProxyClusterKeyDeleteResponse{}
@@ -4371,7 +3970,7 @@ func (svc *ProxyClusterKeys) List(
 	args ...interface{}) (
 	ProxyClusterKeyIterator,
 	error) {
-	req := &plumbing.ProxyClusterKeyListRequest{}
+	req := plumbing.ProxyClusterKeyListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4387,20 +3986,15 @@ func (svc *ProxyClusterKeys) List(
 		func() (
 			[]*ProxyClusterKey,
 			bool, error) {
-			var plumbingResponse *plumbing.ProxyClusterKeyListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ProxyClusterKeys.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ProxyClusterKeyListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ProxyClusterKeys.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedProxyClusterKeyToPorcelain(plumbingResponse.ProxyClusterKeys)
 			if err != nil {
@@ -4427,7 +4021,7 @@ func (svc *Queries) List(
 	args ...interface{}) (
 	QueryIterator,
 	error) {
-	req := &plumbing.QueryListRequest{}
+	req := plumbing.QueryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4443,20 +4037,15 @@ func (svc *Queries) List(
 		func() (
 			[]*Query,
 			bool, error) {
-			var plumbingResponse *plumbing.QueryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Queries.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.QueryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Queries.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedQueryToPorcelain(plumbingResponse.Queries)
 			if err != nil {
@@ -4496,23 +4085,19 @@ func (svc *RemoteIdentities) Create(
 	remoteIdentity *RemoteIdentity) (
 	*RemoteIdentityCreateResponse,
 	error) {
-	req := &plumbing.RemoteIdentityCreateRequest{}
+	req := plumbing.RemoteIdentityCreateRequest{}
 
 	req.RemoteIdentity = convertRemoteIdentityToPlumbing(remoteIdentity)
-	var plumbingResponse *plumbing.RemoteIdentityCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RemoteIdentityCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "RemoteIdentities.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RemoteIdentityCreateResponse{}
@@ -4540,25 +4125,20 @@ func (svc *RemoteIdentities) Get(
 	id string) (
 	*RemoteIdentityGetResponse,
 	error) {
-	req := &plumbing.RemoteIdentityGetRequest{}
+	req := plumbing.RemoteIdentityGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.RemoteIdentityGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RemoteIdentityGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "RemoteIdentities.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RemoteIdentityGetResponse{}
@@ -4586,23 +4166,19 @@ func (svc *RemoteIdentities) Update(
 	remoteIdentity *RemoteIdentity) (
 	*RemoteIdentityUpdateResponse,
 	error) {
-	req := &plumbing.RemoteIdentityUpdateRequest{}
+	req := plumbing.RemoteIdentityUpdateRequest{}
 
 	req.RemoteIdentity = convertRemoteIdentityToPlumbing(remoteIdentity)
-	var plumbingResponse *plumbing.RemoteIdentityUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RemoteIdentityUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "RemoteIdentities.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RemoteIdentityUpdateResponse{}
@@ -4630,23 +4206,19 @@ func (svc *RemoteIdentities) Delete(
 	id string) (
 	*RemoteIdentityDeleteResponse,
 	error) {
-	req := &plumbing.RemoteIdentityDeleteRequest{}
+	req := plumbing.RemoteIdentityDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.RemoteIdentityDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "RemoteIdentities.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RemoteIdentityDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "RemoteIdentities.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RemoteIdentityDeleteResponse{}
@@ -4670,7 +4242,7 @@ func (svc *RemoteIdentities) List(
 	args ...interface{}) (
 	RemoteIdentityIterator,
 	error) {
-	req := &plumbing.RemoteIdentityListRequest{}
+	req := plumbing.RemoteIdentityListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4686,20 +4258,15 @@ func (svc *RemoteIdentities) List(
 		func() (
 			[]*RemoteIdentity,
 			bool, error) {
-			var plumbingResponse *plumbing.RemoteIdentityListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RemoteIdentities.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RemoteIdentityListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RemoteIdentities.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRemoteIdentityToPorcelain(plumbingResponse.RemoteIdentities)
 			if err != nil {
@@ -4724,7 +4291,7 @@ func (svc *RemoteIdentitiesHistory) List(
 	args ...interface{}) (
 	RemoteIdentityHistoryIterator,
 	error) {
-	req := &plumbing.RemoteIdentityHistoryListRequest{}
+	req := plumbing.RemoteIdentityHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4740,20 +4307,15 @@ func (svc *RemoteIdentitiesHistory) List(
 		func() (
 			[]*RemoteIdentityHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.RemoteIdentityHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RemoteIdentitiesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RemoteIdentityHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RemoteIdentitiesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRemoteIdentityHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -4794,25 +4356,20 @@ func (svc *RemoteIdentityGroups) Get(
 	id string) (
 	*RemoteIdentityGroupGetResponse,
 	error) {
-	req := &plumbing.RemoteIdentityGroupGetRequest{}
+	req := plumbing.RemoteIdentityGroupGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.RemoteIdentityGroupGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "RemoteIdentityGroups.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RemoteIdentityGroupGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "RemoteIdentityGroups.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RemoteIdentityGroupGetResponse{}
@@ -4841,7 +4398,7 @@ func (svc *RemoteIdentityGroups) List(
 	args ...interface{}) (
 	RemoteIdentityGroupIterator,
 	error) {
-	req := &plumbing.RemoteIdentityGroupListRequest{}
+	req := plumbing.RemoteIdentityGroupListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4857,20 +4414,15 @@ func (svc *RemoteIdentityGroups) List(
 		func() (
 			[]*RemoteIdentityGroup,
 			bool, error) {
-			var plumbingResponse *plumbing.RemoteIdentityGroupListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RemoteIdentityGroups.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RemoteIdentityGroupListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RemoteIdentityGroups.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRemoteIdentityGroupToPorcelain(plumbingResponse.RemoteIdentityGroups)
 			if err != nil {
@@ -4895,7 +4447,7 @@ func (svc *RemoteIdentityGroupsHistory) List(
 	args ...interface{}) (
 	RemoteIdentityGroupHistoryIterator,
 	error) {
-	req := &plumbing.RemoteIdentityGroupHistoryListRequest{}
+	req := plumbing.RemoteIdentityGroupHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4911,20 +4463,15 @@ func (svc *RemoteIdentityGroupsHistory) List(
 		func() (
 			[]*RemoteIdentityGroupHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.RemoteIdentityGroupHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RemoteIdentityGroupsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RemoteIdentityGroupHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RemoteIdentityGroupsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRemoteIdentityGroupHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -4950,7 +4497,7 @@ func (svc *Replays) List(
 	args ...interface{}) (
 	ReplayChunkIterator,
 	error) {
-	req := &plumbing.ReplayListRequest{}
+	req := plumbing.ReplayListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -4966,20 +4513,15 @@ func (svc *Replays) List(
 		func() (
 			[]*ReplayChunk,
 			bool, error) {
-			var plumbingResponse *plumbing.ReplayListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Replays.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ReplayListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Replays.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedReplayChunkToPorcelain(plumbingResponse.Chunks)
 			if err != nil {
@@ -5021,7 +4563,7 @@ func (svc *Resources) EnumerateTags(
 	args ...interface{}) (
 	TagIterator,
 	error) {
-	req := &plumbing.EnumerateTagsRequest{}
+	req := plumbing.EnumerateTagsRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5037,20 +4579,15 @@ func (svc *Resources) EnumerateTags(
 		func() (
 			[]*Tag,
 			bool, error) {
-			var plumbingResponse *plumbing.EnumerateTagsResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.EnumerateTags(svc.parent.wrapContext(ctx, req, "Resources.EnumerateTags"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.EnumerateTagsResponse, error) {
+					return svc.client.EnumerateTags(svc.parent.wrapContext(ctx, &req, "Resources.EnumerateTags"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedTagToPorcelain(plumbingResponse.Matches)
 			if err != nil {
@@ -5068,23 +4605,19 @@ func (svc *Resources) Create(
 	resource Resource) (
 	*ResourceCreateResponse,
 	error) {
-	req := &plumbing.ResourceCreateRequest{}
+	req := plumbing.ResourceCreateRequest{}
 
 	req.Resource = convertResourceToPlumbing(resource)
-	var plumbingResponse *plumbing.ResourceCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Resources.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ResourceCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Resources.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ResourceCreateResponse{}
@@ -5112,25 +4645,20 @@ func (svc *Resources) Get(
 	id string) (
 	*ResourceGetResponse,
 	error) {
-	req := &plumbing.ResourceGetRequest{}
+	req := plumbing.ResourceGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.ResourceGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Resources.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ResourceGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Resources.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ResourceGetResponse{}
@@ -5158,23 +4686,19 @@ func (svc *Resources) Update(
 	resource Resource) (
 	*ResourceUpdateResponse,
 	error) {
-	req := &plumbing.ResourceUpdateRequest{}
+	req := plumbing.ResourceUpdateRequest{}
 
 	req.Resource = convertResourceToPlumbing(resource)
-	var plumbingResponse *plumbing.ResourceUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Resources.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ResourceUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Resources.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ResourceUpdateResponse{}
@@ -5202,23 +4726,19 @@ func (svc *Resources) Delete(
 	id string) (
 	*ResourceDeleteResponse,
 	error) {
-	req := &plumbing.ResourceDeleteRequest{}
+	req := plumbing.ResourceDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.ResourceDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Resources.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ResourceDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Resources.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ResourceDeleteResponse{}
@@ -5242,7 +4762,7 @@ func (svc *Resources) List(
 	args ...interface{}) (
 	ResourceIterator,
 	error) {
-	req := &plumbing.ResourceListRequest{}
+	req := plumbing.ResourceListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5258,20 +4778,15 @@ func (svc *Resources) List(
 		func() (
 			[]Resource,
 			bool, error) {
-			var plumbingResponse *plumbing.ResourceListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Resources.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ResourceListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Resources.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedResourceToPorcelain(plumbingResponse.Resources)
 			if err != nil {
@@ -5291,23 +4806,19 @@ func (svc *Resources) Healthcheck(
 	id string) (
 	*ResourceHealthcheckResponse,
 	error) {
-	req := &plumbing.ResourceHealthcheckRequest{}
+	req := plumbing.ResourceHealthcheckRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.ResourceHealthcheckResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Healthcheck(svc.parent.wrapContext(ctx, req, "Resources.Healthcheck"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ResourceHealthcheckResponse, error) {
+			return svc.client.Healthcheck(svc.parent.wrapContext(ctx, &req, "Resources.Healthcheck"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &ResourceHealthcheckResponse{}
@@ -5337,7 +4848,7 @@ func (svc *ResourcesHistory) List(
 	args ...interface{}) (
 	ResourceHistoryIterator,
 	error) {
-	req := &plumbing.ResourceHistoryListRequest{}
+	req := plumbing.ResourceHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5353,20 +4864,15 @@ func (svc *ResourcesHistory) List(
 		func() (
 			[]*ResourceHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.ResourceHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "ResourcesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ResourceHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "ResourcesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedResourceHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -5403,7 +4909,7 @@ func (svc *RoleResources) List(
 	args ...interface{}) (
 	RoleResourceIterator,
 	error) {
-	req := &plumbing.RoleResourceListRequest{}
+	req := plumbing.RoleResourceListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5419,20 +4925,15 @@ func (svc *RoleResources) List(
 		func() (
 			[]*RoleResource,
 			bool, error) {
-			var plumbingResponse *plumbing.RoleResourceListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RoleResources.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RoleResourceListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RoleResources.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRoleResourceToPorcelain(plumbingResponse.RoleResources)
 			if err != nil {
@@ -5457,7 +4958,7 @@ func (svc *RoleResourcesHistory) List(
 	args ...interface{}) (
 	RoleResourceHistoryIterator,
 	error) {
-	req := &plumbing.RoleResourceHistoryListRequest{}
+	req := plumbing.RoleResourceHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5473,20 +4974,15 @@ func (svc *RoleResourcesHistory) List(
 		func() (
 			[]*RoleResourceHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.RoleResourceHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RoleResourcesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RoleResourceHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RoleResourcesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRoleResourceHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -5528,23 +5024,19 @@ func (svc *Roles) Create(
 	role *Role) (
 	*RoleCreateResponse,
 	error) {
-	req := &plumbing.RoleCreateRequest{}
+	req := plumbing.RoleCreateRequest{}
 
 	req.Role = convertRoleToPlumbing(role)
-	var plumbingResponse *plumbing.RoleCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Roles.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Roles.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RoleCreateResponse{}
@@ -5572,25 +5064,20 @@ func (svc *Roles) Get(
 	id string) (
 	*RoleGetResponse,
 	error) {
-	req := &plumbing.RoleGetRequest{}
+	req := plumbing.RoleGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.RoleGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Roles.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Roles.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RoleGetResponse{}
@@ -5618,23 +5105,19 @@ func (svc *Roles) Update(
 	role *Role) (
 	*RoleUpdateResponse,
 	error) {
-	req := &plumbing.RoleUpdateRequest{}
+	req := plumbing.RoleUpdateRequest{}
 
 	req.Role = convertRoleToPlumbing(role)
-	var plumbingResponse *plumbing.RoleUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Roles.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Roles.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RoleUpdateResponse{}
@@ -5662,23 +5145,19 @@ func (svc *Roles) Delete(
 	id string) (
 	*RoleDeleteResponse,
 	error) {
-	req := &plumbing.RoleDeleteRequest{}
+	req := plumbing.RoleDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.RoleDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Roles.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Roles.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &RoleDeleteResponse{}
@@ -5702,7 +5181,7 @@ func (svc *Roles) List(
 	args ...interface{}) (
 	RoleIterator,
 	error) {
-	req := &plumbing.RoleListRequest{}
+	req := plumbing.RoleListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5718,20 +5197,15 @@ func (svc *Roles) List(
 		func() (
 			[]*Role,
 			bool, error) {
-			var plumbingResponse *plumbing.RoleListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Roles.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RoleListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Roles.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRoleToPorcelain(plumbingResponse.Roles)
 			if err != nil {
@@ -5756,7 +5230,7 @@ func (svc *RolesHistory) List(
 	args ...interface{}) (
 	RoleHistoryIterator,
 	error) {
-	req := &plumbing.RoleHistoryListRequest{}
+	req := plumbing.RoleHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -5772,20 +5246,15 @@ func (svc *RolesHistory) List(
 		func() (
 			[]*RoleHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.RoleHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "RolesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RoleHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RolesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRoleHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -5824,23 +5293,19 @@ func (svc *SecretStores) Create(
 	secretStore SecretStore) (
 	*SecretStoreCreateResponse,
 	error) {
-	req := &plumbing.SecretStoreCreateRequest{}
+	req := plumbing.SecretStoreCreateRequest{}
 
 	req.SecretStore = convertSecretStoreToPlumbing(secretStore)
-	var plumbingResponse *plumbing.SecretStoreCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "SecretStores.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.SecretStoreCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "SecretStores.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &SecretStoreCreateResponse{}
@@ -5868,25 +5333,20 @@ func (svc *SecretStores) Get(
 	id string) (
 	*SecretStoreGetResponse,
 	error) {
-	req := &plumbing.SecretStoreGetRequest{}
+	req := plumbing.SecretStoreGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.SecretStoreGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "SecretStores.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.SecretStoreGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "SecretStores.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &SecretStoreGetResponse{}
@@ -5914,23 +5374,19 @@ func (svc *SecretStores) Update(
 	secretStore SecretStore) (
 	*SecretStoreUpdateResponse,
 	error) {
-	req := &plumbing.SecretStoreUpdateRequest{}
+	req := plumbing.SecretStoreUpdateRequest{}
 
 	req.SecretStore = convertSecretStoreToPlumbing(secretStore)
-	var plumbingResponse *plumbing.SecretStoreUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "SecretStores.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.SecretStoreUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "SecretStores.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &SecretStoreUpdateResponse{}
@@ -5958,23 +5414,19 @@ func (svc *SecretStores) Delete(
 	id string) (
 	*SecretStoreDeleteResponse,
 	error) {
-	req := &plumbing.SecretStoreDeleteRequest{}
+	req := plumbing.SecretStoreDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.SecretStoreDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "SecretStores.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.SecretStoreDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "SecretStores.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &SecretStoreDeleteResponse{}
@@ -5998,7 +5450,7 @@ func (svc *SecretStores) List(
 	args ...interface{}) (
 	SecretStoreIterator,
 	error) {
-	req := &plumbing.SecretStoreListRequest{}
+	req := plumbing.SecretStoreListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6014,20 +5466,15 @@ func (svc *SecretStores) List(
 		func() (
 			[]SecretStore,
 			bool, error) {
-			var plumbingResponse *plumbing.SecretStoreListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "SecretStores.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.SecretStoreListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "SecretStores.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedSecretStoreToPorcelain(plumbingResponse.SecretStores)
 			if err != nil {
@@ -6052,7 +5499,7 @@ func (svc *SecretStoreHealths) List(
 	args ...interface{}) (
 	SecretStoreHealthIterator,
 	error) {
-	req := &plumbing.SecretStoreHealthListRequest{}
+	req := plumbing.SecretStoreHealthListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6068,20 +5515,15 @@ func (svc *SecretStoreHealths) List(
 		func() (
 			[]*SecretStoreHealth,
 			bool, error) {
-			var plumbingResponse *plumbing.SecretStoreHealthListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "SecretStoreHealths.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.SecretStoreHealthListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "SecretStoreHealths.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedSecretStoreHealthToPorcelain(plumbingResponse.SecretStoreHealths)
 			if err != nil {
@@ -6101,23 +5543,19 @@ func (svc *SecretStoreHealths) Healthcheck(
 	secretStoreId string) (
 	*SecretStoreHealthcheckResponse,
 	error) {
-	req := &plumbing.SecretStoreHealthcheckRequest{}
+	req := plumbing.SecretStoreHealthcheckRequest{}
 
 	req.SecretStoreId = (secretStoreId)
-	var plumbingResponse *plumbing.SecretStoreHealthcheckResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Healthcheck(svc.parent.wrapContext(ctx, req, "SecretStoreHealths.Healthcheck"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.SecretStoreHealthcheckResponse, error) {
+			return svc.client.Healthcheck(svc.parent.wrapContext(ctx, &req, "SecretStoreHealths.Healthcheck"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &SecretStoreHealthcheckResponse{}
@@ -6142,7 +5580,7 @@ func (svc *SecretStoresHistory) List(
 	args ...interface{}) (
 	SecretStoreHistoryIterator,
 	error) {
-	req := &plumbing.SecretStoreHistoryListRequest{}
+	req := plumbing.SecretStoreHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6158,20 +5596,15 @@ func (svc *SecretStoresHistory) List(
 		func() (
 			[]*SecretStoreHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.SecretStoreHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "SecretStoresHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.SecretStoreHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "SecretStoresHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedSecretStoreHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -6211,23 +5644,19 @@ func (svc *WorkflowApprovers) Create(
 	workflowApprover *WorkflowApprover) (
 	*WorkflowApproversCreateResponse,
 	error) {
-	req := &plumbing.WorkflowApproversCreateRequest{}
+	req := plumbing.WorkflowApproversCreateRequest{}
 
 	req.WorkflowApprover = convertWorkflowApproverToPlumbing(workflowApprover)
-	var plumbingResponse *plumbing.WorkflowApproversCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowApproversCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "WorkflowApprovers.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowApproversCreateResponse{}
@@ -6250,25 +5679,20 @@ func (svc *WorkflowApprovers) Get(
 	id string) (
 	*WorkflowApproverGetResponse,
 	error) {
-	req := &plumbing.WorkflowApproverGetRequest{}
+	req := plumbing.WorkflowApproverGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.WorkflowApproverGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowApproverGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "WorkflowApprovers.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowApproverGetResponse{}
@@ -6296,23 +5720,19 @@ func (svc *WorkflowApprovers) Delete(
 	id string) (
 	*WorkflowApproversDeleteResponse,
 	error) {
-	req := &plumbing.WorkflowApproversDeleteRequest{}
+	req := plumbing.WorkflowApproversDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.WorkflowApproversDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowApproversDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "WorkflowApprovers.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowApproversDeleteResponse{}
@@ -6331,7 +5751,7 @@ func (svc *WorkflowApprovers) List(
 	args ...interface{}) (
 	WorkflowApproverIterator,
 	error) {
-	req := &plumbing.WorkflowApproversListRequest{}
+	req := plumbing.WorkflowApproversListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6347,20 +5767,15 @@ func (svc *WorkflowApprovers) List(
 		func() (
 			[]*WorkflowApprover,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowApproversListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowApprovers.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowApproversListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowApprovers.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowApproverToPorcelain(plumbingResponse.WorkflowApprovers)
 			if err != nil {
@@ -6385,7 +5800,7 @@ func (svc *WorkflowApproversHistory) List(
 	args ...interface{}) (
 	WorkflowApproverHistoryIterator,
 	error) {
-	req := &plumbing.WorkflowApproversHistoryListRequest{}
+	req := plumbing.WorkflowApproversHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6401,20 +5816,15 @@ func (svc *WorkflowApproversHistory) List(
 		func() (
 			[]*WorkflowApproverHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowApproversHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowApproversHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowApproversHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowApproversHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowApproverHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -6451,7 +5861,7 @@ func (svc *WorkflowAssignments) List(
 	args ...interface{}) (
 	WorkflowAssignmentIterator,
 	error) {
-	req := &plumbing.WorkflowAssignmentsListRequest{}
+	req := plumbing.WorkflowAssignmentsListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6467,20 +5877,15 @@ func (svc *WorkflowAssignments) List(
 		func() (
 			[]*WorkflowAssignment,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowAssignmentsListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowAssignments.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowAssignmentsListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowAssignments.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowAssignmentToPorcelain(plumbingResponse.WorkflowAssignments)
 			if err != nil {
@@ -6505,7 +5910,7 @@ func (svc *WorkflowAssignmentsHistory) List(
 	args ...interface{}) (
 	WorkflowAssignmentHistoryIterator,
 	error) {
-	req := &plumbing.WorkflowAssignmentsHistoryListRequest{}
+	req := plumbing.WorkflowAssignmentsHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6521,20 +5926,15 @@ func (svc *WorkflowAssignmentsHistory) List(
 		func() (
 			[]*WorkflowAssignmentHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowAssignmentsHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowAssignmentsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowAssignmentsHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowAssignmentsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowAssignmentHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -6575,23 +5975,19 @@ func (svc *WorkflowRoles) Create(
 	workflowRole *WorkflowRole) (
 	*WorkflowRolesCreateResponse,
 	error) {
-	req := &plumbing.WorkflowRolesCreateRequest{}
+	req := plumbing.WorkflowRolesCreateRequest{}
 
 	req.WorkflowRole = convertWorkflowRoleToPlumbing(workflowRole)
-	var plumbingResponse *plumbing.WorkflowRolesCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "WorkflowRoles.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowRolesCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "WorkflowRoles.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowRolesCreateResponse{}
@@ -6614,25 +6010,20 @@ func (svc *WorkflowRoles) Get(
 	id string) (
 	*WorkflowRoleGetResponse,
 	error) {
-	req := &plumbing.WorkflowRoleGetRequest{}
+	req := plumbing.WorkflowRoleGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.WorkflowRoleGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "WorkflowRoles.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowRoleGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "WorkflowRoles.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowRoleGetResponse{}
@@ -6660,23 +6051,19 @@ func (svc *WorkflowRoles) Delete(
 	id string) (
 	*WorkflowRolesDeleteResponse,
 	error) {
-	req := &plumbing.WorkflowRolesDeleteRequest{}
+	req := plumbing.WorkflowRolesDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.WorkflowRolesDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "WorkflowRoles.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowRolesDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "WorkflowRoles.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowRolesDeleteResponse{}
@@ -6695,7 +6082,7 @@ func (svc *WorkflowRoles) List(
 	args ...interface{}) (
 	WorkflowRoleIterator,
 	error) {
-	req := &plumbing.WorkflowRolesListRequest{}
+	req := plumbing.WorkflowRolesListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6711,20 +6098,15 @@ func (svc *WorkflowRoles) List(
 		func() (
 			[]*WorkflowRole,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowRolesListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowRoles.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowRolesListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowRoles.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowRoleToPorcelain(plumbingResponse.WorkflowRole)
 			if err != nil {
@@ -6749,7 +6131,7 @@ func (svc *WorkflowRolesHistory) List(
 	args ...interface{}) (
 	WorkflowRoleHistoryIterator,
 	error) {
-	req := &plumbing.WorkflowRolesHistoryListRequest{}
+	req := plumbing.WorkflowRolesHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6765,20 +6147,15 @@ func (svc *WorkflowRolesHistory) List(
 		func() (
 			[]*WorkflowRoleHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowRolesHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowRolesHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowRolesHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowRolesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowRoleHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
@@ -6820,23 +6197,19 @@ func (svc *Workflows) Create(
 	workflow *Workflow) (
 	*WorkflowCreateResponse,
 	error) {
-	req := &plumbing.WorkflowCreateRequest{}
+	req := plumbing.WorkflowCreateRequest{}
 
 	req.Workflow = convertWorkflowToPlumbing(workflow)
-	var plumbingResponse *plumbing.WorkflowCreateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Create(svc.parent.wrapContext(ctx, req, "Workflows.Create"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Workflows.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowCreateResponse{}
@@ -6859,25 +6232,20 @@ func (svc *Workflows) Get(
 	id string) (
 	*WorkflowGetResponse,
 	error) {
-	req := &plumbing.WorkflowGetRequest{}
+	req := plumbing.WorkflowGetRequest{}
 
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	var plumbingResponse *plumbing.WorkflowGetResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Get(svc.parent.wrapContext(ctx, req, "Workflows.Get"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Workflows.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowGetResponse{}
@@ -6905,23 +6273,19 @@ func (svc *Workflows) Delete(
 	id string) (
 	*WorkflowDeleteResponse,
 	error) {
-	req := &plumbing.WorkflowDeleteRequest{}
+	req := plumbing.WorkflowDeleteRequest{}
 
 	req.Id = (id)
-	var plumbingResponse *plumbing.WorkflowDeleteResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Delete(svc.parent.wrapContext(ctx, req, "Workflows.Delete"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Workflows.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowDeleteResponse{}
@@ -6940,23 +6304,19 @@ func (svc *Workflows) Update(
 	workflow *Workflow) (
 	*WorkflowUpdateResponse,
 	error) {
-	req := &plumbing.WorkflowUpdateRequest{}
+	req := plumbing.WorkflowUpdateRequest{}
 
 	req.Workflow = convertWorkflowToPlumbing(workflow)
-	var plumbingResponse *plumbing.WorkflowUpdateResponse
-	var err error
-	i := 0
-	for {
-		plumbingResponse, err = svc.client.Update(svc.parent.wrapContext(ctx, req, "Workflows.Update"), req)
-		if err != nil {
-			if !svc.parent.shouldRetry(i, err) {
-				return nil, convertErrorToPorcelain(err)
-			}
-			i++
-			svc.parent.jitterSleep(i)
-			continue
-		}
-		break
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.WorkflowUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Workflows.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
 	}
 
 	resp := &WorkflowUpdateResponse{}
@@ -6980,7 +6340,7 @@ func (svc *Workflows) List(
 	args ...interface{}) (
 	WorkflowIterator,
 	error) {
-	req := &plumbing.WorkflowListRequest{}
+	req := plumbing.WorkflowListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -6996,20 +6356,15 @@ func (svc *Workflows) List(
 		func() (
 			[]*Workflow,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "Workflows.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Workflows.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowToPorcelain(plumbingResponse.Workflows)
 			if err != nil {
@@ -7034,7 +6389,7 @@ func (svc *WorkflowsHistory) List(
 	args ...interface{}) (
 	WorkflowHistoryIterator,
 	error) {
-	req := &plumbing.WorkflowHistoryListRequest{}
+	req := plumbing.WorkflowHistoryListRequest{}
 
 	var filterErr error
 	req.Filter, filterErr = quoteFilterArgs(filter, args...)
@@ -7050,20 +6405,15 @@ func (svc *WorkflowsHistory) List(
 		func() (
 			[]*WorkflowHistory,
 			bool, error) {
-			var plumbingResponse *plumbing.WorkflowHistoryListResponse
-			var err error
-			i := 0
-			for {
-				plumbingResponse, err = svc.client.List(svc.parent.wrapContext(ctx, req, "WorkflowsHistory.List"), req)
-				if err != nil {
-					if !svc.parent.shouldRetry(i, err) {
-						return nil, false, convertErrorToPorcelain(err)
-					}
-					i++
-					svc.parent.jitterSleep(i)
-					continue
-				}
-				break
+			plumbingResponse, err := retryWrapper(
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.WorkflowHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "WorkflowsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedWorkflowHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {

@@ -35,6 +35,17 @@ func convertAccessRulesToPlumbing(porcelain interface{}) sdm.AccessRules {
 	return sdm.AccessRules(porcelain.(string))
 }
 
+func convertAccessRuleToPorcelain(plumbing sdm.AccessRule) string {
+	return string(plumbing)
+}
+
+func convertAccessRuleToPlumbing(porcelain interface{}) sdm.AccessRule {
+	if porcelain == nil {
+		return sdm.AccessRule("")
+	}
+	return sdm.AccessRule(porcelain.(string))
+}
+
 func convertTagsToPlumbing(porcelain interface{}) sdm.Tags {
 	if porcelain == nil {
 		return nil
@@ -134,6 +145,29 @@ func accessRulesDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
 		return false
 	}
 	newNormalized, err := json.Marshal(newRules)
+	if err != nil {
+		return false
+	}
+	if !bytes.Equal(oldNormalized, newNormalized) {
+		return false
+	}
+	return true
+}
+
+func accessRuleDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
+	var oldRule []interface{}
+	if err := json.Unmarshal([]byte(old), &oldRule); err != nil {
+		return false
+	}
+	var newRule []interface{}
+	if err := json.Unmarshal([]byte(new), &newRule); err != nil {
+		return false
+	}
+	oldNormalized, err := json.Marshal(oldRule)
+	if err != nil {
+		return false
+	}
+	newNormalized, err := json.Marshal(newRule)
 	if err != nil {
 		return false
 	}

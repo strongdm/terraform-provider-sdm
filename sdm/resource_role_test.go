@@ -423,6 +423,60 @@ func TestAccSDMRole_AccessRules(t *testing.T) {
 				ImportState:       true,
 				ImportStateVerify: true,
 			},
+			// privileges-based access rule
+			{
+				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName,
+					fmt.Sprintf(`access_rules = jsonencode([
+						{ ids = [sdm_resource.%s.id],
+						  privileges = {
+							k8s = {
+							  groups = ["firecall", "engineering"]
+							}
+						  }
+						}
+					])`, resourceName),
+				),
+				Check: resource.ComposeTestCheckFunc(
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", resourceName)
+						if err != nil {
+							return err
+						}
+						return resource.TestCheckResourceAttr("sdm_role."+roleName, "access_rules", fmt.Sprintf(`[{"ids":["%s"],"privileges":{"k8s":{"groups":["firecall","engineering"]}}}]`, id))(s)
+					},
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_role", roleName)
+						if err != nil {
+							return err
+						}
+
+						resourceID, err := testCreatedID(s, "sdm_resource", resourceName)
+						if err != nil {
+							return err
+						}
+						// check if it was actually created
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Roles().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created role: %w", err)
+						}
+
+						ar := fmt.Sprintf(`[{"ids":["%s"],"privileges":{"k8s":{"groups":["firecall","engineering"]}}}]`, resourceID)
+						if resp.Role.AccessRules != sdm.AccessRules(ar) {
+							return fmt.Errorf(`unexpected value '%+v' for access_rule, expected privileges`, resp.Role.AccessRules)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_role." + roleName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
 			// now clear out access rules
 			{
 				Config: testAccSDMRoleAccessRulesConfig(resourceName, roleName, `access_rules = jsonencode([])`),

@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "api.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/12.9.0"
+	defaultUserAgent = "strongdm-sdk-go/12.10.0"
 	defaultPageLimit = 50
 )
 
@@ -67,9 +67,7 @@ type Client struct {
 
 	grpcConn *grpc.ClientConn
 
-	maxRetries                       int
-	baseRetryDelay                   time.Duration
-	maxRetryDelay                    time.Duration
+	retryOptions                     retryOptions
 	accessRequests                   *AccessRequests
 	accessRequestEventsHistory       *AccessRequestEventsHistory
 	accessRequestsHistory            *AccessRequestsHistory
@@ -140,14 +138,12 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 
 	client := &Client{
-		apiHost:        defaultAPIHost,
-		maxRetries:     defaultMaxRetries,
-		baseRetryDelay: defaultBaseRetryDelay,
-		maxRetryDelay:  defaultMaxRetryDelay,
-		apiToken:       token,
-		apiSecret:      decodedSecret,
-		userAgent:      defaultUserAgent,
-		pageLimit:      defaultPageLimit,
+		apiHost:      defaultAPIHost,
+		retryOptions: defaultRetryOptions(),
+		apiToken:     token,
+		apiSecret:    decodedSecret,
+		userAgent:    defaultUserAgent,
+		pageLimit:    defaultPageLimit,
 	}
 
 	for _, opt := range opts {
@@ -475,7 +471,7 @@ func WithUserAgentExtra(userAgentExtra string) ClientOption {
 // exposed to the code using this client (if disabled). By default, it is enabled.
 func WithRateLimitRetries(enabled bool) ClientOption {
 	return func(c *Client) {
-		c.exposeRateLimitErrors = !enabled
+		c.retryOptions.exposeRateLimitErrors = !enabled
 	}
 }
 
@@ -1085,51 +1081,117 @@ func (c *Client) wrapContext(ctx context.Context, req proto.Message, methodName 
 	}))
 }
 
+type retryOptions struct {
+	maxRetries            int
+	baseRetryDelay        time.Duration
+	maxRetryDelay         time.Duration
+	exposeRateLimitErrors bool
+	fulfillRequirements   func(*plumbing.RequirementsMetadata) (*plumbing.FulfillmentsMetadata, error)
+}
+
 // These defaults are taken from AWS. Customization of these values
 // is a future step in the API.
-const (
-	defaultMaxRetries     = 3
-	defaultBaseRetryDelay = 30 * time.Millisecond
-	defaultMaxRetryDelay  = 300 * time.Second
-)
+func defaultRetryOptions() retryOptions {
+	return retryOptions{
+		maxRetries:            3,
+		baseRetryDelay:        30 * time.Millisecond,
+		maxRetryDelay:         300 * time.Second,
+		exposeRateLimitErrors: false,
+		fulfillRequirements:   nil,
+	}
+}
 
-func (c *Client) jitterSleep(iter int) {
-	durMax := c.baseRetryDelay * time.Duration(2<<iter)
-	if durMax > c.maxRetryDelay {
-		durMax = c.maxRetryDelay
+func jitterSleep(opts retryOptions, iter int) time.Duration {
+	durMax := opts.baseRetryDelay * time.Duration(2<<iter)
+	if durMax > opts.maxRetryDelay {
+		durMax = opts.maxRetryDelay
 	}
 	// This is a full jitter, ranging from no delay to the maximum
 	// this jittering aims to prevent clients that start and conflict
 	// at the same time from retrying at the same intervals
-	dur := rand.Intn(int(durMax))
-	// TODO: use resource.Retry instead of time.Sleep in Terraform provider
-	// see https://github.com/bflad/tfproviderlint/tree/main/passes/R018
-	time.Sleep(time.Duration(dur)) //lintignore:R018
+	return time.Duration(rand.Intn(int(durMax)))
+
 }
 
-func (c *Client) shouldRetry(iter int, err error) bool {
-	if iter >= c.maxRetries-1 {
-		return false
-	}
-	// Internal and unknown errors should be retried
-	// Other error types are likely not brief temporary errors
-	if s, ok := status.FromError(err); ok {
-		if !c.exposeRateLimitErrors && s.Code() == codes.ResourceExhausted {
-			var rateLimitError *RateLimitError
-			if err != nil && errors.As(convertErrorToPorcelain(err), &rateLimitError) {
-				waitFor := time.Until(rateLimitError.RateLimit.ResetAt)
-				// If timezones or clock drift causes this calculation to fail,
-				// wait at most one minute.
-				if waitFor < 0 || waitFor > time.Minute {
-					waitFor = time.Minute
-				}
-				// TODO: use resource.Retry instead of time.Sleep in Terraform provider
-				// see https://github.com/bflad/tfproviderlint/tree/main/passes/R018
-				time.Sleep(waitFor) //lintignore:R018
-			}
-			return true
+func retryWrapper[ResponseT any](
+	opts retryOptions,
+	fulfillments **plumbing.FulfillmentsMetadata,
+	f func() (*ResponseT, error),
+) (*ResponseT, error) {
+	var retries int
+	var err error
+	var lastRetry bool
+	for {
+		var resp *ResponseT
+		resp, err = f()
+		if err == nil {
+			return resp, nil
 		}
-		return s.Code() == codes.Internal || s.Code() == codes.Unavailable
+		if lastRetry {
+			return resp, err
+		}
+
+		// Internal and unknown errors should be retried
+		// Other error types are likely not brief temporary errors
+		var waitFor time.Duration
+		if s, ok := status.FromError(err); ok {
+			switch {
+			case s.Code() == codes.ResourceExhausted:
+				if opts.exposeRateLimitErrors {
+					return resp, err
+				}
+
+				var rateLimitError *RateLimitError
+				if errors.As(convertErrorToPorcelain(err), &rateLimitError) {
+					waitFor = time.Until(rateLimitError.RateLimit.ResetAt)
+					// If timezones or clock drift causes this calculation to fail,
+					// wait at most one minute.
+					if waitFor < 0 || waitFor > time.Minute {
+						waitFor = time.Minute
+					}
+				}
+			case s.Code() == codes.PermissionDenied:
+				var requirementsFound bool
+				for _, d := range s.Details() {
+					if rm, ok := d.(*plumbing.RequirementsMetadata); ok {
+						if opts.fulfillRequirements == nil {
+							return resp, fmt.Errorf("unfulfilled authorization requirements: %w", err)
+						}
+
+						f, err := opts.fulfillRequirements(rm)
+						if err != nil {
+							return resp, fmt.Errorf("failed to fulfill authorization requirements: %w", err)
+						}
+						*fulfillments = f
+						requirementsFound = true
+					}
+				}
+				// If requirements found, retry immediately for the last time.
+				// No further retries are allowed to prevent subsequent re-prompting
+				// for MFA/TOTP in case of an unresolvable error.
+				if requirementsFound {
+					lastRetry = true
+					continue
+				}
+
+				// Otherwise, return the PermissionDenied error as usual
+				return resp, err
+			case s.Code() != codes.Internal && s.Code() != codes.Unavailable:
+				return resp, err
+			}
+		}
+
+		if retries == opts.maxRetries {
+			return nil, err
+		}
+
+		if waitFor == 0 {
+			waitFor = jitterSleep(opts, retries)
+		}
+
+		// TODO: use resource.Retry instead of time.Sleep in Terraform provider
+		// see https://github.com/bflad/tfproviderlint/tree/main/passes/R018
+		time.Sleep(waitFor) //lintignore:R018
+		retries++
 	}
-	return true
 }
