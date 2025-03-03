@@ -7772,7 +7772,7 @@ func resourceResource() *schema.Resource {
 						},
 						"server_spn": {
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 							Description: "The Service Principal Name of the Microsoft SQL Server instance in Active Directory.",
 						},
 						"subdomain": {
@@ -10848,12 +10848,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 					return nil, fmt.Errorf("secret store credential realm was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
 				}
 			}
-			if v := raw["server_spn"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential server_spn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
 				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
 				if err != nil {
@@ -10866,7 +10860,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"keytab":     convertStringToPlumbing(raw["keytab"]),
 			"krb_config": convertStringToPlumbing(raw["krb_config"]),
 			"realm":      convertStringToPlumbing(raw["realm"]),
-			"server_spn": convertStringToPlumbing(raw["server_spn"]),
 			"username":   convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
@@ -15793,7 +15786,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"realm":                       seValues["realm"],
 				"schema":                      (v.Schema),
 				"secret_store_id":             (v.SecretStoreID),
-				"server_spn":                  seValues["server_spn"],
+				"server_spn":                  (v.ServerSpn),
 				"subdomain":                   (v.Subdomain),
 				"tags":                        convertTagsToPorcelain(v.Tags),
 				"username":                    seValues["username"],
@@ -18688,9 +18681,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		if v.Realm != "" {
 			seValues["realm"] = v.Realm
 		}
-		if v.ServerSpn != "" {
-			seValues["server_spn"] = v.ServerSpn
-		}
 		if v.Username != "" {
 			seValues["username"] = v.Username
 		}
@@ -18711,7 +18701,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"realm":                       seValues["realm"],
 				"schema":                      (v.Schema),
 				"secret_store_id":             (v.SecretStoreID),
-				"server_spn":                  seValues["server_spn"],
+				"server_spn":                  (v.ServerSpn),
 				"subdomain":                   (v.Subdomain),
 				"tags":                        convertTagsToPorcelain(v.Tags),
 				"username":                    seValues["username"],

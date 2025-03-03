@@ -1412,7 +1412,7 @@ The following arguments are supported by the Resource resource:
 	* `realm` - (Required, either in plaintext, or as a secret store path) The Active Directory domain (realm) to which the configured username belongs.
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `server_spn` - (Required, either in plaintext, or as a secret store path) The Service Principal Name of the Microsoft SQL Server instance in Active Directory.
+	* `server_spn` - (Required) The Service Principal Name of the Microsoft SQL Server instance in Active Directory.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.

@@ -2670,7 +2670,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"realm", `"path/to/secret?key=key&encoding=base64"`},
 				{"schema", `"schema"`},
 				{"secret_store_id", `"` + seID + `"`},
-				{"server_spn", `"path/to/secret?key=key&encoding=base64"`},
+				{"server_spn", `"server_spn"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
 		},
