@@ -1396,8 +1396,6 @@ type Athena struct {
 	Tags Tags `json:"tags"`
 }
 
-// AthenaIAM is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AthenaIAM struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
