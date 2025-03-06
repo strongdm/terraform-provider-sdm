@@ -958,6 +958,19 @@ In addition to provided arguments above, the following attributes are returned b
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - The username to authenticate with.
+	* kubernetes_pod_identity:
+		* `allow_resource_role_bypass` - If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `certificate_authority` - The CA to authenticate TLS connections with.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
 	* kubernetes_service_account:
 		* `allow_resource_role_bypass` - If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.

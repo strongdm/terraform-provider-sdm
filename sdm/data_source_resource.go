@@ -5018,6 +5018,77 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"kubernetes_pod_identity": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"allow_resource_role_bypass": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+									},
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"certificate_authority": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The CA to authenticate TLS connections with.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"healthcheck_namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"kubernetes_service_account": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -9589,6 +9660,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              (v.Username),
+			})
+		case *sdm.KubernetesPodIdentity:
+			output[0]["kubernetes_pod_identity"] = append(output[0]["kubernetes_pod_identity"], entity{
+				"allow_resource_role_bypass": (v.AllowResourceRoleBypass),
+				"bind_interface":             (v.BindInterface),
+				"certificate_authority":      (v.CertificateAuthority),
+				"egress_filter":              (v.EgressFilter),
+				"healthcheck_namespace":      (v.HealthcheckNamespace),
+				"id":                         (v.ID),
+				"name":                       (v.Name),
+				"port_override":              (v.PortOverride),
+				"proxy_cluster_id":           (v.ProxyClusterID),
+				"secret_store_id":            (v.SecretStoreID),
+				"subdomain":                  (v.Subdomain),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{

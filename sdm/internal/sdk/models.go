@@ -3191,6 +3191,36 @@ type KubernetesBasicAuth struct {
 	Username string `json:"username"`
 }
 
+type KubernetesPodIdentity struct {
+	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
+	// when a resource role is not provided.
+	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The CA to authenticate TLS connections with.
+	CertificateAuthority string `json:"certificateAuthority"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The path used to check the health of your connection.  Defaults to `default`.
+	HealthcheckNamespace string `json:"healthcheckNamespace"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type KubernetesServiceAccount struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
@@ -8104,6 +8134,60 @@ func (m *KubernetesBasicAuth) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the KubernetesBasicAuth.
 func (m *KubernetesBasicAuth) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*KubernetesPodIdentity) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) GetID() string { return m.ID }
+
+// GetName returns the name of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the KubernetesPodIdentity.
+func (m *KubernetesPodIdentity) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*KubernetesServiceAccount) isOneOf_Resource() {}

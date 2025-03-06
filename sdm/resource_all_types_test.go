@@ -791,6 +791,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "kubernetes_pod_identity",
+			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
+				{"certificate_authority", certificateAuthority},
+				{"egress_filter", `"name:value"`},
+				{"healthcheck_namespace", `"healthcheck_namespace"`},
+				{"name", `"name"`},
+			},
+		},
+		{
 			resource: "kubernetes_service_account",
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
@@ -2216,6 +2226,18 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "kubernetes_pod_identity",
+			pairs: [][2]string{
+				{"allow_resource_role_bypass", `false`},
+				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
+				{"egress_filter", `"name:value"`},
+				{"healthcheck_namespace", `"healthcheck_namespace"`},
+				{"name", `"secret_name"`},
+				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
 

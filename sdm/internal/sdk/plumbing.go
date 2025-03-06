@@ -8885,6 +8885,75 @@ func convertRepeatedKubernetesBasicAuthToPorcelain(plumbings []*proto.Kubernetes
 	}
 	return items, nil
 }
+func convertKubernetesPodIdentityToPorcelain(plumbing *proto.KubernetesPodIdentity) (*KubernetesPodIdentity, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &KubernetesPodIdentity{}
+	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.CertificateAuthority = plumbing.CertificateAuthority
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertKubernetesPodIdentityToPlumbing(porcelain *KubernetesPodIdentity) *proto.KubernetesPodIdentity {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KubernetesPodIdentity{}
+	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedKubernetesPodIdentityToPlumbing(
+	porcelains []*KubernetesPodIdentity,
+) []*proto.KubernetesPodIdentity {
+	var items []*proto.KubernetesPodIdentity
+	for _, porcelain := range porcelains {
+		items = append(items, convertKubernetesPodIdentityToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKubernetesPodIdentityToPorcelain(plumbings []*proto.KubernetesPodIdentity) (
+	[]*KubernetesPodIdentity,
+	error,
+) {
+	var items []*KubernetesPodIdentity
+	for _, plumbing := range plumbings {
+		if v, err := convertKubernetesPodIdentityToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertKubernetesServiceAccountToPorcelain(plumbing *proto.KubernetesServiceAccount) (*KubernetesServiceAccount, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -13931,6 +14000,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Kubernetes{Kubernetes: convertKubernetesToPlumbing(v)}
 	case *KubernetesBasicAuth:
 		plumbing.Resource = &proto.Resource_KubernetesBasicAuth{KubernetesBasicAuth: convertKubernetesBasicAuthToPlumbing(v)}
+	case *KubernetesPodIdentity:
+		plumbing.Resource = &proto.Resource_KubernetesPodIdentity{KubernetesPodIdentity: convertKubernetesPodIdentityToPlumbing(v)}
 	case *KubernetesServiceAccount:
 		plumbing.Resource = &proto.Resource_KubernetesServiceAccount{KubernetesServiceAccount: convertKubernetesServiceAccountToPlumbing(v)}
 	case *KubernetesServiceAccountUserImpersonation:
@@ -14189,6 +14260,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetKubernetesBasicAuth() != nil {
 		return convertKubernetesBasicAuthToPorcelain(plumbing.GetKubernetesBasicAuth())
+	}
+	if plumbing.GetKubernetesPodIdentity() != nil {
+		return convertKubernetesPodIdentityToPorcelain(plumbing.GetKubernetesPodIdentity())
 	}
 	if plumbing.GetKubernetesServiceAccount() != nil {
 		return convertKubernetesServiceAccountToPorcelain(plumbing.GetKubernetesServiceAccount())

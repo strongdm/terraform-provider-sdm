@@ -4988,6 +4988,78 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"kubernetes_pod_identity": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"allow_resource_role_bypass": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
+						},
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"certificate_authority": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The CA to authenticate TLS connections with.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"healthcheck_namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"kubernetes_service_account": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -10034,6 +10106,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("kubernetes_pod_identity").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["certificate_authority"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential certificate_authority was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"certificate_authority": convertStringToPlumbing(raw["certificate_authority"]),
+		}, nil
+	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12715,6 +12806,32 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("kubernetes_pod_identity").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.KubernetesPodIdentity{}
+		}
+		out := &sdm.KubernetesPodIdentity{
+			ID:                      d.Id(),
+			AllowResourceRoleBypass: convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
+			BindInterface:           convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:    convertStringToPlumbing(raw["certificate_authority"]),
+			EgressFilter:            convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace:    convertStringToPlumbing(raw["healthcheck_namespace"]),
+			Name:                    convertStringToPlumbing(raw["name"]),
+			PortOverride:            convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:          convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:               convertStringToPlumbing(raw["subdomain"]),
+			Tags:                    convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("kubernetes_service_account").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -15108,6 +15225,24 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              seValues["username"],
+			},
+		})
+	case *sdm.KubernetesPodIdentity:
+		localV, _ := localVersion.(*sdm.KubernetesPodIdentity)
+		_ = localV
+		d.Set("kubernetes_pod_identity", []map[string]interface{}{
+			{
+				"allow_resource_role_bypass": (v.AllowResourceRoleBypass),
+				"bind_interface":             (v.BindInterface),
+				"certificate_authority":      seValues["certificate_authority"],
+				"egress_filter":              (v.EgressFilter),
+				"healthcheck_namespace":      (v.HealthcheckNamespace),
+				"name":                       (v.Name),
+				"port_override":              (v.PortOverride),
+				"proxy_cluster_id":           (v.ProxyClusterID),
+				"secret_store_id":            (v.SecretStoreID),
+				"subdomain":                  (v.Subdomain),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
@@ -17735,6 +17870,30 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 				"username":              seValues["username"],
+			},
+		})
+	case *sdm.KubernetesPodIdentity:
+		localV, ok := localVersion.(*sdm.KubernetesPodIdentity)
+		if !ok {
+			localV = &sdm.KubernetesPodIdentity{}
+		}
+		_ = localV
+		if v.CertificateAuthority != "" {
+			seValues["certificate_authority"] = v.CertificateAuthority
+		}
+		d.Set("kubernetes_pod_identity", []map[string]interface{}{
+			{
+				"allow_resource_role_bypass": (v.AllowResourceRoleBypass),
+				"bind_interface":             (v.BindInterface),
+				"certificate_authority":      seValues["certificate_authority"],
+				"egress_filter":              (v.EgressFilter),
+				"healthcheck_namespace":      (v.HealthcheckNamespace),
+				"name":                       (v.Name),
+				"port_override":              (v.PortOverride),
+				"proxy_cluster_id":           (v.ProxyClusterID),
+				"secret_store_id":            (v.SecretStoreID),
+				"subdomain":                  (v.Subdomain),
+				"tags":                       convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
