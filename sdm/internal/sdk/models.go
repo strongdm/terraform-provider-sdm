@@ -4801,6 +4801,84 @@ type Redshift struct {
 	Username string `json:"username"`
 }
 
+// RedshiftIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type RedshiftIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// Cluster Identified of Redshift cluster
+	ClusterID string `json:"clusterId"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	OverrideDatabase bool `json:"overrideDatabase"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	RoleAssumptionArn string `json:"roleAssumptionArn"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// RedshiftServerlessIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type RedshiftServerlessIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
+	OverrideDatabase bool `json:"overrideDatabase"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to connect to.
+	Region string `json:"region"`
+	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	RoleAssumptionArn string `json:"roleAssumptionArn"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// Workgroup name in the serverless Redshift
+	Workgroup string `json:"workgroup"`
+}
+
 // Relay represents a StrongDM CLI installation running in relay mode.
 type Relay struct {
 	// Device is a read only device name uploaded by the gateway process when
@@ -9592,6 +9670,114 @@ func (m *Redshift) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the Redshift.
 func (m *Redshift) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*RedshiftIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RedshiftIAM.
+func (m *RedshiftIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the RedshiftIAM.
+func (m *RedshiftIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RedshiftIAM.
+func (m *RedshiftIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RedshiftIAM.
+func (m *RedshiftIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RedshiftIAM.
+func (m *RedshiftIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RedshiftIAM.
+func (m *RedshiftIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RedshiftIAM.
+func (m *RedshiftIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RedshiftIAM.
+func (m *RedshiftIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RedshiftIAM.
+func (m *RedshiftIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RedshiftIAM.
+func (m *RedshiftIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RedshiftIAM.
+func (m *RedshiftIAM) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*RedshiftServerlessIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RedshiftServerlessIAM.
+func (m *RedshiftServerlessIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*SingleStore) isOneOf_Resource() {}

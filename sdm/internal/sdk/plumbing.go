@@ -13172,6 +13172,160 @@ func convertRepeatedRedshiftToPorcelain(plumbings []*proto.Redshift) (
 	}
 	return items, nil
 }
+func convertRedshiftIAMToPorcelain(plumbing *proto.RedshiftIAM) (*RedshiftIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RedshiftIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.ClusterID = plumbing.ClusterId
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.OverrideDatabase = plumbing.OverrideDatabase
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertRedshiftIAMToPlumbing(porcelain *RedshiftIAM) *proto.RedshiftIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RedshiftIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.ClusterId = (porcelain.ClusterID)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedRedshiftIAMToPlumbing(
+	porcelains []*RedshiftIAM,
+) []*proto.RedshiftIAM {
+	var items []*proto.RedshiftIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertRedshiftIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRedshiftIAMToPorcelain(plumbings []*proto.RedshiftIAM) (
+	[]*RedshiftIAM,
+	error,
+) {
+	var items []*RedshiftIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertRedshiftIAMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertRedshiftServerlessIAMToPorcelain(plumbing *proto.RedshiftServerlessIAM) (*RedshiftServerlessIAM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RedshiftServerlessIAM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.OverrideDatabase = plumbing.OverrideDatabase
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
+	porcelain.RoleAssumptionArn = plumbing.RoleAssumptionArn
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Workgroup = plumbing.Workgroup
+	return porcelain, nil
+}
+
+func convertRedshiftServerlessIAMToPlumbing(porcelain *RedshiftServerlessIAM) *proto.RedshiftServerlessIAM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RedshiftServerlessIAM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
+	plumbing.RoleAssumptionArn = (porcelain.RoleAssumptionArn)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Workgroup = (porcelain.Workgroup)
+	return plumbing
+}
+func convertRepeatedRedshiftServerlessIAMToPlumbing(
+	porcelains []*RedshiftServerlessIAM,
+) []*proto.RedshiftServerlessIAM {
+	var items []*proto.RedshiftServerlessIAM
+	for _, porcelain := range porcelains {
+		items = append(items, convertRedshiftServerlessIAMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRedshiftServerlessIAMToPorcelain(plumbings []*proto.RedshiftServerlessIAM) (
+	[]*RedshiftServerlessIAM,
+	error,
+) {
+	var items []*RedshiftServerlessIAM
+	for _, plumbing := range plumbings {
+		if v, err := convertRedshiftServerlessIAMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertRelayToPorcelain(plumbing *proto.Relay) (*Relay, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -14054,6 +14208,10 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Redis{Redis: convertRedisToPlumbing(v)}
 	case *Redshift:
 		plumbing.Resource = &proto.Resource_Redshift{Redshift: convertRedshiftToPlumbing(v)}
+	case *RedshiftIAM:
+		plumbing.Resource = &proto.Resource_RedshiftIam{RedshiftIam: convertRedshiftIAMToPlumbing(v)}
+	case *RedshiftServerlessIAM:
+		plumbing.Resource = &proto.Resource_RedshiftServerlessIam{RedshiftServerlessIam: convertRedshiftServerlessIAMToPlumbing(v)}
 	case *SingleStore:
 		plumbing.Resource = &proto.Resource_SingleStore{SingleStore: convertSingleStoreToPlumbing(v)}
 	case *Snowflake:
@@ -14341,6 +14499,12 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetRedshift() != nil {
 		return convertRedshiftToPorcelain(plumbing.GetRedshift())
+	}
+	if plumbing.GetRedshiftIam() != nil {
+		return convertRedshiftIAMToPorcelain(plumbing.GetRedshiftIam())
+	}
+	if plumbing.GetRedshiftServerlessIam() != nil {
+		return convertRedshiftServerlessIAMToPorcelain(plumbing.GetRedshiftServerlessIam())
 	}
 	if plumbing.GetSingleStore() != nil {
 		return convertSingleStoreToPorcelain(plumbing.GetSingleStore())

@@ -7322,6 +7322,186 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"redshift_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "RedshiftIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"cluster_id": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Cluster Identified of Redshift cluster",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"role_assumption_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"redshift_serverless_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "RedshiftServerlessIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"override_database": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The AWS region to connect to.",
+						},
+						"role_assumption_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"workgroup": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Workgroup name in the serverless Redshift",
+						},
+					},
+				},
+			},
 			"single_store": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -10784,6 +10964,28 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("redshift_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
+	if list := d.Get("redshift_serverless_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
 	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -13590,6 +13792,66 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("redshift_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RedshiftIAM{}
+		}
+		out := &sdm.RedshiftIAM{
+			ID:                d.Id(),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
+			ClusterID:         convertStringToPlumbing(raw["cluster_id"]),
+			Database:          convertStringToPlumbing(raw["database"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:          convertStringToPlumbing(raw["hostname"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			OverrideDatabase:  convertBoolToPlumbing(raw["override_database"]),
+			Port:              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:      convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:    convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:            convertStringToPlumbing(raw["region"]),
+			RoleAssumptionArn: convertStringToPlumbing(raw["role_assumption_arn"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("redshift_serverless_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RedshiftServerlessIAM{}
+		}
+		out := &sdm.RedshiftServerlessIAM{
+			ID:                d.Id(),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
+			Database:          convertStringToPlumbing(raw["database"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:          convertStringToPlumbing(raw["hostname"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			OverrideDatabase:  convertBoolToPlumbing(raw["override_database"]),
+			Port:              convertInt32ToPlumbing(raw["port"]),
+			PortOverride:      convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:    convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:            convertStringToPlumbing(raw["region"]),
+			RoleAssumptionArn: convertStringToPlumbing(raw["role_assumption_arn"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
+			Workgroup:         convertStringToPlumbing(raw["workgroup"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("single_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -15793,6 +16055,50 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          seValues["username"],
+			},
+		})
+	case *sdm.RedshiftIAM:
+		localV, _ := localVersion.(*sdm.RedshiftIAM)
+		_ = localV
+		d.Set("redshift_iam", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"cluster_id":          (v.ClusterID),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"override_database":   (v.OverrideDatabase),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.RedshiftServerlessIAM:
+		localV, _ := localVersion.(*sdm.RedshiftServerlessIAM)
+		_ = localV
+		d.Set("redshift_serverless_iam", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"override_database":   (v.OverrideDatabase),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"workgroup":           (v.Workgroup),
 			},
 		})
 	case *sdm.SingleStore:
@@ -18672,6 +18978,56 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
 				"username":          seValues["username"],
+			},
+		})
+	case *sdm.RedshiftIAM:
+		localV, ok := localVersion.(*sdm.RedshiftIAM)
+		if !ok {
+			localV = &sdm.RedshiftIAM{}
+		}
+		_ = localV
+		d.Set("redshift_iam", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"cluster_id":          (v.ClusterID),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"override_database":   (v.OverrideDatabase),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.RedshiftServerlessIAM:
+		localV, ok := localVersion.(*sdm.RedshiftServerlessIAM)
+		if !ok {
+			localV = &sdm.RedshiftServerlessIAM{}
+		}
+		_ = localV
+		d.Set("redshift_serverless_iam", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"database":            (v.Database),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"name":                (v.Name),
+				"override_database":   (v.OverrideDatabase),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"workgroup":           (v.Workgroup),
 			},
 		})
 	case *sdm.SingleStore:

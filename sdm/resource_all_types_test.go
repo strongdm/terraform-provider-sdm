@@ -1141,6 +1141,34 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "redshift_iam",
+			pairs: [][2]string{
+				{"cluster_id", `"cluster_id"`},
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"override_database", `true`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"role_assumption_arn", `"role_assumption_arn"`},
+			},
+		},
+		{
+			resource: "redshift_serverless_iam",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"override_database", `true`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"role_assumption_arn", `"role_assumption_arn"`},
+				{"workgroup", `"workgroup"`},
+			},
+		},
+		{
 			resource: "single_store",
 			pairs: [][2]string{
 				{"database", `"database"`},
