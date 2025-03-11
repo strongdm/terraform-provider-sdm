@@ -18,12 +18,13 @@ package sdm
 
 // Permission Levels, shared by all entities capable of making authenticated requests against StrongDM.
 const (
-	PermissionLevelRootAdmin     = "root-admin"
-	PermissionLevelAdmin         = "admin"
-	PermissionLevelDatabaseAdmin = "database-admin"
-	PermissionLevelTeamLeader    = "multi-team-leader"
-	PermissionLevelUser          = "user"
-	PermissionLevelAuditor       = "auditor"
+	PermissionLevelRootAdmin        = "root-admin"
+	PermissionLevelAdmin            = "admin"
+	PermissionLevelDatabaseAdmin    = "database-admin"
+	PermissionLevelDatabaseOperator = "database-operator"
+	PermissionLevelTeamLeader       = "multi-team-leader"
+	PermissionLevelUser             = "user"
+	PermissionLevelAuditor          = "auditor"
 	// Deprecated: Use permissions.CheckNode()
 	PermissionLevelRelay           = "relay"
 	PermissionLevelAdminToken      = "admin-token"
