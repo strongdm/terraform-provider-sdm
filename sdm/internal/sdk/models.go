@@ -3207,6 +3207,10 @@ type KubernetesPodIdentity struct {
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The local port used by clients to connect to this resource.

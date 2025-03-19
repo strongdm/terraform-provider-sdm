@@ -8897,6 +8897,8 @@ func convertKubernetesPodIdentityToPorcelain(plumbing *proto.KubernetesPodIdenti
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
@@ -8922,6 +8924,8 @@ func convertKubernetesPodIdentityToPlumbing(porcelain *KubernetesPodIdentity) *p
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)

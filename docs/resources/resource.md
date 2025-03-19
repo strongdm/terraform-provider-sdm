@@ -932,6 +932,8 @@ The following arguments are supported by the Resource resource:
 	* `certificate_authority` - (Required, either in plaintext, or as a secret store path) The CA to authenticate TLS connections with.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
+	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.

@@ -5055,6 +5055,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
+									"identity_alias_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
 									"name": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -9843,18 +9853,20 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.KubernetesPodIdentity:
 			output[0]["kubernetes_pod_identity"] = append(output[0]["kubernetes_pod_identity"], entity{
-				"allow_resource_role_bypass": (v.AllowResourceRoleBypass),
-				"bind_interface":             (v.BindInterface),
-				"certificate_authority":      (v.CertificateAuthority),
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"id":                         (v.ID),
-				"name":                       (v.Name),
-				"port_override":              (v.PortOverride),
-				"proxy_cluster_id":           (v.ProxyClusterID),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
+				"bind_interface":                      (v.BindInterface),
+				"certificate_authority":               (v.CertificateAuthority),
+				"egress_filter":                       (v.EgressFilter),
+				"healthcheck_namespace":               (v.HealthcheckNamespace),
+				"id":                                  (v.ID),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.KubernetesServiceAccount:
 			output[0]["kubernetes_service_account"] = append(output[0]["kubernetes_service_account"], entity{

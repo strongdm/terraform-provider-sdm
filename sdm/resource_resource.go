@@ -5023,6 +5023,16 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 						},
+						"identity_alias_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+						},
+						"identity_set_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The ID of the identity set to use for identity connections.",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -13014,18 +13024,20 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.KubernetesPodIdentity{}
 		}
 		out := &sdm.KubernetesPodIdentity{
-			ID:                      d.Id(),
-			AllowResourceRoleBypass: convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
-			BindInterface:           convertStringToPlumbing(raw["bind_interface"]),
-			CertificateAuthority:    convertStringToPlumbing(raw["certificate_authority"]),
-			EgressFilter:            convertStringToPlumbing(raw["egress_filter"]),
-			HealthcheckNamespace:    convertStringToPlumbing(raw["healthcheck_namespace"]),
-			Name:                    convertStringToPlumbing(raw["name"]),
-			PortOverride:            convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID:          convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:               convertStringToPlumbing(raw["subdomain"]),
-			Tags:                    convertTagsToPlumbing(raw["tags"]),
+			ID:                               d.Id(),
+			AllowResourceRoleBypass:          convertBoolToPlumbing(raw["allow_resource_role_bypass"]),
+			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
+			CertificateAuthority:             convertStringToPlumbing(raw["certificate_authority"]),
+			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
+			HealthcheckNamespace:             convertStringToPlumbing(raw["healthcheck_namespace"]),
+			IdentityAliasHealthcheckUsername: convertStringToPlumbing(raw["identity_alias_healthcheck_username"]),
+			IdentitySetID:                    convertStringToPlumbing(raw["identity_set_id"]),
+			Name:                             convertStringToPlumbing(raw["name"]),
+			PortOverride:                     convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:                   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:                    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
+			Tags:                             convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -15494,17 +15506,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("kubernetes_pod_identity", []map[string]interface{}{
 			{
-				"allow_resource_role_bypass": (v.AllowResourceRoleBypass),
-				"bind_interface":             (v.BindInterface),
-				"certificate_authority":      seValues["certificate_authority"],
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"name":                       (v.Name),
-				"port_override":              (v.PortOverride),
-				"proxy_cluster_id":           (v.ProxyClusterID),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
+				"bind_interface":                      (v.BindInterface),
+				"certificate_authority":               seValues["certificate_authority"],
+				"egress_filter":                       (v.EgressFilter),
+				"healthcheck_namespace":               (v.HealthcheckNamespace),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
@@ -18189,17 +18203,19 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("kubernetes_pod_identity", []map[string]interface{}{
 			{
-				"allow_resource_role_bypass": (v.AllowResourceRoleBypass),
-				"bind_interface":             (v.BindInterface),
-				"certificate_authority":      seValues["certificate_authority"],
-				"egress_filter":              (v.EgressFilter),
-				"healthcheck_namespace":      (v.HealthcheckNamespace),
-				"name":                       (v.Name),
-				"port_override":              (v.PortOverride),
-				"proxy_cluster_id":           (v.ProxyClusterID),
-				"secret_store_id":            (v.SecretStoreID),
-				"subdomain":                  (v.Subdomain),
-				"tags":                       convertTagsToPorcelain(v.Tags),
+				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
+				"bind_interface":                      (v.BindInterface),
+				"certificate_authority":               seValues["certificate_authority"],
+				"egress_filter":                       (v.EgressFilter),
+				"healthcheck_namespace":               (v.HealthcheckNamespace),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.KubernetesServiceAccount:
