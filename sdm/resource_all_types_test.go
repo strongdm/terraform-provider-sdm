@@ -1352,6 +1352,18 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"username", `"username"`},
 			},
 		},
+		{
+			resource: "vertica",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"username", `"username"`},
+			},
+		},
 	}
 
 	resourceNameBase := randomWithPrefix("test")
