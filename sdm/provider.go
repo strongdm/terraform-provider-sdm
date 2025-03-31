@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/13.4.0"
+const userAgent = "terraform-provider-sdm/13.6.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -33,7 +33,7 @@ func Provider() *schema.Provider {
 			"host": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("SDM_API_HOST", "api.strongdm.com:443"),
+				DefaultFunc: schema.EnvDefaultFunc("SDM_API_HOST", "app.strongdm.com:443"),
 				Description: "The host and port of the StrongDM API endpoint.",
 			},
 			"retry_rate_limit_errors": {

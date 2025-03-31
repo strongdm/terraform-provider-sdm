@@ -514,6 +514,7 @@ const (
 
 // APIHost defines the API host for various control planes.
 const (
-	APIHostUS = "api.strongdm.com:443"
-	APIHostUK = "api.uk.strongdm.com:443"
+	APIHostUS = "app.strongdm.com:443"
+	APIHostUK = "app.uk.strongdm.com:443"
+	APIHostEU = "app.eu.strongdm.com:443"
 )

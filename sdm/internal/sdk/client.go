@@ -41,9 +41,9 @@ import (
 )
 
 const (
-	defaultAPIHost   = "api.strongdm.com:443"
+	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/13.4.0"
+	defaultUserAgent = "strongdm-sdk-go/13.6.0"
 	defaultPageLimit = 50
 )
 
@@ -422,7 +422,7 @@ func (c *Client) Close() error {
 type ClientOption func(c *Client)
 
 // WithHost causes a Client to make it's calls against the provided host instead
-// of against api.strongdm.com.
+// of against app.strongdm.com.
 func WithHost(host string) ClientOption {
 	return func(c *Client) {
 		c.apiHost = host
