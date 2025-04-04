@@ -26,7 +26,7 @@ func resourceApprovalWorkflowStep() *schema.Resource {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
-				Description: "The approval flow id specified the approval workfflow that this step belongs to",
+				Description: "The approval flow id specified the approval workflow that this step belongs to",
 			},
 		},
 		Timeouts: &schema.ResourceTimeout{

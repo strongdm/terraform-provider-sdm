@@ -8800,7 +8800,7 @@ func resourceResource() *schema.Resource {
 						},
 						"username": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "The username to authenticate with.",
 						},
 					},
@@ -11441,9 +11441,24 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
 		}
 
-		return map[string]string{}, nil
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
 	}
 	return map[string]string{}, nil
 }
@@ -16541,14 +16556,14 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"name":             (v.Name),
-				"password":         localV.Password,
+				"password":         seValues["password"],
 				"port":             (v.Port),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
+				"username":         seValues["username"],
 			},
 		})
 	}
@@ -19611,6 +19626,12 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.Vertica{}
 		}
 		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
 		d.Set("vertica", []map[string]interface{}{
 			{
 				"bind_interface":   (v.BindInterface),
@@ -19618,14 +19639,14 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"name":             (v.Name),
-				"password":         localV.Password,
+				"password":         seValues["password"],
 				"port":             (v.Port),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
+				"username":         seValues["username"],
 			},
 		})
 	}

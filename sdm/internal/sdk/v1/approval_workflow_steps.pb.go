@@ -545,7 +545,7 @@ type ApprovalWorkflowStep struct {
 
 	// Unique identifier of the ApprovalWorkflowStep.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The approval flow id specified the approval workfflow that this step belongs to
+	// The approval flow id specified the approval workflow that this step belongs to
 	ApprovalFlowId string `protobuf:"bytes,2,opt,name=approval_flow_id,json=approvalFlowId,proto3" json:"approval_flow_id,omitempty"`
 }
 

@@ -2852,6 +2852,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"username", `"username"`},
 			},
 		},
+
+		{
+			resource: "vertica",
+			pairs: [][2]string{
+				{"database", `"database"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
 	}
 	resourceNameBase := randomWithPrefix("test")
 

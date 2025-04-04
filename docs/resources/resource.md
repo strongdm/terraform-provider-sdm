@@ -1590,7 +1590,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Required) The username to authenticate with.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.

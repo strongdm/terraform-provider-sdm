@@ -17,12 +17,12 @@ data "sdm_approval_workflow_step" "approval_workflow_step_query" {
 ```
 ## Argument Reference
 The following arguments are supported by a ApprovalWorkflowSteps data source:
-* `approval_flow_id` - (Optional) The approval flow id specified the approval workfflow that this step belongs to
+* `approval_flow_id` - (Optional) The approval flow id specified the approval workflow that this step belongs to
 * `id` - (Optional) Unique identifier of the ApprovalWorkflowStep.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a ApprovalWorkflowSteps data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_approval_workflow_step ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `approval_workflow_steps` - A list where each element has the following attributes:
-	* `approval_flow_id` - The approval flow id specified the approval workfflow that this step belongs to
+	* `approval_flow_id` - The approval flow id specified the approval workflow that this step belongs to
 	* `id` - Unique identifier of the ApprovalWorkflowStep.

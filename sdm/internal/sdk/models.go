@@ -1298,7 +1298,7 @@ type ApprovalWorkflowListResponse struct {
 
 // ApprovalWorkflowStep links an approval workflow step to an ApprovalWorkflow
 type ApprovalWorkflowStep struct {
-	// The approval flow id specified the approval workfflow that this step belongs to
+	// The approval flow id specified the approval workflow that this step belongs to
 	ApprovalFlowID string `json:"approvalFlowId"`
 	// Unique identifier of the ApprovalWorkflowStep.
 	ID string `json:"id"`

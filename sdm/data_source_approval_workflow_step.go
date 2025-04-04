@@ -25,7 +25,7 @@ func dataSourceApprovalWorkflowStep() *schema.Resource {
 			"approval_flow_id": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The approval flow id specified the approval workfflow that this step belongs to",
+				Description: "The approval flow id specified the approval workflow that this step belongs to",
 			},
 			"id": {
 				Type:        schema.TypeString,
@@ -41,7 +41,7 @@ func dataSourceApprovalWorkflowStep() *schema.Resource {
 						"approval_flow_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The approval flow id specified the approval workfflow that this step belongs to",
+							Description: "The approval flow id specified the approval workflow that this step belongs to",
 						},
 						"id": {
 							Type:        schema.TypeString,

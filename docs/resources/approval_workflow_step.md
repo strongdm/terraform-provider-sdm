@@ -18,7 +18,7 @@ resource "sdm_approval_workflow_step" "approval_workflow_step_example" {
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Argument Reference
 The following arguments are supported by the ApprovalWorkflowStep resource:
-* `approval_flow_id` - (Required) The approval flow id specified the approval workfflow that this step belongs to
+* `approval_flow_id` - (Required) The approval flow id specified the approval workflow that this step belongs to
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the ApprovalWorkflowStep resource:
 * `id` - A unique identifier for the ApprovalWorkflowStep resource.
