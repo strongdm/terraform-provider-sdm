@@ -13101,6 +13101,79 @@ func convertRepeatedRedisToPorcelain(plumbings []*proto.Redis) (
 	}
 	return items, nil
 }
+func convertRedisClusterToPorcelain(plumbing *proto.RedisCluster) (*RedisCluster, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &RedisCluster{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TlsRequired = plumbing.TlsRequired
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertRedisClusterToPlumbing(porcelain *RedisCluster) *proto.RedisCluster {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.RedisCluster{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedRedisClusterToPlumbing(
+	porcelains []*RedisCluster,
+) []*proto.RedisCluster {
+	var items []*proto.RedisCluster
+	for _, porcelain := range porcelains {
+		items = append(items, convertRedisClusterToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedRedisClusterToPorcelain(plumbings []*proto.RedisCluster) (
+	[]*RedisCluster,
+	error,
+) {
+	var items []*RedisCluster
+	for _, plumbing := range plumbings {
+		if v, err := convertRedisClusterToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertRedshiftToPorcelain(plumbing *proto.Redshift) (*Redshift, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -14210,6 +14283,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_RdsPostgresIam{RdsPostgresIam: convertRDSPostgresIAMToPlumbing(v)}
 	case *Redis:
 		plumbing.Resource = &proto.Resource_Redis{Redis: convertRedisToPlumbing(v)}
+	case *RedisCluster:
+		plumbing.Resource = &proto.Resource_RedisCluster{RedisCluster: convertRedisClusterToPlumbing(v)}
 	case *Redshift:
 		plumbing.Resource = &proto.Resource_Redshift{Redshift: convertRedshiftToPlumbing(v)}
 	case *RedshiftIAM:
@@ -14502,6 +14577,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetRedis() != nil {
 		return convertRedisToPorcelain(plumbing.GetRedis())
+	}
+	if plumbing.GetRedisCluster() != nil {
+		return convertRedisClusterToPorcelain(plumbing.GetRedisCluster())
 	}
 	if plumbing.GetRedshift() != nil {
 		return convertRedshiftToPorcelain(plumbing.GetRedshift())
@@ -15814,6 +15892,8 @@ func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) (*SSHCusto
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
@@ -15842,6 +15922,8 @@ func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustom
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)

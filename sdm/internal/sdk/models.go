@@ -1105,8 +1105,6 @@ type AmazonES struct {
 	Tags Tags `json:"tags"`
 }
 
-// AmazonESIAM is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AmazonESIAM struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -4745,6 +4743,41 @@ type Redis struct {
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
 	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+// RedisCluster is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type RedisCluster struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
@@ -9622,6 +9655,60 @@ func (m *Redis) GetBindInterface() string {
 func (m *Redis) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*RedisCluster) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the RedisCluster.
+func (m *RedisCluster) GetID() string { return m.ID }
+
+// GetName returns the name of the RedisCluster.
+func (m *RedisCluster) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the RedisCluster.
+func (m *RedisCluster) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the RedisCluster.
+func (m *RedisCluster) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the RedisCluster.
+func (m *RedisCluster) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the RedisCluster.
+func (m *RedisCluster) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the RedisCluster.
+func (m *RedisCluster) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the RedisCluster.
+func (m *RedisCluster) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the RedisCluster.
+func (m *RedisCluster) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the RedisCluster.
+func (m *RedisCluster) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the RedisCluster.
+func (m *RedisCluster) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Redshift) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Redshift.
@@ -10978,6 +11065,10 @@ type SSHCustomerKey struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.

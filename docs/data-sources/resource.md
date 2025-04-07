@@ -1377,6 +1377,21 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - If set, TLS must be used to connect to this resource.
 		* `username` - The username to authenticate with.
+	* redis_cluster:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port` - The port to dial to initiate a connection from the egress node to this resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - If set, TLS must be used to connect to this resource.
+		* `username` - The username to authenticate with.
 	* redshift:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
@@ -1570,6 +1585,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
+		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_forwarding` - Whether port forwarding is allowed through this server.

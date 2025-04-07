@@ -1319,6 +1319,20 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
+* redis_cluster:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Optional) The password to authenticate with.
+	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
+	* `username` - (Optional) The username to authenticate with.
 * redshift:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
@@ -1499,6 +1513,8 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.

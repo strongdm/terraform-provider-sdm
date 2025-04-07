@@ -7272,6 +7272,87 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"redis_cluster": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "The password to authenticate with.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, TLS must be used to connect to this resource.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
 						"redshift": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -8299,6 +8380,16 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
+									},
+									"identity_alias_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
 										Type:        schema.TypeString,
@@ -10403,6 +10494,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
 			})
+		case *sdm.RedisCluster:
+			output[0]["redis_cluster"] = append(output[0]["redis_cluster"], entity{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"id":               (v.ID),
+				"name":             (v.Name),
+				"password":         (v.Password),
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         (v.Username),
+			})
 		case *sdm.Redshift:
 			output[0]["redshift"] = append(output[0]["redshift"], entity{
 				"bind_interface":    (v.BindInterface),
@@ -10614,21 +10722,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SSHCustomerKey:
 			output[0]["ssh_customer_key"] = append(output[0]["ssh_customer_key"], entity{
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
-				"bind_interface":                 (v.BindInterface),
-				"egress_filter":                  (v.EgressFilter),
-				"hostname":                       (v.Hostname),
-				"id":                             (v.ID),
-				"name":                           (v.Name),
-				"port":                           (v.Port),
-				"port_forwarding":                (v.PortForwarding),
-				"port_override":                  (v.PortOverride),
-				"private_key":                    (v.PrivateKey),
-				"proxy_cluster_id":               (v.ProxyClusterID),
-				"secret_store_id":                (v.SecretStoreID),
-				"subdomain":                      (v.Subdomain),
-				"tags":                           convertTagsToPorcelain(v.Tags),
-				"username":                       (v.Username),
+				"allow_deprecated_key_exchanges":      (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                      (v.BindInterface),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"id":                                  (v.ID),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port":                                (v.Port),
+				"port_forwarding":                     (v.PortForwarding),
+				"port_override":                       (v.PortOverride),
+				"private_key":                         (v.PrivateKey),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            (v.Username),
 			})
 		case *sdm.SSHPassword:
 			output[0]["ssh_password"] = append(output[0]["ssh_password"], entity{

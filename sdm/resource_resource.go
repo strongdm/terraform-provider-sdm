@@ -1018,7 +1018,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AmazonESIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -7246,6 +7246,87 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"redis_cluster": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "RedisCluster is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, TLS must be used to connect to this resource.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
 			"redshift": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -8271,6 +8352,16 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"identity_alias_healthcheck_username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+						},
+						"identity_set_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The ID of the identity set to use for identity connections.",
 						},
 						"name": {
 							Type:        schema.TypeString,
@@ -11004,6 +11095,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}, nil
 	}
 	if list := d.Get("redis").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
+	if list := d.Get("redis_cluster").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return map[string]string{}, nil
@@ -13882,6 +13999,34 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("redis_cluster").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.RedisCluster{}
+		}
+		out := &sdm.RedisCluster{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Password:       convertStringToPlumbing(raw["password"]),
+			Port:           convertInt32ToPlumbing(raw["port"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:    convertBoolToPlumbing(raw["tls_required"]),
+			Username:       convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("redshift").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -14217,21 +14362,23 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SSHCustomerKey{}
 		}
 		out := &sdm.SSHCustomerKey{
-			ID:                          d.Id(),
-			AllowDeprecatedKeyExchanges: convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
-			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:                    convertStringToPlumbing(raw["hostname"]),
-			Name:                        convertStringToPlumbing(raw["name"]),
-			Port:                        convertInt32ToPlumbing(raw["port"]),
-			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
-			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
-			PrivateKey:                  convertStringToPlumbing(raw["private_key"]),
-			ProxyClusterID:              convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:                   convertStringToPlumbing(raw["subdomain"]),
-			Tags:                        convertTagsToPlumbing(raw["tags"]),
-			Username:                    convertStringToPlumbing(raw["username"]),
+			ID:                               d.Id(),
+			AllowDeprecatedKeyExchanges:      convertBoolToPlumbing(raw["allow_deprecated_key_exchanges"]),
+			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                         convertStringToPlumbing(raw["hostname"]),
+			IdentityAliasHealthcheckUsername: convertStringToPlumbing(raw["identity_alias_healthcheck_username"]),
+			IdentitySetID:                    convertStringToPlumbing(raw["identity_set_id"]),
+			Name:                             convertStringToPlumbing(raw["name"]),
+			Port:                             convertInt32ToPlumbing(raw["port"]),
+			PortForwarding:                   convertBoolToPlumbing(raw["port_forwarding"]),
+			PortOverride:                     convertInt32ToPlumbing(raw["port_override"]),
+			PrivateKey:                       convertStringToPlumbing(raw["private_key"]),
+			ProxyClusterID:                   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:                    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
+			Tags:                             convertTagsToPlumbing(raw["tags"]),
+			Username:                         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16185,6 +16332,26 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.RedisCluster:
+		localV, _ := localVersion.(*sdm.RedisCluster)
+		_ = localV
+		d.Set("redis_cluster", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         seValues["username"],
+			},
+		})
 	case *sdm.Redshift:
 		localV, _ := localVersion.(*sdm.Redshift)
 		_ = localV
@@ -16432,20 +16599,22 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("ssh_customer_key", []map[string]interface{}{
 			{
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
-				"bind_interface":                 (v.BindInterface),
-				"egress_filter":                  (v.EgressFilter),
-				"hostname":                       (v.Hostname),
-				"name":                           (v.Name),
-				"port":                           (v.Port),
-				"port_forwarding":                (v.PortForwarding),
-				"port_override":                  (v.PortOverride),
-				"private_key":                    seValues["private_key"],
-				"proxy_cluster_id":               (v.ProxyClusterID),
-				"secret_store_id":                (v.SecretStoreID),
-				"subdomain":                      (v.Subdomain),
-				"tags":                           convertTagsToPorcelain(v.Tags),
-				"username":                       seValues["username"],
+				"allow_deprecated_key_exchanges":      (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                      (v.BindInterface),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port":                                (v.Port),
+				"port_forwarding":                     (v.PortForwarding),
+				"port_override":                       (v.PortOverride),
+				"private_key":                         seValues["private_key"],
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            seValues["username"],
 			},
 		})
 	case *sdm.SSHPassword:
@@ -19121,6 +19290,35 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.RedisCluster:
+		localV, ok := localVersion.(*sdm.RedisCluster)
+		if !ok {
+			localV = &sdm.RedisCluster{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("redis_cluster", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         seValues["username"],
+			},
+		})
 	case *sdm.Redshift:
 		localV, ok := localVersion.(*sdm.Redshift)
 		if !ok {
@@ -19464,20 +19662,22 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("ssh_customer_key", []map[string]interface{}{
 			{
-				"allow_deprecated_key_exchanges": (v.AllowDeprecatedKeyExchanges),
-				"bind_interface":                 (v.BindInterface),
-				"egress_filter":                  (v.EgressFilter),
-				"hostname":                       (v.Hostname),
-				"name":                           (v.Name),
-				"port":                           (v.Port),
-				"port_forwarding":                (v.PortForwarding),
-				"port_override":                  (v.PortOverride),
-				"private_key":                    seValues["private_key"],
-				"proxy_cluster_id":               (v.ProxyClusterID),
-				"secret_store_id":                (v.SecretStoreID),
-				"subdomain":                      (v.Subdomain),
-				"tags":                           convertTagsToPorcelain(v.Tags),
-				"username":                       seValues["username"],
+				"allow_deprecated_key_exchanges":      (v.AllowDeprecatedKeyExchanges),
+				"bind_interface":                      (v.BindInterface),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"name":                                (v.Name),
+				"port":                                (v.Port),
+				"port_forwarding":                     (v.PortForwarding),
+				"port_override":                       (v.PortOverride),
+				"private_key":                         seValues["private_key"],
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            seValues["username"],
 			},
 		})
 	case *sdm.SSHPassword:

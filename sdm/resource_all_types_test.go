@@ -1129,6 +1129,18 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "redis_cluster",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"tls_required", `true`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "redshift",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1287,6 +1299,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"allow_deprecated_key_exchanges", `true`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
+				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
 				{"name", `"name"`},
 				{"port", `443`},
 				{"port_forwarding", `true`},
@@ -2628,6 +2641,20 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		},
 
 		{
+			resource: "redis_cluster",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"tls_required", `true`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
 			resource: "redshift",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -2776,6 +2803,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"allow_deprecated_key_exchanges", `true`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
+				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
 				{"name", `"secret_name"`},
 				{"port", `443`},
 				{"port_forwarding", `true`},
