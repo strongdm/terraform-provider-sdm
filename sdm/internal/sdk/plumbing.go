@@ -2349,6 +2349,109 @@ func convertRepeatedAccountUpdateResponseToPorcelain(plumbings []*proto.AccountU
 	}
 	return items, nil
 }
+func convertActiveDirectoryEngineToPorcelain(plumbing *proto.ActiveDirectoryEngine) (*ActiveDirectoryEngine, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ActiveDirectoryEngine{}
+	if v, err := convertDurationToPorcelain(plumbing.AfterReadTtl); err != nil {
+		return nil, fmt.Errorf("error converting field AfterReadTtl: %v", err)
+	} else {
+		porcelain.AfterReadTtl = v
+	}
+	porcelain.Binddn = plumbing.Binddn
+	porcelain.Bindpass = plumbing.Bindpass
+	porcelain.Certificate = plumbing.Certificate
+	porcelain.ConnectionTimeout = plumbing.ConnectionTimeout
+	porcelain.DoNotValidateTimestamps = plumbing.DoNotValidateTimestamps
+	porcelain.ID = plumbing.Id
+	porcelain.InsecureTls = plumbing.InsecureTls
+	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
+	if v, err := convertDurationToPorcelain(plumbing.MaxBackoffDuration); err != nil {
+		return nil, fmt.Errorf("error converting field MaxBackoffDuration: %v", err)
+	} else {
+		porcelain.MaxBackoffDuration = v
+	}
+	porcelain.Name = plumbing.Name
+	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	porcelain.PublicKey = plumbing.PublicKey
+	porcelain.RequestTimeout = plumbing.RequestTimeout
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SecretStoreRootPath = plumbing.SecretStoreRootPath
+	porcelain.StartTls = plumbing.StartTls
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	if v, err := convertDurationToPorcelain(plumbing.Ttl); err != nil {
+		return nil, fmt.Errorf("error converting field Ttl: %v", err)
+	} else {
+		porcelain.Ttl = v
+	}
+	porcelain.Upndomain = plumbing.Upndomain
+	porcelain.Url = plumbing.Url
+	porcelain.Userdn = plumbing.Userdn
+	return porcelain, nil
+}
+
+func convertActiveDirectoryEngineToPlumbing(porcelain *ActiveDirectoryEngine) *proto.ActiveDirectoryEngine {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ActiveDirectoryEngine{}
+	plumbing.AfterReadTtl = convertDurationToPlumbing(porcelain.AfterReadTtl)
+	plumbing.Binddn = (porcelain.Binddn)
+	plumbing.Bindpass = (porcelain.Bindpass)
+	plumbing.Certificate = (porcelain.Certificate)
+	plumbing.ConnectionTimeout = (porcelain.ConnectionTimeout)
+	plumbing.DoNotValidateTimestamps = (porcelain.DoNotValidateTimestamps)
+	plumbing.Id = (porcelain.ID)
+	plumbing.InsecureTls = (porcelain.InsecureTls)
+	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
+	plumbing.MaxBackoffDuration = convertDurationToPlumbing(porcelain.MaxBackoffDuration)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.RequestTimeout = (porcelain.RequestTimeout)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
+	plumbing.StartTls = (porcelain.StartTls)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Ttl = convertDurationToPlumbing(porcelain.Ttl)
+	plumbing.Upndomain = (porcelain.Upndomain)
+	plumbing.Url = (porcelain.Url)
+	plumbing.Userdn = (porcelain.Userdn)
+	return plumbing
+}
+func convertRepeatedActiveDirectoryEngineToPlumbing(
+	porcelains []*ActiveDirectoryEngine,
+) []*proto.ActiveDirectoryEngine {
+	var items []*proto.ActiveDirectoryEngine
+	for _, porcelain := range porcelains {
+		items = append(items, convertActiveDirectoryEngineToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedActiveDirectoryEngineToPorcelain(plumbings []*proto.ActiveDirectoryEngine) (
+	[]*ActiveDirectoryEngine,
+	error,
+) {
+	var items []*ActiveDirectoryEngine
+	for _, plumbing := range plumbings {
+		if v, err := convertActiveDirectoryEngineToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertActiveDirectoryStoreToPorcelain(plumbing *proto.ActiveDirectoryStore) (*ActiveDirectoryStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -3179,12 +3282,113 @@ func convertRepeatedAmazonMQAMQP091ToPorcelain(plumbings []*proto.AmazonMQAMQP09
 	}
 	return items, nil
 }
+func convertApprovalFlowApproverToPorcelain(plumbing *proto.ApprovalFlowApprover) (*ApprovalFlowApprover, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalFlowApprover{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.RoleID = plumbing.RoleId
+	return porcelain, nil
+}
+
+func convertApprovalFlowApproverToPlumbing(porcelain *ApprovalFlowApprover) *proto.ApprovalFlowApprover {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalFlowApprover{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.RoleId = (porcelain.RoleID)
+	return plumbing
+}
+func convertRepeatedApprovalFlowApproverToPlumbing(
+	porcelains []*ApprovalFlowApprover,
+) []*proto.ApprovalFlowApprover {
+	var items []*proto.ApprovalFlowApprover
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalFlowApproverToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalFlowApproverToPorcelain(plumbings []*proto.ApprovalFlowApprover) (
+	[]*ApprovalFlowApprover,
+	error,
+) {
+	var items []*ApprovalFlowApprover
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalFlowApproverToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertApprovalFlowStepToPorcelain(plumbing *proto.ApprovalFlowStep) (*ApprovalFlowStep, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ApprovalFlowStep{}
+	if v, err := convertRepeatedApprovalFlowApproverToPorcelain(plumbing.Approvers); err != nil {
+		return nil, fmt.Errorf("error converting field Approvers: %v", err)
+	} else {
+		porcelain.Approvers = v
+	}
+	porcelain.Quantifier = plumbing.Quantifier
+	if v, err := convertDurationToPorcelain(plumbing.SkipAfter); err != nil {
+		return nil, fmt.Errorf("error converting field SkipAfter: %v", err)
+	} else {
+		porcelain.SkipAfter = v
+	}
+	return porcelain, nil
+}
+
+func convertApprovalFlowStepToPlumbing(porcelain *ApprovalFlowStep) *proto.ApprovalFlowStep {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ApprovalFlowStep{}
+	plumbing.Approvers = convertRepeatedApprovalFlowApproverToPlumbing(porcelain.Approvers)
+	plumbing.Quantifier = (porcelain.Quantifier)
+	plumbing.SkipAfter = convertDurationToPlumbing(porcelain.SkipAfter)
+	return plumbing
+}
+func convertRepeatedApprovalFlowStepToPlumbing(
+	porcelains []*ApprovalFlowStep,
+) []*proto.ApprovalFlowStep {
+	var items []*proto.ApprovalFlowStep
+	for _, porcelain := range porcelains {
+		items = append(items, convertApprovalFlowStepToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedApprovalFlowStepToPorcelain(plumbings []*proto.ApprovalFlowStep) (
+	[]*ApprovalFlowStep,
+	error,
+) {
+	var items []*ApprovalFlowStep
+	for _, plumbing := range plumbings {
+		if v, err := convertApprovalFlowStepToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertApprovalWorkflowToPorcelain(plumbing *proto.ApprovalWorkflow) (*ApprovalWorkflow, error) {
 	if plumbing == nil {
 		return nil, nil
 	}
 	porcelain := &ApprovalWorkflow{}
 	porcelain.ApprovalMode = plumbing.ApprovalMode
+	if v, err := convertRepeatedApprovalFlowStepToPorcelain(plumbing.ApprovalWorkflowSteps); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalWorkflowSteps: %v", err)
+	} else {
+		porcelain.ApprovalWorkflowSteps = v
+	}
 	porcelain.Description = plumbing.Description
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
@@ -3197,6 +3401,7 @@ func convertApprovalWorkflowToPlumbing(porcelain *ApprovalWorkflow) *proto.Appro
 	}
 	plumbing := &proto.ApprovalWorkflow{}
 	plumbing.ApprovalMode = (porcelain.ApprovalMode)
+	plumbing.ApprovalWorkflowSteps = convertRepeatedApprovalFlowStepToPlumbing(porcelain.ApprovalWorkflowSteps)
 	plumbing.Description = (porcelain.Description)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
@@ -3800,6 +4005,13 @@ func convertApprovalWorkflowStepToPorcelain(plumbing *proto.ApprovalWorkflowStep
 	porcelain := &ApprovalWorkflowStep{}
 	porcelain.ApprovalFlowID = plumbing.ApprovalFlowId
 	porcelain.ID = plumbing.Id
+	porcelain.Quantifier = plumbing.Quantifier
+	if v, err := convertDurationToPorcelain(plumbing.SkipAfter); err != nil {
+		return nil, fmt.Errorf("error converting field SkipAfter: %v", err)
+	} else {
+		porcelain.SkipAfter = v
+	}
+	porcelain.StepOrder = plumbing.StepOrder
 	return porcelain, nil
 }
 
@@ -3810,6 +4022,9 @@ func convertApprovalWorkflowStepToPlumbing(porcelain *ApprovalWorkflowStep) *pro
 	plumbing := &proto.ApprovalWorkflowStep{}
 	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
 	plumbing.Id = (porcelain.ID)
+	plumbing.Quantifier = (porcelain.Quantifier)
+	plumbing.SkipAfter = convertDurationToPlumbing(porcelain.SkipAfter)
+	plumbing.StepOrder = (porcelain.StepOrder)
 	return plumbing
 }
 func convertRepeatedApprovalWorkflowStepToPlumbing(
@@ -7313,6 +7528,92 @@ func convertRepeatedGatewayToPorcelain(plumbings []*proto.Gateway) (
 	}
 	return items, nil
 }
+func convertGenerateKeysRequestToPorcelain(plumbing *proto.GenerateKeysRequest) (*GenerateKeysRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GenerateKeysRequest{}
+	porcelain.SecretEngineID = plumbing.SecretEngineId
+	return porcelain, nil
+}
+
+func convertGenerateKeysRequestToPlumbing(porcelain *GenerateKeysRequest) *proto.GenerateKeysRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GenerateKeysRequest{}
+	plumbing.SecretEngineId = (porcelain.SecretEngineID)
+	return plumbing
+}
+func convertRepeatedGenerateKeysRequestToPlumbing(
+	porcelains []*GenerateKeysRequest,
+) []*proto.GenerateKeysRequest {
+	var items []*proto.GenerateKeysRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGenerateKeysRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGenerateKeysRequestToPorcelain(plumbings []*proto.GenerateKeysRequest) (
+	[]*GenerateKeysRequest,
+	error,
+) {
+	var items []*GenerateKeysRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGenerateKeysRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGenerateKeysResponseToPorcelain(plumbing *proto.GenerateKeysResponse) (*GenerateKeysResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GenerateKeysResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGenerateKeysResponseToPlumbing(porcelain *GenerateKeysResponse) *proto.GenerateKeysResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GenerateKeysResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGenerateKeysResponseToPlumbing(
+	porcelains []*GenerateKeysResponse,
+) []*proto.GenerateKeysResponse {
+	var items []*proto.GenerateKeysResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGenerateKeysResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGenerateKeysResponseToPorcelain(plumbings []*proto.GenerateKeysResponse) (
+	[]*GenerateKeysResponse,
+	error,
+) {
+	var items []*GenerateKeysResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGenerateKeysResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertGenericResponseMetadataToPorcelain(plumbing *proto.GenericResponseMetadata) (*GenericResponseMetadata, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7934,6 +8235,141 @@ func convertRepeatedHealthcheckListResponseToPorcelain(plumbings []*proto.Health
 	var items []*HealthcheckListResponse
 	for _, plumbing := range plumbings {
 		if v, err := convertHealthcheckListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertHealthcheckRequestToPorcelain(plumbing *proto.HealthcheckRequest) (*HealthcheckRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &HealthcheckRequest{}
+	porcelain.SecretEngineID = plumbing.SecretEngineId
+	return porcelain, nil
+}
+
+func convertHealthcheckRequestToPlumbing(porcelain *HealthcheckRequest) *proto.HealthcheckRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.HealthcheckRequest{}
+	plumbing.SecretEngineId = (porcelain.SecretEngineID)
+	return plumbing
+}
+func convertRepeatedHealthcheckRequestToPlumbing(
+	porcelains []*HealthcheckRequest,
+) []*proto.HealthcheckRequest {
+	var items []*proto.HealthcheckRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertHealthcheckRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedHealthcheckRequestToPorcelain(plumbings []*proto.HealthcheckRequest) (
+	[]*HealthcheckRequest,
+	error,
+) {
+	var items []*HealthcheckRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertHealthcheckRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertHealthcheckResponseToPorcelain(plumbing *proto.HealthcheckResponse) (*HealthcheckResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &HealthcheckResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertRepeatedHealthcheckStatusToPorcelain(plumbing.Status); err != nil {
+		return nil, fmt.Errorf("error converting field Status: %v", err)
+	} else {
+		porcelain.Status = v
+	}
+	return porcelain, nil
+}
+
+func convertHealthcheckResponseToPlumbing(porcelain *HealthcheckResponse) *proto.HealthcheckResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.HealthcheckResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Status = convertRepeatedHealthcheckStatusToPlumbing(porcelain.Status)
+	return plumbing
+}
+func convertRepeatedHealthcheckResponseToPlumbing(
+	porcelains []*HealthcheckResponse,
+) []*proto.HealthcheckResponse {
+	var items []*proto.HealthcheckResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertHealthcheckResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedHealthcheckResponseToPorcelain(plumbings []*proto.HealthcheckResponse) (
+	[]*HealthcheckResponse,
+	error,
+) {
+	var items []*HealthcheckResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertHealthcheckResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertHealthcheckStatusToPorcelain(plumbing *proto.HealthcheckStatus) (*HealthcheckStatus, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &HealthcheckStatus{}
+	porcelain.NodeID = plumbing.NodeId
+	porcelain.Status = plumbing.Status
+	return porcelain, nil
+}
+
+func convertHealthcheckStatusToPlumbing(porcelain *HealthcheckStatus) *proto.HealthcheckStatus {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.HealthcheckStatus{}
+	plumbing.NodeId = (porcelain.NodeID)
+	plumbing.Status = (porcelain.Status)
+	return plumbing
+}
+func convertRepeatedHealthcheckStatusToPlumbing(
+	porcelains []*HealthcheckStatus,
+) []*proto.HealthcheckStatus {
+	var items []*proto.HealthcheckStatus
+	for _, porcelain := range porcelains {
+		items = append(items, convertHealthcheckStatusToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedHealthcheckStatusToPorcelain(plumbings []*proto.HealthcheckStatus) (
+	[]*HealthcheckStatus,
+	error,
+) {
+	var items []*HealthcheckStatus
+	for _, plumbing := range plumbings {
+		if v, err := convertHealthcheckStatusToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -8586,6 +9022,63 @@ func convertRepeatedIdentitySetUpdateResponseToPorcelain(plumbings []*proto.Iden
 	var items []*IdentitySetUpdateResponse
 	for _, plumbing := range plumbings {
 		if v, err := convertIdentitySetUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertKeyValueEngineToPorcelain(plumbing *proto.KeyValueEngine) (*KeyValueEngine, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &KeyValueEngine{}
+	porcelain.ID = plumbing.Id
+	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
+	porcelain.Name = plumbing.Name
+	porcelain.PublicKey = plumbing.PublicKey
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SecretStoreRootPath = plumbing.SecretStoreRootPath
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertKeyValueEngineToPlumbing(porcelain *KeyValueEngine) *proto.KeyValueEngine {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.KeyValueEngine{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedKeyValueEngineToPlumbing(
+	porcelains []*KeyValueEngine,
+) []*proto.KeyValueEngine {
+	var items []*proto.KeyValueEngine
+	for _, porcelain := range porcelains {
+		items = append(items, convertKeyValueEngineToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedKeyValueEngineToPorcelain(plumbings []*proto.KeyValueEngine) (
+	[]*KeyValueEngine,
+	error,
+) {
+	var items []*KeyValueEngine
+	for _, plumbing := range plumbings {
+		if v, err := convertKeyValueEngineToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -9346,6 +9839,1127 @@ func convertRepeatedMTLSPostgresToPorcelain(plumbings []*proto.MTLSPostgres) (
 	var items []*MTLSPostgres
 	for _, plumbing := range plumbings {
 		if v, err := convertMTLSPostgresToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretToPorcelain(plumbing *proto.ManagedSecret) (*ManagedSecret, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecret{}
+	porcelain.Config = plumbing.Config
+	if v, err := convertTimestampToPorcelain(plumbing.ExpiresAt); err != nil {
+		return nil, fmt.Errorf("error converting field ExpiresAt: %v", err)
+	} else {
+		porcelain.ExpiresAt = v
+	}
+	porcelain.ID = plumbing.Id
+	if v, err := convertTimestampToPorcelain(plumbing.LastRotatedAt); err != nil {
+		return nil, fmt.Errorf("error converting field LastRotatedAt: %v", err)
+	} else {
+		porcelain.LastRotatedAt = v
+	}
+	porcelain.Name = plumbing.Name
+	if v, err := convertManagedSecretPolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	porcelain.SecretEngineID = plumbing.SecretEngineId
+	porcelain.SecretStorePath = plumbing.SecretStorePath
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Value = plumbing.Value
+	return porcelain, nil
+}
+
+func convertManagedSecretToPlumbing(porcelain *ManagedSecret) *proto.ManagedSecret {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecret{}
+	plumbing.Config = (porcelain.Config)
+	plumbing.ExpiresAt = convertTimestampToPlumbing(porcelain.ExpiresAt)
+	plumbing.Id = (porcelain.ID)
+	plumbing.LastRotatedAt = convertTimestampToPlumbing(porcelain.LastRotatedAt)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Policy = convertManagedSecretPolicyToPlumbing(porcelain.Policy)
+	plumbing.SecretEngineId = (porcelain.SecretEngineID)
+	plumbing.SecretStorePath = (porcelain.SecretStorePath)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Value = (porcelain.Value)
+	return plumbing
+}
+func convertRepeatedManagedSecretToPlumbing(
+	porcelains []*ManagedSecret,
+) []*proto.ManagedSecret {
+	var items []*proto.ManagedSecret
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretToPorcelain(plumbings []*proto.ManagedSecret) (
+	[]*ManagedSecret,
+	error,
+) {
+	var items []*ManagedSecret
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretCreateRequestToPorcelain(plumbing *proto.ManagedSecretCreateRequest) (*ManagedSecretCreateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretCreateRequest{}
+	if v, err := convertManagedSecretToPorcelain(plumbing.ManagedSecret); err != nil {
+		return nil, fmt.Errorf("error converting field ManagedSecret: %v", err)
+	} else {
+		porcelain.ManagedSecret = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretCreateRequestToPlumbing(porcelain *ManagedSecretCreateRequest) *proto.ManagedSecretCreateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretCreateRequest{}
+	plumbing.ManagedSecret = convertManagedSecretToPlumbing(porcelain.ManagedSecret)
+	return plumbing
+}
+func convertRepeatedManagedSecretCreateRequestToPlumbing(
+	porcelains []*ManagedSecretCreateRequest,
+) []*proto.ManagedSecretCreateRequest {
+	var items []*proto.ManagedSecretCreateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretCreateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretCreateRequestToPorcelain(plumbings []*proto.ManagedSecretCreateRequest) (
+	[]*ManagedSecretCreateRequest,
+	error,
+) {
+	var items []*ManagedSecretCreateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretCreateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretCreateResponseToPorcelain(plumbing *proto.ManagedSecretCreateResponse) (*ManagedSecretCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretCreateResponse{}
+	if v, err := convertManagedSecretToPorcelain(plumbing.ManagedSecret); err != nil {
+		return nil, fmt.Errorf("error converting field ManagedSecret: %v", err)
+	} else {
+		porcelain.ManagedSecret = v
+	}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretCreateResponseToPlumbing(porcelain *ManagedSecretCreateResponse) *proto.ManagedSecretCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretCreateResponse{}
+	plumbing.ManagedSecret = convertManagedSecretToPlumbing(porcelain.ManagedSecret)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretCreateResponseToPlumbing(
+	porcelains []*ManagedSecretCreateResponse,
+) []*proto.ManagedSecretCreateResponse {
+	var items []*proto.ManagedSecretCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretCreateResponseToPorcelain(plumbings []*proto.ManagedSecretCreateResponse) (
+	[]*ManagedSecretCreateResponse,
+	error,
+) {
+	var items []*ManagedSecretCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretDeleteRequestToPorcelain(plumbing *proto.ManagedSecretDeleteRequest) (*ManagedSecretDeleteRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretDeleteRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertManagedSecretDeleteRequestToPlumbing(porcelain *ManagedSecretDeleteRequest) *proto.ManagedSecretDeleteRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretDeleteRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedManagedSecretDeleteRequestToPlumbing(
+	porcelains []*ManagedSecretDeleteRequest,
+) []*proto.ManagedSecretDeleteRequest {
+	var items []*proto.ManagedSecretDeleteRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretDeleteRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretDeleteRequestToPorcelain(plumbings []*proto.ManagedSecretDeleteRequest) (
+	[]*ManagedSecretDeleteRequest,
+	error,
+) {
+	var items []*ManagedSecretDeleteRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretDeleteRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretDeleteResponseToPorcelain(plumbing *proto.ManagedSecretDeleteResponse) (*ManagedSecretDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretDeleteResponseToPlumbing(porcelain *ManagedSecretDeleteResponse) *proto.ManagedSecretDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretDeleteResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretDeleteResponseToPlumbing(
+	porcelains []*ManagedSecretDeleteResponse,
+) []*proto.ManagedSecretDeleteResponse {
+	var items []*proto.ManagedSecretDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretDeleteResponseToPorcelain(plumbings []*proto.ManagedSecretDeleteResponse) (
+	[]*ManagedSecretDeleteResponse,
+	error,
+) {
+	var items []*ManagedSecretDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretGetRequestToPorcelain(plumbing *proto.ManagedSecretGetRequest) (*ManagedSecretGetRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretGetRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertManagedSecretGetRequestToPlumbing(porcelain *ManagedSecretGetRequest) *proto.ManagedSecretGetRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretGetRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedManagedSecretGetRequestToPlumbing(
+	porcelains []*ManagedSecretGetRequest,
+) []*proto.ManagedSecretGetRequest {
+	var items []*proto.ManagedSecretGetRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretGetRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretGetRequestToPorcelain(plumbings []*proto.ManagedSecretGetRequest) (
+	[]*ManagedSecretGetRequest,
+	error,
+) {
+	var items []*ManagedSecretGetRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretGetRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretGetResponseToPorcelain(plumbing *proto.ManagedSecretGetResponse) (*ManagedSecretGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretGetResponse{}
+	if v, err := convertManagedSecretToPorcelain(plumbing.ManagedSecret); err != nil {
+		return nil, fmt.Errorf("error converting field ManagedSecret: %v", err)
+	} else {
+		porcelain.ManagedSecret = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretGetResponseToPlumbing(porcelain *ManagedSecretGetResponse) *proto.ManagedSecretGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretGetResponse{}
+	plumbing.ManagedSecret = convertManagedSecretToPlumbing(porcelain.ManagedSecret)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretGetResponseToPlumbing(
+	porcelains []*ManagedSecretGetResponse,
+) []*proto.ManagedSecretGetResponse {
+	var items []*proto.ManagedSecretGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretGetResponseToPorcelain(plumbings []*proto.ManagedSecretGetResponse) (
+	[]*ManagedSecretGetResponse,
+	error,
+) {
+	var items []*ManagedSecretGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretListRequestToPorcelain(plumbing *proto.ManagedSecretListRequest) (*ManagedSecretListRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretListRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertManagedSecretListRequestToPlumbing(porcelain *ManagedSecretListRequest) *proto.ManagedSecretListRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretListRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedManagedSecretListRequestToPlumbing(
+	porcelains []*ManagedSecretListRequest,
+) []*proto.ManagedSecretListRequest {
+	var items []*proto.ManagedSecretListRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretListRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretListRequestToPorcelain(plumbings []*proto.ManagedSecretListRequest) (
+	[]*ManagedSecretListRequest,
+	error,
+) {
+	var items []*ManagedSecretListRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretListRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretListResponseToPorcelain(plumbing *proto.ManagedSecretListResponse) (*ManagedSecretListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretListResponseToPlumbing(porcelain *ManagedSecretListResponse) *proto.ManagedSecretListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretListResponseToPlumbing(
+	porcelains []*ManagedSecretListResponse,
+) []*proto.ManagedSecretListResponse {
+	var items []*proto.ManagedSecretListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretListResponseToPorcelain(plumbings []*proto.ManagedSecretListResponse) (
+	[]*ManagedSecretListResponse,
+	error,
+) {
+	var items []*ManagedSecretListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretLogToPorcelain(plumbing *proto.ManagedSecretLog) (*ManagedSecretLog, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretLog{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.Action = plumbing.Action
+	if v, err := convertTimestampToPorcelain(plumbing.CreatedAt); err != nil {
+		return nil, fmt.Errorf("error converting field CreatedAt: %v", err)
+	} else {
+		porcelain.CreatedAt = v
+	}
+	porcelain.Debug = plumbing.Debug
+	porcelain.ID = plumbing.Id
+	porcelain.ManagedSecretID = plumbing.ManagedSecretId
+	porcelain.SecretEngineID = plumbing.SecretEngineId
+	return porcelain, nil
+}
+
+func convertManagedSecretLogToPlumbing(porcelain *ManagedSecretLog) *proto.ManagedSecretLog {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretLog{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Action = (porcelain.Action)
+	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
+	plumbing.Debug = (porcelain.Debug)
+	plumbing.Id = (porcelain.ID)
+	plumbing.ManagedSecretId = (porcelain.ManagedSecretID)
+	plumbing.SecretEngineId = (porcelain.SecretEngineID)
+	return plumbing
+}
+func convertRepeatedManagedSecretLogToPlumbing(
+	porcelains []*ManagedSecretLog,
+) []*proto.ManagedSecretLog {
+	var items []*proto.ManagedSecretLog
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretLogToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretLogToPorcelain(plumbings []*proto.ManagedSecretLog) (
+	[]*ManagedSecretLog,
+	error,
+) {
+	var items []*ManagedSecretLog
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretLogToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretLogsRequestToPorcelain(plumbing *proto.ManagedSecretLogsRequest) (*ManagedSecretLogsRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretLogsRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertManagedSecretLogsRequestToPlumbing(porcelain *ManagedSecretLogsRequest) *proto.ManagedSecretLogsRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretLogsRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedManagedSecretLogsRequestToPlumbing(
+	porcelains []*ManagedSecretLogsRequest,
+) []*proto.ManagedSecretLogsRequest {
+	var items []*proto.ManagedSecretLogsRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretLogsRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretLogsRequestToPorcelain(plumbings []*proto.ManagedSecretLogsRequest) (
+	[]*ManagedSecretLogsRequest,
+	error,
+) {
+	var items []*ManagedSecretLogsRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretLogsRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretLogsResponseToPorcelain(plumbing *proto.ManagedSecretLogsResponse) (*ManagedSecretLogsResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretLogsResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretLogsResponseToPlumbing(porcelain *ManagedSecretLogsResponse) *proto.ManagedSecretLogsResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretLogsResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretLogsResponseToPlumbing(
+	porcelains []*ManagedSecretLogsResponse,
+) []*proto.ManagedSecretLogsResponse {
+	var items []*proto.ManagedSecretLogsResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretLogsResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretLogsResponseToPorcelain(plumbings []*proto.ManagedSecretLogsResponse) (
+	[]*ManagedSecretLogsResponse,
+	error,
+) {
+	var items []*ManagedSecretLogsResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretLogsResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretPasswordPolicyToPorcelain(plumbing *proto.ManagedSecretPasswordPolicy) (*ManagedSecretPasswordPolicy, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretPasswordPolicy{}
+	porcelain.AllowRepeat = plumbing.AllowRepeat
+	porcelain.ExcludeCharacters = plumbing.ExcludeCharacters
+	porcelain.ExcludeUpperCase = plumbing.ExcludeUpperCase
+	porcelain.Length = plumbing.Length
+	porcelain.NumDigits = plumbing.NumDigits
+	porcelain.NumSymbols = plumbing.NumSymbols
+	return porcelain, nil
+}
+
+func convertManagedSecretPasswordPolicyToPlumbing(porcelain *ManagedSecretPasswordPolicy) *proto.ManagedSecretPasswordPolicy {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretPasswordPolicy{}
+	plumbing.AllowRepeat = (porcelain.AllowRepeat)
+	plumbing.ExcludeCharacters = (porcelain.ExcludeCharacters)
+	plumbing.ExcludeUpperCase = (porcelain.ExcludeUpperCase)
+	plumbing.Length = (porcelain.Length)
+	plumbing.NumDigits = (porcelain.NumDigits)
+	plumbing.NumSymbols = (porcelain.NumSymbols)
+	return plumbing
+}
+func convertRepeatedManagedSecretPasswordPolicyToPlumbing(
+	porcelains []*ManagedSecretPasswordPolicy,
+) []*proto.ManagedSecretPasswordPolicy {
+	var items []*proto.ManagedSecretPasswordPolicy
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretPasswordPolicyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretPasswordPolicyToPorcelain(plumbings []*proto.ManagedSecretPasswordPolicy) (
+	[]*ManagedSecretPasswordPolicy,
+	error,
+) {
+	var items []*ManagedSecretPasswordPolicy
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretPasswordPolicyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretPolicyToPorcelain(plumbing *proto.ManagedSecretPolicy) (*ManagedSecretPolicy, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretPolicy{}
+	if v, err := convertManagedSecretPasswordPolicyToPorcelain(plumbing.PasswordPolicy); err != nil {
+		return nil, fmt.Errorf("error converting field PasswordPolicy: %v", err)
+	} else {
+		porcelain.PasswordPolicy = v
+	}
+	if v, err := convertManagedSecretRotationPolicyToPorcelain(plumbing.RotationPolicy); err != nil {
+		return nil, fmt.Errorf("error converting field RotationPolicy: %v", err)
+	} else {
+		porcelain.RotationPolicy = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretPolicyToPlumbing(porcelain *ManagedSecretPolicy) *proto.ManagedSecretPolicy {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretPolicy{}
+	plumbing.PasswordPolicy = convertManagedSecretPasswordPolicyToPlumbing(porcelain.PasswordPolicy)
+	plumbing.RotationPolicy = convertManagedSecretRotationPolicyToPlumbing(porcelain.RotationPolicy)
+	return plumbing
+}
+func convertRepeatedManagedSecretPolicyToPlumbing(
+	porcelains []*ManagedSecretPolicy,
+) []*proto.ManagedSecretPolicy {
+	var items []*proto.ManagedSecretPolicy
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretPolicyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretPolicyToPorcelain(plumbings []*proto.ManagedSecretPolicy) (
+	[]*ManagedSecretPolicy,
+	error,
+) {
+	var items []*ManagedSecretPolicy
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretPolicyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretRetrieveRequestToPorcelain(plumbing *proto.ManagedSecretRetrieveRequest) (*ManagedSecretRetrieveRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretRetrieveRequest{}
+	porcelain.ID = plumbing.Id
+	porcelain.PublicKey = plumbing.PublicKey
+	return porcelain, nil
+}
+
+func convertManagedSecretRetrieveRequestToPlumbing(porcelain *ManagedSecretRetrieveRequest) *proto.ManagedSecretRetrieveRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretRetrieveRequest{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	return plumbing
+}
+func convertRepeatedManagedSecretRetrieveRequestToPlumbing(
+	porcelains []*ManagedSecretRetrieveRequest,
+) []*proto.ManagedSecretRetrieveRequest {
+	var items []*proto.ManagedSecretRetrieveRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretRetrieveRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretRetrieveRequestToPorcelain(plumbings []*proto.ManagedSecretRetrieveRequest) (
+	[]*ManagedSecretRetrieveRequest,
+	error,
+) {
+	var items []*ManagedSecretRetrieveRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretRetrieveRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretRetrieveResponseToPorcelain(plumbing *proto.ManagedSecretRetrieveResponse) (*ManagedSecretRetrieveResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretRetrieveResponse{}
+	if v, err := convertManagedSecretToPorcelain(plumbing.ManagedSecret); err != nil {
+		return nil, fmt.Errorf("error converting field ManagedSecret: %v", err)
+	} else {
+		porcelain.ManagedSecret = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretRetrieveResponseToPlumbing(porcelain *ManagedSecretRetrieveResponse) *proto.ManagedSecretRetrieveResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretRetrieveResponse{}
+	plumbing.ManagedSecret = convertManagedSecretToPlumbing(porcelain.ManagedSecret)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretRetrieveResponseToPlumbing(
+	porcelains []*ManagedSecretRetrieveResponse,
+) []*proto.ManagedSecretRetrieveResponse {
+	var items []*proto.ManagedSecretRetrieveResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretRetrieveResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretRetrieveResponseToPorcelain(plumbings []*proto.ManagedSecretRetrieveResponse) (
+	[]*ManagedSecretRetrieveResponse,
+	error,
+) {
+	var items []*ManagedSecretRetrieveResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretRetrieveResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretRotateRequestToPorcelain(plumbing *proto.ManagedSecretRotateRequest) (*ManagedSecretRotateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretRotateRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertManagedSecretRotateRequestToPlumbing(porcelain *ManagedSecretRotateRequest) *proto.ManagedSecretRotateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretRotateRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedManagedSecretRotateRequestToPlumbing(
+	porcelains []*ManagedSecretRotateRequest,
+) []*proto.ManagedSecretRotateRequest {
+	var items []*proto.ManagedSecretRotateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretRotateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretRotateRequestToPorcelain(plumbings []*proto.ManagedSecretRotateRequest) (
+	[]*ManagedSecretRotateRequest,
+	error,
+) {
+	var items []*ManagedSecretRotateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretRotateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretRotateResponseToPorcelain(plumbing *proto.ManagedSecretRotateResponse) (*ManagedSecretRotateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretRotateResponse{}
+	if v, err := convertGenericResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretRotateResponseToPlumbing(porcelain *ManagedSecretRotateResponse) *proto.ManagedSecretRotateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretRotateResponse{}
+	plumbing.Meta = convertGenericResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretRotateResponseToPlumbing(
+	porcelains []*ManagedSecretRotateResponse,
+) []*proto.ManagedSecretRotateResponse {
+	var items []*proto.ManagedSecretRotateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretRotateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretRotateResponseToPorcelain(plumbings []*proto.ManagedSecretRotateResponse) (
+	[]*ManagedSecretRotateResponse,
+	error,
+) {
+	var items []*ManagedSecretRotateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretRotateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretRotationPolicyToPorcelain(plumbing *proto.ManagedSecretRotationPolicy) (*ManagedSecretRotationPolicy, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretRotationPolicy{}
+	return porcelain, nil
+}
+
+func convertManagedSecretRotationPolicyToPlumbing(porcelain *ManagedSecretRotationPolicy) *proto.ManagedSecretRotationPolicy {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretRotationPolicy{}
+	return plumbing
+}
+func convertRepeatedManagedSecretRotationPolicyToPlumbing(
+	porcelains []*ManagedSecretRotationPolicy,
+) []*proto.ManagedSecretRotationPolicy {
+	var items []*proto.ManagedSecretRotationPolicy
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretRotationPolicyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretRotationPolicyToPorcelain(plumbings []*proto.ManagedSecretRotationPolicy) (
+	[]*ManagedSecretRotationPolicy,
+	error,
+) {
+	var items []*ManagedSecretRotationPolicy
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretRotationPolicyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretUpdateRequestToPorcelain(plumbing *proto.ManagedSecretUpdateRequest) (*ManagedSecretUpdateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretUpdateRequest{}
+	if v, err := convertManagedSecretToPorcelain(plumbing.ManagedSecret); err != nil {
+		return nil, fmt.Errorf("error converting field ManagedSecret: %v", err)
+	} else {
+		porcelain.ManagedSecret = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretUpdateRequestToPlumbing(porcelain *ManagedSecretUpdateRequest) *proto.ManagedSecretUpdateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretUpdateRequest{}
+	plumbing.ManagedSecret = convertManagedSecretToPlumbing(porcelain.ManagedSecret)
+	return plumbing
+}
+func convertRepeatedManagedSecretUpdateRequestToPlumbing(
+	porcelains []*ManagedSecretUpdateRequest,
+) []*proto.ManagedSecretUpdateRequest {
+	var items []*proto.ManagedSecretUpdateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretUpdateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretUpdateRequestToPorcelain(plumbings []*proto.ManagedSecretUpdateRequest) (
+	[]*ManagedSecretUpdateRequest,
+	error,
+) {
+	var items []*ManagedSecretUpdateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretUpdateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretUpdateResponseToPorcelain(plumbing *proto.ManagedSecretUpdateResponse) (*ManagedSecretUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretUpdateResponse{}
+	if v, err := convertManagedSecretToPorcelain(plumbing.ManagedSecret); err != nil {
+		return nil, fmt.Errorf("error converting field ManagedSecret: %v", err)
+	} else {
+		porcelain.ManagedSecret = v
+	}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertManagedSecretUpdateResponseToPlumbing(porcelain *ManagedSecretUpdateResponse) *proto.ManagedSecretUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretUpdateResponse{}
+	plumbing.ManagedSecret = convertManagedSecretToPlumbing(porcelain.ManagedSecret)
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedManagedSecretUpdateResponseToPlumbing(
+	porcelains []*ManagedSecretUpdateResponse,
+) []*proto.ManagedSecretUpdateResponse {
+	var items []*proto.ManagedSecretUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretUpdateResponseToPorcelain(plumbings []*proto.ManagedSecretUpdateResponse) (
+	[]*ManagedSecretUpdateResponse,
+	error,
+) {
+	var items []*ManagedSecretUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretValidateRequestToPorcelain(plumbing *proto.ManagedSecretValidateRequest) (*ManagedSecretValidateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretValidateRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertManagedSecretValidateRequestToPlumbing(porcelain *ManagedSecretValidateRequest) *proto.ManagedSecretValidateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretValidateRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedManagedSecretValidateRequestToPlumbing(
+	porcelains []*ManagedSecretValidateRequest,
+) []*proto.ManagedSecretValidateRequest {
+	var items []*proto.ManagedSecretValidateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretValidateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretValidateRequestToPorcelain(plumbings []*proto.ManagedSecretValidateRequest) (
+	[]*ManagedSecretValidateRequest,
+	error,
+) {
+	var items []*ManagedSecretValidateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretValidateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertManagedSecretValidateResponseToPorcelain(plumbing *proto.ManagedSecretValidateResponse) (*ManagedSecretValidateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ManagedSecretValidateResponse{}
+	porcelain.InvalidInfo = plumbing.InvalidInfo
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	porcelain.ValID = plumbing.Valid
+	return porcelain, nil
+}
+
+func convertManagedSecretValidateResponseToPlumbing(porcelain *ManagedSecretValidateResponse) *proto.ManagedSecretValidateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ManagedSecretValidateResponse{}
+	plumbing.InvalidInfo = (porcelain.InvalidInfo)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Valid = (porcelain.ValID)
+	return plumbing
+}
+func convertRepeatedManagedSecretValidateResponseToPlumbing(
+	porcelains []*ManagedSecretValidateResponse,
+) []*proto.ManagedSecretValidateResponse {
+	var items []*proto.ManagedSecretValidateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertManagedSecretValidateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedManagedSecretValidateResponseToPorcelain(plumbings []*proto.ManagedSecretValidateResponse) (
+	[]*ManagedSecretValidateResponse,
+	error,
+) {
+	var items []*ManagedSecretValidateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertManagedSecretValidateResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -16035,6 +17649,716 @@ func convertRepeatedSSHPasswordToPorcelain(plumbings []*proto.SSHPassword) (
 	}
 	return items, nil
 }
+func convertSecretEngineToPlumbing(porcelain SecretEngine) *proto.SecretEngine {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngine{}
+
+	switch v := porcelain.(type) {
+	case *ActiveDirectoryEngine:
+		plumbing.SecretEngine = &proto.SecretEngine_ActiveDirectory{ActiveDirectory: convertActiveDirectoryEngineToPlumbing(v)}
+	case *KeyValueEngine:
+		plumbing.SecretEngine = &proto.SecretEngine_KeyValue{KeyValue: convertKeyValueEngineToPlumbing(v)}
+	}
+	return plumbing
+}
+
+func convertSecretEngineToPorcelain(plumbing *proto.SecretEngine) (SecretEngine, error) {
+	if plumbing.GetActiveDirectory() != nil {
+		return convertActiveDirectoryEngineToPorcelain(plumbing.GetActiveDirectory())
+	}
+	if plumbing.GetKeyValue() != nil {
+		return convertKeyValueEngineToPorcelain(plumbing.GetKeyValue())
+	}
+	return nil, &UnknownError{Wrapped: fmt.Errorf("unknown polymorphic type, please upgrade your SDK")}
+}
+func convertRepeatedSecretEngineToPlumbing(
+	porcelains []SecretEngine,
+) []*proto.SecretEngine {
+	var items []*proto.SecretEngine
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineToPorcelain(plumbings []*proto.SecretEngine) (
+	[]SecretEngine,
+	error,
+) {
+	var items []SecretEngine
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineCreateRequestToPorcelain(plumbing *proto.SecretEngineCreateRequest) (*SecretEngineCreateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineCreateRequest{}
+	if v, err := convertSecretEngineToPorcelain(plumbing.SecretEngine); err != nil {
+		return nil, fmt.Errorf("error converting field SecretEngine: %v", err)
+	} else {
+		porcelain.SecretEngine = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineCreateRequestToPlumbing(porcelain *SecretEngineCreateRequest) *proto.SecretEngineCreateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineCreateRequest{}
+	plumbing.SecretEngine = convertSecretEngineToPlumbing(porcelain.SecretEngine)
+	return plumbing
+}
+func convertRepeatedSecretEngineCreateRequestToPlumbing(
+	porcelains []*SecretEngineCreateRequest,
+) []*proto.SecretEngineCreateRequest {
+	var items []*proto.SecretEngineCreateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineCreateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineCreateRequestToPorcelain(plumbings []*proto.SecretEngineCreateRequest) (
+	[]*SecretEngineCreateRequest,
+	error,
+) {
+	var items []*SecretEngineCreateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineCreateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineCreateResponseToPorcelain(plumbing *proto.SecretEngineCreateResponse) (*SecretEngineCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertSecretEngineToPorcelain(plumbing.SecretEngine); err != nil {
+		return nil, fmt.Errorf("error converting field SecretEngine: %v", err)
+	} else {
+		porcelain.SecretEngine = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineCreateResponseToPlumbing(porcelain *SecretEngineCreateResponse) *proto.SecretEngineCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineCreateResponse{}
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretEngine = convertSecretEngineToPlumbing(porcelain.SecretEngine)
+	return plumbing
+}
+func convertRepeatedSecretEngineCreateResponseToPlumbing(
+	porcelains []*SecretEngineCreateResponse,
+) []*proto.SecretEngineCreateResponse {
+	var items []*proto.SecretEngineCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineCreateResponseToPorcelain(plumbings []*proto.SecretEngineCreateResponse) (
+	[]*SecretEngineCreateResponse,
+	error,
+) {
+	var items []*SecretEngineCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineDeleteRequestToPorcelain(plumbing *proto.SecretEngineDeleteRequest) (*SecretEngineDeleteRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineDeleteRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertSecretEngineDeleteRequestToPlumbing(porcelain *SecretEngineDeleteRequest) *proto.SecretEngineDeleteRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineDeleteRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedSecretEngineDeleteRequestToPlumbing(
+	porcelains []*SecretEngineDeleteRequest,
+) []*proto.SecretEngineDeleteRequest {
+	var items []*proto.SecretEngineDeleteRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineDeleteRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineDeleteRequestToPorcelain(plumbings []*proto.SecretEngineDeleteRequest) (
+	[]*SecretEngineDeleteRequest,
+	error,
+) {
+	var items []*SecretEngineDeleteRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineDeleteRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineDeleteResponseToPorcelain(plumbing *proto.SecretEngineDeleteResponse) (*SecretEngineDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineDeleteResponseToPlumbing(porcelain *SecretEngineDeleteResponse) *proto.SecretEngineDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineDeleteResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedSecretEngineDeleteResponseToPlumbing(
+	porcelains []*SecretEngineDeleteResponse,
+) []*proto.SecretEngineDeleteResponse {
+	var items []*proto.SecretEngineDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineDeleteResponseToPorcelain(plumbings []*proto.SecretEngineDeleteResponse) (
+	[]*SecretEngineDeleteResponse,
+	error,
+) {
+	var items []*SecretEngineDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineGetRequestToPorcelain(plumbing *proto.SecretEngineGetRequest) (*SecretEngineGetRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineGetRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertSecretEngineGetRequestToPlumbing(porcelain *SecretEngineGetRequest) *proto.SecretEngineGetRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineGetRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedSecretEngineGetRequestToPlumbing(
+	porcelains []*SecretEngineGetRequest,
+) []*proto.SecretEngineGetRequest {
+	var items []*proto.SecretEngineGetRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineGetRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineGetRequestToPorcelain(plumbings []*proto.SecretEngineGetRequest) (
+	[]*SecretEngineGetRequest,
+	error,
+) {
+	var items []*SecretEngineGetRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineGetRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineGetResponseToPorcelain(plumbing *proto.SecretEngineGetResponse) (*SecretEngineGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertSecretEngineToPorcelain(plumbing.SecretEngine); err != nil {
+		return nil, fmt.Errorf("error converting field SecretEngine: %v", err)
+	} else {
+		porcelain.SecretEngine = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineGetResponseToPlumbing(porcelain *SecretEngineGetResponse) *proto.SecretEngineGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineGetResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretEngine = convertSecretEngineToPlumbing(porcelain.SecretEngine)
+	return plumbing
+}
+func convertRepeatedSecretEngineGetResponseToPlumbing(
+	porcelains []*SecretEngineGetResponse,
+) []*proto.SecretEngineGetResponse {
+	var items []*proto.SecretEngineGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineGetResponseToPorcelain(plumbings []*proto.SecretEngineGetResponse) (
+	[]*SecretEngineGetResponse,
+	error,
+) {
+	var items []*SecretEngineGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineListRequestToPorcelain(plumbing *proto.SecretEngineListRequest) (*SecretEngineListRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineListRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertSecretEngineListRequestToPlumbing(porcelain *SecretEngineListRequest) *proto.SecretEngineListRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineListRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedSecretEngineListRequestToPlumbing(
+	porcelains []*SecretEngineListRequest,
+) []*proto.SecretEngineListRequest {
+	var items []*proto.SecretEngineListRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineListRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineListRequestToPorcelain(plumbings []*proto.SecretEngineListRequest) (
+	[]*SecretEngineListRequest,
+	error,
+) {
+	var items []*SecretEngineListRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineListRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineListResponseToPorcelain(plumbing *proto.SecretEngineListResponse) (*SecretEngineListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineListResponseToPlumbing(porcelain *SecretEngineListResponse) *proto.SecretEngineListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedSecretEngineListResponseToPlumbing(
+	porcelains []*SecretEngineListResponse,
+) []*proto.SecretEngineListResponse {
+	var items []*proto.SecretEngineListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineListResponseToPorcelain(plumbings []*proto.SecretEngineListResponse) (
+	[]*SecretEngineListResponse,
+	error,
+) {
+	var items []*SecretEngineListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEnginePasswordPolicyToPorcelain(plumbing *proto.SecretEnginePasswordPolicy) (*SecretEnginePasswordPolicy, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEnginePasswordPolicy{}
+	porcelain.AllowRepeat = plumbing.AllowRepeat
+	porcelain.ExcludeCharacters = plumbing.ExcludeCharacters
+	porcelain.ExcludeUpperCase = plumbing.ExcludeUpperCase
+	porcelain.Length = plumbing.Length
+	porcelain.NumDigits = plumbing.NumDigits
+	porcelain.NumSymbols = plumbing.NumSymbols
+	return porcelain, nil
+}
+
+func convertSecretEnginePasswordPolicyToPlumbing(porcelain *SecretEnginePasswordPolicy) *proto.SecretEnginePasswordPolicy {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEnginePasswordPolicy{}
+	plumbing.AllowRepeat = (porcelain.AllowRepeat)
+	plumbing.ExcludeCharacters = (porcelain.ExcludeCharacters)
+	plumbing.ExcludeUpperCase = (porcelain.ExcludeUpperCase)
+	plumbing.Length = (porcelain.Length)
+	plumbing.NumDigits = (porcelain.NumDigits)
+	plumbing.NumSymbols = (porcelain.NumSymbols)
+	return plumbing
+}
+func convertRepeatedSecretEnginePasswordPolicyToPlumbing(
+	porcelains []*SecretEnginePasswordPolicy,
+) []*proto.SecretEnginePasswordPolicy {
+	var items []*proto.SecretEnginePasswordPolicy
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEnginePasswordPolicyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEnginePasswordPolicyToPorcelain(plumbings []*proto.SecretEnginePasswordPolicy) (
+	[]*SecretEnginePasswordPolicy,
+	error,
+) {
+	var items []*SecretEnginePasswordPolicy
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEnginePasswordPolicyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEnginePolicyToPorcelain(plumbing *proto.SecretEnginePolicy) (*SecretEnginePolicy, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEnginePolicy{}
+	if v, err := convertSecretEnginePasswordPolicyToPorcelain(plumbing.PasswordPolicy); err != nil {
+		return nil, fmt.Errorf("error converting field PasswordPolicy: %v", err)
+	} else {
+		porcelain.PasswordPolicy = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEnginePolicyToPlumbing(porcelain *SecretEnginePolicy) *proto.SecretEnginePolicy {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEnginePolicy{}
+	plumbing.PasswordPolicy = convertSecretEnginePasswordPolicyToPlumbing(porcelain.PasswordPolicy)
+	return plumbing
+}
+func convertRepeatedSecretEnginePolicyToPlumbing(
+	porcelains []*SecretEnginePolicy,
+) []*proto.SecretEnginePolicy {
+	var items []*proto.SecretEnginePolicy
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEnginePolicyToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEnginePolicyToPorcelain(plumbings []*proto.SecretEnginePolicy) (
+	[]*SecretEnginePolicy,
+	error,
+) {
+	var items []*SecretEnginePolicy
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEnginePolicyToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineRotateRequestToPorcelain(plumbing *proto.SecretEngineRotateRequest) (*SecretEngineRotateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineRotateRequest{}
+	porcelain.ID = plumbing.Id
+	if v, err := convertSecretEnginePasswordPolicyToPorcelain(plumbing.PasswordPolicy); err != nil {
+		return nil, fmt.Errorf("error converting field PasswordPolicy: %v", err)
+	} else {
+		porcelain.PasswordPolicy = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineRotateRequestToPlumbing(porcelain *SecretEngineRotateRequest) *proto.SecretEngineRotateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineRotateRequest{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.PasswordPolicy = convertSecretEnginePasswordPolicyToPlumbing(porcelain.PasswordPolicy)
+	return plumbing
+}
+func convertRepeatedSecretEngineRotateRequestToPlumbing(
+	porcelains []*SecretEngineRotateRequest,
+) []*proto.SecretEngineRotateRequest {
+	var items []*proto.SecretEngineRotateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineRotateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineRotateRequestToPorcelain(plumbings []*proto.SecretEngineRotateRequest) (
+	[]*SecretEngineRotateRequest,
+	error,
+) {
+	var items []*SecretEngineRotateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineRotateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineRotateResponseToPorcelain(plumbing *proto.SecretEngineRotateResponse) (*SecretEngineRotateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineRotateResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineRotateResponseToPlumbing(porcelain *SecretEngineRotateResponse) *proto.SecretEngineRotateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineRotateResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedSecretEngineRotateResponseToPlumbing(
+	porcelains []*SecretEngineRotateResponse,
+) []*proto.SecretEngineRotateResponse {
+	var items []*proto.SecretEngineRotateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineRotateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineRotateResponseToPorcelain(plumbings []*proto.SecretEngineRotateResponse) (
+	[]*SecretEngineRotateResponse,
+	error,
+) {
+	var items []*SecretEngineRotateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineRotateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineUpdateRequestToPorcelain(plumbing *proto.SecretEngineUpdateRequest) (*SecretEngineUpdateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineUpdateRequest{}
+	if v, err := convertSecretEngineToPorcelain(plumbing.SecretEngine); err != nil {
+		return nil, fmt.Errorf("error converting field SecretEngine: %v", err)
+	} else {
+		porcelain.SecretEngine = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineUpdateRequestToPlumbing(porcelain *SecretEngineUpdateRequest) *proto.SecretEngineUpdateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineUpdateRequest{}
+	plumbing.SecretEngine = convertSecretEngineToPlumbing(porcelain.SecretEngine)
+	return plumbing
+}
+func convertRepeatedSecretEngineUpdateRequestToPlumbing(
+	porcelains []*SecretEngineUpdateRequest,
+) []*proto.SecretEngineUpdateRequest {
+	var items []*proto.SecretEngineUpdateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineUpdateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineUpdateRequestToPorcelain(plumbings []*proto.SecretEngineUpdateRequest) (
+	[]*SecretEngineUpdateRequest,
+	error,
+) {
+	var items []*SecretEngineUpdateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineUpdateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSecretEngineUpdateResponseToPorcelain(plumbing *proto.SecretEngineUpdateResponse) (*SecretEngineUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SecretEngineUpdateResponse{}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertSecretEngineToPorcelain(plumbing.SecretEngine); err != nil {
+		return nil, fmt.Errorf("error converting field SecretEngine: %v", err)
+	} else {
+		porcelain.SecretEngine = v
+	}
+	return porcelain, nil
+}
+
+func convertSecretEngineUpdateResponseToPlumbing(porcelain *SecretEngineUpdateResponse) *proto.SecretEngineUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SecretEngineUpdateResponse{}
+	plumbing.Meta = convertUpdateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SecretEngine = convertSecretEngineToPlumbing(porcelain.SecretEngine)
+	return plumbing
+}
+func convertRepeatedSecretEngineUpdateResponseToPlumbing(
+	porcelains []*SecretEngineUpdateResponse,
+) []*proto.SecretEngineUpdateResponse {
+	var items []*proto.SecretEngineUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertSecretEngineUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSecretEngineUpdateResponseToPorcelain(plumbings []*proto.SecretEngineUpdateResponse) (
+	[]*SecretEngineUpdateResponse,
+	error,
+) {
+	var items []*SecretEngineUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertSecretEngineUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 	if porcelain == nil {
 		return nil
@@ -20663,6 +22987,96 @@ func (i *identitySetHistoryIteratorImpl) Err() error {
 	return i.err
 }
 
+type managedSecretIteratorImplFetchFunc func() (
+	[]*ManagedSecret,
+	bool, error)
+type managedSecretIteratorImpl struct {
+	buffer      []*ManagedSecret
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       managedSecretIteratorImplFetchFunc
+}
+
+func newManagedSecretIteratorImpl(f managedSecretIteratorImplFetchFunc) *managedSecretIteratorImpl {
+	return &managedSecretIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (m *managedSecretIteratorImpl) Next() bool {
+	if m.index < len(m.buffer)-1 {
+		m.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !m.hasNextPage {
+		return false
+	}
+
+	m.index = 0
+	m.buffer, m.hasNextPage, m.err = m.fetch()
+	return len(m.buffer) > 0
+}
+
+func (m *managedSecretIteratorImpl) Value() *ManagedSecret {
+	if m.index >= len(m.buffer) {
+		return nil
+	}
+	return m.buffer[m.index]
+}
+
+func (m *managedSecretIteratorImpl) Err() error {
+	return m.err
+}
+
+type managedSecretLogIteratorImplFetchFunc func() (
+	[]*ManagedSecretLog,
+	bool, error)
+type managedSecretLogIteratorImpl struct {
+	buffer      []*ManagedSecretLog
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       managedSecretLogIteratorImplFetchFunc
+}
+
+func newManagedSecretLogIteratorImpl(f managedSecretLogIteratorImplFetchFunc) *managedSecretLogIteratorImpl {
+	return &managedSecretLogIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (m *managedSecretLogIteratorImpl) Next() bool {
+	if m.index < len(m.buffer)-1 {
+		m.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !m.hasNextPage {
+		return false
+	}
+
+	m.index = 0
+	m.buffer, m.hasNextPage, m.err = m.fetch()
+	return len(m.buffer) > 0
+}
+
+func (m *managedSecretLogIteratorImpl) Value() *ManagedSecretLog {
+	if m.index >= len(m.buffer) {
+		return nil
+	}
+	return m.buffer[m.index]
+}
+
+func (m *managedSecretLogIteratorImpl) Err() error {
+	return m.err
+}
+
 type nodeIteratorImplFetchFunc func() (
 	[]Node,
 	bool, error)
@@ -21740,6 +24154,51 @@ func (s *secretStoreIteratorImpl) Value() SecretStore {
 }
 
 func (s *secretStoreIteratorImpl) Err() error {
+	return s.err
+}
+
+type secretEngineIteratorImplFetchFunc func() (
+	[]SecretEngine,
+	bool, error)
+type secretEngineIteratorImpl struct {
+	buffer      []SecretEngine
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       secretEngineIteratorImplFetchFunc
+}
+
+func newSecretEngineIteratorImpl(f secretEngineIteratorImplFetchFunc) *secretEngineIteratorImpl {
+	return &secretEngineIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (s *secretEngineIteratorImpl) Next() bool {
+	if s.index < len(s.buffer)-1 {
+		s.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !s.hasNextPage {
+		return false
+	}
+
+	s.index = 0
+	s.buffer, s.hasNextPage, s.err = s.fetch()
+	return len(s.buffer) > 0
+}
+
+func (s *secretEngineIteratorImpl) Value() SecretEngine {
+	if s.index >= len(s.buffer) {
+		return nil
+	}
+	return s.buffer[s.index]
+}
+
+func (s *secretEngineIteratorImpl) Err() error {
 	return s.err
 }
 

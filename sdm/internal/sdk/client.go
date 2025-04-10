@@ -43,7 +43,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2024-03-28"
-	defaultUserAgent = "strongdm-sdk-go/13.11.0"
+	defaultUserAgent = "strongdm-sdk-go/14.0.0"
 	defaultPageLimit = 50
 )
 
@@ -93,6 +93,7 @@ type Client struct {
 	identityAliasesHistory           *IdentityAliasesHistory
 	identitySets                     *IdentitySets
 	identitySetsHistory              *IdentitySetsHistory
+	managedSecrets                   *ManagedSecrets
 	nodes                            *Nodes
 	nodesHistory                     *NodesHistory
 	organizationHistory              *OrganizationHistory
@@ -116,6 +117,7 @@ type Client struct {
 	roles                            *Roles
 	rolesHistory                     *RolesHistory
 	secretStores                     *SecretStores
+	secretEngines                    *SecretEngines
 	secretStoreHealths               *SecretStoreHealths
 	secretStoresHistory              *SecretStoresHistory
 	workflowApprovers                *WorkflowApprovers
@@ -269,6 +271,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		client: plumbing.NewIdentitySetsHistoryClient(client.grpcConn),
 		parent: client,
 	}
+	client.managedSecrets = &ManagedSecrets{
+		client: plumbing.NewManagedSecretsClient(client.grpcConn),
+		parent: client,
+	}
 	client.nodes = &Nodes{
 		client: plumbing.NewNodesClient(client.grpcConn),
 		parent: client,
@@ -359,6 +365,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.secretStores = &SecretStores{
 		client: plumbing.NewSecretStoresClient(client.grpcConn),
+		parent: client,
+	}
+	client.secretEngines = &SecretEngines{
+		client: plumbing.NewSecretEnginesClient(client.grpcConn),
 		parent: client,
 	}
 	client.secretStoreHealths = &SecretStoreHealths{
@@ -611,6 +621,13 @@ func (c *Client) IdentitySetsHistory() *IdentitySetsHistory {
 	return c.identitySetsHistory
 }
 
+// ManagedSecret is a private vertical for creating, reading, updating,
+// deleting, listing and rotating the managed secrets in the secrets engines as
+// an authenticated user.
+func (c *Client) ManagedSecrets() *ManagedSecrets {
+	return c.managedSecrets
+}
+
 // Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
 // - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
 // - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
@@ -737,6 +754,10 @@ func (c *Client) RolesHistory() *RolesHistory {
 // SecretStores are servers where resource secrets (passwords, keys) are stored.
 func (c *Client) SecretStores() *SecretStores {
 	return c.secretStores
+}
+
+func (c *Client) SecretEngines() *SecretEngines {
+	return c.secretEngines
 }
 
 // SecretStoreHealths exposes health states for secret stores.

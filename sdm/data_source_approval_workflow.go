@@ -27,6 +27,12 @@ func dataSourceApprovalWorkflow() *schema.Resource {
 				Optional:    true,
 				Description: "Approval mode of the ApprovalWorkflow",
 			},
+			"approval_step": {
+				Type:        schema.TypeList,
+				Elem:        approvalFlowStepElemType,
+				Optional:    true,
+				Description: "The approval steps of this approval workflow",
+			},
 			"description": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -52,6 +58,12 @@ func dataSourceApprovalWorkflow() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: "Approval mode of the ApprovalWorkflow",
+						},
+						"approval_step": {
+							Type:        schema.TypeList,
+							Elem:        approvalFlowStepElemType,
+							Optional:    true,
+							Description: "The approval steps of this approval workflow",
 						},
 						"description": {
 							Type:        schema.TypeString,
@@ -85,6 +97,10 @@ func convertApprovalWorkflowFilterToPlumbing(d *schema.ResourceData) (string, []
 		filter += "approvalmode:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("approval_workflow_steps"); ok {
+		filter += "approvalworkflowsteps:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("description"); ok {
 		filter += "description:? "
 		args = append(args, v)
@@ -115,6 +131,7 @@ func dataSourceApprovalWorkflowList(ctx context.Context, d *schema.ResourceData,
 		output = append(output,
 			entity{
 				"approval_mode": (v.ApprovalMode),
+				"approval_step": convertRepeatedApprovalFlowStepToPorcelain(v.ApprovalWorkflowSteps),
 				"description":   (v.Description),
 				"id":            (v.ID),
 				"name":          (v.Name),

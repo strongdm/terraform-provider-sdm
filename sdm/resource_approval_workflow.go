@@ -28,6 +28,12 @@ func resourceApprovalWorkflow() *schema.Resource {
 				Required:    true,
 				Description: "Approval mode of the ApprovalWorkflow",
 			},
+			"approval_step": {
+				Type:        schema.TypeList,
+				Elem:        approvalFlowStepElemType,
+				Optional:    true,
+				Description: "The approval steps of this approval workflow",
+			},
 			"description": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -50,10 +56,11 @@ func resourceApprovalWorkflow() *schema.Resource {
 }
 func convertApprovalWorkflowToPlumbing(d *schema.ResourceData) *sdm.ApprovalWorkflow {
 	return &sdm.ApprovalWorkflow{
-		ID:           d.Id(),
-		ApprovalMode: convertStringToPlumbing(d.Get("approval_mode")),
-		Description:  convertStringToPlumbing(d.Get("description")),
-		Name:         convertStringToPlumbing(d.Get("name")),
+		ID:                    d.Id(),
+		ApprovalMode:          convertStringToPlumbing(d.Get("approval_mode")),
+		ApprovalWorkflowSteps: convertRepeatedApprovalFlowStepToPlumbing(d.Get("approval_step")),
+		Description:           convertStringToPlumbing(d.Get("description")),
+		Name:                  convertStringToPlumbing(d.Get("name")),
 	}
 }
 
@@ -68,6 +75,7 @@ func resourceApprovalWorkflowCreate(ctx context.Context, d *schema.ResourceData,
 	d.SetId(resp.ApprovalWorkflow.ID)
 	v := resp.ApprovalWorkflow
 	d.Set("approval_mode", (v.ApprovalMode))
+	d.Set("approval_step", convertRepeatedApprovalFlowStepToPorcelain(v.ApprovalWorkflowSteps))
 	d.Set("description", (v.Description))
 	d.Set("name", (v.Name))
 	return nil
@@ -88,6 +96,7 @@ func resourceApprovalWorkflowRead(ctx context.Context, d *schema.ResourceData, c
 	}
 	v := resp.ApprovalWorkflow
 	d.Set("approval_mode", (v.ApprovalMode))
+	d.Set("approval_step", convertRepeatedApprovalFlowStepToPorcelain(v.ApprovalWorkflowSteps))
 	d.Set("description", (v.Description))
 	d.Set("name", (v.Name))
 	return nil

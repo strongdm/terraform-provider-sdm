@@ -140,7 +140,7 @@ func createWorkflowRolesWithPrefix(prefix string, count int) ([]*sdm.WorkflowRol
 	if err != nil {
 		return nil, fmt.Errorf("failed to create roles: %w", err)
 	}
-	workflows, err := createWorkflowsWithPrifix(prefix, 1)
+	workflows, err := createWorkflowsWithPrefix(prefix, 1)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create workflow: %w", err)
 	}

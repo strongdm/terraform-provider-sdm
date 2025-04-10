@@ -25,6 +25,7 @@ data "sdm_approval_workflow" "auto_grant_approval_workflow_query" {
 ## Argument Reference
 The following arguments are supported by a ApprovalWorkflows data source:
 * `approval_mode` - (Optional) Approval mode of the ApprovalWorkflow
+* `approval_step` - (Optional) The approval steps of this approval workflow
 * `description` - (Optional) Optional description of the ApprovalWorkflow.
 * `id` - (Optional) Unique identifier of the ApprovalWorkflow.
 * `name` - (Optional) Unique human-readable name of the ApprovalWorkflow.
@@ -34,6 +35,7 @@ In addition to provided arguments above, the following attributes are returned b
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `approval_workflows` - A list where each element has the following attributes:
 	* `approval_mode` - Approval mode of the ApprovalWorkflow
+	* `approval_step` - The approval steps of this approval workflow
 	* `description` - Optional description of the ApprovalWorkflow.
 	* `id` - Unique identifier of the ApprovalWorkflow.
 	* `name` - Unique human-readable name of the ApprovalWorkflow.

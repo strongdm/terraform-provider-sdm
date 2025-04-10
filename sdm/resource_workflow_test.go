@@ -144,7 +144,7 @@ func TestAccSDMWorkflow_Settings(t *testing.T) {
 	})
 }
 
-func createWorkflowsWithPrifix(prefix string, count int) ([]*sdm.Workflow, error) {
+func createWorkflowsWithPrefix(prefix string, count int) ([]*sdm.Workflow, error) {
 	client, err := preTestClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create test client: %w", err)

@@ -30,14 +30,16 @@ const _ = grpc.SupportPackageIsVersion7
 // ApprovalWorkflowStepsClient is the client API for ApprovalWorkflowSteps service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type ApprovalWorkflowStepsClient interface {
-	// Create creates a new approval workflow step.
+	// Deprecated: Create creates a new approval workflow step.
 	Create(ctx context.Context, in *ApprovalWorkflowStepCreateRequest, opts ...grpc.CallOption) (*ApprovalWorkflowStepCreateResponse, error)
-	// Get reads one approval workflow step by ID.
+	// Deprecated: Get reads one approval workflow step by ID.
 	Get(ctx context.Context, in *ApprovalWorkflowStepGetRequest, opts ...grpc.CallOption) (*ApprovalWorkflowStepGetResponse, error)
-	// Delete deletes an existing approval workflow step.
+	// Deprecated: Delete deletes an existing approval workflow step.
 	Delete(ctx context.Context, in *ApprovalWorkflowStepDeleteRequest, opts ...grpc.CallOption) (*ApprovalWorkflowStepDeleteResponse, error)
-	// Lists existing approval workflow steps.
+	// Deprecated: Lists existing approval workflow steps.
 	List(ctx context.Context, in *ApprovalWorkflowStepListRequest, opts ...grpc.CallOption) (*ApprovalWorkflowStepListResponse, error)
 }
 
@@ -45,6 +47,7 @@ type approvalWorkflowStepsClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewApprovalWorkflowStepsClient(cc grpc.ClientConnInterface) ApprovalWorkflowStepsClient {
 	return &approvalWorkflowStepsClient{cc}
 }
@@ -88,14 +91,16 @@ func (c *approvalWorkflowStepsClient) List(ctx context.Context, in *ApprovalWork
 // ApprovalWorkflowStepsServer is the server API for ApprovalWorkflowSteps service.
 // All implementations must embed UnimplementedApprovalWorkflowStepsServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type ApprovalWorkflowStepsServer interface {
-	// Create creates a new approval workflow step.
+	// Deprecated: Create creates a new approval workflow step.
 	Create(context.Context, *ApprovalWorkflowStepCreateRequest) (*ApprovalWorkflowStepCreateResponse, error)
-	// Get reads one approval workflow step by ID.
+	// Deprecated: Get reads one approval workflow step by ID.
 	Get(context.Context, *ApprovalWorkflowStepGetRequest) (*ApprovalWorkflowStepGetResponse, error)
-	// Delete deletes an existing approval workflow step.
+	// Deprecated: Delete deletes an existing approval workflow step.
 	Delete(context.Context, *ApprovalWorkflowStepDeleteRequest) (*ApprovalWorkflowStepDeleteResponse, error)
-	// Lists existing approval workflow steps.
+	// Deprecated: Lists existing approval workflow steps.
 	List(context.Context, *ApprovalWorkflowStepListRequest) (*ApprovalWorkflowStepListResponse, error)
 	mustEmbedUnimplementedApprovalWorkflowStepsServer()
 }
@@ -125,6 +130,7 @@ type UnsafeApprovalWorkflowStepsServer interface {
 	mustEmbedUnimplementedApprovalWorkflowStepsServer()
 }
 
+// Deprecated: Do not use.
 func RegisterApprovalWorkflowStepsServer(s grpc.ServiceRegistrar, srv ApprovalWorkflowStepsServer) {
 	s.RegisterService(&_ApprovalWorkflowSteps_serviceDesc, srv)
 }

@@ -28,6 +28,10 @@ func convertAccessRulesToPorcelain(plumbing sdm.AccessRules) string {
 	return string(plumbing)
 }
 
+func convertBytesToPorcelain(plumbing []byte) string {
+	return string(plumbing)
+}
+
 func convertAccessRulesToPlumbing(porcelain interface{}) sdm.AccessRules {
 	if porcelain == nil {
 		return sdm.AccessRules("")
@@ -63,6 +67,19 @@ func convertTagsToPlumbing(porcelain interface{}) sdm.Tags {
 		res[key] = str
 	}
 	return res
+}
+
+func convertBytesToPlumbing(porcelain interface{}) []byte {
+	if porcelain == nil {
+		return nil
+	}
+	switch v := porcelain.(type) {
+	case string:
+		return []byte(v)
+	case []byte:
+		return v
+	}
+	return nil
 }
 
 func convertTagsToPorcelain(tags sdm.Tags) map[string]interface{} {
@@ -217,6 +234,13 @@ func convertInt64ToPlumbing(porcelain interface{}) int64 {
 	return int64(porcelain.(int))
 }
 
+func convertUint32ToPlumbing(porcelain interface{}) uint32 {
+	if porcelain == nil {
+		return 0
+	}
+	return uint32(porcelain.(int))
+}
+
 func convertBoolToPlumbing(porcelain interface{}) bool {
 	if porcelain == nil {
 		return false
@@ -246,4 +270,135 @@ func convertDurationToPlumbing(porcelain interface{}) time.Duration {
 	}
 	d, _ := time.ParseDuration(porcelain.(string))
 	return d
+}
+
+func convertRepeatedApprovalFlowStepToPlumbing(porcelain interface{}) []*sdm.ApprovalFlowStep {
+	if porcelain == nil {
+		return nil
+	}
+	approvalSteps, ok := porcelain.([]interface{})
+	if !ok {
+		return nil
+	}
+	ws := make([]*sdm.ApprovalFlowStep, len(approvalSteps))
+	for i, w := range approvalSteps {
+		approvalStep, ok := w.(map[string]interface{})
+		if !ok {
+			return nil
+		}
+		// parse out fields for this step
+		quantifier, ok := approvalStep["quantifier"].(string)
+		if !ok {
+			return nil
+		}
+		skipAfter := convertDurationToPlumbing(approvalStep["skip_after"])
+		approvers := convertRepeatedApprovalFlowApproverToPlumbing(approvalStep["approvers"])
+		// parse out list of approvers
+		if approvers == nil {
+			return nil
+		}
+		ws[i] = &sdm.ApprovalFlowStep{
+			Quantifier: quantifier,
+			SkipAfter:  skipAfter,
+			Approvers:  approvers,
+		}
+	}
+	return ws
+}
+
+func convertRepeatedApprovalFlowStepToPorcelain(ws []*sdm.ApprovalFlowStep) interface{} {
+	approvalSteps := make([]map[string]interface{}, len(ws))
+	for i, w := range ws {
+		approvalSteps[i] = map[string]interface{}{
+			"quantifier": w.Quantifier,
+			"approvers":  convertRepeatedApprovalFlowApproverToPorcelain(w.Approvers),
+			"skip_after": convertDurationToPorcelain(w.SkipAfter),
+		}
+	}
+	return approvalSteps
+}
+
+var approvalFlowStepElemType = &schema.Resource{
+	Schema: map[string]*schema.Schema{
+		"approvers": {
+			Type:        schema.TypeList,
+			Elem:        approvalFlowApproverElemType,
+			Required:    true,
+			Description: "The approvers for this approval step",
+		},
+		"quantifier": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Default:     "any",
+			Description: "Whether any or all approvers are required to approve for this approval step (optional, defaults to any)",
+		},
+		"skip_after": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Default:     "0s",
+			Description: "Duration after which this approval step will be skipped if no approval is given (optional, if not provided this step must be manually approved)",
+		},
+	},
+}
+
+func convertRepeatedApprovalFlowApproverToPlumbing(porcelain interface{}) []*sdm.ApprovalFlowApprover {
+	if porcelain == nil {
+		return nil
+	}
+	approvers, ok := porcelain.([]interface{})
+	if !ok {
+		return nil
+	}
+	ws := make([]*sdm.ApprovalFlowApprover, len(approvers))
+	for i, w := range approvers {
+		approver, ok := w.(map[string]interface{})
+		if !ok {
+			return nil
+		}
+		ws[i] = &sdm.ApprovalFlowApprover{}
+		if approver["account_id"] != nil {
+			accountID, ok := approver["account_id"].(string)
+			if !ok {
+				return nil
+			}
+			ws[i].AccountID = accountID
+		}
+		if approver["role_id"] != nil {
+			roleID, ok := approver["role_id"].(string)
+			if !ok {
+				return nil
+			}
+			ws[i].RoleID = roleID
+		}
+	}
+	return ws
+}
+
+func convertRepeatedApprovalFlowApproverToPorcelain(ws []*sdm.ApprovalFlowApprover) interface{} {
+	approvers := make([]map[string]interface{}, len(ws))
+	for i, w := range ws {
+		approvers[i] = map[string]interface{}{}
+		if w.AccountID != "" {
+			approvers[i]["account_id"] = w.AccountID
+		}
+		if w.RoleID != "" {
+			approvers[i]["role_id"] = w.RoleID
+		}
+	}
+	return approvers
+}
+
+var approvalFlowApproverElemType = &schema.Resource{
+	Schema: map[string]*schema.Schema{
+		"account_id": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "The account id of the approver (only an account_id OR a role_id may be present for one approver)",
+		},
+		"role_id": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "The role id of the approver (only an account_id OR a role_id may be present for one approver)",
+		},
+	},
 }

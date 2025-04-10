@@ -26,6 +26,7 @@ This resource can be imported using the [import](https://www.terraform.io/docs/c
 ## Argument Reference
 The following arguments are supported by the ApprovalWorkflow resource:
 * `approval_mode` - (Required) Approval mode of the ApprovalWorkflow
+* `approval_step` - (Optional) The approval steps of this approval workflow
 * `description` - (Optional) Optional description of the ApprovalWorkflow.
 * `name` - (Required) Unique human-readable name of the ApprovalWorkflow.
 ## Attribute Reference

@@ -9,7 +9,7 @@ import (
 
 func TestAccSDMWorkflow_Get(t *testing.T) {
 	initAcceptanceTest(t)
-	workflows, err := createWorkflowsWithPrifix("workflow-get", 1)
+	workflows, err := createWorkflowsWithPrefix("workflow-get", 1)
 	if err != nil {
 		t.Fatal("failed to create workflow: ", err)
 	}
@@ -33,11 +33,11 @@ func TestAccSDMWorkflow_Get(t *testing.T) {
 func TestAccSDMWorkflow_GetMultiple(t *testing.T) {
 	initAcceptanceTest(t)
 
-	_, err := createWorkflowsWithPrifix("multi-test", 2)
+	_, err := createWorkflowsWithPrefix("wf-multi-test", 2)
 	if err != nil {
 		t.Fatal("failed to create workflow: ", err)
 	}
-	_, err = createWorkflowsWithPrifix("nomatch", 1)
+	_, err = createWorkflowsWithPrefix("nomatch", 1)
 	if err != nil {
 		t.Fatal("failed to create workflow: ", err)
 	}
@@ -47,7 +47,7 @@ func TestAccSDMWorkflow_GetMultiple(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMWorkflowDataSourceGetFilterConfig(dsName, "multi-test*"),
+				Config: testAccSDMWorkflowDataSourceGetFilterConfig(dsName, "wf-multi-test*"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdm_workflow."+dsName, "workflows.#", "2"),
 				),
@@ -59,7 +59,7 @@ func TestAccSDMWorkflow_GetMultiple(t *testing.T) {
 func TestAccSDMWorkflow_GetNone(t *testing.T) {
 	initAcceptanceTest(t)
 
-	_, err := createWorkflowsWithPrifix("dontfind", 1)
+	_, err := createWorkflowsWithPrefix("dontfind", 1)
 	if err != nil {
 		t.Fatal("failed to create workflow: ", err)
 	}

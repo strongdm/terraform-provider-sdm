@@ -816,6 +816,56 @@ type AccountUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// ActiveDirectoryEngine is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type ActiveDirectoryEngine struct {
+	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
+	AfterReadTtl time.Duration `json:"afterReadTtl"`
+	// Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com
+	Binddn string `json:"binddn"`
+	// Password to use along with binddn when performing user search.
+	Bindpass string `json:"bindpass"`
+	// CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.
+	Certificate string `json:"certificate"`
+	// Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration.
+	ConnectionTimeout uint32 `json:"connectionTimeout"`
+	// If set to true this will prevent password change timestamp validation in Active Directory when validating credentials
+	DoNotValidateTimestamps bool `json:"doNotValidateTimestamps"`
+	// Unique identifier of the Secret Engine.
+	ID string `json:"id"`
+	// If true, skips LDAP server SSL certificate verification - insecure, use with caution!
+	InsecureTls bool `json:"insecureTls"`
+	// An interval of public/private key rotation for secret engine in days
+	KeyRotationIntervalDays int32 `json:"keyRotationIntervalDays"`
+	// The maximum retry duration in case of automatic failure.
+	// On failed ttl rotation attempt it will be retried in an increasing intervals until it reaches max_backoff_duration
+	MaxBackoffDuration time.Duration `json:"maxBackoffDuration"`
+	// Unique human-readable name of the Secret Engine.
+	Name string `json:"name"`
+	// Policy for password creation
+	Policy *SecretEnginePolicy `json:"policy"`
+	// Public key linked with a secret engine
+	PublicKey []byte `json:"publicKey"`
+	// Timeout, in seconds, for the connection when making requests against the server before returning back an error.
+	RequestTimeout uint32 `json:"requestTimeout"`
+	// Backing secret store identifier
+	SecretStoreID string `json:"secretStoreId"`
+	// Backing Secret Store root path where managed secrets are going to be stored
+	SecretStoreRootPath string `json:"secretStoreRootPath"`
+	// If true, issues a StartTLS command after establishing an unencrypted connection.
+	StartTls bool `json:"startTls"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
+	Ttl time.Duration `json:"ttl"`
+	// The domain (userPrincipalDomain) used to construct a UPN string for authentication.
+	Upndomain string `json:"upndomain"`
+	// The LDAP server to connect to.
+	Url string `json:"url"`
+	// Base DN under which to perform user search. Example: ou=Users,dc=example,dc=com
+	Userdn string `json:"userdn"`
+}
+
 type ActiveDirectoryStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -1171,11 +1221,31 @@ type AmazonMQAMQP091 struct {
 	Username string `json:"username"`
 }
 
+// An approver for an approval workflow step. Specifies either an account_id or an role_id (not both)
+type ApprovalFlowApprover struct {
+	// The approver account id.
+	AccountID string `json:"accountId"`
+	// The approver role id
+	RoleID string `json:"roleId"`
+}
+
+// An approval step for an approval workflow. Specifies approvers and conditions for approval to be granted.
+type ApprovalFlowStep struct {
+	// The approvers for this approval step
+	Approvers []*ApprovalFlowApprover `json:"approvers"`
+	// Whether "any" or "all" approvers must approve for this approval step to pass. Optional, defaults to "any".
+	Quantifier string `json:"quantifier"`
+	// Duration after which this approval step will be skipped if no approval is given. Optional, if not provided an approver must approve before the step passes.
+	SkipAfter time.Duration `json:"skipAfter"`
+}
+
 // ApprovalWorkflows are the mechanism by which requests for access can be viewed by authorized
 // approvers and be approved or denied.
 type ApprovalWorkflow struct {
 	// Approval mode of the ApprovalWorkflow
 	ApprovalMode string `json:"approvalMode"`
+	// The approval steps of this approval workflow
+	ApprovalWorkflowSteps []*ApprovalFlowStep `json:"approvalWorkflowSteps"`
 	// Optional description of the ApprovalWorkflow.
 	Description string `json:"description"`
 	// Unique identifier of the ApprovalWorkflow.
@@ -1300,6 +1370,12 @@ type ApprovalWorkflowStep struct {
 	ApprovalFlowID string `json:"approvalFlowId"`
 	// Unique identifier of the ApprovalWorkflowStep.
 	ID string `json:"id"`
+	// Whether "any" or "all" approvers must approve for this approval step to pass. Read only field for history commands.
+	Quantifier string `json:"quantifier"`
+	// Duration after which this approval step will be skipped if no approval is given. Read only field for history commands.
+	SkipAfter time.Duration `json:"skipAfter"`
+	// The position of the approval step in a sequence of approval steps for an approval workflow. Read only field for history commands.
+	StepOrder int32 `json:"stepOrder"`
 }
 
 // ApprovalWorkflowStepCreateResponse reports how the ApprovalWorkflowStep was created in the system.
@@ -2667,6 +2743,16 @@ type Gateway struct {
 	Version string `json:"version"`
 }
 
+type GenerateKeysRequest struct {
+	// required
+	SecretEngineID string `json:"secretEngineId"`
+}
+
+type GenerateKeysResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 // GenericResponseMetadata contains common headers for generic request
 // responses.
 type GenericResponseMetadata struct {
@@ -2911,6 +2997,26 @@ type HealthcheckListResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+type HealthcheckRequest struct {
+	// required
+	SecretEngineID string `json:"secretEngineId"`
+}
+
+type HealthcheckResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// Array of statuses of all nodes serving a secret engine
+	Status []*HealthcheckStatus `json:"status"`
+}
+
+// HealthcheckStatus contains status of a node health
+type HealthcheckStatus struct {
+	// ID of node
+	NodeID string `json:"nodeId"`
+	// Status of node's health
+	Status string `json:"status"`
+}
+
 // IdentityAliases define the username to be used for a specific account
 // when connecting to a remote resource using that identity set.
 type IdentityAlias struct {
@@ -3039,6 +3145,25 @@ type IdentitySetUpdateResponse struct {
 	Meta *UpdateResponseMetadata `json:"meta"`
 	// Rate limit information.
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// KeyValueEngine is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type KeyValueEngine struct {
+	// Unique identifier of the Secret Engine.
+	ID string `json:"id"`
+	// An interval of public/private key rotation for secret engine in days
+	KeyRotationIntervalDays int32 `json:"keyRotationIntervalDays"`
+	// Unique human-readable name of the Secret Engine.
+	Name string `json:"name"`
+	// Public key linked with a secret engine
+	PublicKey []byte `json:"publicKey"`
+	// Backing secret store identifier
+	SecretStoreID string `json:"secretStoreId"`
+	// Backing Secret Store root path where managed secrets are going to be stored
+	SecretStoreRootPath string `json:"secretStoreRootPath"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 type KeyfactorSSHStore struct {
@@ -3420,6 +3545,218 @@ type MTLSPostgres struct {
 	Tags Tags `json:"tags"`
 	// The username to authenticate with.
 	Username string `json:"username"`
+}
+
+// ManagedSecret contains details about managed secret
+type ManagedSecret struct {
+	// public part of the secret value
+	Config string `json:"config"`
+	// Timestamp of when secret is going to be rotated
+	ExpiresAt time.Time `json:"expiresAt"`
+	// Unique identifier of the Managed Secret.
+	ID string `json:"id"`
+	// Timestamp of when secret was last rotated
+	LastRotatedAt time.Time `json:"lastRotatedAt"`
+	// Unique human-readable name of the Managed Secret.
+	Name string `json:"name"`
+	// Password and rotation policy for the secret
+	Policy *ManagedSecretPolicy `json:"policy"`
+	// An ID of a Secret Engine linked with the Managed Secret.
+	SecretEngineID string `json:"secretEngineId"`
+	// Path in a secret store.
+	SecretStorePath string `json:"secretStorePath"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// Sensitive value of the secret.
+	Value []byte `json:"value"`
+}
+
+// ManagedSecretCreateRequest specifies a Managed Secret to create.
+type ManagedSecretCreateRequest struct {
+	// Parameters to define the new Managed Secret.
+	ManagedSecret *ManagedSecret `json:"managedSecret"`
+}
+
+// ManagedSecretCreateResponse contains information about a Managed Secret after
+// successful creation.
+type ManagedSecretCreateResponse struct {
+	// The requested Managed Secret.
+	ManagedSecret *ManagedSecret `json:"managedSecret"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ManagedSecretDeleteRequest specified the ID of a Managed Secret to be
+// deleted.
+type ManagedSecretDeleteRequest struct {
+	// The unique identifier of the Managed Secret to delete.
+	ID string `json:"id"`
+}
+
+// ManagedSecretDeleteResponse contains information about a Managed Secret after
+// it was deleted.
+type ManagedSecretDeleteResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ManagedSecretGetRequest specifies which Managed Secret to retrieve
+type ManagedSecretGetRequest struct {
+	// The unique identifier of the Managed Secret to retrieve.
+	ID string `json:"id"`
+}
+
+// ManagedSecretGetResponse contains information about requested Managed Secret
+type ManagedSecretGetResponse struct {
+	// The requested Managed Secret.
+	ManagedSecret *ManagedSecret `json:"managedSecret"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ManagedSecretListRequest specifies criteria for retrieving a list of Managed
+// Secrets.
+type ManagedSecretListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// ManagedSecretListResponse contains a list of requested Managed Secrets
+type ManagedSecretListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ManagedSecretLog contains details about action performed against a managed
+// secret
+type ManagedSecretLog struct {
+	// An ID of the account the action was performed by.
+	AccountID string `json:"accountId"`
+	// The action performed by the account against the managed secret.
+	Action string `json:"action"`
+	// Timestamp of when action was performed.
+	CreatedAt time.Time `json:"createdAt"`
+	// Any debug logs associated with the action.
+	Debug string `json:"debug"`
+	// Unique identifier of the Managed Secret Log.
+	ID string `json:"id"`
+	// An ID of the Managed Secret the action was performed against.
+	ManagedSecretID string `json:"managedSecretId"`
+	// An ID of the Secret Engine linked with the Managed Secret.
+	SecretEngineID string `json:"secretEngineId"`
+}
+
+// ManagedSecretLogsRequest specifies criteria for retrieving a log of Managed
+// Secrets actions.
+type ManagedSecretLogsRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// ManagedSecretLogsResponse contains a list of requested Managed Secrets
+type ManagedSecretLogsResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type ManagedSecretPasswordPolicy struct {
+	// If set to true allows for consecutive characters to repeat itself
+	AllowRepeat bool `json:"allowRepeat"`
+	// Characters to exclude when generating password
+	ExcludeCharacters string `json:"excludeCharacters"`
+	// If set to true do not include upper case letters when generating password
+	ExcludeUpperCase bool `json:"excludeUpperCase"`
+	// Password length
+	Length uint32 `json:"length"`
+	// Numbers of digits to use when generating password
+	NumDigits uint32 `json:"numDigits"`
+	// Number of symbols to use when generating password
+	NumSymbols uint32 `json:"numSymbols"`
+}
+
+// ManagedSecretPolicy contains password and rotation policy for managed secret
+type ManagedSecretPolicy struct {
+	// Password policy for a managed secret
+	PasswordPolicy *ManagedSecretPasswordPolicy `json:"passwordPolicy"`
+	// Rotation policy for a managed secret
+	RotationPolicy *ManagedSecretRotationPolicy `json:"rotationPolicy"`
+}
+
+// ManagedSecretRetrieveRequest specifies which Managed Secret to retrieve
+type ManagedSecretRetrieveRequest struct {
+	// The unique identifier of the Managed Secret to retrieve.
+	ID string `json:"id"`
+	// Public key to encrypt a sensitive value with
+	PublicKey []byte `json:"publicKey"`
+}
+
+// ManagedSecretRetrieveResponse contains information about requested Managed
+// Secret
+type ManagedSecretRetrieveResponse struct {
+	// The requested Managed Secret.
+	ManagedSecret *ManagedSecret `json:"managedSecret"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ManagedSecretRotateRequest specifies Managed Secret to rotate
+type ManagedSecretRotateRequest struct {
+	// The unique identifier of the Managed Secret to rotate.
+	ID string `json:"id"`
+}
+
+// ManagedSecretRotateResponse contains information about Secret Engine after
+// successful rotation.
+type ManagedSecretRotateResponse struct {
+	// Reserved for future use.
+	Meta *GenericResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type ManagedSecretRotationPolicy struct {
+}
+
+// ManagedSecretUpdateRequest specifies Managed Secret to update
+type ManagedSecretUpdateRequest struct {
+	// Managed Secret to update
+	ManagedSecret *ManagedSecret `json:"managedSecret"`
+}
+
+// ManagedSecretUpdateResponse contains information about Secret Engine after
+// successful update.
+type ManagedSecretUpdateResponse struct {
+	// The requested Managed Secret.
+	ManagedSecret *ManagedSecret `json:"managedSecret"`
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ManagedSecretValidateRequest specifies which Managed Secret to validate
+type ManagedSecretValidateRequest struct {
+	// The unique identifier of the Managed Secret to validate.
+	ID string `json:"id"`
+}
+
+// ManagedSecretValidateResponse contains validity of requested Managed
+// Secret
+type ManagedSecretValidateResponse struct {
+	// Information about why secret is invalid
+	InvalidInfo string `json:"invalidInfo"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// Whether the secret is valid
+	ValID bool `json:"valid"`
 }
 
 type Maria struct {
@@ -11126,6 +11463,247 @@ type SSHPassword struct {
 	Username string `json:"username"`
 }
 
+// A SecretEngine is managing secrets in SecretStores.
+type SecretEngine interface {
+	// GetID returns the unique identifier of the SecretEngine.
+	GetID() string
+	// GetName returns the name of the SecretEngine.
+	GetName() string
+	// SetName sets the name of the SecretEngine.
+	SetName(string)
+	// GetTags returns the tags of the SecretEngine.
+	GetTags() Tags
+	// SetTags sets the tags of the SecretEngine.
+	SetTags(Tags)
+	// GetSecretStoreID returns the secret store id of the SecretEngine.
+	GetSecretStoreID() string
+	// SetSecretStoreID sets the secret store id of the SecretEngine.
+	SetSecretStoreID(string)
+	// GetSecretStoreRootPath returns the secret store root path of the SecretEngine.
+	GetSecretStoreRootPath() string
+	// SetSecretStoreRootPath sets the secret store root path of the SecretEngine.
+	SetSecretStoreRootPath(string)
+	// GetPublicKey returns the public key of the SecretEngine.
+	GetPublicKey() []byte
+	// SetPublicKey sets the public key of the SecretEngine.
+	SetPublicKey([]byte)
+	isOneOf_SecretEngine()
+}
+
+func (*ActiveDirectoryEngine) isOneOf_SecretEngine() {}
+
+// GetID returns the unique identifier of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) GetID() string { return m.ID }
+
+// GetName returns the name of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetSecretStoreRootPath returns the secret store root path of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) GetSecretStoreRootPath() string {
+	return m.SecretStoreRootPath
+}
+
+// SetSecretStoreRootPath sets the secret store root path of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) SetSecretStoreRootPath(v string) {
+	m.SecretStoreRootPath = v
+}
+
+// GetPublicKey returns the public key of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) GetPublicKey() []byte {
+	return m.PublicKey
+}
+
+// SetPublicKey sets the public key of the ActiveDirectoryEngine.
+func (m *ActiveDirectoryEngine) SetPublicKey(v []byte) {
+	m.PublicKey = v
+}
+func (*KeyValueEngine) isOneOf_SecretEngine() {}
+
+// GetID returns the unique identifier of the KeyValueEngine.
+func (m *KeyValueEngine) GetID() string { return m.ID }
+
+// GetName returns the name of the KeyValueEngine.
+func (m *KeyValueEngine) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the KeyValueEngine.
+func (m *KeyValueEngine) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the KeyValueEngine.
+func (m *KeyValueEngine) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the KeyValueEngine.
+func (m *KeyValueEngine) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the KeyValueEngine.
+func (m *KeyValueEngine) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the KeyValueEngine.
+func (m *KeyValueEngine) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetSecretStoreRootPath returns the secret store root path of the KeyValueEngine.
+func (m *KeyValueEngine) GetSecretStoreRootPath() string {
+	return m.SecretStoreRootPath
+}
+
+// SetSecretStoreRootPath sets the secret store root path of the KeyValueEngine.
+func (m *KeyValueEngine) SetSecretStoreRootPath(v string) {
+	m.SecretStoreRootPath = v
+}
+
+// GetPublicKey returns the public key of the KeyValueEngine.
+func (m *KeyValueEngine) GetPublicKey() []byte {
+	return m.PublicKey
+}
+
+// SetPublicKey sets the public key of the KeyValueEngine.
+func (m *KeyValueEngine) SetPublicKey(v []byte) {
+	m.PublicKey = v
+}
+
+// SecretEngineCreateRequest specifies a Secret Engine to create.
+type SecretEngineCreateRequest struct {
+	// Parameters to define the new Secret Engine.
+	SecretEngine SecretEngine `json:"secretEngine"`
+}
+
+// SecretEngineCreateResponse contains information about a Secret Engine after successful creation.
+type SecretEngineCreateResponse struct {
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested Secret Engine.
+	SecretEngine SecretEngine `json:"secretEngine"`
+}
+
+// SecretEngineDeleteRequest specified the ID of a Secret Engine to be deleted.
+type SecretEngineDeleteRequest struct {
+	// The unique identifier of the Secret Engine to delete.
+	ID string `json:"id"`
+}
+
+// SecretEngineDeleteResponse contains information about a Secret Engine after it was deleted.
+type SecretEngineDeleteResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// SecretEngineGetRequest specifies which Secret Engine to retrieve
+type SecretEngineGetRequest struct {
+	// The unique identifier of the Secret Engine to retrieve.
+	ID string `json:"id"`
+}
+
+// SecretEngineGetResponse contains information about requested Secret Engine
+type SecretEngineGetResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested Secret Engine.
+	SecretEngine SecretEngine `json:"secretEngine"`
+}
+
+// SecretEngineListRequest specifies criteria for retrieving a list of Secret Engines
+type SecretEngineListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// SecretEngineListResponse contains a list of requested Secret Engine
+type SecretEngineListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type SecretEnginePasswordPolicy struct {
+	// If set to true allows for consecutive characters to repeat itself
+	AllowRepeat bool `json:"allowRepeat"`
+	// Characters to exclude when generating password
+	ExcludeCharacters string `json:"excludeCharacters"`
+	// If set to true do not include upper case letters when generating password
+	ExcludeUpperCase bool `json:"excludeUpperCase"`
+	// Password length.
+	Length uint32 `json:"length"`
+	// Numbers of digits to use when generating password
+	NumDigits uint32 `json:"numDigits"`
+	// Number of symbols to use when generating password
+	NumSymbols uint32 `json:"numSymbols"`
+}
+
+type SecretEnginePolicy struct {
+	// Policy for password
+	PasswordPolicy *SecretEnginePasswordPolicy `json:"passwordPolicy"`
+}
+
+type SecretEngineRotateRequest struct {
+	// The unique identifier of the Secret Engine to rotate credentials for.
+	ID string `json:"id"`
+	// Optional password policy to use when generating a password
+	// If not provided it will use secret engine's password_policy
+	PasswordPolicy *SecretEnginePasswordPolicy `json:"passwordPolicy"`
+}
+
+type SecretEngineRotateResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// SecretEngineUpdateRequest specifies secret engine to update
+type SecretEngineUpdateRequest struct {
+	// Secret engine to update
+	SecretEngine SecretEngine `json:"secretEngine"`
+}
+
+// SecretEngineUpdateResponse contains information about Secret Engine after successful update.
+type SecretEngineUpdateResponse struct {
+	// Reserved for future use.
+	Meta *UpdateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The requested Secret Engine.
+	SecretEngine SecretEngine `json:"secretEngine"`
+}
+
 // A SecretStore is a server where resource secrets (passwords, keys) are stored.
 // Coming soon support for HashiCorp Vault and AWS Secret Store.
 type SecretStore interface {
@@ -12997,6 +13575,40 @@ type IdentitySetHistoryIterator interface {
 	Err() error
 }
 
+// ManagedSecretIterator provides read access to a list of ManagedSecret.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    managedSecret := iterator.Value()
+//	    // ...
+//	}
+type ManagedSecretIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ManagedSecret
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ManagedSecretLogIterator provides read access to a list of ManagedSecretLog.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    managedSecretLog := iterator.Value()
+//	    // ...
+//	}
+type ManagedSecretLogIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *ManagedSecretLog
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
 // NodeIterator provides read access to a list of Node.
 // Use it like so:
 //
@@ -13401,6 +14013,23 @@ type SecretStoreIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() SecretStore
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// SecretEngineIterator provides read access to a list of SecretEngine.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    secretEngine := iterator.Value()
+//	    // ...
+//	}
+type SecretEngineIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() SecretEngine
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

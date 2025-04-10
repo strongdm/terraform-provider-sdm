@@ -30,14 +30,16 @@ const _ = grpc.SupportPackageIsVersion7
 // ApprovalWorkflowApproversClient is the client API for ApprovalWorkflowApprovers service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Deprecated: Do not use.
 type ApprovalWorkflowApproversClient interface {
-	// Create creates a new approval workflow approver.
+	// Deprecated: Create creates a new approval workflow approver.
 	Create(ctx context.Context, in *ApprovalWorkflowApproverCreateRequest, opts ...grpc.CallOption) (*ApprovalWorkflowApproverCreateResponse, error)
-	// Get reads one approval workflow approver by ID.
+	// Deprecated: Get reads one approval workflow approver by ID.
 	Get(ctx context.Context, in *ApprovalWorkflowApproverGetRequest, opts ...grpc.CallOption) (*ApprovalWorkflowApproverGetResponse, error)
-	// Delete deletes an existing approval workflow approver.
+	// Deprecated: Delete deletes an existing approval workflow approver.
 	Delete(ctx context.Context, in *ApprovalWorkflowApproverDeleteRequest, opts ...grpc.CallOption) (*ApprovalWorkflowApproverDeleteResponse, error)
-	// Lists existing approval workflow approvers.
+	// Deprecated: Lists existing approval workflow approvers.
 	List(ctx context.Context, in *ApprovalWorkflowApproverListRequest, opts ...grpc.CallOption) (*ApprovalWorkflowApproverListResponse, error)
 }
 
@@ -45,6 +47,7 @@ type approvalWorkflowApproversClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewApprovalWorkflowApproversClient(cc grpc.ClientConnInterface) ApprovalWorkflowApproversClient {
 	return &approvalWorkflowApproversClient{cc}
 }
@@ -88,14 +91,16 @@ func (c *approvalWorkflowApproversClient) List(ctx context.Context, in *Approval
 // ApprovalWorkflowApproversServer is the server API for ApprovalWorkflowApprovers service.
 // All implementations must embed UnimplementedApprovalWorkflowApproversServer
 // for forward compatibility
+//
+// Deprecated: Do not use.
 type ApprovalWorkflowApproversServer interface {
-	// Create creates a new approval workflow approver.
+	// Deprecated: Create creates a new approval workflow approver.
 	Create(context.Context, *ApprovalWorkflowApproverCreateRequest) (*ApprovalWorkflowApproverCreateResponse, error)
-	// Get reads one approval workflow approver by ID.
+	// Deprecated: Get reads one approval workflow approver by ID.
 	Get(context.Context, *ApprovalWorkflowApproverGetRequest) (*ApprovalWorkflowApproverGetResponse, error)
-	// Delete deletes an existing approval workflow approver.
+	// Deprecated: Delete deletes an existing approval workflow approver.
 	Delete(context.Context, *ApprovalWorkflowApproverDeleteRequest) (*ApprovalWorkflowApproverDeleteResponse, error)
-	// Lists existing approval workflow approvers.
+	// Deprecated: Lists existing approval workflow approvers.
 	List(context.Context, *ApprovalWorkflowApproverListRequest) (*ApprovalWorkflowApproverListResponse, error)
 	mustEmbedUnimplementedApprovalWorkflowApproversServer()
 }
@@ -126,6 +131,7 @@ type UnsafeApprovalWorkflowApproversServer interface {
 	mustEmbedUnimplementedApprovalWorkflowApproversServer()
 }
 
+// Deprecated: Do not use.
 func RegisterApprovalWorkflowApproversServer(s grpc.ServiceRegistrar, srv ApprovalWorkflowApproversServer) {
 	s.RegisterService(&_ApprovalWorkflowApprovers_serviceDesc, srv)
 }
