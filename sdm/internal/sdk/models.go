@@ -5173,8 +5173,6 @@ type Redshift struct {
 	Username string `json:"username"`
 }
 
-// RedshiftIAM is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type RedshiftIAM struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -5212,8 +5210,6 @@ type RedshiftIAM struct {
 	Tags Tags `json:"tags"`
 }
 
-// RedshiftServerlessIAM is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type RedshiftServerlessIAM struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
