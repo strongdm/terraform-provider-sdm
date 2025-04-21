@@ -295,7 +295,7 @@ func testAccSDMApprovalWorkflowNestedConfig(resourceName, workflowName, approval
 	}
 
 	resource "sdm_role" "%[9]s" {
-		name = "role name"
+		name = "role-%[9]s"
 	}
 
 	resource "sdm_approval_workflow" "%[1]s" {

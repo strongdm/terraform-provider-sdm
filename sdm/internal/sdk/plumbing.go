@@ -12244,6 +12244,79 @@ func convertRepeatedOracleToPorcelain(plumbings []*proto.Oracle) (
 	}
 	return items, nil
 }
+func convertOracleNNEToPorcelain(plumbing *proto.OracleNNE) (*OracleNNE, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &OracleNNE{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertOracleNNEToPlumbing(porcelain *OracleNNE) *proto.OracleNNE {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.OracleNNE{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedOracleNNEToPlumbing(
+	porcelains []*OracleNNE,
+) []*proto.OracleNNE {
+	var items []*proto.OracleNNE
+	for _, porcelain := range porcelains {
+		items = append(items, convertOracleNNEToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedOracleNNEToPorcelain(plumbings []*proto.OracleNNE) (
+	[]*OracleNNE,
+	error,
+) {
+	var items []*OracleNNE
+	for _, plumbing := range plumbings {
+		if v, err := convertOracleNNEToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -15881,6 +15954,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_NeptuneIam{NeptuneIam: convertNeptuneIAMToPlumbing(v)}
 	case *Oracle:
 		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
+	case *OracleNNE:
+		plumbing.Resource = &proto.Resource_OracleNne{OracleNne: convertOracleNNEToPlumbing(v)}
 	case *Postgres:
 		plumbing.Resource = &proto.Resource_Postgres{Postgres: convertPostgresToPlumbing(v)}
 	case *Presto:
@@ -16167,6 +16242,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetOracle() != nil {
 		return convertOracleToPorcelain(plumbing.GetOracle())
+	}
+	if plumbing.GetOracleNne() != nil {
+		return convertOracleNNEToPorcelain(plumbing.GetOracleNne())
 	}
 	if plumbing.GetPostgres() != nil {
 		return convertPostgresToPorcelain(plumbing.GetPostgres())
