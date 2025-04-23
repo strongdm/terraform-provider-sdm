@@ -2410,6 +2410,37 @@ type DocumentDBReplicaSet struct {
 	Username string `json:"username"`
 }
 
+// DocumentDBReplicaSetIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type DocumentDBReplicaSetIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// Set to connect to a replica instead of the primary node.
+	ConnectToReplica bool `json:"connectToReplica"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// The region of the document db cluster
+	Region string `json:"region"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type Druid struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -7751,6 +7782,60 @@ func (m *DocumentDBReplicaSet) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the DocumentDBReplicaSet.
 func (m *DocumentDBReplicaSet) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*DocumentDBReplicaSetIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the DocumentDBReplicaSetIAM.
+func (m *DocumentDBReplicaSetIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Druid) isOneOf_Resource() {}

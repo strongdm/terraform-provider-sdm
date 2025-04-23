@@ -589,6 +589,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "document_db_replica_set_iam",
+			pairs: [][2]string{
+				{"connect_to_replica", `true`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"region", `"region"`},
+			},
+		},
+		{
 			resource: "druid",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},

@@ -3655,6 +3655,76 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"document_db_replica_set_iam": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "DocumentDBReplicaSetIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"connect_to_replica": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "Set to connect to a replica instead of the primary node.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The region of the document db cluster",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"druid": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -10171,6 +10241,17 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("document_db_replica_set_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12908,6 +12989,32 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("document_db_replica_set_iam").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DocumentDBReplicaSetIAM{}
+		}
+		out := &sdm.DocumentDBReplicaSetIAM{
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:         convertStringToPlumbing(raw["hostname"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:           convertStringToPlumbing(raw["region"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -15590,6 +15697,24 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":           seValues["username"],
 			},
 		})
+	case *sdm.DocumentDBReplicaSetIAM:
+		localV, _ := localVersion.(*sdm.DocumentDBReplicaSetIAM)
+		_ = localV
+		d.Set("document_db_replica_set_iam", []map[string]interface{}{
+			{
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
+				"proxy_cluster_id":   (v.ProxyClusterID),
+				"region":             (v.Region),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.Druid:
 		localV, _ := localVersion.(*sdm.Druid)
 		_ = localV
@@ -18212,6 +18337,27 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"username":           seValues["username"],
+			},
+		})
+	case *sdm.DocumentDBReplicaSetIAM:
+		localV, ok := localVersion.(*sdm.DocumentDBReplicaSetIAM)
+		if !ok {
+			localV = &sdm.DocumentDBReplicaSetIAM{}
+		}
+		_ = localV
+		d.Set("document_db_replica_set_iam", []map[string]interface{}{
+			{
+				"bind_interface":     (v.BindInterface),
+				"connect_to_replica": (v.ConnectToReplica),
+				"egress_filter":      (v.EgressFilter),
+				"hostname":           (v.Hostname),
+				"name":               (v.Name),
+				"port_override":      (v.PortOverride),
+				"proxy_cluster_id":   (v.ProxyClusterID),
+				"region":             (v.Region),
+				"secret_store_id":    (v.SecretStoreID),
+				"subdomain":          (v.Subdomain),
+				"tags":               convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Druid:

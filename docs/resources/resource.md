@@ -694,6 +694,18 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
+* document_db_replica_set_iam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `connect_to_replica` - (Optional) Set to connect to a replica instead of the primary node.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `region` - (Required) The region of the document db cluster
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * druid:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
