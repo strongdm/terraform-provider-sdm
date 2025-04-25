@@ -1221,10 +1221,13 @@ type AmazonMQAMQP091 struct {
 	Username string `json:"username"`
 }
 
-// An approver for an approval workflow step. Specifies either an account_id or an role_id (not both)
+// An approver for an approval workflow step. Each approver can specify exactly one of: account_id, role_id, or reference
 type ApprovalFlowApprover struct {
 	// The approver account id.
 	AccountID string `json:"accountId"`
+	// A reference to an approver. Must be one of ApproverReference constants.
+	// If set, the account_id and role_id must be empty.
+	Reference string `json:"reference"`
 	// The approver role id
 	RoleID string `json:"roleId"`
 }
@@ -1264,6 +1267,10 @@ type ApprovalWorkflowApprover struct {
 	ApprovalStepID string `json:"approvalStepId"`
 	// Unique identifier of the ApprovalWorkflowApprover.
 	ID string `json:"id"`
+	// A reference to an approver. Will be one of ApproverReference constants.
+	// This field is only populated when reading historical Approval Workflow Approvers data through the Approval Workflows History API.
+	// For the deprecated Approval Workflow Approvers API no value is returned for this field and it is non-settable.
+	Reference string `json:"reference"`
 	// The approver role id
 	RoleID string `json:"roleId"`
 }

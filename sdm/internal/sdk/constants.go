@@ -518,3 +518,10 @@ const (
 	APIHostUK = "app.uk.strongdm.com:443"
 	APIHostEU = "app.eu.strongdm.com:443"
 )
+
+// ApproverReference defines the type for approver references.
+const (
+	ApproverReferenceNone                        = ""
+	ApproverReferenceManagerOfRequester          = "manager-of-requester"
+	ApproverReferenceManagerOfManagerOfRequester = "manager-of-manager-of-requester"
+)

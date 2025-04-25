@@ -370,6 +370,13 @@ func convertRepeatedApprovalFlowApproverToPlumbing(porcelain interface{}) []*sdm
 			}
 			ws[i].RoleID = roleID
 		}
+		if approver["reference"] != nil {
+			reference, ok := approver["reference"].(string)
+			if !ok {
+				return nil
+			}
+			ws[i].Reference = reference
+		}
 	}
 	return ws
 }
@@ -384,6 +391,9 @@ func convertRepeatedApprovalFlowApproverToPorcelain(ws []*sdm.ApprovalFlowApprov
 		if w.RoleID != "" {
 			approvers[i]["role_id"] = w.RoleID
 		}
+		if w.Reference != "" {
+			approvers[i]["reference"] = w.Reference
+		}
 	}
 	return approvers
 }
@@ -393,12 +403,17 @@ var approvalFlowApproverElemType = &schema.Resource{
 		"account_id": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Description: "The account id of the approver (only an account_id OR a role_id may be present for one approver)",
+			Description: "The account id of the approver (only one of account_id, role_id, or reference may be present for one approver)",
 		},
 		"role_id": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Description: "The role id of the approver (only an account_id OR a role_id may be present for one approver)",
+			Description: "The role id of the approver (only one of account_id, role_id, or reference may be present for one approver)",
+		},
+		"reference": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "A reference to an approver: 'manager-of-requester' or 'manager-of-manager-of-requester' (only one of account_id, role_id, or reference may be present for one approver)",
 		},
 	},
 }

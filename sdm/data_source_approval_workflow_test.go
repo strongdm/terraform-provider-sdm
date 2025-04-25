@@ -234,11 +234,15 @@ func validateApprovalWorkflows(dsName string, expectedWorkflows []*sdm.ApprovalW
 					approver := &sdm.ApprovalFlowApprover{}
 					accountID := rs.Primary.Attributes[approverPrefix+"account_id"]
 					roleID := rs.Primary.Attributes[approverPrefix+"role_id"]
+					reference := rs.Primary.Attributes[approverPrefix+"reference"]
 					if accountID != "" {
 						approver.AccountID = accountID
 					}
 					if roleID != "" {
 						approver.RoleID = roleID
+					}
+					if reference != "" {
+						approver.Reference = reference
 					}
 					step.Approvers = append(step.Approvers, approver)
 				}
@@ -311,6 +315,10 @@ func validateApprovalWorkflows(dsName string, expectedWorkflows []*sdm.ApprovalW
 					if expectedApprover.RoleID != actualApprover.RoleID {
 						return fmt.Errorf("Mismatch in approver RoleID at workflow %s, step %d, approver %d: expected %s, got %s",
 							expected.ID, j, k, expectedApprover.RoleID, actualApprover.RoleID)
+					}
+					if expectedApprover.Reference != actualApprover.Reference {
+						return fmt.Errorf("Mismatch in approver Reference at workflow %s, step %d, approver %d: expected %s, got %s",
+							expected.ID, j, k, expectedApprover.Reference, actualApprover.Reference)
 					}
 				}
 			}

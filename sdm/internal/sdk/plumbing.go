@@ -3288,6 +3288,7 @@ func convertApprovalFlowApproverToPorcelain(plumbing *proto.ApprovalFlowApprover
 	}
 	porcelain := &ApprovalFlowApprover{}
 	porcelain.AccountID = plumbing.AccountId
+	porcelain.Reference = plumbing.Reference
 	porcelain.RoleID = plumbing.RoleId
 	return porcelain, nil
 }
@@ -3298,6 +3299,7 @@ func convertApprovalFlowApproverToPlumbing(porcelain *ApprovalFlowApprover) *pro
 	}
 	plumbing := &proto.ApprovalFlowApprover{}
 	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.Reference = (porcelain.Reference)
 	plumbing.RoleId = (porcelain.RoleID)
 	return plumbing
 }
@@ -3440,6 +3442,7 @@ func convertApprovalWorkflowApproverToPorcelain(plumbing *proto.ApprovalWorkflow
 	porcelain.ApprovalFlowID = plumbing.ApprovalFlowId
 	porcelain.ApprovalStepID = plumbing.ApprovalStepId
 	porcelain.ID = plumbing.Id
+	porcelain.Reference = plumbing.Reference
 	porcelain.RoleID = plumbing.RoleId
 	return porcelain, nil
 }
@@ -3453,6 +3456,7 @@ func convertApprovalWorkflowApproverToPlumbing(porcelain *ApprovalWorkflowApprov
 	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
 	plumbing.ApprovalStepId = (porcelain.ApprovalStepID)
 	plumbing.Id = (porcelain.ID)
+	plumbing.Reference = (porcelain.Reference)
 	plumbing.RoleId = (porcelain.RoleID)
 	return plumbing
 }
