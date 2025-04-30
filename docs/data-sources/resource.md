@@ -35,6 +35,20 @@ In addition to provided arguments above, the following attributes are returned b
 * `id` - a generated id representing this request, unrelated to input id and sdm_resource ids.
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `resources` - A single element list containing a map, where each key lists one of the following objects:
+	* aerospike:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port` - The port to dial to initiate a connection from the egress node to this resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `username` - The username to authenticate with.
 	* aks:
 		* `allow_resource_role_bypass` - If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.

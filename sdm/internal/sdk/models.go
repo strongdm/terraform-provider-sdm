@@ -940,6 +940,39 @@ type ActivityGetResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// Aerospike is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type Aerospike struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type AmazonEKS struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
@@ -5523,6 +5556,60 @@ type Resource interface {
 	isOneOf_Resource()
 }
 
+func (*Aerospike) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the Aerospike.
+func (m *Aerospike) GetID() string { return m.ID }
+
+// GetName returns the name of the Aerospike.
+func (m *Aerospike) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the Aerospike.
+func (m *Aerospike) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the Aerospike.
+func (m *Aerospike) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the Aerospike.
+func (m *Aerospike) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the Aerospike.
+func (m *Aerospike) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the Aerospike.
+func (m *Aerospike) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the Aerospike.
+func (m *Aerospike) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the Aerospike.
+func (m *Aerospike) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the Aerospike.
+func (m *Aerospike) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the Aerospike.
+func (m *Aerospike) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*AKS) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKS.

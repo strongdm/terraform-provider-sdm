@@ -97,6 +97,7 @@ const (
 	MFAProviderDuo  = "duo"
 	MFAProviderTOTP = "totp"
 	MFAProviderOkta = "okta"
+	MFAProviderRSA  = "rsa"
 )
 
 // Activity Entities, all entity types that can be part of an activity.

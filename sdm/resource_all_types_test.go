@@ -42,6 +42,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 	}
 	tcs := []testCase{
 		{
+			resource: "aerospike",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "aks",
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
@@ -1494,6 +1505,19 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		pairs    [][2]string
 	}
 	tcs := []testCase{
+
+		{
+			resource: "aerospike",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"secret_name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
 
 		{
 			resource: "aks",

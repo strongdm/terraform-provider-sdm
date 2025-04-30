@@ -2725,6 +2725,77 @@ func convertRepeatedActivityGetResponseToPorcelain(plumbings []*proto.ActivityGe
 	}
 	return items, nil
 }
+func convertAerospikeToPorcelain(plumbing *proto.Aerospike) (*Aerospike, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Aerospike{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertAerospikeToPlumbing(porcelain *Aerospike) *proto.Aerospike {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Aerospike{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAerospikeToPlumbing(
+	porcelains []*Aerospike,
+) []*proto.Aerospike {
+	var items []*proto.Aerospike
+	for _, porcelain := range porcelains {
+		items = append(items, convertAerospikeToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAerospikeToPorcelain(plumbings []*proto.Aerospike) (
+	[]*Aerospike,
+	error,
+) {
+	var items []*Aerospike
+	for _, plumbing := range plumbings {
+		if v, err := convertAerospikeToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -15875,6 +15946,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	plumbing := &proto.Resource{}
 
 	switch v := porcelain.(type) {
+	case *Aerospike:
+		plumbing.Resource = &proto.Resource_Aerospike{Aerospike: convertAerospikeToPlumbing(v)}
 	case *AKS:
 		plumbing.Resource = &proto.Resource_Aks{Aks: convertAKSToPlumbing(v)}
 	case *AKSBasicAuth:
@@ -16090,6 +16163,9 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 }
 
 func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
+	if plumbing.GetAerospike() != nil {
+		return convertAerospikeToPorcelain(plumbing.GetAerospike())
+	}
 	if plumbing.GetAks() != nil {
 		return convertAKSToPorcelain(plumbing.GetAks())
 	}
