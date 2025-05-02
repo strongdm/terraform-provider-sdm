@@ -1389,7 +1389,6 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "trino",
 			pairs: [][2]string{
-				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"name", `"name"`},
@@ -2930,7 +2929,6 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "trino",
 			pairs: [][2]string{
-				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"name", `"secret_name"`},

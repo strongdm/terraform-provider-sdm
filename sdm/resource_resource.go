@@ -8975,11 +8975,6 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
-						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -14876,7 +14871,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.Trino{
 			ID:             d.Id(),
 			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
-			Database:       convertStringToPlumbing(raw["database"]),
 			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:       convertStringToPlumbing(raw["hostname"]),
 			Name:           convertStringToPlumbing(raw["name"]),
@@ -17129,7 +17123,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("trino", []map[string]interface{}{
 			{
 				"bind_interface":   (v.BindInterface),
-				"database":         (v.Database),
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"name":             (v.Name),
@@ -20312,7 +20305,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("trino", []map[string]interface{}{
 			{
 				"bind_interface":   (v.BindInterface),
-				"database":         (v.Database),
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"name":             (v.Name),

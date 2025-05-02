@@ -1620,7 +1620,6 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * trino:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.

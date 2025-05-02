@@ -12859,8 +12859,6 @@ type Token struct {
 type Trino struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
-	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.

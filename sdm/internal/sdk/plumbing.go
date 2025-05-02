@@ -19781,7 +19781,6 @@ func convertTrinoToPorcelain(plumbing *proto.Trino) (*Trino, error) {
 	}
 	porcelain := &Trino{}
 	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -19808,7 +19807,6 @@ func convertTrinoToPlumbing(porcelain *Trino) *proto.Trino {
 	}
 	plumbing := &proto.Trino{}
 	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)

@@ -8998,11 +8998,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
-									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -11084,7 +11079,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.Trino:
 			output[0]["trino"] = append(output[0]["trino"], entity{
 				"bind_interface":   (v.BindInterface),
-				"database":         (v.Database),
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"id":               (v.ID),

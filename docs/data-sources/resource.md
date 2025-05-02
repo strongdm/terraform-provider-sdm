@@ -1699,7 +1699,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - The username to authenticate with.
 	* trino:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
