@@ -12894,6 +12894,8 @@ type UpdateResponseMetadata struct {
 // A User can connect to resources they are granted directly, or granted
 // via roles.
 type User struct {
+	// SCIM contains the raw SCIM metadata for the user. This is a read-only field.
+	SCIM string `json:"scim"`
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
 	// External ID is an alternative unique ID this user is represented by within an external service.
@@ -12906,11 +12908,17 @@ type User struct {
 	LastName string `json:"lastName"`
 	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	ManagedBy string `json:"managedBy"`
+	// Manager ID is the ID of the user's manager. This field is empty when the user has no manager.
+	ManagerID string `json:"managerId"`
 	// Password is a write-only field that can be used to set the user's password.
 	// Currently only supported for update.
 	Password string `json:"password"`
 	// PermissionLevel is the user's permission level e.g. admin, DBA, user.
 	PermissionLevel string `json:"permissionLevel"`
+	// Resolved Manager ID is the ID of the user's manager derived from the manager_id,
+	// if present, or from the SCIM metadata.
+	// This is a read-only field that's only populated for get and list.
+	ResolvedManagerID string `json:"resolvedManagerId"`
 	// Suspended is a read only field for the User's suspended state.
 	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.

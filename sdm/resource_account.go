@@ -62,6 +62,11 @@ func resourceAccount() *schema.Resource {
 				Description: "A User can connect to resources they are granted directly, or granted via roles.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"scim": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "SCIM contains the raw SCIM metadata for the user. This is a read-only field.",
+						},
 						"email": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -87,11 +92,21 @@ func resourceAccount() *schema.Resource {
 							Computed:    true,
 							Description: "Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.",
 						},
+						"manager_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Manager ID is the ID of the user's manager. This field is empty when the user has no manager.",
+						},
 						"permission_level": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 							Description: "PermissionLevel is the user's permission level e.g. admin, DBA, user.",
+						},
+						"resolved_manager_id": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "Resolved Manager ID is the ID of the user's manager derived from the manager_id, if present, or from the SCIM metadata. This is a read-only field that's only populated for get and list.",
 						},
 						"suspended": {
 							Type:        schema.TypeBool,
@@ -143,6 +158,7 @@ func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 			ExternalID:      convertStringToPlumbing(raw["external_id"]),
 			FirstName:       convertStringToPlumbing(raw["first_name"]),
 			LastName:        convertStringToPlumbing(raw["last_name"]),
+			ManagerID:       convertStringToPlumbing(raw["manager_id"]),
 			PermissionLevel: convertStringToPlumbing(raw["permission_level"]),
 			Tags:            convertTagsToPlumbing(raw["tags"]),
 		}
@@ -178,14 +194,17 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 		_ = localV
 		d.Set("user", []map[string]interface{}{
 			{
-				"email":            (v.Email),
-				"external_id":      (v.ExternalID),
-				"first_name":       (v.FirstName),
-				"last_name":        (v.LastName),
-				"managed_by":       (v.ManagedBy),
-				"permission_level": (v.PermissionLevel),
-				"suspended":        (v.Suspended),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"scim":                (v.SCIM),
+				"email":               (v.Email),
+				"external_id":         (v.ExternalID),
+				"first_name":          (v.FirstName),
+				"last_name":           (v.LastName),
+				"managed_by":          (v.ManagedBy),
+				"manager_id":          (v.ManagerID),
+				"permission_level":    (v.PermissionLevel),
+				"resolved_manager_id": (v.ResolvedManagerID),
+				"suspended":           (v.Suspended),
+				"tags":                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	}
@@ -229,14 +248,17 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 		_ = localV
 		d.Set("user", []map[string]interface{}{
 			{
-				"email":            (v.Email),
-				"external_id":      (v.ExternalID),
-				"first_name":       (v.FirstName),
-				"last_name":        (v.LastName),
-				"managed_by":       (v.ManagedBy),
-				"permission_level": (v.PermissionLevel),
-				"suspended":        (v.Suspended),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"scim":                (v.SCIM),
+				"email":               (v.Email),
+				"external_id":         (v.ExternalID),
+				"first_name":          (v.FirstName),
+				"last_name":           (v.LastName),
+				"managed_by":          (v.ManagedBy),
+				"manager_id":          (v.ManagerID),
+				"permission_level":    (v.PermissionLevel),
+				"resolved_manager_id": (v.ResolvedManagerID),
+				"suspended":           (v.Suspended),
+				"tags":                convertTagsToPorcelain(v.Tags),
 			},
 		})
 	}

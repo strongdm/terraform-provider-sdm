@@ -49,6 +49,10 @@ func dataSourceAccount() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"manager_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"name": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -170,6 +174,11 @@ func dataSourceAccount() *schema.Resource {
 							Description: "A User can connect to resources they are granted directly, or granted via roles.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"scim": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "SCIM contains the raw SCIM metadata for the user. This is a read-only field.",
+									},
 									"email": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -200,10 +209,20 @@ func dataSourceAccount() *schema.Resource {
 										Computed:    true,
 										Description: "Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.",
 									},
+									"manager_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Manager ID is the ID of the user's manager. This field is empty when the user has no manager.",
+									},
 									"permission_level": {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "PermissionLevel is the user's permission level e.g. admin, DBA, user.",
+									},
+									"resolved_manager_id": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "Resolved Manager ID is the ID of the user's manager derived from the manager_id, if present, or from the SCIM metadata. This is a read-only field that's only populated for get and list.",
 									},
 									"suspended": {
 										Type:        schema.TypeBool,
@@ -234,6 +253,10 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 	args := []interface{}{}
 	if v, ok := d.GetOkExists("type"); ok {
 		filter += "type:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("SCIM"); ok {
+		filter += "scim:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("account_type"); ok {
@@ -272,6 +295,10 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		filter += "managedby:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("manager_id"); ok {
+		filter += "managerid:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
@@ -286,6 +313,10 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 	}
 	if v, ok := d.GetOkExists("rekeyed"); ok {
 		filter += "rekeyed:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("resolved_manager_id"); ok {
+		filter += "resolvedmanagerid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("suspended"); ok {
@@ -342,15 +373,18 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 			})
 		case *sdm.User:
 			output[0]["user"] = append(output[0]["user"], entity{
-				"email":            (v.Email),
-				"external_id":      (v.ExternalID),
-				"first_name":       (v.FirstName),
-				"id":               (v.ID),
-				"last_name":        (v.LastName),
-				"managed_by":       (v.ManagedBy),
-				"permission_level": (v.PermissionLevel),
-				"suspended":        (v.Suspended),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"scim":                (v.SCIM),
+				"email":               (v.Email),
+				"external_id":         (v.ExternalID),
+				"first_name":          (v.FirstName),
+				"id":                  (v.ID),
+				"last_name":           (v.LastName),
+				"managed_by":          (v.ManagedBy),
+				"manager_id":          (v.ManagerID),
+				"permission_level":    (v.PermissionLevel),
+				"resolved_manager_id": (v.ResolvedManagerID),
+				"suspended":           (v.Suspended),
+				"tags":                convertTagsToPorcelain(v.Tags),
 			})
 		}
 	}

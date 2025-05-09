@@ -15,7 +15,31 @@ ApprovalWorkflows are the mechanism by which requests for access can be viewed b
 resource "sdm_approval_workflow" "manual_approval_workflow" {
     name = "manual approval workflow example"
     approval_mode = "manual"
+    approval_step {
+        quantifier = "any"
+        skip_after = "1h0m0s"
+        approvers {
+            account_id = "a-1234abc"
+        }
+        approvers {
+            reference = "manager-of-requester"
+        }
+    }
+    approval_step {
+        quantifier = "all"
+        skip_after = "0s"
+        approvers {
+            role_id = "r-1234abc"
+        }
+        approvers {
+            account_id = "a-5678def"
+        }
+        approvers {
+            reference = "manager-of-manager-of-requester"
+        }
+    }
 }
+
 
 resource "sdm_approval_workflow" "auto_grant_approval_workflow" {
     name = "auto approval workflow example"

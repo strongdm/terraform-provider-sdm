@@ -19890,14 +19890,17 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 		return nil, nil
 	}
 	porcelain := &User{}
+	porcelain.SCIM = plumbing.SCIM
 	porcelain.Email = plumbing.Email
 	porcelain.ExternalID = plumbing.ExternalId
 	porcelain.FirstName = plumbing.FirstName
 	porcelain.ID = plumbing.Id
 	porcelain.LastName = plumbing.LastName
 	porcelain.ManagedBy = plumbing.ManagedBy
+	porcelain.ManagerID = plumbing.ManagerId
 	porcelain.Password = plumbing.Password
 	porcelain.PermissionLevel = plumbing.PermissionLevelRW
+	porcelain.ResolvedManagerID = plumbing.ResolvedManagerId
 	porcelain.Suspended = plumbing.SuspendedRO
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -19912,14 +19915,17 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 		return nil
 	}
 	plumbing := &proto.User{}
+	plumbing.SCIM = (porcelain.SCIM)
 	plumbing.Email = (porcelain.Email)
 	plumbing.ExternalId = (porcelain.ExternalID)
 	plumbing.FirstName = (porcelain.FirstName)
 	plumbing.Id = (porcelain.ID)
 	plumbing.LastName = (porcelain.LastName)
 	plumbing.ManagedBy = (porcelain.ManagedBy)
+	plumbing.ManagerId = (porcelain.ManagerID)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PermissionLevelRW = (porcelain.PermissionLevel)
+	plumbing.ResolvedManagerId = (porcelain.ResolvedManagerID)
 	plumbing.SuspendedRO = (porcelain.Suspended)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing

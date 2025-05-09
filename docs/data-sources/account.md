@@ -42,6 +42,7 @@ The following arguments are supported by a Accounts data source:
 * `first_name` - (Optional) The User's first name.
 * `id` - (Optional) Unique identifier of the User.
 * `last_name` - (Optional) The User's last name.
+* `manager_id` - (Optional) Manager ID is the ID of the user's manager. This field is empty when the user has no manager.
 * `name` - (Optional) Unique human-readable name of the Token.
 * `permission_level` - (Optional) PermissionLevel is the user's permission level e.g. admin, DBA, user.
 * `permissions` - (Optional) Permissions assigned to the token, e.g. role:create.
@@ -68,12 +69,15 @@ In addition to provided arguments above, the following attributes are returned b
 		* `suspended` - Reserved for future use.  Always false for tokens.
 		* `tags` - Tags is a map of key, value pairs.
 	* user:
+		* `scim` - SCIM contains the raw SCIM metadata for the user. This is a read-only field.
 		* `email` - The User's email address. Must be unique.
 		* `external_id` - External ID is an alternative unique ID this user is represented by within an external service.
 		* `first_name` - The User's first name.
 		* `id` - Unique identifier of the User.
 		* `last_name` - The User's last name.
 		* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
+		* `manager_id` - Manager ID is the ID of the user's manager. This field is empty when the user has no manager.
 		* `permission_level` - PermissionLevel is the user's permission level e.g. admin, DBA, user.
+		* `resolved_manager_id` - Resolved Manager ID is the ID of the user's manager derived from the manager_id, if present, or from the SCIM metadata. This is a read-only field that's only populated for get and list.
 		* `suspended` - Suspended is a read only field for the User's suspended state.
 		* `tags` - Tags is a map of key, value pairs.

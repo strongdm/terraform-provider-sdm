@@ -41,6 +41,7 @@ func dataSourceWorkflow() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Description: "Optional auto grant setting to automatically approve requests or not, defaults to false.",
+				Deprecated:  "auto_grant is deprecated, see docs for more info",
 			},
 			"description": {
 				Type:        schema.TypeString,
@@ -97,6 +98,7 @@ func dataSourceWorkflow() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "Optional auto grant setting to automatically approve requests or not, defaults to false.",
+							Deprecated:  "auto_grant is deprecated, see docs for more info",
 						},
 						"description": {
 							Type:        schema.TypeString,

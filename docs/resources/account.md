@@ -19,10 +19,12 @@ resource "sdm_account" "test-user" {
         first_name = "al"
         last_name = "bob"
         email = "albob@strongdm.com"
+        permission_level  = "database-admin"
+        manager_id = "a-1234abc"
         tags = {
             region = "us-west"
             env = "dev"
-        }    
+        }
     }
 }
 
@@ -49,6 +51,7 @@ The following arguments are supported by the Account resource:
 	* `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
 	* `first_name` - (Required) The User's first name.
 	* `last_name` - (Required) The User's last name.
+	* `manager_id` - (Optional) Manager ID is the ID of the user's manager. This field is empty when the user has no manager.
 	* `permission_level` - (Optional) PermissionLevel is the user's permission level e.g. admin, DBA, user.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 ## Attribute Reference
@@ -56,7 +59,9 @@ In addition to provided arguments above, the following attributes are returned b
 * `id` - A unique identifier for the Account resource.
 
 * user:
+	* `scim` - SCIM contains the raw SCIM metadata for the user. This is a read-only field.
 	* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
+	* `resolved_manager_id` - Resolved Manager ID is the ID of the user's manager derived from the manager_id, if present, or from the SCIM metadata. This is a read-only field that's only populated for get and list.
 	* `suspended` - Suspended is a read only field for the User's suspended state.
 ## Import
 A Account can be imported using the id, e.g.,

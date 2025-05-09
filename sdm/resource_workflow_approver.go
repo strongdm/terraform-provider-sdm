@@ -15,9 +15,10 @@ import (
 
 func resourceWorkflowApprover() *schema.Resource {
 	return &schema.Resource{
-		CreateContext: wrapCrudOperation(resourceWorkflowApproverCreate),
-		ReadContext:   wrapCrudOperation(resourceWorkflowApproverRead),
-		DeleteContext: wrapCrudOperation(resourceWorkflowApproverDelete),
+		CreateContext:      wrapCrudOperation(resourceWorkflowApproverCreate),
+		ReadContext:        wrapCrudOperation(resourceWorkflowApproverRead),
+		DeleteContext:      wrapCrudOperation(resourceWorkflowApproverDelete),
+		DeprecationMessage: "sdm_workflow_approver is deprecated, see docs for more info",
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
