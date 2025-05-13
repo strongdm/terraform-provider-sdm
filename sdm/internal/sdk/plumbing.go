@@ -2747,6 +2747,7 @@ func convertAerospikeToPorcelain(plumbing *proto.Aerospike) (*Aerospike, error) 
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.UseServicesAlternate = plumbing.UseServicesAlternate
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -2769,6 +2770,7 @@ func convertAerospikeToPlumbing(porcelain *Aerospike) *proto.Aerospike {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseServicesAlternate = (porcelain.UseServicesAlternate)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }

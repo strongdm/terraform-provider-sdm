@@ -124,6 +124,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"use_services_alternate": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, uses UseServicesAlternates directive for Aerospike connection",
+									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -9208,19 +9213,20 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		switch v := resp.Value().(type) {
 		case *sdm.Aerospike:
 			output[0]["aerospike"] = append(output[0]["aerospike"], entity{
-				"bind_interface":   (v.BindInterface),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"password":         (v.Password),
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
+				"bind_interface":         (v.BindInterface),
+				"egress_filter":          (v.EgressFilter),
+				"hostname":               (v.Hostname),
+				"id":                     (v.ID),
+				"name":                   (v.Name),
+				"password":               (v.Password),
+				"port":                   (v.Port),
+				"port_override":          (v.PortOverride),
+				"proxy_cluster_id":       (v.ProxyClusterID),
+				"secret_store_id":        (v.SecretStoreID),
+				"subdomain":              (v.Subdomain),
+				"tags":                   convertTagsToPorcelain(v.Tags),
+				"use_services_alternate": (v.UseServicesAlternate),
+				"username":               (v.Username),
 			})
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{

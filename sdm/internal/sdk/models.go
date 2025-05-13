@@ -969,6 +969,8 @@ type Aerospike struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// If true, uses UseServicesAlternates directive for Aerospike connection
+	UseServicesAlternate bool `json:"useServicesAlternate"`
 	// The username to authenticate with.
 	Username string `json:"username"`
 }

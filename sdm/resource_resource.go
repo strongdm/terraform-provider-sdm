@@ -92,6 +92,11 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"use_services_alternate": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, uses UseServicesAlternates directive for Aerospike connection",
+						},
 						"username": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -11871,19 +11876,20 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.Aerospike{}
 		}
 		out := &sdm.Aerospike{
-			ID:             d.Id(),
-			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:       convertStringToPlumbing(raw["hostname"]),
-			Name:           convertStringToPlumbing(raw["name"]),
-			Password:       convertStringToPlumbing(raw["password"]),
-			Port:           convertInt32ToPlumbing(raw["port"]),
-			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
-			Tags:           convertTagsToPlumbing(raw["tags"]),
-			Username:       convertStringToPlumbing(raw["username"]),
+			ID:                   d.Id(),
+			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:             convertStringToPlumbing(raw["hostname"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Password:             convertStringToPlumbing(raw["password"]),
+			Port:                 convertInt32ToPlumbing(raw["port"]),
+			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:       convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:            convertStringToPlumbing(raw["subdomain"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+			UseServicesAlternate: convertBoolToPlumbing(raw["use_services_alternate"]),
+			Username:             convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -14940,18 +14946,19 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("aerospike", []map[string]interface{}{
 			{
-				"bind_interface":   (v.BindInterface),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"name":             (v.Name),
-				"password":         seValues["password"],
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         seValues["username"],
+				"bind_interface":         (v.BindInterface),
+				"egress_filter":          (v.EgressFilter),
+				"hostname":               (v.Hostname),
+				"name":                   (v.Name),
+				"password":               seValues["password"],
+				"port":                   (v.Port),
+				"port_override":          (v.PortOverride),
+				"proxy_cluster_id":       (v.ProxyClusterID),
+				"secret_store_id":        (v.SecretStoreID),
+				"subdomain":              (v.Subdomain),
+				"tags":                   convertTagsToPorcelain(v.Tags),
+				"use_services_alternate": (v.UseServicesAlternate),
+				"username":               seValues["username"],
 			},
 		})
 	case *sdm.AKS:
@@ -17192,18 +17199,19 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("aerospike", []map[string]interface{}{
 			{
-				"bind_interface":   (v.BindInterface),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"name":             (v.Name),
-				"password":         seValues["password"],
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         seValues["username"],
+				"bind_interface":         (v.BindInterface),
+				"egress_filter":          (v.EgressFilter),
+				"hostname":               (v.Hostname),
+				"name":                   (v.Name),
+				"password":               seValues["password"],
+				"port":                   (v.Port),
+				"port_override":          (v.PortOverride),
+				"proxy_cluster_id":       (v.ProxyClusterID),
+				"secret_store_id":        (v.SecretStoreID),
+				"subdomain":              (v.Subdomain),
+				"tags":                   convertTagsToPorcelain(v.Tags),
+				"use_services_alternate": (v.UseServicesAlternate),
+				"username":               seValues["username"],
 			},
 		})
 	case *sdm.AKS:
