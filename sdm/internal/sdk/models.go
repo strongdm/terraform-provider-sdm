@@ -12925,8 +12925,6 @@ type User struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAWSEC2Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAWSEC2Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -12940,8 +12938,6 @@ type VaultAWSEC2Store struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAWSIAMStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAWSIAMStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
