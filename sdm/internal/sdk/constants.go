@@ -97,7 +97,6 @@ const (
 	MFAProviderDuo  = "duo"
 	MFAProviderTOTP = "totp"
 	MFAProviderOkta = "okta"
-	MFAProviderRSA  = "rsa"
 )
 
 // Activity Entities, all entity types that can be part of an activity.
@@ -518,11 +517,4 @@ const (
 	APIHostUS = "app.strongdm.com:443"
 	APIHostUK = "app.uk.strongdm.com:443"
 	APIHostEU = "app.eu.strongdm.com:443"
-)
-
-// ApproverReference defines the type for approver references.
-const (
-	ApproverReferenceNone                        = ""
-	ApproverReferenceManagerOfRequester          = "manager-of-requester"
-	ApproverReferenceManagerOfManagerOfRequester = "manager-of-manager-of-requester"
 )

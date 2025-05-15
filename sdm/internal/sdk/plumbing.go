@@ -2725,79 +2725,6 @@ func convertRepeatedActivityGetResponseToPorcelain(plumbings []*proto.ActivityGe
 	}
 	return items, nil
 }
-func convertAerospikeToPorcelain(plumbing *proto.Aerospike) (*Aerospike, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &Aerospike{}
-	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.EgressFilter = plumbing.EgressFilter
-	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	porcelain.Password = plumbing.Password
-	porcelain.Port = plumbing.Port
-	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.SecretStoreID = plumbing.SecretStoreId
-	porcelain.Subdomain = plumbing.Subdomain
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	porcelain.UseServicesAlternate = plumbing.UseServicesAlternate
-	porcelain.Username = plumbing.Username
-	return porcelain, nil
-}
-
-func convertAerospikeToPlumbing(porcelain *Aerospike) *proto.Aerospike {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.Aerospike{}
-	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.UseServicesAlternate = (porcelain.UseServicesAlternate)
-	plumbing.Username = (porcelain.Username)
-	return plumbing
-}
-func convertRepeatedAerospikeToPlumbing(
-	porcelains []*Aerospike,
-) []*proto.Aerospike {
-	var items []*proto.Aerospike
-	for _, porcelain := range porcelains {
-		items = append(items, convertAerospikeToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAerospikeToPorcelain(plumbings []*proto.Aerospike) (
-	[]*Aerospike,
-	error,
-) {
-	var items []*Aerospike
-	for _, plumbing := range plumbings {
-		if v, err := convertAerospikeToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
 func convertAmazonEKSToPorcelain(plumbing *proto.AmazonEKS) (*AmazonEKS, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -3361,7 +3288,6 @@ func convertApprovalFlowApproverToPorcelain(plumbing *proto.ApprovalFlowApprover
 	}
 	porcelain := &ApprovalFlowApprover{}
 	porcelain.AccountID = plumbing.AccountId
-	porcelain.Reference = plumbing.Reference
 	porcelain.RoleID = plumbing.RoleId
 	return porcelain, nil
 }
@@ -3372,7 +3298,6 @@ func convertApprovalFlowApproverToPlumbing(porcelain *ApprovalFlowApprover) *pro
 	}
 	plumbing := &proto.ApprovalFlowApprover{}
 	plumbing.AccountId = (porcelain.AccountID)
-	plumbing.Reference = (porcelain.Reference)
 	plumbing.RoleId = (porcelain.RoleID)
 	return plumbing
 }
@@ -3515,7 +3440,6 @@ func convertApprovalWorkflowApproverToPorcelain(plumbing *proto.ApprovalWorkflow
 	porcelain.ApprovalFlowID = plumbing.ApprovalFlowId
 	porcelain.ApprovalStepID = plumbing.ApprovalStepId
 	porcelain.ID = plumbing.Id
-	porcelain.Reference = plumbing.Reference
 	porcelain.RoleID = plumbing.RoleId
 	return porcelain, nil
 }
@@ -3529,7 +3453,6 @@ func convertApprovalWorkflowApproverToPlumbing(porcelain *ApprovalWorkflowApprov
 	plumbing.ApprovalFlowId = (porcelain.ApprovalFlowID)
 	plumbing.ApprovalStepId = (porcelain.ApprovalStepID)
 	plumbing.Id = (porcelain.ID)
-	plumbing.Reference = (porcelain.Reference)
 	plumbing.RoleId = (porcelain.RoleID)
 	return plumbing
 }
@@ -6839,75 +6762,6 @@ func convertRepeatedDocumentDBReplicaSetToPorcelain(plumbings []*proto.DocumentD
 	var items []*DocumentDBReplicaSet
 	for _, plumbing := range plumbings {
 		if v, err := convertDocumentDBReplicaSetToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
-func convertDocumentDBReplicaSetIAMToPorcelain(plumbing *proto.DocumentDBReplicaSetIAM) (*DocumentDBReplicaSetIAM, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &DocumentDBReplicaSetIAM{}
-	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.ConnectToReplica = plumbing.ConnectToReplica
-	porcelain.EgressFilter = plumbing.EgressFilter
-	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.Region = plumbing.Region
-	porcelain.SecretStoreID = plumbing.SecretStoreId
-	porcelain.Subdomain = plumbing.Subdomain
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	return porcelain, nil
-}
-
-func convertDocumentDBReplicaSetIAMToPlumbing(porcelain *DocumentDBReplicaSetIAM) *proto.DocumentDBReplicaSetIAM {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.DocumentDBReplicaSetIAM{}
-	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.ConnectToReplica = (porcelain.ConnectToReplica)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.Region = (porcelain.Region)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	return plumbing
-}
-func convertRepeatedDocumentDBReplicaSetIAMToPlumbing(
-	porcelains []*DocumentDBReplicaSetIAM,
-) []*proto.DocumentDBReplicaSetIAM {
-	var items []*proto.DocumentDBReplicaSetIAM
-	for _, porcelain := range porcelains {
-		items = append(items, convertDocumentDBReplicaSetIAMToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedDocumentDBReplicaSetIAMToPorcelain(plumbings []*proto.DocumentDBReplicaSetIAM) (
-	[]*DocumentDBReplicaSetIAM,
-	error,
-) {
-	var items []*DocumentDBReplicaSetIAM
-	for _, plumbing := range plumbings {
-		if v, err := convertDocumentDBReplicaSetIAMToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -12390,79 +12244,6 @@ func convertRepeatedOracleToPorcelain(plumbings []*proto.Oracle) (
 	}
 	return items, nil
 }
-func convertOracleNNEToPorcelain(plumbing *proto.OracleNNE) (*OracleNNE, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &OracleNNE{}
-	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.Database = plumbing.Database
-	porcelain.EgressFilter = plumbing.EgressFilter
-	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
-	porcelain.ID = plumbing.Id
-	porcelain.Name = plumbing.Name
-	porcelain.Password = plumbing.Password
-	porcelain.Port = plumbing.Port
-	porcelain.PortOverride = plumbing.PortOverride
-	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.SecretStoreID = plumbing.SecretStoreId
-	porcelain.Subdomain = plumbing.Subdomain
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	porcelain.Username = plumbing.Username
-	return porcelain, nil
-}
-
-func convertOracleNNEToPlumbing(porcelain *OracleNNE) *proto.OracleNNE {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.OracleNNE{}
-	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.Database = (porcelain.Database)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
-	plumbing.Id = (porcelain.ID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
-	plumbing.PortOverride = (porcelain.PortOverride)
-	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.Username = (porcelain.Username)
-	return plumbing
-}
-func convertRepeatedOracleNNEToPlumbing(
-	porcelains []*OracleNNE,
-) []*proto.OracleNNE {
-	var items []*proto.OracleNNE
-	for _, porcelain := range porcelains {
-		items = append(items, convertOracleNNEToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedOracleNNEToPorcelain(plumbings []*proto.OracleNNE) (
-	[]*OracleNNE,
-	error,
-) {
-	var items []*OracleNNE
-	for _, plumbing := range plumbings {
-		if v, err := convertOracleNNEToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
 func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -15948,8 +15729,6 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 	plumbing := &proto.Resource{}
 
 	switch v := porcelain.(type) {
-	case *Aerospike:
-		plumbing.Resource = &proto.Resource_Aerospike{Aerospike: convertAerospikeToPlumbing(v)}
 	case *AKS:
 		plumbing.Resource = &proto.Resource_Aks{Aks: convertAKSToPlumbing(v)}
 	case *AKSBasicAuth:
@@ -16034,8 +15813,6 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_DocumentDbHostIam{DocumentDbHostIam: convertDocumentDBHostIAMToPlumbing(v)}
 	case *DocumentDBReplicaSet:
 		plumbing.Resource = &proto.Resource_DocumentDbReplicaSet{DocumentDbReplicaSet: convertDocumentDBReplicaSetToPlumbing(v)}
-	case *DocumentDBReplicaSetIAM:
-		plumbing.Resource = &proto.Resource_DocumentDbReplicaSetIam{DocumentDbReplicaSetIam: convertDocumentDBReplicaSetIAMToPlumbing(v)}
 	case *Druid:
 		plumbing.Resource = &proto.Resource_Druid{Druid: convertDruidToPlumbing(v)}
 	case *DynamoDB:
@@ -16104,8 +15881,6 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_NeptuneIam{NeptuneIam: convertNeptuneIAMToPlumbing(v)}
 	case *Oracle:
 		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
-	case *OracleNNE:
-		plumbing.Resource = &proto.Resource_OracleNne{OracleNne: convertOracleNNEToPlumbing(v)}
 	case *Postgres:
 		plumbing.Resource = &proto.Resource_Postgres{Postgres: convertPostgresToPlumbing(v)}
 	case *Presto:
@@ -16165,9 +15940,6 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 }
 
 func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
-	if plumbing.GetAerospike() != nil {
-		return convertAerospikeToPorcelain(plumbing.GetAerospike())
-	}
 	if plumbing.GetAks() != nil {
 		return convertAKSToPorcelain(plumbing.GetAks())
 	}
@@ -16294,9 +16066,6 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	if plumbing.GetDocumentDbReplicaSet() != nil {
 		return convertDocumentDBReplicaSetToPorcelain(plumbing.GetDocumentDbReplicaSet())
 	}
-	if plumbing.GetDocumentDbReplicaSetIam() != nil {
-		return convertDocumentDBReplicaSetIAMToPorcelain(plumbing.GetDocumentDbReplicaSetIam())
-	}
 	if plumbing.GetDruid() != nil {
 		return convertDruidToPorcelain(plumbing.GetDruid())
 	}
@@ -16398,9 +16167,6 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetOracle() != nil {
 		return convertOracleToPorcelain(plumbing.GetOracle())
-	}
-	if plumbing.GetOracleNne() != nil {
-		return convertOracleNNEToPorcelain(plumbing.GetOracleNne())
 	}
 	if plumbing.GetPostgres() != nil {
 		return convertPostgresToPorcelain(plumbing.GetPostgres())
@@ -19783,6 +19549,7 @@ func convertTrinoToPorcelain(plumbing *proto.Trino) (*Trino, error) {
 	}
 	porcelain := &Trino{}
 	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -19809,6 +19576,7 @@ func convertTrinoToPlumbing(porcelain *Trino) *proto.Trino {
 	}
 	plumbing := &proto.Trino{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
@@ -19892,17 +19660,14 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 		return nil, nil
 	}
 	porcelain := &User{}
-	porcelain.SCIM = plumbing.SCIM
 	porcelain.Email = plumbing.Email
 	porcelain.ExternalID = plumbing.ExternalId
 	porcelain.FirstName = plumbing.FirstName
 	porcelain.ID = plumbing.Id
 	porcelain.LastName = plumbing.LastName
 	porcelain.ManagedBy = plumbing.ManagedBy
-	porcelain.ManagerID = plumbing.ManagerId
 	porcelain.Password = plumbing.Password
 	porcelain.PermissionLevel = plumbing.PermissionLevelRW
-	porcelain.ResolvedManagerID = plumbing.ResolvedManagerId
 	porcelain.Suspended = plumbing.SuspendedRO
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -19917,17 +19682,14 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 		return nil
 	}
 	plumbing := &proto.User{}
-	plumbing.SCIM = (porcelain.SCIM)
 	plumbing.Email = (porcelain.Email)
 	plumbing.ExternalId = (porcelain.ExternalID)
 	plumbing.FirstName = (porcelain.FirstName)
 	plumbing.Id = (porcelain.ID)
 	plumbing.LastName = (porcelain.LastName)
 	plumbing.ManagedBy = (porcelain.ManagedBy)
-	plumbing.ManagerId = (porcelain.ManagerID)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PermissionLevelRW = (porcelain.PermissionLevel)
-	plumbing.ResolvedManagerId = (porcelain.ResolvedManagerID)
 	plumbing.SuspendedRO = (porcelain.Suspended)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	return plumbing

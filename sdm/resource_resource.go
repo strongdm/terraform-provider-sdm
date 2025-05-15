@@ -24,87 +24,6 @@ func resourceResource() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
-			"aerospike": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "Aerospike is currently unstable, and its API may change, or it may be removed, without a major version bump.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"bind_interface": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-						},
-						"egress_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Sensitive:   true,
-							Description: "The password to authenticate with.",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Description: "The port to dial to initiate a connection from the egress node to this resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
-						},
-						"proxy_cluster_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ID of the proxy cluster for this resource, if any.",
-						},
-						"secret_store_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-							Description: "ID of the secret store containing credentials for this resource, if any.",
-						},
-						"subdomain": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-						},
-						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-						"use_services_alternate": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "If true, uses UseServicesAlternates directive for Aerospike connection",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The username to authenticate with.",
-						},
-					},
-				},
-			},
 			"aks": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -3736,76 +3655,6 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"document_db_replica_set_iam": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "DocumentDBReplicaSetIAM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"bind_interface": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-						},
-						"connect_to_replica": {
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Description: "Set to connect to a replica instead of the primary node.",
-						},
-						"egress_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
-						},
-						"proxy_cluster_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ID of the proxy cluster for this resource, if any.",
-						},
-						"region": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The region of the document db cluster",
-						},
-						"secret_store_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-							Description: "ID of the secret store containing credentials for this resource, if any.",
-						},
-						"subdomain": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-						},
-						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-					},
-				},
-			},
 			"druid": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -6737,87 +6586,6 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"oracle_nne": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"bind_interface": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-						},
-						"database": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
-						},
-						"egress_filter": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
-						},
-						"name": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "Unique human-readable name of the Resource.",
-						},
-						"password": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Sensitive:   true,
-							Description: "The password to authenticate with.",
-						},
-						"port": {
-							Type:        schema.TypeInt,
-							Required:    true,
-							Description: "The port to dial to initiate a connection from the egress node to this resource.",
-						},
-						"port_override": {
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
-						},
-						"proxy_cluster_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "ID of the proxy cluster for this resource, if any.",
-						},
-						"secret_store_id": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-							Description: "ID of the secret store containing credentials for this resource, if any.",
-						},
-						"subdomain": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-						},
-						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
-							Optional:    true,
-							Description: "Tags is a map of key, value pairs.",
-						},
-						"username": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							Description: "The username to authenticate with.",
-						},
-					},
-				},
-			},
 			"postgres": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -8980,6 +8748,11 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -9047,7 +8820,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "",
+				Description: "Vertica is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -9135,32 +8908,6 @@ func resourceResource() *schema.Resource {
 	}
 }
 func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, error) {
-	if list := d.Get("aerospike").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["password"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
-		}
-
-		return map[string]string{
-			"password": convertStringToPlumbing(raw["password"]),
-			"username": convertStringToPlumbing(raw["username"]),
-		}, nil
-	}
 	if list := d.Get("aks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -10343,17 +10090,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
-	if list := d.Get("document_db_replica_set_iam").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-		}
-
-		return map[string]string{}, nil
-	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11212,32 +10948,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
-	if list := d.Get("oracle_nne").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return map[string]string{}, nil
-		}
-		_ = raw
-		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["password"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
-			if v := raw["username"]; v != nil && v.(string) != "" {
-				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
-				if err != nil {
-					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
-				}
-			}
-		}
-
-		return map[string]string{
-			"password": convertStringToPlumbing(raw["password"]),
-			"username": convertStringToPlumbing(raw["username"]),
-		}, nil
-	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11870,34 +11580,6 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 	return map[string]string{}, nil
 }
 func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
-	if list := d.Get("aerospike").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.Aerospike{}
-		}
-		out := &sdm.Aerospike{
-			ID:                   d.Id(),
-			BindInterface:        convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:         convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:             convertStringToPlumbing(raw["hostname"]),
-			Name:                 convertStringToPlumbing(raw["name"]),
-			Password:             convertStringToPlumbing(raw["password"]),
-			Port:                 convertInt32ToPlumbing(raw["port"]),
-			PortOverride:         convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID:       convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:        convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:            convertStringToPlumbing(raw["subdomain"]),
-			Tags:                 convertTagsToPlumbing(raw["tags"]),
-			UseServicesAlternate: convertBoolToPlumbing(raw["use_services_alternate"]),
-			Username:             convertStringToPlumbing(raw["username"]),
-		}
-		override, ok := raw["port_override"].(int)
-		if !ok || override == 0 {
-			override = -1
-		}
-		out.PortOverride = int32(override)
-		return out
-	}
 	if list := d.Get("aks").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -13119,32 +12801,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
-	if list := d.Get("document_db_replica_set_iam").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.DocumentDBReplicaSetIAM{}
-		}
-		out := &sdm.DocumentDBReplicaSetIAM{
-			ID:               d.Id(),
-			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
-			ConnectToReplica: convertBoolToPlumbing(raw["connect_to_replica"]),
-			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:         convertStringToPlumbing(raw["hostname"]),
-			Name:             convertStringToPlumbing(raw["name"]),
-			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
-			Region:           convertStringToPlumbing(raw["region"]),
-			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
-			Tags:             convertTagsToPlumbing(raw["tags"]),
-		}
-		override, ok := raw["port_override"].(int)
-		if !ok || override == 0 {
-			override = -1
-		}
-		out.PortOverride = int32(override)
-		return out
-	}
 	if list := d.Get("druid").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -14116,34 +13772,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
-	if list := d.Get("oracle_nne").([]interface{}); len(list) > 0 {
-		raw, ok := list[0].(map[string]interface{})
-		if !ok {
-			return &sdm.OracleNNE{}
-		}
-		out := &sdm.OracleNNE{
-			ID:             d.Id(),
-			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
-			Database:       convertStringToPlumbing(raw["database"]),
-			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:       convertStringToPlumbing(raw["hostname"]),
-			Name:           convertStringToPlumbing(raw["name"]),
-			Password:       convertStringToPlumbing(raw["password"]),
-			Port:           convertInt32ToPlumbing(raw["port"]),
-			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
-			Tags:           convertTagsToPlumbing(raw["tags"]),
-			Username:       convertStringToPlumbing(raw["username"]),
-		}
-		override, ok := raw["port_override"].(int)
-		if !ok || override == 0 {
-			override = -1
-		}
-		out.PortOverride = int32(override)
-		return out
-	}
 	if list := d.Get("postgres").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -14877,6 +14505,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.Trino{
 			ID:             d.Id(),
 			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			Database:       convertStringToPlumbing(raw["database"]),
 			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:       convertStringToPlumbing(raw["hostname"]),
 			Name:           convertStringToPlumbing(raw["name"]),
@@ -14941,26 +14570,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 	}
 	d.SetId(resp.Resource.GetID())
 	switch v := resp.Resource.(type) {
-	case *sdm.Aerospike:
-		localV, _ := localVersion.(*sdm.Aerospike)
-		_ = localV
-		d.Set("aerospike", []map[string]interface{}{
-			{
-				"bind_interface":         (v.BindInterface),
-				"egress_filter":          (v.EgressFilter),
-				"hostname":               (v.Hostname),
-				"name":                   (v.Name),
-				"password":               seValues["password"],
-				"port":                   (v.Port),
-				"port_override":          (v.PortOverride),
-				"proxy_cluster_id":       (v.ProxyClusterID),
-				"secret_store_id":        (v.SecretStoreID),
-				"subdomain":              (v.Subdomain),
-				"tags":                   convertTagsToPorcelain(v.Tags),
-				"use_services_alternate": (v.UseServicesAlternate),
-				"username":               seValues["username"],
-			},
-		})
 	case *sdm.AKS:
 		localV, _ := localVersion.(*sdm.AKS)
 		_ = localV
@@ -15846,24 +15455,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":           seValues["username"],
 			},
 		})
-	case *sdm.DocumentDBReplicaSetIAM:
-		localV, _ := localVersion.(*sdm.DocumentDBReplicaSetIAM)
-		_ = localV
-		d.Set("document_db_replica_set_iam", []map[string]interface{}{
-			{
-				"bind_interface":     (v.BindInterface),
-				"connect_to_replica": (v.ConnectToReplica),
-				"egress_filter":      (v.EgressFilter),
-				"hostname":           (v.Hostname),
-				"name":               (v.Name),
-				"port_override":      (v.PortOverride),
-				"proxy_cluster_id":   (v.ProxyClusterID),
-				"region":             (v.Region),
-				"secret_store_id":    (v.SecretStoreID),
-				"subdomain":          (v.Subdomain),
-				"tags":               convertTagsToPorcelain(v.Tags),
-			},
-		})
 	case *sdm.Druid:
 		localV, _ := localVersion.(*sdm.Druid)
 		_ = localV
@@ -16578,26 +16169,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":         seValues["username"],
 			},
 		})
-	case *sdm.OracleNNE:
-		localV, _ := localVersion.(*sdm.OracleNNE)
-		_ = localV
-		d.Set("oracle_nne", []map[string]interface{}{
-			{
-				"bind_interface":   (v.BindInterface),
-				"database":         (v.Database),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"name":             (v.Name),
-				"password":         seValues["password"],
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         seValues["username"],
-			},
-		})
 	case *sdm.Postgres:
 		localV, _ := localVersion.(*sdm.Postgres)
 		_ = localV
@@ -17130,6 +16701,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("trino", []map[string]interface{}{
 			{
 				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"name":             (v.Name),
@@ -17185,35 +16757,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		return fmt.Errorf("cannot read Resource %s: %w", d.Id(), err)
 	}
 	switch v := resp.Resource.(type) {
-	case *sdm.Aerospike:
-		localV, ok := localVersion.(*sdm.Aerospike)
-		if !ok {
-			localV = &sdm.Aerospike{}
-		}
-		_ = localV
-		if v.Password != "" {
-			seValues["password"] = v.Password
-		}
-		if v.Username != "" {
-			seValues["username"] = v.Username
-		}
-		d.Set("aerospike", []map[string]interface{}{
-			{
-				"bind_interface":         (v.BindInterface),
-				"egress_filter":          (v.EgressFilter),
-				"hostname":               (v.Hostname),
-				"name":                   (v.Name),
-				"password":               seValues["password"],
-				"port":                   (v.Port),
-				"port_override":          (v.PortOverride),
-				"proxy_cluster_id":       (v.ProxyClusterID),
-				"secret_store_id":        (v.SecretStoreID),
-				"subdomain":              (v.Subdomain),
-				"tags":                   convertTagsToPorcelain(v.Tags),
-				"use_services_alternate": (v.UseServicesAlternate),
-				"username":               seValues["username"],
-			},
-		})
 	case *sdm.AKS:
 		localV, ok := localVersion.(*sdm.AKS)
 		if !ok {
@@ -18516,27 +18059,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":           seValues["username"],
 			},
 		})
-	case *sdm.DocumentDBReplicaSetIAM:
-		localV, ok := localVersion.(*sdm.DocumentDBReplicaSetIAM)
-		if !ok {
-			localV = &sdm.DocumentDBReplicaSetIAM{}
-		}
-		_ = localV
-		d.Set("document_db_replica_set_iam", []map[string]interface{}{
-			{
-				"bind_interface":     (v.BindInterface),
-				"connect_to_replica": (v.ConnectToReplica),
-				"egress_filter":      (v.EgressFilter),
-				"hostname":           (v.Hostname),
-				"name":               (v.Name),
-				"port_override":      (v.PortOverride),
-				"proxy_cluster_id":   (v.ProxyClusterID),
-				"region":             (v.Region),
-				"secret_store_id":    (v.SecretStoreID),
-				"subdomain":          (v.Subdomain),
-				"tags":               convertTagsToPorcelain(v.Tags),
-			},
-		})
 	case *sdm.Druid:
 		localV, ok := localVersion.(*sdm.Druid)
 		if !ok {
@@ -19548,35 +19070,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":         seValues["username"],
 			},
 		})
-	case *sdm.OracleNNE:
-		localV, ok := localVersion.(*sdm.OracleNNE)
-		if !ok {
-			localV = &sdm.OracleNNE{}
-		}
-		_ = localV
-		if v.Password != "" {
-			seValues["password"] = v.Password
-		}
-		if v.Username != "" {
-			seValues["username"] = v.Username
-		}
-		d.Set("oracle_nne", []map[string]interface{}{
-			{
-				"bind_interface":   (v.BindInterface),
-				"database":         (v.Database),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"name":             (v.Name),
-				"password":         seValues["password"],
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         seValues["username"],
-			},
-		})
 	case *sdm.Postgres:
 		localV, ok := localVersion.(*sdm.Postgres)
 		if !ok {
@@ -20313,6 +19806,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("trino", []map[string]interface{}{
 			{
 				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"name":             (v.Name),

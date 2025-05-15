@@ -56,87 +56,6 @@ func dataSourceResource() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"aerospike": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"bind_interface": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "The password to authenticate with.",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The port to dial to initiate a connection from the egress node to this resource.",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The local port used by clients to connect to this resource.",
-									},
-									"proxy_cluster_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the proxy cluster for this resource, if any.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"subdomain": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"use_services_alternate": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "If true, uses UseServicesAlternates directive for Aerospike connection",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The username to authenticate with.",
-									},
-								},
-							},
-						},
 						"aks": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -3763,76 +3682,6 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"document_db_replica_set_iam": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"bind_interface": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-									},
-									"connect_to_replica": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										Description: "Set to connect to a replica instead of the primary node.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The local port used by clients to connect to this resource.",
-									},
-									"proxy_cluster_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the proxy cluster for this resource, if any.",
-									},
-									"region": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The region of the document db cluster",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"subdomain": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-								},
-							},
-						},
 						"druid": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -6763,87 +6612,6 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"oracle_nne": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"bind_interface": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-									},
-									"database": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"password": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Sensitive:   true,
-										Description: "The password to authenticate with.",
-									},
-									"port": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The port to dial to initiate a connection from the egress node to this resource.",
-									},
-									"port_override": {
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Description: "The local port used by clients to connect to this resource.",
-									},
-									"proxy_cluster_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the proxy cluster for this resource, if any.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"subdomain": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The username to authenticate with.",
-									},
-								},
-							},
-						},
 						"postgres": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -9003,6 +8771,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
 									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -9206,28 +8979,11 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 	type entity = map[string]interface{}
 	output := make([]map[string][]entity, 1)
 	output[0] = map[string][]entity{
-		"aerospike": {},
+		"aks": {},
 	}
 	for resp.Next() {
 		ids = append(ids, resp.Value().GetID())
 		switch v := resp.Value().(type) {
-		case *sdm.Aerospike:
-			output[0]["aerospike"] = append(output[0]["aerospike"], entity{
-				"bind_interface":         (v.BindInterface),
-				"egress_filter":          (v.EgressFilter),
-				"hostname":               (v.Hostname),
-				"id":                     (v.ID),
-				"name":                   (v.Name),
-				"password":               (v.Password),
-				"port":                   (v.Port),
-				"port_override":          (v.PortOverride),
-				"proxy_cluster_id":       (v.ProxyClusterID),
-				"secret_store_id":        (v.SecretStoreID),
-				"subdomain":              (v.Subdomain),
-				"tags":                   convertTagsToPorcelain(v.Tags),
-				"use_services_alternate": (v.UseServicesAlternate),
-				"username":               (v.Username),
-			})
 		case *sdm.AKS:
 			output[0]["aks"] = append(output[0]["aks"], entity{
 				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
@@ -9987,21 +9743,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"username":           (v.Username),
 			})
-		case *sdm.DocumentDBReplicaSetIAM:
-			output[0]["document_db_replica_set_iam"] = append(output[0]["document_db_replica_set_iam"], entity{
-				"bind_interface":     (v.BindInterface),
-				"connect_to_replica": (v.ConnectToReplica),
-				"egress_filter":      (v.EgressFilter),
-				"hostname":           (v.Hostname),
-				"id":                 (v.ID),
-				"name":               (v.Name),
-				"port_override":      (v.PortOverride),
-				"proxy_cluster_id":   (v.ProxyClusterID),
-				"region":             (v.Region),
-				"secret_store_id":    (v.SecretStoreID),
-				"subdomain":          (v.Subdomain),
-				"tags":               convertTagsToPorcelain(v.Tags),
-			})
 		case *sdm.Druid:
 			output[0]["druid"] = append(output[0]["druid"], entity{
 				"bind_interface":   (v.BindInterface),
@@ -10614,23 +10355,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
 			})
-		case *sdm.OracleNNE:
-			output[0]["oracle_nne"] = append(output[0]["oracle_nne"], entity{
-				"bind_interface":   (v.BindInterface),
-				"database":         (v.Database),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"password":         (v.Password),
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
-			})
 		case *sdm.Postgres:
 			output[0]["postgres"] = append(output[0]["postgres"], entity{
 				"bind_interface":    (v.BindInterface),
@@ -11085,6 +10809,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.Trino:
 			output[0]["trino"] = append(output[0]["trino"], entity{
 				"bind_interface":   (v.BindInterface),
+				"database":         (v.Database),
 				"egress_filter":    (v.EgressFilter),
 				"hostname":         (v.Hostname),
 				"id":               (v.ID),

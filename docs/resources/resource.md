@@ -61,20 +61,6 @@ Credentials can be provided to resources in two forms:
 All credentials must be either raw or Secret Store paths, depending on whether the resource has a Secret Store ID provided. In both cases, some credentials may be optional depending on the resource subtype.
 ## Argument Reference
 The following arguments are supported by the Resource resource:
-* aerospike:
-	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
-	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Optional) The password to authenticate with.
-	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
-	* `port_override` - (Optional) The local port used by clients to connect to this resource.
-	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
-	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `use_services_alternate` - (Optional) If true, uses UseServicesAlternates directive for Aerospike connection
-	* `username` - (Optional) The username to authenticate with.
 * aks:
 	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
@@ -708,18 +694,6 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
-* document_db_replica_set_iam:
-	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `connect_to_replica` - (Optional) Set to connect to a replica instead of the primary node.
-	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
-	* `name` - (Required) Unique human-readable name of the Resource.
-	* `port_override` - (Optional) The local port used by clients to connect to this resource.
-	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
-	* `region` - (Required) The region of the document db cluster
-	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	* `tags` - (Optional) Tags is a map of key, value pairs.
 * druid:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1230,20 +1204,6 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
-* oracle_nne:
-	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
-	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
-	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
-	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
-	* `port_override` - (Optional) The local port used by clients to connect to this resource.
-	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
-	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * postgres:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
@@ -1621,6 +1581,7 @@ The following arguments are supported by the Resource resource:
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * trino:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.

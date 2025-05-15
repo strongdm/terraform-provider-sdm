@@ -940,41 +940,6 @@ type ActivityGetResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// Aerospike is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type Aerospike struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	BindInterface string `json:"bindInterface"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// The password to authenticate with.
-	Password string `json:"password"`
-	// The port to dial to initiate a connection from the egress node to this resource.
-	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
-	PortOverride int32 `json:"portOverride"`
-	// ID of the proxy cluster for this resource, if any.
-	ProxyClusterID string `json:"proxyClusterId"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	Subdomain string `json:"subdomain"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// If true, uses UseServicesAlternates directive for Aerospike connection
-	UseServicesAlternate bool `json:"useServicesAlternate"`
-	// The username to authenticate with.
-	Username string `json:"username"`
-}
-
 type AmazonEKS struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
@@ -1256,13 +1221,10 @@ type AmazonMQAMQP091 struct {
 	Username string `json:"username"`
 }
 
-// An approver for an approval workflow step. Each approver can specify exactly one of: account_id, role_id, or reference
+// An approver for an approval workflow step. Specifies either an account_id or an role_id (not both)
 type ApprovalFlowApprover struct {
 	// The approver account id.
 	AccountID string `json:"accountId"`
-	// A reference to an approver. Must be one of ApproverReference constants.
-	// If set, the account_id and role_id must be empty.
-	Reference string `json:"reference"`
 	// The approver role id
 	RoleID string `json:"roleId"`
 }
@@ -1302,10 +1264,6 @@ type ApprovalWorkflowApprover struct {
 	ApprovalStepID string `json:"approvalStepId"`
 	// Unique identifier of the ApprovalWorkflowApprover.
 	ID string `json:"id"`
-	// A reference to an approver. Will be one of ApproverReference constants.
-	// This field is only populated when reading historical Approval Workflow Approvers data through the Approval Workflows History API.
-	// For the deprecated Approval Workflow Approvers API no value is returned for this field and it is non-settable.
-	Reference string `json:"reference"`
 	// The approver role id
 	RoleID string `json:"roleId"`
 }
@@ -2450,37 +2408,6 @@ type DocumentDBReplicaSet struct {
 	Tags Tags `json:"tags"`
 	// The username to authenticate with.
 	Username string `json:"username"`
-}
-
-// DocumentDBReplicaSetIAM is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type DocumentDBReplicaSetIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	BindInterface string `json:"bindInterface"`
-	// Set to connect to a replica instead of the primary node.
-	ConnectToReplica bool `json:"connectToReplica"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
-	Hostname string `json:"hostname"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
-	PortOverride int32 `json:"portOverride"`
-	// ID of the proxy cluster for this resource, if any.
-	ProxyClusterID string `json:"proxyClusterId"`
-	// The region of the document db cluster
-	Region string `json:"region"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	Subdomain string `json:"subdomain"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
 }
 
 type Druid struct {
@@ -4418,39 +4345,6 @@ type Oracle struct {
 	Username string `json:"username"`
 }
 
-type OracleNNE struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	BindInterface string `json:"bindInterface"`
-	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
-	Database string `json:"database"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// The password to authenticate with.
-	Password string `json:"password"`
-	// The port to dial to initiate a connection from the egress node to this resource.
-	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
-	PortOverride int32 `json:"portOverride"`
-	// ID of the proxy cluster for this resource, if any.
-	ProxyClusterID string `json:"proxyClusterId"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	Subdomain string `json:"subdomain"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-	// The username to authenticate with.
-	Username string `json:"username"`
-}
-
 type Organization struct {
 	// The Organization's authentication provider, one of the AuthProvider constants.
 	AuthProvider string `json:"authProvider"`
@@ -5556,60 +5450,6 @@ type Resource interface {
 	isOneOf_Resource()
 }
 
-func (*Aerospike) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the Aerospike.
-func (m *Aerospike) GetID() string { return m.ID }
-
-// GetName returns the name of the Aerospike.
-func (m *Aerospike) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the Aerospike.
-func (m *Aerospike) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the Aerospike.
-func (m *Aerospike) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the Aerospike.
-func (m *Aerospike) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the Aerospike.
-func (m *Aerospike) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the Aerospike.
-func (m *Aerospike) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the Aerospike.
-func (m *Aerospike) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the Aerospike.
-func (m *Aerospike) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-
-// GetBindInterface returns the bind interface of the Aerospike.
-func (m *Aerospike) GetBindInterface() string {
-	return m.BindInterface
-}
-
-// SetBindInterface sets the bind interface of the Aerospike.
-func (m *Aerospike) SetBindInterface(v string) {
-	m.BindInterface = v
-}
 func (*AKS) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AKS.
@@ -7878,60 +7718,6 @@ func (m *DocumentDBReplicaSet) GetBindInterface() string {
 func (m *DocumentDBReplicaSet) SetBindInterface(v string) {
 	m.BindInterface = v
 }
-func (*DocumentDBReplicaSetIAM) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) GetID() string { return m.ID }
-
-// GetName returns the name of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-
-// GetBindInterface returns the bind interface of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) GetBindInterface() string {
-	return m.BindInterface
-}
-
-// SetBindInterface sets the bind interface of the DocumentDBReplicaSetIAM.
-func (m *DocumentDBReplicaSetIAM) SetBindInterface(v string) {
-	m.BindInterface = v
-}
 func (*Druid) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Druid.
@@ -9766,60 +9552,6 @@ func (m *Oracle) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the Oracle.
 func (m *Oracle) SetBindInterface(v string) {
-	m.BindInterface = v
-}
-func (*OracleNNE) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the OracleNNE.
-func (m *OracleNNE) GetID() string { return m.ID }
-
-// GetName returns the name of the OracleNNE.
-func (m *OracleNNE) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the OracleNNE.
-func (m *OracleNNE) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the OracleNNE.
-func (m *OracleNNE) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the OracleNNE.
-func (m *OracleNNE) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the OracleNNE.
-func (m *OracleNNE) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the OracleNNE.
-func (m *OracleNNE) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the OracleNNE.
-func (m *OracleNNE) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the OracleNNE.
-func (m *OracleNNE) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-
-// GetBindInterface returns the bind interface of the OracleNNE.
-func (m *OracleNNE) GetBindInterface() string {
-	return m.BindInterface
-}
-
-// SetBindInterface sets the bind interface of the OracleNNE.
-func (m *OracleNNE) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Postgres) isOneOf_Resource() {}
@@ -12859,6 +12591,8 @@ type Token struct {
 type Trino struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
@@ -12894,8 +12628,6 @@ type UpdateResponseMetadata struct {
 // A User can connect to resources they are granted directly, or granted
 // via roles.
 type User struct {
-	// SCIM contains the raw SCIM metadata for the user. This is a read-only field.
-	SCIM string `json:"scim"`
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
 	// External ID is an alternative unique ID this user is represented by within an external service.
@@ -12908,23 +12640,19 @@ type User struct {
 	LastName string `json:"lastName"`
 	// Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	ManagedBy string `json:"managedBy"`
-	// Manager ID is the ID of the user's manager. This field is empty when the user has no manager.
-	ManagerID string `json:"managerId"`
 	// Password is a write-only field that can be used to set the user's password.
 	// Currently only supported for update.
 	Password string `json:"password"`
 	// PermissionLevel is the user's permission level e.g. admin, DBA, user.
 	PermissionLevel string `json:"permissionLevel"`
-	// Resolved Manager ID is the ID of the user's manager derived from the manager_id,
-	// if present, or from the SCIM metadata.
-	// This is a read-only field that's only populated for get and list.
-	ResolvedManagerID string `json:"resolvedManagerId"`
 	// Suspended is a read only field for the User's suspended state.
 	Suspended bool `json:"suspended"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
 
+// VaultAWSEC2Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type VaultAWSEC2Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -12938,6 +12666,8 @@ type VaultAWSEC2Store struct {
 	Tags Tags `json:"tags"`
 }
 
+// VaultAWSIAMStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type VaultAWSIAMStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -13122,6 +12852,8 @@ type VaultTokenStore struct {
 	Tags Tags `json:"tags"`
 }
 
+// Vertica is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type Vertica struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`

@@ -14,8 +14,7 @@ import (
 
 func dataSourceWorkflowApprover() *schema.Resource {
 	return &schema.Resource{
-		ReadContext:        wrapCrudOperation(dataSourceWorkflowApproverList),
-		DeprecationMessage: "sdm_workflow_approver is deprecated, see docs for more info",
+		ReadContext: wrapCrudOperation(dataSourceWorkflowApproverList),
 		Schema: map[string]*schema.Schema{
 			"ids": {
 				Type:     schema.TypeList,
