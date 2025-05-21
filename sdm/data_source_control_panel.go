@@ -44,3 +44,36 @@ func dataSourceControlPanelSSHCAPublicKeyGet(ctx context.Context, d *schema.Reso
 
 	return nil
 }
+
+func dataSourceControlPanelRDPCAPublicKey() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: wrapCrudOperation(dataSourceControlPanelRDPCAPublicKeyGet),
+		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the RDP CA Public Key.",
+			},
+			"public_key": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The RDP Certificate Authority Public Key.",
+			},
+		},
+		Timeouts: &schema.ResourceTimeout{
+			Default: schema.DefaultTimeout(60 * time.Second),
+		},
+	}
+}
+
+func dataSourceControlPanelRDPCAPublicKeyGet(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	resp, err := cc.ControlPanel().GetRDPCAPublicKey(ctx)
+	if err != nil {
+		return fmt.Errorf("cannot get RDP CA Public Key %s: %w", d.Id(), err)
+	}
+
+	d.Set("public_key", resp.PublicKey)
+	d.SetId("ControlPanelRDPCAPublicKey")
+
+	return nil
+}

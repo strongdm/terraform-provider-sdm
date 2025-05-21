@@ -34,3 +34,28 @@ func testAccSDMControlPanelSSHCAPublicKeyGetConfig(dataName string) string {
 		dataName,
 	)
 }
+
+func TestAccSDMControlPanel_RDPCAPublicKeyGet(t *testing.T) {
+	initAcceptanceTest(t)
+
+	dataName := randomWithPrefix("test")
+	resource.Test(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMControlPanelRDPCAPublicKeyGetConfig(dataName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttrSet("data.sdm_rdp_ca_pubkey."+dataName, "public_key"),
+				),
+			},
+		},
+	})
+}
+
+func testAccSDMControlPanelRDPCAPublicKeyGetConfig(dataName string) string {
+	return fmt.Sprintf(`
+        data "sdm_rdp_ca_pubkey" "%s" {
+        }`,
+		dataName,
+	)
+}

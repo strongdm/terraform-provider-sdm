@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/14.14.0"
+const userAgent = "terraform-provider-sdm/14.15.0"
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
@@ -68,6 +68,7 @@ func Provider() *schema.Provider {
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"sdm_ssh_ca_pubkey":          dataSourceControlPanelSSHCAPublicKey(),
+			"sdm_rdp_ca_pubkey":          dataSourceControlPanelRDPCAPublicKey(),
 			"sdm_account_attachment":     dataSourceAccountAttachment(),
 			"sdm_account":                dataSourceAccount(),
 			"sdm_approval_workflow":      dataSourceApprovalWorkflow(),
