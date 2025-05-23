@@ -16,6 +16,8 @@
 
 package sdm
 
+import "slices"
+
 // Permission Levels, shared by all entities capable of making authenticated requests against StrongDM.
 const (
 	PermissionLevelRootAdmin        = "root-admin"
@@ -526,3 +528,570 @@ const (
 	ApproverReferenceManagerOfRequester          = "manager-of-requester"
 	ApproverReferenceManagerOfManagerOfRequester = "manager-of-manager-of-requester"
 )
+
+var AllAPIHost = []string{
+	APIHostUS,
+	APIHostUK,
+	APIHostEU,
+}
+
+func APIHostIsValid(v string) bool {
+	return slices.Contains(AllAPIHost, v)
+}
+
+var AllActivityEntityType = []string{
+	ActivityEntityTypeUser,
+	ActivityEntityTypeRole,
+	ActivityEntityTypeLegacyCompositeRole,
+	ActivityEntityTypeDatasource,
+	ActivityEntityTypeOrganization,
+	ActivityEntityTypeInstallation,
+	ActivityEntityTypeSecretStore,
+	ActivityEntityTypeSecretEngine,
+	ActivityEntityTypeRemoteIdentityGroup,
+	ActivityEntityTypeRemoteIdentity,
+	ActivityEntityTypeIdentitySet,
+	ActivityEntityTypeIdentityAlias,
+	ActivityEntityTypeAccessRequest,
+	ActivityEntityTypeWorkflow,
+	ActivityEntityTypeApprovalFlow,
+	ActivityEntityTypeApprovalFlowStep,
+	ActivityEntityTypeApprovalFlowApprover,
+	ActivityEntityTypeManagedSecret,
+	ActivityEntityTypeNode,
+	ActivityEntityTypePeeringGroup,
+	ActivityEntityTypePeeringGroupNode,
+	ActivityEntityTypePeeringGroupResource,
+	ActivityEntityTypePeeringGroupPeer,
+}
+
+func ActivityEntityTypeIsValid(v string) bool {
+	return slices.Contains(AllActivityEntityType, v)
+}
+
+var AllActivityVerb = []string{
+	ActivityVerbUserAdded,
+	ActivityVerbUserDeleted,
+	ActivityVerbUserUpdated,
+	ActivityVerbUserSignup,
+	ActivityVerbUserTypeChanged,
+	ActivityVerbUserPasswordChanged,
+	ActivityVerbUserTemporaryAccessGranted,
+	ActivityVerbUserTemporaryAccessRevoked,
+	ActivityVerbUserTemporaryAccessExpired,
+	ActivityVerbUserAddedToRole,
+	ActivityVerbUserDeletedFromRole,
+	ActivityVerbUserSuspended,
+	ActivityVerbUserReinstated,
+	ActivityVerbUserLoggedIntoTheUI,
+	ActivityVerbParentAdminLoggedIntoChildOrg,
+	ActivityVerbUserLoggedIntoTheClient,
+	ActivityVerbServiceAccountCreated,
+	ActivityVerbServiceAccountExpired,
+	ActivityVerbAdminTokenAdded,
+	ActivityVerbAdminTokenDeleted,
+	ActivityVerbAdminTokenExpired,
+	ActivityVerbAdminTokenRekeyed,
+	ActivityVerbAdminTokenCloned,
+	ActivityVerbAdminTokenSuspended,
+	ActivityVerbAdminTokenReinstated,
+	ActivityVerbSSOUserLoggedIntoTheUI,
+	ActivityVerbSSOUserLoggedIntoTheClient,
+	ActivityVerbUserLoggedOutFromTheClient,
+	ActivityVerbUserLoggedOutFromTheUI,
+	ActivityVerbFailedLoginFromTheUI,
+	ActivityVerbFailedLoginFromTheClient,
+	ActivityVerbMFADeniedFromTheUI,
+	ActivityVerbMFADeniedFromTheClient,
+	ActivityVerbTooManyAttemptsLockout,
+	ActivityVerbAttemptCounterReset,
+	ActivityVerbSuspendedUserLoginAttemptFromTheClient,
+	ActivityVerbSuspendedUserLoginAttemptFromTheUI,
+	ActivityVerbServiceAccountLoginAttemptFromTheUI,
+	ActivityVerbSuspendedServiceAccountLoginAttemptFromTheUI,
+	ActivityVerbSuspendedServiceAccountLoginAttemptFromTheClient,
+	ActivityVerbUserSetAPassword,
+	ActivityVerbUserResetAPassword,
+	ActivityVerbUserChangedPassword,
+	ActivityVerbUserInvited,
+	ActivityVerbUserClickedInvitation,
+	ActivityVerbUserClickedPasswordReset,
+	ActivityVerbUserAllowPasswordLogin,
+	ActivityVerbUserRequireSSOLogin,
+	ActivityVerbUserProvisioningEnabled,
+	ActivityVerbUserProvisioningDisabled,
+	ActivityVerbAdminInitiatedPasswordReset,
+	ActivityVerbRoleAdded,
+	ActivityVerbRoleDeleted,
+	ActivityVerbRoleUpdated,
+	ActivityVerbRoleAccessRulesUpdated,
+	ActivityVerbRoleAccessRulesCreated,
+	ActivityVerbRoleAccessRulesDeleted,
+	ActivityVerbRoleProvisioningEnabled,
+	ActivityVerbRoleProvisioningDisabled,
+	ActivityVerbDatasourceAdded,
+	ActivityVerbDatasourceCloned,
+	ActivityVerbDatasourceDeleted,
+	ActivityVerbDatasourceUpdated,
+	ActivityVerbDatasourcePortOverride,
+	ActivityVerbMultipleDatasourcePortOverride,
+	ActivityVerbServerAdded,
+	ActivityVerbServerCloned,
+	ActivityVerbServerDeleted,
+	ActivityVerbServerUpdated,
+	ActivityVerbServerPortOverride,
+	ActivityVerbMultipleServerPortOverride,
+	ActivityVerbClusterAdded,
+	ActivityVerbClusterCloned,
+	ActivityVerbClusterDeleted,
+	ActivityVerbClusterUpdated,
+	ActivityVerbClusterPortOverride,
+	ActivityVerbMultipleClusterPortOverride,
+	ActivityVerbCloudAdded,
+	ActivityVerbCloudCloned,
+	ActivityVerbCloudDeleted,
+	ActivityVerbCloudUpdated,
+	ActivityVerbWebsiteAdded,
+	ActivityVerbWebsiteCloned,
+	ActivityVerbWebsiteDeleted,
+	ActivityVerbWebsiteUpdated,
+	ActivityVerbInstallationCreated,
+	ActivityVerbRelayInstallationCreated,
+	ActivityVerbInstallationApproved,
+	ActivityVerbInstallationRevoked,
+	ActivityVerbRelayCreated,
+	ActivityVerbRelayUpdatedName,
+	ActivityVerbRelayDeleted,
+	ActivityVerbOrgPublicKeyUpdated,
+	ActivityVerbOrgDiscardReplaysUpdated,
+	ActivityVerbOrgEnforcePortOverridesUpdated,
+	ActivityVerbOrgServiceAutoConnectUpdated,
+	ActivityVerbOrgSelfRegistrationActivated,
+	ActivityVerbOrgSelfRegistrationDeactivated,
+	ActivityVerbOrgNameUpdated,
+	ActivityVerbOrgSettingUpdated,
+	ActivityVerbOrgLogSyncSettingUpdated,
+	ActivityVerbOrgWorkflowSettingUpdated,
+	ActivityVerbOrgCreated,
+	ActivityVerbOrgSCIMProvisioningUpdated,
+	ActivityVerbOrgSCIMProvisioningDeleted,
+	ActivityVerbOrgCustomProvisioningUpdated,
+	ActivityVerbOrgCustomProvisioningDeleted,
+	ActivityVerbChildOrgAdminInvited,
+	ActivityVerbServiceAccountRekeyed,
+	ActivityVerbSCIMTokenAdded,
+	ActivityVerbSCIMTokenDeleted,
+	ActivityVerbSCIMTokenRekeyed,
+	ActivityVerbAPIKeyDeleted,
+	ActivityVerbOrgSSHCertificateAuthorityRotated,
+	ActivityVerbOrgSSHAllowPortForwarding,
+	ActivityVerbOrgSSHDisallowPortForwarding,
+	ActivityVerbOrgAddChild,
+	ActivityVerbOrgRemoveChild,
+	ActivityVerbOrgExtendTrial,
+	ActivityVerbSecretStoreAdded,
+	ActivityVerbSecretStoreUpdated,
+	ActivityVerbSecretStoreDeleted,
+	ActivityVerbSecretEngineAdded,
+	ActivityVerbSecretEngineUpdated,
+	ActivityVerbSecretEngineRotated,
+	ActivityVerbSecretEngineDeleted,
+	ActivityVerbRemoteIdentityGroupCreated,
+	ActivityVerbRemoteIdentityGroupUpdated,
+	ActivityVerbRemoteIdentityGroupDeleted,
+	ActivityVerbIdentitySetCreated,
+	ActivityVerbIdentitySetUpdated,
+	ActivityVerbIdentitySetDeleted,
+	ActivityVerbIdentitySetProvisioningEnabled,
+	ActivityVerbIdentitySetProvisioningDisabled,
+	ActivityVerbRemoteIdentityCreated,
+	ActivityVerbRemoteIdentityUpdated,
+	ActivityVerbRemoteIdentityDeleted,
+	ActivityVerbIdentityAliasCreated,
+	ActivityVerbIdentityAliasUpdated,
+	ActivityVerbIdentityAliasDeleted,
+	ActivityVerbIdentityAliasProvisioningEnabled,
+	ActivityVerbIdentityAliasProvisioningDisabled,
+	ActivityVerbAccessRequestedToResource,
+	ActivityVerbAccessRequestToResourceApprovalAdded,
+	ActivityVerbAccessRequestToResourceStepSkipped,
+	ActivityVerbAccessRequestToResourceCanceled,
+	ActivityVerbAccessRequestToResourceDenied,
+	ActivityVerbAccessRequestToResourceTimedOut,
+	ActivityVerbAccessRequestToResourceGranted,
+	ActivityVerbAccessRequestToResourceGrantedAutomatically,
+	ActivityVerbAccessRequestToResourceApprovedViaServiceNow,
+	ActivityVerbAccessRequestToResourceApprovedViaJira,
+	ActivityVerbWorkflowDeleted,
+	ActivityVerbWorkflowAdded,
+	ActivityVerbDeprecatedWorkflowResourceAssigned,
+	ActivityVerbDeprecatedWorkflowResourceUnassigned,
+	ActivityVerbDeprecatedWorkflowResourceMultipleAssigned,
+	ActivityVerbDeprecatedWorkflowResourceMultipleUnassigned,
+	ActivityVerbDeprecatedWorkflowApproversUpdated,
+	ActivityVerbDeprecatedWorkflowAutoGrantUpdated,
+	ActivityVerbDeprecatedWorkflowApprovalCriteriaUpdated,
+	ActivityVerbWorkflowRolesUpdated,
+	ActivityVerbWorkflowNameUpdated,
+	ActivityVerbWorkflowDescriptionUpdated,
+	ActivityVerbWorkflowRequiresReasonUpdated,
+	ActivityVerbWorkflowSettingsUpdated,
+	ActivityVerbWorkflowAccessRulesUpdated,
+	ActivityVerbWorkflowAccessRulesDeleted,
+	ActivityVerbWorkflowAccessRulesCreated,
+	ActivityVerbWorkflowEnabled,
+	ActivityVerbWorkflowDisabled,
+	ActivityVerbApprovalFlowAdded,
+	ActivityVerbApprovalFlowDeleted,
+	ActivityVerbApprovalFlowUpdated,
+	ActivityVerbApprovalFlowStepAdded,
+	ActivityVerbApprovalFlowStepDeleted,
+	ActivityVerbApprovalFlowStepUpdated,
+	ActivityVerbApprovalFlowApproverAdded,
+	ActivityVerbApprovalFlowApproverDeleted,
+	ActivityVerbOrgVNMSubnetUpdated,
+	ActivityVerbOrgVNMResourcesAllocated,
+	ActivityVerbDeprecatedOrgActivateDeviceApproval,
+	ActivityVerbDeprecatedOrgDeactivateDeviceApproval,
+	ActivityVerbEmulationMigrationCompleted,
+	ActivityVerbAccessOverhaulMigrationCompleted,
+	ActivityVerbActivatedSSHPortForwardingAllServer,
+	ActivityVerbTOTPEnrollmentAdded,
+	ActivityVerbTOTPEnrollmentDeleted,
+	ActivityVerbSuspendedUserEnrollAttemptFromTheUI,
+	ActivityVerbResourceLocked,
+	ActivityVerbResourceUnlocked,
+	ActivityVerbResourceForceUnlocked,
+	ActivityVerbConcurrentAuthenticationRevokedPerOrgSetting,
+	ActivityVerbOrgIntegrationInstalled,
+	ActivityVerbUserIntegrationAuthorized,
+	ActivityVerbOrgIntegrationUninstalled,
+	ActivityVerbUserIntegrationDeauthorized,
+	ActivityVerbServiceNowTokenAdded,
+	ActivityVerbServiceNowTokenDeleted,
+	ActivityVerbManagedSecretCreated,
+	ActivityVerbManagedSecretUpdated,
+	ActivityVerbManagedSecretExpirationTimeUpdated,
+	ActivityVerbManagedSecretConfigUpdated,
+	ActivityVerbManagedSecretDeleted,
+}
+
+func ActivityVerbIsValid(v string) bool {
+	return slices.Contains(AllActivityVerb, v)
+}
+
+var AllApproverReference = []string{
+	ApproverReferenceNone,
+	ApproverReferenceManagerOfRequester,
+	ApproverReferenceManagerOfManagerOfRequester,
+}
+
+func ApproverReferenceIsValid(v string) bool {
+	return slices.Contains(AllApproverReference, v)
+}
+
+var AllAuthProvider = []string{
+	AuthProviderAzure,
+	AuthProviderBitium,
+	AuthProviderGoogle,
+	AuthProviderOkta,
+	AuthProviderStrongDM,
+	AuthProviderActiveDirectory,
+	AuthProviderGenericOIDC,
+	AuthProviderOneLoginOIDC,
+	AuthProviderKeycloak,
+	AuthProviderShibboleth,
+	AuthProviderAuth0,
+	AuthProviderWorkspaceOne,
+	AuthProviderOneLoginSAML,
+	AuthProviderGenericSAML,
+	AuthProviderPingIDSAML,
+	AuthProviderPingIDOIDC,
+}
+
+func AuthProviderIsValid(v string) bool {
+	return slices.Contains(AllAuthProvider, v)
+}
+
+var AllCaptureType = []string{
+	CaptureTypeShell,
+	CaptureTypeScpUpload,
+	CaptureTypeScpDownload,
+	CaptureTypeCommand,
+	CaptureTypeRDPBasic,
+	CaptureTypeRDPEnhanced,
+	CaptureTypeK8sExec,
+	CaptureTypeK8sExecTTY,
+	CaptureTypeK8sPortForward,
+	CaptureTypeK8sCPUpload,
+	CaptureTypeK8sCPDownload,
+	CaptureTypeK8sDescribe,
+	CaptureTypeK8sGet,
+	CaptureTypeK8sDelete,
+	CaptureTypeK8sGeneric,
+	CaptureTypeK8sApply,
+	CaptureTypeSSHPortForward,
+}
+
+func CaptureTypeIsValid(v string) bool {
+	return slices.Contains(AllCaptureType, v)
+}
+
+var AllDeviceTrustProvider = []string{
+	DeviceTrustProviderNone,
+	DeviceTrustProviderSentinelOne,
+	DeviceTrustProviderCrowdStrike,
+	DeviceTrustProviderMicrosoftDefender,
+	DeviceTrustProviderDuo,
+}
+
+func DeviceTrustProviderIsValid(v string) bool {
+	return slices.Contains(AllDeviceTrustProvider, v)
+}
+
+var AllLogLocalEncoder = []string{
+	LogLocalEncoderPlaintext,
+	LogLocalEncoderPubKey,
+}
+
+func LogLocalEncoderIsValid(v string) bool {
+	return slices.Contains(AllLogLocalEncoder, v)
+}
+
+var AllLogLocalFormat = []string{
+	LogLocalFormatCSV,
+	LogLocalFormatJSON,
+}
+
+func LogLocalFormatIsValid(v string) bool {
+	return slices.Contains(AllLogLocalFormat, v)
+}
+
+var AllLogLocalStorage = []string{
+	LogLocalStorageStdout,
+	LogLocalStorageFile,
+	LogLocalStorageTCP,
+	LogLocalStorageSocket,
+	LogLocalStorageSyslog,
+	LogLocalStorageNone,
+}
+
+func LogLocalStorageIsValid(v string) bool {
+	return slices.Contains(AllLogLocalStorage, v)
+}
+
+var AllLogRemoteEncoder = []string{
+	LogRemoteEncoderStrongDM,
+	LogRemoteEncoderPubKey,
+	LogRemoteEncoderHash,
+}
+
+func LogRemoteEncoderIsValid(v string) bool {
+	return slices.Contains(AllLogRemoteEncoder, v)
+}
+
+var AllMFAProvider = []string{
+	MFAProviderNone,
+	MFAProviderDuo,
+	MFAProviderTOTP,
+	MFAProviderOkta,
+	MFAProviderRSA,
+}
+
+func MFAProviderIsValid(v string) bool {
+	return slices.Contains(AllMFAProvider, v)
+}
+
+var AllNodeState = []string{
+	NodeStateNew,
+	NodeStateVerifyingRestart,
+	NodeStateAwaitingRestart,
+	NodeStateRestarting,
+	NodeStateStarted,
+	NodeStateStopped,
+	NodeStateDead,
+}
+
+func NodeStateIsValid(v string) bool {
+	return slices.Contains(AllNodeState, v)
+}
+
+var AllOrgKind = []string{
+	OrgKindSolo,
+	OrgKindRoot,
+	OrgKindChild,
+}
+
+func OrgKindIsValid(v string) bool {
+	return slices.Contains(AllOrgKind, v)
+}
+
+var AllPermission = []string{
+	PermissionRelayList,
+	PermissionRelayCreate,
+	PermissionDatasourceList,
+	PermissionDatasourceCreate,
+	PermissionDatasourceHealthcheck,
+	PermissionDeprecatedDatasourceGrant,
+	PermissionDatasourceDelete,
+	PermissionDatasourceUpdate,
+	PermissionResourceLockDelete,
+	PermissionResourceLockList,
+	PermissionSecretEngineCreate,
+	PermissionSecretEngineList,
+	PermissionSecretEngineDelete,
+	PermissionSecretEngineUpdate,
+	PermissionSecretEngineStatus,
+	PermissionSecretStoreCreate,
+	PermissionSecretStoreList,
+	PermissionSecretStoreDelete,
+	PermissionSecretStoreUpdate,
+	PermissionSecretStoreStatus,
+	PermissionRemoteIdentityGroupWrite,
+	PermissionRemoteIdentityGroupRead,
+	PermissionRemoteIdentityWrite,
+	PermissionRemoteIdentityRead,
+	PermissionUserCreate,
+	PermissionUserList,
+	PermissionUserUpdateAdmin,
+	PermissionUserCreateAdminToken,
+	PermissionUserCreateServiceAccount,
+	PermissionUserSetPermissionLevel,
+	PermissionUserUpdate,
+	PermissionUserInitiatePasswordReset,
+	PermissionUserDelete,
+	PermissionUserAssign,
+	PermissionUserSuspend,
+	PermissionUserSetPassword,
+	PermissionRoleList,
+	PermissionRoleCreate,
+	PermissionRoleDelete,
+	PermissionRoleUpdate,
+	PermissionOrgViewSettings,
+	PermissionOrgEditSettings,
+	PermissionOrgDeploymentDoctor,
+	PermissionOrgListChildren,
+	PermissionOrgCreateChildOrganization,
+	PermissionOrgAuditUsers,
+	PermissionOrgAuditRoles,
+	PermissionOrgAuditDatasources,
+	PermissionOrgAuditNodes,
+	PermissionOrgAuditPermissions,
+	PermissionOrgAuditQueries,
+	PermissionOrgAuditActivities,
+	PermissionOrgAuditSSH,
+	PermissionOrgAuditAccountGrants,
+	PermissionOrgAuditOrg,
+	PermissionOrgAuditRemoteIdentities,
+	PermissionOrgAuditRemoteIdentityGroups,
+	PermissionOrgAuditSecretEngines,
+	PermissionOrgAuditSecretStores,
+	PermissionOrgAuditWorkflows,
+	PermissionOrgAuditApprovalFlows,
+	PermissionOrgAuditAccessRequests,
+	PermissionOrgAuditPolicies,
+	PermissionWorkflowList,
+	PermissionWorkflowEdit,
+	PermissionAccessRequestList,
+	PermissionAccessRequestRequester,
+	PermissionApprovalFlowEdit,
+	PermissionApprovalFlowList,
+	PermissionInstallationBless,
+	PermissionInstallationCreate,
+	PermissionInstallationRevoke,
+	PermissionTestingOrgCreate,
+	PermissionTestingOrgDelete,
+	PermissionTestingNoPermissions,
+	PermissionTestingFetchQueries,
+	PermissionGrantRead,
+	PermissionGrantWrite,
+	PermissionReportRead,
+	PermissionBillingRead,
+	PermissionCredentialRead,
+	PermissionCredentialWrite,
+	PermissionManagedSecretCreate,
+	PermissionManagedSecretList,
+	PermissionManagedSecretDelete,
+	PermissionManagedSecretUpdate,
+	PermissionManagedSecretRead,
+}
+
+func PermissionIsValid(v string) bool {
+	return slices.Contains(AllPermission, v)
+}
+
+var AllPermissionLevel = []string{
+	PermissionLevelRootAdmin,
+	PermissionLevelAdmin,
+	PermissionLevelDatabaseAdmin,
+	PermissionLevelDatabaseOperator,
+	PermissionLevelTeamLeader,
+	PermissionLevelUser,
+	PermissionLevelAuditor,
+	PermissionLevelRelay,
+	PermissionLevelAdminToken,
+	PermissionLevelSCIMToken,
+	PermissionLevelServiceNowToken,
+	PermissionLevelService,
+	PermissionLevelSuspended,
+	PermissionLevelEmpty,
+}
+
+func PermissionLevelIsValid(v string) bool {
+	return slices.Contains(AllPermissionLevel, v)
+}
+
+var AllProvider = []string{
+	ProviderNone,
+	ProviderOkta,
+	ProviderSailPoint,
+	ProviderAzure,
+	ProviderGeneric,
+	ProviderOneLogin,
+	ProviderGoogle,
+}
+
+func ProviderIsValid(v string) bool {
+	return slices.Contains(AllProvider, v)
+}
+
+var AllQueryCategory = []string{
+	QueryCategoryKubernetes,
+	QueryCategoryDatasources,
+	QueryCategoryRDP,
+	QueryCategorySSH,
+	QueryCategoryWeb,
+	QueryCategoryCloud,
+	QueryCategoryAll,
+}
+
+func QueryCategoryIsValid(v string) bool {
+	return slices.Contains(AllQueryCategory, v)
+}
+
+var AllSCIMProvider = []string{
+	SCIMProviderNone,
+	SCIMProviderOkta,
+	SCIMProviderSailPoint,
+	SCIMProviderAzure,
+	SCIMProviderGeneric,
+	SCIMProviderOneLogin,
+	SCIMProviderGoogle,
+}
+
+func SCIMProviderIsValid(v string) bool {
+	return slices.Contains(AllSCIMProvider, v)
+}
+
+var AllSSHKeyType = []string{
+	SSHKeyTypeRSA_2048,
+	SSHKeyTypeRSA_4096,
+	SSHKeyTypeECDSA_256,
+	SSHKeyTypeECDSA_384,
+	SSHKeyTypeECDSA_521,
+	SSHKeyTypeED25519,
+}
+
+func SSHKeyTypeIsValid(v string) bool {
+	return slices.Contains(AllSSHKeyType, v)
+}

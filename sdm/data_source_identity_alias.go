@@ -78,6 +78,10 @@ func dataSourceIdentityAlias() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_identity_alias"] = dataSourceIdentityAlias
+}
+
 func convertIdentityAliasFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

@@ -13,6 +13,10 @@ The SSH CA Pubkey is a public key used for setting up SSH resources.
 ```hcl
 data "sdm_ssh_ca_pubkey" "ssh_pubkey_query" {
 }
+
+output "sshca" {
+  value = data.sdm_ssh_ca_pubkey.ssh_pubkey_query.public_key
+}
 ```
 ## Argument Reference
 This datasource has no arguments.

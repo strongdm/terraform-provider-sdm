@@ -1711,6 +1711,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - If set, TLS must be used to connect to this resource.
 		* `username` - The username to authenticate with.
 	* vertica:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.

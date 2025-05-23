@@ -42,6 +42,10 @@ func resourceProxyClusterKey() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_proxy_cluster_key"] = resourceProxyClusterKey
+}
 func convertProxyClusterKeyToPlumbing(d *schema.ResourceData) *sdm.ProxyClusterKey {
 	return &sdm.ProxyClusterKey{
 		ID:             d.Id(),

@@ -38,6 +38,10 @@ func resourcePeeringGroup() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_peering_group"] = resourcePeeringGroup
+}
 func convertPeeringGroupToPlumbing(d *schema.ResourceData) *sdm.PeeringGroup {
 	return &sdm.PeeringGroup{
 		ID:   d.Id(),

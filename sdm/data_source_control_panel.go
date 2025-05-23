@@ -77,3 +77,8 @@ func dataSourceControlPanelRDPCAPublicKeyGet(ctx context.Context, d *schema.Reso
 
 	return nil
 }
+
+func init() {
+	dataSourcesMap["sdm_ssh_ca_pubkey"] = dataSourceControlPanelSSHCAPublicKey
+	dataSourcesMap["sdm_rdp_ca_pubkey"] = dataSourceControlPanelRDPCAPublicKey
+}

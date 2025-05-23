@@ -10,11 +10,15 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/14.15.0"
+const userAgent = "terraform-provider-sdm/14.18.1"
+
+var resourcesMap = map[string]func() *schema.Resource{}
+
+var dataSourcesMap = map[string]func() *schema.Resource{}
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() *schema.Provider {
-	return &schema.Provider{
+	provider := &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"api_access_key": {
 				Type:        schema.TypeString,
@@ -43,55 +47,8 @@ func Provider() *schema.Provider {
 				Description: "Whether experienced rate limits should cause the client to sleep instead of erroring out",
 			},
 		},
-		ResourcesMap: map[string]*schema.Resource{
-			"sdm_account_attachment":     resourceAccountAttachment(),
-			"sdm_account":                resourceAccount(),
-			"sdm_approval_workflow":      resourceApprovalWorkflow(),
-			"sdm_identity_alias":         resourceIdentityAlias(),
-			"sdm_identity_set":           resourceIdentitySet(),
-			"sdm_managed_secret":         resourceManagedSecret(),
-			"sdm_node":                   resourceNode(),
-			"sdm_peering_group_node":     resourcePeeringGroupNode(),
-			"sdm_peering_group_peer":     resourcePeeringGroupPeer(),
-			"sdm_peering_group_resource": resourcePeeringGroupResource(),
-			"sdm_peering_group":          resourcePeeringGroup(),
-			"sdm_policy":                 resourcePolicy(),
-			"sdm_proxy_cluster_key":      resourceProxyClusterKey(),
-			"sdm_remote_identity":        resourceRemoteIdentity(),
-			"sdm_resource":               resourceResource(),
-			"sdm_role":                   resourceRole(),
-			"sdm_secret_store":           resourceSecretStore(),
-			"sdm_secret_engine":          resourceSecretEngine(),
-			"sdm_workflow_approver":      resourceWorkflowApprover(),
-			"sdm_workflow_role":          resourceWorkflowRole(),
-			"sdm_workflow":               resourceWorkflow(),
-		},
-		DataSourcesMap: map[string]*schema.Resource{
-			"sdm_ssh_ca_pubkey":          dataSourceControlPanelSSHCAPublicKey(),
-			"sdm_rdp_ca_pubkey":          dataSourceControlPanelRDPCAPublicKey(),
-			"sdm_account_attachment":     dataSourceAccountAttachment(),
-			"sdm_account":                dataSourceAccount(),
-			"sdm_approval_workflow":      dataSourceApprovalWorkflow(),
-			"sdm_identity_alias":         dataSourceIdentityAlias(),
-			"sdm_identity_set":           dataSourceIdentitySet(),
-			"sdm_managed_secret":         dataSourceManagedSecret(),
-			"sdm_node":                   dataSourceNode(),
-			"sdm_peering_group_node":     dataSourcePeeringGroupNode(),
-			"sdm_peering_group_peer":     dataSourcePeeringGroupPeer(),
-			"sdm_peering_group_resource": dataSourcePeeringGroupResource(),
-			"sdm_peering_group":          dataSourcePeeringGroup(),
-			"sdm_policy":                 dataSourcePolicy(),
-			"sdm_proxy_cluster_key":      dataSourceProxyClusterKey(),
-			"sdm_remote_identity":        dataSourceRemoteIdentity(),
-			"sdm_remote_identity_group":  dataSourceRemoteIdentityGroup(),
-			"sdm_resource":               dataSourceResource(),
-			"sdm_role":                   dataSourceRole(),
-			"sdm_secret_store":           dataSourceSecretStore(),
-			"sdm_secret_engine":          dataSourceSecretEngine(),
-			"sdm_workflow_approver":      dataSourceWorkflowApprover(),
-			"sdm_workflow_role":          dataSourceWorkflowRole(),
-			"sdm_workflow":               dataSourceWorkflow(),
-		},
+		ResourcesMap:   map[string]*schema.Resource{},
+		DataSourcesMap: map[string]*schema.Resource{},
 		ConfigureFunc: func(d *schema.ResourceData) (interface{}, error) {
 			host := d.Get("host").(string)
 			opts := []sdm.ClientOption{
@@ -113,4 +70,14 @@ func Provider() *schema.Provider {
 			return client, nil
 		},
 	}
+
+	for name, constructor := range resourcesMap {
+		provider.ResourcesMap[name] = constructor()
+	}
+
+	for name, constructor := range dataSourcesMap {
+		provider.DataSourcesMap[name] = constructor()
+	}
+
+	return provider
 }

@@ -248,6 +248,10 @@ func dataSourceAccount() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_account"] = dataSourceAccount
+}
+
 func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

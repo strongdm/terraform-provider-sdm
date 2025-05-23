@@ -50,6 +50,10 @@ func resourceWorkflowApprover() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_workflow_approver"] = resourceWorkflowApprover
+}
 func convertWorkflowApproverToPlumbing(d *schema.ResourceData) *sdm.WorkflowApprover {
 	return &sdm.WorkflowApprover{
 		ID:         d.Id(),

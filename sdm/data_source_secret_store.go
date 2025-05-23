@@ -1059,6 +1059,10 @@ func dataSourceSecretStore() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_secret_store"] = dataSourceSecretStore
+}
+
 func convertSecretStoreFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

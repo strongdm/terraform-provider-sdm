@@ -43,6 +43,10 @@ func resourceAccountAttachment() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_account_attachment"] = resourceAccountAttachment
+}
 func convertAccountAttachmentToPlumbing(d *schema.ResourceData) *sdm.AccountAttachment {
 	return &sdm.AccountAttachment{
 		ID:        d.Id(),

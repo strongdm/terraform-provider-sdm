@@ -68,6 +68,10 @@ func dataSourcePeeringGroupResource() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_peering_group_resource"] = dataSourcePeeringGroupResource
+}
+
 func convertPeeringGroupResourceFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

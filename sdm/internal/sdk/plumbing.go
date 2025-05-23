@@ -12476,6 +12476,7 @@ func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization
 	}
 	porcelain.DeviceTrustEnabled = plumbing.DeviceTrustEnabled
 	porcelain.DeviceTrustProvider = plumbing.DeviceTrustProvider
+	porcelain.DiscardReplays = plumbing.DiscardReplays
 	porcelain.EnforceSingleSession = plumbing.EnforceSingleSession
 	if v, err := convertDurationToPorcelain(plumbing.IdleTimeout); err != nil {
 		return nil, fmt.Errorf("error converting field IdleTimeout: %v", err)
@@ -12494,6 +12495,7 @@ func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization
 	porcelain.MFAEnabled = plumbing.MfaEnabled
 	porcelain.MFAProvider = plumbing.MfaProvider
 	porcelain.Name = plumbing.Name
+	porcelain.PublicKeyPem = plumbing.PublicKeyPem
 	porcelain.RequireSecretStore = plumbing.RequireSecretStore
 	porcelain.SAMLMetadataURL = plumbing.SamlMetadataUrl
 	porcelain.SCIMProvider = plumbing.ScimProvider
@@ -12528,6 +12530,7 @@ func convertOrganizationToPlumbing(porcelain *Organization) *proto.Organization 
 	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
 	plumbing.DeviceTrustEnabled = (porcelain.DeviceTrustEnabled)
 	plumbing.DeviceTrustProvider = (porcelain.DeviceTrustProvider)
+	plumbing.DiscardReplays = (porcelain.DiscardReplays)
 	plumbing.EnforceSingleSession = (porcelain.EnforceSingleSession)
 	plumbing.IdleTimeout = convertDurationToPlumbing(porcelain.IdleTimeout)
 	plumbing.IdleTimeoutEnabled = (porcelain.IdleTimeoutEnabled)
@@ -12542,6 +12545,7 @@ func convertOrganizationToPlumbing(porcelain *Organization) *proto.Organization 
 	plumbing.MfaEnabled = (porcelain.MFAEnabled)
 	plumbing.MfaProvider = (porcelain.MFAProvider)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PublicKeyPem = (porcelain.PublicKeyPem)
 	plumbing.RequireSecretStore = (porcelain.RequireSecretStore)
 	plumbing.SamlMetadataUrl = (porcelain.SAMLMetadataURL)
 	plumbing.ScimProvider = (porcelain.SCIMProvider)
@@ -14288,6 +14292,7 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	porcelain.Encrypted = plumbing.Encrypted
 	porcelain.ID = plumbing.Id
 	porcelain.IdentityAliasUsername = plumbing.IdentityAliasUsername
+	porcelain.MetadataJSON = plumbing.MetadataJson
 	porcelain.QueryBody = plumbing.QueryBody
 	porcelain.QueryCategory = plumbing.QueryCategory
 	porcelain.QueryHash = plumbing.QueryHash
@@ -14332,6 +14337,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.Encrypted = (porcelain.Encrypted)
 	plumbing.Id = (porcelain.ID)
 	plumbing.IdentityAliasUsername = (porcelain.IdentityAliasUsername)
+	plumbing.MetadataJson = (porcelain.MetadataJSON)
 	plumbing.QueryBody = (porcelain.QueryBody)
 	plumbing.QueryCategory = (porcelain.QueryCategory)
 	plumbing.QueryHash = (porcelain.QueryHash)
@@ -19799,6 +19805,7 @@ func convertTrinoToPorcelain(plumbing *proto.Trino) (*Trino, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -19821,6 +19828,7 @@ func convertTrinoToPlumbing(porcelain *Trino) *proto.Trino {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }

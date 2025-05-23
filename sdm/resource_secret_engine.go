@@ -188,6 +188,10 @@ func resourceSecretEngine() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_secret_engine"] = resourceSecretEngine
+}
 func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 	if list := d.Get("active_directory").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})

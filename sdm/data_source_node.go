@@ -210,6 +210,10 @@ func dataSourceNode() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_node"] = dataSourceNode
+}
+
 func convertNodeFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

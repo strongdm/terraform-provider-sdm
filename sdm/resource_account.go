@@ -132,6 +132,10 @@ func resourceAccount() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_account"] = resourceAccount
+}
 func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 	if list := d.Get("service").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})

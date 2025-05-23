@@ -58,6 +58,10 @@ func dataSourceProxyClusterKey() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_proxy_cluster_key"] = dataSourceProxyClusterKey
+}
+
 func convertProxyClusterKeyFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

@@ -78,6 +78,10 @@ func dataSourcePolicy() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_policy"] = dataSourcePolicy
+}
+
 func convertPolicyFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

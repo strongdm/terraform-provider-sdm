@@ -56,6 +56,10 @@ func resourceRole() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_role"] = resourceRole
+}
 func convertRoleToPlumbing(d *schema.ResourceData) *sdm.Role {
 	return &sdm.Role{
 		ID:          d.Id(),

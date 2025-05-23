@@ -4460,6 +4460,8 @@ type Organization struct {
 	DeviceTrustEnabled bool `json:"deviceTrustEnabled"`
 	// The Organization's device trust provider, one of the DeviceTrustProvider constants.
 	DeviceTrustProvider string `json:"deviceTrustProvider"`
+	// Indicates if the Organization should drop replay data for SSH, RDP, and K8s logs.
+	DiscardReplays bool `json:"discardReplays"`
 	// Indicates if the Organization enforces a single session per user for the CLI and AdminUI.
 	EnforceSingleSession bool `json:"enforceSingleSession"`
 	// The Organization's idle timeout, if enabled.
@@ -4488,6 +4490,8 @@ type Organization struct {
 	MFAProvider string `json:"mfaProvider"`
 	// The Organization's name.
 	Name string `json:"name"`
+	// The Organization's public key PEM for encrypting remote logs.
+	PublicKeyPem string `json:"publicKeyPem"`
 	// Indicates if the Organization requires secret stores.
 	RequireSecretStore bool `json:"requireSecretStore"`
 	// The Organization's URL for SAML metadata.
@@ -4924,6 +4928,8 @@ type Query struct {
 	ID string `json:"id"`
 	// The username of the IdentityAlias used to access the Resource.
 	IdentityAliasUsername string `json:"identityAliasUsername"`
+	// Driver specific metadata associated with this query.
+	MetadataJSON string `json:"metadataJson"`
 	// The captured content of the Query.
 	// For queries against SSH, Kubernetes, and RDP resources, this contains a JSON representation of the QueryCapture.
 	QueryBody string `json:"queryBody"`
@@ -12883,6 +12889,8 @@ type Trino struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
 	// The username to authenticate with.
 	Username string `json:"username"`
 }

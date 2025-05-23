@@ -946,6 +946,10 @@ func resourceSecretStore() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_secret_store"] = resourceSecretStore
+}
 func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 	if list := d.Get("active_directory_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})

@@ -75,6 +75,10 @@ func resourceManagedSecret() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_managed_secret"] = resourceManagedSecret
+}
 func convertManagedSecretToPlumbing(d *schema.ResourceData) *sdm.ManagedSecret {
 	return &sdm.ManagedSecret{
 		ID:              d.Id(),

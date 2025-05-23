@@ -6,6 +6,7 @@ package sdm
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"time"
 
@@ -29,7 +30,7 @@ func convertAccessRulesToPorcelain(plumbing sdm.AccessRules) string {
 }
 
 func convertBytesToPorcelain(plumbing []byte) string {
-	return string(plumbing)
+	return base64.StdEncoding.EncodeToString(plumbing)
 }
 
 func convertAccessRulesToPlumbing(porcelain interface{}) sdm.AccessRules {
@@ -73,11 +74,9 @@ func convertBytesToPlumbing(porcelain interface{}) []byte {
 	if porcelain == nil {
 		return nil
 	}
-	switch v := porcelain.(type) {
-	case string:
-		return []byte(v)
-	case []byte:
-		return v
+	if v, ok := porcelain.(string); ok {
+		result, _ := base64.StdEncoding.DecodeString(v)
+		return result
 	}
 	return nil
 }

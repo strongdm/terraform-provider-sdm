@@ -48,6 +48,10 @@ func resourcePolicy() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_policy"] = resourcePolicy
+}
 func convertPolicyToPlumbing(d *schema.ResourceData) *sdm.Policy {
 	return &sdm.Policy{
 		ID:          d.Id(),

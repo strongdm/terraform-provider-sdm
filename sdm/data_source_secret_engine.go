@@ -270,6 +270,10 @@ func dataSourceSecretEngine() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_secret_engine"] = dataSourceSecretEngine
+}
+
 func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

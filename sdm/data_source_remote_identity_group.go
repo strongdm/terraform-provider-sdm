@@ -58,6 +58,10 @@ func dataSourceRemoteIdentityGroup() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_remote_identity_group"] = dataSourceRemoteIdentityGroup
+}
+
 func convertRemoteIdentityGroupFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

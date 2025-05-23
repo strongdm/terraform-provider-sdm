@@ -132,6 +132,10 @@ func dataSourceManagedSecret() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_managed_secret"] = dataSourceManagedSecret
+}
+
 func convertManagedSecretFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

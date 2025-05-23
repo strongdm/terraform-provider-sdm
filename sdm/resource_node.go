@@ -185,6 +185,10 @@ func resourceNode() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_node"] = resourceNode
+}
 func convertNodeToPlumbing(d *schema.ResourceData) sdm.Node {
 	if list := d.Get("gateway").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})

@@ -135,6 +135,10 @@ func dataSourceWorkflow() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_workflow"] = dataSourceWorkflow
+}
+
 func convertWorkflowFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

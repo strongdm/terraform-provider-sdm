@@ -90,6 +90,10 @@ func dataSourceApprovalWorkflow() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_approval_workflow"] = dataSourceApprovalWorkflow
+}
+
 func convertApprovalWorkflowFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

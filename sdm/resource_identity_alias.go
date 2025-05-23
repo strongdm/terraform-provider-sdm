@@ -48,6 +48,10 @@ func resourceIdentityAlias() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_identity_alias"] = resourceIdentityAlias
+}
 func convertIdentityAliasToPlumbing(d *schema.ResourceData) *sdm.IdentityAlias {
 	return &sdm.IdentityAlias{
 		ID:            d.Id(),

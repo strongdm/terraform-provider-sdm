@@ -68,6 +68,10 @@ func dataSourceAccountAttachment() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_account_attachment"] = dataSourceAccountAttachment
+}
+
 func convertAccountAttachmentFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

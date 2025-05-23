@@ -48,6 +48,10 @@ func resourceRemoteIdentity() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_remote_identity"] = resourceRemoteIdentity
+}
 func convertRemoteIdentityToPlumbing(d *schema.ResourceData) *sdm.RemoteIdentity {
 	return &sdm.RemoteIdentity{
 		ID:                    d.Id(),

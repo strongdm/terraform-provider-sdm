@@ -38,6 +38,10 @@ func resourceIdentitySet() *schema.Resource {
 		},
 	}
 }
+
+func init() {
+	resourcesMap["sdm_identity_set"] = resourceIdentitySet
+}
 func convertIdentitySetToPlumbing(d *schema.ResourceData) *sdm.IdentitySet {
 	return &sdm.IdentitySet{
 		ID:   d.Id(),

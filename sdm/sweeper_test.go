@@ -117,6 +117,8 @@ func testCheckDestroy(s *terraform.State) error {
 			_, err = client.Policies().Get(context.Background(), rs.Primary.ID)
 		case "sdm_proxy_cluster_key":
 			_, err = client.ProxyClusterKeys().Get(context.Background(), rs.Primary.ID)
+		case "sdm_managed_secret_value":
+			continue // this is virtual resource that is not present in API
 		default:
 			return fmt.Errorf("undefined resource type in testCheckDestroy: %s", rs.Type)
 		}

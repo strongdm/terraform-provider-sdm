@@ -68,6 +68,10 @@ func dataSourceWorkflowRole() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_workflow_role"] = dataSourceWorkflowRole
+}
+
 func convertWorkflowRoleFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}

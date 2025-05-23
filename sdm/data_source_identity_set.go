@@ -58,6 +58,10 @@ func dataSourceIdentitySet() *schema.Resource {
 	}
 }
 
+func init() {
+	dataSourcesMap["sdm_identity_set"] = dataSourceIdentitySet
+}
+
 func convertIdentitySetFilterToPlumbing(d *schema.ResourceData) (string, []interface{}) {
 	filter := ""
 	args := []interface{}{}
