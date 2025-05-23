@@ -5191,6 +5191,16 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of a cluster to be run from a node.",
+									},
+									"discovery_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -10296,6 +10306,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"allow_resource_role_bypass":          (v.AllowResourceRoleBypass),
 				"bind_interface":                      (v.BindInterface),
 				"certificate_authority":               (v.CertificateAuthority),
+				"discovery_enabled":                   (v.DiscoveryEnabled),
+				"discovery_username":                  (v.DiscoveryUsername),
 				"egress_filter":                       (v.EgressFilter),
 				"healthcheck_namespace":               (v.HealthcheckNamespace),
 				"id":                                  (v.ID),

@@ -956,6 +956,8 @@ The following arguments are supported by the Resource resource:
 	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `certificate_authority` - (Required, either in plaintext, or as a secret store path) The CA to authenticate TLS connections with.
+	* `discovery_enabled` - (Optional) If true, configures discovery of a cluster to be run from a node.
+	* `discovery_username` - (Optional) If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.

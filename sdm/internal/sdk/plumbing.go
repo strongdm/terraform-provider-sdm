@@ -9532,6 +9532,8 @@ func convertKubernetesPodIdentityToPorcelain(plumbing *proto.KubernetesPodIdenti
 	porcelain.AllowResourceRoleBypass = plumbing.AllowResourceRoleBypass
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.CertificateAuthority = plumbing.CertificateAuthority
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.DiscoveryUsername = plumbing.DiscoveryUsername
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckNamespace = plumbing.HealthcheckNamespace
 	porcelain.Healthy = plumbing.Healthy
@@ -9559,6 +9561,8 @@ func convertKubernetesPodIdentityToPlumbing(porcelain *KubernetesPodIdentity) *p
 	plumbing.AllowResourceRoleBypass = (porcelain.AllowResourceRoleBypass)
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.CertificateAuthority = (porcelain.CertificateAuthority)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.DiscoveryUsername = (porcelain.DiscoveryUsername)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckNamespace = (porcelain.HealthcheckNamespace)
 	plumbing.Healthy = (porcelain.Healthy)

@@ -3395,6 +3395,11 @@ type KubernetesPodIdentity struct {
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
+	// If true, configures discovery of a cluster to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// If a cluster is configured for user impersonation, this is the user to impersonate when
+	// running discovery.
+	DiscoveryUsername string `json:"discoveryUsername"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The path used to check the health of your connection.  Defaults to `default`.

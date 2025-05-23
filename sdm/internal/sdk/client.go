@@ -24,7 +24,6 @@ import (
 	"crypto/sha256"
 	"crypto/tls"
 	"encoding/base64"
-	"errors"
 	"fmt"
 	"math/rand"
 	"net"
@@ -43,8 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/14.18.0"
-	defaultPageLimit = 50
+	defaultUserAgent = "strongdm-sdk-go/14.20.0"
 )
 
 var _ = metadata.Pairs
@@ -53,17 +51,16 @@ type dialer func(ctx context.Context, addr string) (net.Conn, error)
 
 // Client is the strongDM API client implementation.
 type Client struct {
-	apiHost               string
-	apiToken              string
-	apiSecret             []byte
-	apiInsecureTransport  bool
-	apiTLSConfig          *tls.Config
-	exposeRateLimitErrors bool
-	userAgent             string
-	disableSigning        bool
-	pageLimit             int
-	snapshotAt            time.Time
-	dialer                dialer
+	apiHost              string
+	apiToken             string
+	apiSecret            []byte
+	apiInsecureTransport bool
+	apiTLSConfig         *tls.Config
+	userAgent            string
+	disableSigning       bool
+	pageLimit            int
+	snapshotAt           time.Time
+	dialer               dialer
 
 	grpcConn *grpc.ClientConn
 
@@ -145,7 +142,6 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		apiToken:     token,
 		apiSecret:    decodedSecret,
 		userAgent:    defaultUserAgent,
-		pageLimit:    defaultPageLimit,
 	}
 
 	for _, opt := range opts {
@@ -481,7 +477,7 @@ func WithUserAgentExtra(userAgentExtra string) ClientOption {
 // exposed to the code using this client (if disabled). By default, it is enabled.
 func WithRateLimitRetries(enabled bool) ClientOption {
 	return func(c *Client) {
-		c.retryOptions.exposeRateLimitErrors = !enabled
+		c.retryOptions.retryRateLimitErrors = enabled
 	}
 }
 
@@ -1103,38 +1099,50 @@ func (c *Client) wrapContext(ctx context.Context, req proto.Message, methodName 
 }
 
 type retryOptions struct {
-	maxRetries            int
-	baseRetryDelay        time.Duration
-	maxRetryDelay         time.Duration
-	exposeRateLimitErrors bool
-	fulfillRequirements   func(*plumbing.RequirementsMetadata) (*plumbing.FulfillmentsMetadata, error)
+	baseDelay            time.Duration
+	maxDelay             time.Duration
+	factor               float64
+	jitter               float64
+	retryRateLimitErrors bool
+	fulfillRequirements  func(*plumbing.RequirementsMetadata) (*plumbing.FulfillmentsMetadata, error)
 }
 
-// These defaults are taken from AWS. Customization of these values
+// These defaults are taken from gRPC. Customization of these values
 // is a future step in the API.
 func defaultRetryOptions() retryOptions {
 	return retryOptions{
-		maxRetries:            3,
-		baseRetryDelay:        30 * time.Millisecond,
-		maxRetryDelay:         300 * time.Second,
-		exposeRateLimitErrors: false,
-		fulfillRequirements:   nil,
+		baseDelay:            1 * time.Second,
+		maxDelay:             120 * time.Second,
+		factor:               1.6,
+		jitter:               0.2,
+		retryRateLimitErrors: true,
+		fulfillRequirements:  nil,
 	}
 }
 
-func jitterSleep(opts retryOptions, iter int) time.Duration {
-	durMax := opts.baseRetryDelay * time.Duration(2<<iter)
-	if durMax > opts.maxRetryDelay {
-		durMax = opts.maxRetryDelay
+func exponentialBackoff(opts retryOptions, retries int) time.Duration {
+	if retries == 0 {
+		return opts.baseDelay
 	}
-	// This is a full jitter, ranging from no delay to the maximum
-	// this jittering aims to prevent clients that start and conflict
-	// at the same time from retrying at the same intervals
-	return time.Duration(rand.Intn(int(durMax)))
-
+	backoff, max := float64(opts.baseDelay), float64(opts.maxDelay)
+	for backoff < max && retries > 0 {
+		backoff *= opts.factor
+		retries--
+	}
+	if backoff > max {
+		backoff = max
+	}
+	// Randomize backoff delays so that if a cluster of requests start at
+	// the same time, they won't operate in lockstep.
+	backoff *= 1 + opts.jitter*(rand.Float64()*2-1)
+	if backoff < 0 {
+		return 0
+	}
+	return time.Duration(backoff)
 }
 
 func retryWrapper[ResponseT any](
+	ctx context.Context,
 	opts retryOptions,
 	fulfillments **plumbing.FulfillmentsMetadata,
 	f func() (*ResponseT, error),
@@ -1152,67 +1160,52 @@ func retryWrapper[ResponseT any](
 			return resp, err
 		}
 
-		// Internal and unknown errors should be retried
-		// Other error types are likely not brief temporary errors
-		var waitFor time.Duration
-		if s, ok := status.FromError(err); ok {
-			switch {
-			case s.Code() == codes.ResourceExhausted:
-				if opts.exposeRateLimitErrors {
-					return resp, err
-				}
+		s, _ := status.FromError(err)
 
-				var rateLimitError *RateLimitError
-				if errors.As(convertErrorToPorcelain(err), &rateLimitError) {
-					waitFor = time.Until(rateLimitError.RateLimit.ResetAt)
-					// If timezones or clock drift causes this calculation to fail,
-					// wait at most one minute.
-					if waitFor < 0 || waitFor > time.Minute {
-						waitFor = time.Minute
-					}
-				}
-			case s.Code() == codes.PermissionDenied:
-				var requirementsFound bool
-				for _, d := range s.Details() {
-					if rm, ok := d.(*plumbing.RequirementsMetadata); ok {
-						if opts.fulfillRequirements == nil {
-							return resp, fmt.Errorf("unfulfilled authorization requirements: %w", err)
-						}
-
-						f, err := opts.fulfillRequirements(rm)
-						if err != nil {
-							return resp, fmt.Errorf("failed to fulfill authorization requirements: %w", err)
-						}
-						*fulfillments = f
-						requirementsFound = true
-					}
-				}
-				// If requirements found, retry immediately for the last time.
-				// No further retries are allowed to prevent subsequent re-prompting
-				// for MFA/TOTP in case of an unresolvable error.
-				if requirementsFound {
-					lastRetry = true
-					continue
-				}
-
-				// Otherwise, return the PermissionDenied error as usual
-				return resp, err
-			case s.Code() != codes.Internal && s.Code() != codes.Unavailable:
+		switch {
+		case s.Code() == codes.ResourceExhausted:
+			if !opts.retryRateLimitErrors {
 				return resp, err
 			}
+		case s.Code() == codes.PermissionDenied:
+			var requirementsFound bool
+			for _, d := range s.Details() {
+				if rm, ok := d.(*plumbing.RequirementsMetadata); ok {
+					if opts.fulfillRequirements == nil {
+						return resp, fmt.Errorf("unfulfilled authorization requirements: %w", err)
+					}
+
+					f, err := opts.fulfillRequirements(rm)
+					if err != nil {
+						return resp, fmt.Errorf("failed to fulfill authorization requirements: %w", err)
+					}
+					*fulfillments = f
+					requirementsFound = true
+				}
+			}
+			// If requirements found, retry immediately for the last time.
+			// No further retries are allowed to prevent subsequent re-prompting
+			// for MFA/TOTP in case of an unresolvable error.
+			if requirementsFound {
+				lastRetry = true
+				continue
+			}
+
+			// Otherwise, return the PermissionDenied error as usual
+			return resp, err
+		case s.Code() == codes.Internal || s.Code() == codes.Unavailable:
+			if retries >= 3 {
+				return resp, err
+			}
+		default:
+			return resp, err
 		}
 
-		if retries == opts.maxRetries {
-			return nil, err
+		select {
+		case <-ctx.Done():
+			return nil, ctx.Err()
+		case <-time.After(exponentialBackoff(opts, retries)):
 		}
-
-		if waitFor == 0 {
-			waitFor = jitterSleep(opts, retries)
-		}
-
-		// TODO: use resource.Retry instead of time.Sleep in Terraform provider
-		// see https://github.com/bflad/tfproviderlint/tree/main/passes/R018
-		time.Sleep(waitFor) //lintignore:R018
 		retries++
 	}
 }

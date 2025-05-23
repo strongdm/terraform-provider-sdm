@@ -819,6 +819,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
@@ -2338,6 +2340,8 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", `"path/to/secret?key=key&encoding=base64"`},
+				{"discovery_enabled", `true`},
+				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},

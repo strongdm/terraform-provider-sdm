@@ -990,6 +990,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `allow_resource_role_bypass` - If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `certificate_authority` - The CA to authenticate TLS connections with.
+		* `discovery_enabled` - If true, configures discovery of a cluster to be run from a node.
+		* `discovery_username` - If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `healthcheck_namespace` - The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.
 		* `id` - Unique identifier of the Resource.

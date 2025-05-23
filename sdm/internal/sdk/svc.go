@@ -64,6 +64,7 @@ func (svc *AccessRequests) List(
 			[]*AccessRequest,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccessRequestListResponse, error) {
@@ -113,6 +114,7 @@ func (svc *AccessRequestEventsHistory) List(
 			[]*AccessRequestEventHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccessRequestEventHistoryListResponse, error) {
@@ -162,6 +164,7 @@ func (svc *AccessRequestsHistory) List(
 			[]*AccessRequestHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccessRequestHistoryListResponse, error) {
@@ -214,6 +217,7 @@ func (svc *AccountAttachments) Create(
 	req.AccountAttachment = convertAccountAttachmentToPlumbing(accountAttachment)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountAttachmentCreateResponse, error) {
@@ -255,6 +259,7 @@ func (svc *AccountAttachments) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountAttachmentGetResponse, error) {
@@ -295,6 +300,7 @@ func (svc *AccountAttachments) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountAttachmentDeleteResponse, error) {
@@ -343,6 +349,7 @@ func (svc *AccountAttachments) List(
 			[]*AccountAttachment,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountAttachmentListResponse, error) {
@@ -392,6 +399,7 @@ func (svc *AccountAttachmentsHistory) List(
 			[]*AccountAttachmentHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountAttachmentHistoryListResponse, error) {
@@ -444,6 +452,7 @@ func (svc *AccountGrants) Create(
 	req.AccountGrant = convertAccountGrantToPlumbing(accountGrant)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountGrantCreateResponse, error) {
@@ -485,6 +494,7 @@ func (svc *AccountGrants) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountGrantGetResponse, error) {
@@ -525,6 +535,7 @@ func (svc *AccountGrants) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountGrantDeleteResponse, error) {
@@ -573,6 +584,7 @@ func (svc *AccountGrants) List(
 			[]*AccountGrant,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountGrantListResponse, error) {
@@ -622,6 +634,7 @@ func (svc *AccountGrantsHistory) List(
 			[]*AccountGrantHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountGrantHistoryListResponse, error) {
@@ -683,6 +696,7 @@ func (svc *AccountPermissions) List(
 			[]*AccountPermission,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountPermissionListResponse, error) {
@@ -744,6 +758,7 @@ func (svc *AccountResources) List(
 			[]*AccountResource,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountResourceListResponse, error) {
@@ -793,6 +808,7 @@ func (svc *AccountResourcesHistory) List(
 			[]*AccountResourceHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountResourceHistoryListResponse, error) {
@@ -848,6 +864,7 @@ func (svc *Accounts) Create(
 	req.Account = convertAccountToPlumbing(account)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountCreateResponse, error) {
@@ -892,6 +909,7 @@ func (svc *Accounts) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountGetResponse, error) {
@@ -932,6 +950,7 @@ func (svc *Accounts) Update(
 	req.Account = convertAccountToPlumbing(account)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountUpdateResponse, error) {
@@ -972,6 +991,7 @@ func (svc *Accounts) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.AccountDeleteResponse, error) {
@@ -1020,6 +1040,7 @@ func (svc *Accounts) List(
 			[]Account,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountListResponse, error) {
@@ -1069,6 +1090,7 @@ func (svc *AccountsHistory) List(
 			[]*AccountHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.AccountHistoryListResponse, error) {
@@ -1108,6 +1130,7 @@ func (svc *Activities) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ActivityGetResponse, error) {
@@ -1164,6 +1187,7 @@ func (svc *Activities) List(
 			[]*Activity,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ActivityListResponse, error) {
@@ -1216,6 +1240,7 @@ func (svc *ApprovalWorkflowApprovers) Create(
 	req.ApprovalWorkflowApprover = convertApprovalWorkflowApproverToPlumbing(approvalWorkflowApprover)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowApproverCreateResponse, error) {
@@ -1252,6 +1277,7 @@ func (svc *ApprovalWorkflowApprovers) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowApproverGetResponse, error) {
@@ -1292,6 +1318,7 @@ func (svc *ApprovalWorkflowApprovers) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowApproverDeleteResponse, error) {
@@ -1336,6 +1363,7 @@ func (svc *ApprovalWorkflowApprovers) List(
 			[]*ApprovalWorkflowApprover,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ApprovalWorkflowApproverListResponse, error) {
@@ -1385,6 +1413,7 @@ func (svc *ApprovalWorkflowApproversHistory) List(
 			[]*ApprovalWorkflowApproverHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ApprovalWorkflowApproverHistoryListResponse, error) {
@@ -1437,6 +1466,7 @@ func (svc *ApprovalWorkflowSteps) Create(
 	req.ApprovalWorkflowStep = convertApprovalWorkflowStepToPlumbing(approvalWorkflowStep)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowStepCreateResponse, error) {
@@ -1473,6 +1503,7 @@ func (svc *ApprovalWorkflowSteps) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowStepGetResponse, error) {
@@ -1513,6 +1544,7 @@ func (svc *ApprovalWorkflowSteps) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowStepDeleteResponse, error) {
@@ -1557,6 +1589,7 @@ func (svc *ApprovalWorkflowSteps) List(
 			[]*ApprovalWorkflowStep,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ApprovalWorkflowStepListResponse, error) {
@@ -1606,6 +1639,7 @@ func (svc *ApprovalWorkflowStepsHistory) List(
 			[]*ApprovalWorkflowStepHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ApprovalWorkflowStepHistoryListResponse, error) {
@@ -1659,6 +1693,7 @@ func (svc *ApprovalWorkflows) Create(
 	req.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(approvalWorkflow)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowCreateResponse, error) {
@@ -1695,6 +1730,7 @@ func (svc *ApprovalWorkflows) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowGetResponse, error) {
@@ -1735,6 +1771,7 @@ func (svc *ApprovalWorkflows) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowDeleteResponse, error) {
@@ -1766,6 +1803,7 @@ func (svc *ApprovalWorkflows) Update(
 	req.ApprovalWorkflow = convertApprovalWorkflowToPlumbing(approvalWorkflow)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ApprovalWorkflowUpdateResponse, error) {
@@ -1814,6 +1852,7 @@ func (svc *ApprovalWorkflows) List(
 			[]*ApprovalWorkflow,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ApprovalWorkflowListResponse, error) {
@@ -1863,6 +1902,7 @@ func (svc *ApprovalWorkflowsHistory) List(
 			[]*ApprovalWorkflowHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ApprovalWorkflowHistoryListResponse, error) {
@@ -1897,6 +1937,7 @@ func (svc *ControlPanel) GetSSHCAPublicKey(
 
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ControlPanelGetSSHCAPublicKeyResponse, error) {
@@ -1931,6 +1972,7 @@ func (svc *ControlPanel) GetRDPCAPublicKey(
 
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ControlPanelGetRDPCAPublicKeyResponse, error) {
@@ -1967,6 +2009,7 @@ func (svc *ControlPanel) VerifyJWT(
 	req.Token = (token)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ControlPanelVerifyJWTResponse, error) {
@@ -2023,6 +2066,7 @@ func (svc *HealthChecks) List(
 			[]*Healthcheck,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.HealthcheckListResponse, error) {
@@ -2076,6 +2120,7 @@ func (svc *IdentityAliases) Create(
 	req.IdentityAlias = convertIdentityAliasToPlumbing(identityAlias)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentityAliasCreateResponse, error) {
@@ -2117,6 +2162,7 @@ func (svc *IdentityAliases) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentityAliasGetResponse, error) {
@@ -2157,6 +2203,7 @@ func (svc *IdentityAliases) Update(
 	req.IdentityAlias = convertIdentityAliasToPlumbing(identityAlias)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentityAliasUpdateResponse, error) {
@@ -2197,6 +2244,7 @@ func (svc *IdentityAliases) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentityAliasDeleteResponse, error) {
@@ -2245,6 +2293,7 @@ func (svc *IdentityAliases) List(
 			[]*IdentityAlias,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.IdentityAliasListResponse, error) {
@@ -2294,6 +2343,7 @@ func (svc *IdentityAliasesHistory) List(
 			[]*IdentityAliasHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.IdentityAliasHistoryListResponse, error) {
@@ -2347,6 +2397,7 @@ func (svc *IdentitySets) Create(
 	req.IdentitySet = convertIdentitySetToPlumbing(identitySet)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentitySetCreateResponse, error) {
@@ -2388,6 +2439,7 @@ func (svc *IdentitySets) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentitySetGetResponse, error) {
@@ -2428,6 +2480,7 @@ func (svc *IdentitySets) Update(
 	req.IdentitySet = convertIdentitySetToPlumbing(identitySet)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentitySetUpdateResponse, error) {
@@ -2468,6 +2521,7 @@ func (svc *IdentitySets) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.IdentitySetDeleteResponse, error) {
@@ -2516,6 +2570,7 @@ func (svc *IdentitySets) List(
 			[]*IdentitySet,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.IdentitySetListResponse, error) {
@@ -2565,6 +2620,7 @@ func (svc *IdentitySetsHistory) List(
 			[]*IdentitySetHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.IdentitySetHistoryListResponse, error) {
@@ -2616,6 +2672,7 @@ func (svc *ManagedSecrets) List(
 			[]*ManagedSecret,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ManagedSecretListResponse, error) {
@@ -2659,6 +2716,7 @@ func (svc *ManagedSecrets) ListByActor(
 			[]*ManagedSecret,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ManagedSecretListResponse, error) {
@@ -2689,6 +2747,7 @@ func (svc *ManagedSecrets) Create(
 	req.ManagedSecret = convertManagedSecretToPlumbing(managedSecret)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretCreateResponse, error) {
@@ -2729,6 +2788,7 @@ func (svc *ManagedSecrets) Update(
 	req.ManagedSecret = convertManagedSecretToPlumbing(managedSecret)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretUpdateResponse, error) {
@@ -2769,6 +2829,7 @@ func (svc *ManagedSecrets) Rotate(
 	req.Id = (id)
 	req.Meta = &plumbing.GenericRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretRotateResponse, error) {
@@ -2804,6 +2865,7 @@ func (svc *ManagedSecrets) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretDeleteResponse, error) {
@@ -2835,6 +2897,7 @@ func (svc *ManagedSecrets) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretGetResponse, error) {
@@ -2877,6 +2940,7 @@ func (svc *ManagedSecrets) Retrieve(
 	req.PublicKey = (publicKey)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretRetrieveResponse, error) {
@@ -2918,6 +2982,7 @@ func (svc *ManagedSecrets) Validate(
 	req.Id = (id)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretValidateResponse, error) {
@@ -2969,6 +3034,7 @@ func (svc *ManagedSecrets) Logs(
 			[]*ManagedSecretLog,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ManagedSecretLogsResponse, error) {
@@ -3023,6 +3089,7 @@ func (svc *Nodes) Create(
 	req.Node = convertNodeToPlumbing(node)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.NodeCreateResponse, error) {
@@ -3065,6 +3132,7 @@ func (svc *Nodes) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.NodeGetResponse, error) {
@@ -3105,6 +3173,7 @@ func (svc *Nodes) Update(
 	req.Node = convertNodeToPlumbing(node)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.NodeUpdateResponse, error) {
@@ -3145,6 +3214,7 @@ func (svc *Nodes) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.NodeDeleteResponse, error) {
@@ -3193,6 +3263,7 @@ func (svc *Nodes) List(
 			[]Node,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.NodeListResponse, error) {
@@ -3242,6 +3313,7 @@ func (svc *NodesHistory) List(
 			[]*NodeHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.NodeHistoryListResponse, error) {
@@ -3291,6 +3363,7 @@ func (svc *OrganizationHistory) List(
 			[]*OrganizationHistoryRecord,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.OrganizationHistoryListResponse, error) {
@@ -3327,6 +3400,7 @@ func (svc *PeeringGroupNodes) Create(
 	req.PeeringGroupNode = convertPeeringGroupNodeToPlumbing(peeringGroupNode)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupNodeCreateResponse, error) {
@@ -3367,6 +3441,7 @@ func (svc *PeeringGroupNodes) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupNodeDeleteResponse, error) {
@@ -3403,6 +3478,7 @@ func (svc *PeeringGroupNodes) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupNodeGetResponse, error) {
@@ -3456,6 +3532,7 @@ func (svc *PeeringGroupNodes) List(
 			[]*PeeringGroupNode,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.PeeringGroupNodeListResponse, error) {
@@ -3492,6 +3569,7 @@ func (svc *PeeringGroupPeers) Create(
 	req.PeeringGroupPeer = convertPeeringGroupPeerToPlumbing(peeringGroupPeer)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupPeerCreateResponse, error) {
@@ -3532,6 +3610,7 @@ func (svc *PeeringGroupPeers) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupPeerDeleteResponse, error) {
@@ -3568,6 +3647,7 @@ func (svc *PeeringGroupPeers) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupPeerGetResponse, error) {
@@ -3621,6 +3701,7 @@ func (svc *PeeringGroupPeers) List(
 			[]*PeeringGroupPeer,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.PeeringGroupPeerListResponse, error) {
@@ -3657,6 +3738,7 @@ func (svc *PeeringGroupResources) Create(
 	req.PeeringGroupResource = convertPeeringGroupResourceToPlumbing(peeringGroupResource)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupResourceCreateResponse, error) {
@@ -3697,6 +3779,7 @@ func (svc *PeeringGroupResources) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupResourceDeleteResponse, error) {
@@ -3733,6 +3816,7 @@ func (svc *PeeringGroupResources) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupResourceGetResponse, error) {
@@ -3786,6 +3870,7 @@ func (svc *PeeringGroupResources) List(
 			[]*PeeringGroupResource,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.PeeringGroupResourceListResponse, error) {
@@ -3822,6 +3907,7 @@ func (svc *PeeringGroups) Create(
 	req.PeeringGroup = convertPeeringGroupToPlumbing(peeringGroup)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupCreateResponse, error) {
@@ -3862,6 +3948,7 @@ func (svc *PeeringGroups) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupDeleteResponse, error) {
@@ -3898,6 +3985,7 @@ func (svc *PeeringGroups) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PeeringGroupGetResponse, error) {
@@ -3951,6 +4039,7 @@ func (svc *PeeringGroups) List(
 			[]*PeeringGroup,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.PeeringGroupListResponse, error) {
@@ -4004,6 +4093,7 @@ func (svc *Policies) Create(
 	req.Policy = convertPolicyToPlumbing(policy)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PolicyCreateResponse, error) {
@@ -4039,6 +4129,7 @@ func (svc *Policies) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PolicyDeleteResponse, error) {
@@ -4069,6 +4160,7 @@ func (svc *Policies) Update(
 	req.Policy = convertPolicyToPlumbing(policy)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PolicyUpdateResponse, error) {
@@ -4105,6 +4197,7 @@ func (svc *Policies) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.PolicyGetResponse, error) {
@@ -4158,6 +4251,7 @@ func (svc *Policies) List(
 			[]*Policy,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.PolicyListResponse, error) {
@@ -4207,6 +4301,7 @@ func (svc *PoliciesHistory) List(
 			[]*PolicyHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.PoliciesHistoryListResponse, error) {
@@ -4261,6 +4356,7 @@ func (svc *ProxyClusterKeys) Create(
 	req.ProxyClusterKey = convertProxyClusterKeyToPlumbing(proxyClusterKey)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ProxyClusterKeyCreateResponse, error) {
@@ -4303,6 +4399,7 @@ func (svc *ProxyClusterKeys) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ProxyClusterKeyGetResponse, error) {
@@ -4343,6 +4440,7 @@ func (svc *ProxyClusterKeys) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ProxyClusterKeyDeleteResponse, error) {
@@ -4391,6 +4489,7 @@ func (svc *ProxyClusterKeys) List(
 			[]*ProxyClusterKey,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ProxyClusterKeyListResponse, error) {
@@ -4442,6 +4541,7 @@ func (svc *Queries) List(
 			[]*Query,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.QueryListResponse, error) {
@@ -4494,6 +4594,7 @@ func (svc *RemoteIdentities) Create(
 	req.RemoteIdentity = convertRemoteIdentityToPlumbing(remoteIdentity)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RemoteIdentityCreateResponse, error) {
@@ -4535,6 +4636,7 @@ func (svc *RemoteIdentities) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RemoteIdentityGetResponse, error) {
@@ -4575,6 +4677,7 @@ func (svc *RemoteIdentities) Update(
 	req.RemoteIdentity = convertRemoteIdentityToPlumbing(remoteIdentity)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RemoteIdentityUpdateResponse, error) {
@@ -4615,6 +4718,7 @@ func (svc *RemoteIdentities) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RemoteIdentityDeleteResponse, error) {
@@ -4663,6 +4767,7 @@ func (svc *RemoteIdentities) List(
 			[]*RemoteIdentity,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RemoteIdentityListResponse, error) {
@@ -4712,6 +4817,7 @@ func (svc *RemoteIdentitiesHistory) List(
 			[]*RemoteIdentityHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RemoteIdentityHistoryListResponse, error) {
@@ -4766,6 +4872,7 @@ func (svc *RemoteIdentityGroups) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RemoteIdentityGroupGetResponse, error) {
@@ -4819,6 +4926,7 @@ func (svc *RemoteIdentityGroups) List(
 			[]*RemoteIdentityGroup,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RemoteIdentityGroupListResponse, error) {
@@ -4868,6 +4976,7 @@ func (svc *RemoteIdentityGroupsHistory) List(
 			[]*RemoteIdentityGroupHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RemoteIdentityGroupHistoryListResponse, error) {
@@ -4918,6 +5027,7 @@ func (svc *Replays) List(
 			[]*ReplayChunk,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ReplayListResponse, error) {
@@ -4984,6 +5094,7 @@ func (svc *Resources) EnumerateTags(
 			[]*Tag,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.EnumerateTagsResponse, error) {
@@ -5014,6 +5125,7 @@ func (svc *Resources) Create(
 	req.Resource = convertResourceToPlumbing(resource)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ResourceCreateResponse, error) {
@@ -5055,6 +5167,7 @@ func (svc *Resources) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ResourceGetResponse, error) {
@@ -5095,6 +5208,7 @@ func (svc *Resources) Update(
 	req.Resource = convertResourceToPlumbing(resource)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ResourceUpdateResponse, error) {
@@ -5135,6 +5249,7 @@ func (svc *Resources) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ResourceDeleteResponse, error) {
@@ -5183,6 +5298,7 @@ func (svc *Resources) List(
 			[]Resource,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ResourceListResponse, error) {
@@ -5215,6 +5331,7 @@ func (svc *Resources) Healthcheck(
 	req.Id = (id)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ResourceHealthcheckResponse, error) {
@@ -5269,6 +5386,7 @@ func (svc *ResourcesHistory) List(
 			[]*ResourceHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.ResourceHistoryListResponse, error) {
@@ -5330,6 +5448,7 @@ func (svc *RoleResources) List(
 			[]*RoleResource,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RoleResourceListResponse, error) {
@@ -5379,6 +5498,7 @@ func (svc *RoleResourcesHistory) List(
 			[]*RoleResourceHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RoleResourceHistoryListResponse, error) {
@@ -5433,6 +5553,7 @@ func (svc *Roles) Create(
 	req.Role = convertRoleToPlumbing(role)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RoleCreateResponse, error) {
@@ -5474,6 +5595,7 @@ func (svc *Roles) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RoleGetResponse, error) {
@@ -5514,6 +5636,7 @@ func (svc *Roles) Update(
 	req.Role = convertRoleToPlumbing(role)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RoleUpdateResponse, error) {
@@ -5554,6 +5677,7 @@ func (svc *Roles) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.RoleDeleteResponse, error) {
@@ -5602,6 +5726,7 @@ func (svc *Roles) List(
 			[]*Role,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RoleListResponse, error) {
@@ -5651,6 +5776,7 @@ func (svc *RolesHistory) List(
 			[]*RoleHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.RoleHistoryListResponse, error) {
@@ -5702,6 +5828,7 @@ func (svc *SecretStores) Create(
 	req.SecretStore = convertSecretStoreToPlumbing(secretStore)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretStoreCreateResponse, error) {
@@ -5743,6 +5870,7 @@ func (svc *SecretStores) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretStoreGetResponse, error) {
@@ -5783,6 +5911,7 @@ func (svc *SecretStores) Update(
 	req.SecretStore = convertSecretStoreToPlumbing(secretStore)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretStoreUpdateResponse, error) {
@@ -5823,6 +5952,7 @@ func (svc *SecretStores) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretStoreDeleteResponse, error) {
@@ -5871,6 +6001,7 @@ func (svc *SecretStores) List(
 			[]SecretStore,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.SecretStoreListResponse, error) {
@@ -5919,6 +6050,7 @@ func (svc *SecretEngines) List(
 			[]SecretEngine,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.SecretEngineListResponse, error) {
@@ -5950,6 +6082,7 @@ func (svc *SecretEngines) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretEngineGetResponse, error) {
@@ -5990,6 +6123,7 @@ func (svc *SecretEngines) Create(
 	req.SecretEngine = convertSecretEngineToPlumbing(secretEngine)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretEngineCreateResponse, error) {
@@ -6030,6 +6164,7 @@ func (svc *SecretEngines) Update(
 	req.SecretEngine = convertSecretEngineToPlumbing(secretEngine)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretEngineUpdateResponse, error) {
@@ -6070,6 +6205,7 @@ func (svc *SecretEngines) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretEngineDeleteResponse, error) {
@@ -6114,6 +6250,7 @@ func (svc *SecretEngines) ListSecretStores(
 			[]SecretStore,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.SecretStoreListResponse, error) {
@@ -6144,6 +6281,7 @@ func (svc *SecretEngines) GenerateKeys(
 	req.SecretEngineId = (secretEngineId)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.GenerateKeysResponse, error) {
@@ -6174,6 +6312,7 @@ func (svc *SecretEngines) Healthcheck(
 	req.SecretEngineId = (secretEngineId)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.HealthcheckResponse, error) {
@@ -6211,6 +6350,7 @@ func (svc *SecretEngines) Rotate(
 	req.PasswordPolicy = convertSecretEnginePasswordPolicyToPlumbing(passwordPolicy)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretEngineRotateResponse, error) {
@@ -6260,6 +6400,7 @@ func (svc *SecretStoreHealths) List(
 			[]*SecretStoreHealth,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.SecretStoreHealthListResponse, error) {
@@ -6292,6 +6433,7 @@ func (svc *SecretStoreHealths) Healthcheck(
 	req.SecretStoreId = (secretStoreId)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.SecretStoreHealthcheckResponse, error) {
@@ -6341,6 +6483,7 @@ func (svc *SecretStoresHistory) List(
 			[]*SecretStoreHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.SecretStoreHistoryListResponse, error) {
@@ -6393,6 +6536,7 @@ func (svc *WorkflowApprovers) Create(
 	req.WorkflowApprover = convertWorkflowApproverToPlumbing(workflowApprover)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowApproversCreateResponse, error) {
@@ -6429,6 +6573,7 @@ func (svc *WorkflowApprovers) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowApproverGetResponse, error) {
@@ -6469,6 +6614,7 @@ func (svc *WorkflowApprovers) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowApproversDeleteResponse, error) {
@@ -6512,6 +6658,7 @@ func (svc *WorkflowApprovers) List(
 			[]*WorkflowApprover,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowApproversListResponse, error) {
@@ -6561,6 +6708,7 @@ func (svc *WorkflowApproversHistory) List(
 			[]*WorkflowApproverHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowApproversHistoryListResponse, error) {
@@ -6622,6 +6770,7 @@ func (svc *WorkflowAssignments) List(
 			[]*WorkflowAssignment,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowAssignmentsListResponse, error) {
@@ -6671,6 +6820,7 @@ func (svc *WorkflowAssignmentsHistory) List(
 			[]*WorkflowAssignmentHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowAssignmentsHistoryListResponse, error) {
@@ -6724,6 +6874,7 @@ func (svc *WorkflowRoles) Create(
 	req.WorkflowRole = convertWorkflowRoleToPlumbing(workflowRole)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowRolesCreateResponse, error) {
@@ -6760,6 +6911,7 @@ func (svc *WorkflowRoles) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowRoleGetResponse, error) {
@@ -6800,6 +6952,7 @@ func (svc *WorkflowRoles) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowRolesDeleteResponse, error) {
@@ -6843,6 +6996,7 @@ func (svc *WorkflowRoles) List(
 			[]*WorkflowRole,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowRolesListResponse, error) {
@@ -6892,6 +7046,7 @@ func (svc *WorkflowRolesHistory) List(
 			[]*WorkflowRoleHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowRolesHistoryListResponse, error) {
@@ -6946,6 +7101,7 @@ func (svc *Workflows) Create(
 	req.Workflow = convertWorkflowToPlumbing(workflow)
 	req.Meta = &plumbing.CreateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowCreateResponse, error) {
@@ -6982,6 +7138,7 @@ func (svc *Workflows) Get(
 	req.Meta = &plumbing.GetRequestMetadata{}
 	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowGetResponse, error) {
@@ -7022,6 +7179,7 @@ func (svc *Workflows) Delete(
 	req.Id = (id)
 	req.Meta = &plumbing.DeleteRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowDeleteResponse, error) {
@@ -7053,6 +7211,7 @@ func (svc *Workflows) Update(
 	req.Workflow = convertWorkflowToPlumbing(workflow)
 	req.Meta = &plumbing.UpdateRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
+		ctx,
 		svc.parent.retryOptions,
 		&req.Meta.Fulfillments,
 		func() (*plumbing.WorkflowUpdateResponse, error) {
@@ -7101,6 +7260,7 @@ func (svc *Workflows) List(
 			[]*Workflow,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowListResponse, error) {
@@ -7150,6 +7310,7 @@ func (svc *WorkflowsHistory) List(
 			[]*WorkflowHistory,
 			bool, error) {
 			plumbingResponse, err := retryWrapper(
+				ctx,
 				svc.parent.retryOptions,
 				&req.Meta.Fulfillments,
 				func() (*plumbing.WorkflowHistoryListResponse, error) {
