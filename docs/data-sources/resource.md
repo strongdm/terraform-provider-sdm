@@ -449,6 +449,20 @@ In addition to provided arguments above, the following attributes are returned b
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
 		* `tenant_id` - The tenant ID to authenticate to.
+	* azure_console:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `connector_id` - The connector ID to authenticate through.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `id` - Unique identifier of the Resource.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
+		* `management_group_id` - The management group ID to authenticate scope Privileges to.
+		* `name` - Unique human-readable name of the Resource.
+		* `privilege_levels` - The privilege levels specify which Groups are managed externally
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `subscription_id` - The subscription ID to authenticate scope Privileges to.
+		* `tags` - Tags is a map of key, value pairs.
 	* azure_mysql:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 		* `database` - The database for healthchecks. Does not affect client requests.
@@ -915,6 +929,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `host_override` - The host header will be overwritten with this field if provided.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -930,6 +945,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - The password to authenticate with.
+		* `port_override` - The local port used by clients to connect to this resource.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -945,6 +961,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `host_override` - The host header will be overwritten with this field if provided.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `port_override` - The local port used by clients to connect to this resource.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1511,8 +1528,9 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
-		* `password` - The password to authenticate with.
+		* `password` - Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
 		* `port_override` - The local port used by clients to connect to this resource.
+		* `private_key` - RSA Private Key for authentication
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `schema` - The schema to provide on authentication.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.

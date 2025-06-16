@@ -231,6 +231,7 @@ const (
 	ActivityVerbOrgSelfRegistrationDeactivated                   = "self-registration deactivated"
 	ActivityVerbOrgNameUpdated                                   = "organization name updated"
 	ActivityVerbOrgSettingUpdated                                = "organization setting updated"
+	ActivityVerbOrgLogConfigUpdated                              = "organization logging configuration updated"
 	ActivityVerbOrgLogSyncSettingUpdated                         = "organization log stream setting updated"
 	ActivityVerbOrgWorkflowSettingUpdated                        = "organization workflow setting updated"
 	ActivityVerbOrgCreated                                       = "organization created"
@@ -670,6 +671,7 @@ var AllActivityVerb = []string{
 	ActivityVerbOrgSelfRegistrationDeactivated,
 	ActivityVerbOrgNameUpdated,
 	ActivityVerbOrgSettingUpdated,
+	ActivityVerbOrgLogConfigUpdated,
 	ActivityVerbOrgLogSyncSettingUpdated,
 	ActivityVerbOrgWorkflowSettingUpdated,
 	ActivityVerbOrgCreated,

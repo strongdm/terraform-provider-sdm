@@ -2251,6 +2251,80 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"azure_console": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AzureConsole is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"connector_id": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The connector ID to authenticate through.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"identity_set_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The ID of the identity set to use for identity connections.",
+						},
+						"management_group_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The management group ID to authenticate scope Privileges to.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"privilege_levels": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The privilege levels specify which Groups are managed externally",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"subscription_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The subscription ID to authenticate scope Privileges to.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"azure_mysql": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -4756,6 +4830,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4835,6 +4915,12 @@ func resourceResource() *schema.Resource {
 							Sensitive:   true,
 							Description: "The password to authenticate with.",
 						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -4912,6 +4998,12 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7962,14 +8054,21 @@ func resourceResource() *schema.Resource {
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Sensitive:   true,
-							Description: "The password to authenticate with.",
+							Description: "Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/",
 						},
 						"port_override": {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
 							Description: "The local port used by clients to connect to this resource.",
+						},
+						"private_key": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "RSA Private Key for authentication",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -9916,6 +10015,17 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"tenant_id":          convertStringToPlumbing(raw["tenant_id"]),
 		}, nil
 	}
+	if list := d.Get("azure_console").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
 	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -11536,10 +11646,10 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["password"]; v != nil && v.(string) != "" {
+			if v := raw["private_key"]; v != nil && v.(string) != "" {
 				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
 				if err != nil {
-					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+					return nil, fmt.Errorf("secret store credential private_key was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
 				}
 			}
 			if v := raw["username"]; v != nil && v.(string) != "" {
@@ -11551,8 +11661,8 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{
-			"password": convertStringToPlumbing(raw["password"]),
-			"username": convertStringToPlumbing(raw["username"]),
+			"private_key": convertStringToPlumbing(raw["private_key"]),
+			"username":    convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
 	if list := d.Get("snowsight").([]interface{}); len(list) > 0 {
@@ -12628,6 +12738,28 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("azure_console").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AzureConsole{}
+		}
+		out := &sdm.AzureConsole{
+			ID:                d.Id(),
+			BindInterface:     convertStringToPlumbing(raw["bind_interface"]),
+			ConnectorID:       convertStringToPlumbing(raw["connector_id"]),
+			EgressFilter:      convertStringToPlumbing(raw["egress_filter"]),
+			IdentitySetID:     convertStringToPlumbing(raw["identity_set_id"]),
+			ManagementGroupID: convertStringToPlumbing(raw["management_group_id"]),
+			Name:              convertStringToPlumbing(raw["name"]),
+			PrivilegeLevels:   convertStringToPlumbing(raw["privilege_levels"]),
+			ProxyClusterID:    convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:     convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:         convertStringToPlumbing(raw["subdomain"]),
+			SubscriptionID:    convertStringToPlumbing(raw["subscription_id"]),
+			Tags:              convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -13489,12 +13621,18 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			HealthcheckPath:  convertStringToPlumbing(raw["healthcheck_path"]),
 			HostOverride:     convertStringToPlumbing(raw["host_override"]),
 			Name:             convertStringToPlumbing(raw["name"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		return out
 	}
 	if list := d.Get("http_basic_auth").([]interface{}); len(list) > 0 {
@@ -13512,6 +13650,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			HostOverride:     convertStringToPlumbing(raw["host_override"]),
 			Name:             convertStringToPlumbing(raw["name"]),
 			Password:         convertStringToPlumbing(raw["password"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
@@ -13519,6 +13658,11 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Url:              convertStringToPlumbing(raw["url"]),
 			Username:         convertStringToPlumbing(raw["username"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		return out
 	}
 	if list := d.Get("http_no_auth").([]interface{}); len(list) > 0 {
@@ -13535,12 +13679,18 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			HealthcheckPath:  convertStringToPlumbing(raw["healthcheck_path"]),
 			HostOverride:     convertStringToPlumbing(raw["host_override"]),
 			Name:             convertStringToPlumbing(raw["name"]),
+			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
 		return out
 	}
 	if list := d.Get("kubernetes").([]interface{}); len(list) > 0 {
@@ -14551,8 +14701,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:       convertStringToPlumbing(raw["hostname"]),
 			Name:           convertStringToPlumbing(raw["name"]),
-			Password:       convertStringToPlumbing(raw["password"]),
 			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			PrivateKey:     convertStringToPlumbing(raw["private_key"]),
 			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
 			Schema:         convertStringToPlumbing(raw["schema"]),
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
@@ -15502,6 +15652,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tenant_id":          seValues["tenant_id"],
 			},
 		})
+	case *sdm.AzureConsole:
+		localV, _ := localVersion.(*sdm.AzureConsole)
+		_ = localV
+		d.Set("azure_console", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"connector_id":        (v.ConnectorID),
+				"egress_filter":       (v.EgressFilter),
+				"identity_set_id":     (v.IdentitySetID),
+				"management_group_id": (v.ManagementGroupID),
+				"name":                (v.Name),
+				"privilege_levels":    (v.PrivilegeLevels),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"subscription_id":     (v.SubscriptionID),
+				"tags":                convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AzureMysql:
 		localV, _ := localVersion.(*sdm.AzureMysql)
 		_ = localV
@@ -16121,6 +16290,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_path":  (v.HealthcheckPath),
 				"host_override":     (v.HostOverride),
 				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -16141,6 +16311,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"host_override":     (v.HostOverride),
 				"name":              (v.Name),
 				"password":          seValues["password"],
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -16161,6 +16332,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"healthcheck_path":  (v.HealthcheckPath),
 				"host_override":     (v.HostOverride),
 				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -16904,6 +17076,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":             (v.Name),
 				"password":         seValues["password"],
 				"port_override":    (v.PortOverride),
+				"private_key":      seValues["private_key"],
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"schema":           (v.Schema),
 				"secret_store_id":  (v.SecretStoreID),
@@ -18022,6 +18195,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"tenant_id":          seValues["tenant_id"],
 			},
 		})
+	case *sdm.AzureConsole:
+		localV, ok := localVersion.(*sdm.AzureConsole)
+		if !ok {
+			localV = &sdm.AzureConsole{}
+		}
+		_ = localV
+		d.Set("azure_console", []map[string]interface{}{
+			{
+				"bind_interface":      (v.BindInterface),
+				"connector_id":        (v.ConnectorID),
+				"egress_filter":       (v.EgressFilter),
+				"identity_set_id":     (v.IdentitySetID),
+				"management_group_id": (v.ManagementGroupID),
+				"name":                (v.Name),
+				"privilege_levels":    (v.PrivilegeLevels),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"subscription_id":     (v.SubscriptionID),
+				"tags":                convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.AzureMysql:
 		localV, ok := localVersion.(*sdm.AzureMysql)
 		if !ok {
@@ -18893,6 +19088,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"healthcheck_path":  (v.HealthcheckPath),
 				"host_override":     (v.HostOverride),
 				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -18922,6 +19118,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"host_override":     (v.HostOverride),
 				"name":              (v.Name),
 				"password":          seValues["password"],
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -18945,6 +19142,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"healthcheck_path":  (v.HealthcheckPath),
 				"host_override":     (v.HostOverride),
 				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -19973,6 +20171,9 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		if v.Password != "" {
 			seValues["password"] = v.Password
 		}
+		if v.PrivateKey != "" {
+			seValues["private_key"] = v.PrivateKey
+		}
 		if v.Username != "" {
 			seValues["username"] = v.Username
 		}
@@ -19985,6 +20186,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":             (v.Name),
 				"password":         seValues["password"],
 				"port_override":    (v.PortOverride),
+				"private_key":      seValues["private_key"],
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"schema":           (v.Schema),
 				"secret_store_id":  (v.SecretStoreID),

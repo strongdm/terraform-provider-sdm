@@ -558,6 +558,8 @@ type PrivilegesMessage struct {
 
 	// Kubernetes privileges.
 	Kubernetes *KubernetesPrivileges `protobuf:"bytes,1,opt,name=kubernetes,proto3" json:"kubernetes,omitempty"`
+	// Entra Group privileges.
+	EntraGroups *EntraGroupPrivileges `protobuf:"bytes,2,opt,name=entraGroups,proto3" json:"entraGroups,omitempty"`
 }
 
 func (x *PrivilegesMessage) Reset() {
@@ -595,6 +597,13 @@ func (*PrivilegesMessage) Descriptor() ([]byte, []int) {
 func (x *PrivilegesMessage) GetKubernetes() *KubernetesPrivileges {
 	if x != nil {
 		return x.Kubernetes
+	}
+	return nil
+}
+
+func (x *PrivilegesMessage) GetEntraGroups() *EntraGroupPrivileges {
+	if x != nil {
+		return x.EntraGroups
 	}
 	return nil
 }
@@ -647,6 +656,54 @@ func (x *KubernetesPrivileges) GetGroups() []string {
 	return nil
 }
 
+type EntraGroupPrivileges struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The entra groups
+	Groups []string `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
+}
+
+func (x *EntraGroupPrivileges) Reset() {
+	*x = EntraGroupPrivileges{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_access_requests_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EntraGroupPrivileges) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EntraGroupPrivileges) ProtoMessage() {}
+
+func (x *EntraGroupPrivileges) ProtoReflect() protoreflect.Message {
+	mi := &file_access_requests_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EntraGroupPrivileges.ProtoReflect.Descriptor instead.
+func (*EntraGroupPrivileges) Descriptor() ([]byte, []int) {
+	return file_access_requests_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *EntraGroupPrivileges) GetGroups() []string {
+	if x != nil {
+		return x.Groups
+	}
+	return nil
+}
+
 // AccessRequestConfig holds the information required to request access to a resource
 type AccessRequestConfig struct {
 	state         protoimpl.MessageState
@@ -666,7 +723,7 @@ type AccessRequestConfig struct {
 func (x *AccessRequestConfig) Reset() {
 	*x = AccessRequestConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_access_requests_proto_msgTypes[7]
+		mi := &file_access_requests_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -679,7 +736,7 @@ func (x *AccessRequestConfig) String() string {
 func (*AccessRequestConfig) ProtoMessage() {}
 
 func (x *AccessRequestConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_access_requests_proto_msgTypes[7]
+	mi := &file_access_requests_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -692,7 +749,7 @@ func (x *AccessRequestConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessRequestConfig.ProtoReflect.Descriptor instead.
 func (*AccessRequestConfig) Descriptor() ([]byte, []int) {
-	return file_access_requests_proto_rawDescGZIP(), []int{7}
+	return file_access_requests_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AccessRequestConfig) GetResourceId() string {
@@ -746,7 +803,7 @@ type RequestAccessRequestConfig struct {
 func (x *RequestAccessRequestConfig) Reset() {
 	*x = RequestAccessRequestConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_access_requests_proto_msgTypes[8]
+		mi := &file_access_requests_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -759,7 +816,7 @@ func (x *RequestAccessRequestConfig) String() string {
 func (*RequestAccessRequestConfig) ProtoMessage() {}
 
 func (x *RequestAccessRequestConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_access_requests_proto_msgTypes[8]
+	mi := &file_access_requests_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -772,7 +829,7 @@ func (x *RequestAccessRequestConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestAccessRequestConfig.ProtoReflect.Descriptor instead.
 func (*RequestAccessRequestConfig) Descriptor() ([]byte, []int) {
-	return file_access_requests_proto_rawDescGZIP(), []int{8}
+	return file_access_requests_proto_rawDescGZIP(), []int{9}
 }
 
 // Deprecated: Do not use.
@@ -943,15 +1000,25 @@ var file_access_requests_proto_rawDesc = []byte{
 	0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x52, 0x1b, 0x70, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67,
 	0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61,
 	0x74, 0x75, 0x73, 0x3a, 0x10, 0xfa, 0xf8, 0xb3, 0x07, 0x0b, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2,
-	0xf3, 0xb3, 0x07, 0x01, 0x2a, 0x22, 0x74, 0x0a, 0x11, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65,
-	0x67, 0x65, 0x73, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x44, 0x0a, 0x0a, 0x6b, 0x75,
-	0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18,
-	0x2e, 0x76, 0x31, 0x2e, 0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x50, 0x72,
-	0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65, 0x73, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0,
-	0xf3, 0xb3, 0x07, 0x01, 0x52, 0x0a, 0x6b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73,
+	0xf3, 0xb3, 0x07, 0x01, 0x2a, 0x22, 0xbc, 0x01, 0x0a, 0x11, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c,
+	0x65, 0x67, 0x65, 0x73, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x44, 0x0a, 0x0a, 0x6b,
+	0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x18, 0x2e, 0x76, 0x31, 0x2e, 0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x50,
+	0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65, 0x73, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05,
+	0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x0a, 0x6b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65,
+	0x73, 0x12, 0x46, 0x0a, 0x0b, 0x65, 0x6e, 0x74, 0x72, 0x61, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x74, 0x72,
+	0x61, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65, 0x73,
+	0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x0b, 0x65, 0x6e,
+	0x74, 0x72, 0x61, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14,
+	0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69,
+	0x76, 0x61, 0x74, 0x65, 0x22, 0x55, 0x0a, 0x14, 0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74,
+	0x65, 0x73, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65, 0x73, 0x12, 0x22, 0x0a, 0x06,
+	0x67, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8,
+	0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x06, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x73,
 	0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07,
-	0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x55, 0x0a, 0x14, 0x4b,
-	0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65,
+	0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x55, 0x0a, 0x14, 0x45,
+	0x6e, 0x74, 0x72, 0x61, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65,
 	0x67, 0x65, 0x73, 0x12, 0x22, 0x0a, 0x06, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x01, 0x20,
 	0x03, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52,
 	0x06, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3,
@@ -1041,7 +1108,7 @@ func file_access_requests_proto_rawDescGZIP() []byte {
 	return file_access_requests_proto_rawDescData
 }
 
-var file_access_requests_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_access_requests_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_access_requests_proto_goTypes = []interface{}{
 	(*AccessRequestListRequest)(nil),   // 0: v1.AccessRequestListRequest
 	(*AccessRequestListResponse)(nil),  // 1: v1.AccessRequestListResponse
@@ -1050,38 +1117,40 @@ var file_access_requests_proto_goTypes = []interface{}{
 	(*RequestableResource)(nil),        // 4: v1.RequestableResource
 	(*PrivilegesMessage)(nil),          // 5: v1.PrivilegesMessage
 	(*KubernetesPrivileges)(nil),       // 6: v1.KubernetesPrivileges
-	(*AccessRequestConfig)(nil),        // 7: v1.AccessRequestConfig
-	(*RequestAccessRequestConfig)(nil), // 8: v1.RequestAccessRequestConfig
-	(*ListRequestMetadata)(nil),        // 9: v1.ListRequestMetadata
-	(*ListResponseMetadata)(nil),       // 10: v1.ListResponseMetadata
-	(*RateLimitMetadata)(nil),          // 11: v1.RateLimitMetadata
-	(*timestamppb.Timestamp)(nil),      // 12: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),        // 13: google.protobuf.Duration
-	(*Tags)(nil),                       // 14: v1.Tags
+	(*EntraGroupPrivileges)(nil),       // 7: v1.EntraGroupPrivileges
+	(*AccessRequestConfig)(nil),        // 8: v1.AccessRequestConfig
+	(*RequestAccessRequestConfig)(nil), // 9: v1.RequestAccessRequestConfig
+	(*ListRequestMetadata)(nil),        // 10: v1.ListRequestMetadata
+	(*ListResponseMetadata)(nil),       // 11: v1.ListResponseMetadata
+	(*RateLimitMetadata)(nil),          // 12: v1.RateLimitMetadata
+	(*timestamppb.Timestamp)(nil),      // 13: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),        // 14: google.protobuf.Duration
+	(*Tags)(nil),                       // 15: v1.Tags
 }
 var file_access_requests_proto_depIdxs = []int32{
-	9,  // 0: v1.AccessRequestListRequest.meta:type_name -> v1.ListRequestMetadata
-	10, // 1: v1.AccessRequestListResponse.meta:type_name -> v1.ListResponseMetadata
+	10, // 0: v1.AccessRequestListRequest.meta:type_name -> v1.ListRequestMetadata
+	11, // 1: v1.AccessRequestListResponse.meta:type_name -> v1.ListResponseMetadata
 	2,  // 2: v1.AccessRequestListResponse.access_requests:type_name -> v1.AccessRequest
-	11, // 3: v1.AccessRequestListResponse.rate_limit:type_name -> v1.RateLimitMetadata
-	12, // 4: v1.AccessRequest.start_from:type_name -> google.protobuf.Timestamp
-	12, // 5: v1.AccessRequest.valid_until:type_name -> google.protobuf.Timestamp
-	12, // 6: v1.AccessRequest.status_at:type_name -> google.protobuf.Timestamp
-	13, // 7: v1.AccessRequest.requestedDuration:type_name -> google.protobuf.Duration
-	13, // 8: v1.AccessRequest.resultDuration:type_name -> google.protobuf.Duration
-	12, // 9: v1.AccessRequestEvent.time:type_name -> google.protobuf.Timestamp
-	14, // 10: v1.RequestableResource.tags:type_name -> v1.Tags
+	12, // 3: v1.AccessRequestListResponse.rate_limit:type_name -> v1.RateLimitMetadata
+	13, // 4: v1.AccessRequest.start_from:type_name -> google.protobuf.Timestamp
+	13, // 5: v1.AccessRequest.valid_until:type_name -> google.protobuf.Timestamp
+	13, // 6: v1.AccessRequest.status_at:type_name -> google.protobuf.Timestamp
+	14, // 7: v1.AccessRequest.requestedDuration:type_name -> google.protobuf.Duration
+	14, // 8: v1.AccessRequest.resultDuration:type_name -> google.protobuf.Duration
+	13, // 9: v1.AccessRequestEvent.time:type_name -> google.protobuf.Timestamp
+	15, // 10: v1.RequestableResource.tags:type_name -> v1.Tags
 	5,  // 11: v1.RequestableResource.privileges:type_name -> v1.PrivilegesMessage
 	6,  // 12: v1.PrivilegesMessage.kubernetes:type_name -> v1.KubernetesPrivileges
-	12, // 13: v1.AccessRequestConfig.start_from:type_name -> google.protobuf.Timestamp
-	12, // 14: v1.RequestAccessRequestConfig.start_from:type_name -> google.protobuf.Timestamp
-	0,  // 15: v1.AccessRequests.List:input_type -> v1.AccessRequestListRequest
-	1,  // 16: v1.AccessRequests.List:output_type -> v1.AccessRequestListResponse
-	16, // [16:17] is the sub-list for method output_type
-	15, // [15:16] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	7,  // 13: v1.PrivilegesMessage.entraGroups:type_name -> v1.EntraGroupPrivileges
+	13, // 14: v1.AccessRequestConfig.start_from:type_name -> google.protobuf.Timestamp
+	13, // 15: v1.RequestAccessRequestConfig.start_from:type_name -> google.protobuf.Timestamp
+	0,  // 16: v1.AccessRequests.List:input_type -> v1.AccessRequestListRequest
+	1,  // 17: v1.AccessRequests.List:output_type -> v1.AccessRequestListResponse
+	17, // [17:18] is the sub-list for method output_type
+	16, // [16:17] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_access_requests_proto_init() }
@@ -1178,7 +1247,7 @@ func file_access_requests_proto_init() {
 			}
 		}
 		file_access_requests_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AccessRequestConfig); i {
+			switch v := v.(*EntraGroupPrivileges); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1190,6 +1259,18 @@ func file_access_requests_proto_init() {
 			}
 		}
 		file_access_requests_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AccessRequestConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_access_requests_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RequestAccessRequestConfig); i {
 			case 0:
 				return &v.state
@@ -1208,7 +1289,7 @@ func file_access_requests_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_access_requests_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

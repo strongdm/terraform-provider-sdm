@@ -2276,6 +2276,81 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"azure_console": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"connector_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The connector ID to authenticate through.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
+									"management_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The management group ID to authenticate scope Privileges to.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"privilege_levels": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The privilege levels specify which Groups are managed externally",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"subscription_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The subscription ID to authenticate scope Privileges to.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"azure_mysql": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -4785,6 +4860,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
 									"proxy_cluster_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4866,6 +4946,11 @@ func dataSourceResource() *schema.Resource {
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
+									},
 									"proxy_cluster_id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -4945,6 +5030,11 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource.",
 									},
 									"proxy_cluster_id": {
 										Type:        schema.TypeString,
@@ -7990,14 +8080,20 @@ func dataSourceResource() *schema.Resource {
 									},
 									"password": {
 										Type:        schema.TypeString,
-										Optional:    true,
+										Computed:    true,
 										Sensitive:   true,
-										Description: "The password to authenticate with.",
+										Description: "Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/",
 									},
 									"port_override": {
 										Type:        schema.TypeInt,
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource.",
+									},
+									"private_key": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Sensitive:   true,
+										Description: "RSA Private Key for authentication",
 									},
 									"proxy_cluster_id": {
 										Type:        schema.TypeString,
@@ -9694,6 +9790,22 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"tenant_id":          (v.TenantID),
 			})
+		case *sdm.AzureConsole:
+			output[0]["azure_console"] = append(output[0]["azure_console"], entity{
+				"bind_interface":      (v.BindInterface),
+				"connector_id":        (v.ConnectorID),
+				"egress_filter":       (v.EgressFilter),
+				"id":                  (v.ID),
+				"identity_set_id":     (v.IdentitySetID),
+				"management_group_id": (v.ManagementGroupID),
+				"name":                (v.Name),
+				"privilege_levels":    (v.PrivilegeLevels),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"subscription_id":     (v.SubscriptionID),
+				"tags":                convertTagsToPorcelain(v.Tags),
+			})
 		case *sdm.AzureMysql:
 			output[0]["azure_mysql"] = append(output[0]["azure_mysql"], entity{
 				"bind_interface":                    (v.BindInterface),
@@ -10221,6 +10333,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"host_override":     (v.HostOverride),
 				"id":                (v.ID),
 				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -10238,6 +10351,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                (v.ID),
 				"name":              (v.Name),
 				"password":          (v.Password),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -10255,6 +10369,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"host_override":     (v.HostOverride),
 				"id":                (v.ID),
 				"name":              (v.Name),
+				"port_override":     (v.PortOverride),
 				"proxy_cluster_id":  (v.ProxyClusterID),
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
@@ -10893,6 +11008,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":             (v.Name),
 				"password":         (v.Password),
 				"port_override":    (v.PortOverride),
+				"private_key":      (v.PrivateKey),
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"schema":           (v.Schema),
 				"secret_store_id":  (v.SecretStoreID),

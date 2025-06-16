@@ -835,7 +835,7 @@ func createProxyClusterWithPrefix(prefix string) (*sdm.ProxyCluster, error) {
 	defer cancel()
 	createResp, err := client.Nodes().Create(ctx, &sdm.ProxyCluster{
 		Name:    randomWithPrefix(prefix),
-		Address: "proxy:8443",
+		Address: randomWithPrefix(prefix) + ":8443",
 	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create proxy cluster: %w", err)

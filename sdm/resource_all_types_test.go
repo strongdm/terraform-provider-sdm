@@ -379,6 +379,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "azure_console",
+			pairs: [][2]string{
+				{"connector_id", `"connector_id"`},
+				{"egress_filter", `"name:value"`},
+				{"management_group_id", `"management_group_id"`},
+				{"name", `"name"`},
+				{"privilege_levels", `"privilege_levels"`},
+				{"subscription_id", `"subscription_id"`},
+			},
+		},
+		{
 			resource: "azure_mysql",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1240,7 +1251,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"name", `"name"`},
-				{"password", `"password"`},
+				{"private_key", `"private_key"`},
 				{"schema", `"schema"`},
 				{"username", `"username"`},
 			},
@@ -2760,7 +2771,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"name", `"secret_name"`},
-				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"private_key", `"path/to/secret?key=key&encoding=base64"`},
 				{"schema", `"schema"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},

@@ -450,6 +450,19 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The tenant ID to authenticate to.
+* azure_console:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `connector_id` - (Required) The connector ID to authenticate through.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
+	* `management_group_id` - (Optional) The management group ID to authenticate scope Privileges to.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `privilege_levels` - (Required) The privilege levels specify which Groups are managed externally
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subscription_id` - (Optional) The subscription ID to authenticate scope Privileges to.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * azure_mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
@@ -885,6 +898,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_path` - (Required) This path will be used to check the health of your site.
 	* `host_override` - (Optional) The host header will be overwritten with this field if provided.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -899,6 +913,7 @@ The following arguments are supported by the Resource resource:
 	* `host_override` - (Optional) The host header will be overwritten with this field if provided.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Optional) The password to authenticate with.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -913,6 +928,7 @@ The following arguments are supported by the Resource resource:
 	* `healthcheck_path` - (Required) This path will be used to check the health of your site.
 	* `host_override` - (Optional) The host header will be overwritten with this field if provided.
 	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -1444,8 +1460,8 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
+	* `private_key` - (Required, either in plaintext, or as a secret store path) RSA Private Key for authentication
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `schema` - (Optional) The schema to provide on authentication.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -1652,6 +1668,8 @@ The following arguments are supported by the Resource resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
+* snowflake:
+	* `password` - Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
 * ssh:
 	* `public_key` - The public key to append to a server's authorized keys. This will be generated after resource creation.
 ## Import

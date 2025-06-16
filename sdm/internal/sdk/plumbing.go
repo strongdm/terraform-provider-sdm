@@ -5026,6 +5026,77 @@ func convertRepeatedAzureCertificateToPorcelain(plumbings []*proto.AzureCertific
 	}
 	return items, nil
 }
+func convertAzureConsoleToPorcelain(plumbing *proto.AzureConsole) (*AzureConsole, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AzureConsole{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.ConnectorID = plumbing.ConnectorId
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.ManagementGroupID = plumbing.ManagementGroupId
+	porcelain.Name = plumbing.Name
+	porcelain.PrivilegeLevels = plumbing.PrivilegeLevels
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	porcelain.SubscriptionID = plumbing.SubscriptionId
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertAzureConsoleToPlumbing(porcelain *AzureConsole) *proto.AzureConsole {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzureConsole{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.ConnectorId = (porcelain.ConnectorID)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.ManagementGroupId = (porcelain.ManagementGroupID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PrivilegeLevels = (porcelain.PrivilegeLevels)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.SubscriptionId = (porcelain.SubscriptionID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedAzureConsoleToPlumbing(
+	porcelains []*AzureConsole,
+) []*proto.AzureConsole {
+	var items []*proto.AzureConsole
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureConsoleToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureConsoleToPorcelain(plumbings []*proto.AzureConsole) (
+	[]*AzureConsole,
+	error,
+) {
+	var items []*AzureConsole
+	for _, plumbing := range plumbings {
+		if v, err := convertAzureConsoleToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -8080,6 +8151,7 @@ func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8107,6 +8179,7 @@ func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8153,6 +8226,7 @@ func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) (*HTTPBasicA
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8181,6 +8255,7 @@ func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAu
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -8227,6 +8302,7 @@ func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) (*HTTPNoAuth, erro
 	porcelain.HostOverride = plumbing.HostOverride
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
@@ -8253,6 +8329,7 @@ func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
 	plumbing.HostOverride = (porcelain.HostOverride)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
@@ -16008,6 +16085,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
 	case *AzureCertificate:
 		plumbing.Resource = &proto.Resource_AzureCertificate{AzureCertificate: convertAzureCertificateToPlumbing(v)}
+	case *AzureConsole:
+		plumbing.Resource = &proto.Resource_AzureConsole{AzureConsole: convertAzureConsoleToPlumbing(v)}
 	case *AzureMysql:
 		plumbing.Resource = &proto.Resource_AzureMysql{AzureMysql: convertAzureMysqlToPlumbing(v)}
 	case *AzurePostgres:
@@ -16249,6 +16328,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAzureCertificate() != nil {
 		return convertAzureCertificateToPorcelain(plumbing.GetAzureCertificate())
+	}
+	if plumbing.GetAzureConsole() != nil {
+		return convertAzureConsoleToPorcelain(plumbing.GetAzureConsole())
 	}
 	if plumbing.GetAzureMysql() != nil {
 		return convertAzureMysqlToPorcelain(plumbing.GetAzureMysql())
@@ -19332,6 +19414,7 @@ func convertSnowflakeToPorcelain(plumbing *proto.Snowflake) (*Snowflake, error) 
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.PrivateKey = plumbing.PrivateKey
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.Schema = plumbing.Schema
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -19359,6 +19442,7 @@ func convertSnowflakeToPlumbing(porcelain *Snowflake) *proto.Snowflake {
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.PrivateKey = (porcelain.PrivateKey)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.Schema = (porcelain.Schema)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
