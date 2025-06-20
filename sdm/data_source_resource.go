@@ -3593,6 +3593,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, TLS must be used to connect to this resource.",
+									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -10066,6 +10071,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
 			})
 		case *sdm.DocumentDBHost:

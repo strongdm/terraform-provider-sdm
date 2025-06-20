@@ -2367,6 +2367,8 @@ type DB2LUW struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
 	// The username to authenticate with.
 	Username string `json:"username"`
 }

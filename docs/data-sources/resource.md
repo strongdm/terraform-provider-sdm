@@ -694,6 +694,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - If set, TLS must be used to connect to this resource.
 		* `username` - The username to authenticate with.
 	* document_db_host:
 		* `auth_database` - The authentication database to use.

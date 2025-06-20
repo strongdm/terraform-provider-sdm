@@ -6558,6 +6558,7 @@ func convertDB2LUWToPorcelain(plumbing *proto.DB2LUW) (*DB2LUW, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -6581,6 +6582,7 @@ func convertDB2LUWToPlumbing(porcelain *DB2LUW) *proto.DB2LUW {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
