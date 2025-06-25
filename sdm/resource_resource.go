@@ -28,7 +28,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "Aerospike is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -77,7 +77,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -201,7 +200,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -278,7 +276,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -379,7 +376,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -456,7 +452,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -551,7 +546,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -679,7 +673,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -796,7 +789,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -888,7 +880,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -991,7 +982,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1077,7 +1067,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1152,7 +1141,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1228,7 +1216,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1324,7 +1311,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1399,7 +1385,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1480,7 +1465,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1570,7 +1554,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1656,7 +1639,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1746,7 +1728,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1832,7 +1813,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -1917,7 +1897,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"session_expiry": {
@@ -2012,7 +1991,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"session_expiry": {
@@ -2091,7 +2069,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2157,7 +2134,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2228,7 +2204,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2302,7 +2277,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2388,7 +2362,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2479,7 +2452,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2565,7 +2537,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2646,7 +2617,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2722,7 +2692,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2813,7 +2782,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -2884,7 +2852,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"tags": {
@@ -2969,7 +2936,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3050,7 +3016,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3141,7 +3106,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3232,7 +3196,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3313,7 +3276,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3384,7 +3346,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3464,7 +3425,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3550,7 +3510,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3636,7 +3595,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3711,7 +3669,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3792,7 +3749,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3867,7 +3823,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -3938,7 +3893,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4029,7 +3983,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4104,7 +4057,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4175,7 +4127,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4256,7 +4207,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4332,7 +4282,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4397,7 +4346,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"session_expiry": {
@@ -4486,7 +4434,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"session_expiry": {
@@ -4598,7 +4545,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"service_account_key": {
@@ -4676,7 +4622,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"service_account_key": {
@@ -4763,7 +4708,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4849,7 +4793,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -4934,7 +4877,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5018,7 +4960,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5136,7 +5077,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5213,7 +5153,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5310,7 +5249,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5406,7 +5344,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5483,7 +5420,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5578,7 +5514,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5659,7 +5594,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5734,7 +5668,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5815,7 +5748,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5901,7 +5833,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -5987,7 +5918,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6083,7 +6013,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6179,7 +6108,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6260,7 +6188,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6369,7 +6296,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"server_name": {
@@ -6483,7 +6409,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"server_name": {
@@ -6574,7 +6499,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6649,7 +6573,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6740,7 +6663,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6816,7 +6738,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6902,7 +6823,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -6988,7 +6908,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7069,7 +6988,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7150,7 +7068,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7225,7 +7142,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7306,7 +7222,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7391,7 +7306,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7481,7 +7395,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7557,7 +7470,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7638,7 +7550,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7729,7 +7640,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7824,7 +7734,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7909,7 +7818,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -7995,7 +7903,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8088,7 +7995,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8158,7 +8064,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8248,7 +8153,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8349,7 +8253,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8456,7 +8359,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"server_spn": {
@@ -8552,7 +8454,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8648,7 +8549,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8744,7 +8644,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8830,7 +8729,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8906,7 +8804,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -8982,7 +8879,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -9058,7 +8954,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -9134,7 +9029,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {
@@ -9220,7 +9114,6 @@ func resourceResource() *schema.Resource {
 						"secret_store_id": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
 						"subdomain": {

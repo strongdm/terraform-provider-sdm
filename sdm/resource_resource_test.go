@@ -210,7 +210,7 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 	})
 }
 
-func TestAccSDMResource_RecreateWithSecretStore(t *testing.T) {
+func TestAccSDMResource_UpdateWithSecretStore(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
@@ -266,11 +266,11 @@ func TestAccSDMResource_RecreateWithSecretStore(t *testing.T) {
 					}
 
 					// did the id change?
-					if id == createdID {
-						return errors.New("expected resource ID to change")
+					if id != createdID {
+						return errors.New("expected resource ID not to change")
 					}
 
-					// confirm it was recreated with new secret store
+					// confirm it was updated with new secret store
 					client := testClient()
 					ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 					defer cancel()

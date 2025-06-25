@@ -42,7 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/14.25.0"
+	defaultUserAgent = "strongdm-sdk-go/15.1.0"
 )
 
 var _ = metadata.Pairs
@@ -119,8 +119,6 @@ type Client struct {
 	secretStoresHistory              *SecretStoresHistory
 	workflowApprovers                *WorkflowApprovers
 	workflowApproversHistory         *WorkflowApproversHistory
-	workflowAssignments              *WorkflowAssignments
-	workflowAssignmentsHistory       *WorkflowAssignmentsHistory
 	workflowRoles                    *WorkflowRoles
 	workflowRolesHistory             *WorkflowRolesHistory
 	workflows                        *Workflows
@@ -381,14 +379,6 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.workflowApproversHistory = &WorkflowApproversHistory{
 		client: plumbing.NewWorkflowApproversHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowAssignments = &WorkflowAssignments{
-		client: plumbing.NewWorkflowAssignmentsClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowAssignmentsHistory = &WorkflowAssignmentsHistory{
-		client: plumbing.NewWorkflowAssignmentsHistoryClient(client.grpcConn),
 		parent: client,
 	}
 	client.workflowRoles = &WorkflowRoles{
@@ -776,17 +766,6 @@ func (c *Client) WorkflowApproversHistory() *WorkflowApproversHistory {
 	return c.workflowApproversHistory
 }
 
-// WorkflowAssignments links a Resource to a Workflow. The assigned resources are those that a user can request
-// access to via the workflow.
-func (c *Client) WorkflowAssignments() *WorkflowAssignments {
-	return c.workflowAssignments
-}
-
-// WorkflowAssignmentsHistory provides records of all changes to the state of a WorkflowAssignment.
-func (c *Client) WorkflowAssignmentsHistory() *WorkflowAssignmentsHistory {
-	return c.workflowAssignmentsHistory
-}
-
 // WorkflowRole links a role to a workflow. The linked roles indicate which roles a user must be a part of
 // to request access to a resource via the workflow.
 func (c *Client) WorkflowRoles() *WorkflowRoles {
@@ -902,10 +881,6 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 	}
 	snapshotClient.client.workflowApprovers = &WorkflowApprovers{
 		client: plumbing.NewWorkflowApproversClient(snapshotClient.client.grpcConn),
-		parent: snapshotClient.client,
-	}
-	snapshotClient.client.workflowAssignments = &WorkflowAssignments{
-		client: plumbing.NewWorkflowAssignmentsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
 	snapshotClient.client.workflowRoles = &WorkflowRoles{
@@ -1040,12 +1015,6 @@ func (c *SnapshotClient) SecretStores() SnapshotSecretStores {
 // WorkflowApprovers is an account or a role with the ability to approve requests bound to a workflow.
 func (c *SnapshotClient) WorkflowApprovers() SnapshotWorkflowApprovers {
 	return c.client.workflowApprovers
-}
-
-// WorkflowAssignments links a Resource to a Workflow. The assigned resources are those that a user can request
-// access to via the workflow.
-func (c *SnapshotClient) WorkflowAssignments() SnapshotWorkflowAssignments {
-	return c.client.workflowAssignments
 }
 
 // WorkflowRole links a role to a workflow. The linked roles indicate which roles a user must be a part of

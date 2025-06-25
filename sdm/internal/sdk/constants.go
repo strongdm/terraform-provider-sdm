@@ -127,6 +127,11 @@ const (
 	ActivityEntityTypePeeringGroupNode     = "peering_group_node"
 	ActivityEntityTypePeeringGroupResource = "peering_group_resource"
 	ActivityEntityTypePeeringGroupPeer     = "peering_group_peer"
+	ActivityEntityTypeOrgIntegration       = "org_integration"
+	ActivityEntityTypeCredential           = "credential"
+	ActivityEntityTypeCertificateAuthority = "certificate_authority"
+	ActivityEntityTypePolicy               = "policy"
+	ActivityEntityTypeProxyClusterKey      = "proxy_cluster_key"
 )
 
 // Activity Verbs, describe which kind of activity has taken place.
@@ -325,12 +330,28 @@ const (
 	ActivityVerbResourceUnlocked                                 = "user unlocked a resource"
 	ActivityVerbResourceForceUnlocked                            = "admin force-unlocked a resource"
 	ActivityVerbConcurrentAuthenticationRevokedPerOrgSetting     = "concurrent authentications revoked per organization settings"
+	ActivityVerbPeeringGroupToggled                              = "peering group toggled"
+	ActivityVerbPeeringGroupCreated                              = "peering group created"
+	ActivityVerbPeeringGroupDeleted                              = "peering group deleted"
+	ActivityVerbPeeringGroupLinked                               = "peering groups linked"
+	ActivityVerbPeeringGroupUnlinked                             = "peering groups unlinked"
+	ActivityVerbPeeringGroupAttached                             = "entity attached to peering group"
+	ActivityVerbPeeringGroupDetached                             = "entity detached from peering group"
 	ActivityVerbOrgIntegrationInstalled                          = "org integration installed"
 	ActivityVerbUserIntegrationAuthorized                        = "user authorized integration"
 	ActivityVerbOrgIntegrationUninstalled                        = "org integration uninstalled"
 	ActivityVerbUserIntegrationDeauthorized                      = "user deauthorized integration"
 	ActivityVerbServiceNowTokenAdded                             = "ServiceNow token created"
 	ActivityVerbServiceNowTokenDeleted                           = "ServiceNow token deleted"
+	ActivityVerbCredentialCreated                                = "credential created"
+	ActivityVerbCredentialDeleted                                = "credential deleted"
+	ActivityVerbCertificateAuthorityUpdated                      = "certificate authority updated"
+	ActivityVerbPolicyCreated                                    = "policy created"
+	ActivityVerbPolicyUpdated                                    = "policy updated"
+	ActivityVerbPolicyDeleted                                    = "policy deleted"
+	ActivityVerbAuthenticationRevokedByPolicy                    = "authentication revoked by policy"
+	ActivityVerbProxyClusterKeyCreated                           = "proxy cluster key created"
+	ActivityVerbProxyClusterKeyDeleted                           = "proxy cluster key deleted"
 	ActivityVerbManagedSecretCreated                             = "managed secret created"
 	ActivityVerbManagedSecretUpdated                             = "managed secret updated"
 	ActivityVerbManagedSecretExpirationTimeUpdated               = "managed secret expiration time updated"
@@ -422,6 +443,8 @@ const (
 	PermissionBillingRead                  = "billing:read"
 	PermissionCredentialRead               = "credential:read"
 	PermissionCredentialWrite              = "credential:write"
+	PermissionPolicyRead                   = "policy:read"
+	PermissionPolicyWrite                  = "policy:write"
 	PermissionManagedSecretCreate          = "managedsecret:create"
 	PermissionManagedSecretList            = "managedsecret:list"
 	PermissionManagedSecretDelete          = "managedsecret:delete"
@@ -564,6 +587,11 @@ var AllActivityEntityType = []string{
 	ActivityEntityTypePeeringGroupNode,
 	ActivityEntityTypePeeringGroupResource,
 	ActivityEntityTypePeeringGroupPeer,
+	ActivityEntityTypeOrgIntegration,
+	ActivityEntityTypeCredential,
+	ActivityEntityTypeCertificateAuthority,
+	ActivityEntityTypePolicy,
+	ActivityEntityTypeProxyClusterKey,
 }
 
 func ActivityEntityTypeIsValid(v string) bool {
@@ -765,12 +793,28 @@ var AllActivityVerb = []string{
 	ActivityVerbResourceUnlocked,
 	ActivityVerbResourceForceUnlocked,
 	ActivityVerbConcurrentAuthenticationRevokedPerOrgSetting,
+	ActivityVerbPeeringGroupToggled,
+	ActivityVerbPeeringGroupCreated,
+	ActivityVerbPeeringGroupDeleted,
+	ActivityVerbPeeringGroupLinked,
+	ActivityVerbPeeringGroupUnlinked,
+	ActivityVerbPeeringGroupAttached,
+	ActivityVerbPeeringGroupDetached,
 	ActivityVerbOrgIntegrationInstalled,
 	ActivityVerbUserIntegrationAuthorized,
 	ActivityVerbOrgIntegrationUninstalled,
 	ActivityVerbUserIntegrationDeauthorized,
 	ActivityVerbServiceNowTokenAdded,
 	ActivityVerbServiceNowTokenDeleted,
+	ActivityVerbCredentialCreated,
+	ActivityVerbCredentialDeleted,
+	ActivityVerbCertificateAuthorityUpdated,
+	ActivityVerbPolicyCreated,
+	ActivityVerbPolicyUpdated,
+	ActivityVerbPolicyDeleted,
+	ActivityVerbAuthenticationRevokedByPolicy,
+	ActivityVerbProxyClusterKeyCreated,
+	ActivityVerbProxyClusterKeyDeleted,
 	ActivityVerbManagedSecretCreated,
 	ActivityVerbManagedSecretUpdated,
 	ActivityVerbManagedSecretExpirationTimeUpdated,
@@ -1011,6 +1055,8 @@ var AllPermission = []string{
 	PermissionBillingRead,
 	PermissionCredentialRead,
 	PermissionCredentialWrite,
+	PermissionPolicyRead,
+	PermissionPolicyWrite,
 	PermissionManagedSecretCreate,
 	PermissionManagedSecretList,
 	PermissionManagedSecretDelete,

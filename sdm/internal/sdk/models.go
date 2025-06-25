@@ -940,8 +940,6 @@ type ActivityGetResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// Aerospike is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type Aerospike struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -13371,42 +13369,6 @@ type WorkflowApproversListResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// WorkflowAssignment links a Resource to a Workflow. The assigned resources are those that a user can request
-// access to via the workflow.
-type WorkflowAssignment struct {
-	// The resource id.
-	ResourceID string `json:"resourceId"`
-	// The workflow id.
-	WorkflowID string `json:"workflowId"`
-}
-
-// WorkflowAssignmentsHistory provides records of all changes to the state of a WorkflowAssignment.
-type WorkflowAssignmentHistory struct {
-	// The unique identifier of the Activity that produced this change to the WorkflowAssignment.
-	// May be empty for some system-initiated updates.
-	ActivityID string `json:"activityId"`
-	// If this WorkflowAssignment was deleted, the time it was deleted.
-	DeletedAt time.Time `json:"deletedAt"`
-	// The time at which the WorkflowAssignment state was recorded.
-	Timestamp time.Time `json:"timestamp"`
-	// The complete WorkflowAssignment state at this time.
-	WorkflowAssignment *WorkflowAssignment `json:"workflowAssignment"`
-}
-
-// WorkflowAssignmentsListRequest specifies criteria for retrieving a list of
-// WorkflowAssignment records
-type WorkflowAssignmentsListRequest struct {
-	// A human-readable filter query string.
-	Filter string `json:"filter"`
-}
-
-// WorkflowAssignmentsListResponse returns a list of WorkflowAssignment records that meet
-// the criteria of a WorkflowAssignmentsListRequest.
-type WorkflowAssignmentsListResponse struct {
-	// Rate limit information.
-	RateLimit *RateLimitMetadata `json:"rateLimit"`
-}
-
 // WorkflowCreateResponse reports how the Workflow was created in the system.
 type WorkflowCreateResponse struct {
 	// Rate limit information.
@@ -14468,40 +14430,6 @@ type WorkflowApproverHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *WorkflowApproverHistory
-	// Err returns the first error encountered during iteration, if any.
-	Err() error
-}
-
-// WorkflowAssignmentIterator provides read access to a list of WorkflowAssignment.
-// Use it like so:
-//
-//	for iterator.Next() {
-//	    workflowAssignment := iterator.Value()
-//	    // ...
-//	}
-type WorkflowAssignmentIterator interface {
-	// Next advances the iterator to the next item in the list. It returns
-	// true if an item is available to retrieve via the `Value()` function.
-	Next() bool
-	// Value returns the current item, if one is available.
-	Value() *WorkflowAssignment
-	// Err returns the first error encountered during iteration, if any.
-	Err() error
-}
-
-// WorkflowAssignmentHistoryIterator provides read access to a list of WorkflowAssignmentHistory.
-// Use it like so:
-//
-//	for iterator.Next() {
-//	    workflowAssignmentHistory := iterator.Value()
-//	    // ...
-//	}
-type WorkflowAssignmentHistoryIterator interface {
-	// Next advances the iterator to the next item in the list. It returns
-	// true if an item is available to retrieve via the `Value()` function.
-	Next() bool
-	// Value returns the current item, if one is available.
-	Value() *WorkflowAssignmentHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }
