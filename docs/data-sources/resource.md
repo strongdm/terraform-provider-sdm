@@ -263,6 +263,21 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls_required` - If set, TLS must be used to connect to this resource.
 		* `username` - The username to authenticate with.
+	* amazonmq_amqp:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port` - The port to dial to initiate a connection from the egress node to this resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls_required` - If set, TLS must be used to connect to this resource.
+		* `username` - The username to authenticate with.
 	* athena:
 		* `access_key` - The Access Key ID to use to authenticate.
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
@@ -475,6 +490,22 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - The local port used by clients to connect to this resource.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `require_native_auth` - Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+		* `tags` - Tags is a map of key, value pairs.
+		* `use_azure_single_server_usernames` - If true, appends the hostname to the username when hitting a database.azure.com address
+		* `username` - The username to authenticate with.
+	* azure_mysql_managed_identity:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+		* `database` - The database for healthchecks. Does not affect client requests.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+		* `id` - Unique identifier of the Resource.
+		* `name` - Unique human-readable name of the Resource.
+		* `password` - The password to authenticate with.
+		* `port` - The port to dial to initiate a connection from the egress node to this resource.
+		* `port_override` - The local port used by clients to connect to this resource.
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 		* `tags` - Tags is a map of key, value pairs.

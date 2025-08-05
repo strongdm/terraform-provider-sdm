@@ -24,7 +24,7 @@ func TestAccSDMApprovalWorkflow_Get(t *testing.T) {
 	workflow := workflows[0]
 
 	dsName := randomWithPrefix("af-test-query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -47,7 +47,7 @@ func TestAccSDMApprovalWorkflow_GetNested(t *testing.T) {
 	workflow := workflows[0]
 
 	dsName := randomWithPrefix("af-test-query-nested")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -76,7 +76,7 @@ func TestAccSDMApprovalWorkflow_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("af-multistep-test-query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -101,7 +101,7 @@ func TestAccSDMApprovalWorkflow_GetMultipleNested(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("af-multistep-test-query-nested")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -124,7 +124,7 @@ func TestAccSDMApprovalWorkflow_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("af-none-query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -146,7 +146,7 @@ func TestAccSDMApprovalWorkflow_GetNoneNested(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("af-none-query-nested")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

@@ -31,6 +31,8 @@ func (t Tags) clone() Tags {
 	return res
 }
 
+type LogCategoryConfigMap map[string]*LogCategoryConfig
+
 type AKS struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
@@ -156,6 +158,7 @@ type AKSServiceAccount struct {
 	Token string `json:"token"`
 }
 
+// Deprecated: see docs for more info.
 type AKSServiceAccountUserImpersonation struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -187,6 +190,7 @@ type AKSServiceAccountUserImpersonation struct {
 	Token string `json:"token"`
 }
 
+// Deprecated: see docs for more info.
 type AKSUserImpersonation struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -220,6 +224,41 @@ type AKSUserImpersonation struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+// AMQP is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AMQP struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
+	// The username to authenticate with.
+	Username string `json:"username"`
 }
 
 type AWS struct {
@@ -1075,6 +1114,7 @@ type AmazonEKSInstanceProfile struct {
 	Tags Tags `json:"tags"`
 }
 
+// Deprecated: see docs for more info.
 type AmazonEKSInstanceProfileUserImpersonation struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -1112,6 +1152,7 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
+// Deprecated: see docs for more info.
 type AmazonEKSUserImpersonation struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
@@ -1291,6 +1332,7 @@ type ApprovalWorkflow struct {
 }
 
 // ApprovalWorkflowApprover links an approval workflow approver to an ApprovalWorkflowStep
+// Deprecated: see docs for more info.
 type ApprovalWorkflowApprover struct {
 	// The approver account id.
 	AccountID string `json:"accountId"`
@@ -1405,6 +1447,7 @@ type ApprovalWorkflowListResponse struct {
 }
 
 // ApprovalWorkflowStep links an approval workflow step to an ApprovalWorkflow
+// Deprecated: see docs for more info.
 type ApprovalWorkflowStep struct {
 	// The approval flow id specified the approval workflow that this step belongs to
 	ApprovalFlowID string `json:"approvalFlowId"`
@@ -1801,6 +1844,43 @@ type AzureMysql struct {
 	ProxyClusterID string `json:"proxyClusterId"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `json:"requireNativeAuth"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// If true, appends the hostname to the username when hitting a database.azure.com address
+	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+// AzureMysqlManagedIdentity is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type AzureMysqlManagedIdentity struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// The database for healthchecks. Does not affect client requests.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
@@ -2911,6 +2991,7 @@ type GoogleGKE struct {
 	Tags Tags `json:"tags"`
 }
 
+// Deprecated: see docs for more info.
 type GoogleGKEUserImpersonation struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -3508,6 +3589,7 @@ type KubernetesServiceAccount struct {
 	Token string `json:"token"`
 }
 
+// Deprecated: see docs for more info.
 type KubernetesServiceAccountUserImpersonation struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -3539,6 +3621,7 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Token string `json:"token"`
 }
 
+// Deprecated: see docs for more info.
 type KubernetesUserImpersonation struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -3572,6 +3655,30 @@ type KubernetesUserImpersonation struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+type LogCategoryConfig struct {
+	// Indicates if the Organization should exclude replay data from remote logging for the log category.
+	RemoteDiscardReplays bool `json:"remoteDiscardReplays"`
+	// The Organization's remote log encryption encoder, one of the LogRemoteEncoder constants.
+	RemoteEncoder string `json:"remoteEncoder"`
+}
+
+type LogConfig struct {
+	// The Organization's log category configuration settings.
+	Categories LogCategoryConfigMap `json:"categories"`
+	// The Organization's local log encryption encoder, one of the LogLocalEncoder constants.
+	LocalEncoder string `json:"localEncoder"`
+	// The Organization's local log format, one of the LogLocalFormat constants.
+	LocalFormat string `json:"localFormat"`
+	// The Organization's local log socket path.
+	LocalSocketPath string `json:"localSocketPath"`
+	// The Organization's local log storage, one of the LogLocalStorage constants.
+	LocalStorage string `json:"localStorage"`
+	// The Organization's local log TCP address.
+	LocalTCPAddress string `json:"localTcpAddress"`
+	// The Organization's public key in PEM format for encrypting logs.
+	PublicKey string `json:"publicKey"`
 }
 
 // MTLSMysql is currently unstable, and its API may change, or it may be removed,
@@ -4505,6 +4612,7 @@ type Organization struct {
 	// The Organization's device trust provider, one of the DeviceTrustProvider constants.
 	DeviceTrustProvider string `json:"deviceTrustProvider"`
 	// Indicates if the Organization should drop replay data for SSH, RDP, and K8s logs.
+	// Deprecated: use categories specific log_config.categories[].remote_discard_replays instead
 	DiscardReplays bool `json:"discardReplays"`
 	// Indicates if the Organization enforces a single session per user for the CLI and AdminUI.
 	EnforceSingleSession bool `json:"enforceSingleSession"`
@@ -4514,17 +4622,25 @@ type Organization struct {
 	IdleTimeoutEnabled bool `json:"idleTimeoutEnabled"`
 	// The Organization's type, one of the OrgKind constants.
 	Kind string `json:"kind"`
+	// The Organization's logging settings
+	LogConfig *LogConfig `json:"logConfig"`
 	// The Organization's local log encryption encoder, one of the LogLocalEncoder constants.
+	// Deprecated: use log_config.local_encoder instead
 	LogLocalEncoder string `json:"logLocalEncoder"`
 	// The Organization's local log format, one of the LogLocalFormat constants.
+	// Deprecated: use log_config.local_format instead
 	LogLocalFormat string `json:"logLocalFormat"`
 	// The Organization's local log storage, one of the LogLocalStorage constants.
+	// Deprecated: use log_config.local_storage instead
 	LogLocalStorage string `json:"logLocalStorage"`
 	// The Organization's remote log encryption encoder, one of the LogRemoteEncoder constants.
+	// Deprecated: use categories specific log_config.categories[].remote_encoder instead
 	LogRemoteEncoder string `json:"logRemoteEncoder"`
 	// The Organization's socket path for Socket local log storage.
+	// Deprecated: use log_config.local_socket_path instead
 	LogSocketPath string `json:"logSocketPath"`
 	// The Organization's TCP address for TCP or Syslog local log storage.
+	// Deprecated: use log_config.local_tcp_address instead
 	LogTCPAddress string `json:"logTcpAddress"`
 	// The Organization's loopback range.
 	LoopbackRange string `json:"loopbackRange"`
@@ -4535,6 +4651,7 @@ type Organization struct {
 	// The Organization's name.
 	Name string `json:"name"`
 	// The Organization's public key PEM for encrypting remote logs.
+	// Deprecated: use log_config.public_key instead
 	PublicKeyPem string `json:"publicKeyPem"`
 	// Indicates if the Organization requires secret stores.
 	RequireSecretStore bool `json:"requireSecretStore"`
@@ -6308,6 +6425,60 @@ func (m *AmazonMQAMQP091) GetBindInterface() string {
 func (m *AmazonMQAMQP091) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*AMQP) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AMQP.
+func (m *AMQP) GetID() string { return m.ID }
+
+// GetName returns the name of the AMQP.
+func (m *AMQP) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AMQP.
+func (m *AMQP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AMQP.
+func (m *AMQP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AMQP.
+func (m *AMQP) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AMQP.
+func (m *AMQP) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AMQP.
+func (m *AMQP) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AMQP.
+func (m *AMQP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AMQP.
+func (m *AMQP) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AMQP.
+func (m *AMQP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AMQP.
+func (m *AMQP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Athena) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Athena.
@@ -7062,6 +7233,60 @@ func (m *AzureMysql) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the AzureMysql.
 func (m *AzureMysql) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*AzureMysqlManagedIdentity) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) GetID() string { return m.ID }
+
+// GetName returns the name of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the AzureMysqlManagedIdentity.
+func (m *AzureMysqlManagedIdentity) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*AzurePostgres) isOneOf_Resource() {}
@@ -13294,6 +13519,7 @@ type Workflow struct {
 }
 
 // WorkflowApprover is an account or a role with the ability to approve requests bound to a workflow.
+// Deprecated: see docs for more info.
 type WorkflowApprover struct {
 	// The approver account id.
 	AccountID string `json:"accountId"`
@@ -13822,6 +14048,23 @@ type ApprovalWorkflowHistoryIterator interface {
 	Err() error
 }
 
+// RoleIterator provides read access to a list of Role.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    role := iterator.Value()
+//	    // ...
+//	}
+type RoleIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *Role
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
 // HealthcheckIterator provides read access to a list of Healthcheck.
 // Use it like so:
 //
@@ -14294,23 +14537,6 @@ type RoleResourceHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *RoleResourceHistory
-	// Err returns the first error encountered during iteration, if any.
-	Err() error
-}
-
-// RoleIterator provides read access to a list of Role.
-// Use it like so:
-//
-//	for iterator.Next() {
-//	    role := iterator.Value()
-//	    // ...
-//	}
-type RoleIterator interface {
-	// Next advances the iterator to the next item in the list. It returns
-	// true if an item is available to retrieve via the `Value()` function.
-	Next() bool
-	// Value returns the current item, if one is available.
-	Value() *Role
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

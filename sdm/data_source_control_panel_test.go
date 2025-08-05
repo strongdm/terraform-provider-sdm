@@ -14,7 +14,7 @@ func TestAccSDMControlPanel_SSHCAPublicKeyGet(t *testing.T) {
 	initAcceptanceTest(t)
 
 	dataName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -39,7 +39,7 @@ func TestAccSDMControlPanel_RDPCAPublicKeyGet(t *testing.T) {
 	initAcceptanceTest(t)
 
 	dataName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

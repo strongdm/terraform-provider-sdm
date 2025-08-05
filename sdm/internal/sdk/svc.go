@@ -2035,6 +2035,234 @@ func (svc *ControlPanel) VerifyJWT(
 	return resp, nil
 }
 
+// A Role has a list of access rules which determine which Resources the members
+// of the Role have access to. An Account can be a member of multiple Roles via
+// AccountAttachments.
+type Roles struct {
+	client plumbing.RolesClient
+	parent *Client
+}
+
+// A SnapshotRoles exposes the read only methods of the Roles
+// service for historical queries.
+type SnapshotRoles interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*RoleGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		RoleIterator,
+		error)
+}
+
+// Create registers a new Role.
+func (svc *Roles) Create(
+	ctx context.Context,
+	role *Role) (
+	*RoleCreateResponse,
+	error) {
+	req := plumbing.RoleCreateRequest{}
+
+	req.Role = convertRoleToPlumbing(role)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Roles.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &RoleCreateResponse{}
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
+		return nil, err
+	} else {
+		resp.Role = v
+	}
+	return resp, nil
+}
+
+// Get reads one Role by ID.
+func (svc *Roles) Get(
+	ctx context.Context,
+	id string) (
+	*RoleGetResponse,
+	error) {
+	req := plumbing.RoleGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Roles.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &RoleGetResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
+		return nil, err
+	} else {
+		resp.Role = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a Role by ID.
+func (svc *Roles) Update(
+	ctx context.Context,
+	role *Role) (
+	*RoleUpdateResponse,
+	error) {
+	req := plumbing.RoleUpdateRequest{}
+
+	req.Role = convertRoleToPlumbing(role)
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Roles.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &RoleUpdateResponse{}
+	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
+		return nil, err
+	} else {
+		resp.Role = v
+	}
+	return resp, nil
+}
+
+// Delete removes a Role by ID.
+func (svc *Roles) Delete(
+	ctx context.Context,
+	id string) (
+	*RoleDeleteResponse,
+	error) {
+	req := plumbing.RoleDeleteRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.RoleDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Roles.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &RoleDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of Roles matching a given set of criteria.
+func (svc *Roles) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	RoleIterator,
+	error) {
+	req := plumbing.RoleListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newRoleIteratorImpl(
+		func() (
+			[]*Role,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RoleListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Roles.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedRoleToPorcelain(plumbingResponse.Roles)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // HealthChecks lists the last healthcheck between each node and resource.
 // Note the unconventional capitalization here is to prevent having a collision with GRPC
 type HealthChecks struct {
@@ -2870,6 +3098,37 @@ func (svc *ManagedSecrets) Delete(
 		&req.Meta.Fulfillments,
 		func() (*plumbing.ManagedSecretDeleteResponse, error) {
 			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "ManagedSecrets.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &ManagedSecretDeleteResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// ForceDelete deletes a Managed Secret regardless of errors on external system
+func (svc *ManagedSecrets) ForceDelete(
+	ctx context.Context,
+	id string) (
+	*ManagedSecretDeleteResponse,
+	error) {
+	req := plumbing.ManagedSecretDeleteRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ManagedSecretDeleteResponse, error) {
+			return svc.client.ForceDelete(svc.parent.wrapContext(ctx, &req, "ManagedSecrets.ForceDelete"), &req)
 		},
 	)
 	if err != nil {
@@ -5509,234 +5768,6 @@ func (svc *RoleResourcesHistory) List(
 				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRoleResourceHistoryToPorcelain(plumbingResponse.History)
-			if err != nil {
-				return nil, false, err
-			}
-			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
-			return result, req.Meta.Cursor != "", nil
-		},
-	), nil
-}
-
-// A Role has a list of access rules which determine which Resources the members
-// of the Role have access to. An Account can be a member of multiple Roles via
-// AccountAttachments.
-type Roles struct {
-	client plumbing.RolesClient
-	parent *Client
-}
-
-// A SnapshotRoles exposes the read only methods of the Roles
-// service for historical queries.
-type SnapshotRoles interface {
-	Get(
-		ctx context.Context,
-		id string) (
-		*RoleGetResponse,
-		error)
-	List(
-		ctx context.Context,
-		filter string,
-		args ...interface{}) (
-		RoleIterator,
-		error)
-}
-
-// Create registers a new Role.
-func (svc *Roles) Create(
-	ctx context.Context,
-	role *Role) (
-	*RoleCreateResponse,
-	error) {
-	req := plumbing.RoleCreateRequest{}
-
-	req.Role = convertRoleToPlumbing(role)
-	req.Meta = &plumbing.CreateRequestMetadata{}
-	plumbingResponse, err := retryWrapper(
-		ctx,
-		svc.parent.retryOptions,
-		&req.Meta.Fulfillments,
-		func() (*plumbing.RoleCreateResponse, error) {
-			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Roles.Create"), &req)
-		},
-	)
-	if err != nil {
-		return nil, convertErrorToPorcelain(err)
-	}
-
-	resp := &RoleCreateResponse{}
-	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
-		return nil, err
-	} else {
-		resp.Meta = v
-	}
-	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
-		return nil, err
-	} else {
-		resp.RateLimit = v
-	}
-	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
-		return nil, err
-	} else {
-		resp.Role = v
-	}
-	return resp, nil
-}
-
-// Get reads one Role by ID.
-func (svc *Roles) Get(
-	ctx context.Context,
-	id string) (
-	*RoleGetResponse,
-	error) {
-	req := plumbing.RoleGetRequest{}
-
-	req.Id = (id)
-	req.Meta = &plumbing.GetRequestMetadata{}
-	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	plumbingResponse, err := retryWrapper(
-		ctx,
-		svc.parent.retryOptions,
-		&req.Meta.Fulfillments,
-		func() (*plumbing.RoleGetResponse, error) {
-			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Roles.Get"), &req)
-		},
-	)
-	if err != nil {
-		return nil, convertErrorToPorcelain(err)
-	}
-
-	resp := &RoleGetResponse{}
-	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
-		return nil, err
-	} else {
-		resp.Meta = v
-	}
-	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
-		return nil, err
-	} else {
-		resp.RateLimit = v
-	}
-	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
-		return nil, err
-	} else {
-		resp.Role = v
-	}
-	return resp, nil
-}
-
-// Update replaces all the fields of a Role by ID.
-func (svc *Roles) Update(
-	ctx context.Context,
-	role *Role) (
-	*RoleUpdateResponse,
-	error) {
-	req := plumbing.RoleUpdateRequest{}
-
-	req.Role = convertRoleToPlumbing(role)
-	req.Meta = &plumbing.UpdateRequestMetadata{}
-	plumbingResponse, err := retryWrapper(
-		ctx,
-		svc.parent.retryOptions,
-		&req.Meta.Fulfillments,
-		func() (*plumbing.RoleUpdateResponse, error) {
-			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Roles.Update"), &req)
-		},
-	)
-	if err != nil {
-		return nil, convertErrorToPorcelain(err)
-	}
-
-	resp := &RoleUpdateResponse{}
-	if v, err := convertUpdateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
-		return nil, err
-	} else {
-		resp.Meta = v
-	}
-	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
-		return nil, err
-	} else {
-		resp.RateLimit = v
-	}
-	if v, err := convertRoleToPorcelain(plumbingResponse.Role); err != nil {
-		return nil, err
-	} else {
-		resp.Role = v
-	}
-	return resp, nil
-}
-
-// Delete removes a Role by ID.
-func (svc *Roles) Delete(
-	ctx context.Context,
-	id string) (
-	*RoleDeleteResponse,
-	error) {
-	req := plumbing.RoleDeleteRequest{}
-
-	req.Id = (id)
-	req.Meta = &plumbing.DeleteRequestMetadata{}
-	plumbingResponse, err := retryWrapper(
-		ctx,
-		svc.parent.retryOptions,
-		&req.Meta.Fulfillments,
-		func() (*plumbing.RoleDeleteResponse, error) {
-			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Roles.Delete"), &req)
-		},
-	)
-	if err != nil {
-		return nil, convertErrorToPorcelain(err)
-	}
-
-	resp := &RoleDeleteResponse{}
-	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
-		return nil, err
-	} else {
-		resp.Meta = v
-	}
-	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
-		return nil, err
-	} else {
-		resp.RateLimit = v
-	}
-	return resp, nil
-}
-
-// List gets a list of Roles matching a given set of criteria.
-func (svc *Roles) List(
-	ctx context.Context,
-	filter string,
-	args ...interface{}) (
-	RoleIterator,
-	error) {
-	req := plumbing.RoleListRequest{}
-
-	var filterErr error
-	req.Filter, filterErr = quoteFilterArgs(filter, args...)
-	if filterErr != nil {
-		return nil, filterErr
-	}
-	req.Meta = &plumbing.ListRequestMetadata{}
-	if svc.parent.pageLimit > 0 {
-		req.Meta.Limit = int32(svc.parent.pageLimit)
-	}
-	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
-	return newRoleIteratorImpl(
-		func() (
-			[]*Role,
-			bool, error) {
-			plumbingResponse, err := retryWrapper(
-				ctx,
-				svc.parent.retryOptions,
-				&req.Meta.Fulfillments,
-				func() (*plumbing.RoleListResponse, error) {
-					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Roles.List"), &req)
-				},
-			)
-			if err != nil {
-				return nil, false, convertErrorToPorcelain(err)
-			}
-			result, err := convertRepeatedRoleToPorcelain(plumbingResponse.Roles)
 			if err != nil {
 				return nil, false, err
 			}

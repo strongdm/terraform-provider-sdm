@@ -43,7 +43,7 @@ func init() {
 func TestAccSDMIdentitySet_Create(t *testing.T) {
 	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test-identity-set-resource")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -68,7 +68,7 @@ func TestAccSDMIdentitySet_Create(t *testing.T) {
 func TestAccSDMIdentitySet_Update(t *testing.T) {
 	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test-identity-set-resource")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

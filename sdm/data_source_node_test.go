@@ -22,7 +22,7 @@ func TestAccSDMNode_Get(t *testing.T) {
 	}
 	relay := nodes[0].(*sdm.Relay)
 	dsName := randomWithPrefix("node_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -65,7 +65,7 @@ func TestAccSDMNodeDataSource_GetByTags(t *testing.T) {
 	}
 	dsName := randomWithPrefix("test-node-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -99,7 +99,7 @@ func TestAccSDMNode_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("node_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -122,7 +122,7 @@ func TestAccSDMNode_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("node_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

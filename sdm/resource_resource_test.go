@@ -54,7 +54,7 @@ func TestAccSDMResource_Create(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -101,7 +101,7 @@ func TestAccSDMResource_CreateWithBindInterface(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -166,7 +166,7 @@ func TestAccSDMResource_CreateWithSecretStore(t *testing.T) {
 	path := "/path/to/secret"
 	key := "password2"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -227,7 +227,7 @@ func TestAccSDMResource_UpdateWithSecretStore(t *testing.T) {
 
 	var createdID string
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -310,7 +310,7 @@ func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
 	// so this will likely just catch binary inputs.
 	password := string([]byte{0x7f})
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -325,7 +325,7 @@ func TestAccSDMResource_CreateWithSecretStoreNoRawCredentials(t *testing.T) {
 func TestAccSDMResource_Tags(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -407,7 +407,7 @@ func TestAccSDMResource_CreateSSH(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -463,7 +463,7 @@ func TestAccSDMResource_Update(t *testing.T) {
 	port := portOverride.Count()
 	updatedPort := portOverride.Count()
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -549,7 +549,7 @@ func TestAccSDMImportMongoLegacyReplicaSet(t *testing.T) {
 	name := randomWithPrefix("test")
 	port := portOverride.Count()
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -579,330 +579,330 @@ func TestAccSDMImportMongoLegacyReplicaSet(t *testing.T) {
 }
 
 // lintignore:AT006
-func TestAccSDMResource_UpdatePortOverrides(t *testing.T) {
+func TestAccSDMResource_UpdatePortOverrides_PresentToPresent(t *testing.T) {
 	initAcceptanceTest(t)
-	t.Run("present->present", func(t *testing.T) {
-		initAcceptanceTest(t)
-		resourceName := randomWithPrefix("test")
-		redisName := randomWithPrefix("test")
-		portOverride, updatedPortOverride := portOverride.Count(), portOverride.Count()
+	resourceName := randomWithPrefix("test")
+	redisName := randomWithPrefix("test")
+	portOverride, updatedPortOverride := portOverride.Count(), portOverride.Count()
 
-		resource.Test(t, resource.TestCase{
-			Providers:    testAccProviders,
-			CheckDestroy: testCheckDestroy,
-			Steps: []resource.TestStep{
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-							port_override = %v
-						}
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
+						port_override = %v
 					}
-					`, resourceName, redisName, portOverride),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
-						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-							bind_interface = "127.0.0.2"
-							port_override = %v
-						}
-					}
-					`, resourceName, redisName, updatedPortOverride),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(updatedPortOverride)),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
-						func(s *terraform.State) error {
-							id, err := testCreatedID(s, "sdm_resource", resourceName)
-							if err != nil {
-								return err
-							}
-
-							// check if it was actually updated
-							client := testClient()
-							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-							defer cancel()
-							resp, err := client.Resources().Get(ctx, id)
-							if err != nil {
-								return fmt.Errorf("failed to get created resource: %w", err)
-							}
-
-							if resp.Resource.(*sdm.Redis).PortOverride != updatedPortOverride {
-								return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, updatedPortOverride)
-							}
-
-							return nil
-						},
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
+				}
+				`, resourceName, redisName, portOverride),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
+					resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+				),
 			},
-		})
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
+						bind_interface = "127.0.0.2"
+						port_override = %v
+					}
+				}
+				`, resourceName, redisName, updatedPortOverride),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(updatedPortOverride)),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", resourceName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually updated
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.(*sdm.Redis).PortOverride != updatedPortOverride {
+							return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, updatedPortOverride)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
 	})
+}
 
-	t.Run("absent->present", func(t *testing.T) {
-		initAcceptanceTest(t)
-		resourceName := randomWithPrefix("test")
-		redisName := randomWithPrefix("test")
-		updatedPortOverride := portOverride.Count()
+// lintignore:AT006
+func TestAccSDMResource_UpdatePortOverrides_AbsentToPresent(t *testing.T) {
+	initAcceptanceTest(t)
+	resourceName := randomWithPrefix("test")
+	redisName := randomWithPrefix("test")
+	updatedPortOverride := portOverride.Count()
 
-		resource.Test(t, resource.TestCase{
-			Providers:    testAccProviders,
-			CheckDestroy: testCheckDestroy,
-			Steps: []resource.TestStep{
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-						}
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
 					}
-					`, resourceName, redisName),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-							bind_interface = "127.0.0.2"
-							port_override = %v
-						}
-					}
-					`, resourceName, redisName, updatedPortOverride),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(updatedPortOverride)),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
-						func(s *terraform.State) error {
-							id, err := testCreatedID(s, "sdm_resource", resourceName)
-							if err != nil {
-								return err
-							}
-
-							// check if it was actually updated
-							client := testClient()
-							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-							defer cancel()
-							resp, err := client.Resources().Get(ctx, id)
-							if err != nil {
-								return fmt.Errorf("failed to get created resource: %w", err)
-							}
-
-							if resp.Resource.(*sdm.Redis).PortOverride != updatedPortOverride {
-								return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, updatedPortOverride)
-							}
-
-							return nil
-						},
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
+				}
+				`, resourceName, redisName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+				),
 			},
-		})
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
+						bind_interface = "127.0.0.2"
+						port_override = %v
+					}
+				}
+				`, resourceName, redisName, updatedPortOverride),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(updatedPortOverride)),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", resourceName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually updated
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.(*sdm.Redis).PortOverride != updatedPortOverride {
+							return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, updatedPortOverride)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
 	})
+}
 
-	t.Run("present->absent", func(t *testing.T) {
-		initAcceptanceTest(t)
-		resourceName := randomWithPrefix("test")
-		redisName := randomWithPrefix("test")
-		portOverride := portOverride.Count()
+// lintignore:AT006
+func TestAccSDMResource_UpdatePortOverrides_PresentToAbsent(t *testing.T) {
+	initAcceptanceTest(t)
+	resourceName := randomWithPrefix("test")
+	redisName := randomWithPrefix("test")
+	portOverride := portOverride.Count()
 
-		resource.Test(t, resource.TestCase{
-			Providers:    testAccProviders,
-			CheckDestroy: testCheckDestroy,
-			Steps: []resource.TestStep{
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-							port_override = %v
-						}
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
+						port_override = %v
 					}
-					`, resourceName, redisName, portOverride),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-							bind_interface = "127.0.0.2"
-						}
-					}
-					`, resourceName, redisName),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
-						func(s *terraform.State) error {
-							id, err := testCreatedID(s, "sdm_resource", resourceName)
-							if err != nil {
-								return err
-							}
-
-							// check if it was actually updated
-							client := testClient()
-							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-							defer cancel()
-							resp, err := client.Resources().Get(ctx, id)
-							if err != nil {
-								return fmt.Errorf("failed to get created resource: %w", err)
-							}
-
-							if resp.Resource.(*sdm.Redis).PortOverride != portOverride {
-								return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, portOverride)
-							}
-
-							return nil
-						},
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
+				}
+				`, resourceName, redisName, portOverride),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+				),
 			},
-		})
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
+						bind_interface = "127.0.0.2"
+					}
+				}
+				`, resourceName, redisName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.port_override", fmt.Sprint(portOverride)),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", resourceName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually updated
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.(*sdm.Redis).PortOverride != portOverride {
+							return fmt.Errorf("unexpected port override '%d', expected '%d'", resp.Resource.(*sdm.Redis).PortOverride, portOverride)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
 	})
+}
 
-	t.Run("absent->absent", func(t *testing.T) {
-		initAcceptanceTest(t)
-		resourceName := randomWithPrefix("test")
-		redisName := randomWithPrefix("test")
+// lintignore:AT006
+func TestAccSDMResource_UpdatePortOverrides_AbsentToAbsent(t *testing.T) {
+	initAcceptanceTest(t)
+	resourceName := randomWithPrefix("test")
+	redisName := randomWithPrefix("test")
 
-		resource.Test(t, resource.TestCase{
-			Providers:    testAccProviders,
-			CheckDestroy: testCheckDestroy,
-			Steps: []resource.TestStep{
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-						}
+	resource.ParallelTest(t, resource.TestCase{
+		Providers:    testAccProviders,
+		CheckDestroy: testCheckDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
 					}
-					`, resourceName, redisName),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
-				{
-					Config: fmt.Sprintf(`
-					resource "sdm_resource" "%s" {
-						redis {
-							name = "%s"
-							hostname = "test.com"
-							port = 6379
-							bind_interface = "127.0.0.2"
-						}
-					}
-					`, resourceName, redisName),
-					Check: resource.ComposeTestCheckFunc(
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
-						resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
-						resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
-						func(s *terraform.State) error {
-							id, err := testCreatedID(s, "sdm_resource", resourceName)
-							if err != nil {
-								return err
-							}
-
-							// check if it was actually updated
-							client := testClient()
-							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-							defer cancel()
-							resp, err := client.Resources().Get(ctx, id)
-							if err != nil {
-								return fmt.Errorf("failed to get created resource: %w", err)
-							}
-
-							if resp.Resource.(*sdm.Redis).PortOverride == 0 {
-								return fmt.Errorf("missing port override '%d'", resp.Resource.(*sdm.Redis).PortOverride)
-							}
-
-							return nil
-						},
-					),
-				},
-				{
-					ResourceName:      "sdm_resource." + resourceName,
-					ImportState:       true,
-					ImportStateVerify: true,
-				},
+				}
+				`, resourceName, redisName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.1"),
+				),
 			},
-		})
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: fmt.Sprintf(`
+				resource "sdm_resource" "%s" {
+					redis {
+						name = "%s"
+						hostname = "test.com"
+						port = 6379
+						bind_interface = "127.0.0.2"
+					}
+				}
+				`, resourceName, redisName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.name", redisName),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.hostname", "test.com"),
+					resource.TestCheckResourceAttrSet("sdm_resource."+resourceName, "redis.0.port_override"),
+					resource.TestCheckResourceAttr("sdm_resource."+resourceName, "redis.0.bind_interface", "127.0.0.2"),
+					func(s *terraform.State) error {
+						id, err := testCreatedID(s, "sdm_resource", resourceName)
+						if err != nil {
+							return err
+						}
+
+						// check if it was actually updated
+						client := testClient()
+						ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+						defer cancel()
+						resp, err := client.Resources().Get(ctx, id)
+						if err != nil {
+							return fmt.Errorf("failed to get created resource: %w", err)
+						}
+
+						if resp.Resource.(*sdm.Redis).PortOverride == 0 {
+							return fmt.Errorf("missing port override '%d'", resp.Resource.(*sdm.Redis).PortOverride)
+						}
+
+						return nil
+					},
+				),
+			},
+			{
+				ResourceName:      "sdm_resource." + resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
 	})
 }
 

@@ -21,7 +21,7 @@ func TestAccSDMAccountAttachment_DataSourceGet(t *testing.T) {
 	accountID := attachments[0].AccountID
 
 	accountAttachmentName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -59,7 +59,7 @@ func TestAccSDMAccountAttachment_DataSourceGetMultiple(t *testing.T) {
 	}
 
 	accountAttachmentName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -85,7 +85,7 @@ func TestAccSDMAccountAttachment_DataSourceGetNone(t *testing.T) {
 	}
 
 	accountAttachmentName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

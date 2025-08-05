@@ -24,7 +24,7 @@ func TestAccSDMRoleDataSource_Get(t *testing.T) {
 
 	rsName := randomWithPrefix("test-role-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -61,7 +61,7 @@ func TestAccSDMRoleDataSource_GetByTags(t *testing.T) {
 	role := createResp.Role
 	dsName := randomWithPrefix("test-role-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -94,7 +94,7 @@ func TestAccSDMRoleDataSource_GetMultiple(t *testing.T) {
 	}
 
 	rsName := randomWithPrefix("test-role")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -116,7 +116,7 @@ func TestAccSDMRoleDataSource_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("role-ds")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -133,7 +133,7 @@ func TestAccSDMRoleDataSource_GetByID(t *testing.T) {
 	initAcceptanceTest(t)
 	roleName := randomWithPrefix("role")
 	dsName := randomWithPrefix("role")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

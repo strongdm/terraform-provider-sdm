@@ -23,7 +23,7 @@ func TestAccSDMIdentityAlias_Create(t *testing.T) {
 	username := randomWithPrefix("test-username")
 
 	rsName := randomWithPrefix("test-identity-alias-resource")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -61,7 +61,7 @@ func TestAccSDMIdentityAlias_Update(t *testing.T) {
 	username := randomWithPrefix("test-username")
 
 	rsName := randomWithPrefix("test-identity-alias-resource")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

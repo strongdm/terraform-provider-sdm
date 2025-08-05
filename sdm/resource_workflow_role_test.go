@@ -53,7 +53,7 @@ func TestAccSDMWorkflowRole_Create(t *testing.T) {
 	workflowID := ""
 	role1ID := ""
 	role2ID := ""
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

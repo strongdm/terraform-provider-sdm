@@ -32,7 +32,7 @@ func TestAccSDMAccount_Get(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("ac_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -57,7 +57,7 @@ func TestAccSDMAccount_Get(t *testing.T) {
 func TestAccSDMAccount_GetResolvedManager(t *testing.T) {
 	initAcceptanceTest(t)
 	dsName := randomWithPrefix("ac_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -98,7 +98,7 @@ func TestAccSDMAccountDataSource_GetByTags(t *testing.T) {
 	}
 	dsName := randomWithPrefix("test-account-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -128,7 +128,7 @@ func TestAccSDMAccount_GetSuspended(t *testing.T) {
 	userNameNotSuspended := randomWithPrefix("ac_suspended_query")
 	notSuspended := createUserWithSuspension(t, userNameNotSuspended, false)
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -186,7 +186,7 @@ func TestAccSDMAccount_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("ac_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -207,7 +207,7 @@ func TestAccSDMAccount_GetNone(t *testing.T) {
 		t.Fatal("failed to create account in setup: ", err)
 	}
 	dsName := randomWithPrefix("ac_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -242,7 +242,9 @@ func TestAccSDMAccount_GetMultipleTypes(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("ac_test_query")
-	resource.Test(t, resource.TestCase{
+	dsName2 := randomWithPrefix("ac_test_query")
+
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -254,13 +256,6 @@ func TestAccSDMAccount_GetMultipleTypes(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.token.#", "4"),
 				),
 			},
-		},
-	})
-
-	dsName2 := randomWithPrefix("ac_test_query")
-	resource.Test(t, resource.TestCase{
-		Providers: testAccProviders,
-		Steps: []resource.TestStep{
 			{
 				Config: testAccSDMAccountGetFilterNameTypeConfig(dsName2, "account-multi-type*", "api"),
 				Check: resource.ComposeTestCheckFunc(

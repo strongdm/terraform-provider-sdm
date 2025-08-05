@@ -48,7 +48,7 @@ func TestAccSDMWorkflow_Create(t *testing.T) {
 	initAcceptanceTest(t)
 	resourceName := randomWithPrefix("wf-create")
 	workflowName := randomWithPrefix("wf-create")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -73,7 +73,7 @@ func TestAccSDMWorkflow_Update(t *testing.T) {
 	resourceName := randomWithPrefix("wf-create")
 	workflowName := randomWithPrefix("wf-create")
 	updatedWorkflowName := randomWithPrefix("wf-create-updated")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -111,7 +111,7 @@ func TestAccSDMWorkflow_Settings(t *testing.T) {
 	workflowName := randomWithPrefix("wf-create")
 	maxDuration := "1h30m0s"
 	fixedDuration := "1h45m0s"
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

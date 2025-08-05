@@ -24,7 +24,7 @@ func TestAccSDMSecretStore_Get(t *testing.T) {
 	store := stores[0].(*sdm.VaultTokenStore)
 
 	dsName := randomWithPrefix("se_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -65,7 +65,7 @@ func TestAccSDMSecretStoreDataSource_GetByTags(t *testing.T) {
 	}
 	dsName := randomWithPrefix("test-secretstore-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -97,7 +97,7 @@ func TestAccSDMSecretStore_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("se_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -120,7 +120,7 @@ func TestAccSDMSecretStore_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -156,7 +156,7 @@ func TestAccSDMSecretStore_GetTags(t *testing.T) {
 	}
 	dsName := randomWithPrefix("se_test_query")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

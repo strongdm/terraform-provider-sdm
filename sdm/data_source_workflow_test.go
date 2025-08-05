@@ -19,7 +19,7 @@ func TestAccSDMWorkflow_Get(t *testing.T) {
 	workflow := workflows[0]
 
 	dsName := randomWithPrefix("wf-test-query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -46,7 +46,7 @@ func TestAccSDMWorkflow_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("wf-multi-test-query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -68,7 +68,7 @@ func TestAccSDMWorkflow_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("wf-none-query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

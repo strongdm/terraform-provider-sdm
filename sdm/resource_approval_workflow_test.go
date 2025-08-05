@@ -48,7 +48,7 @@ func TestAccSDMApprovalWorkflow_Create(t *testing.T) {
 	initAcceptanceTest(t)
 	resourceName := randomWithPrefix("af-create")
 	approvalWorkflowName := randomWithPrefix("af-create")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -80,7 +80,7 @@ func TestAccSDMApprovalWorkflow_CreateNested(t *testing.T) {
 	step2Quantifier := "any"
 	step2SkipAfter := "1h0m0s"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -118,7 +118,7 @@ func TestAccSDMApprovalWorkflow_Update(t *testing.T) {
 	resourceName := randomWithPrefix("wf-create")
 	approvalWorkflowName := randomWithPrefix("wf-create")
 	updatedApprovalWorkflowName := randomWithPrefix("wf-create-updated")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -165,7 +165,7 @@ func TestAccSDMApprovalWorkflow_UpdateNested(t *testing.T) {
 	accountNameUpdated := randomWithPrefix("af-update-account")
 	roleNameUpdated := randomWithPrefix("af-update-role")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

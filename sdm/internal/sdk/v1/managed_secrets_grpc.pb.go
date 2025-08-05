@@ -43,6 +43,8 @@ type ManagedSecretsClient interface {
 	Rotate(ctx context.Context, in *ManagedSecretRotateRequest, opts ...grpc.CallOption) (*ManagedSecretRotateResponse, error)
 	// Delete deletes a Managed Secret
 	Delete(ctx context.Context, in *ManagedSecretDeleteRequest, opts ...grpc.CallOption) (*ManagedSecretDeleteResponse, error)
+	// ForceDelete deletes a Managed Secret regardless of errors on external system
+	ForceDelete(ctx context.Context, in *ManagedSecretDeleteRequest, opts ...grpc.CallOption) (*ManagedSecretDeleteResponse, error)
 	// Get gets details of a Managed Secret without sensitive data
 	Get(ctx context.Context, in *ManagedSecretGetRequest, opts ...grpc.CallOption) (*ManagedSecretGetResponse, error)
 	// Retrieve returns Managed Secret with sensitive data
@@ -117,6 +119,15 @@ func (c *managedSecretsClient) Delete(ctx context.Context, in *ManagedSecretDele
 	return out, nil
 }
 
+func (c *managedSecretsClient) ForceDelete(ctx context.Context, in *ManagedSecretDeleteRequest, opts ...grpc.CallOption) (*ManagedSecretDeleteResponse, error) {
+	out := new(ManagedSecretDeleteResponse)
+	err := c.cc.Invoke(ctx, "/v1.ManagedSecrets/ForceDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *managedSecretsClient) Get(ctx context.Context, in *ManagedSecretGetRequest, opts ...grpc.CallOption) (*ManagedSecretGetResponse, error) {
 	out := new(ManagedSecretGetResponse)
 	err := c.cc.Invoke(ctx, "/v1.ManagedSecrets/Get", in, out, opts...)
@@ -169,6 +180,8 @@ type ManagedSecretsServer interface {
 	Rotate(context.Context, *ManagedSecretRotateRequest) (*ManagedSecretRotateResponse, error)
 	// Delete deletes a Managed Secret
 	Delete(context.Context, *ManagedSecretDeleteRequest) (*ManagedSecretDeleteResponse, error)
+	// ForceDelete deletes a Managed Secret regardless of errors on external system
+	ForceDelete(context.Context, *ManagedSecretDeleteRequest) (*ManagedSecretDeleteResponse, error)
 	// Get gets details of a Managed Secret without sensitive data
 	Get(context.Context, *ManagedSecretGetRequest) (*ManagedSecretGetResponse, error)
 	// Retrieve returns Managed Secret with sensitive data
@@ -203,6 +216,9 @@ func (UnimplementedManagedSecretsServer) Rotate(context.Context, *ManagedSecretR
 }
 func (UnimplementedManagedSecretsServer) Delete(context.Context, *ManagedSecretDeleteRequest) (*ManagedSecretDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedManagedSecretsServer) ForceDelete(context.Context, *ManagedSecretDeleteRequest) (*ManagedSecretDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ForceDelete not implemented")
 }
 func (UnimplementedManagedSecretsServer) Get(context.Context, *ManagedSecretGetRequest) (*ManagedSecretGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
@@ -337,6 +353,24 @@ func _ManagedSecrets_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ManagedSecrets_ForceDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManagedSecretDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ManagedSecretsServer).ForceDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.ManagedSecrets/ForceDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ManagedSecretsServer).ForceDelete(ctx, req.(*ManagedSecretDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ManagedSecrets_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ManagedSecretGetRequest)
 	if err := dec(in); err != nil {
@@ -436,6 +470,10 @@ var _ManagedSecrets_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ManagedSecrets_Delete_Handler,
+		},
+		{
+			MethodName: "ForceDelete",
+			Handler:    _ManagedSecrets_ForceDelete_Handler,
 		},
 		{
 			MethodName: "Get",

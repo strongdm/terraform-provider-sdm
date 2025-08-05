@@ -49,7 +49,7 @@ func TestAccSDMSecretStore_Create(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	address := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -101,7 +101,7 @@ func TestAccSDMSecretStoreCA_Create(t *testing.T) {
 	mountPoint := randomWithPrefix("ca-test")
 	signingRole := randomWithPrefix("ca-test")
 	ttlMinutes := 5
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -161,7 +161,7 @@ func TestAccSDMSecretStore_Tags(t *testing.T) {
 	initAcceptanceTest(t)
 	name := randomWithPrefix("test")
 	address := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -249,7 +249,7 @@ func TestAccSDMSecretStore_Update(t *testing.T) {
 	address := randomWithPrefix("test")
 	updatedAddress := randomWithPrefix("test2")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

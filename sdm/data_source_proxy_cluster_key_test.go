@@ -23,7 +23,7 @@ func TestAccSDMProxyClusterKey_DataSourceGet(t *testing.T) {
 	}
 
 	dataSourceName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -61,7 +61,7 @@ func TestAccSDMProxyClusterKey_DataSourceGetMultiple(t *testing.T) {
 	}
 
 	dataSourceName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -90,7 +90,7 @@ func TestAccSDMProxyClusterKey_DataSourceGetNone(t *testing.T) {
 	}
 
 	dataSourceName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

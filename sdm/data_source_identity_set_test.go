@@ -15,7 +15,7 @@ func TestAccSDMIdentitySetDataSource_GetByName(t *testing.T) {
 	identitySet := createIdentitySet(t)
 	dsName := randomWithPrefix("test-identity-set-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

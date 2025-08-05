@@ -400,10 +400,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"aks_service_account_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "aks_service_account_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -476,10 +476,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"aks_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "aks_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -807,10 +807,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"amazon_eks_instance_profile_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "amazon_eks_instance_profile_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -898,10 +898,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"amazon_eks_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "amazon_eks_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"access_key": {
@@ -1168,6 +1168,86 @@ func resourceResource() *schema.Resource {
 				MaxItems:    1,
 				Optional:    true,
 				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, TLS must be used to connect to this resource.",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
+			"amazonmq_amqp": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AMQP is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -2358,6 +2438,91 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
+						},
+						"secret_store_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"use_azure_single_server_usernames": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
+						},
+						"username": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The username to authenticate with.",
+						},
+					},
+				},
+			},
+			"azure_mysql_managed_identity": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "AzureMysqlManagedIdentity is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The database for healthchecks. Does not affect client requests.",
+						},
+						"egress_filter": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource.",
+						},
+						"proxy_cluster_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
 						},
 						"secret_store_id": {
 							Type:        schema.TypeString,
@@ -4569,10 +4734,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"google_gke_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "google_gke_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -5368,10 +5533,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"kubernetes_service_account_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "kubernetes_service_account_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -5444,10 +5609,10 @@ func resourceResource() *schema.Resource {
 				},
 			},
 			"kubernetes_user_impersonation": {
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Description: "",
+				Type:       schema.TypeList,
+				MaxItems:   1,
+				Optional:   true,
+				Deprecated: "kubernetes_user_impersonation is deprecated, see docs for more info",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -9559,6 +9724,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("amazonmq_amqp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -9925,6 +10116,32 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		return map[string]string{}, nil
 	}
 	if list := d.Get("azure_mysql").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+			if v := raw["username"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential username was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+			"username": convertStringToPlumbing(raw["username"]),
+		}, nil
+	}
+	if list := d.Get("azure_mysql_managed_identity").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return map[string]string{}, nil
@@ -12294,6 +12511,34 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("amazonmq_amqp").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AMQP{}
+		}
+		out := &sdm.AMQP{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Password:       convertStringToPlumbing(raw["password"]),
+			Port:           convertInt32ToPlumbing(raw["port"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:    convertBoolToPlumbing(raw["tls_required"]),
+			Username:       convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("athena").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -12675,6 +12920,35 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			PortOverride:                  convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:                convertStringToPlumbing(raw["proxy_cluster_id"]),
 			RequireNativeAuth:             convertBoolToPlumbing(raw["require_native_auth"]),
+			SecretStoreID:                 convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:                     convertStringToPlumbing(raw["subdomain"]),
+			Tags:                          convertTagsToPlumbing(raw["tags"]),
+			UseAzureSingleServerUsernames: convertBoolToPlumbing(raw["use_azure_single_server_usernames"]),
+			Username:                      convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("azure_mysql_managed_identity").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.AzureMysqlManagedIdentity{}
+		}
+		out := &sdm.AzureMysqlManagedIdentity{
+			ID:                            d.Id(),
+			BindInterface:                 convertStringToPlumbing(raw["bind_interface"]),
+			Database:                      convertStringToPlumbing(raw["database"]),
+			EgressFilter:                  convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                      convertStringToPlumbing(raw["hostname"]),
+			Name:                          convertStringToPlumbing(raw["name"]),
+			Password:                      convertStringToPlumbing(raw["password"]),
+			Port:                          convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                  convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:                convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:                 convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:                     convertStringToPlumbing(raw["subdomain"]),
 			Tags:                          convertTagsToPlumbing(raw["tags"]),
@@ -15305,6 +15579,26 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.AMQP:
+		localV, _ := localVersion.(*sdm.AMQP)
+		_ = localV
+		d.Set("amazonmq_amqp", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         seValues["username"],
+			},
+		})
 	case *sdm.Athena:
 		localV, _ := localVersion.(*sdm.Athena)
 		_ = localV
@@ -15585,6 +15879,27 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":                     (v.PortOverride),
 				"proxy_cluster_id":                  (v.ProxyClusterID),
 				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          seValues["username"],
+			},
+		})
+	case *sdm.AzureMysqlManagedIdentity:
+		localV, _ := localVersion.(*sdm.AzureMysqlManagedIdentity)
+		_ = localV
+		d.Set("azure_mysql_managed_identity", []map[string]interface{}{
+			{
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"name":                              (v.Name),
+				"password":                          seValues["password"],
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"proxy_cluster_id":                  (v.ProxyClusterID),
 				"secret_store_id":                   (v.SecretStoreID),
 				"subdomain":                         (v.Subdomain),
 				"tags":                              convertTagsToPorcelain(v.Tags),
@@ -17723,6 +18038,35 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.AMQP:
+		localV, ok := localVersion.(*sdm.AMQP)
+		if !ok {
+			localV = &sdm.AMQP{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("amazonmq_amqp", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port":             (v.Port),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
+				"username":         seValues["username"],
+			},
+		})
 	case *sdm.Athena:
 		localV, ok := localVersion.(*sdm.Athena)
 		if !ok {
@@ -18141,6 +18485,36 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":                     (v.PortOverride),
 				"proxy_cluster_id":                  (v.ProxyClusterID),
 				"require_native_auth":               (v.RequireNativeAuth),
+				"secret_store_id":                   (v.SecretStoreID),
+				"subdomain":                         (v.Subdomain),
+				"tags":                              convertTagsToPorcelain(v.Tags),
+				"use_azure_single_server_usernames": (v.UseAzureSingleServerUsernames),
+				"username":                          seValues["username"],
+			},
+		})
+	case *sdm.AzureMysqlManagedIdentity:
+		localV, ok := localVersion.(*sdm.AzureMysqlManagedIdentity)
+		if !ok {
+			localV = &sdm.AzureMysqlManagedIdentity{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		if v.Username != "" {
+			seValues["username"] = v.Username
+		}
+		d.Set("azure_mysql_managed_identity", []map[string]interface{}{
+			{
+				"bind_interface":                    (v.BindInterface),
+				"database":                          (v.Database),
+				"egress_filter":                     (v.EgressFilter),
+				"hostname":                          (v.Hostname),
+				"name":                              (v.Name),
+				"password":                          seValues["password"],
+				"port":                              (v.Port),
+				"port_override":                     (v.PortOverride),
+				"proxy_cluster_id":                  (v.ProxyClusterID),
 				"secret_store_id":                   (v.SecretStoreID),
 				"subdomain":                         (v.Subdomain),
 				"tags":                              convertTagsToPorcelain(v.Tags),

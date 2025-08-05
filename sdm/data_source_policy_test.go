@@ -18,7 +18,7 @@ func TestAccSDMPolicy_Get(t *testing.T) {
 	}
 	policy := policies[0]
 	dsName := randomWithPrefix("policy_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -48,7 +48,7 @@ func TestAccSDMPolicy_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("policies_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -71,7 +71,7 @@ func TestAccSDMPolicy_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("policy_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

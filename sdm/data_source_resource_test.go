@@ -23,7 +23,7 @@ func TestAccSDMResource_Get(t *testing.T) {
 	redis := resources[0].(*sdm.Redis)
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -69,7 +69,7 @@ func TestAccSDMResourceDataSource_GetByTags(t *testing.T) {
 	}
 	dsName := randomWithPrefix("test-resource-ds")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -117,7 +117,7 @@ func TestAccSDMResource_SecretStoreGet(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -140,7 +140,7 @@ func TestAccSDMResource_SSHGet(t *testing.T) {
 	ssh := resources[0].(*sdm.SSH)
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -171,7 +171,7 @@ func TestAccSDMResource_GetMultiple(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -194,7 +194,7 @@ func TestAccSDMResource_GetNone(t *testing.T) {
 	}
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -232,7 +232,7 @@ func TestAccSDMResource_GetTags(t *testing.T) {
 	}
 	dsName := randomWithPrefix("rs_test_query")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -260,7 +260,7 @@ func TestAccSDMResourceWithIdentitySet_Get(t *testing.T) {
 	sshCert := resources[0].(*sdm.SSHCert)
 
 	dsName := randomWithPrefix("rs_test_query")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

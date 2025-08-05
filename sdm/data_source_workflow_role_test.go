@@ -21,7 +21,7 @@ func TestAccSDMWorkflowRoles_Get(t *testing.T) {
 	workflowID := workflowRoles[0].WorkflowID
 	roleID := workflowRoles[0].RoleID
 	workflowRoleName := randomWithPrefix("wr-test-get")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -47,7 +47,7 @@ func TestAccSDMWorkflowRoles_GetNone(t *testing.T) {
 	roleID := "r-000333000"
 
 	workflowRoleName := randomWithPrefix("wr-test-get-none")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
@@ -71,7 +71,7 @@ func TestAccSDMWorkflowRoles_GetMultiple(t *testing.T) {
 	workflowID := workflowRoles[0].WorkflowID
 
 	workflowRoleName := randomWithPrefix("wr-test-get-multi")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

@@ -54,7 +54,7 @@ func TestAccSDMProxyClusterKey_Create(t *testing.T) {
 	proxyClusterName := randomWithPrefix("test-proxy-cluster")
 	proxyClusterKeyName := randomWithPrefix("test-proxy-cluster-key")
 	proxyClusterID := ""
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

@@ -46,7 +46,7 @@ func TestAccSDMIdentityAliasDataSource_Get(t *testing.T) {
 		identity_set_id = "%s"
 	}`, dsName, created.IdentityAlias.ID, account.ID, identitySet.ID)
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{

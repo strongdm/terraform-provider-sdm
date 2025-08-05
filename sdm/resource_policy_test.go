@@ -53,7 +53,7 @@ func TestAccSDMPolicy_Create(t *testing.T) {
 	name := randomWithPrefix("test")
 	description := randomWithPrefix("test")
 	rawPolicy := defaultPolicy
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -111,7 +111,7 @@ func TestAccSDMPolicy_Update(t *testing.T) {
 	rawPolicy := ""
 	updatedPolicy := defaultPolicy
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

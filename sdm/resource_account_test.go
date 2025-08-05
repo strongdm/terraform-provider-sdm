@@ -50,7 +50,7 @@ func TestAccSDMAccount_ServiceCreate(t *testing.T) {
 	initAcceptanceTest(t)
 	rsName := randomWithPrefix("test")
 	serviceName := randomWithPrefix("test")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -109,7 +109,7 @@ func TestAccSDMAccount_UserCreate(t *testing.T) {
 		t.Fatal("failed to create account in setup: ", err)
 	}
 	permissionLevel := sdm.PermissionLevelTeamLeader
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -179,7 +179,7 @@ func TestAccSDMAccount_Update(t *testing.T) {
 		t.Fatal("failed to create account in setup: ", err)
 	}
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
@@ -250,7 +250,7 @@ func TestAccSDMAccount_Tags(t *testing.T) {
 	firstName := randomWithPrefix("ursula")
 	lastName := randomWithPrefix("leguin")
 	email := randomWithPrefix("testsuites@strongdm.com")
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{

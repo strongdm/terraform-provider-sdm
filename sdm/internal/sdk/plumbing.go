@@ -92,6 +92,28 @@ func convertTagsToPlumbing(tags Tags) *proto.Tags {
 	}
 	return &proto.Tags{Pairs: result}
 }
+func convertLogCategoryConfigMapToPorcelain(plumbing *proto.LogCategoryConfigMap) (LogCategoryConfigMap, error) {
+	porcelain := LogCategoryConfigMap{}
+	for _, entry := range plumbing.Entries {
+		if config, err := convertLogCategoryConfigToPorcelain(entry.Config); err != nil {
+			return nil, err
+		} else {
+			porcelain[entry.Name] = config
+		}
+	}
+	return porcelain, nil
+}
+
+func convertLogCategoryConfigMapToPlumbing(porcelain LogCategoryConfigMap) *proto.LogCategoryConfigMap {
+	var entries []*proto.LogCategoryConfigMap_Entry
+	for name, config := range porcelain {
+		entries = append(entries, &proto.LogCategoryConfigMap_Entry{
+			Name:   name,
+			Config: convertLogCategoryConfigToPlumbing(config),
+		})
+	}
+	return &proto.LogCategoryConfigMap{Entries: entries}
+}
 func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -470,6 +492,79 @@ func convertRepeatedAKSUserImpersonationToPorcelain(plumbings []*proto.AKSUserIm
 	var items []*AKSUserImpersonation
 	for _, plumbing := range plumbings {
 		if v, err := convertAKSUserImpersonationToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAMQPToPorcelain(plumbing *proto.AMQP) (*AMQP, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AMQP{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TlsRequired = plumbing.TlsRequired
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertAMQPToPlumbing(porcelain *AMQP) *proto.AMQP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AMQP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAMQPToPlumbing(
+	porcelains []*AMQP,
+) []*proto.AMQP {
+	var items []*proto.AMQP
+	for _, porcelain := range porcelains {
+		items = append(items, convertAMQPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAMQPToPorcelain(plumbings []*proto.AMQP) (
+	[]*AMQP,
+	error,
+) {
+	var items []*AMQP
+	for _, plumbing := range plumbings {
+		if v, err := convertAMQPToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -5167,6 +5262,81 @@ func convertRepeatedAzureMysqlToPorcelain(plumbings []*proto.AzureMysql) (
 	var items []*AzureMysql
 	for _, plumbing := range plumbings {
 		if v, err := convertAzureMysqlToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAzureMysqlManagedIdentityToPorcelain(plumbing *proto.AzureMysqlManagedIdentity) (*AzureMysqlManagedIdentity, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AzureMysqlManagedIdentity{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.UseAzureSingleServerUsernames = plumbing.UseAzureSingleServerUsernames
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertAzureMysqlManagedIdentityToPlumbing(porcelain *AzureMysqlManagedIdentity) *proto.AzureMysqlManagedIdentity {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzureMysqlManagedIdentity{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.UseAzureSingleServerUsernames = (porcelain.UseAzureSingleServerUsernames)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedAzureMysqlManagedIdentityToPlumbing(
+	porcelains []*AzureMysqlManagedIdentity,
+) []*proto.AzureMysqlManagedIdentity {
+	var items []*proto.AzureMysqlManagedIdentity
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureMysqlManagedIdentityToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureMysqlManagedIdentityToPorcelain(plumbings []*proto.AzureMysqlManagedIdentity) (
+	[]*AzureMysqlManagedIdentity,
+	error,
+) {
+	var items []*AzureMysqlManagedIdentity
+	for _, plumbing := range plumbings {
+		if v, err := convertAzureMysqlManagedIdentityToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -9907,6 +10077,106 @@ func convertRepeatedKubernetesUserImpersonationToPorcelain(plumbings []*proto.Ku
 	}
 	return items, nil
 }
+func convertLogCategoryConfigToPorcelain(plumbing *proto.LogCategoryConfig) (*LogCategoryConfig, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &LogCategoryConfig{}
+	porcelain.RemoteDiscardReplays = plumbing.RemoteDiscardReplays
+	porcelain.RemoteEncoder = plumbing.RemoteEncoder
+	return porcelain, nil
+}
+
+func convertLogCategoryConfigToPlumbing(porcelain *LogCategoryConfig) *proto.LogCategoryConfig {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.LogCategoryConfig{}
+	plumbing.RemoteDiscardReplays = (porcelain.RemoteDiscardReplays)
+	plumbing.RemoteEncoder = (porcelain.RemoteEncoder)
+	return plumbing
+}
+func convertRepeatedLogCategoryConfigToPlumbing(
+	porcelains []*LogCategoryConfig,
+) []*proto.LogCategoryConfig {
+	var items []*proto.LogCategoryConfig
+	for _, porcelain := range porcelains {
+		items = append(items, convertLogCategoryConfigToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedLogCategoryConfigToPorcelain(plumbings []*proto.LogCategoryConfig) (
+	[]*LogCategoryConfig,
+	error,
+) {
+	var items []*LogCategoryConfig
+	for _, plumbing := range plumbings {
+		if v, err := convertLogCategoryConfigToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertLogConfigToPorcelain(plumbing *proto.LogConfig) (*LogConfig, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &LogConfig{}
+	if v, err := convertLogCategoryConfigMapToPorcelain(plumbing.Categories); err != nil {
+		return nil, fmt.Errorf("error converting field Categories: %v", err)
+	} else {
+		porcelain.Categories = v
+	}
+	porcelain.LocalEncoder = plumbing.LocalEncoder
+	porcelain.LocalFormat = plumbing.LocalFormat
+	porcelain.LocalSocketPath = plumbing.LocalSocketPath
+	porcelain.LocalStorage = plumbing.LocalStorage
+	porcelain.LocalTCPAddress = plumbing.LocalTcpAddress
+	porcelain.PublicKey = plumbing.PublicKey
+	return porcelain, nil
+}
+
+func convertLogConfigToPlumbing(porcelain *LogConfig) *proto.LogConfig {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.LogConfig{}
+	plumbing.Categories = convertLogCategoryConfigMapToPlumbing(porcelain.Categories)
+	plumbing.LocalEncoder = (porcelain.LocalEncoder)
+	plumbing.LocalFormat = (porcelain.LocalFormat)
+	plumbing.LocalSocketPath = (porcelain.LocalSocketPath)
+	plumbing.LocalStorage = (porcelain.LocalStorage)
+	plumbing.LocalTcpAddress = (porcelain.LocalTCPAddress)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	return plumbing
+}
+func convertRepeatedLogConfigToPlumbing(
+	porcelains []*LogConfig,
+) []*proto.LogConfig {
+	var items []*proto.LogConfig
+	for _, porcelain := range porcelains {
+		items = append(items, convertLogConfigToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedLogConfigToPorcelain(plumbings []*proto.LogConfig) (
+	[]*LogConfig,
+	error,
+) {
+	var items []*LogConfig
+	for _, plumbing := range plumbings {
+		if v, err := convertLogConfigToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertMTLSMysqlToPorcelain(plumbing *proto.MTLSMysql) (*MTLSMysql, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -12568,6 +12838,11 @@ func convertOrganizationToPorcelain(plumbing *proto.Organization) (*Organization
 	}
 	porcelain.IdleTimeoutEnabled = plumbing.IdleTimeoutEnabled
 	porcelain.Kind = plumbing.Kind
+	if v, err := convertLogConfigToPorcelain(plumbing.LogConfig); err != nil {
+		return nil, fmt.Errorf("error converting field LogConfig: %v", err)
+	} else {
+		porcelain.LogConfig = v
+	}
 	porcelain.LogLocalEncoder = plumbing.LogLocalEncoder
 	porcelain.LogLocalFormat = plumbing.LogLocalFormat
 	porcelain.LogLocalStorage = plumbing.LogLocalStorage
@@ -12618,6 +12893,7 @@ func convertOrganizationToPlumbing(porcelain *Organization) *proto.Organization 
 	plumbing.IdleTimeout = convertDurationToPlumbing(porcelain.IdleTimeout)
 	plumbing.IdleTimeoutEnabled = (porcelain.IdleTimeoutEnabled)
 	plumbing.Kind = (porcelain.Kind)
+	plumbing.LogConfig = convertLogConfigToPlumbing(porcelain.LogConfig)
 	plumbing.LogLocalEncoder = (porcelain.LogLocalEncoder)
 	plumbing.LogLocalFormat = (porcelain.LogLocalFormat)
 	plumbing.LogLocalStorage = (porcelain.LogLocalStorage)
@@ -16063,6 +16339,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AmazonEsiam{AmazonEsiam: convertAmazonESIAMToPlumbing(v)}
 	case *AmazonMQAMQP091:
 		plumbing.Resource = &proto.Resource_AmazonMqamqp_091{AmazonMqamqp_091: convertAmazonMQAMQP091ToPlumbing(v)}
+	case *AMQP:
+		plumbing.Resource = &proto.Resource_Amqp{Amqp: convertAMQPToPlumbing(v)}
 	case *Athena:
 		plumbing.Resource = &proto.Resource_Athena{Athena: convertAthenaToPlumbing(v)}
 	case *AthenaIAM:
@@ -16091,6 +16369,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_AzureConsole{AzureConsole: convertAzureConsoleToPlumbing(v)}
 	case *AzureMysql:
 		plumbing.Resource = &proto.Resource_AzureMysql{AzureMysql: convertAzureMysqlToPlumbing(v)}
+	case *AzureMysqlManagedIdentity:
+		plumbing.Resource = &proto.Resource_AzureMysqlManagedIdentity{AzureMysqlManagedIdentity: convertAzureMysqlManagedIdentityToPlumbing(v)}
 	case *AzurePostgres:
 		plumbing.Resource = &proto.Resource_AzurePostgres{AzurePostgres: convertAzurePostgresToPlumbing(v)}
 	case *AzurePostgresManagedIdentity:
@@ -16295,6 +16575,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	if plumbing.GetAmazonMqamqp_091() != nil {
 		return convertAmazonMQAMQP091ToPorcelain(plumbing.GetAmazonMqamqp_091())
 	}
+	if plumbing.GetAmqp() != nil {
+		return convertAMQPToPorcelain(plumbing.GetAmqp())
+	}
 	if plumbing.GetAthena() != nil {
 		return convertAthenaToPorcelain(plumbing.GetAthena())
 	}
@@ -16336,6 +16619,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetAzureMysql() != nil {
 		return convertAzureMysqlToPorcelain(plumbing.GetAzureMysql())
+	}
+	if plumbing.GetAzureMysqlManagedIdentity() != nil {
+		return convertAzureMysqlManagedIdentityToPorcelain(plumbing.GetAzureMysqlManagedIdentity())
 	}
 	if plumbing.GetAzurePostgres() != nil {
 		return convertAzurePostgresToPorcelain(plumbing.GetAzurePostgres())
@@ -22910,6 +23196,51 @@ func (a *approvalWorkflowHistoryIteratorImpl) Err() error {
 	return a.err
 }
 
+type roleIteratorImplFetchFunc func() (
+	[]*Role,
+	bool, error)
+type roleIteratorImpl struct {
+	buffer      []*Role
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       roleIteratorImplFetchFunc
+}
+
+func newRoleIteratorImpl(f roleIteratorImplFetchFunc) *roleIteratorImpl {
+	return &roleIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (r *roleIteratorImpl) Next() bool {
+	if r.index < len(r.buffer)-1 {
+		r.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !r.hasNextPage {
+		return false
+	}
+
+	r.index = 0
+	r.buffer, r.hasNextPage, r.err = r.fetch()
+	return len(r.buffer) > 0
+}
+
+func (r *roleIteratorImpl) Value() *Role {
+	if r.index >= len(r.buffer) {
+		return nil
+	}
+	return r.buffer[r.index]
+}
+
+func (r *roleIteratorImpl) Err() error {
+	return r.err
+}
+
 type healthcheckIteratorImplFetchFunc func() (
 	[]*Healthcheck,
 	bool, error)
@@ -24167,51 +24498,6 @@ func (r *roleResourceHistoryIteratorImpl) Value() *RoleResourceHistory {
 }
 
 func (r *roleResourceHistoryIteratorImpl) Err() error {
-	return r.err
-}
-
-type roleIteratorImplFetchFunc func() (
-	[]*Role,
-	bool, error)
-type roleIteratorImpl struct {
-	buffer      []*Role
-	index       int
-	hasNextPage bool
-	err         error
-	fetch       roleIteratorImplFetchFunc
-}
-
-func newRoleIteratorImpl(f roleIteratorImplFetchFunc) *roleIteratorImpl {
-	return &roleIteratorImpl{
-		hasNextPage: true,
-		fetch:       f,
-	}
-}
-
-func (r *roleIteratorImpl) Next() bool {
-	if r.index < len(r.buffer)-1 {
-		r.index++
-		return true
-	}
-
-	// reached end of buffer
-	if !r.hasNextPage {
-		return false
-	}
-
-	r.index = 0
-	r.buffer, r.hasNextPage, r.err = r.fetch()
-	return len(r.buffer) > 0
-}
-
-func (r *roleIteratorImpl) Value() *Role {
-	if r.index >= len(r.buffer) {
-		return nil
-	}
-	return r.buffer[r.index]
-}
-
-func (r *roleIteratorImpl) Err() error {
 	return r.err
 }
 

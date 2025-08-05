@@ -26,7 +26,7 @@ func TestAccSDMManagedSecretValue_Create_Base64(t *testing.T) {
 	pubKey := publicKeyPEM(privKey)
 	pubKeyBase64 := base64.StdEncoding.EncodeToString([]byte(pubKey))
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		IsUnitTest:   true,
 		CheckDestroy: testCheckDestroy,
@@ -59,7 +59,7 @@ func TestAccSDMManagedSecretValue_Create_PEM(t *testing.T) {
 	}
 	pubKey := publicKeyPEM(privKey)
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
 		IsUnitTest:   true,
 		CheckDestroy: testCheckDestroy,

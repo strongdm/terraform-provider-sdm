@@ -42,7 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/15.1.0"
+	defaultUserAgent = "strongdm-sdk-go/15.5.0"
 )
 
 var _ = metadata.Pairs
@@ -85,6 +85,7 @@ type Client struct {
 	approvalWorkflows                *ApprovalWorkflows
 	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
 	controlPanel                     *ControlPanel
+	roles                            *Roles
 	healthChecks                     *HealthChecks
 	identityAliases                  *IdentityAliases
 	identityAliasesHistory           *IdentityAliasesHistory
@@ -111,7 +112,6 @@ type Client struct {
 	resourcesHistory                 *ResourcesHistory
 	roleResources                    *RoleResources
 	roleResourcesHistory             *RoleResourcesHistory
-	roles                            *Roles
 	rolesHistory                     *RolesHistory
 	secretStores                     *SecretStores
 	secretEngines                    *SecretEngines
@@ -245,6 +245,10 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		client: plumbing.NewControlPanelClient(client.grpcConn),
 		parent: client,
 	}
+	client.roles = &Roles{
+		client: plumbing.NewRolesClient(client.grpcConn),
+		parent: client,
+	}
 	client.healthChecks = &HealthChecks{
 		client: plumbing.NewHealthChecksClient(client.grpcConn),
 		parent: client,
@@ -347,10 +351,6 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.roleResourcesHistory = &RoleResourcesHistory{
 		client: plumbing.NewRoleResourcesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.roles = &Roles{
-		client: plumbing.NewRolesClient(client.grpcConn),
 		parent: client,
 	}
 	client.rolesHistory = &RolesHistory{
@@ -579,6 +579,13 @@ func (c *Client) ControlPanel() *ControlPanel {
 	return c.controlPanel
 }
 
+// A Role has a list of access rules which determine which Resources the members
+// of the Role have access to. An Account can be a member of multiple Roles via
+// AccountAttachments.
+func (c *Client) Roles() *Roles {
+	return c.roles
+}
+
 // HealthChecks lists the last healthcheck between each node and resource.
 // Note the unconventional capitalization here is to prevent having a collision with GRPC
 func (c *Client) HealthChecks() *HealthChecks {
@@ -725,13 +732,6 @@ func (c *Client) RoleResourcesHistory() *RoleResourcesHistory {
 	return c.roleResourcesHistory
 }
 
-// A Role has a list of access rules which determine which Resources the members
-// of the Role have access to. An Account can be a member of multiple Roles via
-// AccountAttachments.
-func (c *Client) Roles() *Roles {
-	return c.roles
-}
-
 // RolesHistory records all changes to the state of a Role.
 func (c *Client) RolesHistory() *RolesHistory {
 	return c.rolesHistory
@@ -835,6 +835,10 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewApprovalWorkflowsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.roles = &Roles{
+		client: plumbing.NewRolesClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.identityAliases = &IdentityAliases{
 		client: plumbing.NewIdentityAliasesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -869,10 +873,6 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 	}
 	snapshotClient.client.roleResources = &RoleResources{
 		client: plumbing.NewRoleResourcesClient(snapshotClient.client.grpcConn),
-		parent: snapshotClient.client,
-	}
-	snapshotClient.client.roles = &Roles{
-		client: plumbing.NewRolesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
 	snapshotClient.client.secretStores = &SecretStores{
@@ -945,6 +945,13 @@ func (c *SnapshotClient) ApprovalWorkflows() SnapshotApprovalWorkflows {
 	return c.client.approvalWorkflows
 }
 
+// A Role has a list of access rules which determine which Resources the members
+// of the Role have access to. An Account can be a member of multiple Roles via
+// AccountAttachments.
+func (c *SnapshotClient) Roles() SnapshotRoles {
+	return c.client.roles
+}
+
 // IdentityAliases assign an alias to an account within an IdentitySet.
 // The alias is used as the username when connecting to a identity supported resource.
 func (c *SnapshotClient) IdentityAliases() SnapshotIdentityAliases {
@@ -998,13 +1005,6 @@ func (c *SnapshotClient) Resources() SnapshotResources {
 // The RoleResources service is read-only.
 func (c *SnapshotClient) RoleResources() SnapshotRoleResources {
 	return c.client.roleResources
-}
-
-// A Role has a list of access rules which determine which Resources the members
-// of the Role have access to. An Account can be a member of multiple Roles via
-// AccountAttachments.
-func (c *SnapshotClient) Roles() SnapshotRoles {
-	return c.client.roles
 }
 
 // SecretStores are servers where resource secrets (passwords, keys) are stored.
