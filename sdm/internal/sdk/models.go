@@ -1786,39 +1786,6 @@ type AzureCertificate struct {
 	TenantID string `json:"tenantId"`
 }
 
-// AzureConsole is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type AzureConsole struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	BindInterface string `json:"bindInterface"`
-	// The connector ID to authenticate through.
-	ConnectorID string `json:"connectorId"`
-	// A filter applied to the routing logic to pin datasource to nodes.
-	EgressFilter string `json:"egressFilter"`
-	// True if the datasource is reachable and the credentials are valid.
-	Healthy bool `json:"healthy"`
-	// Unique identifier of the Resource.
-	ID string `json:"id"`
-	// The ID of the identity set to use for identity connections.
-	IdentitySetID string `json:"identitySetId"`
-	// The management group ID to authenticate scope Privileges to.
-	ManagementGroupID string `json:"managementGroupId"`
-	// Unique human-readable name of the Resource.
-	Name string `json:"name"`
-	// The privilege levels specify which Groups are managed externally
-	PrivilegeLevels string `json:"privilegeLevels"`
-	// ID of the proxy cluster for this resource, if any.
-	ProxyClusterID string `json:"proxyClusterId"`
-	// ID of the secret store containing credentials for this resource, if any.
-	SecretStoreID string `json:"secretStoreId"`
-	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	Subdomain string `json:"subdomain"`
-	// The subscription ID to authenticate scope Privileges to.
-	SubscriptionID string `json:"subscriptionId"`
-	// Tags is a map of key, value pairs.
-	Tags Tags `json:"tags"`
-}
-
 type AzureMysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	BindInterface string `json:"bindInterface"`
@@ -2757,6 +2724,45 @@ type ElasticacheRedis struct {
 	TlsRequired bool `json:"tlsRequired"`
 	// The username to authenticate with.
 	Username string `json:"username"`
+}
+
+// EntraID is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type EntraID struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	BindInterface string `json:"bindInterface"`
+	// If true, configures discovery of the tenant to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// comma separated list of group names to filter by. Supports wildcards (*)
+	GroupNames string `json:"groupNames"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
+	// The management group ID to authenticate scope Privileges to.
+	ManagementGroupID string `json:"managementGroupId"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The privilege levels specify which Groups are managed externally
+	PrivilegeLevels string `json:"privilegeLevels"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// filters discovered groups to the specified Resource Group
+	ResourceGroupID string `json:"resourceGroupId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	Subdomain string `json:"subdomain"`
+	// The subscription ID to authenticate scope Privileges to.
+	SubscriptionID string `json:"subscriptionId"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The connector ID to authenticate through.
+	TenantID string `json:"tenantId"`
 }
 
 type GCP struct {
@@ -5225,6 +5231,9 @@ type RDPCert struct {
 	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
+	// The SID needed in leased credentials to generate a valid certificate.
+	// Using extraplain3 here as 1 and 2 are used in cert generation and internal driver config
+	SID string `json:"sid"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
@@ -7127,60 +7136,6 @@ func (m *AzureCertificate) GetBindInterface() string {
 func (m *AzureCertificate) SetBindInterface(v string) {
 	m.BindInterface = v
 }
-func (*AzureConsole) isOneOf_Resource() {}
-
-// GetID returns the unique identifier of the AzureConsole.
-func (m *AzureConsole) GetID() string { return m.ID }
-
-// GetName returns the name of the AzureConsole.
-func (m *AzureConsole) GetName() string {
-	return m.Name
-}
-
-// SetName sets the name of the AzureConsole.
-func (m *AzureConsole) SetName(v string) {
-	m.Name = v
-}
-
-// GetTags returns the tags of the AzureConsole.
-func (m *AzureConsole) GetTags() Tags {
-	return m.Tags.clone()
-}
-
-// SetTags sets the tags of the AzureConsole.
-func (m *AzureConsole) SetTags(v Tags) {
-	m.Tags = v.clone()
-}
-
-// GetSecretStoreID returns the secret store id of the AzureConsole.
-func (m *AzureConsole) GetSecretStoreID() string {
-	return m.SecretStoreID
-}
-
-// SetSecretStoreID sets the secret store id of the AzureConsole.
-func (m *AzureConsole) SetSecretStoreID(v string) {
-	m.SecretStoreID = v
-}
-
-// GetEgressFilter returns the egress filter of the AzureConsole.
-func (m *AzureConsole) GetEgressFilter() string {
-	return m.EgressFilter
-}
-
-// SetEgressFilter sets the egress filter of the AzureConsole.
-func (m *AzureConsole) SetEgressFilter(v string) {
-	m.EgressFilter = v
-}
-
-// GetBindInterface returns the bind interface of the AzureConsole.
-func (m *AzureConsole) GetBindInterface() string {
-	return m.BindInterface
-}
-
-// SetBindInterface sets the bind interface of the AzureConsole.
-func (m *AzureConsole) SetBindInterface(v string) {
-	m.BindInterface = v
-}
 func (*AzureMysql) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the AzureMysql.
@@ -8529,6 +8484,60 @@ func (m *ElasticacheRedis) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the ElasticacheRedis.
 func (m *ElasticacheRedis) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*EntraID) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the EntraID.
+func (m *EntraID) GetID() string { return m.ID }
+
+// GetName returns the name of the EntraID.
+func (m *EntraID) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the EntraID.
+func (m *EntraID) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the EntraID.
+func (m *EntraID) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the EntraID.
+func (m *EntraID) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the EntraID.
+func (m *EntraID) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the EntraID.
+func (m *EntraID) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the EntraID.
+func (m *EntraID) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the EntraID.
+func (m *EntraID) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the EntraID.
+func (m *EntraID) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the EntraID.
+func (m *EntraID) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*GCP) isOneOf_Resource() {}

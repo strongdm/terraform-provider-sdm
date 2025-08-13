@@ -5121,77 +5121,6 @@ func convertRepeatedAzureCertificateToPorcelain(plumbings []*proto.AzureCertific
 	}
 	return items, nil
 }
-func convertAzureConsoleToPorcelain(plumbing *proto.AzureConsole) (*AzureConsole, error) {
-	if plumbing == nil {
-		return nil, nil
-	}
-	porcelain := &AzureConsole{}
-	porcelain.BindInterface = plumbing.BindInterface
-	porcelain.ConnectorID = plumbing.ConnectorId
-	porcelain.EgressFilter = plumbing.EgressFilter
-	porcelain.Healthy = plumbing.Healthy
-	porcelain.ID = plumbing.Id
-	porcelain.IdentitySetID = plumbing.IdentitySetId
-	porcelain.ManagementGroupID = plumbing.ManagementGroupId
-	porcelain.Name = plumbing.Name
-	porcelain.PrivilegeLevels = plumbing.PrivilegeLevels
-	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.SecretStoreID = plumbing.SecretStoreId
-	porcelain.Subdomain = plumbing.Subdomain
-	porcelain.SubscriptionID = plumbing.SubscriptionId
-	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
-		return nil, fmt.Errorf("error converting field Tags: %v", err)
-	} else {
-		porcelain.Tags = v
-	}
-	return porcelain, nil
-}
-
-func convertAzureConsoleToPlumbing(porcelain *AzureConsole) *proto.AzureConsole {
-	if porcelain == nil {
-		return nil
-	}
-	plumbing := &proto.AzureConsole{}
-	plumbing.BindInterface = (porcelain.BindInterface)
-	plumbing.ConnectorId = (porcelain.ConnectorID)
-	plumbing.EgressFilter = (porcelain.EgressFilter)
-	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Id = (porcelain.ID)
-	plumbing.IdentitySetId = (porcelain.IdentitySetID)
-	plumbing.ManagementGroupId = (porcelain.ManagementGroupID)
-	plumbing.Name = (porcelain.Name)
-	plumbing.PrivilegeLevels = (porcelain.PrivilegeLevels)
-	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.SecretStoreId = (porcelain.SecretStoreID)
-	plumbing.Subdomain = (porcelain.Subdomain)
-	plumbing.SubscriptionId = (porcelain.SubscriptionID)
-	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	return plumbing
-}
-func convertRepeatedAzureConsoleToPlumbing(
-	porcelains []*AzureConsole,
-) []*proto.AzureConsole {
-	var items []*proto.AzureConsole
-	for _, porcelain := range porcelains {
-		items = append(items, convertAzureConsoleToPlumbing(porcelain))
-	}
-	return items
-}
-
-func convertRepeatedAzureConsoleToPorcelain(plumbings []*proto.AzureConsole) (
-	[]*AzureConsole,
-	error,
-) {
-	var items []*AzureConsole
-	for _, plumbing := range plumbings {
-		if v, err := convertAzureConsoleToPorcelain(plumbing); err != nil {
-			return nil, err
-		} else {
-			items = append(items, v)
-		}
-	}
-	return items, nil
-}
 func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7514,6 +7443,83 @@ func convertRepeatedElasticacheRedisToPorcelain(plumbings []*proto.ElasticacheRe
 	var items []*ElasticacheRedis
 	for _, plumbing := range plumbings {
 		if v, err := convertElasticacheRedisToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertEntraIDToPorcelain(plumbing *proto.EntraID) (*EntraID, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &EntraID{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.GroupNames = plumbing.GroupNames
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.ManagementGroupID = plumbing.ManagementGroupId
+	porcelain.Name = plumbing.Name
+	porcelain.PrivilegeLevels = plumbing.PrivilegeLevels
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.ResourceGroupID = plumbing.ResourceGroupId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	porcelain.SubscriptionID = plumbing.SubscriptionId
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.TenantID = plumbing.TenantId
+	return porcelain, nil
+}
+
+func convertEntraIDToPlumbing(porcelain *EntraID) *proto.EntraID {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.EntraID{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.GroupNames = (porcelain.GroupNames)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.ManagementGroupId = (porcelain.ManagementGroupID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PrivilegeLevels = (porcelain.PrivilegeLevels)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.ResourceGroupId = (porcelain.ResourceGroupID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.SubscriptionId = (porcelain.SubscriptionID)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TenantId = (porcelain.TenantID)
+	return plumbing
+}
+func convertRepeatedEntraIDToPlumbing(
+	porcelains []*EntraID,
+) []*proto.EntraID {
+	var items []*proto.EntraID
+	for _, porcelain := range porcelains {
+		items = append(items, convertEntraIDToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedEntraIDToPorcelain(plumbings []*proto.EntraID) (
+	[]*EntraID,
+	error,
+) {
+	var items []*EntraID
+	for _, plumbing := range plumbings {
+		if v, err := convertEntraIDToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -14901,6 +14907,7 @@ func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SID = plumbing.Sid
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
@@ -14929,6 +14936,7 @@ func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Sid = (porcelain.SID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
 	plumbing.Username = (porcelain.Username)
@@ -16365,8 +16373,6 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Azure{Azure: convertAzureToPlumbing(v)}
 	case *AzureCertificate:
 		plumbing.Resource = &proto.Resource_AzureCertificate{AzureCertificate: convertAzureCertificateToPlumbing(v)}
-	case *AzureConsole:
-		plumbing.Resource = &proto.Resource_AzureConsole{AzureConsole: convertAzureConsoleToPlumbing(v)}
 	case *AzureMysql:
 		plumbing.Resource = &proto.Resource_AzureMysql{AzureMysql: convertAzureMysqlToPlumbing(v)}
 	case *AzureMysqlManagedIdentity:
@@ -16417,6 +16423,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Elastic{Elastic: convertElasticToPlumbing(v)}
 	case *ElasticacheRedis:
 		plumbing.Resource = &proto.Resource_ElasticacheRedis{ElasticacheRedis: convertElasticacheRedisToPlumbing(v)}
+	case *EntraID:
+		plumbing.Resource = &proto.Resource_EntraId{EntraId: convertEntraIDToPlumbing(v)}
 	case *GCP:
 		plumbing.Resource = &proto.Resource_Gcp{Gcp: convertGCPToPlumbing(v)}
 	case *GCPConsole:
@@ -16614,9 +16622,6 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	if plumbing.GetAzureCertificate() != nil {
 		return convertAzureCertificateToPorcelain(plumbing.GetAzureCertificate())
 	}
-	if plumbing.GetAzureConsole() != nil {
-		return convertAzureConsoleToPorcelain(plumbing.GetAzureConsole())
-	}
 	if plumbing.GetAzureMysql() != nil {
 		return convertAzureMysqlToPorcelain(plumbing.GetAzureMysql())
 	}
@@ -16691,6 +16696,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetElasticacheRedis() != nil {
 		return convertElasticacheRedisToPorcelain(plumbing.GetElasticacheRedis())
+	}
+	if plumbing.GetEntraId() != nil {
+		return convertEntraIDToPorcelain(plumbing.GetEntraId())
 	}
 	if plumbing.GetGcp() != nil {
 		return convertGCPToPorcelain(plumbing.GetGcp())

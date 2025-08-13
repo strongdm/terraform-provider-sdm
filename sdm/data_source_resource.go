@@ -2361,81 +2361,6 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
-						"azure_console": {
-							Type:        schema.TypeList,
-							Computed:    true,
-							Description: "",
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"bind_interface": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
-									},
-									"connector_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The connector ID to authenticate through.",
-									},
-									"egress_filter": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique identifier of the Resource.",
-									},
-									"identity_set_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The ID of the identity set to use for identity connections.",
-									},
-									"management_group_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The management group ID to authenticate scope Privileges to.",
-									},
-									"name": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Unique human-readable name of the Resource.",
-									},
-									"privilege_levels": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The privilege levels specify which Groups are managed externally",
-									},
-									"proxy_cluster_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the proxy cluster for this resource, if any.",
-									},
-									"secret_store_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "ID of the secret store containing credentials for this resource, if any.",
-									},
-									"subdomain": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
-									},
-									"subscription_id": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The subscription ID to authenticate scope Privileges to.",
-									},
-									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
-										Optional:    true,
-										Description: "Tags is a map of key, value pairs.",
-									},
-								},
-							},
-						},
 						"azure_mysql": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -4479,6 +4404,96 @@ func dataSourceResource() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
+						"entra_id": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+									},
+									"discovery_enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, configures discovery of the tenant to be run from a node.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"group_names": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "comma separated list of group names to filter by. Supports wildcards (*)",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
+									"management_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The management group ID to authenticate scope Privileges to.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"privilege_levels": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The privilege levels specify which Groups are managed externally",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"resource_group_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "filters discovered groups to the specified Resource Group",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+									},
+									"subscription_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The subscription ID to authenticate scope Privileges to.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tenant_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The connector ID to authenticate through.",
 									},
 								},
 							},
@@ -7593,6 +7608,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
+									"sid": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The SID needed in leased credentials to generate a valid certificate. Using extraplain3 here as 1 and 2 are used in cert generation and internal driver config",
+									},
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -9986,22 +10006,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":               convertTagsToPorcelain(v.Tags),
 				"tenant_id":          (v.TenantID),
 			})
-		case *sdm.AzureConsole:
-			output[0]["azure_console"] = append(output[0]["azure_console"], entity{
-				"bind_interface":      (v.BindInterface),
-				"connector_id":        (v.ConnectorID),
-				"egress_filter":       (v.EgressFilter),
-				"id":                  (v.ID),
-				"identity_set_id":     (v.IdentitySetID),
-				"management_group_id": (v.ManagementGroupID),
-				"name":                (v.Name),
-				"privilege_levels":    (v.PrivilegeLevels),
-				"proxy_cluster_id":    (v.ProxyClusterID),
-				"secret_store_id":     (v.SecretStoreID),
-				"subdomain":           (v.Subdomain),
-				"subscription_id":     (v.SubscriptionID),
-				"tags":                convertTagsToPorcelain(v.Tags),
-			})
 		case *sdm.AzureMysql:
 			output[0]["azure_mysql"] = append(output[0]["azure_mysql"], entity{
 				"bind_interface":                    (v.BindInterface),
@@ -10431,6 +10435,25 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":             convertTagsToPorcelain(v.Tags),
 				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
+			})
+		case *sdm.EntraID:
+			output[0]["entra_id"] = append(output[0]["entra_id"], entity{
+				"bind_interface":      (v.BindInterface),
+				"discovery_enabled":   (v.DiscoveryEnabled),
+				"egress_filter":       (v.EgressFilter),
+				"group_names":         (v.GroupNames),
+				"id":                  (v.ID),
+				"identity_set_id":     (v.IdentitySetID),
+				"management_group_id": (v.ManagementGroupID),
+				"name":                (v.Name),
+				"privilege_levels":    (v.PrivilegeLevels),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"resource_group_id":   (v.ResourceGroupID),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"subscription_id":     (v.SubscriptionID),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"tenant_id":           (v.TenantID),
 			})
 		case *sdm.GCP:
 			output[0]["gcp"] = append(output[0]["gcp"], entity{
@@ -11081,6 +11104,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":                       (v.PortOverride),
 				"proxy_cluster_id":                    (v.ProxyClusterID),
 				"secret_store_id":                     (v.SecretStoreID),
+				"sid":                                 (v.SID),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
 				"username":                            (v.Username),

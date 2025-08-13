@@ -464,19 +464,6 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The tenant ID to authenticate to.
-* azure_console:
-	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
-	* `connector_id` - (Required) The connector ID to authenticate through.
-	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
-	* `management_group_id` - (Optional) The management group ID to authenticate scope Privileges to.
-	* `name` - (Required) Unique human-readable name of the Resource.
-	* `privilege_levels` - (Required) The privilege levels specify which Groups are managed externally
-	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
-	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
-	* `subscription_id` - (Optional) The subscription ID to authenticate scope Privileges to.
-	* `tags` - (Optional) Tags is a map of key, value pairs.
 * azure_mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
@@ -832,6 +819,22 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
+* entra_id:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	* `discovery_enabled` - (Optional) If true, configures discovery of the tenant to be run from a node.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `group_names` - (Optional) comma separated list of group names to filter by. Supports wildcards (*)
+	* `identity_set_id` - (Required) The ID of the identity set to use for identity connections.
+	* `management_group_id` - (Optional) The management group ID to authenticate scope Privileges to.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `privilege_levels` - (Optional) The privilege levels specify which Groups are managed externally
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `resource_group_id` - (Optional) filters discovered groups to the specified Resource Group
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subscription_id` - (Optional) The subscription ID to authenticate scope Privileges to.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tenant_id` - (Required) The connector ID to authenticate through.
 * gcp:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1374,6 +1377,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `sid` - (Optional) The SID needed in leased credentials to generate a valid certificate. Using extraplain3 here as 1 and 2 are used in cert generation and internal driver config
 	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.

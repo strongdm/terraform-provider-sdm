@@ -66,3 +66,19 @@ func createIdentitySet(t testing.TB) *sdm.IdentitySet {
 	}
 	return createResp.IdentitySet
 }
+
+func getEmailIdentitySet(t testing.TB) *sdm.IdentitySet {
+	t.Helper()
+	client, err := preTestClient()
+	if err != nil {
+		t.Fatalf("failed to create test client: %v", err)
+	}
+	resp, err := client.IdentitySets().List(context.Background(), "name:?", "email")
+	if err != nil {
+		t.Fatalf("failed to list identity sets: %v", err)
+	}
+	if !resp.Next() {
+		t.Fatalf("cannot find email identity set")
+	}
+	return resp.Value()
+}
