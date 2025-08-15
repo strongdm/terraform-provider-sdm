@@ -35,7 +35,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -67,7 +67,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -120,7 +120,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -190,7 +190,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -228,7 +228,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -266,7 +266,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -314,7 +314,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"discovery_enabled": {
 							Type:        schema.TypeBool,
@@ -366,7 +366,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -410,7 +410,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -442,7 +442,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -486,7 +486,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -536,7 +536,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -584,7 +584,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -642,7 +642,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -706,7 +706,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -764,7 +764,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -817,7 +817,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -855,7 +855,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -913,7 +913,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -951,7 +951,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1015,7 +1015,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1036,7 +1036,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1095,7 +1095,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1116,7 +1116,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1174,7 +1174,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1206,7 +1206,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1254,7 +1254,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1286,7 +1286,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1339,7 +1339,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1360,7 +1360,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1419,7 +1419,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1440,7 +1440,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1493,7 +1493,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -1530,7 +1530,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1583,7 +1583,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -1614,7 +1614,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1667,7 +1667,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -1709,7 +1709,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1752,7 +1752,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -1788,7 +1788,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1846,7 +1846,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1867,7 +1867,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -1921,7 +1921,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -1952,7 +1952,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2014,7 +2014,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2040,7 +2040,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2103,7 +2103,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2124,7 +2124,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2182,7 +2182,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2204,7 +2204,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2252,7 +2252,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"client_certificate": {
 							Type:        schema.TypeString,
@@ -2274,7 +2274,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2317,7 +2317,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -2354,7 +2354,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2407,7 +2407,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -2444,7 +2444,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2492,7 +2492,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -2534,7 +2534,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2577,7 +2577,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -2619,7 +2619,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2667,7 +2667,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2688,7 +2688,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"private_key": {
 							Type:        schema.TypeString,
@@ -2742,7 +2742,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -2774,7 +2774,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2822,7 +2822,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -2864,7 +2864,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2907,7 +2907,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -2934,7 +2934,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -2976,7 +2976,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -3013,7 +3013,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3061,7 +3061,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -3098,7 +3098,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3146,7 +3146,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -3183,7 +3183,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3236,7 +3236,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -3278,7 +3278,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3321,7 +3321,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3358,7 +3358,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3406,7 +3406,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3428,7 +3428,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3475,7 +3475,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3507,7 +3507,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3555,7 +3555,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -3592,7 +3592,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3645,7 +3645,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3677,7 +3677,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3720,7 +3720,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3746,7 +3746,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3794,7 +3794,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
@@ -3826,7 +3826,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3874,7 +3874,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
@@ -3900,7 +3900,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -3943,7 +3943,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -3975,7 +3975,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4023,7 +4023,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4044,7 +4044,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4103,7 +4103,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4124,7 +4124,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4177,7 +4177,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4209,7 +4209,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4257,7 +4257,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4289,7 +4289,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4337,7 +4337,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"discovery_enabled": {
 							Type:        schema.TypeBool,
@@ -4425,7 +4425,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4447,7 +4447,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4490,7 +4490,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4516,7 +4516,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4568,7 +4568,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -4594,7 +4594,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"project_id": {
 							Type:        schema.TypeString,
@@ -4662,7 +4662,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -4715,7 +4715,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4759,7 +4759,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -4792,7 +4792,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4836,7 +4836,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -4878,7 +4878,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -4927,7 +4927,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"default_path": {
 							Type:        schema.TypeString,
@@ -4963,7 +4963,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5005,7 +5005,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"default_path": {
 							Type:        schema.TypeString,
@@ -5047,7 +5047,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5094,7 +5094,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"default_path": {
 							Type:        schema.TypeString,
@@ -5130,7 +5130,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5177,7 +5177,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -5247,7 +5247,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5285,7 +5285,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5323,7 +5323,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5371,7 +5371,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -5419,7 +5419,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5462,7 +5462,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"discovery_enabled": {
 							Type:        schema.TypeBool,
@@ -5514,7 +5514,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5558,7 +5558,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5590,7 +5590,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5634,7 +5634,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -5684,7 +5684,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5722,7 +5722,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -5759,7 +5759,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5812,7 +5812,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -5838,7 +5838,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5876,7 +5876,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -5913,7 +5913,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -5971,7 +5971,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -6003,7 +6003,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6056,7 +6056,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -6088,7 +6088,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6141,7 +6141,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
@@ -6178,7 +6178,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6236,7 +6236,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"connect_to_replica": {
 							Type:        schema.TypeBool,
@@ -6273,7 +6273,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6331,7 +6331,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -6358,7 +6358,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6406,7 +6406,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -6461,7 +6461,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6519,7 +6519,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"certificate_authority": {
 							Type:        schema.TypeString,
@@ -6579,7 +6579,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6627,7 +6627,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -6664,7 +6664,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6717,7 +6717,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -6743,7 +6743,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6786,7 +6786,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -6812,7 +6812,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6871,7 +6871,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -6908,7 +6908,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -6956,7 +6956,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -6993,7 +6993,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7036,7 +7036,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -7078,7 +7078,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7121,7 +7121,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -7158,7 +7158,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7206,7 +7206,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7238,7 +7238,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7286,7 +7286,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7312,7 +7312,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7350,7 +7350,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"downgrade_nla_connections": {
 							Type:        schema.TypeBool,
@@ -7392,7 +7392,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7435,7 +7435,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7476,7 +7476,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7491,7 +7491,7 @@ func resourceResource() *schema.Resource {
 						"sid": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The SID needed in leased credentials to generate a valid certificate. Using extraplain3 here as 1 and 2 are used in cert generation and internal driver config",
+							Description: "Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.",
 						},
 						"subdomain": {
 							Type:        schema.TypeString,
@@ -7524,7 +7524,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -7560,7 +7560,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7613,7 +7613,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7645,7 +7645,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7693,7 +7693,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7725,7 +7725,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7773,7 +7773,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -7815,7 +7815,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7858,7 +7858,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"cluster_id": {
 							Type:        schema.TypeString,
@@ -7899,7 +7899,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -7947,7 +7947,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -7983,7 +7983,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8036,7 +8036,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -8073,7 +8073,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8126,7 +8126,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -8159,7 +8159,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"private_key": {
 							Type:        schema.TypeString,
@@ -8213,7 +8213,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -8234,7 +8234,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8281,7 +8281,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -8323,7 +8323,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8376,7 +8376,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"client_id": {
 							Type:        schema.TypeString,
@@ -8417,7 +8417,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8476,7 +8476,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -8524,7 +8524,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8587,7 +8587,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -8624,7 +8624,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8677,7 +8677,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -8724,7 +8724,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8772,7 +8772,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -8813,7 +8813,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"private_key": {
 							Type:        schema.TypeString,
@@ -8867,7 +8867,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -8904,7 +8904,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -8947,7 +8947,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -8979,7 +8979,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -9022,7 +9022,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -9054,7 +9054,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -9097,7 +9097,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -9129,7 +9129,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -9172,7 +9172,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -9204,7 +9204,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,
@@ -9252,7 +9252,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.",
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
 						"database": {
 							Type:        schema.TypeString,
@@ -9289,7 +9289,7 @@ func resourceResource() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-							Description: "The local port used by clients to connect to this resource.",
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 						},
 						"proxy_cluster_id": {
 							Type:        schema.TypeString,

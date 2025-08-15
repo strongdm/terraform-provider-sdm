@@ -553,6 +553,14 @@ const (
 	ApproverReferenceManagerOfManagerOfRequester = "manager-of-manager-of-requester"
 )
 
+// ResourceIPAllocationMode defines how to allocate IP addresses on resource create and update.
+const (
+	ResourceIPAllocationModeUnset    = ""
+	ResourceIPAllocationModeDefault  = "default"
+	ResourceIPAllocationModeLoopback = "loopback"
+	ResourceIPAllocationModeVNM      = "vnm"
+)
+
 var AllAPIHost = []string{
 	APIHostUS,
 	APIHostUK,
@@ -1115,6 +1123,17 @@ var AllQueryCategory = []string{
 
 func QueryCategoryIsValid(v string) bool {
 	return slices.Contains(AllQueryCategory, v)
+}
+
+var AllResourceIPAllocationMode = []string{
+	ResourceIPAllocationModeUnset,
+	ResourceIPAllocationModeDefault,
+	ResourceIPAllocationModeLoopback,
+	ResourceIPAllocationModeVNM,
+}
+
+func ResourceIPAllocationModeIsValid(v string) bool {
+	return slices.Contains(AllResourceIPAllocationMode, v)
 }
 
 var AllSCIMProvider = []string{

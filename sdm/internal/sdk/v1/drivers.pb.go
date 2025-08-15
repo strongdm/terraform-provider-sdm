@@ -1634,7 +1634,7 @@ type AKS struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -1664,7 +1664,7 @@ type AKS struct {
 	IdentitySetId string `protobuf:"bytes,10,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,12,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -1864,7 +1864,7 @@ type AKSBasicAuth struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -1878,7 +1878,7 @@ type AKSBasicAuth struct {
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
@@ -2038,7 +2038,7 @@ type AKSServiceAccount struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -2062,7 +2062,7 @@ type AKSServiceAccount struct {
 	IdentitySetId string `protobuf:"bytes,5,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The API token to authenticate with.
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
@@ -2251,7 +2251,7 @@ type AKSServiceAccountUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -2263,7 +2263,7 @@ type AKSServiceAccountUserImpersonation struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The API token to authenticate with.
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
@@ -2417,7 +2417,7 @@ type AKSUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -2435,7 +2435,7 @@ type AKSUserImpersonation struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,10,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -2600,7 +2600,7 @@ type AMQP struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -2612,7 +2612,7 @@ type AMQP struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,8,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -2774,7 +2774,7 @@ type AWS struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -2784,7 +2784,7 @@ type AWS struct {
 	AccessKey string `protobuf:"bytes,1,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
 	// The AWS region healthcheck requests should attempt to connect to.
 	HealthcheckRegion string `protobuf:"bytes,4,opt,name=healthcheck_region,json=healthcheckRegion,proto3" json:"healthcheck_region,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,10,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The role to assume after logging in.
 	RoleArn string `protobuf:"bytes,5,opt,name=role_arn,json=roleArn,proto3" json:"role_arn,omitempty"`
@@ -2948,7 +2948,7 @@ type AWSConsole struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -2958,7 +2958,7 @@ type AWSConsole struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,9,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,8,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
@@ -3140,7 +3140,7 @@ type AWSConsoleStaticKeyPair struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -3150,7 +3150,7 @@ type AWSConsoleStaticKeyPair struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,10,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,9,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,8,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -3341,7 +3341,7 @@ type AWSInstanceProfile struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -3349,7 +3349,7 @@ type AWSInstanceProfile struct {
 	Subdomain string `protobuf:"bytes,32775,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	// If true, prefer environment variables to authenticate connection even if EC2 roles are configured.
 	EnableEnvVariables bool `protobuf:"varint,1,opt,name=enable_env_variables,json=enableEnvVariables,proto3" json:"enable_env_variables,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,8,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
@@ -3506,7 +3506,7 @@ type Aerospike struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -3518,7 +3518,7 @@ type Aerospike struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If true, uses UseServicesAlternates directive for Aerospike connection
 	UseServicesAlternate bool `protobuf:"varint,10,opt,name=use_services_alternate,json=useServicesAlternate,proto3" json:"use_services_alternate,omitempty"`
@@ -3680,7 +3680,7 @@ type AmazonEKS struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -3708,7 +3708,7 @@ type AmazonEKS struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,12,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,11,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,15,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
@@ -3937,7 +3937,7 @@ type AmazonEKSInstanceProfile struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -3963,7 +3963,7 @@ type AmazonEKSInstanceProfile struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,10,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,9,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,15,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
@@ -4177,7 +4177,7 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -4191,7 +4191,7 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	Endpoint string `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `protobuf:"bytes,8,opt,name=healthcheck_namespace,json=healthcheckNamespace,proto3" json:"healthcheck_namespace,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,15,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
@@ -4370,7 +4370,7 @@ type AmazonEKSUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -4386,7 +4386,7 @@ type AmazonEKSUserImpersonation struct {
 	Endpoint string `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `protobuf:"bytes,9,opt,name=healthcheck_namespace,json=healthcheckNamespace,proto3" json:"healthcheck_namespace,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,15,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
@@ -4580,7 +4580,7 @@ type AmazonES struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -4590,7 +4590,7 @@ type AmazonES struct {
 	AccessKey string `protobuf:"bytes,4,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
 	// The endpoint to dial e.g. search-?.region.es.amazonaws.com"
 	Endpoint string `protobuf:"bytes,3,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
@@ -4763,7 +4763,7 @@ type AmazonESIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -4771,7 +4771,7 @@ type AmazonESIAM struct {
 	Subdomain string `protobuf:"bytes,32775,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	// The endpoint to dial e.g. search-?.region.es.amazonaws.com"
 	Endpoint string `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
@@ -4937,7 +4937,7 @@ type AmazonMQAMQP091 struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -4949,7 +4949,7 @@ type AmazonMQAMQP091 struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,8,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -5111,7 +5111,7 @@ type Athena struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -5121,7 +5121,7 @@ type Athena struct {
 	AccessKey string `protobuf:"bytes,1,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
 	// The AWS S3 output location.
 	Output string `protobuf:"bytes,3,opt,name=output,proto3" json:"output,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,5,opt,name=region,proto3" json:"region,omitempty"`
@@ -5294,7 +5294,7 @@ type AthenaIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -5302,7 +5302,7 @@ type AthenaIAM struct {
 	Subdomain string `protobuf:"bytes,32775,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	// The AWS S3 output location.
 	Output string `protobuf:"bytes,1,opt,name=output,proto3" json:"output,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to e.g. us-east-1.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -5459,7 +5459,7 @@ type AuroraMysql struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -5473,7 +5473,7 @@ type AuroraMysql struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -5651,7 +5651,7 @@ type AuroraMysqlIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -5663,7 +5663,7 @@ type AuroraMysqlIAM struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -5834,7 +5834,7 @@ type AuroraPostgres struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -5850,7 +5850,7 @@ type AuroraPostgres struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -6017,7 +6017,7 @@ type AuroraPostgresIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -6031,7 +6031,7 @@ type AuroraPostgresIAM struct {
 	OverrideDatabase bool `protobuf:"varint,7,opt,name=override_database,json=overrideDatabase,proto3" json:"override_database,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -6209,7 +6209,7 @@ type Azure struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -6219,7 +6219,7 @@ type Azure struct {
 	AppId string `protobuf:"bytes,1,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
 	// The password to authenticate with.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,8,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The tenant ID to authenticate to.
 	TenantId string `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
@@ -6365,7 +6365,7 @@ type AzureCertificate struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -6375,7 +6375,7 @@ type AzureCertificate struct {
 	AppId string `protobuf:"bytes,1,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
 	// The service Principal certificate file, both private and public key included.
 	ClientCertificate string `protobuf:"bytes,3,opt,name=client_certificate,json=clientCertificate,proto3" json:"client_certificate,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,10,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The tenant ID to authenticate to.
 	TenantId string `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
@@ -6521,7 +6521,7 @@ type AzureMysql struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -6535,7 +6535,7 @@ type AzureMysql struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -6713,7 +6713,7 @@ type AzureMysqlManagedIdentity struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -6727,7 +6727,7 @@ type AzureMysqlManagedIdentity struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `protobuf:"varint,8,opt,name=use_azure_single_server_usernames,json=useAzureSingleServerUsernames,proto3" json:"use_azure_single_server_usernames,omitempty"`
@@ -6896,7 +6896,7 @@ type AzurePostgres struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -6912,7 +6912,7 @@ type AzurePostgres struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with. For Azure Postgres, this also will include the hostname of the target server for Azure Single Server compatibility. For Flexible servers, use the normal Postgres type.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -7079,7 +7079,7 @@ type AzurePostgresManagedIdentity struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -7095,7 +7095,7 @@ type AzurePostgresManagedIdentity struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `protobuf:"varint,10,opt,name=use_azure_single_server_usernames,json=useAzureSingleServerUsernames,proto3" json:"use_azure_single_server_usernames,omitempty"`
@@ -7271,7 +7271,7 @@ type BigQuery struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -7279,7 +7279,7 @@ type BigQuery struct {
 	Subdomain string `protobuf:"bytes,32775,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	// The endpoint to dial.
 	Endpoint string `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The JSON Private key to authenticate with.
 	PrivateKey string `protobuf:"bytes,1,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
@@ -7436,7 +7436,7 @@ type Cassandra struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -7448,7 +7448,7 @@ type Cassandra struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,6,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -7610,7 +7610,7 @@ type Citus struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -7626,7 +7626,7 @@ type Citus struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -7793,7 +7793,7 @@ type ClickHouseHTTP struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -7801,7 +7801,7 @@ type ClickHouseHTTP struct {
 	Database string `protobuf:"bytes,5,opt,name=database,proto3" json:"database,omitempty"`
 	// The password to authenticate with.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
@@ -7949,7 +7949,7 @@ type ClickHouseMySQL struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -7963,7 +7963,7 @@ type ClickHouseMySQL struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -8132,7 +8132,7 @@ type ClickHouseTCP struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -8146,7 +8146,7 @@ type ClickHouseTCP struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,6,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -8315,7 +8315,7 @@ type Clustrix struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -8329,7 +8329,7 @@ type Clustrix struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -8507,7 +8507,7 @@ type Cockroach struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -8523,7 +8523,7 @@ type Cockroach struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -8690,7 +8690,7 @@ type CouchbaseDatabase struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -8704,7 +8704,7 @@ type CouchbaseDatabase struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,9,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,7,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -8873,13 +8873,13 @@ type CouchbaseWebUI struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
 	// The password to authenticate with.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `protobuf:"bytes,4,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
@@ -9029,7 +9029,7 @@ type DB2I struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -9041,7 +9041,7 @@ type DB2I struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,7,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -9203,7 +9203,7 @@ type DB2LUW struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -9217,7 +9217,7 @@ type DB2LUW struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,8,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -9386,7 +9386,7 @@ type DocumentDBHost struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -9400,7 +9400,7 @@ type DocumentDBHost struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
@@ -9560,7 +9560,7 @@ type DocumentDBHostIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -9570,7 +9570,7 @@ type DocumentDBHostIAM struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,9,opt,name=region,proto3" json:"region,omitempty"`
@@ -9716,7 +9716,7 @@ type DocumentDBReplicaSet struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -9730,7 +9730,7 @@ type DocumentDBReplicaSet struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The password to authenticate with.
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The name of the mongo replicaset.
 	ReplicaSet string `protobuf:"bytes,6,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
@@ -9899,7 +9899,7 @@ type DocumentDBReplicaSetIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -9909,7 +9909,7 @@ type DocumentDBReplicaSetIAM struct {
 	ConnectToReplica bool `protobuf:"varint,3,opt,name=connect_to_replica,json=connectToReplica,proto3" json:"connect_to_replica,omitempty"`
 	// Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The region of the document db cluster
 	Region string `protobuf:"bytes,5,opt,name=region,proto3" json:"region,omitempty"`
@@ -10055,7 +10055,7 @@ type Druid struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -10067,7 +10067,7 @@ type Druid struct {
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
@@ -10220,7 +10220,7 @@ type DynamoDB struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -10230,7 +10230,7 @@ type DynamoDB struct {
 	AccessKey string `protobuf:"bytes,1,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
 	// The endpoint to dial e.g. dynamodb.region.amazonaws.com
 	Endpoint string `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The region to authenticate requests against e.g. us-east-1
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -10403,7 +10403,7 @@ type DynamoDBIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -10411,7 +10411,7 @@ type DynamoDBIAM struct {
 	Subdomain string `protobuf:"bytes,32775,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	// The endpoint to dial e.g. dynamodb.region.amazonaws.com
 	Endpoint string `protobuf:"bytes,2,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The region to authenticate requests against e.g. us-east-1
 	Region string `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
@@ -10568,7 +10568,7 @@ type Elastic struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -10580,7 +10580,7 @@ type Elastic struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,6,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -10742,7 +10742,7 @@ type ElasticacheRedis struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -10754,7 +10754,7 @@ type ElasticacheRedis struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,5,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -10916,7 +10916,7 @@ type EntraID struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -11108,7 +11108,7 @@ type GCP struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -11116,7 +11116,7 @@ type GCP struct {
 	Subdomain string `protobuf:"bytes,32775,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	// The service account keyfile to authenticate with.
 	Keyfile string `protobuf:"bytes,1,opt,name=keyfile,proto3" json:"keyfile,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,11,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Space separated scopes that this login should assume into when authenticating.
 	Scopes string `protobuf:"bytes,2,opt,name=scopes,proto3" json:"scopes,omitempty"`
@@ -11255,7 +11255,7 @@ type GCPConsole struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -11263,7 +11263,7 @@ type GCPConsole struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,5,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,4,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The length of time in seconds console sessions will live before needing to reauthenticate.
 	SessionExpiry int32 `protobuf:"varint,3,opt,name=session_expiry,json=sessionExpiry,proto3" json:"session_expiry,omitempty"`
@@ -11429,7 +11429,7 @@ type GCPWIF struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -11439,7 +11439,7 @@ type GCPWIF struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,5,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,4,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients
 	ProjectId string `protobuf:"bytes,13,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
@@ -11621,7 +11621,7 @@ type GoogleGKE struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -11645,7 +11645,7 @@ type GoogleGKE struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,8,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,7,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,14,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The service account key to authenticate with.
 	ServiceAccountKey string `protobuf:"bytes,4,opt,name=service_account_key,json=serviceAccountKey,proto3" json:"service_account_key,omitempty"`
@@ -11834,7 +11834,7 @@ type GoogleGKEUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -11846,7 +11846,7 @@ type GoogleGKEUserImpersonation struct {
 	Endpoint string `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The path used to check the health of your connection.  Defaults to `default`.
 	HealthcheckNamespace string `protobuf:"bytes,6,opt,name=healthcheck_namespace,json=healthcheckNamespace,proto3" json:"healthcheck_namespace,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,12,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The service account key to authenticate with.
 	ServiceAccountKey string `protobuf:"bytes,4,opt,name=service_account_key,json=serviceAccountKey,proto3" json:"service_account_key,omitempty"`
@@ -11999,7 +11999,7 @@ type Greenplum struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -12015,7 +12015,7 @@ type Greenplum struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -12182,7 +12182,7 @@ type HTTPAuth struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -12196,7 +12196,7 @@ type HTTPAuth struct {
 	HealthcheckPath string `protobuf:"bytes,2,opt,name=healthcheck_path,json=healthcheckPath,proto3" json:"healthcheck_path,omitempty"`
 	// The host header will be overwritten with this field if provided.
 	HostOverride string `protobuf:"bytes,7,opt,name=host_override,json=hostOverride,proto3" json:"host_override,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,12,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `protobuf:"bytes,6,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
@@ -12365,7 +12365,7 @@ type HTTPBasicAuth struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -12379,7 +12379,7 @@ type HTTPBasicAuth struct {
 	HostOverride string `protobuf:"bytes,8,opt,name=host_override,json=hostOverride,proto3" json:"host_override,omitempty"`
 	// The password to authenticate with.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,12,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `protobuf:"bytes,7,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
@@ -12557,7 +12557,7 @@ type HTTPNoAuth struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -12569,7 +12569,7 @@ type HTTPNoAuth struct {
 	HealthcheckPath string `protobuf:"bytes,2,opt,name=healthcheck_path,json=healthcheckPath,proto3" json:"healthcheck_path,omitempty"`
 	// The host header will be overwritten with this field if provided.
 	HostOverride string `protobuf:"bytes,6,opt,name=host_override,json=hostOverride,proto3" json:"host_override,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,12,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `protobuf:"bytes,5,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
@@ -12731,7 +12731,7 @@ type Kubernetes struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -12761,7 +12761,7 @@ type Kubernetes struct {
 	IdentitySetId string `protobuf:"bytes,10,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,12,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -12961,7 +12961,7 @@ type KubernetesBasicAuth struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -12975,7 +12975,7 @@ type KubernetesBasicAuth struct {
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
@@ -13135,7 +13135,7 @@ type KubernetesPodIdentity struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -13157,7 +13157,7 @@ type KubernetesPodIdentity struct {
 	IdentityAliasHealthcheckUsername string `protobuf:"bytes,8,opt,name=identity_alias_healthcheck_username,json=identityAliasHealthcheckUsername,proto3" json:"identity_alias_healthcheck_username,omitempty"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetId string `protobuf:"bytes,7,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,9,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -13329,7 +13329,7 @@ type KubernetesServiceAccount struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -13353,7 +13353,7 @@ type KubernetesServiceAccount struct {
 	IdentitySetId string `protobuf:"bytes,5,opt,name=identity_set_id,json=identitySetId,proto3" json:"identity_set_id,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The API token to authenticate with.
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
@@ -13542,7 +13542,7 @@ type KubernetesServiceAccountUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -13554,7 +13554,7 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The API token to authenticate with.
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
@@ -13708,7 +13708,7 @@ type KubernetesUserImpersonation struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -13726,7 +13726,7 @@ type KubernetesUserImpersonation struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,10,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -13891,7 +13891,7 @@ type MTLSMysql struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -13911,7 +13911,7 @@ type MTLSMysql struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,14,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -14119,7 +14119,7 @@ type MTLSPostgres struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -14141,7 +14141,7 @@ type MTLSPostgres struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Server name for TLS verification (unverified by StrongDM if empty)
 	ServerName string `protobuf:"bytes,14,opt,name=server_name,json=serverName,proto3" json:"server_name,omitempty"`
@@ -14338,7 +14338,7 @@ type Maria struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -14352,7 +14352,7 @@ type Maria struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -14530,7 +14530,7 @@ type Memcached struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -14540,7 +14540,7 @@ type Memcached struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -14677,7 +14677,7 @@ type Memsql struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -14691,7 +14691,7 @@ type Memsql struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -14869,7 +14869,7 @@ type MongoHost struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -14883,7 +14883,7 @@ type MongoHost struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,8,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -15052,7 +15052,7 @@ type MongoLegacyHost struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -15066,7 +15066,7 @@ type MongoLegacyHost struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,8,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -15235,7 +15235,7 @@ type MongoLegacyReplicaset struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -15251,7 +15251,7 @@ type MongoLegacyReplicaset struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The name of the mongo replicaset.
 	ReplicaSet string `protobuf:"bytes,7,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
@@ -15436,7 +15436,7 @@ type MongoReplicaSet struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -15452,7 +15452,7 @@ type MongoReplicaSet struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The name of the mongo replicaset.
 	ReplicaSet string `protobuf:"bytes,7,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
@@ -15637,7 +15637,7 @@ type MongoShardedCluster struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -15649,7 +15649,7 @@ type MongoShardedCluster struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The password to authenticate with.
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,6,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -15811,7 +15811,7 @@ type Mysql struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -15825,7 +15825,7 @@ type Mysql struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -16003,7 +16003,7 @@ type Neptune struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -16013,7 +16013,7 @@ type Neptune struct {
 	Endpoint string `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -16150,7 +16150,7 @@ type NeptuneIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -16162,7 +16162,7 @@ type NeptuneIAM struct {
 	Endpoint string `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
@@ -16342,7 +16342,7 @@ type Oracle struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -16356,7 +16356,7 @@ type Oracle struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,7,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -16525,7 +16525,7 @@ type OracleNNE struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -16539,7 +16539,7 @@ type OracleNNE struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -16699,7 +16699,7 @@ type Postgres struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -16715,7 +16715,7 @@ type Postgres struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -16882,7 +16882,7 @@ type Presto struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -16896,7 +16896,7 @@ type Presto struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,7,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -17065,7 +17065,7 @@ type RDP struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -17081,7 +17081,7 @@ type RDP struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -17248,7 +17248,7 @@ type RDPCert struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -17264,10 +17264,9 @@ type RDPCert struct {
 	LockRequired bool `protobuf:"varint,11,opt,name=lock_required,json=lockRequired,proto3" json:"lock_required,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
-	// The SID needed in leased credentials to generate a valid certificate.
-	// Using extraplain3 here as 1 and 2 are used in cert generation and internal driver config
+	// Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.
 	Sid string `protobuf:"bytes,12,opt,name=sid,proto3" json:"sid,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -17441,7 +17440,7 @@ type RDSPostgresIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -17455,7 +17454,7 @@ type RDSPostgresIAM struct {
 	OverrideDatabase bool `protobuf:"varint,7,opt,name=override_database,json=overrideDatabase,proto3" json:"override_database,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -17633,7 +17632,7 @@ type RabbitMQAMQP091 struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -17645,7 +17644,7 @@ type RabbitMQAMQP091 struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,8,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -17807,7 +17806,7 @@ type RawTCP struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -17817,7 +17816,7 @@ type RawTCP struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 }
 
@@ -17954,7 +17953,7 @@ type Redis struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -17966,7 +17965,7 @@ type Redis struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,2,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,6,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -18128,7 +18127,7 @@ type RedisCluster struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -18140,7 +18139,7 @@ type RedisCluster struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,6,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -18302,7 +18301,7 @@ type Redshift struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -18318,7 +18317,7 @@ type Redshift struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -18485,7 +18484,7 @@ type RedshiftIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -18501,7 +18500,7 @@ type RedshiftIAM struct {
 	OverrideDatabase bool `protobuf:"varint,7,opt,name=override_database,json=overrideDatabase,proto3" json:"override_database,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
@@ -18677,7 +18676,7 @@ type RedshiftServerlessIAM struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -18691,7 +18690,7 @@ type RedshiftServerlessIAM struct {
 	OverrideDatabase bool `protobuf:"varint,7,opt,name=override_database,json=overrideDatabase,proto3" json:"override_database,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The AWS region to connect to.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
@@ -18869,7 +18868,7 @@ type SQLServer struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -18888,7 +18887,7 @@ type SQLServer struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,7,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The Schema to use to direct initial requests.
 	Schema string `protobuf:"bytes,6,opt,name=schema,proto3" json:"schema,omitempty"`
@@ -19071,7 +19070,7 @@ type SQLServerAzureAD struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -19090,7 +19089,7 @@ type SQLServerAzureAD struct {
 	OverrideDatabase bool `protobuf:"varint,8,opt,name=override_database,json=overrideDatabase,proto3" json:"override_database,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,7,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The Schema to use to direct initial requests.
 	Schema string `protobuf:"bytes,6,opt,name=schema,proto3" json:"schema,omitempty"`
@@ -19282,7 +19281,7 @@ type SQLServerKerberosAD struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -19303,7 +19302,7 @@ type SQLServerKerberosAD struct {
 	OverrideDatabase bool `protobuf:"varint,8,opt,name=override_database,json=overrideDatabase,proto3" json:"override_database,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,7,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The Active Directory domain (realm) to which the configured username belongs.
 	Realm string `protobuf:"bytes,11,opt,name=realm,proto3" json:"realm,omitempty"`
@@ -19511,7 +19510,7 @@ type SSH struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -19527,7 +19526,7 @@ type SSH struct {
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `protobuf:"varint,5,opt,name=port_forwarding,json=portForwarding,proto3" json:"port_forwarding,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The public key to append to a server's authorized keys. This will be generated after resource creation.
 	PublicKey string `protobuf:"bytes,4,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
@@ -19703,7 +19702,7 @@ type SSHCert struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -19723,7 +19722,7 @@ type SSHCert struct {
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `protobuf:"varint,4,opt,name=port_forwarding,json=portForwarding,proto3" json:"port_forwarding,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -19904,7 +19903,7 @@ type SSHCustomerKey struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -19922,7 +19921,7 @@ type SSHCustomerKey struct {
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `protobuf:"varint,5,opt,name=port_forwarding,json=portForwarding,proto3" json:"port_forwarding,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The private key used to authenticate with the server.
 	PrivateKey string `protobuf:"bytes,4,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
@@ -20105,7 +20104,7 @@ type SSHPassword struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -20121,7 +20120,7 @@ type SSHPassword struct {
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `protobuf:"varint,5,opt,name=port_forwarding,json=portForwarding,proto3" json:"port_forwarding,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,7,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -20288,7 +20287,7 @@ type SingleStore struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -20302,7 +20301,7 @@ type SingleStore struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	RequireNativeAuth bool `protobuf:"varint,7,opt,name=require_native_auth,json=requireNativeAuth,proto3" json:"require_native_auth,omitempty"`
@@ -20480,7 +20479,7 @@ type Snowflake struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -20492,7 +20491,7 @@ type Snowflake struct {
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,6,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// RSA Private Key for authentication
 	PrivateKey string `protobuf:"bytes,9,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
@@ -20663,13 +20662,13 @@ type Snowsight struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
 	// The StrongDM user email to use for healthchecks.
 	HealthcheckUsername string `protobuf:"bytes,11,opt,name=healthcheck_username,json=healthcheckUsername,proto3" json:"healthcheck_username,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The Metadata for your snowflake IDP integration
 	SamlMetadata string `protobuf:"bytes,1,opt,name=samlMetadata,proto3" json:"samlMetadata,omitempty"`
@@ -20810,7 +20809,7 @@ type Sybase struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -20822,7 +20821,7 @@ type Sybase struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -20975,7 +20974,7 @@ type SybaseIQ struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -20987,7 +20986,7 @@ type SybaseIQ struct {
 	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,3,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -21140,7 +21139,7 @@ type Teradata struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -21152,7 +21151,7 @@ type Teradata struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -21305,7 +21304,7 @@ type Trino struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -21317,7 +21316,7 @@ type Trino struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,5,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,4,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `protobuf:"varint,7,opt,name=tls_required,json=tlsRequired,proto3" json:"tls_required,omitempty"`
@@ -21479,7 +21478,7 @@ type Vertica struct {
 	SecretStoreId string `protobuf:"bytes,32772,opt,name=secret_store_id,json=secretStoreId,proto3" json:"secret_store_id,omitempty"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `protobuf:"bytes,32773,opt,name=egress_filter,json=egressFilter,proto3" json:"egress_filter,omitempty"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `protobuf:"bytes,32774,opt,name=bind_interface,json=bindInterface,proto3" json:"bind_interface,omitempty"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterId string `protobuf:"bytes,32776,opt,name=proxy_cluster_id,json=proxyClusterId,proto3" json:"proxy_cluster_id,omitempty"`
@@ -21493,7 +21492,7 @@ type Vertica struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `protobuf:"varint,5,opt,name=port_override,json=portOverride,proto3" json:"port_override,omitempty"`
 	// The username to authenticate with.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`

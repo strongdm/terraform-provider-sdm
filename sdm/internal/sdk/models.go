@@ -37,7 +37,7 @@ type AKS struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -68,7 +68,7 @@ type AKS struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -83,7 +83,7 @@ type AKS struct {
 // AKSBasicAuth is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type AKSBasicAuth struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -101,7 +101,7 @@ type AKSBasicAuth struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -119,7 +119,7 @@ type AKSServiceAccount struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// If true, configures discovery of a cluster to be run from a node.
 	DiscoveryEnabled bool `json:"discoveryEnabled"`
@@ -144,7 +144,7 @@ type AKSServiceAccount struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -160,7 +160,7 @@ type AKSServiceAccount struct {
 
 // Deprecated: see docs for more info.
 type AKSServiceAccountUserImpersonation struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -176,7 +176,7 @@ type AKSServiceAccountUserImpersonation struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -192,7 +192,7 @@ type AKSServiceAccountUserImpersonation struct {
 
 // Deprecated: see docs for more info.
 type AKSUserImpersonation struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -214,7 +214,7 @@ type AKSUserImpersonation struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -229,7 +229,7 @@ type AKSUserImpersonation struct {
 // AMQP is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type AMQP struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -245,7 +245,7 @@ type AMQP struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -264,7 +264,7 @@ type AMQP struct {
 type AWS struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -276,7 +276,7 @@ type AWS struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -314,7 +314,7 @@ type AWSCertX509Store struct {
 }
 
 type AWSConsole struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -330,7 +330,7 @@ type AWSConsole struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -353,7 +353,7 @@ type AWSConsole struct {
 type AWSConsoleStaticKeyPair struct {
 	// The Access Key ID to authenticate with.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -367,7 +367,7 @@ type AWSConsoleStaticKeyPair struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -390,7 +390,7 @@ type AWSConsoleStaticKeyPair struct {
 }
 
 type AWSInstanceProfile struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -402,7 +402,7 @@ type AWSInstanceProfile struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -980,7 +980,7 @@ type ActivityGetResponse struct {
 }
 
 type Aerospike struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -996,7 +996,7 @@ type Aerospike struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1018,7 +1018,7 @@ type AmazonEKS struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -1045,7 +1045,7 @@ type AmazonEKS struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1069,7 +1069,7 @@ type AmazonEKSInstanceProfile struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -1096,7 +1096,7 @@ type AmazonEKSInstanceProfile struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1116,7 +1116,7 @@ type AmazonEKSInstanceProfile struct {
 
 // Deprecated: see docs for more info.
 type AmazonEKSInstanceProfileUserImpersonation struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -1134,7 +1134,7 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1156,7 +1156,7 @@ type AmazonEKSInstanceProfileUserImpersonation struct {
 type AmazonEKSUserImpersonation struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -1174,7 +1174,7 @@ type AmazonEKSUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1197,7 +1197,7 @@ type AmazonEKSUserImpersonation struct {
 type AmazonES struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1209,7 +1209,7 @@ type AmazonES struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1230,7 +1230,7 @@ type AmazonES struct {
 }
 
 type AmazonESIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1242,7 +1242,7 @@ type AmazonESIAM struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1263,7 +1263,7 @@ type AmazonESIAM struct {
 }
 
 type AmazonMQAMQP091 struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1279,7 +1279,7 @@ type AmazonMQAMQP091 struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1521,7 +1521,7 @@ type ApprovalWorkflowUpdateResponse struct {
 type Athena struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1533,7 +1533,7 @@ type Athena struct {
 	Name string `json:"name"`
 	// The AWS S3 output location.
 	Output string `json:"output"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1554,7 +1554,7 @@ type Athena struct {
 }
 
 type AthenaIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1566,7 +1566,7 @@ type AthenaIAM struct {
 	Name string `json:"name"`
 	// The AWS S3 output location.
 	Output string `json:"output"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1585,7 +1585,7 @@ type AthenaIAM struct {
 }
 
 type AuroraMysql struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests
 	Database string `json:"database"`
@@ -1603,7 +1603,7 @@ type AuroraMysql struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1622,7 +1622,7 @@ type AuroraMysql struct {
 }
 
 type AuroraMysqlIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests
 	Database string `json:"database"`
@@ -1638,7 +1638,7 @@ type AuroraMysqlIAM struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1657,7 +1657,7 @@ type AuroraMysqlIAM struct {
 }
 
 type AuroraPostgres struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -1677,7 +1677,7 @@ type AuroraPostgres struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1692,7 +1692,7 @@ type AuroraPostgres struct {
 }
 
 type AuroraPostgresIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -1710,7 +1710,7 @@ type AuroraPostgresIAM struct {
 	OverrideDatabase bool `json:"overrideDatabase"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1731,7 +1731,7 @@ type AuroraPostgresIAM struct {
 type Azure struct {
 	// The application ID to authenticate with.
 	AppID string `json:"appId"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1743,7 +1743,7 @@ type Azure struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1760,7 +1760,7 @@ type Azure struct {
 type AzureCertificate struct {
 	// The application ID to authenticate with.
 	AppID string `json:"appId"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The service Principal certificate file, both private and public key included.
 	ClientCertificate string `json:"clientCertificate"`
@@ -1772,7 +1772,7 @@ type AzureCertificate struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1787,7 +1787,7 @@ type AzureCertificate struct {
 }
 
 type AzureMysql struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -1805,7 +1805,7 @@ type AzureMysql struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1826,7 +1826,7 @@ type AzureMysql struct {
 // AzureMysqlManagedIdentity is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type AzureMysqlManagedIdentity struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -1844,7 +1844,7 @@ type AzureMysqlManagedIdentity struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1861,7 +1861,7 @@ type AzureMysqlManagedIdentity struct {
 }
 
 type AzurePostgres struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -1881,7 +1881,7 @@ type AzurePostgres struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1896,7 +1896,7 @@ type AzurePostgres struct {
 }
 
 type AzurePostgresManagedIdentity struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -1916,7 +1916,7 @@ type AzurePostgresManagedIdentity struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -1944,7 +1944,7 @@ type AzureStore struct {
 }
 
 type BigQuery struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1956,7 +1956,7 @@ type BigQuery struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// The JSON Private key to authenticate with.
 	PrivateKey string `json:"privateKey"`
@@ -1975,7 +1975,7 @@ type BigQuery struct {
 }
 
 type Cassandra struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -1991,7 +1991,7 @@ type Cassandra struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2008,7 +2008,7 @@ type Cassandra struct {
 }
 
 type Citus struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -2028,7 +2028,7 @@ type Citus struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2043,7 +2043,7 @@ type Citus struct {
 }
 
 type ClickHouseHTTP struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -2057,7 +2057,7 @@ type ClickHouseHTTP struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2072,7 +2072,7 @@ type ClickHouseHTTP struct {
 }
 
 type ClickHouseMySQL struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -2090,7 +2090,7 @@ type ClickHouseMySQL struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2107,7 +2107,7 @@ type ClickHouseMySQL struct {
 }
 
 type ClickHouseTCP struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -2125,7 +2125,7 @@ type ClickHouseTCP struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2142,7 +2142,7 @@ type ClickHouseTCP struct {
 }
 
 type Clustrix struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -2160,7 +2160,7 @@ type Clustrix struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2179,7 +2179,7 @@ type Clustrix struct {
 }
 
 type Cockroach struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -2199,7 +2199,7 @@ type Cockroach struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2248,7 +2248,7 @@ type ControlPanelVerifyJWTResponse struct {
 }
 
 type CouchbaseDatabase struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2266,7 +2266,7 @@ type CouchbaseDatabase struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2283,7 +2283,7 @@ type CouchbaseDatabase struct {
 }
 
 type CouchbaseWebUI struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2295,7 +2295,7 @@ type CouchbaseWebUI struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2351,7 +2351,7 @@ type CyberarkPAMStore struct {
 }
 
 type DB2I struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2367,7 +2367,7 @@ type DB2I struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2384,7 +2384,7 @@ type DB2I struct {
 }
 
 type DB2LUW struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -2402,7 +2402,7 @@ type DB2LUW struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2438,7 +2438,7 @@ type DelineaStore struct {
 type DocumentDBHost struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2454,7 +2454,7 @@ type DocumentDBHost struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2469,7 +2469,7 @@ type DocumentDBHost struct {
 }
 
 type DocumentDBHostIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2483,7 +2483,7 @@ type DocumentDBHostIAM struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2500,7 +2500,7 @@ type DocumentDBHostIAM struct {
 type DocumentDBReplicaSet struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
@@ -2516,7 +2516,7 @@ type DocumentDBReplicaSet struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2535,7 +2535,7 @@ type DocumentDBReplicaSet struct {
 // DocumentDBReplicaSetIAM is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type DocumentDBReplicaSetIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
@@ -2549,7 +2549,7 @@ type DocumentDBReplicaSetIAM struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2564,7 +2564,7 @@ type DocumentDBReplicaSetIAM struct {
 }
 
 type Druid struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2580,7 +2580,7 @@ type Druid struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2597,7 +2597,7 @@ type Druid struct {
 type DynamoDB struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2609,7 +2609,7 @@ type DynamoDB struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2630,7 +2630,7 @@ type DynamoDB struct {
 }
 
 type DynamoDBIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2642,7 +2642,7 @@ type DynamoDBIAM struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2661,7 +2661,7 @@ type DynamoDBIAM struct {
 }
 
 type Elastic struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2677,7 +2677,7 @@ type Elastic struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2694,7 +2694,7 @@ type Elastic struct {
 }
 
 type ElasticacheRedis struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2710,7 +2710,7 @@ type ElasticacheRedis struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2729,7 +2729,7 @@ type ElasticacheRedis struct {
 // EntraID is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type EntraID struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// If true, configures discovery of the tenant to be run from a node.
 	DiscoveryEnabled bool `json:"discoveryEnabled"`
@@ -2766,7 +2766,7 @@ type EntraID struct {
 }
 
 type GCP struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2778,7 +2778,7 @@ type GCP struct {
 	Keyfile string `json:"keyfile"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2812,7 +2812,7 @@ type GCPCertX509Store struct {
 }
 
 type GCPConsole struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2826,7 +2826,7 @@ type GCPConsole struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2856,7 +2856,7 @@ type GCPStore struct {
 }
 
 type GCPWIF struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -2870,7 +2870,7 @@ type GCPWIF struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients
 	ProjectID string `json:"projectId"`
@@ -2958,7 +2958,7 @@ type GoogleGKE struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -2983,7 +2983,7 @@ type GoogleGKE struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -2999,7 +2999,7 @@ type GoogleGKE struct {
 
 // Deprecated: see docs for more info.
 type GoogleGKEUserImpersonation struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -3015,7 +3015,7 @@ type GoogleGKEUserImpersonation struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3030,7 +3030,7 @@ type GoogleGKEUserImpersonation struct {
 }
 
 type Greenplum struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -3050,7 +3050,7 @@ type Greenplum struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3067,7 +3067,7 @@ type Greenplum struct {
 type HTTPAuth struct {
 	// The content to set as the authorization header.
 	AuthHeader string `json:"authHeader"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
@@ -3085,7 +3085,7 @@ type HTTPAuth struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3100,7 +3100,7 @@ type HTTPAuth struct {
 }
 
 type HTTPBasicAuth struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
@@ -3120,7 +3120,7 @@ type HTTPBasicAuth struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3137,7 +3137,7 @@ type HTTPBasicAuth struct {
 }
 
 type HTTPNoAuth struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
@@ -3155,7 +3155,7 @@ type HTTPNoAuth struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3435,7 +3435,7 @@ type Kubernetes struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -3466,7 +3466,7 @@ type Kubernetes struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3481,7 +3481,7 @@ type Kubernetes struct {
 // KubernetesBasicAuth is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type KubernetesBasicAuth struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -3499,7 +3499,7 @@ type KubernetesBasicAuth struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3517,7 +3517,7 @@ type KubernetesPodIdentity struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -3540,7 +3540,7 @@ type KubernetesPodIdentity struct {
 	IdentitySetID string `json:"identitySetId"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3556,7 +3556,7 @@ type KubernetesServiceAccount struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
 	AllowResourceRoleBypass bool `json:"allowResourceRoleBypass"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// If true, configures discovery of a cluster to be run from a node.
 	DiscoveryEnabled bool `json:"discoveryEnabled"`
@@ -3581,7 +3581,7 @@ type KubernetesServiceAccount struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3597,7 +3597,7 @@ type KubernetesServiceAccount struct {
 
 // Deprecated: see docs for more info.
 type KubernetesServiceAccountUserImpersonation struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -3613,7 +3613,7 @@ type KubernetesServiceAccountUserImpersonation struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3629,7 +3629,7 @@ type KubernetesServiceAccountUserImpersonation struct {
 
 // Deprecated: see docs for more info.
 type KubernetesUserImpersonation struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -3651,7 +3651,7 @@ type KubernetesUserImpersonation struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3690,7 +3690,7 @@ type LogConfig struct {
 // MTLSMysql is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type MTLSMysql struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -3714,7 +3714,7 @@ type MTLSMysql struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3735,7 +3735,7 @@ type MTLSMysql struct {
 }
 
 type MTLSPostgres struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The CA to authenticate TLS connections with.
 	CertificateAuthority string `json:"certificateAuthority"`
@@ -3761,7 +3761,7 @@ type MTLSPostgres struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -3990,7 +3990,7 @@ type ManagedSecretValidateResponse struct {
 }
 
 type Maria struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -4008,7 +4008,7 @@ type Maria struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4027,7 +4027,7 @@ type Maria struct {
 }
 
 type Memcached struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -4041,7 +4041,7 @@ type Memcached struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4054,7 +4054,7 @@ type Memcached struct {
 }
 
 type Memsql struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -4072,7 +4072,7 @@ type Memsql struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4093,7 +4093,7 @@ type Memsql struct {
 type MongoHost struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -4109,7 +4109,7 @@ type MongoHost struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4130,7 +4130,7 @@ type MongoHost struct {
 type MongoLegacyHost struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -4146,7 +4146,7 @@ type MongoLegacyHost struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4167,7 +4167,7 @@ type MongoLegacyHost struct {
 type MongoLegacyReplicaset struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
@@ -4185,7 +4185,7 @@ type MongoLegacyReplicaset struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4206,7 +4206,7 @@ type MongoLegacyReplicaset struct {
 type MongoReplicaSet struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Set to connect to a replica instead of the primary node.
 	ConnectToReplica bool `json:"connectToReplica"`
@@ -4224,7 +4224,7 @@ type MongoReplicaSet struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4245,7 +4245,7 @@ type MongoReplicaSet struct {
 type MongoShardedCluster struct {
 	// The authentication database to use.
 	AuthDatabase string `json:"authDatabase"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -4259,7 +4259,7 @@ type MongoShardedCluster struct {
 	Name string `json:"name"`
 	// The password to authenticate with.
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4276,7 +4276,7 @@ type MongoShardedCluster struct {
 }
 
 type Mysql struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -4294,7 +4294,7 @@ type Mysql struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4313,7 +4313,7 @@ type Mysql struct {
 }
 
 type Neptune struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -4327,7 +4327,7 @@ type Neptune struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4342,7 +4342,7 @@ type Neptune struct {
 type NeptuneIAM struct {
 	// The Access Key ID to use to authenticate.
 	AccessKey string `json:"accessKey"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -4356,7 +4356,7 @@ type NeptuneIAM struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4541,7 +4541,7 @@ type NodeUpdateResponse struct {
 }
 
 type Oracle struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -4559,7 +4559,7 @@ type Oracle struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4576,7 +4576,7 @@ type Oracle struct {
 }
 
 type OracleNNE struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -4594,7 +4594,7 @@ type OracleNNE struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4913,7 +4913,7 @@ type PolicyUpdateResponse struct {
 }
 
 type Postgres struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -4933,7 +4933,7 @@ type Postgres struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -4948,7 +4948,7 @@ type Postgres struct {
 }
 
 type Presto struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -4966,7 +4966,7 @@ type Presto struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5170,7 +5170,7 @@ type QueryCapture struct {
 }
 
 type RDP struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// When set, network level authentication will not be used. May resolve unexpected authentication errors to older servers. When set, healthchecks cannot detect if a provided username / password pair is correct.
 	DowngradeNlaConnections bool `json:"downgradeNlaConnections"`
@@ -5190,7 +5190,7 @@ type RDP struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5205,7 +5205,7 @@ type RDP struct {
 }
 
 type RDPCert struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5225,14 +5225,13 @@ type RDPCert struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-	// The SID needed in leased credentials to generate a valid certificate.
-	// Using extraplain3 here as 1 and 2 are used in cert generation and internal driver config
+	// Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.
 	SID string `json:"sid"`
 	// Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	Subdomain string `json:"subdomain"`
@@ -5243,7 +5242,7 @@ type RDPCert struct {
 }
 
 type RDSPostgresIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -5261,7 +5260,7 @@ type RDSPostgresIAM struct {
 	OverrideDatabase bool `json:"overrideDatabase"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5280,7 +5279,7 @@ type RDSPostgresIAM struct {
 }
 
 type RabbitMQAMQP091 struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5296,7 +5295,7 @@ type RabbitMQAMQP091 struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5328,7 +5327,7 @@ type RateLimitMetadata struct {
 }
 
 type RawTCP struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5342,7 +5341,7 @@ type RawTCP struct {
 	Name string `json:"name"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5355,7 +5354,7 @@ type RawTCP struct {
 }
 
 type Redis struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5371,7 +5370,7 @@ type Redis struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5388,7 +5387,7 @@ type Redis struct {
 }
 
 type RedisCluster struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5404,7 +5403,7 @@ type RedisCluster struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5421,7 +5420,7 @@ type RedisCluster struct {
 }
 
 type Redshift struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -5441,7 +5440,7 @@ type Redshift struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5456,7 +5455,7 @@ type Redshift struct {
 }
 
 type RedshiftIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// Cluster Identified of Redshift cluster
 	ClusterID string `json:"clusterId"`
@@ -5476,7 +5475,7 @@ type RedshiftIAM struct {
 	OverrideDatabase bool `json:"overrideDatabase"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -5493,7 +5492,7 @@ type RedshiftIAM struct {
 }
 
 type RedshiftServerlessIAM struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -5511,7 +5510,7 @@ type RedshiftServerlessIAM struct {
 	OverrideDatabase bool `json:"overrideDatabase"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -11789,7 +11788,7 @@ type SQLServer struct {
 	// Whether to allow deprecated encryption protocols to be used for this resource. For example,
 	// TLS 1.0.
 	AllowDeprecatedEncryption bool `json:"allowDeprecatedEncryption"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks, and used for clients if Override Default Database is true.
 	Database string `json:"database"`
@@ -11809,7 +11808,7 @@ type SQLServer struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -11829,7 +11828,7 @@ type SQLServerAzureAD struct {
 	// Whether to allow deprecated encryption protocols to be used for this resource. For example,
 	// TLS 1.0.
 	AllowDeprecatedEncryption bool `json:"allowDeprecatedEncryption"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The Azure AD application (client) ID with which to authenticate.
 	ClientID string `json:"clientId"`
@@ -11849,7 +11848,7 @@ type SQLServerAzureAD struct {
 	OverrideDatabase bool `json:"overrideDatabase"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -11871,7 +11870,7 @@ type SQLServerKerberosAD struct {
 	// Whether to allow deprecated encryption protocols to be used for this resource. For example,
 	// TLS 1.0.
 	AllowDeprecatedEncryption bool `json:"allowDeprecatedEncryption"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks, and used for clients if Override Default Database is true.
 	Database string `json:"database"`
@@ -11893,7 +11892,7 @@ type SQLServerKerberosAD struct {
 	OverrideDatabase bool `json:"overrideDatabase"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -11916,7 +11915,7 @@ type SQLServerKerberosAD struct {
 type SSH struct {
 	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -11934,7 +11933,7 @@ type SSH struct {
 	Port int32 `json:"port"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -11953,7 +11952,7 @@ type SSH struct {
 type SSHCert struct {
 	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -11975,7 +11974,7 @@ type SSHCert struct {
 	Port int32 `json:"port"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -11992,7 +11991,7 @@ type SSHCert struct {
 type SSHCustomerKey struct {
 	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -12012,7 +12011,7 @@ type SSHCustomerKey struct {
 	Port int32 `json:"port"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// The private key used to authenticate with the server.
 	PrivateKey string `json:"privateKey"`
@@ -12031,7 +12030,7 @@ type SSHCustomerKey struct {
 type SSHPassword struct {
 	// Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.
 	AllowDeprecatedKeyExchanges bool `json:"allowDeprecatedKeyExchanges"`
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -12049,7 +12048,7 @@ type SSHPassword struct {
 	Port int32 `json:"port"`
 	// Whether port forwarding is allowed through this server.
 	PortForwarding bool `json:"portForwarding"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -12973,7 +12972,7 @@ type Service struct {
 }
 
 type SingleStore struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The database for healthchecks. Does not affect client requests.
 	Database string `json:"database"`
@@ -12991,7 +12990,7 @@ type SingleStore struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -13010,7 +13009,7 @@ type SingleStore struct {
 }
 
 type Snowflake struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -13026,7 +13025,7 @@ type Snowflake struct {
 	Name string `json:"name"`
 	// Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
 	Password string `json:"password"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// RSA Private Key for authentication
 	PrivateKey string `json:"privateKey"`
@@ -13045,7 +13044,7 @@ type Snowflake struct {
 }
 
 type Snowsight struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -13057,7 +13056,7 @@ type Snowsight struct {
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
 	Name string `json:"name"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -13072,7 +13071,7 @@ type Snowsight struct {
 }
 
 type Sybase struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -13088,7 +13087,7 @@ type Sybase struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -13103,7 +13102,7 @@ type Sybase struct {
 }
 
 type SybaseIQ struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -13119,7 +13118,7 @@ type SybaseIQ struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -13141,7 +13140,7 @@ type Tag struct {
 }
 
 type Teradata struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -13157,7 +13156,7 @@ type Teradata struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -13195,7 +13194,7 @@ type Token struct {
 }
 
 type Trino struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -13211,7 +13210,7 @@ type Trino struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
@@ -13463,7 +13462,7 @@ type VaultTokenStore struct {
 }
 
 type Vertica struct {
-	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided.
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
 	Database string `json:"database"`
@@ -13481,7 +13480,7 @@ type Vertica struct {
 	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
-	// The local port used by clients to connect to this resource.
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
