@@ -116,7 +116,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -239,7 +239,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -315,7 +315,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -415,7 +415,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -492,7 +492,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -587,7 +587,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -714,7 +714,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -830,7 +830,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -922,7 +922,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1025,7 +1025,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1111,7 +1111,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1186,7 +1186,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1262,7 +1262,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1343,7 +1343,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1439,7 +1439,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1514,7 +1514,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1595,7 +1595,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1685,7 +1685,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1771,7 +1771,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1861,7 +1861,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1947,7 +1947,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2208,7 +2208,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2274,7 +2274,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2345,7 +2345,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2431,7 +2431,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2517,7 +2517,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2608,7 +2608,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2694,7 +2694,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2775,7 +2775,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2851,7 +2851,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -2942,7 +2942,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3099,7 +3099,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3180,7 +3180,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3271,7 +3271,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3362,7 +3362,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3443,7 +3443,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3595,7 +3595,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3681,7 +3681,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3767,7 +3767,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3842,7 +3842,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3923,7 +3923,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -3998,7 +3998,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4069,7 +4069,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4160,7 +4160,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4235,7 +4235,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4306,7 +4306,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4387,7 +4387,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4477,7 +4477,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"subscription_id": {
 										Type:        schema.TypeString,
@@ -4553,7 +4553,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4713,7 +4713,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4825,7 +4825,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4903,7 +4903,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -4984,7 +4984,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5359,7 +5359,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5435,7 +5435,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5531,7 +5531,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5626,7 +5626,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5703,7 +5703,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5798,7 +5798,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5879,7 +5879,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -5954,7 +5954,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6035,7 +6035,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6121,7 +6121,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6207,7 +6207,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6303,7 +6303,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6399,7 +6399,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6480,7 +6480,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6594,7 +6594,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6708,7 +6708,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6794,7 +6794,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6869,7 +6869,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -6960,7 +6960,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7036,7 +7036,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7122,7 +7122,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7208,7 +7208,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7289,7 +7289,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7370,7 +7370,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7445,7 +7445,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7526,7 +7526,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7616,7 +7616,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7706,7 +7706,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7782,7 +7782,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7863,7 +7863,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -7954,7 +7954,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8049,7 +8049,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8134,7 +8134,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8220,7 +8220,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8312,7 +8312,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8473,7 +8473,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8574,7 +8574,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8686,7 +8686,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8776,7 +8776,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8871,7 +8871,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -8967,7 +8967,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -9053,7 +9053,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -9129,7 +9129,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -9205,7 +9205,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -9281,7 +9281,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -9357,7 +9357,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -9443,7 +9443,7 @@ func dataSourceResource() *schema.Resource {
 									"subdomain": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
 										Type:        schema.TypeMap,

@@ -71,7 +71,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_services_alternate` - (Optional) If true, uses UseServicesAlternates directive for Aerospike connection
 	* `username` - (Optional) The username to authenticate with.
@@ -93,7 +93,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aks_basic_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -106,7 +106,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aks_service_account:
@@ -124,7 +124,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required, either in plaintext, or as a secret store path) The API token to authenticate with.
 * aks_service_account_user_impersonation:
@@ -137,7 +137,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required, either in plaintext, or as a secret store path) The API token to authenticate with.
 * aks_user_impersonation:
@@ -153,7 +153,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks:
 	* `access_key` - (Required, either in plaintext, or as a secret store path) The Access Key ID to use to authenticate.
@@ -176,7 +176,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_instance_profile:
 	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
@@ -197,7 +197,7 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_instance_profile_user_impersonation:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -213,7 +213,7 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_eks_user_impersonation:
 	* `access_key` - (Required, either in plaintext, or as a secret store path) The Access Key ID to use to authenticate.
@@ -231,7 +231,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_es:
 	* `access_key` - (Optional) The Access Key ID to use to authenticate.
@@ -246,7 +246,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Optional) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * amazon_esiam:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -259,7 +259,7 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) Use TLS to connect to the OpenSearch server
 * amazonmq_amqp_091:
@@ -272,7 +272,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -286,7 +286,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -303,7 +303,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * athena_iam:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -316,7 +316,7 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aurora_mysql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -330,7 +330,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -346,7 +346,7 @@ The following arguments are supported by the Resource resource:
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aurora_postgres:
@@ -361,7 +361,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aurora_postgres_iam:
@@ -377,7 +377,7 @@ The following arguments are supported by the Resource resource:
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * aws:
@@ -392,7 +392,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aws_console:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -438,7 +438,7 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * azure:
 	* `app_id` - (Required, either in plaintext, or as a secret store path) The application ID to authenticate with.
@@ -449,7 +449,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The tenant ID to authenticate to.
 * azure_certificate:
@@ -461,7 +461,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The tenant ID to authenticate to.
 * azure_mysql:
@@ -476,7 +476,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -491,7 +491,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -507,7 +507,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with. For Azure Postgres, this also will include the hostname of the target server for Azure Single Server compatibility. For Flexible servers, use the normal Postgres type.
 * azure_postgres_managed_identity:
@@ -522,7 +522,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -536,7 +536,7 @@ The following arguments are supported by the Resource resource:
 	* `project` - (Required) The project to connect to.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
 * cassandra:
@@ -549,7 +549,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -565,7 +565,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * click_house_http:
@@ -592,7 +592,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * click_house_tcp:
@@ -606,7 +606,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -622,7 +622,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -638,7 +638,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * couchbase_database:
@@ -652,7 +652,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -678,7 +678,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -693,7 +693,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -708,7 +708,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
 * document_db_host_iam:
@@ -721,7 +721,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The AWS region to connect to.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * document_db_replica_set:
 	* `auth_database` - (Required) The authentication database to use.
@@ -735,7 +735,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `replica_set` - (Required) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
 * document_db_replica_set_iam:
@@ -748,7 +748,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The region of the document db cluster
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * druid:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -760,7 +760,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Optional) The username to authenticate with.
 * dynamo_db:
@@ -776,7 +776,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * dynamo_dbiam:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -789,7 +789,7 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * elastic:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -801,7 +801,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -815,7 +815,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -831,7 +831,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `resource_group_id` - (Optional) filters discovered groups to the specified Resource Group
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `subscription_id` - (Optional) The subscription ID to authenticate scope Privileges to.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required) The connector ID to authenticate through.
@@ -844,7 +844,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `scopes` - (Required) Space separated scopes that this login should assume into when authenticating.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * gcp_console:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -872,7 +872,7 @@ The following arguments are supported by the Resource resource:
 	* `scopes` - (Required) Space separated scopes that this login should assume into when authenticating.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `session_expiry` - (Optional) The length of time in seconds console sessions will live before needing to reauthenticate.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `workforce_pool_id` - (Required) The ID of the Workforce Identity Pool in GCP to use for federated authentication.
 	* `workforce_provider_id` - (Required) The ID of the Workforce Identity Provider in GCP to use for federated authentication.
@@ -892,7 +892,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `service_account_key` - (Required, either in plaintext, or as a secret store path) The service account key to authenticate with.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_gke_user_impersonation:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -905,7 +905,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `service_account_key` - (Required, either in plaintext, or as a secret store path) The service account key to authenticate with.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * greenplum:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -919,7 +919,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * http_auth:
@@ -985,7 +985,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * kubernetes_basic_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -998,7 +998,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * kubernetes_pod_identity:
@@ -1015,7 +1015,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * kubernetes_service_account:
 	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
@@ -1032,7 +1032,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required, either in plaintext, or as a secret store path) The API token to authenticate with.
 * kubernetes_service_account_user_impersonation:
@@ -1045,7 +1045,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `token` - (Required, either in plaintext, or as a secret store path) The API token to authenticate with.
 * kubernetes_user_impersonation:
@@ -1061,7 +1061,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * maria:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1075,7 +1075,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1088,7 +1088,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * memsql:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1102,7 +1102,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1117,7 +1117,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1132,7 +1132,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1149,7 +1149,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `replica_set` - (Required) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1166,7 +1166,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `replica_set` - (Required) The name of the mongo replicaset.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1180,7 +1180,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1200,7 +1200,7 @@ The following arguments are supported by the Resource resource:
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) Server name for TLS verification (unverified by StrongDM if empty)
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1220,7 +1220,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_name` - (Optional) Server name for TLS verification (unverified by StrongDM if empty)
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * mysql:
@@ -1235,7 +1235,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1248,7 +1248,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * neptune_iam:
 	* `access_key` - (Required, either in plaintext, or as a secret store path) The Access Key ID to use to authenticate.
@@ -1264,7 +1264,7 @@ The following arguments are supported by the Resource resource:
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Required, either in plaintext, or as a secret store path) The Secret Access Key to use to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * oracle:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1277,7 +1277,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1292,7 +1292,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * postgres:
@@ -1307,7 +1307,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * presto:
@@ -1321,7 +1321,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1335,7 +1335,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1348,7 +1348,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * rdp:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1362,7 +1362,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * rdp_cert:
@@ -1378,7 +1378,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `sid` - (Optional) Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * rds_postgres_iam:
@@ -1394,7 +1394,7 @@ The following arguments are supported by the Resource resource:
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * redis:
@@ -1407,7 +1407,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1421,7 +1421,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1437,7 +1437,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * redshift_iam:
@@ -1454,7 +1454,7 @@ The following arguments are supported by the Resource resource:
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * redshift_serverless_iam:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1469,7 +1469,7 @@ The following arguments are supported by the Resource resource:
 	* `region` - (Required) The AWS region to connect to.
 	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `workgroup` - (Required) Workgroup name in the serverless Redshift
 * single_store:
@@ -1484,7 +1484,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `require_native_auth` - (Optional) Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
@@ -1499,7 +1499,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `schema` - (Optional) The schema to provide on authentication.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * snowsight:
@@ -1527,7 +1527,7 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * sql_server_azure_ad:
@@ -1545,7 +1545,7 @@ The following arguments are supported by the Resource resource:
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret` - (Required, either in plaintext, or as a secret store path) The Azure AD client secret (application password) with which to authenticate.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_id` - (Required, either in plaintext, or as a secret store path) The Azure AD directory (tenant) ID with which to authenticate.
 * sql_server_kerberos_ad:
@@ -1565,7 +1565,7 @@ The following arguments are supported by the Resource resource:
 	* `schema` - (Optional) The Schema to use to direct initial requests.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `server_spn` - (Required) The Service Principal Name of the Microsoft SQL Server instance in Active Directory.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * ssh:
@@ -1580,7 +1580,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * ssh_cert:
@@ -1597,7 +1597,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * ssh_customer_key:
@@ -1614,7 +1614,7 @@ The following arguments are supported by the Resource resource:
 	* `private_key` - (Required, either in plaintext, or as a secret store path) The private key used to authenticate with the server.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * ssh_password:
@@ -1629,7 +1629,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * sybase:
@@ -1642,7 +1642,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * sybase_iq:
@@ -1655,7 +1655,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * teradata:
@@ -1668,7 +1668,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * trino:
@@ -1681,7 +1681,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
@@ -1696,7 +1696,7 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
-	* `subdomain` - (Optional) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 ## Attribute Reference
