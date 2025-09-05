@@ -8215,6 +8215,11 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
+						"connect_to_default": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If true, select the ACS with isDefault=true",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -14929,6 +14934,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.Snowsight{
 			ID:                  d.Id(),
 			BindInterface:       convertStringToPlumbing(raw["bind_interface"]),
+			ConnectToDefault:    convertBoolToPlumbing(raw["connect_to_default"]),
 			EgressFilter:        convertStringToPlumbing(raw["egress_filter"]),
 			HealthcheckUsername: convertStringToPlumbing(raw["healthcheck_username"]),
 			Name:                convertStringToPlumbing(raw["name"]),
@@ -17341,6 +17347,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("snowsight", []map[string]interface{}{
 			{
 				"bind_interface":       (v.BindInterface),
+				"connect_to_default":   (v.ConnectToDefault),
 				"egress_filter":        (v.EgressFilter),
 				"healthcheck_username": (v.HealthcheckUsername),
 				"name":                 (v.Name),
@@ -20524,6 +20531,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("snowsight", []map[string]interface{}{
 			{
 				"bind_interface":       (v.BindInterface),
+				"connect_to_default":   (v.ConnectToDefault),
 				"egress_filter":        (v.EgressFilter),
 				"healthcheck_username": (v.HealthcheckUsername),
 				"name":                 (v.Name),

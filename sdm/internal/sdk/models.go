@@ -13042,6 +13042,8 @@ type Snowflake struct {
 type Snowsight struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
+	// If true, select the ACS with isDefault=true
+	ConnectToDefault bool `json:"connectToDefault"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
 	// The StrongDM user email to use for healthchecks.

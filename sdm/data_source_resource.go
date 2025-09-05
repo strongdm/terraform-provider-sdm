@@ -8339,6 +8339,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
+									"connect_to_default": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If true, select the ACS with isDefault=true",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -11258,6 +11263,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.Snowsight:
 			output[0]["snowsight"] = append(output[0]["snowsight"], entity{
 				"bind_interface":       (v.BindInterface),
+				"connect_to_default":   (v.ConnectToDefault),
 				"egress_filter":        (v.EgressFilter),
 				"healthcheck_username": (v.HealthcheckUsername),
 				"id":                   (v.ID),

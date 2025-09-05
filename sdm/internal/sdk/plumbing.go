@@ -19777,6 +19777,7 @@ func convertSnowsightToPorcelain(plumbing *proto.Snowsight) (*Snowsight, error) 
 	}
 	porcelain := &Snowsight{}
 	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.ConnectToDefault = plumbing.ConnectToDefault
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HealthcheckUsername = plumbing.HealthcheckUsername
 	porcelain.Healthy = plumbing.Healthy
@@ -19801,6 +19802,7 @@ func convertSnowsightToPlumbing(porcelain *Snowsight) *proto.Snowsight {
 	}
 	plumbing := &proto.Snowsight{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.ConnectToDefault = (porcelain.ConnectToDefault)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HealthcheckUsername = (porcelain.HealthcheckUsername)
 	plumbing.Healthy = (porcelain.Healthy)

@@ -1305,6 +1305,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "snowsight",
 			pairs: [][2]string{
+				{"connect_to_default", `true`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_username", `"healthcheck_username"`},
 				{"name", `"all-resources-snowsight-name"`},
@@ -2860,6 +2861,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "snowsight",
 			pairs: [][2]string{
+				{"connect_to_default", `true`},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_username", `"healthcheck_username"`},
 				{"name", `"all-resources-secret-snowsight-name"`},
