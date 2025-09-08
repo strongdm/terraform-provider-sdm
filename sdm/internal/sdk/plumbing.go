@@ -14895,6 +14895,7 @@ func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
 	}
 	porcelain := &RDPCert{}
 	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.DcHostnames = plumbing.DcHostnames
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
@@ -14924,6 +14925,7 @@ func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
 	}
 	plumbing := &proto.RDPCert{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.DcHostnames = (porcelain.DcHostnames)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)

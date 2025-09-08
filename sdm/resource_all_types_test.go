@@ -1186,6 +1186,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 		{
 			resource: "rdp_cert",
 			pairs: [][2]string{
+				{"dc_hostnames", `"dc_hostnames"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},
@@ -2757,6 +2758,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		{
 			resource: "rdp_cert",
 			pairs: [][2]string{
+				{"dc_hostnames", `"dc_hostnames"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
 				{"identity_alias_healthcheck_username", `"identity_alias_healthcheck_username"`},

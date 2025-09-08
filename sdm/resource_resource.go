@@ -7437,6 +7437,11 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
+						"dc_hostnames": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Comma-separated list of Active Directory Domain Controller hostnames for LDAPS SID resolution. Utilized for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID.",
+						},
 						"egress_filter": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -14671,6 +14676,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out := &sdm.RDPCert{
 			ID:                               d.Id(),
 			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
+			DcHostnames:                      convertStringToPlumbing(raw["dc_hostnames"]),
 			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                         convertStringToPlumbing(raw["hostname"]),
 			IdentityAliasHealthcheckUsername: convertStringToPlumbing(raw["identity_alias_healthcheck_username"]),
@@ -17155,6 +17161,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		d.Set("rdp_cert", []map[string]interface{}{
 			{
 				"bind_interface":                      (v.BindInterface),
+				"dc_hostnames":                        (v.DcHostnames),
 				"egress_filter":                       (v.EgressFilter),
 				"hostname":                            (v.Hostname),
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
@@ -20273,6 +20280,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		d.Set("rdp_cert", []map[string]interface{}{
 			{
 				"bind_interface":                      (v.BindInterface),
+				"dc_hostnames":                        (v.DcHostnames),
 				"egress_filter":                       (v.EgressFilter),
 				"hostname":                            (v.Hostname),
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),

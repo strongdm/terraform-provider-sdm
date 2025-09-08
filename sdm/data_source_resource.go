@@ -7553,6 +7553,11 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
+									"dc_hostnames": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Comma-separated list of Active Directory Domain Controller hostnames for LDAPS SID resolution. Utilized for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID.",
+									},
 									"egress_filter": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -11098,6 +11103,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 		case *sdm.RDPCert:
 			output[0]["rdp_cert"] = append(output[0]["rdp_cert"], entity{
 				"bind_interface":                      (v.BindInterface),
+				"dc_hostnames":                        (v.DcHostnames),
 				"egress_filter":                       (v.EgressFilter),
 				"hostname":                            (v.Hostname),
 				"id":                                  (v.ID),
