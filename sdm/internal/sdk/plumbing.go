@@ -12772,6 +12772,7 @@ func convertOracleNNEToPorcelain(plumbing *proto.OracleNNE) (*OracleNNE, error) 
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -12795,6 +12796,7 @@ func convertOracleNNEToPlumbing(porcelain *OracleNNE) *proto.OracleNNE {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }

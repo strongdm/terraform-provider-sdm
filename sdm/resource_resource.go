@@ -6876,7 +6876,7 @@ func resourceResource() *schema.Resource {
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Description: "Oracle service name to connect to",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -6961,7 +6961,7 @@ func resourceResource() *schema.Resource {
 						"database": {
 							Type:        schema.TypeString,
 							Required:    true,
-							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+							Description: "Oracle service name to connect to",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7016,6 +7016,11 @@ func resourceResource() *schema.Resource {
 							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "If set, TLS must be used to connect to this resource.",
 						},
 						"username": {
 							Type:        schema.TypeString,
@@ -14519,6 +14524,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:    convertBoolToPlumbing(raw["tls_required"]),
 			Username:       convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -17052,6 +17058,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
 				"username":         seValues["username"],
 			},
 		})
@@ -20126,6 +20133,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
 				"username":         seValues["username"],
 			},
 		})

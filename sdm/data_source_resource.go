@@ -6985,7 +6985,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "Oracle service name to connect to",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -7071,7 +7071,7 @@ func dataSourceResource() *schema.Resource {
 									"database": {
 										Type:        schema.TypeString,
 										Optional:    true,
-										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+										Description: "Oracle service name to connect to",
 									},
 									"egress_filter": {
 										Type:        schema.TypeString,
@@ -7129,6 +7129,11 @@ func dataSourceResource() *schema.Resource {
 										Elem:        tagsElemType,
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
 										Type:        schema.TypeString,
@@ -11013,6 +11018,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
 			})
 		case *sdm.Postgres:
