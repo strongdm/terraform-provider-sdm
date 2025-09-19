@@ -772,6 +772,88 @@ type AccountGrantHistory struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
+// An AccountGroup is a link between an Account and a Group.
+type AccountGroup struct {
+	// Unique identifier of the Account.
+	AccountID string `json:"accountId"`
+	// Unique identifier of the Group.
+	GroupID string `json:"groupId"`
+	// Unique identifier of the AccountGroup.
+	ID string `json:"id"`
+}
+
+// AccountGroupCreateRequest specifies an AccountGroup to create.
+type AccountGroupCreateRequest struct {
+	// Parameters to define the new AccountGroup.
+	AccountGroup *AccountGroup `json:"accountGroup"`
+}
+
+// AccountGroupCreateResponse reports the result of a create.
+type AccountGroupCreateResponse struct {
+	// The created AccountGroup.
+	AccountGroup *AccountGroup `json:"accountGroup"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupDeleteRequest identifies an AccountGroup by ID to delete.
+type AccountGroupDeleteRequest struct {
+	// The unique identifier of the group to delete.
+	ID string `json:"id"`
+}
+
+// GroupDeleteResponse returns information about an AccountGroup that was deleted.
+type AccountGroupDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountGroupGetRequest specifies which AccountGroup to retrieve.
+type AccountGroupGetRequest struct {
+	// The unique identifier of the AccountGroup to retrieve.
+	ID string `json:"id"`
+}
+
+// AccountGroupGetResponse returns a requested AccountGroup.
+type AccountGroupGetResponse struct {
+	// The requested AccountGroup.
+	AccountGroup *AccountGroup `json:"accountGroup"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// AccountGroupHistory records the state of an AccountGroup at a given point in time,
+// where every change (create, update and delete) to an AccountGroup produces an
+// AccountGroupHistory record.
+type AccountGroupHistory struct {
+	// The complete AccountGroup state at this time.
+	AccountGroup *AccountGroup `json:"accountGroup"`
+	// The unique identifier of the Activity that produced this change to the AccountGroup.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this AccountGroup was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The time at which the AccountGroup state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// GroupListRequest specifies criteria for retrieving a list of groups.
+type AccountGroupListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// GroupListResponse returns a list of groups that meet the criteria of a
+// GroupListRequest.
+type AccountGroupListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 // AccountHistory records the state of an Account at a given point in time,
 // where every change (create, update and delete) to an Account produces an
 // AccountHistory record.
@@ -1299,6 +1381,8 @@ type AmazonMQAMQP091 struct {
 type ApprovalFlowApprover struct {
 	// The approver account id.
 	AccountID string `json:"accountId"`
+	// The approver group id
+	GroupID string `json:"groupId"`
 	// A reference to an approver. Must be one of ApproverReference constants.
 	// If set, the account_id and role_id must be empty.
 	Reference string `json:"reference"`
@@ -3060,6 +3144,218 @@ type Greenplum struct {
 	Username string `json:"username"`
 }
 
+// A Group is a named set of principals.
+type Group struct {
+	// Description of the Group.
+	Description string `json:"description"`
+	// Unique identifier of the Group.
+	ID string `json:"id"`
+	// Unique human-readable name of the Group.
+	Name string `json:"name"`
+	// Source is a read only field for what service manages this group, e.g. StrongDM, Okta, Azure.
+	Source string `json:"source"`
+	// Tags is a map of key/value pairs that can be attached to a Group.
+	Tags Tags `json:"tags"`
+}
+
+type GroupCreateFromRolesRequest struct {
+	// Commit
+	Commit bool `json:"commit"`
+	// The unique identifiers of the roles create groups from.
+	RoleIDs []string `json:"roleIds"`
+}
+
+type GroupCreateFromRolesResponse struct {
+	// The created Group.
+	GroupFromRole []*GroupFromRole `json:"groupFromRole"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupCreateRequest specifies a group to create.
+type GroupCreateRequest struct {
+	// Parameters to define the new Group.
+	Group *Group `json:"group"`
+}
+
+// GroupCreateResponse reports the result of a create.
+type GroupCreateResponse struct {
+	// The created Group.
+	Group *Group `json:"group"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// groupDeleteRequest identifies a group by ID to delete.
+type GroupDeleteRequest struct {
+	// The unique identifier of the group to delete.
+	ID string `json:"id"`
+}
+
+// groupDeleteResponse returns information about a group that was deleted.
+type GroupDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type GroupFromRole struct {
+	// The migrated Accounts.
+	Accounts []*User `json:"accounts"`
+	// The affected approval flows.
+	ApprovalFlows []*ApprovalWorkflow `json:"approvalFlows"`
+	// The group created from the source role.
+	Group *Group `json:"group"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The source role.
+	Role *Role `json:"role"`
+}
+
+// GroupGetRequest specifies which Group to retrieve.
+type GroupGetRequest struct {
+	// The unique identifier of the Group to retrieve.
+	ID string `json:"id"`
+}
+
+// GroupGetResponse returns a requested Group.
+type GroupGetResponse struct {
+	// The requested Group.
+	Group *Group `json:"group"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupHistory records the state of a Group at a given point in time,
+// where every change (create, update and delete) to a Group produces a
+// GroupHistory record.
+type GroupHistory struct {
+	// The unique identifier of the Activity that produced this change to the Group.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this Group was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The complete Group state at this time.
+	Group *Group `json:"group"`
+	// The time at which the Group state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// groupListRequest specifies criteria for retrieving a list of groups.
+type GroupListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// groupListResponse returns a list of groups that meet the criteria of a
+// groupListRequest.
+type GroupListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// A GroupRole assigns a Group to a Role.
+type GroupRole struct {
+	// The assigned Group ID.
+	GroupID string `json:"groupId"`
+	// Unique identifier of the GroupRole.
+	ID string `json:"id"`
+	// The assigned Role ID.
+	RoleID string `json:"roleId"`
+}
+
+// GroupRoleCreateRequest specifies a group role to create.
+type GroupRoleCreateRequest struct {
+	// Parameters to define the new GroupRole.
+	GroupRole *GroupRole `json:"groupRole"`
+}
+
+// GroupRoleCreateResponse reports the result of a create.
+type GroupRoleCreateResponse struct {
+	// The created GroupRole.
+	GroupRole *GroupRole `json:"groupRole"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupRoleDeleteRequest identifies a group role by ID to delete.
+type GroupRoleDeleteRequest struct {
+	// The unique identifier of the group to delete.
+	ID string `json:"id"`
+}
+
+// GroupRoleDeleteResponse returns information about a group that was deleted.
+type GroupRoleDeleteResponse struct {
+	// The deleted GroupRole.
+	GroupRole *GroupRole `json:"groupRole"`
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupRoleGetRequest specifies which GroupRole to retrieve.
+type GroupRoleGetRequest struct {
+	// The unique identifier of the GroupRole to retrieve.
+	ID string `json:"id"`
+}
+
+// GroupRoleGetResponse returns a requested GroupRole.
+type GroupRoleGetResponse struct {
+	// The requested GroupRole.
+	GroupRole *GroupRole `json:"groupRole"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupRoleHistory records the state of a GroupRole at a given point in time,
+// where every change (create, update and delete) to a GroupRole produces a
+// GroupRoleHistory record.
+type GroupRoleHistory struct {
+	// The unique identifier of the Activity that produced this change to the GroupRole.
+	// May be empty for some system-initiated updates.
+	ActivityID string `json:"activityId"`
+	// If this GroupRole was deleted, the time it was deleted.
+	DeletedAt time.Time `json:"deletedAt"`
+	// The complete GroupRole state at this time.
+	GroupRole *GroupRole `json:"groupRole"`
+	// The time at which the GroupRole state was recorded.
+	Timestamp time.Time `json:"timestamp"`
+}
+
+// GroupRoleListRequest specifies criteria for retrieving a list of groups.
+type GroupRoleListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// GroupRoleListResponse returns a list of group roles that meet the criteria of a
+// GroupRoleListRequest.
+type GroupRoleListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// GroupUpdateRequest updates a group.
+type GroupUpdateRequest struct {
+	// Parameters to overwrite the specified group.
+	Group *Group `json:"group"`
+}
+
+// groupUpdateResponse returns the fields of a group after it has been updated by
+// a groupUpdateRequest.
+type GroupUpdateResponse struct {
+	// The updated group.
+	Group *Group `json:"group"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 type HTTPAuth struct {
 	// The content to set as the authorization header.
 	AuthHeader string `json:"authHeader"`
@@ -3681,6 +3977,39 @@ type LogConfig struct {
 	LocalTCPAddress string `json:"localTcpAddress"`
 	// The Organization's public key in PEM format for encrypting logs.
 	PublicKey string `json:"publicKey"`
+}
+
+// MCP is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type MCP struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The username to authenticate with.
+	Username string `json:"username"`
 }
 
 // MTLSMysql is currently unstable, and its API may change, or it may be removed,
@@ -9403,6 +9732,60 @@ func (m *Maria) GetBindInterface() string {
 func (m *Maria) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*MCP) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MCP.
+func (m *MCP) GetID() string { return m.ID }
+
+// GetName returns the name of the MCP.
+func (m *MCP) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MCP.
+func (m *MCP) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MCP.
+func (m *MCP) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MCP.
+func (m *MCP) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MCP.
+func (m *MCP) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MCP.
+func (m *MCP) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MCP.
+func (m *MCP) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MCP.
+func (m *MCP) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MCP.
+func (m *MCP) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MCP.
+func (m *MCP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Memcached) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Memcached.
@@ -13922,6 +14305,40 @@ type AccountIterator interface {
 	Err() error
 }
 
+// AccountGroupIterator provides read access to a list of AccountGroup.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    accountGroup := iterator.Value()
+//	    // ...
+//	}
+type AccountGroupIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *AccountGroup
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// AccountGroupHistoryIterator provides read access to a list of AccountGroupHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    accountGroupHistory := iterator.Value()
+//	    // ...
+//	}
+type AccountGroupHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *AccountGroupHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
 // AccountHistoryIterator provides read access to a list of AccountHistory.
 // Use it like so:
 //
@@ -14071,6 +14488,74 @@ type RoleIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *Role
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// GroupIterator provides read access to a list of Group.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    group := iterator.Value()
+//	    // ...
+//	}
+type GroupIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *Group
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// GroupHistoryIterator provides read access to a list of GroupHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    groupHistory := iterator.Value()
+//	    // ...
+//	}
+type GroupHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *GroupHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// GroupRoleIterator provides read access to a list of GroupRole.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    groupRole := iterator.Value()
+//	    // ...
+//	}
+type GroupRoleIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *GroupRole
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// GroupRoleHistoryIterator provides read access to a list of GroupRoleHistory.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    groupRoleHistory := iterator.Value()
+//	    // ...
+//	}
+type GroupRoleHistoryIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *GroupRoleHistory
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

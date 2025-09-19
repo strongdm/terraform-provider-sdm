@@ -1060,6 +1060,236 @@ func (svc *Accounts) List(
 	), nil
 }
 
+// An AccountGroup links an account and a group.
+type AccountsGroups struct {
+	client plumbing.AccountsGroupsClient
+	parent *Client
+}
+
+// A SnapshotAccountsGroups exposes the read only methods of the AccountsGroups
+// service for historical queries.
+type SnapshotAccountsGroups interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*AccountGroupGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		AccountGroupIterator,
+		error)
+}
+
+// Create create a new AccountGroup.
+func (svc *AccountsGroups) Create(
+	ctx context.Context,
+	accountGroup *AccountGroup) (
+	*AccountGroupCreateResponse,
+	error) {
+	req := plumbing.AccountGroupCreateRequest{}
+
+	req.AccountGroup = convertAccountGroupToPlumbing(accountGroup)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGroupCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "AccountsGroups.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &AccountGroupCreateResponse{}
+	if v, err := convertAccountGroupToPorcelain(plumbingResponse.AccountGroup); err != nil {
+		return nil, err
+	} else {
+		resp.AccountGroup = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one AccountGroup by ID.
+func (svc *AccountsGroups) Get(
+	ctx context.Context,
+	id string) (
+	*AccountGroupGetResponse,
+	error) {
+	req := plumbing.AccountGroupGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGroupGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "AccountsGroups.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &AccountGroupGetResponse{}
+	if v, err := convertAccountGroupToPorcelain(plumbingResponse.AccountGroup); err != nil {
+		return nil, err
+	} else {
+		resp.AccountGroup = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes an AccountGroup by ID.
+func (svc *AccountsGroups) Delete(
+	ctx context.Context,
+	id string) (
+	*AccountGroupDeleteResponse,
+	error) {
+	req := plumbing.AccountGroupDeleteRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.AccountGroupDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "AccountsGroups.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &AccountGroupDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of AccountGroups matching a given set of criteria.
+func (svc *AccountsGroups) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	AccountGroupIterator,
+	error) {
+	req := plumbing.AccountGroupListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newAccountGroupIteratorImpl(
+		func() (
+			[]*AccountGroup,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountGroupListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountsGroups.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedAccountGroupToPorcelain(plumbingResponse.AccountGroups)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// AccountsGroupsHistory records all changes to the state of an AccountGroup.
+type AccountsGroupsHistory struct {
+	client plumbing.AccountsGroupsHistoryClient
+	parent *Client
+}
+
+// List gets a list of AccountGroupHistory records matching a given set of criteria.
+func (svc *AccountsGroupsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	AccountGroupHistoryIterator,
+	error) {
+	req := plumbing.AccountGroupHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newAccountGroupHistoryIteratorImpl(
+		func() (
+			[]*AccountGroupHistory,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.AccountGroupHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "AccountsGroupsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedAccountGroupHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // AccountsHistory records all changes to the state of an Account.
 type AccountsHistory struct {
 	client plumbing.AccountsHistoryClient
@@ -2254,6 +2484,544 @@ func (svc *Roles) List(
 				return nil, false, convertErrorToPorcelain(err)
 			}
 			result, err := convertRepeatedRoleToPorcelain(plumbingResponse.Roles)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// A Group is a set of principals.
+type Groups struct {
+	client plumbing.GroupsClient
+	parent *Client
+}
+
+// A SnapshotGroups exposes the read only methods of the Groups
+// service for historical queries.
+type SnapshotGroups interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*GroupGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		GroupIterator,
+		error)
+}
+
+// Create registers a new Group.
+func (svc *Groups) Create(
+	ctx context.Context,
+	group *Group) (
+	*GroupCreateResponse,
+	error) {
+	req := plumbing.GroupCreateRequest{}
+
+	req.Group = convertGroupToPlumbing(group)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "Groups.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupCreateResponse{}
+	if v, err := convertGroupToPorcelain(plumbingResponse.Group); err != nil {
+		return nil, err
+	} else {
+		resp.Group = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+func (svc *Groups) CreateFromRoles(
+	ctx context.Context,
+	commit bool,
+	roleIds ...string) (
+	*GroupCreateFromRolesResponse,
+	error) {
+	req := plumbing.GroupCreateFromRolesRequest{}
+
+	req.RoleIds = (roleIds)
+	req.Commit = (commit)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupCreateFromRolesResponse, error) {
+			return svc.client.CreateFromRoles(svc.parent.wrapContext(ctx, &req, "Groups.CreateFromRoles"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupCreateFromRolesResponse{}
+	if v, err := convertRepeatedGroupFromRoleToPorcelain(plumbingResponse.GroupFromRole); err != nil {
+		return nil, err
+	} else {
+		resp.GroupFromRole = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one Group by ID.
+func (svc *Groups) Get(
+	ctx context.Context,
+	id string) (
+	*GroupGetResponse,
+	error) {
+	req := plumbing.GroupGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "Groups.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupGetResponse{}
+	if v, err := convertGroupToPorcelain(plumbingResponse.Group); err != nil {
+		return nil, err
+	} else {
+		resp.Group = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a Group by ID.
+func (svc *Groups) Update(
+	ctx context.Context,
+	group *Group) (
+	*GroupUpdateResponse,
+	error) {
+	req := plumbing.GroupUpdateRequest{}
+
+	req.Group = convertGroupToPlumbing(group)
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "Groups.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupUpdateResponse{}
+	if v, err := convertGroupToPorcelain(plumbingResponse.Group); err != nil {
+		return nil, err
+	} else {
+		resp.Group = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a Group by ID.
+func (svc *Groups) Delete(
+	ctx context.Context,
+	id string) (
+	*GroupDeleteResponse,
+	error) {
+	req := plumbing.GroupDeleteRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "Groups.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of Groups matching a given set of criteria.
+func (svc *Groups) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	GroupIterator,
+	error) {
+	req := plumbing.GroupListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGroupIteratorImpl(
+		func() (
+			[]*Group,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GroupListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "Groups.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGroupToPorcelain(plumbingResponse.Groups)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// GroupsHistory records all changes to the state of a Group.
+type GroupsHistory struct {
+	client plumbing.GroupsHistoryClient
+	parent *Client
+}
+
+// List gets a list of GroupHistory records matching a given set of criteria.
+func (svc *GroupsHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	GroupHistoryIterator,
+	error) {
+	req := plumbing.GroupHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGroupHistoryIteratorImpl(
+		func() (
+			[]*GroupHistory,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GroupHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "GroupsHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGroupHistoryToPorcelain(plumbingResponse.History)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// A GroupRole is an assignment of a Group to a Role.
+type GroupsRoles struct {
+	client plumbing.GroupsRolesClient
+	parent *Client
+}
+
+// A SnapshotGroupsRoles exposes the read only methods of the GroupsRoles
+// service for historical queries.
+type SnapshotGroupsRoles interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*GroupRoleGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		GroupRoleIterator,
+		error)
+}
+
+// Create registers a new GroupRole.
+func (svc *GroupsRoles) Create(
+	ctx context.Context,
+	groupRole *GroupRole) (
+	*GroupRoleCreateResponse,
+	error) {
+	req := plumbing.GroupRoleCreateRequest{}
+
+	req.GroupRole = convertGroupRoleToPlumbing(groupRole)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupRoleCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "GroupsRoles.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupRoleCreateResponse{}
+	if v, err := convertGroupRoleToPorcelain(plumbingResponse.GroupRole); err != nil {
+		return nil, err
+	} else {
+		resp.GroupRole = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one GroupRole by ID.
+func (svc *GroupsRoles) Get(
+	ctx context.Context,
+	id string) (
+	*GroupRoleGetResponse,
+	error) {
+	req := plumbing.GroupRoleGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupRoleGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "GroupsRoles.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupRoleGetResponse{}
+	if v, err := convertGroupRoleToPorcelain(plumbingResponse.GroupRole); err != nil {
+		return nil, err
+	} else {
+		resp.GroupRole = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a GroupRole by ID.
+func (svc *GroupsRoles) Delete(
+	ctx context.Context,
+	id string) (
+	*GroupRoleDeleteResponse,
+	error) {
+	req := plumbing.GroupRoleDeleteRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.GroupRoleDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "GroupsRoles.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &GroupRoleDeleteResponse{}
+	if v, err := convertGroupRoleToPorcelain(plumbingResponse.GroupRole); err != nil {
+		return nil, err
+	} else {
+		resp.GroupRole = v
+	}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of GroupRoles matching a given set of criteria.
+func (svc *GroupsRoles) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	GroupRoleIterator,
+	error) {
+	req := plumbing.GroupRoleListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGroupRoleIteratorImpl(
+		func() (
+			[]*GroupRole,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GroupRoleListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "GroupsRoles.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGroupRoleToPorcelain(plumbingResponse.GroupsRoles)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// GroupsRolesHistory records all changes to the state of a GroupRole.
+type GroupsRolesHistory struct {
+	client plumbing.GroupsRolesHistoryClient
+	parent *Client
+}
+
+// List gets a list of GroupRoleHistory records matching a given set of criteria.
+func (svc *GroupsRolesHistory) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	GroupRoleHistoryIterator,
+	error) {
+	req := plumbing.GroupRoleHistoryListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGroupRoleHistoryIteratorImpl(
+		func() (
+			[]*GroupRoleHistory,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GroupRoleHistoryListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "GroupsRolesHistory.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGroupRoleHistoryToPorcelain(plumbingResponse.History)
 			if err != nil {
 				return nil, false, err
 			}

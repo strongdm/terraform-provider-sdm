@@ -2151,6 +2151,482 @@ func convertRepeatedAccountGrantHistoryToPorcelain(plumbings []*proto.AccountGra
 	}
 	return items, nil
 }
+func convertAccountGroupToPorcelain(plumbing *proto.AccountGroup) (*AccountGroup, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroup{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.GroupID = plumbing.GroupId
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertAccountGroupToPlumbing(porcelain *AccountGroup) *proto.AccountGroup {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroup{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.GroupId = (porcelain.GroupID)
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedAccountGroupToPlumbing(
+	porcelains []*AccountGroup,
+) []*proto.AccountGroup {
+	var items []*proto.AccountGroup
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupToPorcelain(plumbings []*proto.AccountGroup) (
+	[]*AccountGroup,
+	error,
+) {
+	var items []*AccountGroup
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupCreateRequestToPorcelain(plumbing *proto.AccountGroupCreateRequest) (*AccountGroupCreateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupCreateRequest{}
+	if v, err := convertAccountGroupToPorcelain(plumbing.AccountGroup); err != nil {
+		return nil, fmt.Errorf("error converting field AccountGroup: %v", err)
+	} else {
+		porcelain.AccountGroup = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountGroupCreateRequestToPlumbing(porcelain *AccountGroupCreateRequest) *proto.AccountGroupCreateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupCreateRequest{}
+	plumbing.AccountGroup = convertAccountGroupToPlumbing(porcelain.AccountGroup)
+	return plumbing
+}
+func convertRepeatedAccountGroupCreateRequestToPlumbing(
+	porcelains []*AccountGroupCreateRequest,
+) []*proto.AccountGroupCreateRequest {
+	var items []*proto.AccountGroupCreateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupCreateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupCreateRequestToPorcelain(plumbings []*proto.AccountGroupCreateRequest) (
+	[]*AccountGroupCreateRequest,
+	error,
+) {
+	var items []*AccountGroupCreateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupCreateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupCreateResponseToPorcelain(plumbing *proto.AccountGroupCreateResponse) (*AccountGroupCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupCreateResponse{}
+	if v, err := convertAccountGroupToPorcelain(plumbing.AccountGroup); err != nil {
+		return nil, fmt.Errorf("error converting field AccountGroup: %v", err)
+	} else {
+		porcelain.AccountGroup = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountGroupCreateResponseToPlumbing(porcelain *AccountGroupCreateResponse) *proto.AccountGroupCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupCreateResponse{}
+	plumbing.AccountGroup = convertAccountGroupToPlumbing(porcelain.AccountGroup)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGroupCreateResponseToPlumbing(
+	porcelains []*AccountGroupCreateResponse,
+) []*proto.AccountGroupCreateResponse {
+	var items []*proto.AccountGroupCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupCreateResponseToPorcelain(plumbings []*proto.AccountGroupCreateResponse) (
+	[]*AccountGroupCreateResponse,
+	error,
+) {
+	var items []*AccountGroupCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupDeleteRequestToPorcelain(plumbing *proto.AccountGroupDeleteRequest) (*AccountGroupDeleteRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupDeleteRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertAccountGroupDeleteRequestToPlumbing(porcelain *AccountGroupDeleteRequest) *proto.AccountGroupDeleteRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupDeleteRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedAccountGroupDeleteRequestToPlumbing(
+	porcelains []*AccountGroupDeleteRequest,
+) []*proto.AccountGroupDeleteRequest {
+	var items []*proto.AccountGroupDeleteRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupDeleteRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupDeleteRequestToPorcelain(plumbings []*proto.AccountGroupDeleteRequest) (
+	[]*AccountGroupDeleteRequest,
+	error,
+) {
+	var items []*AccountGroupDeleteRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupDeleteRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupDeleteResponseToPorcelain(plumbing *proto.AccountGroupDeleteResponse) (*AccountGroupDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountGroupDeleteResponseToPlumbing(porcelain *AccountGroupDeleteResponse) *proto.AccountGroupDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGroupDeleteResponseToPlumbing(
+	porcelains []*AccountGroupDeleteResponse,
+) []*proto.AccountGroupDeleteResponse {
+	var items []*proto.AccountGroupDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupDeleteResponseToPorcelain(plumbings []*proto.AccountGroupDeleteResponse) (
+	[]*AccountGroupDeleteResponse,
+	error,
+) {
+	var items []*AccountGroupDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupGetRequestToPorcelain(plumbing *proto.AccountGroupGetRequest) (*AccountGroupGetRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupGetRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertAccountGroupGetRequestToPlumbing(porcelain *AccountGroupGetRequest) *proto.AccountGroupGetRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupGetRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedAccountGroupGetRequestToPlumbing(
+	porcelains []*AccountGroupGetRequest,
+) []*proto.AccountGroupGetRequest {
+	var items []*proto.AccountGroupGetRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupGetRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupGetRequestToPorcelain(plumbings []*proto.AccountGroupGetRequest) (
+	[]*AccountGroupGetRequest,
+	error,
+) {
+	var items []*AccountGroupGetRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupGetRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupGetResponseToPorcelain(plumbing *proto.AccountGroupGetResponse) (*AccountGroupGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupGetResponse{}
+	if v, err := convertAccountGroupToPorcelain(plumbing.AccountGroup); err != nil {
+		return nil, fmt.Errorf("error converting field AccountGroup: %v", err)
+	} else {
+		porcelain.AccountGroup = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountGroupGetResponseToPlumbing(porcelain *AccountGroupGetResponse) *proto.AccountGroupGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupGetResponse{}
+	plumbing.AccountGroup = convertAccountGroupToPlumbing(porcelain.AccountGroup)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGroupGetResponseToPlumbing(
+	porcelains []*AccountGroupGetResponse,
+) []*proto.AccountGroupGetResponse {
+	var items []*proto.AccountGroupGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupGetResponseToPorcelain(plumbings []*proto.AccountGroupGetResponse) (
+	[]*AccountGroupGetResponse,
+	error,
+) {
+	var items []*AccountGroupGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupHistoryToPorcelain(plumbing *proto.AccountGroupHistory) (*AccountGroupHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupHistory{}
+	if v, err := convertAccountGroupToPorcelain(plumbing.AccountGroup); err != nil {
+		return nil, fmt.Errorf("error converting field AccountGroup: %v", err)
+	} else {
+		porcelain.AccountGroup = v
+	}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountGroupHistoryToPlumbing(porcelain *AccountGroupHistory) *proto.AccountGroupHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupHistory{}
+	plumbing.AccountGroup = convertAccountGroupToPlumbing(porcelain.AccountGroup)
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedAccountGroupHistoryToPlumbing(
+	porcelains []*AccountGroupHistory,
+) []*proto.AccountGroupHistory {
+	var items []*proto.AccountGroupHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupHistoryToPorcelain(plumbings []*proto.AccountGroupHistory) (
+	[]*AccountGroupHistory,
+	error,
+) {
+	var items []*AccountGroupHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupListRequestToPorcelain(plumbing *proto.AccountGroupListRequest) (*AccountGroupListRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupListRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertAccountGroupListRequestToPlumbing(porcelain *AccountGroupListRequest) *proto.AccountGroupListRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupListRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedAccountGroupListRequestToPlumbing(
+	porcelains []*AccountGroupListRequest,
+) []*proto.AccountGroupListRequest {
+	var items []*proto.AccountGroupListRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupListRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupListRequestToPorcelain(plumbings []*proto.AccountGroupListRequest) (
+	[]*AccountGroupListRequest,
+	error,
+) {
+	var items []*AccountGroupListRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupListRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertAccountGroupListResponseToPorcelain(plumbing *proto.AccountGroupListResponse) (*AccountGroupListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AccountGroupListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertAccountGroupListResponseToPlumbing(porcelain *AccountGroupListResponse) *proto.AccountGroupListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AccountGroupListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedAccountGroupListResponseToPlumbing(
+	porcelains []*AccountGroupListResponse,
+) []*proto.AccountGroupListResponse {
+	var items []*proto.AccountGroupListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertAccountGroupListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAccountGroupListResponseToPorcelain(plumbings []*proto.AccountGroupListResponse) (
+	[]*AccountGroupListResponse,
+	error,
+) {
+	var items []*AccountGroupListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertAccountGroupListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAccountHistoryToPorcelain(plumbing *proto.AccountHistory) (*AccountHistory, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -3456,6 +3932,7 @@ func convertApprovalFlowApproverToPorcelain(plumbing *proto.ApprovalFlowApprover
 	}
 	porcelain := &ApprovalFlowApprover{}
 	porcelain.AccountID = plumbing.AccountId
+	porcelain.GroupID = plumbing.GroupId
 	porcelain.Reference = plumbing.Reference
 	porcelain.RoleID = plumbing.RoleId
 	return porcelain, nil
@@ -3467,6 +3944,7 @@ func convertApprovalFlowApproverToPlumbing(porcelain *ApprovalFlowApprover) *pro
 	}
 	plumbing := &proto.ApprovalFlowApprover{}
 	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.GroupId = (porcelain.GroupID)
 	plumbing.Reference = (porcelain.Reference)
 	plumbing.RoleId = (porcelain.RoleID)
 	return plumbing
@@ -8314,6 +8792,1231 @@ func convertRepeatedGreenplumToPorcelain(plumbings []*proto.Greenplum) (
 	}
 	return items, nil
 }
+func convertGroupToPorcelain(plumbing *proto.Group) (*Group, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Group{}
+	porcelain.Description = plumbing.Description
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Source = plumbing.Source
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupToPlumbing(porcelain *Group) *proto.Group {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Group{}
+	plumbing.Description = (porcelain.Description)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Source = (porcelain.Source)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedGroupToPlumbing(
+	porcelains []*Group,
+) []*proto.Group {
+	var items []*proto.Group
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupToPorcelain(plumbings []*proto.Group) (
+	[]*Group,
+	error,
+) {
+	var items []*Group
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupCreateFromRolesRequestToPorcelain(plumbing *proto.GroupCreateFromRolesRequest) (*GroupCreateFromRolesRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupCreateFromRolesRequest{}
+	porcelain.Commit = plumbing.Commit
+	porcelain.RoleIDs = plumbing.RoleIds
+	return porcelain, nil
+}
+
+func convertGroupCreateFromRolesRequestToPlumbing(porcelain *GroupCreateFromRolesRequest) *proto.GroupCreateFromRolesRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupCreateFromRolesRequest{}
+	plumbing.Commit = (porcelain.Commit)
+	plumbing.RoleIds = (porcelain.RoleIDs)
+	return plumbing
+}
+func convertRepeatedGroupCreateFromRolesRequestToPlumbing(
+	porcelains []*GroupCreateFromRolesRequest,
+) []*proto.GroupCreateFromRolesRequest {
+	var items []*proto.GroupCreateFromRolesRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupCreateFromRolesRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupCreateFromRolesRequestToPorcelain(plumbings []*proto.GroupCreateFromRolesRequest) (
+	[]*GroupCreateFromRolesRequest,
+	error,
+) {
+	var items []*GroupCreateFromRolesRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupCreateFromRolesRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupCreateFromRolesResponseToPorcelain(plumbing *proto.GroupCreateFromRolesResponse) (*GroupCreateFromRolesResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupCreateFromRolesResponse{}
+	if v, err := convertRepeatedGroupFromRoleToPorcelain(plumbing.GroupFromRole); err != nil {
+		return nil, fmt.Errorf("error converting field GroupFromRole: %v", err)
+	} else {
+		porcelain.GroupFromRole = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupCreateFromRolesResponseToPlumbing(porcelain *GroupCreateFromRolesResponse) *proto.GroupCreateFromRolesResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupCreateFromRolesResponse{}
+	plumbing.GroupFromRole = convertRepeatedGroupFromRoleToPlumbing(porcelain.GroupFromRole)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupCreateFromRolesResponseToPlumbing(
+	porcelains []*GroupCreateFromRolesResponse,
+) []*proto.GroupCreateFromRolesResponse {
+	var items []*proto.GroupCreateFromRolesResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupCreateFromRolesResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupCreateFromRolesResponseToPorcelain(plumbings []*proto.GroupCreateFromRolesResponse) (
+	[]*GroupCreateFromRolesResponse,
+	error,
+) {
+	var items []*GroupCreateFromRolesResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupCreateFromRolesResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupCreateRequestToPorcelain(plumbing *proto.GroupCreateRequest) (*GroupCreateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupCreateRequest{}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupCreateRequestToPlumbing(porcelain *GroupCreateRequest) *proto.GroupCreateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupCreateRequest{}
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	return plumbing
+}
+func convertRepeatedGroupCreateRequestToPlumbing(
+	porcelains []*GroupCreateRequest,
+) []*proto.GroupCreateRequest {
+	var items []*proto.GroupCreateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupCreateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupCreateRequestToPorcelain(plumbings []*proto.GroupCreateRequest) (
+	[]*GroupCreateRequest,
+	error,
+) {
+	var items []*GroupCreateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupCreateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupCreateResponseToPorcelain(plumbing *proto.GroupCreateResponse) (*GroupCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupCreateResponse{}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupCreateResponseToPlumbing(porcelain *GroupCreateResponse) *proto.GroupCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupCreateResponse{}
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupCreateResponseToPlumbing(
+	porcelains []*GroupCreateResponse,
+) []*proto.GroupCreateResponse {
+	var items []*proto.GroupCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupCreateResponseToPorcelain(plumbings []*proto.GroupCreateResponse) (
+	[]*GroupCreateResponse,
+	error,
+) {
+	var items []*GroupCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupDeleteRequestToPorcelain(plumbing *proto.GroupDeleteRequest) (*GroupDeleteRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupDeleteRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertGroupDeleteRequestToPlumbing(porcelain *GroupDeleteRequest) *proto.GroupDeleteRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupDeleteRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedGroupDeleteRequestToPlumbing(
+	porcelains []*GroupDeleteRequest,
+) []*proto.GroupDeleteRequest {
+	var items []*proto.GroupDeleteRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupDeleteRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupDeleteRequestToPorcelain(plumbings []*proto.GroupDeleteRequest) (
+	[]*GroupDeleteRequest,
+	error,
+) {
+	var items []*GroupDeleteRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupDeleteRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupDeleteResponseToPorcelain(plumbing *proto.GroupDeleteResponse) (*GroupDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupDeleteResponseToPlumbing(porcelain *GroupDeleteResponse) *proto.GroupDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupDeleteResponseToPlumbing(
+	porcelains []*GroupDeleteResponse,
+) []*proto.GroupDeleteResponse {
+	var items []*proto.GroupDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupDeleteResponseToPorcelain(plumbings []*proto.GroupDeleteResponse) (
+	[]*GroupDeleteResponse,
+	error,
+) {
+	var items []*GroupDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupFromRoleToPorcelain(plumbing *proto.GroupFromRole) (*GroupFromRole, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupFromRole{}
+	if v, err := convertRepeatedUserToPorcelain(plumbing.Accounts); err != nil {
+		return nil, fmt.Errorf("error converting field Accounts: %v", err)
+	} else {
+		porcelain.Accounts = v
+	}
+	if v, err := convertRepeatedApprovalWorkflowToPorcelain(plumbing.ApprovalFlows); err != nil {
+		return nil, fmt.Errorf("error converting field ApprovalFlows: %v", err)
+	} else {
+		porcelain.ApprovalFlows = v
+	}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	if v, err := convertRoleToPorcelain(plumbing.Role); err != nil {
+		return nil, fmt.Errorf("error converting field Role: %v", err)
+	} else {
+		porcelain.Role = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupFromRoleToPlumbing(porcelain *GroupFromRole) *proto.GroupFromRole {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupFromRole{}
+	plumbing.Accounts = convertRepeatedUserToPlumbing(porcelain.Accounts)
+	plumbing.ApprovalFlows = convertRepeatedApprovalWorkflowToPlumbing(porcelain.ApprovalFlows)
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Role = convertRoleToPlumbing(porcelain.Role)
+	return plumbing
+}
+func convertRepeatedGroupFromRoleToPlumbing(
+	porcelains []*GroupFromRole,
+) []*proto.GroupFromRole {
+	var items []*proto.GroupFromRole
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupFromRoleToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupFromRoleToPorcelain(plumbings []*proto.GroupFromRole) (
+	[]*GroupFromRole,
+	error,
+) {
+	var items []*GroupFromRole
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupFromRoleToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupGetRequestToPorcelain(plumbing *proto.GroupGetRequest) (*GroupGetRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupGetRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertGroupGetRequestToPlumbing(porcelain *GroupGetRequest) *proto.GroupGetRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupGetRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedGroupGetRequestToPlumbing(
+	porcelains []*GroupGetRequest,
+) []*proto.GroupGetRequest {
+	var items []*proto.GroupGetRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupGetRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupGetRequestToPorcelain(plumbings []*proto.GroupGetRequest) (
+	[]*GroupGetRequest,
+	error,
+) {
+	var items []*GroupGetRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupGetRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupGetResponseToPorcelain(plumbing *proto.GroupGetResponse) (*GroupGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupGetResponse{}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupGetResponseToPlumbing(porcelain *GroupGetResponse) *proto.GroupGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupGetResponse{}
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupGetResponseToPlumbing(
+	porcelains []*GroupGetResponse,
+) []*proto.GroupGetResponse {
+	var items []*proto.GroupGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupGetResponseToPorcelain(plumbings []*proto.GroupGetResponse) (
+	[]*GroupGetResponse,
+	error,
+) {
+	var items []*GroupGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupHistoryToPorcelain(plumbing *proto.GroupHistory) (*GroupHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupHistoryToPlumbing(porcelain *GroupHistory) *proto.GroupHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedGroupHistoryToPlumbing(
+	porcelains []*GroupHistory,
+) []*proto.GroupHistory {
+	var items []*proto.GroupHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupHistoryToPorcelain(plumbings []*proto.GroupHistory) (
+	[]*GroupHistory,
+	error,
+) {
+	var items []*GroupHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupListRequestToPorcelain(plumbing *proto.GroupListRequest) (*GroupListRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupListRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertGroupListRequestToPlumbing(porcelain *GroupListRequest) *proto.GroupListRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupListRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedGroupListRequestToPlumbing(
+	porcelains []*GroupListRequest,
+) []*proto.GroupListRequest {
+	var items []*proto.GroupListRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupListRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupListRequestToPorcelain(plumbings []*proto.GroupListRequest) (
+	[]*GroupListRequest,
+	error,
+) {
+	var items []*GroupListRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupListRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupListResponseToPorcelain(plumbing *proto.GroupListResponse) (*GroupListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupListResponseToPlumbing(porcelain *GroupListResponse) *proto.GroupListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupListResponseToPlumbing(
+	porcelains []*GroupListResponse,
+) []*proto.GroupListResponse {
+	var items []*proto.GroupListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupListResponseToPorcelain(plumbings []*proto.GroupListResponse) (
+	[]*GroupListResponse,
+	error,
+) {
+	var items []*GroupListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleToPorcelain(plumbing *proto.GroupRole) (*GroupRole, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRole{}
+	porcelain.GroupID = plumbing.GroupId
+	porcelain.ID = plumbing.Id
+	porcelain.RoleID = plumbing.RoleId
+	return porcelain, nil
+}
+
+func convertGroupRoleToPlumbing(porcelain *GroupRole) *proto.GroupRole {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRole{}
+	plumbing.GroupId = (porcelain.GroupID)
+	plumbing.Id = (porcelain.ID)
+	plumbing.RoleId = (porcelain.RoleID)
+	return plumbing
+}
+func convertRepeatedGroupRoleToPlumbing(
+	porcelains []*GroupRole,
+) []*proto.GroupRole {
+	var items []*proto.GroupRole
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleToPorcelain(plumbings []*proto.GroupRole) (
+	[]*GroupRole,
+	error,
+) {
+	var items []*GroupRole
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleCreateRequestToPorcelain(plumbing *proto.GroupRoleCreateRequest) (*GroupRoleCreateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleCreateRequest{}
+	if v, err := convertGroupRoleToPorcelain(plumbing.GroupRole); err != nil {
+		return nil, fmt.Errorf("error converting field GroupRole: %v", err)
+	} else {
+		porcelain.GroupRole = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupRoleCreateRequestToPlumbing(porcelain *GroupRoleCreateRequest) *proto.GroupRoleCreateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleCreateRequest{}
+	plumbing.GroupRole = convertGroupRoleToPlumbing(porcelain.GroupRole)
+	return plumbing
+}
+func convertRepeatedGroupRoleCreateRequestToPlumbing(
+	porcelains []*GroupRoleCreateRequest,
+) []*proto.GroupRoleCreateRequest {
+	var items []*proto.GroupRoleCreateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleCreateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleCreateRequestToPorcelain(plumbings []*proto.GroupRoleCreateRequest) (
+	[]*GroupRoleCreateRequest,
+	error,
+) {
+	var items []*GroupRoleCreateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleCreateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleCreateResponseToPorcelain(plumbing *proto.GroupRoleCreateResponse) (*GroupRoleCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleCreateResponse{}
+	if v, err := convertGroupRoleToPorcelain(plumbing.GroupRole); err != nil {
+		return nil, fmt.Errorf("error converting field GroupRole: %v", err)
+	} else {
+		porcelain.GroupRole = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupRoleCreateResponseToPlumbing(porcelain *GroupRoleCreateResponse) *proto.GroupRoleCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleCreateResponse{}
+	plumbing.GroupRole = convertGroupRoleToPlumbing(porcelain.GroupRole)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupRoleCreateResponseToPlumbing(
+	porcelains []*GroupRoleCreateResponse,
+) []*proto.GroupRoleCreateResponse {
+	var items []*proto.GroupRoleCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleCreateResponseToPorcelain(plumbings []*proto.GroupRoleCreateResponse) (
+	[]*GroupRoleCreateResponse,
+	error,
+) {
+	var items []*GroupRoleCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleDeleteRequestToPorcelain(plumbing *proto.GroupRoleDeleteRequest) (*GroupRoleDeleteRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleDeleteRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertGroupRoleDeleteRequestToPlumbing(porcelain *GroupRoleDeleteRequest) *proto.GroupRoleDeleteRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleDeleteRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedGroupRoleDeleteRequestToPlumbing(
+	porcelains []*GroupRoleDeleteRequest,
+) []*proto.GroupRoleDeleteRequest {
+	var items []*proto.GroupRoleDeleteRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleDeleteRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleDeleteRequestToPorcelain(plumbings []*proto.GroupRoleDeleteRequest) (
+	[]*GroupRoleDeleteRequest,
+	error,
+) {
+	var items []*GroupRoleDeleteRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleDeleteRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleDeleteResponseToPorcelain(plumbing *proto.GroupRoleDeleteResponse) (*GroupRoleDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleDeleteResponse{}
+	if v, err := convertGroupRoleToPorcelain(plumbing.GroupRole); err != nil {
+		return nil, fmt.Errorf("error converting field GroupRole: %v", err)
+	} else {
+		porcelain.GroupRole = v
+	}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupRoleDeleteResponseToPlumbing(porcelain *GroupRoleDeleteResponse) *proto.GroupRoleDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleDeleteResponse{}
+	plumbing.GroupRole = convertGroupRoleToPlumbing(porcelain.GroupRole)
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupRoleDeleteResponseToPlumbing(
+	porcelains []*GroupRoleDeleteResponse,
+) []*proto.GroupRoleDeleteResponse {
+	var items []*proto.GroupRoleDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleDeleteResponseToPorcelain(plumbings []*proto.GroupRoleDeleteResponse) (
+	[]*GroupRoleDeleteResponse,
+	error,
+) {
+	var items []*GroupRoleDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleGetRequestToPorcelain(plumbing *proto.GroupRoleGetRequest) (*GroupRoleGetRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleGetRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertGroupRoleGetRequestToPlumbing(porcelain *GroupRoleGetRequest) *proto.GroupRoleGetRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleGetRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedGroupRoleGetRequestToPlumbing(
+	porcelains []*GroupRoleGetRequest,
+) []*proto.GroupRoleGetRequest {
+	var items []*proto.GroupRoleGetRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleGetRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleGetRequestToPorcelain(plumbings []*proto.GroupRoleGetRequest) (
+	[]*GroupRoleGetRequest,
+	error,
+) {
+	var items []*GroupRoleGetRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleGetRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleGetResponseToPorcelain(plumbing *proto.GroupRoleGetResponse) (*GroupRoleGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleGetResponse{}
+	if v, err := convertGroupRoleToPorcelain(plumbing.GroupRole); err != nil {
+		return nil, fmt.Errorf("error converting field GroupRole: %v", err)
+	} else {
+		porcelain.GroupRole = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupRoleGetResponseToPlumbing(porcelain *GroupRoleGetResponse) *proto.GroupRoleGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleGetResponse{}
+	plumbing.GroupRole = convertGroupRoleToPlumbing(porcelain.GroupRole)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupRoleGetResponseToPlumbing(
+	porcelains []*GroupRoleGetResponse,
+) []*proto.GroupRoleGetResponse {
+	var items []*proto.GroupRoleGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleGetResponseToPorcelain(plumbings []*proto.GroupRoleGetResponse) (
+	[]*GroupRoleGetResponse,
+	error,
+) {
+	var items []*GroupRoleGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleHistoryToPorcelain(plumbing *proto.GroupRoleHistory) (*GroupRoleHistory, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleHistory{}
+	porcelain.ActivityID = plumbing.ActivityId
+	if v, err := convertTimestampToPorcelain(plumbing.DeletedAt); err != nil {
+		return nil, fmt.Errorf("error converting field DeletedAt: %v", err)
+	} else {
+		porcelain.DeletedAt = v
+	}
+	if v, err := convertGroupRoleToPorcelain(plumbing.GroupRole); err != nil {
+		return nil, fmt.Errorf("error converting field GroupRole: %v", err)
+	} else {
+		porcelain.GroupRole = v
+	}
+	if v, err := convertTimestampToPorcelain(plumbing.Timestamp); err != nil {
+		return nil, fmt.Errorf("error converting field Timestamp: %v", err)
+	} else {
+		porcelain.Timestamp = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupRoleHistoryToPlumbing(porcelain *GroupRoleHistory) *proto.GroupRoleHistory {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleHistory{}
+	plumbing.ActivityId = (porcelain.ActivityID)
+	plumbing.DeletedAt = convertTimestampToPlumbing(porcelain.DeletedAt)
+	plumbing.GroupRole = convertGroupRoleToPlumbing(porcelain.GroupRole)
+	plumbing.Timestamp = convertTimestampToPlumbing(porcelain.Timestamp)
+	return plumbing
+}
+func convertRepeatedGroupRoleHistoryToPlumbing(
+	porcelains []*GroupRoleHistory,
+) []*proto.GroupRoleHistory {
+	var items []*proto.GroupRoleHistory
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleHistoryToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleHistoryToPorcelain(plumbings []*proto.GroupRoleHistory) (
+	[]*GroupRoleHistory,
+	error,
+) {
+	var items []*GroupRoleHistory
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleHistoryToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleListRequestToPorcelain(plumbing *proto.GroupRoleListRequest) (*GroupRoleListRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleListRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertGroupRoleListRequestToPlumbing(porcelain *GroupRoleListRequest) *proto.GroupRoleListRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleListRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedGroupRoleListRequestToPlumbing(
+	porcelains []*GroupRoleListRequest,
+) []*proto.GroupRoleListRequest {
+	var items []*proto.GroupRoleListRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleListRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleListRequestToPorcelain(plumbings []*proto.GroupRoleListRequest) (
+	[]*GroupRoleListRequest,
+	error,
+) {
+	var items []*GroupRoleListRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleListRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupRoleListResponseToPorcelain(plumbing *proto.GroupRoleListResponse) (*GroupRoleListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupRoleListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupRoleListResponseToPlumbing(porcelain *GroupRoleListResponse) *proto.GroupRoleListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupRoleListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupRoleListResponseToPlumbing(
+	porcelains []*GroupRoleListResponse,
+) []*proto.GroupRoleListResponse {
+	var items []*proto.GroupRoleListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupRoleListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupRoleListResponseToPorcelain(plumbings []*proto.GroupRoleListResponse) (
+	[]*GroupRoleListResponse,
+	error,
+) {
+	var items []*GroupRoleListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupRoleListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupUpdateRequestToPorcelain(plumbing *proto.GroupUpdateRequest) (*GroupUpdateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupUpdateRequest{}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupUpdateRequestToPlumbing(porcelain *GroupUpdateRequest) *proto.GroupUpdateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupUpdateRequest{}
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	return plumbing
+}
+func convertRepeatedGroupUpdateRequestToPlumbing(
+	porcelains []*GroupUpdateRequest,
+) []*proto.GroupUpdateRequest {
+	var items []*proto.GroupUpdateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupUpdateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupUpdateRequestToPorcelain(plumbings []*proto.GroupUpdateRequest) (
+	[]*GroupUpdateRequest,
+	error,
+) {
+	var items []*GroupUpdateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupUpdateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGroupUpdateResponseToPorcelain(plumbing *proto.GroupUpdateResponse) (*GroupUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GroupUpdateResponse{}
+	if v, err := convertGroupToPorcelain(plumbing.Group); err != nil {
+		return nil, fmt.Errorf("error converting field Group: %v", err)
+	} else {
+		porcelain.Group = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertGroupUpdateResponseToPlumbing(porcelain *GroupUpdateResponse) *proto.GroupUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GroupUpdateResponse{}
+	plumbing.Group = convertGroupToPlumbing(porcelain.Group)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedGroupUpdateResponseToPlumbing(
+	porcelains []*GroupUpdateResponse,
+) []*proto.GroupUpdateResponse {
+	var items []*proto.GroupUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertGroupUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGroupUpdateResponseToPorcelain(plumbings []*proto.GroupUpdateResponse) (
+	[]*GroupUpdateResponse,
+	error,
+) {
+	var items []*GroupUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertGroupUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -10176,6 +11879,77 @@ func convertRepeatedLogConfigToPorcelain(plumbings []*proto.LogConfig) (
 	var items []*LogConfig
 	for _, plumbing := range plumbings {
 		if v, err := convertLogConfigToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertMCPToPorcelain(plumbing *proto.MCP) (*MCP, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &MCP{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertMCPToPlumbing(porcelain *MCP) *proto.MCP {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MCP{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMCPToPlumbing(
+	porcelains []*MCP,
+) []*proto.MCP {
+	var items []*proto.MCP
+	for _, porcelain := range porcelains {
+		items = append(items, convertMCPToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMCPToPorcelain(plumbings []*proto.MCP) (
+	[]*MCP,
+	error,
+) {
+	var items []*MCP
+	for _, plumbing := range plumbings {
+		if v, err := convertMCPToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -16461,6 +18235,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_KubernetesUserImpersonation{KubernetesUserImpersonation: convertKubernetesUserImpersonationToPlumbing(v)}
 	case *Maria:
 		plumbing.Resource = &proto.Resource_Maria{Maria: convertMariaToPlumbing(v)}
+	case *MCP:
+		plumbing.Resource = &proto.Resource_Mcp{Mcp: convertMCPToPlumbing(v)}
 	case *Memcached:
 		plumbing.Resource = &proto.Resource_Memcached{Memcached: convertMemcachedToPlumbing(v)}
 	case *Memsql:
@@ -16751,6 +18527,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetMaria() != nil {
 		return convertMariaToPorcelain(plumbing.GetMaria())
+	}
+	if plumbing.GetMcp() != nil {
+		return convertMCPToPorcelain(plumbing.GetMcp())
 	}
 	if plumbing.GetMemcached() != nil {
 		return convertMemcachedToPorcelain(plumbing.GetMemcached())
@@ -22850,6 +24629,96 @@ func (a *accountIteratorImpl) Err() error {
 	return a.err
 }
 
+type accountGroupIteratorImplFetchFunc func() (
+	[]*AccountGroup,
+	bool, error)
+type accountGroupIteratorImpl struct {
+	buffer      []*AccountGroup
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       accountGroupIteratorImplFetchFunc
+}
+
+func newAccountGroupIteratorImpl(f accountGroupIteratorImplFetchFunc) *accountGroupIteratorImpl {
+	return &accountGroupIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *accountGroupIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *accountGroupIteratorImpl) Value() *AccountGroup {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *accountGroupIteratorImpl) Err() error {
+	return a.err
+}
+
+type accountGroupHistoryIteratorImplFetchFunc func() (
+	[]*AccountGroupHistory,
+	bool, error)
+type accountGroupHistoryIteratorImpl struct {
+	buffer      []*AccountGroupHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       accountGroupHistoryIteratorImplFetchFunc
+}
+
+func newAccountGroupHistoryIteratorImpl(f accountGroupHistoryIteratorImplFetchFunc) *accountGroupHistoryIteratorImpl {
+	return &accountGroupHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (a *accountGroupHistoryIteratorImpl) Next() bool {
+	if a.index < len(a.buffer)-1 {
+		a.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !a.hasNextPage {
+		return false
+	}
+
+	a.index = 0
+	a.buffer, a.hasNextPage, a.err = a.fetch()
+	return len(a.buffer) > 0
+}
+
+func (a *accountGroupHistoryIteratorImpl) Value() *AccountGroupHistory {
+	if a.index >= len(a.buffer) {
+		return nil
+	}
+	return a.buffer[a.index]
+}
+
+func (a *accountGroupHistoryIteratorImpl) Err() error {
+	return a.err
+}
+
 type accountHistoryIteratorImplFetchFunc func() (
 	[]*AccountHistory,
 	bool, error)
@@ -23253,6 +25122,186 @@ func (r *roleIteratorImpl) Value() *Role {
 
 func (r *roleIteratorImpl) Err() error {
 	return r.err
+}
+
+type groupIteratorImplFetchFunc func() (
+	[]*Group,
+	bool, error)
+type groupIteratorImpl struct {
+	buffer      []*Group
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       groupIteratorImplFetchFunc
+}
+
+func newGroupIteratorImpl(f groupIteratorImplFetchFunc) *groupIteratorImpl {
+	return &groupIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *groupIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *groupIteratorImpl) Value() *Group {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *groupIteratorImpl) Err() error {
+	return g.err
+}
+
+type groupHistoryIteratorImplFetchFunc func() (
+	[]*GroupHistory,
+	bool, error)
+type groupHistoryIteratorImpl struct {
+	buffer      []*GroupHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       groupHistoryIteratorImplFetchFunc
+}
+
+func newGroupHistoryIteratorImpl(f groupHistoryIteratorImplFetchFunc) *groupHistoryIteratorImpl {
+	return &groupHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *groupHistoryIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *groupHistoryIteratorImpl) Value() *GroupHistory {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *groupHistoryIteratorImpl) Err() error {
+	return g.err
+}
+
+type groupRoleIteratorImplFetchFunc func() (
+	[]*GroupRole,
+	bool, error)
+type groupRoleIteratorImpl struct {
+	buffer      []*GroupRole
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       groupRoleIteratorImplFetchFunc
+}
+
+func newGroupRoleIteratorImpl(f groupRoleIteratorImplFetchFunc) *groupRoleIteratorImpl {
+	return &groupRoleIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *groupRoleIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *groupRoleIteratorImpl) Value() *GroupRole {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *groupRoleIteratorImpl) Err() error {
+	return g.err
+}
+
+type groupRoleHistoryIteratorImplFetchFunc func() (
+	[]*GroupRoleHistory,
+	bool, error)
+type groupRoleHistoryIteratorImpl struct {
+	buffer      []*GroupRoleHistory
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       groupRoleHistoryIteratorImplFetchFunc
+}
+
+func newGroupRoleHistoryIteratorImpl(f groupRoleHistoryIteratorImplFetchFunc) *groupRoleHistoryIteratorImpl {
+	return &groupRoleHistoryIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *groupRoleHistoryIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *groupRoleHistoryIteratorImpl) Value() *GroupRoleHistory {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *groupRoleHistoryIteratorImpl) Err() error {
+	return g.err
 }
 
 type healthcheckIteratorImplFetchFunc func() (

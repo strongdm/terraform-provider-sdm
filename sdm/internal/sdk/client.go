@@ -42,7 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/15.14.0"
+	defaultUserAgent = "strongdm-sdk-go/15.15.0"
 )
 
 var _ = metadata.Pairs
@@ -76,6 +76,8 @@ type Client struct {
 	accountResources                 *AccountResources
 	accountResourcesHistory          *AccountResourcesHistory
 	accounts                         *Accounts
+	accountsGroups                   *AccountsGroups
+	accountsGroupsHistory            *AccountsGroupsHistory
 	accountsHistory                  *AccountsHistory
 	activities                       *Activities
 	approvalWorkflowApprovers        *ApprovalWorkflowApprovers
@@ -86,6 +88,10 @@ type Client struct {
 	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
 	controlPanel                     *ControlPanel
 	roles                            *Roles
+	groups                           *Groups
+	groupsHistory                    *GroupsHistory
+	groupsRoles                      *GroupsRoles
+	groupsRolesHistory               *GroupsRolesHistory
 	healthChecks                     *HealthChecks
 	identityAliases                  *IdentityAliases
 	identityAliasesHistory           *IdentityAliasesHistory
@@ -209,6 +215,14 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		client: plumbing.NewAccountsClient(client.grpcConn),
 		parent: client,
 	}
+	client.accountsGroups = &AccountsGroups{
+		client: plumbing.NewAccountsGroupsClient(client.grpcConn),
+		parent: client,
+	}
+	client.accountsGroupsHistory = &AccountsGroupsHistory{
+		client: plumbing.NewAccountsGroupsHistoryClient(client.grpcConn),
+		parent: client,
+	}
 	client.accountsHistory = &AccountsHistory{
 		client: plumbing.NewAccountsHistoryClient(client.grpcConn),
 		parent: client,
@@ -247,6 +261,22 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 	client.roles = &Roles{
 		client: plumbing.NewRolesClient(client.grpcConn),
+		parent: client,
+	}
+	client.groups = &Groups{
+		client: plumbing.NewGroupsClient(client.grpcConn),
+		parent: client,
+	}
+	client.groupsHistory = &GroupsHistory{
+		client: plumbing.NewGroupsHistoryClient(client.grpcConn),
+		parent: client,
+	}
+	client.groupsRoles = &GroupsRoles{
+		client: plumbing.NewGroupsRolesClient(client.grpcConn),
+		parent: client,
+	}
+	client.groupsRolesHistory = &GroupsRolesHistory{
+		client: plumbing.NewGroupsRolesHistoryClient(client.grpcConn),
 		parent: client,
 	}
 	client.healthChecks = &HealthChecks{
@@ -531,6 +561,16 @@ func (c *Client) Accounts() *Accounts {
 	return c.accounts
 }
 
+// An AccountGroup links an account and a group.
+func (c *Client) AccountsGroups() *AccountsGroups {
+	return c.accountsGroups
+}
+
+// AccountsGroupsHistory records all changes to the state of an AccountGroup.
+func (c *Client) AccountsGroupsHistory() *AccountsGroupsHistory {
+	return c.accountsGroupsHistory
+}
+
 // AccountsHistory records all changes to the state of an Account.
 func (c *Client) AccountsHistory() *AccountsHistory {
 	return c.accountsHistory
@@ -584,6 +624,26 @@ func (c *Client) ControlPanel() *ControlPanel {
 // AccountAttachments.
 func (c *Client) Roles() *Roles {
 	return c.roles
+}
+
+// A Group is a set of principals.
+func (c *Client) Groups() *Groups {
+	return c.groups
+}
+
+// GroupsHistory records all changes to the state of a Group.
+func (c *Client) GroupsHistory() *GroupsHistory {
+	return c.groupsHistory
+}
+
+// A GroupRole is an assignment of a Group to a Role.
+func (c *Client) GroupsRoles() *GroupsRoles {
+	return c.groupsRoles
+}
+
+// GroupsRolesHistory records all changes to the state of a GroupRole.
+func (c *Client) GroupsRolesHistory() *GroupsRolesHistory {
+	return c.groupsRolesHistory
 }
 
 // HealthChecks lists the last healthcheck between each node and resource.
@@ -823,6 +883,10 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewAccountsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.accountsGroups = &AccountsGroups{
+		client: plumbing.NewAccountsGroupsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.approvalWorkflowApprovers = &ApprovalWorkflowApprovers{
 		client: plumbing.NewApprovalWorkflowApproversClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -837,6 +901,14 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 	}
 	snapshotClient.client.roles = &Roles{
 		client: plumbing.NewRolesClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.groups = &Groups{
+		client: plumbing.NewGroupsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.groupsRoles = &GroupsRoles{
+		client: plumbing.NewGroupsRolesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
 	snapshotClient.client.identityAliases = &IdentityAliases{
@@ -929,6 +1001,11 @@ func (c *SnapshotClient) Accounts() SnapshotAccounts {
 	return c.client.accounts
 }
 
+// An AccountGroup links an account and a group.
+func (c *SnapshotClient) AccountsGroups() SnapshotAccountsGroups {
+	return c.client.accountsGroups
+}
+
 // ApprovalWorkflowApprovers link approval workflow approvers to an ApprovalWorkflowStep
 func (c *SnapshotClient) ApprovalWorkflowApprovers() SnapshotApprovalWorkflowApprovers {
 	return c.client.approvalWorkflowApprovers
@@ -950,6 +1027,16 @@ func (c *SnapshotClient) ApprovalWorkflows() SnapshotApprovalWorkflows {
 // AccountAttachments.
 func (c *SnapshotClient) Roles() SnapshotRoles {
 	return c.client.roles
+}
+
+// A Group is a set of principals.
+func (c *SnapshotClient) Groups() SnapshotGroups {
+	return c.client.groups
+}
+
+// A GroupRole is an assignment of a Group to a Role.
+func (c *SnapshotClient) GroupsRoles() SnapshotGroupsRoles {
+	return c.client.groupsRoles
 }
 
 // IdentityAliases assign an alias to an account within an IdentitySet.

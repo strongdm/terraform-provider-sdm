@@ -936,6 +936,17 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "mcp",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-mcp-name"`},
+				{"password", `"password"`},
+				{"port", `443`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "memcached",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
@@ -2500,6 +2511,19 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"use_azure_single_server_usernames", `true`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "mcp",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-secret-mcp-name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"username"`},
 			},
 		},
 
