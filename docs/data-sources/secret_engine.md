@@ -10,7 +10,7 @@ sidebar_current: “docs-sdm-datasource-secret-engine"
 A SecretEngine is managing secrets in SecretStores.
 ## Argument Reference
 The following arguments are supported by a SecretEngines data source:
-* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/cli/filters/) for more information.
+* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://docs.strongdm.com/references/cli/filters/) for more information.
 * `binddn` - (Optional) Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com
 * `bindpass` - (Optional) Password to use along with binddn when performing user search.
 * `certificate` - (Optional) CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.

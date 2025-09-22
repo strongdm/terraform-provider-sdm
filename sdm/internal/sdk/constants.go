@@ -361,6 +361,12 @@ const (
 
 // Permissions, all permissions that may be granted to an account.
 const (
+	PermissionGroupRead                    = "group:read"
+	PermissionGroupWrite                   = "group:write"
+	PermissionGroupRoleRead                = "grouprole:read"
+	PermissionGroupRoleWrite               = "grouprole:write"
+	PermissionAccountGroupRead             = "accountgroup:read"
+	PermissionAccountGroupWrite            = "accountgroup:write"
 	PermissionRelayList                    = "relay:list"
 	PermissionRelayCreate                  = "relay:create"
 	PermissionDatasourceList               = "datasource:list"
@@ -424,6 +430,7 @@ const (
 	PermissionOrgAuditApprovalFlows        = "audit:approvalflows"
 	PermissionOrgAuditAccessRequests       = "audit:accessrequests"
 	PermissionOrgAuditPolicies             = "audit:policies"
+	PermissionOrgAuditGroups               = "audit:groups"
 	PermissionWorkflowList                 = "workflow:list"
 	PermissionWorkflowEdit                 = "workflow:edit"
 	PermissionAccessRequestList            = "accessrequest:list"
@@ -981,6 +988,12 @@ func OrgKindIsValid(v string) bool {
 }
 
 var AllPermission = []string{
+	PermissionGroupRead,
+	PermissionGroupWrite,
+	PermissionGroupRoleRead,
+	PermissionGroupRoleWrite,
+	PermissionAccountGroupRead,
+	PermissionAccountGroupWrite,
 	PermissionRelayList,
 	PermissionRelayCreate,
 	PermissionDatasourceList,
@@ -1044,6 +1057,7 @@ var AllPermission = []string{
 	PermissionOrgAuditApprovalFlows,
 	PermissionOrgAuditAccessRequests,
 	PermissionOrgAuditPolicies,
+	PermissionOrgAuditGroups,
 	PermissionWorkflowList,
 	PermissionWorkflowEdit,
 	PermissionAccessRequestList,

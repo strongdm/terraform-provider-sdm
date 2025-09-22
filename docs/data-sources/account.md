@@ -35,7 +35,7 @@ data "sdm_account" "admin-token-queries" {
 ```
 ## Argument Reference
 The following arguments are supported by a Accounts data source:
-* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://www.strongdm.com/docs/cli/filters/) for more information.
+* `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://docs.strongdm.com/references/cli/filters/) for more information.
 * `account_type` - (Optional) Corresponds to the type of token, e.g. api or admin-token.
 * `email` - (Optional) The User's email address. Must be unique.
 * `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
