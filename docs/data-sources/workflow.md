@@ -13,9 +13,19 @@ Workflows are the collection of rules that define the resources to which access 
 ## Example Usage
 
 ```hcl
-data "sdm_workflow" "workflow_query" {
+# Query workflow by name
+data "sdm_workflow" "workflow_by_name" {
     name = "workflow example"
-    approval_mode = "automatic"
+}
+
+# Query workflow by ID
+data "sdm_workflow" "workflow_by_id" {
+    id = "w-1234567890abcdef"
+}
+
+# Query workflow by approval flow ID
+data "sdm_workflow" "workflow_by_approval_flow" {
+    approval_flow_id = "aw-1234567890abcdef"
 }
 ```
 ## Argument Reference

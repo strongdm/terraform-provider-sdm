@@ -74,6 +74,7 @@ func TestAccSDMApprovalWorkflow_CreateNested(t *testing.T) {
 	approvalWorkflowName := randomWithPrefix("af-create")
 	accountName := randomWithPrefix("af-create-account")
 	roleName := randomWithPrefix("af-create-role")
+	groupName := randomWithPrefix("af-create-group")
 	approvalMode := "manual"
 	step1Quantifier := "all"
 	step1SkipAfter := "0s"
@@ -85,7 +86,7 @@ func TestAccSDMApprovalWorkflow_CreateNested(t *testing.T) {
 		CheckDestroy: testCheckDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSDMApprovalWorkflowNestedConfig(resourceName, approvalWorkflowName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName),
+				Config: testAccSDMApprovalWorkflowNestedConfig(resourceName, approvalWorkflowName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName, groupName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_approval_workflow."+resourceName, "name", approvalWorkflowName),
 					doubleCheckApprovalWorkflow(resourceName, approvalWorkflowName),
@@ -101,7 +102,7 @@ func TestAccSDMApprovalWorkflow_CreateNested(t *testing.T) {
 						}
 						return nil
 					},
-					checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName),
+					checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName, groupName),
 				),
 			},
 			{
@@ -156,6 +157,7 @@ func TestAccSDMApprovalWorkflow_UpdateNested(t *testing.T) {
 	approvalWorkflowName := randomWithPrefix("af-update")
 	accountName := randomWithPrefix("af-update-account")
 	roleName := randomWithPrefix("af-update-role")
+	groupName := randomWithPrefix("af-update-group")
 	approvalMode := "manual"
 	step1Quantifier := "all"
 	step1SkipAfter := "0s"
@@ -164,6 +166,7 @@ func TestAccSDMApprovalWorkflow_UpdateNested(t *testing.T) {
 
 	accountNameUpdated := randomWithPrefix("af-update-account")
 	roleNameUpdated := randomWithPrefix("af-update-role")
+	groupNameUpdated := randomWithPrefix("af-update-group")
 
 	resource.ParallelTest(t, resource.TestCase{
 		Providers:    testAccProviders,
@@ -171,7 +174,7 @@ func TestAccSDMApprovalWorkflow_UpdateNested(t *testing.T) {
 		Steps: []resource.TestStep{
 
 			{
-				Config: testAccSDMApprovalWorkflowNestedConfig(resourceName, approvalWorkflowName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName),
+				Config: testAccSDMApprovalWorkflowNestedConfig(resourceName, approvalWorkflowName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName, groupName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_approval_workflow."+resourceName, "name", approvalWorkflowName),
 					doubleCheckApprovalWorkflow(resourceName, approvalWorkflowName),
@@ -187,7 +190,7 @@ func TestAccSDMApprovalWorkflow_UpdateNested(t *testing.T) {
 						}
 						return nil
 					},
-					checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName),
+					checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAfter, accountName, step2Quantifier, step2SkipAfter, roleName, groupName),
 				),
 			},
 			{
@@ -196,11 +199,11 @@ func TestAccSDMApprovalWorkflow_UpdateNested(t *testing.T) {
 				ImportStateVerify: true,
 			},
 			{
-				Config: testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, approvalWorkflowName, approvalMode, step2Quantifier, step2SkipAfter, accountNameUpdated, step1Quantifier, step1SkipAfter, roleNameUpdated),
+				Config: testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, approvalWorkflowName, approvalMode, step2Quantifier, step2SkipAfter, accountNameUpdated, step1Quantifier, step1SkipAfter, roleNameUpdated, groupNameUpdated),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_approval_workflow."+resourceName, "name", approvalWorkflowName),
 					doubleCheckApprovalWorkflow(resourceName, approvalWorkflowName),
-					checkApprovalStepsUpdate(resourceName, approvalMode, step2Quantifier, step2SkipAfter, accountNameUpdated, step1Quantifier, step1SkipAfter, roleNameUpdated),
+					checkApprovalStepsUpdate(resourceName, approvalMode, step2Quantifier, step2SkipAfter, accountNameUpdated, step1Quantifier, step1SkipAfter, roleNameUpdated, groupNameUpdated),
 				),
 			},
 			{
@@ -256,6 +259,10 @@ func createApprovalWorkflowsNestedWithPrefix(prefix string, count int) ([]*sdm.A
 	if err != nil {
 		return nil, fmt.Errorf("failed to create roles for approvers: %w", err)
 	}
+	groups, err := createGroupsWithPrefix(prefix, 1)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create groups for approvers: %w", err)
+	}
 	approvalWorkflows := []*sdm.ApprovalWorkflow{}
 	for i := 0; i < count; i++ {
 		createResp, err := client.ApprovalWorkflows().Create(ctx, &sdm.ApprovalWorkflow{
@@ -268,6 +275,7 @@ func createApprovalWorkflowsNestedWithPrefix(prefix string, count int) ([]*sdm.A
 					Approvers: []*sdm.ApprovalFlowApprover{
 						{AccountID: users[0].GetID()},
 						{RoleID: roles[0].ID},
+						{GroupID: groups[0].ID},
 					},
 				},
 				{
@@ -289,7 +297,7 @@ func createApprovalWorkflowsNestedWithPrefix(prefix string, count int) ([]*sdm.A
 	return approvalWorkflows, nil
 }
 
-func testAccSDMApprovalWorkflowNestedConfig(resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName string) string {
+func testAccSDMApprovalWorkflowNestedConfig(resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName, groupName string) string {
 	return fmt.Sprintf(`
 	resource "sdm_account" "%[6]s" {
 		user {
@@ -301,6 +309,10 @@ func testAccSDMApprovalWorkflowNestedConfig(resourceName, workflowName, approval
 
 	resource "sdm_role" "%[9]s" {
 		name = "role-%[9]s"
+	}
+
+	resource "sdm_group" "%[10]s" {
+		name = "group-%[10]s"
 	}
 
 	resource "sdm_approval_workflow" "%[1]s" {
@@ -320,16 +332,19 @@ func testAccSDMApprovalWorkflowNestedConfig(resourceName, workflowName, approval
 				role_id = sdm_role.%[9]s.id
 			}
 			approvers {
+				group_id = sdm_group.%[10]s.id
+			}
+			approvers {
 				reference = "manager-of-requester"
 			}
 			approvers {
 				reference = "manager-of-manager-of-requester"
 			}
 		}
-	}`, resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName)
+	}`, resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName, groupName)
 }
 
-func testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName string) string {
+func testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName, groupName string) string {
 	return fmt.Sprintf(`
 	resource "sdm_account" "%[6]s" {
 		user {
@@ -341,6 +356,10 @@ func testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, workflowName, ap
 
 	resource "sdm_role" "%[9]s" {
 		name = "role-%[9]s"
+	}
+
+	resource "sdm_group" "%[10]s" {
+		name = "group-%[10]s"
 	}
 
 	resource "sdm_approval_workflow" "%[1]s" {
@@ -358,6 +377,9 @@ func testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, workflowName, ap
 			approvers {
 				reference = "manager-of-manager-of-requester"
 			}
+			approvers {
+				group_id = sdm_group.%[10]s.id
+			}
 		}
 		approval_step {
 			quantifier = "%[7]s"
@@ -366,7 +388,7 @@ func testAccSDMApprovalWorkflowUpdateNestedConfig(resourceName, workflowName, ap
 				role_id = sdm_role.%[9]s.id
 			}
 		}
-	}`, resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName)
+	}`, resourceName, workflowName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName, groupName)
 }
 
 func doubleCheckApprovalWorkflow(resourceName, approvalWorkflowName string) func(s *terraform.State) error {
@@ -390,7 +412,7 @@ func doubleCheckApprovalWorkflow(resourceName, approvalWorkflowName string) func
 	}
 }
 
-func checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName string) func(s *terraform.State) error {
+func checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName, step2GroupName string) func(s *terraform.State) error {
 	return func(s *terraform.State) error {
 		id, err := testCreatedID(s, "sdm_approval_workflow", resourceName)
 		if err != nil {
@@ -400,7 +422,11 @@ func checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAf
 		if err != nil {
 			return err
 		}
-		step2ApproverID, err := testCreatedID(s, "sdm_role", step2RoleName)
+		step2ApproverRoleID, err := testCreatedID(s, "sdm_role", step2RoleName)
+		if err != nil {
+			return err
+		}
+		step2ApproverGroupID, err := testCreatedID(s, "sdm_group", step2GroupName)
 		if err != nil {
 			return err
 		}
@@ -449,16 +475,19 @@ func checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAf
 		if step2.SkipAfter != step2SkipAfterDuration {
 			return fmt.Errorf("unexpected skip_after '%v', expected '%v'", step2.SkipAfter, step2SkipAfterDuration)
 		}
-		if len(step2.Approvers) != 3 {
-			return fmt.Errorf("expected 3 approvers, got %v", len(step2.Approvers))
+		if len(step2.Approvers) != 4 {
+			return fmt.Errorf("expected 4 approvers, got %v", len(step2.Approvers))
 		}
-		if step2.Approvers[0].RoleID != step2ApproverID {
-			return fmt.Errorf("unexpected approver id '%v', expected '%v'", step2.Approvers[0].RoleID, step2ApproverID)
+		if step2.Approvers[0].RoleID != step2ApproverRoleID {
+			return fmt.Errorf("unexpected approver id '%v', expected '%v'", step2.Approvers[0].RoleID, step2ApproverRoleID)
 		}
-		if step2.Approvers[1].Reference != sdm.ApproverReferenceManagerOfRequester {
+		if step2.Approvers[1].GroupID != step2ApproverGroupID {
+			return fmt.Errorf("unexpected approver id '%v', expected '%v'", step2.Approvers[1].GroupID, step2ApproverGroupID)
+		}
+		if step2.Approvers[2].Reference != sdm.ApproverReferenceManagerOfRequester {
 			return fmt.Errorf("unexpected approver reference '%v', expected '%v'", step2.Approvers[1].Reference, sdm.ApproverReferenceManagerOfRequester)
 		}
-		if step2.Approvers[2].Reference != sdm.ApproverReferenceManagerOfManagerOfRequester {
+		if step2.Approvers[3].Reference != sdm.ApproverReferenceManagerOfManagerOfRequester {
 			return fmt.Errorf("unexpected approver reference '%v', expected '%v'", step2.Approvers[2].Reference, sdm.ApproverReferenceManagerOfManagerOfRequester)
 		}
 
@@ -466,13 +495,17 @@ func checkApprovalSteps(resourceName, approvalMode, step1Quantifier, step1SkipAf
 	}
 }
 
-func checkApprovalStepsUpdate(resourceName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName string) func(s *terraform.State) error {
+func checkApprovalStepsUpdate(resourceName, approvalMode, step1Quantifier, step1SkipAfter, step1AccountName, step2Quantifier, step2SkipAfter, step2RoleName, step1GroupName string) func(s *terraform.State) error {
 	return func(s *terraform.State) error {
 		id, err := testCreatedID(s, "sdm_approval_workflow", resourceName)
 		if err != nil {
 			return err
 		}
-		step1ApproverID, err := testCreatedID(s, "sdm_account", step1AccountName)
+		step1ApproverAccountID, err := testCreatedID(s, "sdm_account", step1AccountName)
+		if err != nil {
+			return err
+		}
+		step1ApproverGroupID, err := testCreatedID(s, "sdm_group", step1GroupName)
 		if err != nil {
 			return err
 		}
@@ -506,17 +539,20 @@ func checkApprovalStepsUpdate(resourceName, approvalMode, step1Quantifier, step1
 		if step1.SkipAfter != step1SkipAfterDuration {
 			return fmt.Errorf("unexpected skip_after '%v', expected '%v'", step1.SkipAfter, step1SkipAfterDuration)
 		}
-		if len(step1.Approvers) != 3 {
-			return fmt.Errorf("expected 3 approver, got %v", len(step1.Approvers))
+		if len(step1.Approvers) != 4 {
+			return fmt.Errorf("expected 4 approver, got %v", len(step1.Approvers))
 		}
-		if step1.Approvers[0].AccountID != step1ApproverID {
-			return fmt.Errorf("unexpected approver id '%v', expected '%v'", step1.Approvers[0].AccountID, step1ApproverID)
+		if step1.Approvers[0].AccountID != step1ApproverAccountID {
+			return fmt.Errorf("unexpected approver id '%v', expected '%v'", step1.Approvers[0].AccountID, step1ApproverAccountID)
 		}
 		if step1.Approvers[1].Reference != sdm.ApproverReferenceManagerOfRequester {
 			return fmt.Errorf("unexpected approver reference '%v', expected '%v'", step1.Approvers[1].Reference, sdm.ApproverReferenceManagerOfRequester)
 		}
 		if step1.Approvers[2].Reference != sdm.ApproverReferenceManagerOfManagerOfRequester {
 			return fmt.Errorf("unexpected approver reference '%v', expected '%v'", step1.Approvers[2].Reference, sdm.ApproverReferenceManagerOfManagerOfRequester)
+		}
+		if step1.Approvers[3].GroupID != step1ApproverGroupID {
+			return fmt.Errorf("unexpected approver id '%v', expected '%v'", step1.Approvers[0].GroupID, step1ApproverGroupID)
 		}
 
 		step2 := approvalSteps[1]

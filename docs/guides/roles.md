@@ -8,6 +8,12 @@ page_title: "Manage Roles"
 
 A role consists of a collection of permissions that leverages [static or dynamic access rules](https://www.strongdm.com/docs/admin-ui-guide/access/rules/) to manage access to your StrongDM environment. When added to the role, members gain access to the specific resources defined by a particular role.
 
+Roles can be assigned to users in two ways:
+1. **Direct Assignment**: Assign roles directly to individual accounts using [sdm_account_attachment](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account_attachment)
+2. **Group-Based Assignment**: Assign roles to [groups](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/guides/groups) using [sdm_group_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/group_role), and all group members inherit the role's permissions
+
+Group-based assignment is recommended for larger organizations as it simplifies role management and makes it easier to maintain access permissions at scale.
+
 ## Create a Role
 
 Use the following example to [create a role](https://www.strongdm.com/docs/admin-ui-guide/access/roles/) in StrongDM with the Terraform provider. See the [sdm_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/role) page for additional information about arguments and attributes.
@@ -59,6 +65,73 @@ resource "sdm_role" "engineering" {
   ])
 }
 ```
+
+## Assign Roles to Groups
+
+Instead of assigning roles to individual users, you can assign roles to groups. All members of the group automatically inherit the role's permissions. This approach scales better for large organizations.
+
+### Example Usage
+
+```hcl
+# Create a group for developers
+resource "sdm_group" "developers" {
+  name = "Developers"
+}
+
+# Create users
+resource "sdm_account" "alice_developer" {
+  user {
+    first_name = "Alice"
+    last_name  = "Developer"
+    email      = "alice@company.com"
+  }
+}
+
+resource "sdm_account" "bob_developer" {
+  user {
+    first_name = "Bob"
+    last_name  = "Developer"
+    email      = "bob@company.com"
+  }
+}
+
+# Add users to the developers group
+resource "sdm_account_group" "alice_to_developers" {
+  account_id = sdm_account.alice_developer.id
+  group_id   = sdm_group.developers.id
+}
+
+resource "sdm_account_group" "bob_to_developers" {
+  account_id = sdm_account.bob_developer.id
+  group_id   = sdm_group.developers.id
+}
+
+# Create a role for development resources
+resource "sdm_role" "dev_access" {
+  name = "Development Access"
+  access_rules = jsonencode([
+    {
+      "tags": {
+        "env": "development"
+      }
+    }
+  ])
+}
+
+# Assign the role to the entire group
+resource "sdm_group_role" "developers_dev_access" {
+  group_id = sdm_group.developers.id
+  role_id  = sdm_role.dev_access.id
+}
+```
+
+This approach provides several advantages:
+- **Simplified Management**: Add new developers to the group and they automatically get appropriate access
+- **Consistent Permissions**: All group members have the same access level
+- **Easy Updates**: Modify the group's role assignments to change access for all members
+- **Audit Trail**: Clear visibility into which groups have which roles
+
+For more information on group management, see the [Groups Guide](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/guides/groups).
 
 If you prefer, you can also write the access rules using raw JSON.
 

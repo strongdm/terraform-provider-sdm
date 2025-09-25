@@ -22,6 +22,9 @@ resource "sdm_approval_workflow" "manual_approval_workflow" {
             account_id = "a-1234abc"
         }
         approvers {
+            group_id = "group-1234abc"
+        }
+        approvers {
             reference = "manager-of-requester"
         }
     }
@@ -33,6 +36,9 @@ resource "sdm_approval_workflow" "manual_approval_workflow" {
         }
         approvers {
             account_id = "a-5678def"
+        }
+        approvers {
+            group_id = "group-5678def"
         }
         approvers {
             reference = "manager-of-manager-of-requester"

@@ -13,8 +13,13 @@ WorkflowRole links a role to a workflow. The linked roles indicate which roles a
 
 ```hcl
 resource "sdm_workflow_role" "workflow_role_example" {
-    workflow_id = "aw-343865"
-    role_id = "r-243561"
+    workflow_id = sdm_workflow.manual_approval_workflow.id
+    role_id = sdm_role.developers.id
+}
+
+resource "sdm_workflow_role" "workflow_role_with_ids" {
+    workflow_id = "w-1234567890abcdef"
+    role_id = "r-1234567890abcdef"
 }
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.

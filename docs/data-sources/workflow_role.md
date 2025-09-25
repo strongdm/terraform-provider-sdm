@@ -12,9 +12,15 @@ WorkflowRole links a role to a workflow. The linked roles indicate which roles a
 ## Example Usage
 
 ```hcl
+# Query workflow role by workflow and role IDs
 data "sdm_workflow_role" "workflow_role_query" {
-    workflow_id = "aw-7935485"
-    role_id = "r-9862923"
+    workflow_id = "w-1234567890abcdef"
+    role_id = "r-1234567890abcdef"
+}
+
+# Query workflow role by specific ID
+data "sdm_workflow_role" "workflow_role_by_id" {
+    id = "wr-1234567890abcdef"
 }
 ```
 ## Argument Reference

@@ -55,9 +55,14 @@ output "dev_ci_pipeline_token" {
 
 ## Grant Access to StrongDM Resources
 
-StrongDM uses role-based privileges to control access to infrastructure resources. You can grant users and service accounts access by [assigning each to a role](https://www.strongdm.com/docs/admin-ui-guide/access/roles/). After the role assignment, each user entity can access the StrongDM resources attached to the specific role.
+StrongDM uses role-based privileges to control access to infrastructure resources. You can grant users and service accounts access in two ways:
 
-For argument and attribute references, see [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account), [sdm_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/role), and [sdm_account_attachment](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account_attachment).
+1. **Direct Role Assignment**: [Assign users directly to roles](https://www.strongdm.com/docs/admin-ui-guide/access/roles/) using account attachments
+2. **Group-Based Assignment**: Add users to [groups](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/guides/groups), then assign roles to the entire group
+
+Group-based assignment is recommended for larger organizations as it simplifies access management and makes it easier to maintain permissions at scale.
+
+For argument and attribute references, see [sdm_account](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account), [sdm_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/role), [sdm_account_attachment](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account_attachment), [sdm_group](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/group), [sdm_account_group](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/account_group), and [sdm_group_role](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/resources/group_role).
 
 ### Example Usage
 
@@ -90,3 +95,67 @@ resource "sdm_account_attachment" "developers_jane_doe" {
   role_id     = sdm_role.developers.id
 }
 ```
+
+## Group-Based Access Management
+
+For larger organizations, group-based access management provides a more scalable approach. Instead of assigning users to roles individually, you can organize users into groups and assign roles to the entire group.
+
+### Example Usage
+
+```hcl
+# Create users
+resource "sdm_account" "alice_smith" {
+  user {
+    first_name = "Alice"
+    last_name  = "Smith"
+    email      = "alice.smith@company.com"
+  }
+}
+
+resource "sdm_account" "bob_jones" {
+  user {
+    first_name = "Bob"
+    last_name  = "Jones"
+    email      = "bob.jones@company.com"
+  }
+}
+
+# Create a group for developers
+resource "sdm_group" "developers" {
+  name = "Developers"
+}
+
+# Add users to the group
+resource "sdm_account_group" "alice_developers" {
+  account_id = sdm_account.alice_smith.id
+  group_id   = sdm_group.developers.id
+}
+
+resource "sdm_account_group" "bob_developers" {
+  account_id = sdm_account.bob_jones.id
+  group_id   = sdm_group.developers.id
+}
+
+# Create role for development resources
+resource "sdm_role" "dev_resources" {
+  name = "Development Resources"
+  access_rules = jsonencode([
+    {
+      "tags": { "env": "development" }
+    }
+  ])
+}
+
+# Assign the role to the entire group (all group members inherit this access)
+resource "sdm_group_role" "developers_access" {
+  group_id = sdm_group.developers.id
+  role_id  = sdm_role.dev_resources.id
+}
+```
+
+This approach makes it easy to:
+- Add new developers to the group and they automatically get the appropriate access
+- Change permissions for all developers by modifying the group's role assignments
+- Remove a developer's access by removing them from the group
+
+For a comprehensive guide on group management, see the [Groups Guide](https://registry.terraform.io/providers/strongdm/sdm/latest/docs/guides/groups).

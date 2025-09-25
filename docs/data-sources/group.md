@@ -8,6 +8,23 @@ sidebar_current: “docs-sdm-datasource-group"
 # Data Source: sdm_group
 
 A Group is a named set of principals.
+## Example Usage
+
+```hcl
+data "sdm_group" "security_team" {
+  name = "Security Team"
+}
+
+data "sdm_group" "administrators" {
+  id = "group-1234567890abcdef"
+}
+
+data "sdm_group" "admin_teams" {
+  tags = {
+    admin = "true"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported by a Groups data source:
 * `description` - (Optional) Description of the Group.

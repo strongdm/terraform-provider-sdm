@@ -11,6 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
 func init() {
@@ -185,4 +186,24 @@ func testAccSDMGroupTagsConfig(resourceName string, groupName string, tagKey str
 			%s = "%s"
 		}
 	}`, resourceName, groupName, tagKey, tagValue)
+}
+
+func createGroupsWithPrefix(prefix string, count int) ([]*sdm.Group, error) {
+	client, err := preTestClient()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create test client: %w", err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	groups := []*sdm.Group{}
+	for i := 0; i < count; i++ {
+		createResp, err := client.Groups().Create(ctx, &sdm.Group{
+			Name: randomWithPrefix(prefix),
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create role: %w", err)
+		}
+		groups = append(groups, createResp.Group)
+	}
+	return groups, nil
 }

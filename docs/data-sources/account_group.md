@@ -8,6 +8,21 @@ sidebar_current: “docs-sdm-datasource-account-group"
 # Data Source: sdm_account_group
 
 An AccountGroup is a link between an Account and a Group.
+## Example Usage
+
+```hcl
+data "sdm_account_group" "security_lead_groups" {
+  account_id = sdm_account.security_lead.id
+}
+
+data "sdm_account_group" "specific_relationship" {
+  id = "accountgroup-1234567890abcdef"
+}
+
+data "sdm_account_group" "users_in_group" {
+  group_id = sdm_group.devops_group.id
+}
+```
 ## Argument Reference
 The following arguments are supported by a AccountsGroups data source:
 * `account_id` - (Optional) Unique identifier of the Account.
