@@ -937,8 +937,6 @@ type AccountUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// ActiveDirectoryEngine is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type ActiveDirectoryEngine struct {
 	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
 	AfterReadTtl time.Duration `json:"afterReadTtl"`
@@ -3638,8 +3636,6 @@ type IdentitySetUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
-// KeyValueEngine is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type KeyValueEngine struct {
 	// Unique identifier of the Secret Engine.
 	ID string `json:"id"`
@@ -5271,6 +5267,33 @@ type Postgres struct {
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+// PostgresEngine is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type PostgresEngine struct {
+	// Hostname is the hostname or IP address of the Postgres server.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Secret Engine.
+	ID string `json:"id"`
+	// An interval of public/private key rotation for secret engine in days
+	KeyRotationIntervalDays int32 `json:"keyRotationIntervalDays"`
+	// Unique human-readable name of the Secret Engine.
+	Name string `json:"name"`
+	// Password is the password to connect to the Postgres server.
+	Password string `json:"password"`
+	// Port is the port number of the Postgres server.
+	Port uint32 `json:"port"`
+	// Public key linked with a secret engine
+	PublicKey []byte `json:"publicKey"`
+	// Backing secret store identifier
+	SecretStoreID string `json:"secretStoreId"`
+	// Backing Secret Store root path where managed secrets are going to be stored
+	SecretStoreRootPath string `json:"secretStoreRootPath"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// Username is the username to connect to the Postgres server.
 	Username string `json:"username"`
 }
 
@@ -12578,6 +12601,60 @@ func (m *KeyValueEngine) GetPublicKey() []byte {
 
 // SetPublicKey sets the public key of the KeyValueEngine.
 func (m *KeyValueEngine) SetPublicKey(v []byte) {
+	m.PublicKey = v
+}
+func (*PostgresEngine) isOneOf_SecretEngine() {}
+
+// GetID returns the unique identifier of the PostgresEngine.
+func (m *PostgresEngine) GetID() string { return m.ID }
+
+// GetName returns the name of the PostgresEngine.
+func (m *PostgresEngine) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the PostgresEngine.
+func (m *PostgresEngine) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the PostgresEngine.
+func (m *PostgresEngine) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the PostgresEngine.
+func (m *PostgresEngine) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the PostgresEngine.
+func (m *PostgresEngine) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the PostgresEngine.
+func (m *PostgresEngine) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetSecretStoreRootPath returns the secret store root path of the PostgresEngine.
+func (m *PostgresEngine) GetSecretStoreRootPath() string {
+	return m.SecretStoreRootPath
+}
+
+// SetSecretStoreRootPath sets the secret store root path of the PostgresEngine.
+func (m *PostgresEngine) SetSecretStoreRootPath(v string) {
+	m.SecretStoreRootPath = v
+}
+
+// GetPublicKey returns the public key of the PostgresEngine.
+func (m *PostgresEngine) GetPublicKey() []byte {
+	return m.PublicKey
+}
+
+// SetPublicKey sets the public key of the PostgresEngine.
+func (m *PostgresEngine) SetPublicKey(v []byte) {
 	m.PublicKey = v
 }
 

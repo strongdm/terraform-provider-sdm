@@ -16044,6 +16044,71 @@ func convertRepeatedPostgresToPorcelain(plumbings []*proto.Postgres) (
 	}
 	return items, nil
 }
+func convertPostgresEngineToPorcelain(plumbing *proto.PostgresEngine) (*PostgresEngine, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &PostgresEngine{}
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.Port = plumbing.Port
+	porcelain.PublicKey = plumbing.PublicKey
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SecretStoreRootPath = plumbing.SecretStoreRootPath
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertPostgresEngineToPlumbing(porcelain *PostgresEngine) *proto.PostgresEngine {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.PostgresEngine{}
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedPostgresEngineToPlumbing(
+	porcelains []*PostgresEngine,
+) []*proto.PostgresEngine {
+	var items []*proto.PostgresEngine
+	for _, porcelain := range porcelains {
+		items = append(items, convertPostgresEngineToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedPostgresEngineToPorcelain(plumbings []*proto.PostgresEngine) (
+	[]*PostgresEngine,
+	error,
+) {
+	var items []*PostgresEngine
+	for _, plumbing := range plumbings {
+		if v, err := convertPostgresEngineToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertPrestoToPorcelain(plumbing *proto.Presto) (*Presto, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -20065,6 +20130,8 @@ func convertSecretEngineToPlumbing(porcelain SecretEngine) *proto.SecretEngine {
 		plumbing.SecretEngine = &proto.SecretEngine_ActiveDirectory{ActiveDirectory: convertActiveDirectoryEngineToPlumbing(v)}
 	case *KeyValueEngine:
 		plumbing.SecretEngine = &proto.SecretEngine_KeyValue{KeyValue: convertKeyValueEngineToPlumbing(v)}
+	case *PostgresEngine:
+		plumbing.SecretEngine = &proto.SecretEngine_Postgres{Postgres: convertPostgresEngineToPlumbing(v)}
 	}
 	return plumbing
 }
@@ -20075,6 +20142,9 @@ func convertSecretEngineToPorcelain(plumbing *proto.SecretEngine) (SecretEngine,
 	}
 	if plumbing.GetKeyValue() != nil {
 		return convertKeyValueEngineToPorcelain(plumbing.GetKeyValue())
+	}
+	if plumbing.GetPostgres() != nil {
+		return convertPostgresEngineToPorcelain(plumbing.GetPostgres())
 	}
 	return nil, &UnknownError{Wrapped: fmt.Errorf("unknown polymorphic type, please upgrade your SDK")}
 }

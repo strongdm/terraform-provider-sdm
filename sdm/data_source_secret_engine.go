@@ -45,6 +45,10 @@ func dataSourceSecretEngine() *schema.Resource {
 				Type:     schema.TypeBool,
 				Optional: true,
 			},
+			"hostname": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"id": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -59,6 +63,14 @@ func dataSourceSecretEngine() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"password": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"port": {
+				Type:     schema.TypeInt,
 				Optional: true,
 			},
 			"request_timeout": {
@@ -91,6 +103,10 @@ func dataSourceSecretEngine() *schema.Resource {
 				Optional: true,
 			},
 			"userdn": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"username": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -260,6 +276,71 @@ func dataSourceSecretEngine() *schema.Resource {
 								},
 							},
 						},
+						"postgres_secret_engine": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Hostname is the hostname or IP address of the Postgres server.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Secret Engine.",
+									},
+									"key_rotation_interval_days": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "An interval of public/private key rotation for secret engine in days",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Secret Engine.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Password is the password to connect to the Postgres server.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "Port is the port number of the Postgres server.",
+									},
+									"public_key": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "Public key linked with a secret engine",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Backing secret store identifier",
+									},
+									"secret_store_root_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Backing Secret Store root path where managed secrets are going to be stored",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Username is the username to connect to the Postgres server.",
+									},
+								},
+							},
+						},
 					},
 				},
 			},
@@ -305,6 +386,10 @@ func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []inte
 		filter += "donotvalidatetimestamps:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("hostname"); ok {
+		filter += "hostname:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("id"); ok {
 		filter += "id:? "
 		args = append(args, v)
@@ -325,8 +410,16 @@ func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []inte
 		filter += "name:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("password"); ok {
+		filter += "password:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("policy"); ok {
 		filter += "policy:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("port"); ok {
+		filter += "port:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("public_key"); ok {
@@ -370,6 +463,10 @@ func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []inte
 	}
 	if v, ok := d.GetOkExists("userdn"); ok {
 		filter += "userdn:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("username"); ok {
+		filter += "username:? "
 		args = append(args, v)
 	}
 	return filter, args
@@ -423,6 +520,20 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.PostgresEngine:
+			output[0]["postgres_secret_engine"] = append(output[0]["postgres_secret_engine"], entity{
+				"hostname":                   (v.Hostname),
+				"id":                         (v.ID),
+				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
+				"name":                       (v.Name),
+				"password":                   (v.Password),
+				"port":                       (v.Port),
+				"public_key":                 convertBytesToPorcelain(v.PublicKey),
+				"secret_store_id":            (v.SecretStoreID),
+				"secret_store_root_path":     (v.SecretStoreRootPath),
+				"tags":                       convertTagsToPorcelain(v.Tags),
+				"username":                   (v.Username),
 			})
 		}
 	}
