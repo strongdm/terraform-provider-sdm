@@ -66,6 +66,101 @@ resource "sdm_role" "engineering" {
 }
 ```
 
+## Add Kubernetes Privileges to Roles
+
+For Kubernetes resources (such as Amazon EKS, Google GKE, or native Kubernetes clusters), you can specify fine-grained privileges that control what Kubernetes groups users are assigned when they access the cluster. These groups can then be used with Kubernetes RBAC to control permissions within the cluster.
+
+### Example Usage
+
+```hcl
+# Create role with Kubernetes admin privileges
+resource "sdm_role" "k8s_admin" {
+  name = "k8s-admin"
+  access_rules = jsonencode([
+    {
+      "tags": {
+        "env": "production"
+      },
+      "privileges": {
+        "k8s": {
+          "groups": ["system:masters"]
+        }
+      }
+    }
+  ])
+}
+
+# Create role with custom Kubernetes groups for developers
+resource "sdm_role" "k8s_developers" {
+  name = "k8s-developers"
+  access_rules = jsonencode([
+    # Grant access to EKS dev clusters with custom groups
+    {
+      "type": "amazon_eks",
+      "tags": {
+        "env": "dev"
+      },
+      "privileges": {
+        "k8s": {
+          "groups": ["developers", "viewers"]
+        }
+      }
+    },
+    # Grant access to Kubernetes clusters in us-west with edit permissions
+    {
+      "type": "kubernetes",
+      "tags": {
+        "region": "us-west"
+      },
+      "privileges": {
+        "k8s": {
+          "groups": ["edit"]
+        }
+      }
+    }
+  ])
+}
+
+# Create role combining resource filtering with K8s privileges
+resource "sdm_role" "platform_team" {
+  name = "platform-team"
+  access_rules = jsonencode([
+    # Full admin access to all K8s clusters
+    {
+      "type": "kubernetes",
+      "privileges": {
+        "k8s": {
+          "groups": ["system:masters"]
+        }
+      }
+    },
+    {
+      "type": "amazon_eks",
+      "privileges": {
+        "k8s": {
+          "groups": ["system:masters"]
+        }
+      }
+    },
+    {
+      "type": "google_gke",
+      "privileges": {
+        "k8s": {
+          "groups": ["system:masters"]
+        }
+      }
+    }
+  ])
+}
+```
+
+The `privileges.k8s.groups` field accepts an array of Kubernetes group names. These groups are then available for use in Kubernetes RoleBindings and ClusterRoleBindings to control access within the cluster. Common Kubernetes groups include:
+
+- `system:masters`: Cluster admin privileges
+- `edit`: Read/write access to most resources in a namespace
+- `view`: Read-only access to resources in a namespace
+- Custom groups defined in your Kubernetes RBAC configuration
+
 ## Assign Roles to Groups
 
 Instead of assigning roles to individual users, you can assign roles to groups. All members of the group automatically inherit the role's permissions. This approach scales better for large organizations.

@@ -10,7 +10,7 @@ import (
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
-const userAgent = "terraform-provider-sdm/15.18.0"
+const userAgent = "terraform-provider-sdm/15.19.0"
 
 var resourcesMap = map[string]func() *schema.Resource{}
 

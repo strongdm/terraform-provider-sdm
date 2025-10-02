@@ -40,6 +40,50 @@ resource "sdm_role" "example-role" {
         }
     ])
 }
+
+resource "sdm_role" "k8s-admin" {
+    name = "k8s-admin"
+    access_rules = jsonencode([
+        {
+            "tags": {
+                "env": "production"
+            },
+            "privileges": {
+                "k8s": {
+                    "groups": ["system:masters"]
+                }
+            }
+        }
+    ])
+}
+
+resource "sdm_role" "k8s-developers" {
+    name = "k8s-developers"
+    access_rules = jsonencode([
+        {
+            "type": "amazon_eks",
+            "tags": {
+                "env": "dev"
+            },
+            "privileges": {
+                "k8s": {
+                    "groups": ["developers", "viewers"]
+                }
+            }
+        },
+        {
+            "type": "kubernetes",
+            "tags": {
+                "region": "us-west"
+            },
+            "privileges": {
+                "k8s": {
+                    "groups": ["edit"]
+                }
+            }
+        }
+    ])
+}
 ```
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Argument Reference
