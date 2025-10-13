@@ -41,6 +41,10 @@ func dataSourceSecretEngine() *schema.Resource {
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
+			"database": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"do_not_validate_timestamps": {
 				Type:     schema.TypeBool,
 				Optional: true,
@@ -93,6 +97,10 @@ func dataSourceSecretEngine() *schema.Resource {
 				Type:     schema.TypeMap,
 				Optional: true,
 				Elem:     tagsElemType,
+			},
+			"tls": {
+				Type:     schema.TypeBool,
+				Optional: true,
 			},
 			"upndomain": {
 				Type:     schema.TypeString,
@@ -282,6 +290,16 @@ func dataSourceSecretEngine() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"after_read_ttl": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Database is the database to verify credential against.",
+									},
 									"hostname": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -333,6 +351,16 @@ func dataSourceSecretEngine() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "TLS enables TLS/SSL when connecting to the Postgres server.",
+									},
+									"ttl": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
+									},
 									"username": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -380,6 +408,10 @@ func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []inte
 	}
 	if v, ok := d.GetOkExists("connection_timeout"); ok {
 		filter += "connectiontimeout:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("database"); ok {
+		filter += "database:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("do_not_validate_timestamps"); ok {
@@ -448,6 +480,10 @@ func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []inte
 			filter += "tag:?=? "
 			args = append(args, kk, vv)
 		}
+	}
+	if v, ok := d.GetOkExists("tls"); ok {
+		filter += "tls:? "
+		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("ttl"); ok {
 		filter += "ttl:? "
@@ -523,6 +559,8 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 			})
 		case *sdm.PostgresEngine:
 			output[0]["postgres_secret_engine"] = append(output[0]["postgres_secret_engine"], entity{
+				"after_read_ttl":             convertDurationToPorcelain(v.AfterReadTtl),
+				"database":                   (v.Database),
 				"hostname":                   (v.Hostname),
 				"id":                         (v.ID),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
@@ -533,6 +571,8 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls":                        (v.Tls),
+				"ttl":                        convertDurationToPorcelain(v.Ttl),
 				"username":                   (v.Username),
 			})
 		}

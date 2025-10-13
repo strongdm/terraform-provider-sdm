@@ -943,7 +943,6 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"name", `"all-resources-mcp-name"`},
 				{"password", `"password"`},
 				{"port", `443`},
-				{"username", `"username"`},
 			},
 		},
 		{
@@ -2523,7 +2522,6 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
-				{"username", `"username"`},
 			},
 		},
 

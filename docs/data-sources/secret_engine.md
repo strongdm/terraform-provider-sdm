@@ -15,6 +15,7 @@ The following arguments are supported by a SecretEngines data source:
 * `bindpass` - (Optional) Password to use along with binddn when performing user search.
 * `certificate` - (Optional) CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.
 * `connection_timeout` - (Optional) Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration.
+* `database` - (Optional) Database is the database to verify credential against.
 * `do_not_validate_timestamps` - (Optional) If set to true this will prevent password change timestamp validation in Active Directory when validating credentials
 * `hostname` - (Optional) Hostname is the hostname or IP address of the Postgres server.
 * `id` - (Optional) Unique identifier of the Secret Engine.
@@ -28,6 +29,7 @@ The following arguments are supported by a SecretEngines data source:
 * `secret_store_root_path` - (Optional) Backing Secret Store root path where managed secrets are going to be stored
 * `start_tls` - (Optional) If true, issues a StartTLS command after establishing an unencrypted connection.
 * `tags` - (Optional) Tags is a map of key, value pairs.
+* `tls` - (Optional) TLS enables TLS/SSL when connecting to the Postgres server.
 * `upndomain` - (Optional) The domain (userPrincipalDomain) used to construct a UPN string for authentication.
 * `url` - (Optional) The LDAP server to connect to.
 * `userdn` - (Optional) Base DN under which to perform user search. Example: ou=Users,dc=example,dc=com
@@ -68,6 +70,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_root_path` - Backing Secret Store root path where managed secrets are going to be stored
 		* `tags` - Tags is a map of key, value pairs.
 	* postgres_secret_engine:
+		* `after_read_ttl` - The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
+		* `database` - Database is the database to verify credential against.
 		* `hostname` - Hostname is the hostname or IP address of the Postgres server.
 		* `id` - Unique identifier of the Secret Engine.
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
@@ -78,4 +82,6 @@ In addition to provided arguments above, the following attributes are returned b
 		* `secret_store_id` - Backing secret store identifier
 		* `secret_store_root_path` - Backing Secret Store root path where managed secrets are going to be stored
 		* `tags` - Tags is a map of key, value pairs.
+		* `tls` - TLS enables TLS/SSL when connecting to the Postgres server.
+		* `ttl` - The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
 		* `username` - Username is the username to connect to the Postgres server.

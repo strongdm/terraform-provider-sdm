@@ -11908,7 +11908,6 @@ func convertMCPToPorcelain(plumbing *proto.MCP) (*MCP, error) {
 	} else {
 		porcelain.Tags = v
 	}
-	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
@@ -11930,7 +11929,6 @@ func convertMCPToPlumbing(porcelain *MCP) *proto.MCP {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
-	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedMCPToPlumbing(
@@ -16049,11 +16047,22 @@ func convertPostgresEngineToPorcelain(plumbing *proto.PostgresEngine) (*Postgres
 		return nil, nil
 	}
 	porcelain := &PostgresEngine{}
+	if v, err := convertDurationToPorcelain(plumbing.AfterReadTtl); err != nil {
+		return nil, fmt.Errorf("error converting field AfterReadTtl: %v", err)
+	} else {
+		porcelain.AfterReadTtl = v
+	}
+	porcelain.Database = plumbing.Database
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
 	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
+	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
 	porcelain.Port = plumbing.Port
 	porcelain.PublicKey = plumbing.PublicKey
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -16062,6 +16071,12 @@ func convertPostgresEngineToPorcelain(plumbing *proto.PostgresEngine) (*Postgres
 		return nil, fmt.Errorf("error converting field Tags: %v", err)
 	} else {
 		porcelain.Tags = v
+	}
+	porcelain.Tls = plumbing.Tls
+	if v, err := convertDurationToPorcelain(plumbing.Ttl); err != nil {
+		return nil, fmt.Errorf("error converting field Ttl: %v", err)
+	} else {
+		porcelain.Ttl = v
 	}
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
@@ -16072,16 +16087,21 @@ func convertPostgresEngineToPlumbing(porcelain *PostgresEngine) *proto.PostgresE
 		return nil
 	}
 	plumbing := &proto.PostgresEngine{}
+	plumbing.AfterReadTtl = convertDurationToPlumbing(porcelain.AfterReadTtl)
+	plumbing.Database = (porcelain.Database)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
+	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PublicKey = (porcelain.PublicKey)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Tls = (porcelain.Tls)
+	plumbing.Ttl = convertDurationToPlumbing(porcelain.Ttl)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }

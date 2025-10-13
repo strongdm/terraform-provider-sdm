@@ -35,6 +35,7 @@ The following arguments are supported by the SecretEngine resource:
 	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * postgres_secret_engine:
+	* `database` - (Required) Database is the database to verify credential against.
 	* `hostname` - (Required) Hostname is the hostname or IP address of the Postgres server.
 	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 	* `name` - (Required) Unique human-readable name of the Secret Engine.
@@ -43,6 +44,7 @@ The following arguments are supported by the SecretEngine resource:
 	* `secret_store_id` - (Required) Backing secret store identifier
 	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls` - (Optional) TLS enables TLS/SSL when connecting to the Postgres server.
 	* `username` - (Required) Username is the username to connect to the Postgres server.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the SecretEngine resource:

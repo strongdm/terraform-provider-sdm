@@ -5968,11 +5968,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
-									"username": {
-										Type:        schema.TypeString,
-										Optional:    true,
-										Description: "The username to authenticate with.",
-									},
 								},
 							},
 						},
@@ -10852,7 +10847,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{

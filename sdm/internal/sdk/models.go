@@ -4004,12 +4004,8 @@ type MCP struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
-	// The username to authenticate with.
-	Username string `json:"username"`
 }
 
-// MTLSMysql is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type MTLSMysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -5273,6 +5269,10 @@ type Postgres struct {
 // PostgresEngine is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
 type PostgresEngine struct {
+	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
+	AfterReadTtl time.Duration `json:"afterReadTtl"`
+	// Database is the database to verify credential against.
+	Database string `json:"database"`
 	// Hostname is the hostname or IP address of the Postgres server.
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Secret Engine.
@@ -5283,6 +5283,8 @@ type PostgresEngine struct {
 	Name string `json:"name"`
 	// Password is the password to connect to the Postgres server.
 	Password string `json:"password"`
+	// Policy for password creation
+	Policy *SecretEnginePolicy `json:"policy"`
 	// Port is the port number of the Postgres server.
 	Port uint32 `json:"port"`
 	// Public key linked with a secret engine
@@ -5293,6 +5295,10 @@ type PostgresEngine struct {
 	SecretStoreRootPath string `json:"secretStoreRootPath"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// TLS enables TLS/SSL when connecting to the Postgres server.
+	Tls bool `json:"tls"`
+	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
+	Ttl time.Duration `json:"ttl"`
 	// Username is the username to connect to the Postgres server.
 	Username string `json:"username"`
 }

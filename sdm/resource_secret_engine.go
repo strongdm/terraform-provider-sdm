@@ -185,6 +185,17 @@ func resourceSecretEngine() *schema.Resource {
 				Description: "PostgresEngine is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"after_read_ttl": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "0s",
+							Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
+						},
+						"database": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Database is the database to verify credential against.",
+						},
 						"hostname": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -230,6 +241,17 @@ func resourceSecretEngine() *schema.Resource {
 							Elem:        tagsElemType,
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: "TLS enables TLS/SSL when connecting to the Postgres server.",
+						},
+						"ttl": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "0s",
+							Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
 						},
 						"username": {
 							Type:        schema.TypeString,
@@ -305,6 +327,8 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 		}
 		out := &sdm.PostgresEngine{
 			ID:                      d.Id(),
+			AfterReadTtl:            convertDurationToPlumbing(raw["after_read_ttl"]),
+			Database:                convertStringToPlumbing(raw["database"]),
 			Hostname:                convertStringToPlumbing(raw["hostname"]),
 			KeyRotationIntervalDays: convertInt32ToPlumbing(raw["key_rotation_interval_days"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
@@ -313,6 +337,8 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
 			Tags:                    convertTagsToPlumbing(raw["tags"]),
+			Tls:                     convertBoolToPlumbing(raw["tls"]),
+			Ttl:                     convertDurationToPlumbing(raw["ttl"]),
 			Username:                convertStringToPlumbing(raw["username"]),
 		}
 		return out
@@ -375,6 +401,8 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 		_ = localV
 		d.Set("postgres_secret_engine", []map[string]interface{}{
 			{
+				"after_read_ttl":             convertDurationToPorcelain(v.AfterReadTtl),
+				"database":                   (v.Database),
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
@@ -384,6 +412,8 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls":                        (v.Tls),
+				"ttl":                        convertDurationToPorcelain(v.Ttl),
 				"username":                   (v.Username),
 			},
 		})
@@ -459,6 +489,8 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 		_ = localV
 		d.Set("postgres_secret_engine", []map[string]interface{}{
 			{
+				"after_read_ttl":             convertDurationToPorcelain(v.AfterReadTtl),
+				"database":                   (v.Database),
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
@@ -468,6 +500,8 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
 				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls":                        (v.Tls),
+				"ttl":                        convertDurationToPorcelain(v.Ttl),
 				"username":                   (v.Username),
 			},
 		})

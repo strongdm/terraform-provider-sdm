@@ -5868,11 +5868,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
-						"username": {
-							Type:        schema.TypeString,
-							Required:    true,
-							Description: "The username to authenticate with.",
-						},
 					},
 				},
 			},
@@ -6474,7 +6469,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "MTLSMysql is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -14233,7 +14228,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
-			Username:       convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16898,7 +16892,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
 			},
 		})
 	case *sdm.Memcached:
@@ -19860,7 +19853,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
 			},
 		})
 	case *sdm.Memcached:
