@@ -66,6 +66,16 @@ func resourceSecretStore() *schema.Resource {
 							Required:    true,
 							Description: "The AWS region to target e.g. us-east-1",
 						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The role to assume after logging in.",
+						},
+						"role_external_id": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
+						},
 						"tags": {
 							Type:        schema.TypeMap,
 							Elem:        tagsElemType,
@@ -460,6 +470,27 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"strong_vault": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "StrongVaultStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"vault_approle": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -614,6 +645,98 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"vault_aws_ec2_cert_ssh": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "VaultAWSEC2CertSSHStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"issued_cert_ttl_minutes": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The namespace to make requests within",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL of the Vault to target",
+						},
+						"signing_role": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The signing role to be used for signing certificates",
+						},
+						"ssh_mount_point": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The mount point of the SSH engine configured with the desired CA",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"vault_aws_ec2_cert_x509": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "VaultAWSEC2CertX509Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"issued_cert_ttl_minutes": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The lifetime of certificates issued by this CA represented in minutes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The namespace to make requests within",
+						},
+						"pki_mount_point": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The mount point of the PKI engine configured with the desired CA",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL of the Vault to target",
+						},
+						"signing_role": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The signing role to be used for signing certificates",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"vault_aws_iam": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -635,6 +758,98 @@ func resourceSecretStore() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: "The URL of the Vault to target",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"vault_aws_iam_cert_ssh": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "VaultAWSIAMCertSSHStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"issued_cert_ttl_minutes": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The namespace to make requests within",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL of the Vault to target",
+						},
+						"signing_role": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The signing role to be used for signing certificates",
+						},
+						"ssh_mount_point": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The mount point of the SSH engine configured with the desired CA",
+						},
+						"tags": {
+							Type:        schema.TypeMap,
+							Elem:        tagsElemType,
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"vault_aws_iam_cert_x509": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "VaultAWSIAMCertX509Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"issued_cert_ttl_minutes": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The lifetime of certificates issued by this CA represented in minutes.",
+						},
+						"name": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"namespace": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "The namespace to make requests within",
+						},
+						"pki_mount_point": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The mount point of the PKI engine configured with the desired CA",
+						},
+						"server_address": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The URL of the Vault to target",
+						},
+						"signing_role": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The signing role to be used for signing certificates",
 						},
 						"tags": {
 							Type:        schema.TypeMap,
@@ -970,10 +1185,12 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 			return &sdm.AWSStore{}
 		}
 		out := &sdm.AWSStore{
-			ID:     d.Id(),
-			Name:   convertStringToPlumbing(raw["name"]),
-			Region: convertStringToPlumbing(raw["region"]),
-			Tags:   convertTagsToPlumbing(raw["tags"]),
+			ID:             d.Id(),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Region:         convertStringToPlumbing(raw["region"]),
+			RoleArn:        convertStringToPlumbing(raw["role_arn"]),
+			RoleExternalID: convertStringToPlumbing(raw["role_external_id"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -1132,6 +1349,18 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("strong_vault").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.StrongVaultStore{}
+		}
+		out := &sdm.StrongVaultStore{
+			ID:   d.Id(),
+			Name: convertStringToPlumbing(raw["name"]),
+			Tags: convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("vault_approle").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -1194,6 +1423,40 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("vault_aws_ec2_cert_ssh").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAWSEC2CertSSHStore{}
+		}
+		out := &sdm.VaultAWSEC2CertSSHStore{
+			ID:                   d.Id(),
+			IssuedCertTTLMinutes: convertInt32ToPlumbing(raw["issued_cert_ttl_minutes"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Namespace:            convertStringToPlumbing(raw["namespace"]),
+			ServerAddress:        convertStringToPlumbing(raw["server_address"]),
+			SigningRole:          convertStringToPlumbing(raw["signing_role"]),
+			SshMountPoint:        convertStringToPlumbing(raw["ssh_mount_point"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("vault_aws_ec2_cert_x509").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAWSEC2CertX509Store{}
+		}
+		out := &sdm.VaultAWSEC2CertX509Store{
+			ID:                   d.Id(),
+			IssuedCertTTLMinutes: convertInt32ToPlumbing(raw["issued_cert_ttl_minutes"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Namespace:            convertStringToPlumbing(raw["namespace"]),
+			PkiMountPoint:        convertStringToPlumbing(raw["pki_mount_point"]),
+			ServerAddress:        convertStringToPlumbing(raw["server_address"]),
+			SigningRole:          convertStringToPlumbing(raw["signing_role"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("vault_aws_iam").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -1205,6 +1468,40 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 			Namespace:     convertStringToPlumbing(raw["namespace"]),
 			ServerAddress: convertStringToPlumbing(raw["server_address"]),
 			Tags:          convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("vault_aws_iam_cert_ssh").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAWSIAMCertSSHStore{}
+		}
+		out := &sdm.VaultAWSIAMCertSSHStore{
+			ID:                   d.Id(),
+			IssuedCertTTLMinutes: convertInt32ToPlumbing(raw["issued_cert_ttl_minutes"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Namespace:            convertStringToPlumbing(raw["namespace"]),
+			ServerAddress:        convertStringToPlumbing(raw["server_address"]),
+			SigningRole:          convertStringToPlumbing(raw["signing_role"]),
+			SshMountPoint:        convertStringToPlumbing(raw["ssh_mount_point"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
+	if list := d.Get("vault_aws_iam_cert_x509").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.VaultAWSIAMCertX509Store{}
+		}
+		out := &sdm.VaultAWSIAMCertX509Store{
+			ID:                   d.Id(),
+			IssuedCertTTLMinutes: convertInt32ToPlumbing(raw["issued_cert_ttl_minutes"]),
+			Name:                 convertStringToPlumbing(raw["name"]),
+			Namespace:            convertStringToPlumbing(raw["namespace"]),
+			PkiMountPoint:        convertStringToPlumbing(raw["pki_mount_point"]),
+			ServerAddress:        convertStringToPlumbing(raw["server_address"]),
+			SigningRole:          convertStringToPlumbing(raw["signing_role"]),
+			Tags:                 convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -1341,9 +1638,11 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 		_ = localV
 		d.Set("aws", []map[string]interface{}{
 			{
-				"name":   (v.Name),
-				"region": (v.Region),
-				"tags":   convertTagsToPorcelain(v.Tags),
+				"name":             (v.Name),
+				"region":           (v.Region),
+				"role_arn":         (v.RoleArn),
+				"role_external_id": (v.RoleExternalID),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AWSCertX509Store:
@@ -1471,6 +1770,15 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":                               convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.StrongVaultStore:
+		localV, _ := localVersion.(*sdm.StrongVaultStore)
+		_ = localV
+		d.Set("strong_vault", []map[string]interface{}{
+			{
+				"name": (v.Name),
+				"tags": convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.VaultAppRoleStore:
 		localV, _ := localVersion.(*sdm.VaultAppRoleStore)
 		_ = localV
@@ -1521,6 +1829,34 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.VaultAWSEC2CertSSHStore:
+		localV, _ := localVersion.(*sdm.VaultAWSEC2CertSSHStore)
+		_ = localV
+		d.Set("vault_aws_ec2_cert_ssh", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSEC2CertX509Store:
+		localV, _ := localVersion.(*sdm.VaultAWSEC2CertX509Store)
+		_ = localV
+		d.Set("vault_aws_ec2_cert_x509", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.VaultAWSIAMStore:
 		localV, _ := localVersion.(*sdm.VaultAWSIAMStore)
 		_ = localV
@@ -1530,6 +1866,34 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSIAMCertSSHStore:
+		localV, _ := localVersion.(*sdm.VaultAWSIAMCertSSHStore)
+		_ = localV
+		d.Set("vault_aws_iam_cert_ssh", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSIAMCertX509Store:
+		localV, _ := localVersion.(*sdm.VaultAWSIAMCertX509Store)
+		_ = localV
+		d.Set("vault_aws_iam_cert_x509", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTLSStore:
@@ -1658,9 +2022,11 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 		_ = localV
 		d.Set("aws", []map[string]interface{}{
 			{
-				"name":   (v.Name),
-				"region": (v.Region),
-				"tags":   convertTagsToPorcelain(v.Tags),
+				"name":             (v.Name),
+				"region":           (v.Region),
+				"role_arn":         (v.RoleArn),
+				"role_external_id": (v.RoleExternalID),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.AWSCertX509Store:
@@ -1818,6 +2184,18 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"tags":                               convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.StrongVaultStore:
+		localV, ok := localVersion.(*sdm.StrongVaultStore)
+		if !ok {
+			localV = &sdm.StrongVaultStore{}
+		}
+		_ = localV
+		d.Set("strong_vault", []map[string]interface{}{
+			{
+				"name": (v.Name),
+				"tags": convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.VaultAppRoleStore:
 		localV, ok := localVersion.(*sdm.VaultAppRoleStore)
 		if !ok {
@@ -1880,6 +2258,40 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"tags":           convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.VaultAWSEC2CertSSHStore:
+		localV, ok := localVersion.(*sdm.VaultAWSEC2CertSSHStore)
+		if !ok {
+			localV = &sdm.VaultAWSEC2CertSSHStore{}
+		}
+		_ = localV
+		d.Set("vault_aws_ec2_cert_ssh", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSEC2CertX509Store:
+		localV, ok := localVersion.(*sdm.VaultAWSEC2CertX509Store)
+		if !ok {
+			localV = &sdm.VaultAWSEC2CertX509Store{}
+		}
+		_ = localV
+		d.Set("vault_aws_ec2_cert_x509", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.VaultAWSIAMStore:
 		localV, ok := localVersion.(*sdm.VaultAWSIAMStore)
 		if !ok {
@@ -1892,6 +2304,40 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSIAMCertSSHStore:
+		localV, ok := localVersion.(*sdm.VaultAWSIAMCertSSHStore)
+		if !ok {
+			localV = &sdm.VaultAWSIAMCertSSHStore{}
+		}
+		_ = localV
+		d.Set("vault_aws_iam_cert_ssh", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.VaultAWSIAMCertX509Store:
+		localV, ok := localVersion.(*sdm.VaultAWSIAMCertX509Store)
+		if !ok {
+			localV = &sdm.VaultAWSIAMCertX509Store{}
+		}
+		_ = localV
+		d.Set("vault_aws_iam_cert_x509", []map[string]interface{}{
+			{
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.VaultTLSStore:

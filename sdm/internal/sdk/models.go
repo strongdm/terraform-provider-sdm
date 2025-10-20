@@ -427,6 +427,10 @@ type AWSStore struct {
 	Name string `json:"name"`
 	// The AWS region to target e.g. us-east-1
 	Region string `json:"region"`
+	// The role to assume after logging in.
+	RoleArn string `json:"roleArn"`
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	RoleExternalID string `json:"roleExternalId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }
@@ -13073,6 +13077,30 @@ func (m *KeyfactorX509Store) GetName() string {
 func (m *KeyfactorX509Store) SetName(v string) {
 	m.Name = v
 }
+func (*StrongVaultStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the StrongVaultStore.
+func (m *StrongVaultStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the StrongVaultStore.
+func (m *StrongVaultStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the StrongVaultStore.
+func (m *StrongVaultStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the StrongVaultStore.
+func (m *StrongVaultStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the StrongVaultStore.
+func (m *StrongVaultStore) SetName(v string) {
+	m.Name = v
+}
 func (*VaultAppRoleStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultAppRoleStore.
@@ -13169,6 +13197,54 @@ func (m *VaultAWSEC2Store) GetName() string {
 func (m *VaultAWSEC2Store) SetName(v string) {
 	m.Name = v
 }
+func (*VaultAWSEC2CertSSHStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAWSEC2CertSSHStore.
+func (m *VaultAWSEC2CertSSHStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAWSEC2CertSSHStore.
+func (m *VaultAWSEC2CertSSHStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAWSEC2CertSSHStore.
+func (m *VaultAWSEC2CertSSHStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAWSEC2CertSSHStore.
+func (m *VaultAWSEC2CertSSHStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAWSEC2CertSSHStore.
+func (m *VaultAWSEC2CertSSHStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultAWSEC2CertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAWSEC2CertX509Store.
+func (m *VaultAWSEC2CertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAWSEC2CertX509Store.
+func (m *VaultAWSEC2CertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAWSEC2CertX509Store.
+func (m *VaultAWSEC2CertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAWSEC2CertX509Store.
+func (m *VaultAWSEC2CertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAWSEC2CertX509Store.
+func (m *VaultAWSEC2CertX509Store) SetName(v string) {
+	m.Name = v
+}
 func (*VaultAWSIAMStore) isOneOf_SecretStore() {}
 
 // GetID returns the unique identifier of the VaultAWSIAMStore.
@@ -13191,6 +13267,54 @@ func (m *VaultAWSIAMStore) GetName() string {
 
 // SetName sets the name of the VaultAWSIAMStore.
 func (m *VaultAWSIAMStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultAWSIAMCertSSHStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAWSIAMCertSSHStore.
+func (m *VaultAWSIAMCertSSHStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAWSIAMCertSSHStore.
+func (m *VaultAWSIAMCertSSHStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAWSIAMCertSSHStore.
+func (m *VaultAWSIAMCertSSHStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAWSIAMCertSSHStore.
+func (m *VaultAWSIAMCertSSHStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAWSIAMCertSSHStore.
+func (m *VaultAWSIAMCertSSHStore) SetName(v string) {
+	m.Name = v
+}
+func (*VaultAWSIAMCertX509Store) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the VaultAWSIAMCertX509Store.
+func (m *VaultAWSIAMCertX509Store) GetID() string { return m.ID }
+
+// GetTags returns the tags of the VaultAWSIAMCertX509Store.
+func (m *VaultAWSIAMCertX509Store) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the VaultAWSIAMCertX509Store.
+func (m *VaultAWSIAMCertX509Store) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the VaultAWSIAMCertX509Store.
+func (m *VaultAWSIAMCertX509Store) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the VaultAWSIAMCertX509Store.
+func (m *VaultAWSIAMCertX509Store) SetName(v string) {
 	m.Name = v
 }
 func (*VaultTLSStore) isOneOf_SecretStore() {}
@@ -13538,6 +13662,17 @@ type Snowsight struct {
 	Tags Tags `json:"tags"`
 }
 
+// StrongVaultStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type StrongVaultStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type Sybase struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -13732,6 +13867,48 @@ type User struct {
 	Tags Tags `json:"tags"`
 }
 
+// VaultAWSEC2CertSSHStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAWSEC2CertSSHStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// The mount point of the SSH engine configured with the desired CA
+	SshMountPoint string `json:"sshMountPoint"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultAWSEC2CertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAWSEC2CertX509Store struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The mount point of the PKI engine configured with the desired CA
+	PkiMountPoint string `json:"pkiMountPoint"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type VaultAWSEC2Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -13741,6 +13918,48 @@ type VaultAWSEC2Store struct {
 	Namespace string `json:"namespace"`
 	// The URL of the Vault to target
 	ServerAddress string `json:"serverAddress"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultAWSIAMCertSSHStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAWSIAMCertSSHStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
+	// The mount point of the SSH engine configured with the desired CA
+	SshMountPoint string `json:"sshMountPoint"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// VaultAWSIAMCertX509Store is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type VaultAWSIAMCertX509Store struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// The lifetime of certificates issued by this CA represented in minutes.
+	IssuedCertTTLMinutes int32 `json:"issuedCertTtlMinutes"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// The namespace to make requests within
+	Namespace string `json:"namespace"`
+	// The mount point of the PKI engine configured with the desired CA
+	PkiMountPoint string `json:"pkiMountPoint"`
+	// The URL of the Vault to target
+	ServerAddress string `json:"serverAddress"`
+	// The signing role to be used for signing certificates
+	SigningRole string `json:"signingRole"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
 }

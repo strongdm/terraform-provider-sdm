@@ -3144,6 +3144,8 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"name", `"all-secrets-aws-name"`},
 				{"region", `"region"`},
+				{"role_arn", `"role_arn"`},
+				{"role_external_id", `"role_external_id"`},
 			},
 		},
 		{
@@ -3242,6 +3244,12 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "strong_vault",
+			pairs: [][2]string{
+				{"name", `"all-secrets-strongvault-name"`},
+			},
+		},
+		{
 			resource: "vault_approle",
 			pairs: [][2]string{
 				{"name", `"all-secrets-vaultapprole-name"`},
@@ -3280,11 +3288,55 @@ func TestAccSDMSecretStore_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "vault_aws_ec2_cert_ssh",
+			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
+				{"name", `"all-secrets-vaultawsec2certssh-name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+				{"ssh_mount_point", `"ssh_mount_point"`},
+			},
+		},
+		{
+			resource: "vault_aws_ec2_cert_x509",
+			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
+				{"name", `"all-secrets-vaultawsec2certx509-name"`},
+				{"namespace", `"namespace"`},
+				{"pki_mount_point", `"pki_mount_point"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+			},
+		},
+		{
 			resource: "vault_aws_iam",
 			pairs: [][2]string{
 				{"name", `"all-secrets-vaultawsiam-name"`},
 				{"namespace", `"namespace"`},
 				{"server_address", `"server_address"`},
+			},
+		},
+		{
+			resource: "vault_aws_iam_cert_ssh",
+			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
+				{"name", `"all-secrets-vaultawsiamcertssh-name"`},
+				{"namespace", `"namespace"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
+				{"ssh_mount_point", `"ssh_mount_point"`},
+			},
+		},
+		{
+			resource: "vault_aws_iam_cert_x509",
+			pairs: [][2]string{
+				{"issued_cert_ttl_minutes", `"5"`},
+				{"name", `"all-secrets-vaultawsiamcertx509-name"`},
+				{"namespace", `"namespace"`},
+				{"pki_mount_point", `"pki_mount_point"`},
+				{"server_address", `"server_address"`},
+				{"signing_role", `"signing_role"`},
 			},
 		},
 		{

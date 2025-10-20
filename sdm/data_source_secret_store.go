@@ -95,6 +95,16 @@ func dataSourceSecretStore() *schema.Resource {
 										Optional:    true,
 										Description: "The AWS region to target e.g. us-east-1",
 									},
+									"role_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The role to assume after logging in.",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
+									},
 									"tags": {
 										Type:        schema.TypeMap,
 										Elem:        tagsElemType,
@@ -529,6 +539,31 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"strong_vault": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"vault_approle": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -699,6 +734,106 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"vault_aws_ec2_cert_ssh": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The namespace to make requests within",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The URL of the Vault to target",
+									},
+									"signing_role": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The signing role to be used for signing certificates",
+									},
+									"ssh_mount_point": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The mount point of the SSH engine configured with the desired CA",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"vault_aws_ec2_cert_x509": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The namespace to make requests within",
+									},
+									"pki_mount_point": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The mount point of the PKI engine configured with the desired CA",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The URL of the Vault to target",
+									},
+									"signing_role": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The signing role to be used for signing certificates",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"vault_aws_iam": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -724,6 +859,106 @@ func dataSourceSecretStore() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "The URL of the Vault to target",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"vault_aws_iam_cert_ssh": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The namespace to make requests within",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The URL of the Vault to target",
+									},
+									"signing_role": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The signing role to be used for signing certificates",
+									},
+									"ssh_mount_point": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The mount point of the SSH engine configured with the desired CA",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"vault_aws_iam_cert_x509": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"issued_cert_ttl_minutes": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The lifetime of certificates issued by this CA represented in minutes.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"namespace": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The namespace to make requests within",
+									},
+									"pki_mount_point": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The mount point of the PKI engine configured with the desired CA",
+									},
+									"server_address": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The URL of the Vault to target",
+									},
+									"signing_role": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The signing role to be used for signing certificates",
 									},
 									"tags": {
 										Type:        schema.TypeMap,
@@ -1112,10 +1347,12 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 			})
 		case *sdm.AWSStore:
 			output[0]["aws"] = append(output[0]["aws"], entity{
-				"id":     (v.ID),
-				"name":   (v.Name),
-				"region": (v.Region),
-				"tags":   convertTagsToPorcelain(v.Tags),
+				"id":               (v.ID),
+				"name":             (v.Name),
+				"region":           (v.Region),
+				"role_arn":         (v.RoleArn),
+				"role_external_id": (v.RoleExternalID),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.AWSCertX509Store:
 			output[0]["aws_cert_x509"] = append(output[0]["aws_cert_x509"], entity{
@@ -1212,6 +1449,12 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"server_address":                     (v.ServerAddress),
 				"tags":                               convertTagsToPorcelain(v.Tags),
 			})
+		case *sdm.StrongVaultStore:
+			output[0]["strong_vault"] = append(output[0]["strong_vault"], entity{
+				"id":   (v.ID),
+				"name": (v.Name),
+				"tags": convertTagsToPorcelain(v.Tags),
+			})
 		case *sdm.VaultAppRoleStore:
 			output[0]["vault_approle"] = append(output[0]["vault_approle"], entity{
 				"id":             (v.ID),
@@ -1250,6 +1493,28 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToPorcelain(v.Tags),
 			})
+		case *sdm.VaultAWSEC2CertSSHStore:
+			output[0]["vault_aws_ec2_cert_ssh"] = append(output[0]["vault_aws_ec2_cert_ssh"], entity{
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.VaultAWSEC2CertX509Store:
+			output[0]["vault_aws_ec2_cert_x509"] = append(output[0]["vault_aws_ec2_cert_x509"], entity{
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			})
 		case *sdm.VaultAWSIAMStore:
 			output[0]["vault_aws_iam"] = append(output[0]["vault_aws_iam"], entity{
 				"id":             (v.ID),
@@ -1257,6 +1522,28 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"namespace":      (v.Namespace),
 				"server_address": (v.ServerAddress),
 				"tags":           convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.VaultAWSIAMCertSSHStore:
+			output[0]["vault_aws_iam_cert_ssh"] = append(output[0]["vault_aws_iam_cert_ssh"], entity{
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"ssh_mount_point":         (v.SshMountPoint),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.VaultAWSIAMCertX509Store:
+			output[0]["vault_aws_iam_cert_x509"] = append(output[0]["vault_aws_iam_cert_x509"], entity{
+				"id":                      (v.ID),
+				"issued_cert_ttl_minutes": (v.IssuedCertTTLMinutes),
+				"name":                    (v.Name),
+				"namespace":               (v.Namespace),
+				"pki_mount_point":         (v.PkiMountPoint),
+				"server_address":          (v.ServerAddress),
+				"signing_role":            (v.SigningRole),
+				"tags":                    convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.VaultTLSStore:
 			output[0]["vault_tls"] = append(output[0]["vault_tls"], entity{

@@ -29,6 +29,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `region` - The AWS region to target e.g. us-east-1
+		* `role_arn` - The role to assume after logging in.
+		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `tags` - Tags is a map of key, value pairs.
 	* aws_cert_x509:
 		* `ca_arn` - The ARN of the CA in AWS Private CA
@@ -105,6 +107,10 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the SecretStore.
 		* `server_address` - the host of the Key Factor CA
 		* `tags` - Tags is a map of key, value pairs.
+	* strong_vault:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_approle:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
@@ -135,11 +141,47 @@ In addition to provided arguments above, the following attributes are returned b
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
 		* `tags` - Tags is a map of key, value pairs.
+	* vault_aws_ec2_cert_ssh:
+		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `ssh_mount_point` - The mount point of the SSH engine configured with the desired CA
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_aws_ec2_cert_x509:
+		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `tags` - Tags is a map of key, value pairs.
 	* vault_aws_iam:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.
 		* `namespace` - The namespace to make requests within
 		* `server_address` - The URL of the Vault to target
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_aws_iam_cert_ssh:
+		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
+		* `ssh_mount_point` - The mount point of the SSH engine configured with the desired CA
+		* `tags` - Tags is a map of key, value pairs.
+	* vault_aws_iam_cert_x509:
+		* `id` - Unique identifier of the SecretStore.
+		* `issued_cert_ttl_minutes` - The lifetime of certificates issued by this CA represented in minutes.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `namespace` - The namespace to make requests within
+		* `pki_mount_point` - The mount point of the PKI engine configured with the desired CA
+		* `server_address` - The URL of the Vault to target
+		* `signing_role` - The signing role to be used for signing certificates
 		* `tags` - Tags is a map of key, value pairs.
 	* vault_tls:
 		* `ca_cert_path` - A path to a CA file accessible by a Node

@@ -19,6 +19,8 @@ The following arguments are supported by the SecretStore resource:
 * aws:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `region` - (Required) The AWS region to target e.g. us-east-1
+	* `role_arn` - (Optional) The role to assume after logging in.
+	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * aws_cert_x509:
 	* `ca_arn` - (Required) The ARN of the CA in AWS Private CA
@@ -85,6 +87,9 @@ The following arguments are supported by the SecretStore resource:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `server_address` - (Required) the host of the Key Factor CA
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* strong_vault:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_approle:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
@@ -111,10 +116,42 @@ The following arguments are supported by the SecretStore resource:
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_aws_ec2_cert_ssh:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_aws_ec2_cert_x509:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_aws_iam:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `namespace` - (Optional) The namespace to make requests within
 	* `server_address` - (Required) The URL of the Vault to target
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_aws_iam_cert_ssh:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA in minutes. Recommended value is 5.
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
+	* `ssh_mount_point` - (Required) The mount point of the SSH engine configured with the desired CA
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* vault_aws_iam_cert_x509:
+	* `issued_cert_ttl_minutes` - (Required) The lifetime of certificates issued by this CA represented in minutes.
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `namespace` - (Optional) The namespace to make requests within
+	* `pki_mount_point` - (Required) The mount point of the PKI engine configured with the desired CA
+	* `server_address` - (Required) The URL of the Vault to target
+	* `signing_role` - (Required) The signing role to be used for signing certificates
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * vault_tls:
 	* `ca_cert_path` - (Optional) A path to a CA file accessible by a Node
