@@ -4408,6 +4408,96 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"elasticache_redis_iam": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+									},
+									"egress_filter": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The host to dial to initiate a connection from the egress node to this resource.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+									},
+									"proxy_cluster_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "AWS region is needed in addition to hostname to generate the IAM signature",
+									},
+									"role_assumption_arn": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
+									},
+									"role_external_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_required": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "If set, TLS must be used to connect to this resource.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to authenticate with.",
+									},
+								},
+							},
+						},
 						"entra_id": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -10521,6 +10611,25 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":             convertTagsToPorcelain(v.Tags),
 				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
+			})
+		case *sdm.ElasticacheRedisIAM:
+			output[0]["elasticache_redis_iam"] = append(output[0]["elasticache_redis_iam"], entity{
+				"bind_interface":      (v.BindInterface),
+				"egress_filter":       (v.EgressFilter),
+				"hostname":            (v.Hostname),
+				"id":                  (v.ID),
+				"name":                (v.Name),
+				"port":                (v.Port),
+				"port_override":       (v.PortOverride),
+				"proxy_cluster_id":    (v.ProxyClusterID),
+				"region":              (v.Region),
+				"role_assumption_arn": (v.RoleAssumptionArn),
+				"role_external_id":    (v.RoleExternalID),
+				"secret_store_id":     (v.SecretStoreID),
+				"subdomain":           (v.Subdomain),
+				"tags":                convertTagsToPorcelain(v.Tags),
+				"tls_required":        (v.TlsRequired),
+				"username":            (v.Username),
 			})
 		case *sdm.EntraID:
 			output[0]["entra_id"] = append(output[0]["entra_id"], entity{

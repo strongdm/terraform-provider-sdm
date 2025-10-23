@@ -706,6 +706,20 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "elasticache_redis_iam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-elasticacheredisiam-name"`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"role_assumption_arn", `"role_assumption_arn"`},
+				{"role_external_id", `"role_external_id"`},
+				{"tls_required", `true`},
+				{"username", `"username"`},
+			},
+		},
+		{
 			resource: "entra_id",
 			pairs: [][2]string{
 				{"discovery_enabled", `true`},
@@ -2309,6 +2323,22 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"name", `"all-resources-secret-elasticacheredis-name"`},
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"tls_required", `true`},
+				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "elasticache_redis_iam",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-secret-elasticacheredisiam-name"`},
+				{"port", `443`},
+				{"region", `"region"`},
+				{"role_assumption_arn", `"role_assumption_arn"`},
+				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"tls_required", `true`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},

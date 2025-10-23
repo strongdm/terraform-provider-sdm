@@ -132,6 +132,7 @@ const (
 	ActivityEntityTypeCertificateAuthority = "certificate_authority"
 	ActivityEntityTypePolicy               = "policy"
 	ActivityEntityTypeProxyClusterKey      = "proxy_cluster_key"
+	ActivityEntityTypeTrustDomain          = "trust_domain"
 )
 
 // Activity Verbs, describe which kind of activity has taken place.
@@ -263,6 +264,9 @@ const (
 	ActivityVerbSecretEngineUpdated                              = "secret engine updated"
 	ActivityVerbSecretEngineRotated                              = "secret engine's credentials updated"
 	ActivityVerbSecretEngineDeleted                              = "secret engine deleted"
+	ActivityVerbTrustDomainCreated                               = "trust domain created"
+	ActivityVerbTrustDomainUpdated                               = "trust domain updated"
+	ActivityVerbTrustDomainDeleted                               = "trust domain deleted"
 	ActivityVerbRemoteIdentityGroupCreated                       = "remote identity group created"
 	ActivityVerbRemoteIdentityGroupUpdated                       = "remote identity group updated"
 	ActivityVerbRemoteIdentityGroupDeleted                       = "remote identity group deleted"
@@ -607,6 +611,7 @@ var AllActivityEntityType = []string{
 	ActivityEntityTypeCertificateAuthority,
 	ActivityEntityTypePolicy,
 	ActivityEntityTypeProxyClusterKey,
+	ActivityEntityTypeTrustDomain,
 }
 
 func ActivityEntityTypeIsValid(v string) bool {
@@ -741,6 +746,9 @@ var AllActivityVerb = []string{
 	ActivityVerbSecretEngineUpdated,
 	ActivityVerbSecretEngineRotated,
 	ActivityVerbSecretEngineDeleted,
+	ActivityVerbTrustDomainCreated,
+	ActivityVerbTrustDomainUpdated,
+	ActivityVerbTrustDomainDeleted,
 	ActivityVerbRemoteIdentityGroupCreated,
 	ActivityVerbRemoteIdentityGroupUpdated,
 	ActivityVerbRemoteIdentityGroupDeleted,

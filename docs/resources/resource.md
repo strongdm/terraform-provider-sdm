@@ -819,6 +819,22 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Optional) The username to authenticate with.
+* elasticache_redis_iam:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `region` - (Required) AWS region is needed in addition to hostname to generate the IAM signature
+	* `role_assumption_arn` - (Optional) If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
+	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * entra_id:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `discovery_enabled` - (Optional) If true, configures discovery of the tenant to be run from a node.

@@ -42,7 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/15.25.0"
+	defaultUserAgent = "strongdm-sdk-go/15.27.0"
 )
 
 var _ = metadata.Pairs
@@ -171,262 +171,7 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 		return nil, convertErrorToPorcelain(fmt.Errorf("cannot dial API server: %w", err))
 	}
 	client.grpcConn = cc
-	client.accessRequests = &AccessRequests{
-		client: plumbing.NewAccessRequestsClient(client.grpcConn),
-		parent: client,
-	}
-	client.accessRequestEventsHistory = &AccessRequestEventsHistory{
-		client: plumbing.NewAccessRequestEventsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.accessRequestsHistory = &AccessRequestsHistory{
-		client: plumbing.NewAccessRequestsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountAttachments = &AccountAttachments{
-		client: plumbing.NewAccountAttachmentsClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountAttachmentsHistory = &AccountAttachmentsHistory{
-		client: plumbing.NewAccountAttachmentsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountGrants = &AccountGrants{
-		client: plumbing.NewAccountGrantsClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountGrantsHistory = &AccountGrantsHistory{
-		client: plumbing.NewAccountGrantsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountPermissions = &AccountPermissions{
-		client: plumbing.NewAccountPermissionsClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountResources = &AccountResources{
-		client: plumbing.NewAccountResourcesClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountResourcesHistory = &AccountResourcesHistory{
-		client: plumbing.NewAccountResourcesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.accounts = &Accounts{
-		client: plumbing.NewAccountsClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountsGroups = &AccountsGroups{
-		client: plumbing.NewAccountsGroupsClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountsGroupsHistory = &AccountsGroupsHistory{
-		client: plumbing.NewAccountsGroupsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.accountsHistory = &AccountsHistory{
-		client: plumbing.NewAccountsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.activities = &Activities{
-		client: plumbing.NewActivitiesClient(client.grpcConn),
-		parent: client,
-	}
-	client.approvalWorkflowApprovers = &ApprovalWorkflowApprovers{
-		client: plumbing.NewApprovalWorkflowApproversClient(client.grpcConn),
-		parent: client,
-	}
-	client.approvalWorkflowApproversHistory = &ApprovalWorkflowApproversHistory{
-		client: plumbing.NewApprovalWorkflowApproversHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.approvalWorkflowSteps = &ApprovalWorkflowSteps{
-		client: plumbing.NewApprovalWorkflowStepsClient(client.grpcConn),
-		parent: client,
-	}
-	client.approvalWorkflowStepsHistory = &ApprovalWorkflowStepsHistory{
-		client: plumbing.NewApprovalWorkflowStepsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.approvalWorkflows = &ApprovalWorkflows{
-		client: plumbing.NewApprovalWorkflowsClient(client.grpcConn),
-		parent: client,
-	}
-	client.approvalWorkflowsHistory = &ApprovalWorkflowsHistory{
-		client: plumbing.NewApprovalWorkflowsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.controlPanel = &ControlPanel{
-		client: plumbing.NewControlPanelClient(client.grpcConn),
-		parent: client,
-	}
-	client.roles = &Roles{
-		client: plumbing.NewRolesClient(client.grpcConn),
-		parent: client,
-	}
-	client.groups = &Groups{
-		client: plumbing.NewGroupsClient(client.grpcConn),
-		parent: client,
-	}
-	client.groupsHistory = &GroupsHistory{
-		client: plumbing.NewGroupsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.groupsRoles = &GroupsRoles{
-		client: plumbing.NewGroupsRolesClient(client.grpcConn),
-		parent: client,
-	}
-	client.groupsRolesHistory = &GroupsRolesHistory{
-		client: plumbing.NewGroupsRolesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.healthChecks = &HealthChecks{
-		client: plumbing.NewHealthChecksClient(client.grpcConn),
-		parent: client,
-	}
-	client.identityAliases = &IdentityAliases{
-		client: plumbing.NewIdentityAliasesClient(client.grpcConn),
-		parent: client,
-	}
-	client.identityAliasesHistory = &IdentityAliasesHistory{
-		client: plumbing.NewIdentityAliasesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.identitySets = &IdentitySets{
-		client: plumbing.NewIdentitySetsClient(client.grpcConn),
-		parent: client,
-	}
-	client.identitySetsHistory = &IdentitySetsHistory{
-		client: plumbing.NewIdentitySetsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.managedSecrets = &ManagedSecrets{
-		client: plumbing.NewManagedSecretsClient(client.grpcConn),
-		parent: client,
-	}
-	client.nodes = &Nodes{
-		client: plumbing.NewNodesClient(client.grpcConn),
-		parent: client,
-	}
-	client.nodesHistory = &NodesHistory{
-		client: plumbing.NewNodesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.organizationHistory = &OrganizationHistory{
-		client: plumbing.NewOrganizationHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.peeringGroupNodes = &PeeringGroupNodes{
-		client: plumbing.NewPeeringGroupNodesClient(client.grpcConn),
-		parent: client,
-	}
-	client.peeringGroupPeers = &PeeringGroupPeers{
-		client: plumbing.NewPeeringGroupPeersClient(client.grpcConn),
-		parent: client,
-	}
-	client.peeringGroupResources = &PeeringGroupResources{
-		client: plumbing.NewPeeringGroupResourcesClient(client.grpcConn),
-		parent: client,
-	}
-	client.peeringGroups = &PeeringGroups{
-		client: plumbing.NewPeeringGroupsClient(client.grpcConn),
-		parent: client,
-	}
-	client.policies = &Policies{
-		client: plumbing.NewPoliciesClient(client.grpcConn),
-		parent: client,
-	}
-	client.policiesHistory = &PoliciesHistory{
-		client: plumbing.NewPoliciesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.proxyClusterKeys = &ProxyClusterKeys{
-		client: plumbing.NewProxyClusterKeysClient(client.grpcConn),
-		parent: client,
-	}
-	client.queries = &Queries{
-		client: plumbing.NewQueriesClient(client.grpcConn),
-		parent: client,
-	}
-	client.remoteIdentities = &RemoteIdentities{
-		client: plumbing.NewRemoteIdentitiesClient(client.grpcConn),
-		parent: client,
-	}
-	client.remoteIdentitiesHistory = &RemoteIdentitiesHistory{
-		client: plumbing.NewRemoteIdentitiesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.remoteIdentityGroups = &RemoteIdentityGroups{
-		client: plumbing.NewRemoteIdentityGroupsClient(client.grpcConn),
-		parent: client,
-	}
-	client.remoteIdentityGroupsHistory = &RemoteIdentityGroupsHistory{
-		client: plumbing.NewRemoteIdentityGroupsHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.replays = &Replays{
-		client: plumbing.NewReplaysClient(client.grpcConn),
-		parent: client,
-	}
-	client.resources = &Resources{
-		client: plumbing.NewResourcesClient(client.grpcConn),
-		parent: client,
-	}
-	client.resourcesHistory = &ResourcesHistory{
-		client: plumbing.NewResourcesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.roleResources = &RoleResources{
-		client: plumbing.NewRoleResourcesClient(client.grpcConn),
-		parent: client,
-	}
-	client.roleResourcesHistory = &RoleResourcesHistory{
-		client: plumbing.NewRoleResourcesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.rolesHistory = &RolesHistory{
-		client: plumbing.NewRolesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.secretStores = &SecretStores{
-		client: plumbing.NewSecretStoresClient(client.grpcConn),
-		parent: client,
-	}
-	client.secretEngines = &SecretEngines{
-		client: plumbing.NewSecretEnginesClient(client.grpcConn),
-		parent: client,
-	}
-	client.secretStoreHealths = &SecretStoreHealths{
-		client: plumbing.NewSecretStoreHealthsClient(client.grpcConn),
-		parent: client,
-	}
-	client.secretStoresHistory = &SecretStoresHistory{
-		client: plumbing.NewSecretStoresHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowApprovers = &WorkflowApprovers{
-		client: plumbing.NewWorkflowApproversClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowApproversHistory = &WorkflowApproversHistory{
-		client: plumbing.NewWorkflowApproversHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowRoles = &WorkflowRoles{
-		client: plumbing.NewWorkflowRolesClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowRolesHistory = &WorkflowRolesHistory{
-		client: plumbing.NewWorkflowRolesHistoryClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflows = &Workflows{
-		client: plumbing.NewWorkflowsClient(client.grpcConn),
-		parent: client,
-	}
-	client.workflowsHistory = &WorkflowsHistory{
-		client: plumbing.NewWorkflowsHistoryClient(client.grpcConn),
-		parent: client,
-	}
+	client.initializeServices()
 	return client, nil
 }
 
@@ -441,6 +186,267 @@ func (c *Client) Close() error {
 		return &UnknownError{Wrapped: fmt.Errorf("cannot close nil grpc client")}
 	}
 	return c.grpcConn.Close()
+}
+
+// initializeServices initializes all service clients using the existing grpcConn.
+// This is called by New(), NewForWorkload(), and other constructors.
+func (c *Client) initializeServices() {
+	c.accessRequests = &AccessRequests{
+		client: plumbing.NewAccessRequestsClient(c.grpcConn),
+		parent: c,
+	}
+	c.accessRequestEventsHistory = &AccessRequestEventsHistory{
+		client: plumbing.NewAccessRequestEventsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.accessRequestsHistory = &AccessRequestsHistory{
+		client: plumbing.NewAccessRequestsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountAttachments = &AccountAttachments{
+		client: plumbing.NewAccountAttachmentsClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountAttachmentsHistory = &AccountAttachmentsHistory{
+		client: plumbing.NewAccountAttachmentsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountGrants = &AccountGrants{
+		client: plumbing.NewAccountGrantsClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountGrantsHistory = &AccountGrantsHistory{
+		client: plumbing.NewAccountGrantsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountPermissions = &AccountPermissions{
+		client: plumbing.NewAccountPermissionsClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountResources = &AccountResources{
+		client: plumbing.NewAccountResourcesClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountResourcesHistory = &AccountResourcesHistory{
+		client: plumbing.NewAccountResourcesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.accounts = &Accounts{
+		client: plumbing.NewAccountsClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountsGroups = &AccountsGroups{
+		client: plumbing.NewAccountsGroupsClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountsGroupsHistory = &AccountsGroupsHistory{
+		client: plumbing.NewAccountsGroupsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.accountsHistory = &AccountsHistory{
+		client: plumbing.NewAccountsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.activities = &Activities{
+		client: plumbing.NewActivitiesClient(c.grpcConn),
+		parent: c,
+	}
+	c.approvalWorkflowApprovers = &ApprovalWorkflowApprovers{
+		client: plumbing.NewApprovalWorkflowApproversClient(c.grpcConn),
+		parent: c,
+	}
+	c.approvalWorkflowApproversHistory = &ApprovalWorkflowApproversHistory{
+		client: plumbing.NewApprovalWorkflowApproversHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.approvalWorkflowSteps = &ApprovalWorkflowSteps{
+		client: plumbing.NewApprovalWorkflowStepsClient(c.grpcConn),
+		parent: c,
+	}
+	c.approvalWorkflowStepsHistory = &ApprovalWorkflowStepsHistory{
+		client: plumbing.NewApprovalWorkflowStepsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.approvalWorkflows = &ApprovalWorkflows{
+		client: plumbing.NewApprovalWorkflowsClient(c.grpcConn),
+		parent: c,
+	}
+	c.approvalWorkflowsHistory = &ApprovalWorkflowsHistory{
+		client: plumbing.NewApprovalWorkflowsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.controlPanel = &ControlPanel{
+		client: plumbing.NewControlPanelClient(c.grpcConn),
+		parent: c,
+	}
+	c.roles = &Roles{
+		client: plumbing.NewRolesClient(c.grpcConn),
+		parent: c,
+	}
+	c.groups = &Groups{
+		client: plumbing.NewGroupsClient(c.grpcConn),
+		parent: c,
+	}
+	c.groupsHistory = &GroupsHistory{
+		client: plumbing.NewGroupsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.groupsRoles = &GroupsRoles{
+		client: plumbing.NewGroupsRolesClient(c.grpcConn),
+		parent: c,
+	}
+	c.groupsRolesHistory = &GroupsRolesHistory{
+		client: plumbing.NewGroupsRolesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.healthChecks = &HealthChecks{
+		client: plumbing.NewHealthChecksClient(c.grpcConn),
+		parent: c,
+	}
+	c.identityAliases = &IdentityAliases{
+		client: plumbing.NewIdentityAliasesClient(c.grpcConn),
+		parent: c,
+	}
+	c.identityAliasesHistory = &IdentityAliasesHistory{
+		client: plumbing.NewIdentityAliasesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.identitySets = &IdentitySets{
+		client: plumbing.NewIdentitySetsClient(c.grpcConn),
+		parent: c,
+	}
+	c.identitySetsHistory = &IdentitySetsHistory{
+		client: plumbing.NewIdentitySetsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.managedSecrets = &ManagedSecrets{
+		client: plumbing.NewManagedSecretsClient(c.grpcConn),
+		parent: c,
+	}
+	c.nodes = &Nodes{
+		client: plumbing.NewNodesClient(c.grpcConn),
+		parent: c,
+	}
+	c.nodesHistory = &NodesHistory{
+		client: plumbing.NewNodesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.organizationHistory = &OrganizationHistory{
+		client: plumbing.NewOrganizationHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.peeringGroupNodes = &PeeringGroupNodes{
+		client: plumbing.NewPeeringGroupNodesClient(c.grpcConn),
+		parent: c,
+	}
+	c.peeringGroupPeers = &PeeringGroupPeers{
+		client: plumbing.NewPeeringGroupPeersClient(c.grpcConn),
+		parent: c,
+	}
+	c.peeringGroupResources = &PeeringGroupResources{
+		client: plumbing.NewPeeringGroupResourcesClient(c.grpcConn),
+		parent: c,
+	}
+	c.peeringGroups = &PeeringGroups{
+		client: plumbing.NewPeeringGroupsClient(c.grpcConn),
+		parent: c,
+	}
+	c.policies = &Policies{
+		client: plumbing.NewPoliciesClient(c.grpcConn),
+		parent: c,
+	}
+	c.policiesHistory = &PoliciesHistory{
+		client: plumbing.NewPoliciesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.proxyClusterKeys = &ProxyClusterKeys{
+		client: plumbing.NewProxyClusterKeysClient(c.grpcConn),
+		parent: c,
+	}
+	c.queries = &Queries{
+		client: plumbing.NewQueriesClient(c.grpcConn),
+		parent: c,
+	}
+	c.remoteIdentities = &RemoteIdentities{
+		client: plumbing.NewRemoteIdentitiesClient(c.grpcConn),
+		parent: c,
+	}
+	c.remoteIdentitiesHistory = &RemoteIdentitiesHistory{
+		client: plumbing.NewRemoteIdentitiesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.remoteIdentityGroups = &RemoteIdentityGroups{
+		client: plumbing.NewRemoteIdentityGroupsClient(c.grpcConn),
+		parent: c,
+	}
+	c.remoteIdentityGroupsHistory = &RemoteIdentityGroupsHistory{
+		client: plumbing.NewRemoteIdentityGroupsHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.replays = &Replays{
+		client: plumbing.NewReplaysClient(c.grpcConn),
+		parent: c,
+	}
+	c.resources = &Resources{
+		client: plumbing.NewResourcesClient(c.grpcConn),
+		parent: c,
+	}
+	c.resourcesHistory = &ResourcesHistory{
+		client: plumbing.NewResourcesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.roleResources = &RoleResources{
+		client: plumbing.NewRoleResourcesClient(c.grpcConn),
+		parent: c,
+	}
+	c.roleResourcesHistory = &RoleResourcesHistory{
+		client: plumbing.NewRoleResourcesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.rolesHistory = &RolesHistory{
+		client: plumbing.NewRolesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.secretStores = &SecretStores{
+		client: plumbing.NewSecretStoresClient(c.grpcConn),
+		parent: c,
+	}
+	c.secretEngines = &SecretEngines{
+		client: plumbing.NewSecretEnginesClient(c.grpcConn),
+		parent: c,
+	}
+	c.secretStoreHealths = &SecretStoreHealths{
+		client: plumbing.NewSecretStoreHealthsClient(c.grpcConn),
+		parent: c,
+	}
+	c.secretStoresHistory = &SecretStoresHistory{
+		client: plumbing.NewSecretStoresHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.workflowApprovers = &WorkflowApprovers{
+		client: plumbing.NewWorkflowApproversClient(c.grpcConn),
+		parent: c,
+	}
+	c.workflowApproversHistory = &WorkflowApproversHistory{
+		client: plumbing.NewWorkflowApproversHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.workflowRoles = &WorkflowRoles{
+		client: plumbing.NewWorkflowRolesClient(c.grpcConn),
+		parent: c,
+	}
+	c.workflowRolesHistory = &WorkflowRolesHistory{
+		client: plumbing.NewWorkflowRolesHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.workflows = &Workflows{
+		client: plumbing.NewWorkflowsClient(c.grpcConn),
+		parent: c,
+	}
+	c.workflowsHistory = &WorkflowsHistory{
+		client: plumbing.NewWorkflowsHistoryClient(c.grpcConn),
+		parent: c,
+	}
 }
 
 // A ClientOption is an optional argument to New that can override the created

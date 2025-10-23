@@ -2810,6 +2810,45 @@ type ElasticacheRedis struct {
 	Username string `json:"username"`
 }
 
+// ElasticacheRedisIAM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type ElasticacheRedisIAM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// AWS region is needed in addition to hostname to generate the IAM signature
+	Region string `json:"region"`
+	// If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.
+	RoleAssumptionArn string `json:"roleAssumptionArn"`
+	// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
+	RoleExternalID string `json:"roleExternalId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// If set, TLS must be used to connect to this resource.
+	TlsRequired bool `json:"tlsRequired"`
+	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
 type EntraID struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -8845,6 +8884,60 @@ func (m *ElasticacheRedis) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the ElasticacheRedis.
 func (m *ElasticacheRedis) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*ElasticacheRedisIAM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) GetID() string { return m.ID }
+
+// GetName returns the name of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the ElasticacheRedisIAM.
+func (m *ElasticacheRedisIAM) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*EntraID) isOneOf_Resource() {}
