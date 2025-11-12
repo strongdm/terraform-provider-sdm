@@ -7653,6 +7653,16 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
+									"identity_alias_healthcheck_username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+									},
+									"identity_set_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "if provided use identity_set to map username to secret store path",
+									},
 									"lock_required": {
 										Type:        schema.TypeBool,
 										Optional:    true,
@@ -11285,21 +11295,23 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.RDP:
 			output[0]["rdp"] = append(output[0]["rdp"], entity{
-				"bind_interface":            (v.BindInterface),
-				"downgrade_nla_connections": (v.DowngradeNlaConnections),
-				"egress_filter":             (v.EgressFilter),
-				"hostname":                  (v.Hostname),
-				"id":                        (v.ID),
-				"lock_required":             (v.LockRequired),
-				"name":                      (v.Name),
-				"password":                  (v.Password),
-				"port":                      (v.Port),
-				"port_override":             (v.PortOverride),
-				"proxy_cluster_id":          (v.ProxyClusterID),
-				"secret_store_id":           (v.SecretStoreID),
-				"subdomain":                 (v.Subdomain),
-				"tags":                      convertTagsToPorcelain(v.Tags),
-				"username":                  (v.Username),
+				"bind_interface":                      (v.BindInterface),
+				"downgrade_nla_connections":           (v.DowngradeNlaConnections),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"id":                                  (v.ID),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"lock_required":                       (v.LockRequired),
+				"name":                                (v.Name),
+				"password":                            (v.Password),
+				"port":                                (v.Port),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"secret_store_id":                     (v.SecretStoreID),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            (v.Username),
 			})
 		case *sdm.RDPCert:
 			output[0]["rdp_cert"] = append(output[0]["rdp_cert"], entity{

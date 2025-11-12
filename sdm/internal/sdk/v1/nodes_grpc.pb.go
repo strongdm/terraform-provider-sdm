@@ -41,6 +41,9 @@ type NodesClient interface {
 	Delete(ctx context.Context, in *NodeDeleteRequest, opts ...grpc.CallOption) (*NodeDeleteResponse, error)
 	// List gets a list of Nodes matching a given set of criteria.
 	List(ctx context.Context, in *NodeListRequest, opts ...grpc.CallOption) (*NodeListResponse, error)
+	// TCPProbe instructs a Node to connect to an address via TCP and report the
+	// result.
+	TCPProbe(ctx context.Context, in *NodeTCPProbeRequest, opts ...grpc.CallOption) (*NodeTCPProbeResponse, error)
 }
 
 type nodesClient struct {
@@ -96,6 +99,15 @@ func (c *nodesClient) List(ctx context.Context, in *NodeListRequest, opts ...grp
 	return out, nil
 }
 
+func (c *nodesClient) TCPProbe(ctx context.Context, in *NodeTCPProbeRequest, opts ...grpc.CallOption) (*NodeTCPProbeResponse, error) {
+	out := new(NodeTCPProbeResponse)
+	err := c.cc.Invoke(ctx, "/v1.Nodes/TCPProbe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NodesServer is the server API for Nodes service.
 // All implementations must embed UnimplementedNodesServer
 // for forward compatibility
@@ -110,6 +122,9 @@ type NodesServer interface {
 	Delete(context.Context, *NodeDeleteRequest) (*NodeDeleteResponse, error)
 	// List gets a list of Nodes matching a given set of criteria.
 	List(context.Context, *NodeListRequest) (*NodeListResponse, error)
+	// TCPProbe instructs a Node to connect to an address via TCP and report the
+	// result.
+	TCPProbe(context.Context, *NodeTCPProbeRequest) (*NodeTCPProbeResponse, error)
 	mustEmbedUnimplementedNodesServer()
 }
 
@@ -131,6 +146,9 @@ func (UnimplementedNodesServer) Delete(context.Context, *NodeDeleteRequest) (*No
 }
 func (UnimplementedNodesServer) List(context.Context, *NodeListRequest) (*NodeListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedNodesServer) TCPProbe(context.Context, *NodeTCPProbeRequest) (*NodeTCPProbeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TCPProbe not implemented")
 }
 func (UnimplementedNodesServer) mustEmbedUnimplementedNodesServer() {}
 
@@ -235,6 +253,24 @@ func _Nodes_List_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nodes_TCPProbe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodeTCPProbeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodesServer).TCPProbe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.Nodes/TCPProbe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodesServer).TCPProbe(ctx, req.(*NodeTCPProbeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Nodes_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.Nodes",
 	HandlerType: (*NodesServer)(nil),
@@ -258,6 +294,10 @@ var _Nodes_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _Nodes_List_Handler,
+		},
+		{
+			MethodName: "TCPProbe",
+			Handler:    _Nodes_TCPProbe_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

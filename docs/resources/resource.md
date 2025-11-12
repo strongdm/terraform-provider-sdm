@@ -1384,6 +1384,8 @@ The following arguments are supported by the Resource resource:
 	* `downgrade_nla_connections` - (Optional) When set, network level authentication will not be used. May resolve unexpected authentication errors to older servers. When set, healthchecks cannot detect if a provided username / password pair is correct.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	* `identity_set_id` - (Optional) if provided use identity_set to map username to secret store path
 	* `lock_required` - (Optional) When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.

@@ -4081,9 +4081,11 @@ func (svc *ManagedSecrets) Logs(
 	), nil
 }
 
-// Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
-// - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
-// - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
+// Nodes make up the StrongDM network, and allow your users to connect securely to your resources.
+// There are three types of nodes:
+// 1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
+// 2. **Gateway:** a relay that also listens for connections from StrongDM clients
+// 3. **Proxy Cluster:** a cluster of workers that together mediate access from clients to resources
 type Nodes struct {
 	client plumbing.NodesClient
 	parent *Client
@@ -4308,6 +4310,49 @@ func (svc *Nodes) List(
 			return result, req.Meta.Cursor != "", nil
 		},
 	), nil
+}
+
+// TCPProbe instructs a Node to connect to an address via TCP and report the
+// result.
+func (svc *Nodes) TCPProbe(
+	ctx context.Context,
+	nodeId string,
+	host string,
+	port int32) (
+	*NodeTCPProbeResponse,
+	error) {
+	req := plumbing.NodeTCPProbeRequest{}
+
+	req.NodeId = (nodeId)
+	req.Host = (host)
+	req.Port = (port)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.NodeTCPProbeResponse, error) {
+			return svc.client.TCPProbe(svc.parent.wrapContext(ctx, &req, "Nodes.TCPProbe"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &NodeTCPProbeResponse{}
+	resp.Error = (plumbingResponse.Error)
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	resp.Succeeded = (plumbingResponse.Succeeded)
+	return resp, nil
 }
 
 // NodesHistory records all changes to the state of a Node.

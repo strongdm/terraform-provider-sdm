@@ -4736,10 +4736,11 @@ type NeptuneIAM struct {
 	Tags Tags `json:"tags"`
 }
 
-// Nodes make up the strongDM network, and allow your users to connect securely to your resources.
-// There are two types of nodes:
+// Nodes make up the StrongDM network, and allow your users to connect securely to your resources.
+// There are three types of nodes:
 // 1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
-// 1. **Gateways:** a relay that also listens for connections from strongDM clients
+// 2. **Gateway:** a relay that also listens for connections from StrongDM clients
+// 3. **Proxy Cluster:** a cluster of workers that together mediate access from clients to resources
 type Node interface {
 	// GetID returns the unique identifier of the Node.
 	GetID() string
@@ -4887,6 +4888,18 @@ type NodeMaintenanceWindow struct {
 	// node will restart as soon as it enters an allowed day / hour combination. At least one
 	// maintenance window, out of all configured windows for a node, must have this as false.
 	RequireIdleness bool `json:"requireIdleness"`
+}
+
+// NodeTCPProbeResponse reports the result of a TCP probe.
+type NodeTCPProbeResponse struct {
+	// The connection error reported by the node, or the empty string if the probe succeeded.
+	Error string `json:"error"`
+	// Reserved for future use.
+	Meta *CreateResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// True if the node was able to connect to the target address.
+	Succeeded bool `json:"succeeded"`
 }
 
 // NodeUpdateResponse returns the fields of a Node after it has been updated by
@@ -5581,6 +5594,10 @@ type RDP struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// if provided use identity_set to map username to secret store path
+	IdentitySetID string `json:"identitySetId"`
 	// When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	LockRequired bool `json:"lockRequired"`
 	// Unique human-readable name of the Resource.
@@ -13960,8 +13977,6 @@ type User struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAWSEC2CertSSHStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAWSEC2CertSSHStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -13981,8 +13996,6 @@ type VaultAWSEC2CertSSHStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAWSEC2CertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAWSEC2CertX509Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -14015,8 +14028,6 @@ type VaultAWSEC2Store struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAWSIAMCertSSHStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAWSIAMCertSSHStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -14036,8 +14047,6 @@ type VaultAWSIAMCertSSHStore struct {
 	Tags Tags `json:"tags"`
 }
 
-// VaultAWSIAMCertX509Store is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type VaultAWSIAMCertX509Store struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`

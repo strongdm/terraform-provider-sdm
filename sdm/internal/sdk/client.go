@@ -42,7 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/15.27.0"
+	defaultUserAgent = "strongdm-sdk-go/15.29.0"
 )
 
 var _ = metadata.Pairs
@@ -687,9 +687,11 @@ func (c *Client) ManagedSecrets() *ManagedSecrets {
 	return c.managedSecrets
 }
 
-// Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
-// - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
-// - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
+// Nodes make up the StrongDM network, and allow your users to connect securely to your resources.
+// There are three types of nodes:
+// 1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
+// 2. **Gateway:** a relay that also listens for connections from StrongDM clients
+// 3. **Proxy Cluster:** a cluster of workers that together mediate access from clients to resources
 func (c *Client) Nodes() *Nodes {
 	return c.nodes
 }
@@ -1057,9 +1059,11 @@ func (c *SnapshotClient) IdentitySets() SnapshotIdentitySets {
 	return c.client.identitySets
 }
 
-// Nodes make up the strongDM network, and allow your users to connect securely to your resources. There are two types of nodes:
-// - **Gateways** are the entry points into network. They listen for connection from the strongDM client, and provide access to databases and servers.
-// - **Relays** are used to extend the strongDM network into segmented subnets. They provide access to databases and servers but do not listen for incoming connections.
+// Nodes make up the StrongDM network, and allow your users to connect securely to your resources.
+// There are three types of nodes:
+// 1. **Relay:** creates connectivity to your datasources, while maintaining the egress-only nature of your firewall
+// 2. **Gateway:** a relay that also listens for connections from StrongDM clients
+// 3. **Proxy Cluster:** a cluster of workers that together mediate access from clients to resources
 func (c *SnapshotClient) Nodes() SnapshotNodes {
 	return c.client.nodes
 }

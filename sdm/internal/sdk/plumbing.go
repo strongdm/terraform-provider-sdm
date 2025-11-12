@@ -14470,6 +14470,61 @@ func convertRepeatedNodeMaintenanceWindowToPorcelain(plumbings []*proto.NodeMain
 	}
 	return items, nil
 }
+func convertNodeTCPProbeResponseToPorcelain(plumbing *proto.NodeTCPProbeResponse) (*NodeTCPProbeResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &NodeTCPProbeResponse{}
+	porcelain.Error = plumbing.Error
+	if v, err := convertCreateResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	porcelain.Succeeded = plumbing.Succeeded
+	return porcelain, nil
+}
+
+func convertNodeTCPProbeResponseToPlumbing(porcelain *NodeTCPProbeResponse) *proto.NodeTCPProbeResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.NodeTCPProbeResponse{}
+	plumbing.Error = (porcelain.Error)
+	plumbing.Meta = convertCreateResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.Succeeded = (porcelain.Succeeded)
+	return plumbing
+}
+func convertRepeatedNodeTCPProbeResponseToPlumbing(
+	porcelains []*NodeTCPProbeResponse,
+) []*proto.NodeTCPProbeResponse {
+	var items []*proto.NodeTCPProbeResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertNodeTCPProbeResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedNodeTCPProbeResponseToPorcelain(plumbings []*proto.NodeTCPProbeResponse) (
+	[]*NodeTCPProbeResponse,
+	error,
+) {
+	var items []*NodeTCPProbeResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertNodeTCPProbeResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertNodeUpdateResponseToPorcelain(plumbing *proto.NodeUpdateResponse) (*NodeUpdateResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -16767,6 +16822,8 @@ func convertRDPToPorcelain(plumbing *proto.RDP) (*RDP, error) {
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
@@ -16795,6 +16852,8 @@ func convertRDPToPlumbing(porcelain *RDP) *proto.RDP {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)

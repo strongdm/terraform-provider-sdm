@@ -649,7 +649,7 @@ func resourceSecretStore() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "VaultAWSEC2CertSSHStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
@@ -695,7 +695,7 @@ func resourceSecretStore() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "VaultAWSEC2CertX509Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
@@ -772,7 +772,7 @@ func resourceSecretStore() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "VaultAWSIAMCertSSHStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
@@ -818,7 +818,7 @@ func resourceSecretStore() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "VaultAWSIAMCertX509Store is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
