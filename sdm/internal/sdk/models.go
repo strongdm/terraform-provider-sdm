@@ -553,6 +553,10 @@ type Account interface {
 	GetTags() Tags
 	// SetTags sets the tags of the Account.
 	SetTags(Tags)
+	// GetCreatedAt returns the created at of the Account.
+	GetCreatedAt() time.Time
+	// SetCreatedAt sets the created at of the Account.
+	SetCreatedAt(time.Time)
 	isOneOf_Account()
 }
 
@@ -580,6 +584,16 @@ func (m *Service) GetTags() Tags {
 func (m *Service) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
+
+// GetCreatedAt returns the created at of the Service.
+func (m *Service) GetCreatedAt() time.Time {
+	return m.CreatedAt
+}
+
+// SetCreatedAt sets the created at of the Service.
+func (m *Service) SetCreatedAt(v time.Time) {
+	m.CreatedAt = v
+}
 func (*Token) isOneOf_Account() {}
 
 // GetID returns the unique identifier of the Token.
@@ -604,6 +618,16 @@ func (m *Token) GetTags() Tags {
 func (m *Token) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
+
+// GetCreatedAt returns the created at of the Token.
+func (m *Token) GetCreatedAt() time.Time {
+	return m.CreatedAt
+}
+
+// SetCreatedAt sets the created at of the Token.
+func (m *Token) SetCreatedAt(v time.Time) {
+	m.CreatedAt = v
+}
 func (*User) isOneOf_Account() {}
 
 // GetID returns the unique identifier of the User.
@@ -627,6 +651,16 @@ func (m *User) GetTags() Tags {
 // SetTags sets the tags of the User.
 func (m *User) SetTags(v Tags) {
 	m.Tags = v.clone()
+}
+
+// GetCreatedAt returns the created at of the User.
+func (m *User) GetCreatedAt() time.Time {
+	return m.CreatedAt
+}
+
+// SetCreatedAt sets the created at of the User.
+func (m *User) SetCreatedAt(v time.Time) {
+	m.CreatedAt = v
 }
 
 // AccountAttachments assign an account to a role.
@@ -4669,6 +4703,45 @@ type Mysql struct {
 	// If true, appends the hostname to the username when hitting a database.azure.com address
 	UseAzureSingleServerUsernames bool `json:"useAzureSingleServerUsernames"`
 	// The username to authenticate with.
+	Username string `json:"username"`
+}
+
+// MysqlEngine is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type MysqlEngine struct {
+	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
+	AfterReadTtl time.Duration `json:"afterReadTtl"`
+	// Database is the database to verify credential against.
+	Database string `json:"database"`
+	// Hostname is the hostname or IP address of the MySQL server.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Secret Engine.
+	ID string `json:"id"`
+	// An interval of public/private key rotation for secret engine in days
+	KeyRotationIntervalDays int32 `json:"keyRotationIntervalDays"`
+	// Unique human-readable name of the Secret Engine.
+	Name string `json:"name"`
+	// Password is the password to connect to the MySQL server.
+	Password string `json:"password"`
+	// Policy for password creation
+	Policy *SecretEnginePolicy `json:"policy"`
+	// Port is the port number of the MySQL server.
+	Port uint32 `json:"port"`
+	// Public key linked with a secret engine
+	PublicKey []byte `json:"publicKey"`
+	// Backing secret store identifier
+	SecretStoreID string `json:"secretStoreId"`
+	// Backing Secret Store root path where managed secrets are going to be stored
+	SecretStoreRootPath string `json:"secretStoreRootPath"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// TLS enables TLS/SSL when connecting to the MySQL server.
+	Tls bool `json:"tls"`
+	// TLS disable certificate verification
+	TlsSkipVerify bool `json:"tlsSkipVerify"`
+	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
+	Ttl time.Duration `json:"ttl"`
+	// Username is the username to connect to the MySQL server.
 	Username string `json:"username"`
 }
 
@@ -12723,6 +12796,60 @@ func (m *KeyValueEngine) GetPublicKey() []byte {
 func (m *KeyValueEngine) SetPublicKey(v []byte) {
 	m.PublicKey = v
 }
+func (*MysqlEngine) isOneOf_SecretEngine() {}
+
+// GetID returns the unique identifier of the MysqlEngine.
+func (m *MysqlEngine) GetID() string { return m.ID }
+
+// GetName returns the name of the MysqlEngine.
+func (m *MysqlEngine) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MysqlEngine.
+func (m *MysqlEngine) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MysqlEngine.
+func (m *MysqlEngine) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MysqlEngine.
+func (m *MysqlEngine) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MysqlEngine.
+func (m *MysqlEngine) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MysqlEngine.
+func (m *MysqlEngine) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetSecretStoreRootPath returns the secret store root path of the MysqlEngine.
+func (m *MysqlEngine) GetSecretStoreRootPath() string {
+	return m.SecretStoreRootPath
+}
+
+// SetSecretStoreRootPath sets the secret store root path of the MysqlEngine.
+func (m *MysqlEngine) SetSecretStoreRootPath(v string) {
+	m.SecretStoreRootPath = v
+}
+
+// GetPublicKey returns the public key of the MysqlEngine.
+func (m *MysqlEngine) GetPublicKey() []byte {
+	return m.PublicKey
+}
+
+// SetPublicKey sets the public key of the MysqlEngine.
+func (m *MysqlEngine) SetPublicKey(v []byte) {
+	m.PublicKey = v
+}
 func (*PostgresEngine) isOneOf_SecretEngine() {}
 
 // GetID returns the unique identifier of the PostgresEngine.
@@ -13661,6 +13788,8 @@ type SecretStoreUpdateResponse struct {
 // A Service is a service account that can connect to resources they are granted
 // directly, or granted via roles. Services are typically automated jobs.
 type Service struct {
+	// CreatedAt is the timestamp when the service was created
+	CreatedAt time.Time `json:"createdAt"`
 	// Unique identifier of the Service.
 	ID string `json:"id"`
 	// Unique human-readable name of the Service.
@@ -13888,6 +14017,8 @@ type Teradata struct {
 type Token struct {
 	// Corresponds to the type of token, e.g. api or admin-token.
 	AccountType string `json:"accountType"`
+	// CreatedAt is the timestamp when the token was created
+	CreatedAt time.Time `json:"createdAt"`
 	// The timestamp when the Token will expire.
 	Deadline time.Time `json:"deadline"`
 	// Duration from token creation to expiration.
@@ -13948,6 +14079,8 @@ type UpdateResponseMetadata struct {
 type User struct {
 	// SCIM contains the raw SCIM metadata for the user. This is a read-only field.
 	SCIM string `json:"scim"`
+	// CreatedAt is the timestamp when the user was created
+	CreatedAt time.Time `json:"createdAt"`
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
 	// External ID is an alternative unique ID this user is represented by within an external service.

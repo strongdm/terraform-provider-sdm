@@ -30,6 +30,11 @@ func resourceAccount() *schema.Resource {
 				Description: "A Service is a service account that can connect to resources they are granted directly, or granted via roles. Services are typically automated jobs.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"created_at": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "CreatedAt is the timestamp when the service was created",
+						},
 						"name": {
 							Type:        schema.TypeString,
 							Required:    true,
@@ -66,6 +71,11 @@ func resourceAccount() *schema.Resource {
 							Type:        schema.TypeString,
 							Computed:    true,
 							Description: "SCIM contains the raw SCIM metadata for the user. This is a read-only field.",
+						},
+						"created_at": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "CreatedAt is the timestamp when the user was created",
 						},
 						"email": {
 							Type:        schema.TypeString,
@@ -186,10 +196,11 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 		_ = localV
 		d.Set("service", []map[string]interface{}{
 			{
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
-				"tags":      convertTagsToPorcelain(v.Tags),
-				"token":     resp.Token,
+				"created_at": convertTimestampToPorcelain(v.CreatedAt),
+				"name":       (v.Name),
+				"suspended":  (v.Suspended),
+				"tags":       convertTagsToPorcelain(v.Tags),
+				"token":      resp.Token,
 			},
 		})
 
@@ -199,6 +210,7 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 		d.Set("user", []map[string]interface{}{
 			{
 				"scim":                (v.SCIM),
+				"created_at":          convertTimestampToPorcelain(v.CreatedAt),
 				"email":               (v.Email),
 				"external_id":         (v.ExternalID),
 				"first_name":          (v.FirstName),
@@ -237,10 +249,11 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 		_ = localV
 		d.Set("service", []map[string]interface{}{
 			{
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
-				"tags":      convertTagsToPorcelain(v.Tags),
-				"token":     d.Get("service.0.token"),
+				"created_at": convertTimestampToPorcelain(v.CreatedAt),
+				"name":       (v.Name),
+				"suspended":  (v.Suspended),
+				"tags":       convertTagsToPorcelain(v.Tags),
+				"token":      d.Get("service.0.token"),
 			},
 		})
 
@@ -253,6 +266,7 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 		d.Set("user", []map[string]interface{}{
 			{
 				"scim":                (v.SCIM),
+				"created_at":          convertTimestampToPorcelain(v.CreatedAt),
 				"email":               (v.Email),
 				"external_id":         (v.ExternalID),
 				"first_name":          (v.FirstName),

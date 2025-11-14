@@ -14004,6 +14004,95 @@ func convertRepeatedMysqlToPorcelain(plumbings []*proto.Mysql) (
 	}
 	return items, nil
 }
+func convertMysqlEngineToPorcelain(plumbing *proto.MysqlEngine) (*MysqlEngine, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &MysqlEngine{}
+	if v, err := convertDurationToPorcelain(plumbing.AfterReadTtl); err != nil {
+		return nil, fmt.Errorf("error converting field AfterReadTtl: %v", err)
+	} else {
+		porcelain.AfterReadTtl = v
+	}
+	porcelain.Database = plumbing.Database
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	porcelain.Port = plumbing.Port
+	porcelain.PublicKey = plumbing.PublicKey
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SecretStoreRootPath = plumbing.SecretStoreRootPath
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Tls = plumbing.Tls
+	porcelain.TlsSkipVerify = plumbing.TlsSkipVerify
+	if v, err := convertDurationToPorcelain(plumbing.Ttl); err != nil {
+		return nil, fmt.Errorf("error converting field Ttl: %v", err)
+	} else {
+		porcelain.Ttl = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertMysqlEngineToPlumbing(porcelain *MysqlEngine) *proto.MysqlEngine {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MysqlEngine{}
+	plumbing.AfterReadTtl = convertDurationToPlumbing(porcelain.AfterReadTtl)
+	plumbing.Database = (porcelain.Database)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Tls = (porcelain.Tls)
+	plumbing.TlsSkipVerify = (porcelain.TlsSkipVerify)
+	plumbing.Ttl = convertDurationToPlumbing(porcelain.Ttl)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedMysqlEngineToPlumbing(
+	porcelains []*MysqlEngine,
+) []*proto.MysqlEngine {
+	var items []*proto.MysqlEngine
+	for _, porcelain := range porcelains {
+		items = append(items, convertMysqlEngineToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMysqlEngineToPorcelain(plumbings []*proto.MysqlEngine) (
+	[]*MysqlEngine,
+	error,
+) {
+	var items []*MysqlEngine
+	for _, plumbing := range plumbings {
+		if v, err := convertMysqlEngineToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertNeptuneToPorcelain(plumbing *proto.Neptune) (*Neptune, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -20295,6 +20384,8 @@ func convertSecretEngineToPlumbing(porcelain SecretEngine) *proto.SecretEngine {
 		plumbing.SecretEngine = &proto.SecretEngine_ActiveDirectory{ActiveDirectory: convertActiveDirectoryEngineToPlumbing(v)}
 	case *KeyValueEngine:
 		plumbing.SecretEngine = &proto.SecretEngine_KeyValue{KeyValue: convertKeyValueEngineToPlumbing(v)}
+	case *MysqlEngine:
+		plumbing.SecretEngine = &proto.SecretEngine_Mysql{Mysql: convertMysqlEngineToPlumbing(v)}
 	case *PostgresEngine:
 		plumbing.SecretEngine = &proto.SecretEngine_Postgres{Postgres: convertPostgresEngineToPlumbing(v)}
 	}
@@ -20307,6 +20398,9 @@ func convertSecretEngineToPorcelain(plumbing *proto.SecretEngine) (SecretEngine,
 	}
 	if plumbing.GetKeyValue() != nil {
 		return convertKeyValueEngineToPorcelain(plumbing.GetKeyValue())
+	}
+	if plumbing.GetMysql() != nil {
+		return convertMysqlEngineToPorcelain(plumbing.GetMysql())
 	}
 	if plumbing.GetPostgres() != nil {
 		return convertPostgresEngineToPorcelain(plumbing.GetPostgres())
@@ -21616,6 +21710,11 @@ func convertServiceToPorcelain(plumbing *proto.Service) (*Service, error) {
 		return nil, nil
 	}
 	porcelain := &Service{}
+	if v, err := convertTimestampToPorcelain(plumbing.CreatedAt); err != nil {
+		return nil, fmt.Errorf("error converting field CreatedAt: %v", err)
+	} else {
+		porcelain.CreatedAt = v
+	}
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Suspended = plumbing.Suspended
@@ -21632,6 +21731,7 @@ func convertServiceToPlumbing(porcelain *Service) *proto.Service {
 		return nil
 	}
 	plumbing := &proto.Service{}
+	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Suspended = (porcelain.Suspended)
@@ -22194,6 +22294,11 @@ func convertTokenToPorcelain(plumbing *proto.Token) (*Token, error) {
 	}
 	porcelain := &Token{}
 	porcelain.AccountType = plumbing.AccountType
+	if v, err := convertTimestampToPorcelain(plumbing.CreatedAt); err != nil {
+		return nil, fmt.Errorf("error converting field CreatedAt: %v", err)
+	} else {
+		porcelain.CreatedAt = v
+	}
 	if v, err := convertTimestampToPorcelain(plumbing.Deadline); err != nil {
 		return nil, fmt.Errorf("error converting field Deadline: %v", err)
 	} else {
@@ -22227,6 +22332,7 @@ func convertTokenToPlumbing(porcelain *Token) *proto.Token {
 	}
 	plumbing := &proto.Token{}
 	plumbing.AccountType = (porcelain.AccountType)
+	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
 	plumbing.Deadline = convertTimestampToPlumbing(porcelain.Deadline)
 	plumbing.Duration = convertDurationToPlumbing(porcelain.Duration)
 	plumbing.Id = (porcelain.ID)
@@ -22379,6 +22485,11 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 	}
 	porcelain := &User{}
 	porcelain.SCIM = plumbing.SCIM
+	if v, err := convertTimestampToPorcelain(plumbing.CreatedAt); err != nil {
+		return nil, fmt.Errorf("error converting field CreatedAt: %v", err)
+	} else {
+		porcelain.CreatedAt = v
+	}
 	porcelain.Email = plumbing.Email
 	porcelain.ExternalID = plumbing.ExternalId
 	porcelain.FirstName = plumbing.FirstName
@@ -22404,6 +22515,7 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 	}
 	plumbing := &proto.User{}
 	plumbing.SCIM = (porcelain.SCIM)
+	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
 	plumbing.Email = (porcelain.Email)
 	plumbing.ExternalId = (porcelain.ExternalID)
 	plumbing.FirstName = (porcelain.FirstName)

@@ -57,9 +57,12 @@ The following arguments are supported by the Account resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Account resource:
 * `id` - A unique identifier for the Account resource.
+* service:
+	* `created_at` - CreatedAt is the timestamp when the service was created
 
 * user:
 	* `scim` - SCIM contains the raw SCIM metadata for the user. This is a read-only field.
+	* `created_at` - CreatedAt is the timestamp when the user was created
 	* `managed_by` - Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.
 	* `resolved_manager_id` - Resolved Manager ID is the ID of the user's manager derived from the manager_id, if present, or from the SCIM metadata. This is a read-only field that's only populated for get and list.
 	* `suspended` - Suspended is a read only field for the User's suspended state.

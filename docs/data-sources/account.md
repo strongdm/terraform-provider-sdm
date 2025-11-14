@@ -54,12 +54,14 @@ In addition to provided arguments above, the following attributes are returned b
 * `ids` - a list of strings of ids of data sources that match the given arguments.
 * `accounts` - A single element list containing a map, where each key lists one of the following objects:
 	* service:
+		* `created_at` - CreatedAt is the timestamp when the service was created
 		* `id` - Unique identifier of the Service.
 		* `name` - Unique human-readable name of the Service.
 		* `suspended` - The Service's suspended state.
 		* `tags` - Tags is a map of key, value pairs.
 	* token:
 		* `account_type` - Corresponds to the type of token, e.g. api or admin-token.
+		* `created_at` - CreatedAt is the timestamp when the token was created
 		* `deadline` - The timestamp when the Token will expire.
 		* `duration` - Duration from token creation to expiration.
 		* `id` - Unique identifier of the Token.
@@ -70,6 +72,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* user:
 		* `scim` - SCIM contains the raw SCIM metadata for the user. This is a read-only field.
+		* `created_at` - CreatedAt is the timestamp when the user was created
 		* `email` - The User's email address. Must be unique.
 		* `external_id` - External ID is an alternative unique ID this user is represented by within an external service.
 		* `first_name` - The User's first name.

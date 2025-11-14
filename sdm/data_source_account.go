@@ -86,6 +86,11 @@ func dataSourceAccount() *schema.Resource {
 							Description: "A Service is a service account that can connect to resources they are granted directly, or granted via roles. Services are typically automated jobs.",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"created_at": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "CreatedAt is the timestamp when the service was created",
+									},
 									"id": {
 										Type:        schema.TypeString,
 										Optional:    true,
@@ -120,6 +125,11 @@ func dataSourceAccount() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Description: "Corresponds to the type of token, e.g. api or admin-token.",
+									},
+									"created_at": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "CreatedAt is the timestamp when the token was created",
 									},
 									"deadline": {
 										Type:        schema.TypeString,
@@ -178,6 +188,11 @@ func dataSourceAccount() *schema.Resource {
 										Type:        schema.TypeString,
 										Computed:    true,
 										Description: "SCIM contains the raw SCIM metadata for the user. This is a read-only field.",
+									},
+									"created_at": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "CreatedAt is the timestamp when the user was created",
 									},
 									"email": {
 										Type:        schema.TypeString,
@@ -265,6 +280,10 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 	}
 	if v, ok := d.GetOkExists("account_type"); ok {
 		filter += "accounttype:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("created_at"); ok {
+		filter += "createdat:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("deadline"); ok {
@@ -358,14 +377,16 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 		switch v := resp.Value().(type) {
 		case *sdm.Service:
 			output[0]["service"] = append(output[0]["service"], entity{
-				"id":        (v.ID),
-				"name":      (v.Name),
-				"suspended": (v.Suspended),
-				"tags":      convertTagsToPorcelain(v.Tags),
+				"created_at": convertTimestampToPorcelain(v.CreatedAt),
+				"id":         (v.ID),
+				"name":       (v.Name),
+				"suspended":  (v.Suspended),
+				"tags":       convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Token:
 			output[0]["token"] = append(output[0]["token"], entity{
 				"account_type": (v.AccountType),
+				"created_at":   convertTimestampToPorcelain(v.CreatedAt),
 				"deadline":     convertTimestampToPorcelain(v.Deadline),
 				"duration":     convertDurationToPorcelain(v.Duration),
 				"id":           (v.ID),
@@ -378,6 +399,7 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 		case *sdm.User:
 			output[0]["user"] = append(output[0]["user"], entity{
 				"scim":                (v.SCIM),
+				"created_at":          convertTimestampToPorcelain(v.CreatedAt),
 				"email":               (v.Email),
 				"external_id":         (v.ExternalID),
 				"first_name":          (v.FirstName),

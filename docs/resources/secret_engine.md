@@ -34,6 +34,19 @@ The following arguments are supported by the SecretEngine resource:
 	* `secret_store_id` - (Required) Backing secret store identifier
 	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* mysql_secret_engine:
+	* `database` - (Required) Database is the database to verify credential against.
+	* `hostname` - (Required) Hostname is the hostname or IP address of the MySQL server.
+	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
+	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `password` - (Required) Password is the password to connect to the MySQL server.
+	* `port` - (Required) Port is the port number of the MySQL server.
+	* `secret_store_id` - (Required) Backing secret store identifier
+	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls` - (Optional) TLS enables TLS/SSL when connecting to the MySQL server.
+	* `tls_skip_verify` - (Optional) TLS disable certificate verification
+	* `username` - (Required) Username is the username to connect to the MySQL server.
 * postgres_secret_engine:
 	* `database` - (Required) Database is the database to verify credential against.
 	* `hostname` - (Required) Hostname is the hostname or IP address of the Postgres server.
@@ -52,6 +65,8 @@ In addition to provided arguments above, the following attributes are returned b
 * active_directory:
 	* `public_key` - Public key linked with a secret engine
 * key_value:
+	* `public_key` - Public key linked with a secret engine
+* mysql_secret_engine:
 	* `public_key` - Public key linked with a secret engine
 * postgres_secret_engine:
 	* `public_key` - Public key linked with a secret engine

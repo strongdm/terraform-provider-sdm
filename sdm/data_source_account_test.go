@@ -48,6 +48,7 @@ func TestAccSDMAccount_Get(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "ids.0", account.GetID()),
 					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.#", "1"),
 					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "ids.#", "1"),
+					resource.TestCheckResourceAttr("data.sdm_account."+dsName, "accounts.0.user.0.created_at", account.CreatedAt.Format(time.RFC3339)),
 				),
 			},
 		},
