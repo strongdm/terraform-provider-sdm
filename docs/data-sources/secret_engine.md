@@ -17,24 +17,24 @@ The following arguments are supported by a SecretEngines data source:
 * `connection_timeout` - (Optional) Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration.
 * `database` - (Optional) Database is the database to verify credential against.
 * `do_not_validate_timestamps` - (Optional) If set to true this will prevent password change timestamp validation in Active Directory when validating credentials
-* `hostname` - (Optional) Hostname is the hostname or IP address of the Postgres server.
+* `hostname` - (Optional) Hostname is the hostname or IP address of the SQL Server.
 * `id` - (Optional) Unique identifier of the Secret Engine.
 * `insecure_tls` - (Optional) If true, skips LDAP server SSL certificate verification - insecure, use with caution!
 * `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 * `name` - (Optional) Unique human-readable name of the Secret Engine.
-* `password` - (Optional) Password is the password to connect to the Postgres server.
-* `port` - (Optional) Port is the port number of the Postgres server.
+* `password` - (Optional) Password is the password to connect to the SQL Server server.
+* `port` - (Optional) Port is the port number of the SQL Server server.
 * `request_timeout` - (Optional) Timeout, in seconds, for the connection when making requests against the server before returning back an error.
 * `secret_store_id` - (Optional) Backing secret store identifier
 * `secret_store_root_path` - (Optional) Backing Secret Store root path where managed secrets are going to be stored
 * `start_tls` - (Optional) If true, issues a StartTLS command after establishing an unencrypted connection.
 * `tags` - (Optional) Tags is a map of key, value pairs.
-* `tls` - (Optional) TLS enables TLS/SSL when connecting to the Postgres server.
+* `tls` - (Optional) TLS enables TLS/SSL when connecting to the SQL Server server.
 * `tls_skip_verify` - (Optional) TLS disable certificate verification
 * `upndomain` - (Optional) The domain (userPrincipalDomain) used to construct a UPN string for authentication.
 * `url` - (Optional) The LDAP server to connect to.
 * `userdn` - (Optional) Base DN under which to perform user search. Example: ou=Users,dc=example,dc=com
-* `username` - (Optional) Username is the username to connect to the Postgres server.
+* `username` - (Optional) Username is the username to connect to the SQL Server.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a SecretEngines data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_secret_engine ids.
@@ -103,3 +103,20 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tls` - TLS enables TLS/SSL when connecting to the Postgres server.
 		* `ttl` - The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
 		* `username` - Username is the username to connect to the Postgres server.
+	* sqlserver_secret_engine:
+		* `after_read_ttl` - The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
+		* `database` - Database is the database to verify credential against.
+		* `hostname` - Hostname is the hostname or IP address of the SQL Server.
+		* `id` - Unique identifier of the Secret Engine.
+		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
+		* `name` - Unique human-readable name of the Secret Engine.
+		* `password` - Password is the password to connect to the SQL Server server.
+		* `port` - Port is the port number of the SQL Server server.
+		* `public_key` - Public key linked with a secret engine
+		* `secret_store_id` - Backing secret store identifier
+		* `secret_store_root_path` - Backing Secret Store root path where managed secrets are going to be stored
+		* `tags` - Tags is a map of key, value pairs.
+		* `tls` - TLS enables TLS/SSL when connecting to the SQL Server server.
+		* `tls_skip_verify` - TLS disable certificate verification
+		* `ttl` - The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
+		* `username` - Username is the username to connect to the SQL Server.

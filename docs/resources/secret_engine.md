@@ -59,6 +59,19 @@ The following arguments are supported by the SecretEngine resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tls` - (Optional) TLS enables TLS/SSL when connecting to the Postgres server.
 	* `username` - (Required) Username is the username to connect to the Postgres server.
+* sqlserver_secret_engine:
+	* `database` - (Required) Database is the database to verify credential against.
+	* `hostname` - (Required) Hostname is the hostname or IP address of the SQL Server.
+	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
+	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `password` - (Required) Password is the password to connect to the SQL Server server.
+	* `port` - (Required) Port is the port number of the SQL Server server.
+	* `secret_store_id` - (Required) Backing secret store identifier
+	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls` - (Optional) TLS enables TLS/SSL when connecting to the SQL Server server.
+	* `tls_skip_verify` - (Optional) TLS disable certificate verification
+	* `username` - (Required) Username is the username to connect to the SQL Server.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the SecretEngine resource:
 * `id` - A unique identifier for the SecretEngine resource.
@@ -69,6 +82,8 @@ In addition to provided arguments above, the following attributes are returned b
 * mysql_secret_engine:
 	* `public_key` - Public key linked with a secret engine
 * postgres_secret_engine:
+	* `public_key` - Public key linked with a secret engine
+* sqlserver_secret_engine:
 	* `public_key` - Public key linked with a secret engine
 ## Import
 A SecretEngine can be imported using the id, e.g.,

@@ -4706,8 +4706,6 @@ type Mysql struct {
 	Username string `json:"username"`
 }
 
-// MysqlEngine is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type MysqlEngine struct {
 	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
 	AfterReadTtl time.Duration `json:"afterReadTtl"`
@@ -5395,8 +5393,6 @@ type Postgres struct {
 	Username string `json:"username"`
 }
 
-// PostgresEngine is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type PostgresEngine struct {
 	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
 	AfterReadTtl time.Duration `json:"afterReadTtl"`
@@ -12904,6 +12900,60 @@ func (m *PostgresEngine) GetPublicKey() []byte {
 func (m *PostgresEngine) SetPublicKey(v []byte) {
 	m.PublicKey = v
 }
+func (*SqlserverEngine) isOneOf_SecretEngine() {}
+
+// GetID returns the unique identifier of the SqlserverEngine.
+func (m *SqlserverEngine) GetID() string { return m.ID }
+
+// GetName returns the name of the SqlserverEngine.
+func (m *SqlserverEngine) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the SqlserverEngine.
+func (m *SqlserverEngine) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the SqlserverEngine.
+func (m *SqlserverEngine) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the SqlserverEngine.
+func (m *SqlserverEngine) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the SqlserverEngine.
+func (m *SqlserverEngine) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the SqlserverEngine.
+func (m *SqlserverEngine) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetSecretStoreRootPath returns the secret store root path of the SqlserverEngine.
+func (m *SqlserverEngine) GetSecretStoreRootPath() string {
+	return m.SecretStoreRootPath
+}
+
+// SetSecretStoreRootPath sets the secret store root path of the SqlserverEngine.
+func (m *SqlserverEngine) SetSecretStoreRootPath(v string) {
+	m.SecretStoreRootPath = v
+}
+
+// GetPublicKey returns the public key of the SqlserverEngine.
+func (m *SqlserverEngine) GetPublicKey() []byte {
+	return m.PublicKey
+}
+
+// SetPublicKey sets the public key of the SqlserverEngine.
+func (m *SqlserverEngine) SetPublicKey(v []byte) {
+	m.PublicKey = v
+}
 
 // SecretEngineCreateRequest specifies a Secret Engine to create.
 type SecretEngineCreateRequest struct {
@@ -13901,8 +13951,43 @@ type Snowsight struct {
 	Tags Tags `json:"tags"`
 }
 
-// StrongVaultStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
+type SqlserverEngine struct {
+	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
+	AfterReadTtl time.Duration `json:"afterReadTtl"`
+	// Database is the database to verify credential against.
+	Database string `json:"database"`
+	// Hostname is the hostname or IP address of the SQL Server.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Secret Engine.
+	ID string `json:"id"`
+	// An interval of public/private key rotation for secret engine in days
+	KeyRotationIntervalDays int32 `json:"keyRotationIntervalDays"`
+	// Unique human-readable name of the Secret Engine.
+	Name string `json:"name"`
+	// Password is the password to connect to the SQL Server server.
+	Password string `json:"password"`
+	// Policy for password creation
+	Policy *SecretEnginePolicy `json:"policy"`
+	// Port is the port number of the SQL Server server.
+	Port uint32 `json:"port"`
+	// Public key linked with a secret engine
+	PublicKey []byte `json:"publicKey"`
+	// Backing secret store identifier
+	SecretStoreID string `json:"secretStoreId"`
+	// Backing Secret Store root path where managed secrets are going to be stored
+	SecretStoreRootPath string `json:"secretStoreRootPath"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// TLS enables TLS/SSL when connecting to the SQL Server server.
+	Tls bool `json:"tls"`
+	// TLS disable certificate verification
+	TlsSkipVerify bool `json:"tlsSkipVerify"`
+	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
+	Ttl time.Duration `json:"ttl"`
+	// Username is the username to connect to the SQL Server.
+	Username string `json:"username"`
+}
+
 type StrongVaultStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`

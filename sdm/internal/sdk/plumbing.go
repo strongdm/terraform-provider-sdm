@@ -20388,6 +20388,8 @@ func convertSecretEngineToPlumbing(porcelain SecretEngine) *proto.SecretEngine {
 		plumbing.SecretEngine = &proto.SecretEngine_Mysql{Mysql: convertMysqlEngineToPlumbing(v)}
 	case *PostgresEngine:
 		plumbing.SecretEngine = &proto.SecretEngine_Postgres{Postgres: convertPostgresEngineToPlumbing(v)}
+	case *SqlserverEngine:
+		plumbing.SecretEngine = &proto.SecretEngine_Sqlserver{Sqlserver: convertSqlserverEngineToPlumbing(v)}
 	}
 	return plumbing
 }
@@ -20404,6 +20406,9 @@ func convertSecretEngineToPorcelain(plumbing *proto.SecretEngine) (SecretEngine,
 	}
 	if plumbing.GetPostgres() != nil {
 		return convertPostgresEngineToPorcelain(plumbing.GetPostgres())
+	}
+	if plumbing.GetSqlserver() != nil {
+		return convertSqlserverEngineToPorcelain(plumbing.GetSqlserver())
 	}
 	return nil, &UnknownError{Wrapped: fmt.Errorf("unknown polymorphic type, please upgrade your SDK")}
 }
@@ -21976,6 +21981,95 @@ func convertRepeatedSnowsightToPorcelain(plumbings []*proto.Snowsight) (
 	var items []*Snowsight
 	for _, plumbing := range plumbings {
 		if v, err := convertSnowsightToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertSqlserverEngineToPorcelain(plumbing *proto.SqlserverEngine) (*SqlserverEngine, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &SqlserverEngine{}
+	if v, err := convertDurationToPorcelain(plumbing.AfterReadTtl); err != nil {
+		return nil, fmt.Errorf("error converting field AfterReadTtl: %v", err)
+	} else {
+		porcelain.AfterReadTtl = v
+	}
+	porcelain.Database = plumbing.Database
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
+		return nil, fmt.Errorf("error converting field Policy: %v", err)
+	} else {
+		porcelain.Policy = v
+	}
+	porcelain.Port = plumbing.Port
+	porcelain.PublicKey = plumbing.PublicKey
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.SecretStoreRootPath = plumbing.SecretStoreRootPath
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Tls = plumbing.Tls
+	porcelain.TlsSkipVerify = plumbing.TlsSkipVerify
+	if v, err := convertDurationToPorcelain(plumbing.Ttl); err != nil {
+		return nil, fmt.Errorf("error converting field Ttl: %v", err)
+	} else {
+		porcelain.Ttl = v
+	}
+	porcelain.Username = plumbing.Username
+	return porcelain, nil
+}
+
+func convertSqlserverEngineToPlumbing(porcelain *SqlserverEngine) *proto.SqlserverEngine {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.SqlserverEngine{}
+	plumbing.AfterReadTtl = convertDurationToPlumbing(porcelain.AfterReadTtl)
+	plumbing.Database = (porcelain.Database)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PublicKey = (porcelain.PublicKey)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Tls = (porcelain.Tls)
+	plumbing.TlsSkipVerify = (porcelain.TlsSkipVerify)
+	plumbing.Ttl = convertDurationToPlumbing(porcelain.Ttl)
+	plumbing.Username = (porcelain.Username)
+	return plumbing
+}
+func convertRepeatedSqlserverEngineToPlumbing(
+	porcelains []*SqlserverEngine,
+) []*proto.SqlserverEngine {
+	var items []*proto.SqlserverEngine
+	for _, porcelain := range porcelains {
+		items = append(items, convertSqlserverEngineToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedSqlserverEngineToPorcelain(plumbings []*proto.SqlserverEngine) (
+	[]*SqlserverEngine,
+	error,
+) {
+	var items []*SqlserverEngine
+	for _, plumbing := range plumbings {
+		if v, err := convertSqlserverEngineToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)

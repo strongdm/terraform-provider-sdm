@@ -463,6 +463,96 @@ func dataSourceSecretEngine() *schema.Resource {
 								},
 							},
 						},
+						"sqlserver_secret_engine": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"after_read_ttl": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
+									},
+									"database": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Database is the database to verify credential against.",
+									},
+									"hostname": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Hostname is the hostname or IP address of the SQL Server.",
+									},
+									"id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique identifier of the Secret Engine.",
+									},
+									"key_rotation_interval_days": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "An interval of public/private key rotation for secret engine in days",
+									},
+									"name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Unique human-readable name of the Secret Engine.",
+									},
+									"password": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Password is the password to connect to the SQL Server server.",
+									},
+									"port": {
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: "Port is the port number of the SQL Server server.",
+									},
+									"public_key": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "Public key linked with a secret engine",
+									},
+									"secret_store_id": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Backing secret store identifier",
+									},
+									"secret_store_root_path": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Backing Secret Store root path where managed secrets are going to be stored",
+									},
+									"tags": {
+										Type:        schema.TypeMap,
+										Elem:        tagsElemType,
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "TLS enables TLS/SSL when connecting to the SQL Server server.",
+									},
+									"tls_skip_verify": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Description: "TLS disable certificate verification",
+									},
+									"ttl": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
+									},
+									"username": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Username is the username to connect to the SQL Server.",
+									},
+								},
+							},
+						},
 					},
 				},
 			},
@@ -689,6 +779,25 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"secret_store_root_path":     (v.SecretStoreRootPath),
 				"tags":                       convertTagsToPorcelain(v.Tags),
 				"tls":                        (v.Tls),
+				"ttl":                        convertDurationToPorcelain(v.Ttl),
+				"username":                   (v.Username),
+			})
+		case *sdm.SqlserverEngine:
+			output[0]["sqlserver_secret_engine"] = append(output[0]["sqlserver_secret_engine"], entity{
+				"after_read_ttl":             convertDurationToPorcelain(v.AfterReadTtl),
+				"database":                   (v.Database),
+				"hostname":                   (v.Hostname),
+				"id":                         (v.ID),
+				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
+				"name":                       (v.Name),
+				"password":                   (v.Password),
+				"port":                       (v.Port),
+				"public_key":                 convertBytesToPorcelain(v.PublicKey),
+				"secret_store_id":            (v.SecretStoreID),
+				"secret_store_root_path":     (v.SecretStoreRootPath),
+				"tags":                       convertTagsToPorcelain(v.Tags),
+				"tls":                        (v.Tls),
+				"tls_skip_verify":            (v.TlsSkipVerify),
 				"ttl":                        convertDurationToPorcelain(v.Ttl),
 				"username":                   (v.Username),
 			})

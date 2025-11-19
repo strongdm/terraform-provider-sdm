@@ -44,6 +44,28 @@ To configure the provider, you must first add the [API credentials](https://www.
 
 These credentials can be supplied to the provider directly or set using environment variables. As a best practice, we recommend using environment variables.
 
+### Timeouts
+
+The StrongDM provider supports the timeouts listed below, shown with their default values.
+
+For datasources
+```hcl
+timeouts {
+  default = "60s"
+}
+```
+
+For resources:
+```hcl
+timeouts {
+  default = "60s"
+  create = "60s"
+  update = "60s"
+  read = "60s"
+  delete = "60s"
+}
+```
+
 ## Environment Variables
 
 You can provide your credentials via the SDM_API_ACCESS_KEY and SDM_API_SECRET_KEY environment variables.
