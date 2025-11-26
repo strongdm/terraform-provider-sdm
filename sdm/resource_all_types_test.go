@@ -4,6 +4,7 @@ package sdm
 
 import (
 	"context"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -17,28 +18,72 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 	initAcceptanceTest(t)
 	identitySet := getEmailIdentitySet(t)
 	identitySetID := "\"" + identitySet.ID + "\""
-	certificateAuthorityRaw := []string{
-		"\"-----BEGIN CERTIFICATE-----",
-		"MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p",
-		"a3ViZUNBMB4XDTE5MDkyNDE2MDgwMVoXDTI5MDkyMjE2MDgwMVowFTETMBEGA1UE",
-		"AxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALpg",
-		"4/Kjq9CXaU7lSO9v5m7wFHg2+t1U8q7MmO4M9tDmhcgCR3x2lnQZR3cXSuq/BzV+",
-		"9VAalARIiA7JYXQRJvucqb9Aj7Q2A/wC9D2CovCCnfslZRGGhcw3zVRM0UwP0zg6",
-		"sgBixcls9YqKP2Td2+TwnWYMd43ah9MSO823VLNJi56JXoV0fyrdERpL5+5y6aUM",
-		"X3qXXZusVYGwJ4c2ucqWRWcXDDArxYVqNJV7GONeDee2HMBC+k12CUJU7HxIzZlW",
-		"QPWSRr9j3nTeJyC8sgbNJDJWLYvIv4j0+0OTUvB/2f8T7vbeWR5VeD7PtmzVN4/M",
-		"4U8jI64qUsPZBZGhXg0CAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMB0GA1UdJQQW",
-		"MBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3",
-		"DQEBCwUAA4IBAQB33WY0z4Aw1RCLYK06V/HtcuZdh5d6TWKHg/b9ncNbroJaEJGk",
-		"xPaIuVBzajygn2vdyv8iRX0yDgYM3lZ/P5SLbhD2oZRhi9qgOW6oNuN99EinUnQw",
-		"jp1R7F1ug1yxRgZLGgDlBL83jRJV0AgmxgOrbsd8sAVXKI8p70RFYAyBoGd9Pj9D",
-		"nohAJ+7Eh2xuPqnU2J7bzddP+ECoucSZ/Ex4qWF+0RFyFUwk/c/2nH9AvTNCUY2H",
-		"d/ref47hNcAAjTHG7OKqSUHhAkaOuGUdnGEyNuGHREd11S0x+oTjFDoNaJ6O4PDF",
-		"VTzHCUQlVvCxKklV3pArPBB7vJdjBFvZcreB",
-		"-----END CERTIFICATE-----\"",
-	}
-	certificateAuthority := strings.Join(certificateAuthorityRaw, "\\n")
-	_ = certificateAuthority
+	certificateAuthority := strconv.Quote(`-----BEGIN CERTIFICATE-----
+MIIC5zCCAc+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p
+a3ViZUNBMB4XDTE5MDkyNDE2MDgwMVoXDTI5MDkyMjE2MDgwMVowFTETMBEGA1UE
+AxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALpg
+4/Kjq9CXaU7lSO9v5m7wFHg2+t1U8q7MmO4M9tDmhcgCR3x2lnQZR3cXSuq/BzV+
+9VAalARIiA7JYXQRJvucqb9Aj7Q2A/wC9D2CovCCnfslZRGGhcw3zVRM0UwP0zg6
+sgBixcls9YqKP2Td2+TwnWYMd43ah9MSO823VLNJi56JXoV0fyrdERpL5+5y6aUM
+X3qXXZusVYGwJ4c2ucqWRWcXDDArxYVqNJV7GONeDee2HMBC+k12CUJU7HxIzZlW
+QPWSRr9j3nTeJyC8sgbNJDJWLYvIv4j0+0OTUvB/2f8T7vbeWR5VeD7PtmzVN4/M
+4U8jI64qUsPZBZGhXg0CAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMB0GA1UdJQQW
+MBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3
+DQEBCwUAA4IBAQB33WY0z4Aw1RCLYK06V/HtcuZdh5d6TWKHg/b9ncNbroJaEJGk
+xPaIuVBzajygn2vdyv8iRX0yDgYM3lZ/P5SLbhD2oZRhi9qgOW6oNuN99EinUnQw
+jp1R7F1ug1yxRgZLGgDlBL83jRJV0AgmxgOrbsd8sAVXKI8p70RFYAyBoGd9Pj9D
+nohAJ+7Eh2xuPqnU2J7bzddP+ECoucSZ/Ex4qWF+0RFyFUwk/c/2nH9AvTNCUY2H
+d/ref47hNcAAjTHG7OKqSUHhAkaOuGUdnGEyNuGHREd11S0x+oTjFDoNaJ6O4PDF
+VTzHCUQlVvCxKklV3pArPBB7vJdjBFvZcreB
+-----END CERTIFICATE-----`)
+	clientCert := strconv.Quote(`-----BEGIN CERTIFICATE-----
+MIIDhjCCAm6gAwIBAgIESNqSNDANBgkqhkiG9w0BAQsFADCBjTEtMCsGA1UELhMk
+MGJmZmNkOTQtZWNjYy00NDYwLTgyYWYtMTQyMzM0MWQ2YjAxMTkwNwYDVQQDEzBH
+b29nbGUgQ2xvdWQgU1FMIENsaWVudCBDQSBtYXJjaW4tei13b3JraW5nLWNlcnQx
+FDASBgNVBAoTC0dvb2dsZSwgSW5jMQswCQYDVQQGEwJVUzAeFw0yNTEwMTUxMTE1
+MThaFw0zNTEwMTMxMTE2MThaMEMxHjAcBgNVBAMTFW1hcmNpbi16LXdvcmtpbmct
+Y2VydDEUMBIGA1UEChMLR29vZ2xlLCBJbmMxCzAJBgNVBAYTAlVTMIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3CQWFaKLnEkalfpKNBoEr1G6rOOAoaiZ
+Radqb1QeWD0xzv29YoZd/KoIe6cu+57w46wMHwvghC22lPmhyc+DL1KqyH8P01gJ
+IaqNATnkrny669sjR5koIZBtvetApY16y7jx4cd97s0SNdjtuKlplq8McrAJh6rZ
+gZG9fwYKqhhMhk9VgwJMj5wMjgaKKhyn2nkf4wFUmojbprRt5kiCkp86RLGBkOyY
+2EbeR12lHQgDHGf8hbndgCGbVwkuhQbEzfBK9W9MXkIgi6IdB1YEjbe5A9SerwtI
+Y6/Ccj/4ajdcmOG/9U37IdwtUmrFVojVCqm2HOiAwnmzQXr4R57qmwIDAQABozcw
+NTAJBgNVHRMEAjAAMCgGA1UdEQQhMB+BHW1hcmNpbi56dWJyenlja2lAc3Ryb25n
+ZG0uY29tMA0GCSqGSIb3DQEBCwUAA4IBAQCiYb12nbiHA8OZQy2J/p0pl2FL8p0o
+iMzunYEEEDgk+QCyTdZO6SpdHcJ87ZRRvd/gN3uYQHbdpKkRmPKf0cQ6RmC6rAOy
+iuxQ167PaEFoFoiLX5vCjf/qbOOhxVZrFmFtk7OzI0spbECNTl4kkJ8XSNTkRKe0
+NUKA+LZ4OOFaoFwcw1eqo6xfJc9XFmeC/ItmizDpH//aHZDr5twtk0f8W1Z92Z6M
+ICpURLIbnqZ3y+V00cObW9tDXABDwG20z0KfWVoQSkAdCSMuJzqzz7gIDB8E50N7
+fnTTeSI7hDtxhz7q8sasQGUDZfjtdxWzg+zzRNWfp3xMN+i6aIXCmLBX
+-----END CERTIFICATE-----`)
+	clientKey := strconv.Quote(`-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA3CQWFaKLnEkalfpKNBoEr1G6rOOAoaiZRadqb1QeWD0xzv29
+YoZd/KoIe6cu+57w46wMHwvghC22lPmhyc+DL1KqyH8P01gJIaqNATnkrny669sj
+R5koIZBtvetApY16y7jx4cd97s0SNdjtuKlplq8McrAJh6rZgZG9fwYKqhhMhk9V
+gwJMj5wMjgaKKhyn2nkf4wFUmojbprRt5kiCkp86RLGBkOyY2EbeR12lHQgDHGf8
+hbndgCGbVwkuhQbEzfBK9W9MXkIgi6IdB1YEjbe5A9SerwtIY6/Ccj/4ajdcmOG/
+9U37IdwtUmrFVojVCqm2HOiAwnmzQXr4R57qmwIDAQABAoIBADTqobpin6+aLP9X
+MkYS6QRhn39WkoGJfwpsw1tue3rXfuUUPlV0GhyVnMNofRUz8BCyNxmxZ68uM+Dc
+nsTdklmqQ+49CMdTNqK2lf1w9qTwy5fNTc40pR5oUtDfv2LsPtPAqbgNlZp1BgcW
+lZIZew2jF1lsMmY/rdgE+emSQLcA/SOyVdLu5plvuQiuguFkLx+Pi9g1YJXCpLRV
+0Z/C6+AAJeMlDZlvHht3sA0DTj3evANQEOwc9pAYp8BVQmTpLb41WimhpKpMH4GQ
+e3eHnwokbYdedgZBysHuAvukw8rhG30qI5IIj+0Kyfzff5W+x6neDX8HV3fEmWPB
+M88XOjUCgYEA6ds/EINf+YYoYzIhB1Ts2X8iBuHntOCCFVL48d132E9KVHuMPz96
+uwyd8Fie8xUTZ7GIoQUTm5qoKPDc70iHRrxUXOp1bv5l46rC5+8yu5lVP0LIH5dZ
+cz1JfLs3hW9l/9C3cK3nwAqxDRLamh/jSt7UkWeOTVjqrLr9w9gUSl8CgYEA8Pxf
+ZGXk2DxRfM9nQL6ADNPLEeQADq6O4VG7skjyRtg3jzUKbxJjzyT7uYWdlMkj34ez
+B+ASymonr4h8PFdLLhgwXu8y/wWTppFTm7LnoPhsZMc3SyL5sxgBZDsJ67vbgToe
+azG4HfXFPm5CP7/9HUiG9xN6H+0nKrmzWZhzgUUCgYALlwIZH2myRCPcRq+8XUkf
+vl1BWhDRtg68X9BWrFM0NTnJ1hWtTMgYXRe2wa2e/nxntzS+RjIilBehb86DTWTm
+7I6BzFzlk1YZYm0mcYRiJ8dBy11/s1CLlY3+0Ih/5HV5qC5vNy81JVKBA14yJUJu
+g3yleCxlSPLYfKv2+M6IoQKBgBYOIvTfVnhr3NFdcge8559E6vryMQcm9rCseE8y
+2emd9EfJBPFxb20P53HtRqTNW9kjZEE+Qrn/yS4JgcVL//dyA0tM/Q/WBNNjzZEc
+aJKU6ea3TNo1k0DO26G+vYOzp71GAm6xGDa1vZ2fHbUT7yh08NVAFRdC7yi74iw7
+Bac5AoGBAJMK6CfJKoDiuY6Z6wjGhwf1Kx2cSUTvjTW5UwBaEy7S/8B5wq4+Koaq
+1THP1isKrPF2UkTROgwLkxIJfHHaglRM96g7s+8aIbAkZv2RSxB7YyqGdpynRd/d
+MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
+-----END RSA PRIVATE KEY-----`)
 
 	type testCase struct {
 		resource string
@@ -62,8 +107,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
-				{"client_certificate", certificateAuthority},
-				{"client_key", `"key"`},
+				{"client_certificate", clientCert},
+				{"client_key", clientKey},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
@@ -118,8 +163,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "aks_user_impersonation",
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
-				{"client_certificate", certificateAuthority},
-				{"client_key", `"key"`},
+				{"client_certificate", clientCert},
+				{"client_key", clientKey},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -392,7 +437,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "azure_certificate",
 			pairs: [][2]string{
 				{"app_id", `"app_id"`},
-				{"client_certificate", certificateAuthority},
+				{"client_certificate", clientCert},
 				{"egress_filter", `"name:value"`},
 				{"name", `"all-resources-azurecertificate-name"`},
 				{"tenant_id", `"tenant_id"`},
@@ -857,7 +902,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			pairs: [][2]string{
 				{"allow_resource_role_bypass", `false`},
 				{"certificate_authority", certificateAuthority},
-				{"client_certificate", certificateAuthority},
+				{"client_certificate", clientCert},
 				{"discovery_enabled", `true`},
 				{"discovery_username", `"discovery_username"`},
 				{"egress_filter", `"name:value"`},
@@ -926,8 +971,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "kubernetes_user_impersonation",
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
-				{"client_certificate", certificateAuthority},
-				{"client_key", `"key"`},
+				{"client_certificate", clientCert},
+				{"client_key", clientKey},
 				{"egress_filter", `"name:value"`},
 				{"healthcheck_namespace", `"healthcheck_namespace"`},
 				{"hostname", `"hostname"`},
@@ -1054,8 +1099,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "mtls_mysql",
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
-				{"client_certificate", certificateAuthority},
-				{"client_key", `"key"`},
+				{"client_certificate", clientCert},
+				{"client_key", clientKey},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
@@ -1072,8 +1117,8 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			resource: "mtls_postgres",
 			pairs: [][2]string{
 				{"certificate_authority", certificateAuthority},
-				{"client_certificate", certificateAuthority},
-				{"client_key", `"key"`},
+				{"client_certificate", clientCert},
+				{"client_key", clientKey},
 				{"database", `"database"`},
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
@@ -1220,6 +1265,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"lock_required", `true`},
 				{"name", `"all-resources-rdpcert-name"`},
 				{"port", `443`},
+				{"server_fqdn", `"server_fqdn"`},
 				{"sid", `"sid"`},
 				{"username", `"username"`},
 			},
@@ -2822,6 +2868,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"name", `"all-resources-secret-rdpcert-name"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seRDPID + `"`},
+				{"server_fqdn", `"server_fqdn"`},
 				{"sid", `"path/to/secret?key=key&encoding=base64"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},

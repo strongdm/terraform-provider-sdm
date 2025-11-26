@@ -7614,7 +7614,7 @@ func resourceResource() *schema.Resource {
 						"dc_hostnames": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "Comma-separated list of Active Directory Domain Controller hostnames for LDAPS SID resolution. Utilized for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID.",
+							Description: "Comma-separated list of Active Directory Domain Controller hostnames. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), and for LDAPS SID resolution for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID. Unused for Entra ID.",
 						},
 						"egress_filter": {
 							Type:        schema.TypeString,
@@ -7629,7 +7629,7 @@ func resourceResource() *schema.Resource {
 						"identity_alias_healthcheck_username": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+							Description: "Username of the AD service account for health checks, and LDAPS SID resolution if necessary. Required for on-premises AD environments, unused for Entra ID.",
 						},
 						"identity_set_id": {
 							Type:        schema.TypeString,
@@ -7667,10 +7667,15 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "ID of the secret store containing credentials for this resource, if any.",
 						},
+						"server_fqdn": {
+							Type:        schema.TypeString,
+							Optional:    true,
+							Description: "Fully-qualified DNS name of the target Windows server, including the AD domain. Must match the Service Principal Name (SPN) of the server in AD. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), unused for Entra ID.",
+						},
 						"sid": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Description: "Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.",
+							Description: "Windows Security Identifier (SID) of the configured Username, or AD service account if using LDAPS SID resolution. Required in on-premises AD environments for strong certificate mapping in full enforcement mode, unused for Entra ID.",
 						},
 						"subdomain": {
 							Type:        schema.TypeString,
@@ -14965,6 +14970,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			PortOverride:                     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:                   convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:                    convertStringToPlumbing(raw["secret_store_id"]),
+			ServerFqdn:                       convertStringToPlumbing(raw["server_fqdn"]),
 			SID:                              convertStringToPlumbing(raw["sid"]),
 			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
 			Tags:                             convertTagsToPlumbing(raw["tags"]),
@@ -17493,6 +17499,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":                       (v.PortOverride),
 				"proxy_cluster_id":                    (v.ProxyClusterID),
 				"secret_store_id":                     (v.SecretStoreID),
+				"server_fqdn":                         (v.ServerFqdn),
 				"sid":                                 seValues["sid"],
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
@@ -20670,6 +20677,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port_override":                       (v.PortOverride),
 				"proxy_cluster_id":                    (v.ProxyClusterID),
 				"secret_store_id":                     (v.SecretStoreID),
+				"server_fqdn":                         (v.ServerFqdn),
 				"sid":                                 seValues["sid"],
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),

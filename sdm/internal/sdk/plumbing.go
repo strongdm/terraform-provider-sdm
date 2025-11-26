@@ -16998,6 +16998,7 @@ func convertRDPCertToPorcelain(plumbing *proto.RDPCert) (*RDPCert, error) {
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.ServerFqdn = plumbing.ServerFqdn
 	porcelain.SID = plumbing.Sid
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -17028,6 +17029,7 @@ func convertRDPCertToPlumbing(porcelain *RDPCert) *proto.RDPCert {
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.ServerFqdn = (porcelain.ServerFqdn)
 	plumbing.Sid = (porcelain.SID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)

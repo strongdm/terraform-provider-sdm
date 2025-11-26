@@ -5692,7 +5692,7 @@ type RDP struct {
 type RDPCert struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
-	// Comma-separated list of Active Directory Domain Controller hostnames for LDAPS SID resolution. Utilized for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID.
+	// Comma-separated list of Active Directory Domain Controller hostnames. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), and for LDAPS SID resolution for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID. Unused for Entra ID.
 	DcHostnames string `json:"dcHostnames"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
@@ -5702,7 +5702,7 @@ type RDPCert struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
-	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	// Username of the AD service account for health checks, and LDAPS SID resolution if necessary. Required for on-premises AD environments, unused for Entra ID.
 	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
 	// The ID of the identity set to use for identity connections.
 	IdentitySetID string `json:"identitySetId"`
@@ -5718,7 +5718,9 @@ type RDPCert struct {
 	ProxyClusterID string `json:"proxyClusterId"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
-	// Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.
+	// Fully-qualified DNS name of the target Windows server, including the AD domain. Must match the Service Principal Name (SPN) of the server in AD. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), unused for Entra ID.
+	ServerFqdn string `json:"serverFqdn"`
+	// Windows Security Identifier (SID) of the configured Username, or AD service account if using LDAPS SID resolution. Required in on-premises AD environments for strong certificate mapping in full enforcement mode, unused for Entra ID.
 	SID string `json:"sid"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	Subdomain string `json:"subdomain"`

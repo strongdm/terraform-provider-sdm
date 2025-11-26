@@ -1461,11 +1461,11 @@ In addition to provided arguments above, the following attributes are returned b
 		* `username` - The username to authenticate with.
 	* rdp_cert:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
-		* `dc_hostnames` - Comma-separated list of Active Directory Domain Controller hostnames for LDAPS SID resolution. Utilized for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID.
+		* `dc_hostnames` - Comma-separated list of Active Directory Domain Controller hostnames. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), and for LDAPS SID resolution for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID. Unused for Entra ID.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
-		* `identity_alias_healthcheck_username` - The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+		* `identity_alias_healthcheck_username` - Username of the AD service account for health checks, and LDAPS SID resolution if necessary. Required for on-premises AD environments, unused for Entra ID.
 		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `lock_required` - When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 		* `name` - Unique human-readable name of the Resource.
@@ -1473,7 +1473,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
-		* `sid` - Windows Security Identifier (SID) of the configured Username, required for strong certificate mapping in full enforcement mode.
+		* `server_fqdn` - Fully-qualified DNS name of the target Windows server, including the AD domain. Must match the Service Principal Name (SPN) of the server in AD. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), unused for Entra ID.
+		* `sid` - Windows Security Identifier (SID) of the configured Username, or AD service account if using LDAPS SID resolution. Required in on-premises AD environments for strong certificate mapping in full enforcement mode, unused for Entra ID.
 		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 		* `tags` - Tags is a map of key, value pairs.
 		* `username` - The username to authenticate with.
